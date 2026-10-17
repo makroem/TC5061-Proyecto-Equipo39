@@ -123,7 +123,10 @@ def logical_hash(frame, keys):
 def unique_chunk(frame, db):
     """Deduplica también entre bloques y meses; detecta un ID con datos distintos."""
     frame = frame.copy()
-    payload = frame.astype("string").fillna("").agg("|".join, axis=1)
+    normalized = frame.astype("string").fillna("")
+    payload = normalized.iloc[:, 0]
+    for column in normalized.columns[1:]:
+        payload = payload.str.cat(normalized[column], sep="|")
     frame["payload_hash"] = payload.map(lambda x: hashlib.sha256(x.encode()).hexdigest())
     if frame.groupby("trip_id").payload_hash.nunique().gt(1).any():
         raise ValueError("Un trip_id tiene contenidos distintos dentro del bloque.")
