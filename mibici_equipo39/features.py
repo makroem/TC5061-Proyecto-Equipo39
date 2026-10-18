@@ -1,462 +1,205 @@
+import hashlib
 import json
-import uuid
-from pathlib import Path
-
-import numpy as np
-import pandas as pd
-
 from pathlib import Path
 
 from loguru import logger
-from tqdm import tqdm
+import numpy as np
+import pandas as pd
 import typer
 
-from mibici_equipo39.config import (
-    PROCESSED_DATA_DIR,
-    INTERIM_DATA_DIR,
-    EXTERNAL_DATA_DIR
-)
+from mibici_equipo39 import config as C
 
 app = typer.Typer()
 
-def random_grouped_split(
-    df,
-    train_size=0.70,
-    val_size=0.15,
-    test_size=0.15,
-    seed=39,
-    manifest_path=None,
-    data_version="1"
-):
+SPLIT_PATH = C.REFERENCES / "split_manifest.json"
+LAGS = (1, 2, 24, 168)
+WINDOWS = (24, 168)
+CALENDAR_FEATURES = [
+    "hour_of_day", "day_of_week", "month", "is_weekend",
+    "hour_sin", "hour_cos", "month_sin", "month_cos",
+]
+LAG_FEATURES = (
+    [f"{p}_lag_{k}" for p in ("dep", "arr") for k in LAGS]
+    + [f"{p}_mean_{w}" for p in ("dep", "arr") for w in WINDOWS]
+    + ["net_lag_1", "net_sum_24"]
+)
+FEATURE_COLUMNS = CALENDAR_FEATURES + LAG_FEATURES
+
+
+def random_grouped_split(df, seed=C.SEED, manifest_path=None, data_version="1"):
     """
-    Divide por días completos estratificando por mes.
+    Divide por días completos estratificando por mes (70/15/15 de config.py).
 
-    Todos los registros de una fecha permanecen
-    juntos en train, val o test.
+    Ningún día queda en dos conjuntos y todos los meses aparecen en train, val y test.
+    El split_id es el hash del mapa de días, así que la misma semilla da el mismo id.
     """
-
-    if not np.isclose(
-        train_size + val_size + test_size,
-        1.0
-    ):
-        raise ValueError(
-            "Los porcentajes deben sumar 1."
-        )
-
     split_df = df.copy()
-
-    split_df["date"] = (
-        pd.to_datetime(split_df["hour"])
-        .dt.date
-    )
-
-    split_df["month_strat"] = (
-        pd.to_datetime(split_df["hour"])
-        .dt.to_period("M")
-        .astype(str)
-    )
-
+    split_df["date"] = split_df["hour"].dt.normalize()
     rng = np.random.default_rng(seed)
-
     assignments = {}
-
-    for month, month_data in split_df.groupby("month_strat"):
-
-        days = (
-            month_data["date"]
-            .drop_duplicates()
-            .values
-        )
-
+    for _, days in split_df.groupby(split_df["date"].dt.to_period("M"))["date"]:
+        days = np.sort(days.unique())
         rng.shuffle(days)
+        cut_train = int(np.floor(C.TRAIN_SIZE * len(days) + 0.5))
+        cut_val = int(np.floor((C.TRAIN_SIZE + C.VAL_SIZE) * len(days) + 0.5))
+        for i, day in enumerate(days):
+            assignments[pd.Timestamp(day)] = "train" if i < cut_train else "validation" if i < cut_val else "test"
+    split_df["split"] = split_df["date"].map(assignments)
 
-        n_days = len(days)
-
-        n_train = int(train_size * n_days)
-        n_val = int(val_size * n_days)
-
-        train_days = days[:n_train]
-        val_days = days[n_train:n_train + n_val]
-        test_days = days[n_train + n_val:]
-
-        for d in train_days:
-            assignments[d] = "train"
-
-        for d in val_days:
-            assignments[d] = "validation"
-
-        for d in test_days:
-            assignments[d] = "test"
-
-    split_df["split"] = (
-        split_df["date"]
-        .map(assignments)
-    )
-
-    split_id = str(uuid.uuid4())
-
-    manifest = {
-        "split_id": split_id,
-        "seed": seed,
-        "strategy":
-            "random_days_month_stratified",
-        "data_version": data_version,
-        "days": {
-            split_name: [
-                str(day)
-                for day, group in assignments.items()
-                if group == split_name
-            ]
-            for split_name in [
-                "train",
-                "validation",
-                "test"
-            ]
-        }
-    }
-
+    days = {name: sorted(d.strftime("%Y-%m-%d") for d, s in assignments.items() if s == name)
+            for name in ["train", "validation", "test"]}
+    content = {"seed": seed, "strategy": C.SPLIT_STRATEGY, "data_version": data_version, "days": days}
+    split_id = hashlib.sha256(json.dumps(content, sort_keys=True).encode()).hexdigest()
+    manifest = {"split_id": split_id, **content}
     if manifest_path is not None:
+        Path(manifest_path).write_text(json.dumps(manifest, indent=2, ensure_ascii=False), encoding="utf-8")
+    return split_df.drop(columns="date"), manifest
 
-        manifest_path = Path(manifest_path)
-
-        with open(
-            manifest_path,
-            "w",
-            encoding="utf-8"
-        ) as f:
-
-            json.dump(
-                manifest,
-                f,
-                indent=2,
-                ensure_ascii=False
-            )
-
-    return split_df, manifest
 
 def make_events(clean_departures, clean_arrivals):
     """
-    Genera eventos de salida (-1) y llegada (+1).
+    Genera eventos de salida (-1, en el inicio) y llegada (+1, en el fin).
 
+    Las salidas no dependen del fin del viaje porque al pronosticar ese fin aún no se conoce.
     """
-
-    departures = clean_departures.copy()
-    arrivals = clean_arrivals.copy()
-
-    departures["event"] = -1
-    arrivals["event"] = 1
-
-    departures = departures[
-        ["station_id", "timestamp", "event"]
-    ]
-
-    arrivals = arrivals[
-        ["station_id", "timestamp", "event"]
-    ]
-
-    events = pd.concat(
-        [departures, arrivals],
-        ignore_index=True
-    )
-
-    events["timestamp"] = pd.to_datetime(
-        events["timestamp"]
-    )
-
-    events = events.sort_values(
-        ["timestamp", "station_id"]
-    ).reset_index(drop=True)
-
-    return events
+    departures = clean_departures[["station_id", "timestamp"]].assign(event=-1)
+    arrivals = clean_arrivals[["station_id", "timestamp"]].assign(event=1)
+    events = pd.concat([departures, arrivals], ignore_index=True)
+    events["station_id"] = events["station_id"].astype("string")
+    events["timestamp"] = pd.to_datetime(events["timestamp"])
+    return events.sort_values(["timestamp", "station_id"]).reset_index(drop=True)
 
 
-def aggregate_hourly(events, stations, config=None):
+def aggregate_hourly(events, stations, start=C.SOURCE_START, end=C.SOURCE_END_EXCLUSIVE):
     """
-    Agrega eventos por estación-hora y completa los
-    periodos faltantes con ceros.
+    Cuenta salidas y llegadas por estación en intervalos [t, t+1) y completa con ceros.
+
+    Sin la malla completa se pierden las horas sin viajes y los rezagos dejan de ser horas reales.
+    Solo entran estaciones del catálogo, que P2 y P3 necesitan para capacidad y coordenadas.
     """
-
-
-    df = events.copy()
-
-    # intervalos [t, t+1)
+    df = events.loc[events["station_id"].isin(stations["station_id"])].copy()
     df["hour"] = df["timestamp"].dt.floor("h")
-
-    departures = (
-        df[df["event"] == -1]
-        .groupby(["station_id", "hour"])
-        .size()
-        .reset_index(name="departures")
+    df = df.loc[df["hour"].ge(start) & df["hour"].lt(end)]
+    counts = (
+        df.groupby(["station_id", "hour", "event"], observed=True).size()
+        .unstack("event", fill_value=0)
+        .reindex(columns=[-1, 1], fill_value=0)
+        .rename(columns={-1: "departures", 1: "arrivals"})
     )
-
-    arrivals = (
-        df[df["event"] == 1]
-        .groupby(["station_id", "hour"])
-        .size()
-        .reset_index(name="arrivals")
-    )
-
-    hourly = departures.merge(
-        arrivals,
-        on=["station_id", "hour"],
-        how="outer"
-    )
-
-    hourly["departures"] = (
-        hourly["departures"]
-        .fillna(0)
-        .astype(int)
-    )
-
-    hourly["arrivals"] = (
-        hourly["arrivals"]
-        .fillna(0)
-        .astype(int)
-    )
-
-    all_hours = pd.date_range(
-        start=hourly["hour"].min(),
-        end=hourly["hour"].max(),
-        freq="h"
-    )
-
-    if "station_id" not in stations.columns:
-        stations = stations.rename(
-            columns={"id": "station_id"}
-         )
-
-    all_stations = (
-    stations["station_id"]
-    .drop_duplicates()
-    .sort_values()
-    )
-
     full_index = pd.MultiIndex.from_product(
-        [all_stations, all_hours],
-        names=["station_id", "hour"]
+        [sorted(df["station_id"].unique()), pd.date_range(start, end, freq="h", inclusive="left")],
+        names=["station_id", "hour"],
     )
-
-    hourly = (
-        hourly
-        .set_index(["station_id", "hour"])
-        .reindex(full_index)
-        .fillna(0)
-        .reset_index()
-    )
-
-    hourly["departures"] = hourly["departures"].astype(int)
-    hourly["arrivals"] = hourly["arrivals"].astype(int)
-
+    hourly = counts.reindex(full_index, fill_value=0).reset_index()
+    hourly.columns.name = None
+    hourly["station_id"] = hourly["station_id"].astype("string")
+    hourly[["departures", "arrivals"]] = hourly[["departures", "arrivals"]].astype("int32")
     return hourly
 
 
 def add_calendar_features(df):
     """
-    Agrega variables calendarias y cíclicas.
+    Agrega hora, día, mes, fin de semana y sus versiones cíclicas.
+
+    Se conocen antes de la hora objetivo y capturan los picos de traslado (P1, P2)
+    y la diferencia entre semana y fin de semana (P3).
     """
-
     df = df.copy()
-
     df["hour_of_day"] = df["hour"].dt.hour
-
-    df["day_of_week"] = (
-        df["hour"].dt.dayofweek
-    )
-
-    df["month"] = (
-        df["hour"].dt.month
-    )
-
-    df["is_weekend"] = (
-        df["day_of_week"] >= 5
-    ).astype(int)
-
-    df["hour_sin"] = np.sin(
-        2 * np.pi * df["hour_of_day"] / 24
-    )
-
-    df["hour_cos"] = np.cos(
-        2 * np.pi * df["hour_of_day"] / 24
-    )
-
-    df["month_sin"] = np.sin(
-        2 * np.pi * df["month"] / 12
-    )
-
-    df["month_cos"] = np.cos(
-        2 * np.pi * df["month"] / 12
-    )
-
+    df["day_of_week"] = df["hour"].dt.dayofweek
+    df["month"] = df["hour"].dt.month
+    df["is_weekend"] = (df["day_of_week"] >= 5).astype(int)
+    df["hour_sin"] = np.sin(2 * np.pi * df["hour_of_day"] / 24)
+    df["hour_cos"] = np.cos(2 * np.pi * df["hour_of_day"] / 24)
+    df["month_sin"] = np.sin(2 * np.pi * df["month"] / 12)
+    df["month_cos"] = np.cos(2 * np.pi * df["month"] / 12)
     return df
 
 
 def add_lagged_features(df):
     """
-    Placeholder para una futura evaluación temporal.
+    Agrega rezagos y medias móviles por estación usando solo horas anteriores a t.
 
-    Los rezagos y medias móviles deberán construirse
-    exclusivamente utilizando información previa al
-    instante de predicción.
+    shift(1) va antes de rolling, así la hora objetivo nunca entra en su propia variable.
+    Miden la actividad reciente de cada estación, que explica la demanda de la siguiente
+    hora (P1) y la presión acumulada de salidas contra llegadas (P2).
     """
+    df = df.sort_values(["station_id", "hour"]).reset_index(drop=True)
+    by_station = df.groupby("station_id", sort=False, observed=True)
+    steps = by_station["hour"].diff().dropna()
+    if by_station.size().nunique() != 1 or not steps.eq(pd.Timedelta("1h")).all():
+        raise ValueError("La malla estación-hora no está completa.")
 
-    return df
+    def rolling(series, window, how):
+        grouped = series.groupby(df["station_id"], sort=False, observed=True).rolling(window, min_periods=window)
+        return getattr(grouped, how)().reset_index(level=0, drop=True).sort_index()
+
+    net = df["arrivals"] - df["departures"]
+    new = {}
+    for column, prefix in [("departures", "dep"), ("arrivals", "arr")]:
+        for lag in LAGS:
+            new[f"{prefix}_lag_{lag}"] = by_station[column].shift(lag)
+        past = by_station[column].shift(1)
+        for window in WINDOWS:
+            new[f"{prefix}_mean_{window}"] = rolling(past, window, "mean")
+    past_net = net.groupby(df["station_id"], sort=False, observed=True).shift(1)
+    new["net_lag_1"] = past_net
+    new["net_sum_24"] = rolling(past_net, 24, "sum")
+    return pd.concat([df, pd.DataFrame(new).astype("float32")], axis=1)
+
 
 def build_supervised_tables(df, p2_labels=None, data_version="1"):
     """
-   Construye matrices supervisadas para P1 y P2.
-   Requiere que el dataframe ya tenga:
-       -split
-       - variables calendario
-   """
+    Construye metadata, X y objetivos. P1 es el conteo de salidas en [t, t+1).
 
-    feature_columns = [
-       "hour_of_day",
-       "day_of_week",
-       "month",
-       "is_weekend",
-       "hour_sin",
-       "hour_cos",
-       "month_sin",
-       "month_cos",
-    ]
-
-    metadata = df[
-       ["station_id", "hour", "split"]
-    ].copy()
-
-    metadata = metadata.rename(
-       columns={"hour": "prediction_time"}
-    )
-
+    X solo lleva variables disponibles antes de t; los objetivos se usan offline.
+    """
+    metadata = df[["station_id", "hour", "split"]].rename(columns={"hour": "prediction_time"})
     metadata["data_version"] = data_version
-
-    X = df[feature_columns].copy()
-    # Conteo de salidas observado en la hora t, t+1
-    y_p1 = df["departures"].copy()
-
-    result = {
-       "metadata": metadata,
-       "X": X,
-       "y_p1": y_p1,
-    }
-
+    result = {"metadata": metadata, "X": df[FEATURE_COLUMNS].copy(), "y_p1": df["departures"].copy()}
     if p2_labels is not None:
-        result["y_p2"] = (p2_labels.copy())
-
+        result["y_p2"] = p2_labels.copy()
     return result
-    
+
+
+def eligible_stations(metadata, y_p1, min_departures=C.P1_MIN_TRAIN_DEPARTURES):
+    """Estaciones con suficientes salidas en train; se fija sin mirar val ni test."""
+    train = metadata["split"].eq("train")
+    totals = y_p1[train].groupby(metadata.loc[train, "station_id"], observed=True).sum()
+    return sorted(totals.index[totals.ge(min_departures)])
+
+
+def load_tables():
+    """Lee las tablas que deja build() en data/processed."""
+    metadata = pd.read_parquet(C.PROCESSED / "metadata.parquet")
+    X = pd.read_parquet(C.PROCESSED / "X_p1.parquet")
+    y_p1 = pd.read_parquet(C.PROCESSED / "y_p1.parquet")["target_departures"]
+    return metadata, X, y_p1
+
 
 @app.command()
 def build():
-    """
-    Construye el pipeline completo de features:
+    """Construye eventos, malla horaria, calendario, rezagos, partición y tablas supervisadas."""
+    data_version = json.loads((C.REFERENCES / "data_manifest.json").read_text())["data_version"]
+    departures = pd.read_parquet(C.INTERIM / "departures", columns=["station_id", "timestamp"])
+    arrivals = pd.read_parquet(C.INTERIM / "arrivals", columns=["station_id", "timestamp"])
+    stations = pd.read_parquet(C.PROCESSED / "stations.parquet")
 
-    1. Carga vistas limpias de salidas y llegadas.
-    2. Genera eventos.
-    3. Agrega a nivel estación-hora.
-    4. Agrega variables calendario.
-    5. Genera partición reproducible.
-    6. Construye tablas supervisadas.
-    7. Guarda artefactos en data/processed.
-    """
-    logger.info("Building features...")
+    hourly = aggregate_hourly(make_events(departures, arrivals), stations)
+    hourly = add_lagged_features(add_calendar_features(hourly))
+    hourly = hourly.loc[hourly["hour"].ge(C.FEATURES_START)].reset_index(drop=True)
+    hourly, manifest = random_grouped_split(hourly, manifest_path=SPLIT_PATH, data_version=data_version)
+    if hourly[LAG_FEATURES].isna().any().any():
+        raise ValueError("Quedan rezagos vacíos después de FEATURES_START.")
 
-    departures = pd.read_parquet(
-        INTERIM_DATA_DIR / "departures"
-    )
-
-    arrivals = pd.read_parquet(
-        INTERIM_DATA_DIR / "arrivals"
-    )
-
-    stations = pd.read_csv(
-        EXTERNAL_DATA_DIR / "nomenclatura_2026_09.csv"
-    )
-
-    logger.info(
-        f"Departures: {departures.shape}"
-    )
-
-    logger.info(
-        f"Arrivals: {arrivals.shape}"
-    )
-
-    events = make_events(
-        departures,
-        arrivals
-    )
-
-    logger.info(
-        f"Events: {events.shape}"
-    )
-
-    hourly = aggregate_hourly(
-        events,
-        stations
-    )
-
-    logger.info(
-        f"Hourly: {hourly.shape}"
-    )
+    tables = build_supervised_tables(hourly, data_version=data_version)
+    C.PROCESSED.mkdir(parents=True, exist_ok=True)
+    tables["metadata"].to_parquet(C.PROCESSED / "metadata.parquet", index=False)
+    tables["X"].to_parquet(C.PROCESSED / "X_p1.parquet", index=False)
+    tables["y_p1"].to_frame("target_departures").to_parquet(C.PROCESSED / "y_p1.parquet", index=False)
+    counts = {k: len(v) for k, v in manifest["days"].items()}
+    logger.success(f"{len(hourly)} filas, {hourly['station_id'].nunique()} estaciones, split {manifest['split_id'][:12]} {counts}")
 
 
-    hourly = add_calendar_features(
-        hourly
-    )
-
-
-    processed_references = (
-        Path("references")
-        / "split_manifest.json"
-    )
-
-    hourly, manifest = (
-        random_grouped_split(
-            hourly,
-            seed=39,
-            manifest_path=processed_references
-        )
-    )
-
-    logger.info(
-        f"Split ID: {manifest['split_id']}"
-    )
-
-
-    tables = build_supervised_tables(
-        hourly
-    )
-
-    metadata = tables["metadata"]
-    X = tables["X"]
-    y_p1 = tables["y_p1"]
-
-
-    PROCESSED_DATA_DIR.mkdir(
-        parents=True,
-        exist_ok=True
-    )
-
-    metadata.to_parquet(
-        PROCESSED_DATA_DIR
-        / "metadata.parquet"
-    )
-
-    X.to_parquet(
-        PROCESSED_DATA_DIR
-        / "X_p1.parquet"
-    )
-
-    y_p1.to_frame(
-        name="target_departures"
-    ).to_parquet(
-        PROCESSED_DATA_DIR
-        / "y_p1.parquet"
-    )
-
-    logger.success(
-        "Feature generation complete."
-    )
-    
 if __name__ == "__main__":
     app()

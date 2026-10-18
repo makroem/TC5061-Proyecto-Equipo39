@@ -21,7 +21,11 @@ TRAIN_SIZE, VAL_SIZE, TEST_SIZE = 0.70, 0.15, 0.15
 SPLIT_STRATEGY = "random_days_month_stratified"
 SPLIT_VERSION = "2"
 CLEANING_SCHEMA_VERSION = "3-colab"
-FEATURE_SCHEMA_VERSION = "3-random-calendar"
+FEATURE_SCHEMA_VERSION = "4-random-calendar-lags"
+# 1 de octubre excluido por la ingesta y 7 días de calentamiento para el rezago de 168 h.
+FEATURES_START = "2025-10-09"
+P1_MIN_TRAIN_DEPARTURES = 100
+P1_HGB_PARAMS = {"loss": "squared_error", "learning_rate": 0.1, "max_iter": 200, "max_leaf_nodes": 31, "random_state": SEED}
 P2_INITIAL_OCCUPANCY, P2_MARGIN = 0.50, 0.10
 P3_K, P3_MIN_TRAIN_TRIPS = 3, 100
 EXPERIMENT_NAME = "mibici-equipo39"
