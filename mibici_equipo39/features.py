@@ -1,36 +1,135 @@
+import json
+import uuid
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
 
+def random_grouped_split(
+    df,
+    train_size=0.70,
+    val_size=0.15,
+    test_size=0.15,
+    seed=39,
+    manifest_path=None,
+    data_version="1"
+):
+    """
+    Divide por días completos estratificando por mes.
+
+    Todos los registros de una fecha permanecen
+    juntos en train, val o test.
+    """
+
+    if not np.isclose(
+        train_size + val_size + test_size,
+        1.0
+    ):
+        raise ValueError(
+            "Los porcentajes deben sumar 1."
+        )
+
+    split_df = df.copy()
+
+    split_df["date"] = (
+        pd.to_datetime(split_df["hour"])
+        .dt.date
+    )
+
+    split_df["month_strat"] = (
+        pd.to_datetime(split_df["hour"])
+        .dt.to_period("M")
+        .astype(str)
+    )
+
+    rng = np.random.default_rng(seed)
+
+    assignments = {}
+
+    for month, month_data in split_df.groupby("month_strat"):
+
+        days = (
+            month_data["date"]
+            .drop_duplicates()
+            .values
+        )
+
+        rng.shuffle(days)
+
+        n_days = len(days)
+
+        n_train = int(train_size * n_days)
+        n_val = int(val_size * n_days)
+
+        train_days = days[:n_train]
+        val_days = days[n_train:n_train + n_val]
+        test_days = days[n_train + n_val:]
+
+        for d in train_days:
+            assignments[d] = "train"
+
+        for d in val_days:
+            assignments[d] = "validation"
+
+        for d in test_days:
+            assignments[d] = "test"
+
+    split_df["split"] = (
+        split_df["date"]
+        .map(assignments)
+    )
+
+    split_id = str(uuid.uuid4())
+
+    manifest = {
+        "split_id": split_id,
+        "seed": seed,
+        "strategy":
+            "random_days_month_stratified",
+        "data_version": data_version,
+        "days": {
+            split_name: [
+                str(day)
+                for day, group in assignments.items()
+                if group == split_name
+            ]
+            for split_name in [
+                "train",
+                "validation",
+                "test"
+            ]
+        }
+    }
+
+    if manifest_path is not None:
+
+        manifest_path = Path(manifest_path)
+
+        with open(
+            manifest_path,
+            "w",
+            encoding="utf-8"
+        ) as f:
+
+            json.dump(
+                manifest,
+                f,
+                indent=2,
+                ensure_ascii=False
+            )
+
+    return split_df, manifest
 
 def make_events(clean_departures, clean_arrivals):
     """
     Genera eventos de salida (-1) y llegada (+1).
 
-    Parameters
-    ----------
-    clean_departures : pd.DataFrame
-        Tabla de salidas limpias.
-
-    clean_arrivals : pd.DataFrame
-        Tabla de llegadas limpias.
-
-    Returns
-    -------
-    pd.DataFrame
-        Tabla consolidada de eventos.
     """
 
     departures = clean_departures.copy()
     arrivals = clean_arrivals.copy()
 
-    departures = departures.rename(
-        columns={"started_at": "timestamp"}
-    )
     departures["event"] = -1
-
-    arrivals = arrivals.rename(
-        columns={"ended_at": "timestamp"}
-    )
     arrivals["event"] = 1
 
     departures = departures[
@@ -62,6 +161,7 @@ def aggregate_hourly(events, stations, config=None):
     Agrega eventos por estación-hora y completa los
     periodos faltantes con ceros.
     """
+
 
     df = events.copy()
 
@@ -106,10 +206,15 @@ def aggregate_hourly(events, stations, config=None):
         freq="h"
     )
 
+    if "station_id" not in stations.columns:
+        stations = stations.rename(
+            columns={"id": "station_id"}
+         )
+
     all_stations = (
-        stations["station_id"]
-        .drop_duplicates()
-        .sort_values()
+    stations["station_id"]
+    .drop_duplicates()
+    .sort_values()
     )
 
     full_index = pd.MultiIndex.from_product(
@@ -182,7 +287,50 @@ def add_lagged_features(df):
 
     return df
 
+def build_supervised_tables(df, p2_labels=None, data_version="1"):
+    """
+   Construye matrices supervisadas para P1 y P2.
+   Requiere que el dataframe ya tenga:
+       -split
+       - variables calendario
+   """
 
+    feature_columns = [
+       "hour_of_day",
+       "day_of_week",
+       "month",
+       "is_weekend",
+       "hour_sin",
+       "hour_cos",
+       "month_sin",
+       "month_cos",
+    ]
+
+    metadata = df[
+       ["station_id", "hour", "split"]
+    ].copy()
+
+    metadata = metadata.rename(
+       columns={"hour": "prediction_time"}
+    )
+
+    metadata["data_version"] = data_version
+
+    X = df[feature_columns].copy()
+    # Conteo de salidas observado en la hora t, t+1
+    y_p1 = df["departures"].copy()
+
+    result = {
+       "metadata": metadata,
+       "X": X,
+       "y_p1": y_p1,
+    }
+
+    if p2_labels is not None:
+        result["y_p2"] = (p2_labels.copy())
+
+    return result
+    
 
 
 
