@@ -5,6 +5,20 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+from pathlib import Path
+
+from loguru import logger
+from tqdm import tqdm
+import typer
+
+from mibici_equipo39.config import (
+    PROCESSED_DATA_DIR,
+    INTERIM_DATA_DIR,
+    EXTERNAL_DATA_DIR
+)
+
+app = typer.Typer()
+
 def random_grouped_split(
     df,
     train_size=0.70,
@@ -332,7 +346,117 @@ def build_supervised_tables(df, p2_labels=None, data_version="1"):
     return result
     
 
+@app.command()
+def build():
+    """
+    Construye el pipeline completo de features:
+
+    1. Carga vistas limpias de salidas y llegadas.
+    2. Genera eventos.
+    3. Agrega a nivel estación-hora.
+    4. Agrega variables calendario.
+    5. Genera partición reproducible.
+    6. Construye tablas supervisadas.
+    7. Guarda artefactos en data/processed.
+    """
+    logger.info("Building features...")
+
+    departures = pd.read_parquet(
+        INTERIM_DATA_DIR / "departures"
+    )
+
+    arrivals = pd.read_parquet(
+        INTERIM_DATA_DIR / "arrivals"
+    )
+
+    stations = pd.read_csv(
+        EXTERNAL_DATA_DIR / "nomenclatura_2026_09.csv"
+    )
+
+    logger.info(
+        f"Departures: {departures.shape}"
+    )
+
+    logger.info(
+        f"Arrivals: {arrivals.shape}"
+    )
+
+    events = make_events(
+        departures,
+        arrivals
+    )
+
+    logger.info(
+        f"Events: {events.shape}"
+    )
+
+    hourly = aggregate_hourly(
+        events,
+        stations
+    )
+
+    logger.info(
+        f"Hourly: {hourly.shape}"
+    )
 
 
+    hourly = add_calendar_features(
+        hourly
+    )
 
 
+    processed_references = (
+        Path("references")
+        / "split_manifest.json"
+    )
+
+    hourly, manifest = (
+        random_grouped_split(
+            hourly,
+            seed=39,
+            manifest_path=processed_references
+        )
+    )
+
+    logger.info(
+        f"Split ID: {manifest['split_id']}"
+    )
+
+
+    tables = build_supervised_tables(
+        hourly
+    )
+
+    metadata = tables["metadata"]
+    X = tables["X"]
+    y_p1 = tables["y_p1"]
+
+
+    PROCESSED_DATA_DIR.mkdir(
+        parents=True,
+        exist_ok=True
+    )
+
+    metadata.to_parquet(
+        PROCESSED_DATA_DIR
+        / "metadata.parquet"
+    )
+
+    X.to_parquet(
+        PROCESSED_DATA_DIR
+        / "X_p1.parquet"
+    )
+
+    y_p1.to_frame(
+        name="target_departures"
+    ).to_parquet(
+        PROCESSED_DATA_DIR
+        / "y_p1.parquet"
+    )
+
+    logger.success(
+        "Feature generation complete."
+    )
+    
+if __name__ == "__main__":
+    app()
