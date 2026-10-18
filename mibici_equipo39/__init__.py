@@ -1,1 +1,1 @@
-from mibici_equipo39 import config  # noqa: F401
+"""Herramientas del proyecto MiBici del equipo 39."""
