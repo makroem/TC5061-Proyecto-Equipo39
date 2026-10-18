@@ -4,6 +4,8 @@
 Proyecto académico MiBici para estudiar demanda por estación, presión de flujo y grupos de uso. Esta rama contiene la estructura y la ingesta de Marco. La integración de los módulos del equipo y su ejecución oficial siguen pendientes.
 
 ## Integrantes y roles
+Integrantes: Marco, Stefania, Diego Martinez, Diego Hurtado.
+
 Marco (makroem, identificador técnico persona1) prepara configuración, ingesta, versionado y coordinación. Stefania (a01236059-lab, persona2) implementa variables, partición, P1 y Canvas. Diego Martinez (Sanciprian, persona3) implementa P2. Diego Hurtado (invitación pendiente para diegoHurtado01, persona4) implementa P3, Tracking y propuesta final. Estas asignaciones no acreditan contribuciones o revisiones todavía no realizadas.
 
 ## Preguntas y usuarios
@@ -44,6 +46,8 @@ Ramas chore/persona1-estructura y feat/persona1-ingesta publicadas el 17 de octu
 La base provisional del PR de ingesta es chore/persona1-estructura para mostrar solo los cambios adicionales. Primero incorporar el PR de estructura con merge commit después de su aprobación; después cambiar la base del PR de ingesta a main y volver a comprobar diferencias y revisiones. No incorporar la ingesta en la rama de estructura. La evidencia de descarga automática está separada de la aprobación del PR y de la ejecución oficial del proyecto integrado. Convención de commits chore, feat, fix y docs. Ver references/colaboracion.md.
 
 ## Resultados limitaciones y evidencia
+La comprobación de cierre técnico de Marco está en reports/cierre_marco.json: siete pruebas aprobadas, manifiesto conservado y auditoría de rutas de datos, modelos y Tracking en el historial. También identifica las revisiones y aportaciones que siguen pendientes. Este registro no acredita una ejecución oficial del proyecto integrado.
+
 Ingesta y notebook locales verificables; la reproducción oficial y las evidencias colaborativas están pendientes. La partición aleatoria no mide pronóstico sobre un periodo posterior. El catálogo de capacidad es de septiembre de 2026 y no representa inventario observado. La propuesta debe justificar herramientas con las lecturas del curso y confrontar el criterio temporal de la rúbrica.
 
 Buenas prácticas: config.py centraliza configuración; requirements.txt fija versiones; .gitignore excluye datos, modelos, credenciales y MLflow; data_manifest.json versiona fuentes y salidas; el flujo de PR y las etiquetas oficiales se verificarán cuando exista integración. No se deben presentar pruebas sintéticas ni runs de referencia como resultados oficiales del equipo.
