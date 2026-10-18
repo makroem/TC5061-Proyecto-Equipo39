@@ -22,10 +22,18 @@ data contiene solo marcadores en Git; mibici_equipo39 contiene módulos; noteboo
 Comprueba primero Python 3.11.9 y Git con sus comandos de versión. Si ya están disponibles, reutilízalos. Desde la raíz crea un entorno con python -m venv .venv y, en Windows, ejecuta .venv\Scripts\python.exe -m pip install -r requirements.txt. En Linux o Colab utiliza .venv/bin/python. El lock fija dependencias y marca pywin32 como exclusivo de Windows. Las fechas y la semilla están centralizadas en config.py.
 
 ## Ingesta y verificación
-Ejecuta python -m mibici_equipo39.dataset --freeze-manifest solo para la versión inicial autorizada. Para reproducir el manifiesto confirmado ejecuta python -m mibici_equipo39.dataset --verify-manifest. En esta máquina la descarga Python recibió HTTP 406; se descargaron las trece fuentes desde https://mibici.net/es/datos-abiertos/ a data/raw y data/external antes de procesar. La descarga automática desde un clon limpio debe revalidarse.
+Con el entorno de instalación activado, para reproducir el manifiesto confirmado desde un clon sin datos, ejecuta:
+
+```bash
+python -m mibici_equipo39.dataset --verify-manifest
+```
+
+El comando descarga automáticamente las trece fuentes oficiales a data/raw y data/external, comprueba sus SHA-256 y reconstruye las salidas antes de compararlas con references/data_manifest.json. Requiere acceso HTTPS a mibici.net y unos 390 MB de descarga, además del espacio de las salidas. El cliente se identifica como MiBici-Equipo39 para evitar el HTTP 406 que el portal devuelve al identificador predeterminado de requests; no requiere cookies ni descargas manuales. Los archivos incompletos se eliminan tras un fallo y la descarga se reintenta hasta tres veces. Un archivo local cuyo hash no coincide se rechaza sin reemplazarlo. No se desactiva la verificación TLS.
+
+Usa --freeze-manifest solo para una nueva versión de datos autorizada; no lo uses para ocultar diferencias al reproducir la versión confirmada. La evidencia de la validación real se registra en reports/validacion_descarga_automatica.json.
 
 ## Variables y pruebas
-Las pruebas de Persona1 se ejecutan con python -m pytest tests/test_data.py -v. El notebook notebooks/1.0-p1-auditoria-ingesta.ipynb contiene resultados de la auditoría local. Features y la partición oficial esperan la integración de Persona2; el módulo de plantilla no se debe ejecutar como implementación final. La referencia usa días aleatorios estratificados por mes, seed 39, proporciones aproximadas 70/15/15.
+Las pruebas de Persona1 se ejecutan con python -m pytest tests -v. Incluyen un servidor HTTP local para comprobar la identificación del cliente, reintentos, caché verificada y rechazo de HTML, respuestas vacías y hashes distintos. El notebook notebooks/1.0-p1-auditoria-ingesta.ipynb contiene resultados de la auditoría local. Features y la partición oficial esperan la integración de Persona2; el módulo de plantilla no se debe ejecutar como implementación final. La referencia usa días aleatorios estratificados por mes, seed 39, proporciones aproximadas 70/15/15.
 
 ## Experimento y MLflow Projects
 La implementación completa de referencia se entrega por separado para revisión. Sus ejecuciones usan mibici-equipo39-referencia y executor persona1. El experimento oficial mibici-equipo39 y el comando mlflow run . --env-manager=local esperan los módulos, manifiestos y MLproject integrados. No hay todavía evidencia de ejecución oficial desde main.
@@ -33,7 +41,7 @@ La implementación completa de referencia se entrega por separado para revisión
 ## Flujo Git y GitHub
 Ramas chore/persona1-estructura y feat/persona1-ingesta publicadas el 17 de octubre de 2026. PR de estructura: https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/1. PR de ingesta: https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/2. Ambos solicitan revisión a Stefania. main está protegida con PR, una aprobación, descarte de aprobaciones antiguas y conversaciones resueltas; se bloquean force push y eliminación, también para administradores.
 
-La base provisional del PR de ingesta es chore/persona1-estructura para mostrar solo los cambios adicionales. Primero incorporar el PR de estructura con merge commit después de su aprobación; después cambiar la base del PR de ingesta a main y volver a comprobar diferencias y revisiones. No incorporar la ingesta en la rama de estructura. Su aprobación final también depende de resolver la descarga automática. Convención de commits chore, feat, fix y docs. Ver references/colaboracion.md.
+La base provisional del PR de ingesta es chore/persona1-estructura para mostrar solo los cambios adicionales. Primero incorporar el PR de estructura con merge commit después de su aprobación; después cambiar la base del PR de ingesta a main y volver a comprobar diferencias y revisiones. No incorporar la ingesta en la rama de estructura. La evidencia de descarga automática está separada de la aprobación del PR y de la ejecución oficial del proyecto integrado. Convención de commits chore, feat, fix y docs. Ver references/colaboracion.md.
 
 ## Resultados limitaciones y evidencia
 Ingesta y notebook locales verificables; la reproducción oficial y las evidencias colaborativas están pendientes. La partición aleatoria no mide pronóstico sobre un periodo posterior. El catálogo de capacidad es de septiembre de 2026 y no representa inventario observado. La propuesta debe justificar herramientas con las lecturas del curso y confrontar el criterio temporal de la rúbrica.

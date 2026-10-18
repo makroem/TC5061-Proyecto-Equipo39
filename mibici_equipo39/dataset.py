@@ -15,6 +15,11 @@ import requests
 from . import config as C
 
 
+# El portal rechaza el User-Agent predeterminado de python-requests con HTTP 406.
+# Identificamos al cliente real; no se necesitan cookies ni automatizar un navegador.
+DOWNLOAD_HEADERS = {"User-Agent": "MiBici-Equipo39/0.0.1 (academic data ingestion)"}
+
+
 def canonical(value):
     return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
 
@@ -46,18 +51,16 @@ def download_file(url, path, expected=None):
             raise ValueError(f"Hash distinto en {path.name}; revisar antes de reemplazar.")
         return
     last_error = None
+    part = path.with_suffix(path.suffix + ".part")
     for attempt in range(3):
         try:
-            with requests.get(url, stream=True, timeout=(10, 120)) as response:
+            with requests.get(url, headers=DOWNLOAD_HEADERS, stream=True, timeout=(10, 120)) as response:
                 response.raise_for_status()
-                part = path.with_suffix(path.suffix + ".part")
                 with part.open("wb") as output:
                     for block in response.iter_content(1024 * 1024):
                         output.write(block)
-            head = part.read_bytes()[:250] if part.stat().st_size < 250 else b""
-            if not head:
-                with part.open("rb") as stream:
-                    head = stream.read(250)
+            with part.open("rb") as stream:
+                head = stream.read(250)
             if not part.stat().st_size or b"<html" in head.lower() or b"<!doctype" in head.lower():
                 raise ValueError(f"No se recibió un CSV: {path.name}")
             if expected and sha_file(part) != expected:
@@ -66,6 +69,7 @@ def download_file(url, path, expected=None):
             return
         except (requests.RequestException, OSError, ValueError) as exc:
             last_error = exc
+            part.unlink(missing_ok=True)
             if attempt < 2:
                 time.sleep(2 ** (attempt + 1))
     raise RuntimeError(f"No se pudo descargar {url}: {last_error}")
