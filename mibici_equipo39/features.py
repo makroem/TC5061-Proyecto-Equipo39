@@ -148,6 +148,54 @@ def add_lagged_features(df):
     return pd.concat([df, pd.DataFrame(new).astype("float32")], axis=1)
 
 
+def intra_hour_extremes(events, start=C.SOURCE_START, end=C.SOURCE_END_EXCLUSIVE):
+    """
+    Mínimo y máximo del flujo acumulado (llegadas menos salidas) dentro de cada hora.
+
+    El flujo parte de cero y los eventos con el mismo timestamp se suman antes de acumular.
+    Describe la hora objetivo, así que solo sirve para construir etiquetas de P2, nunca como X.
+    """
+    df = events.assign(hour=events["timestamp"].dt.floor("h"))
+    df = df.loc[df["hour"].ge(start) & df["hour"].lt(end)]
+    net = df.groupby(["station_id", "hour", "timestamp"], observed=True)["event"].sum()
+    by_hour = net.groupby(level=["station_id", "hour"], observed=True).cumsum().groupby(level=["station_id", "hour"], observed=True)
+    return pd.DataFrame({"flow_min": by_hour.min().clip(upper=0), "flow_max": by_hour.max().clip(lower=0)})
+
+
+def proxy_labels(flow_min, flow_max, capacity, occupancy=C.P2_INITIAL_OCCUPANCY, margin=C.P2_MARGIN):
+    """
+    Riesgo aproximado con ocupación inicial hipotética: B*(u) = occupancy * capacidad + flujo.
+
+    y_bikes = 1 si el mínimo de B* llega a margin * capacidad; y_docks = 1 si el máximo
+    llega a (1 - margin) * capacidad. No se recorta B* para no esconder la presión acumulada.
+    """
+    start = occupancy * capacity
+    y_bikes = (start + flow_min).le(margin * capacity).astype("int8")
+    y_docks = (start + flow_max).ge((1 - margin) * capacity).astype("int8")
+    return y_bikes, y_docks
+
+
+def make_capacity_proxy_targets(hourly, events, stations):
+    """
+    Etiquetas de P2 alineadas con la malla: riesgo de quedarse sin bicicletas o sin anclajes.
+
+    Usa la capacidad publicada solo para definir la etiqueta; las estaciones sin capacidad
+    válida quedan en NaN y se excluyen antes de entrenar. MiBici no publica inventario.
+    """
+    valid = stations.loc[stations["valid_capacity"].fillna(False), ["station_id", "capacity"]]
+    targets = hourly[["station_id", "hour"]].merge(valid, on="station_id", how="left")
+    keys = pd.MultiIndex.from_frame(targets[["station_id", "hour"]])
+    extremes = intra_hour_extremes(events).reindex(keys, fill_value=0)
+    targets["flow_min"] = extremes["flow_min"].to_numpy().astype("int32")
+    targets["flow_max"] = extremes["flow_max"].to_numpy().astype("int32")
+    targets["capacity"] = targets["capacity"].astype("float64")
+    y_bikes, y_docks = proxy_labels(targets["flow_min"], targets["flow_max"], targets["capacity"])
+    has_capacity = targets["capacity"].notna()
+    targets["y_bikes"] = y_bikes.where(has_capacity)
+    targets["y_docks"] = y_docks.where(has_capacity)
+    return targets[["capacity", "flow_min", "flow_max", "y_bikes", "y_docks"]]
+
+
 def build_supervised_tables(df, p2_labels=None, data_version="1"):
     """
     Construye metadata, X y objetivos. P1 es el conteo de salidas en [t, t+1).
@@ -177,6 +225,11 @@ def load_tables():
     return metadata, X, y_p1
 
 
+def load_p2_targets():
+    """Etiquetas de P2 alineadas fila por fila con metadata."""
+    return pd.read_parquet(C.PROCESSED / "y_p2.parquet")
+
+
 @app.command()
 def build():
     """Construye eventos, malla horaria, calendario, rezagos, partición y tablas supervisadas."""
@@ -185,18 +238,22 @@ def build():
     arrivals = pd.read_parquet(C.INTERIM / "arrivals", columns=["station_id", "timestamp"])
     stations = pd.read_parquet(C.PROCESSED / "stations.parquet")
 
-    hourly = aggregate_hourly(make_events(departures, arrivals), stations)
+    events = make_events(departures, arrivals)
+    hourly = aggregate_hourly(events, stations)
     hourly = add_lagged_features(add_calendar_features(hourly))
     hourly = hourly.loc[hourly["hour"].ge(C.FEATURES_START)].reset_index(drop=True)
     hourly, manifest = random_grouped_split(hourly, manifest_path=SPLIT_PATH, data_version=data_version)
     if hourly[LAG_FEATURES].isna().any().any():
         raise ValueError("Quedan rezagos vacíos después de FEATURES_START.")
 
-    tables = build_supervised_tables(hourly, data_version=data_version)
+    p2_labels = make_capacity_proxy_targets(hourly, events, stations)
+    tables = build_supervised_tables(hourly, p2_labels=p2_labels, data_version=data_version)
     C.PROCESSED.mkdir(parents=True, exist_ok=True)
     tables["metadata"].to_parquet(C.PROCESSED / "metadata.parquet", index=False)
     tables["X"].to_parquet(C.PROCESSED / "X_p1.parquet", index=False)
     tables["y_p1"].to_frame("target_departures").to_parquet(C.PROCESSED / "y_p1.parquet", index=False)
+    tables["y_p2"].to_parquet(C.PROCESSED / "y_p2.parquet", index=False)
+    logger.info(f"P2: y_bikes {p2_labels['y_bikes'].mean():.4f}, y_docks {p2_labels['y_docks'].mean():.4f}")
     counts = {k: len(v) for k, v in manifest["days"].items()}
     logger.success(f"{len(hourly)} filas, {hourly['station_id'].nunique()} estaciones, split {manifest['split_id'][:12]} {counts}")
 

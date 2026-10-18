@@ -2,6 +2,7 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from sklearn.metrics import precision_recall_curve
 
 
 def p1_error_by_hour(frame, predictions, path):
@@ -11,6 +12,22 @@ def p1_error_by_hour(frame, predictions, path):
         ax.plot(error.index, error.values, marker="o", label=name)
     ax.set(xlabel="Hora del día", ylabel="MAE (viajes por estación)", title="P1: error en prueba por hora")
     ax.legend()
+    fig.savefig(path, dpi=120, bbox_inches="tight")
+    plt.close(fig)
+    return path
+
+
+def p2_precision_recall(frame, scores, targets, path, min_recall=0.80):
+    val = frame["split"].eq("validation").to_numpy()
+    fig, axes = plt.subplots(1, 2, figsize=(10, 4))
+    for ax, (name, target) in zip(axes, targets.items()):
+        y = frame[target].to_numpy()[val]
+        for model, by_target in scores.items():
+            precision, recall, _ = precision_recall_curve(y, by_target[name][val])
+            ax.plot(recall, precision, label=model)
+        ax.axvline(min_recall, color="grey", linestyle="--", linewidth=1)
+        ax.set(title=f"P2 riesgo aproximado {name} (validación)", xlabel="recall", ylabel="precisión", ylim=(0, 0.6))
+        ax.legend()
     fig.savefig(path, dpi=120, bbox_inches="tight")
     plt.close(fig)
     return path
