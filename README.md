@@ -1,10 +1,10 @@
 # TC5061 Proyecto Equipo 39
 
 ## Propósito
-Proyecto académico MiBici para estudiar demanda por estación, presión de flujo y grupos de uso. Esta rama contiene la estructura y la ingesta de Persona1. La integración de los módulos del equipo y su ejecución oficial siguen pendientes.
+Proyecto académico MiBici para estudiar demanda por estación, presión de flujo y grupos de uso. Esta rama contiene la estructura y la ingesta de Marco. La integración de los módulos del equipo y su ejecución oficial siguen pendientes.
 
 ## Integrantes y roles
-Persona1 makroem prepara configuración, ingesta, versionado y coordinación. Persona2 implementa variables, partición, P1 y Canvas. Persona3 implementa P2. Persona4 implementa P3, Tracking y propuesta final. Los usuarios de las otras tres cuentas deben confirmarse antes de atribuirles commits o revisiones.
+Marco (makroem, identificador técnico persona1) prepara configuración, ingesta, versionado y coordinación. Stefania (a01236059-lab, persona2) implementa variables, partición, P1 y Canvas. Diego Martinez (Sanciprian, persona3) implementa P2. Diego Hurtado (invitación pendiente para diegoHurtado01, persona4) implementa P3, Tracking y propuesta final. Estas asignaciones no acreditan contribuciones o revisiones todavía no realizadas.
 
 ## Preguntas y usuarios
 P1 regresión: viajes que se iniciarán por estación en la próxima hora; la usa el operador para planear la flota. P2 clasificación: riesgo aproximado de falta de bicicletas o anclajes en la próxima hora, usando capacidad publicada; la usa rebalanceo. P3 clustering: grupos de estaciones con patrones semejantes y sus coordenadas; lo usa planeación urbana y expansión. P2 es una aproximación sin inventario observado. Ver references/ingesta_interface.md.
@@ -31,7 +31,9 @@ Las pruebas de Persona1 se ejecutan con python -m pytest tests/test_data.py -v. 
 La implementación completa de referencia se entrega por separado para revisión. Sus ejecuciones usan mibici-equipo39-referencia y executor persona1. El experimento oficial mibici-equipo39 y el comando mlflow run . --env-manager=local esperan los módulos, manifiestos y MLproject integrados. No hay todavía evidencia de ejecución oficial desde main.
 
 ## Flujo Git y GitHub
-Cambios en ramas chore/persona1-estructura y feat/persona1-ingesta. Publicar scaffold, obtener Approve de Persona2 e integrar mediante merge commit; después publicar y revisar ingesta. Proteger main antes de integrar. Convención de commits chore, feat, fix y docs. Todo cambio entra por PR revisado. Ver references/colaboracion.md.
+Ramas chore/persona1-estructura y feat/persona1-ingesta publicadas el 17 de octubre de 2026. PR de estructura: https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/1. PR de ingesta: https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/2. Ambos solicitan revisión a Stefania. main está protegida con PR, una aprobación, descarte de aprobaciones antiguas y conversaciones resueltas; se bloquean force push y eliminación, también para administradores.
+
+La base provisional del PR de ingesta es chore/persona1-estructura para mostrar solo los cambios adicionales. Primero incorporar el PR de estructura con merge commit después de su aprobación; después cambiar la base del PR de ingesta a main y volver a comprobar diferencias y revisiones. No incorporar la ingesta en la rama de estructura. Su aprobación final también depende de resolver la descarga automática. Convención de commits chore, feat, fix y docs. Ver references/colaboracion.md.
 
 ## Resultados limitaciones y evidencia
 Ingesta y notebook locales verificables; la reproducción oficial y las evidencias colaborativas están pendientes. La partición aleatoria no mide pronóstico sobre un periodo posterior. El catálogo de capacidad es de septiembre de 2026 y no representa inventario observado. La propuesta debe justificar herramientas con las lecturas del curso y confrontar el criterio temporal de la rúbrica.

@@ -1,7 +1,11 @@
 # Estado de colaboración
 
-Persona1 corresponde al usuario makroem. Persona2, Persona3 y Persona4 deben confirmar sus cuentas de GitHub y aceptar las invitaciones enviadas a sus correos por el administrador. Los correos de contacto se mantienen fuera del repositorio público.
+Marco corresponde a makroem y al identificador técnico persona1. Stefania tiene acceso con a01236059-lab; Diego Martinez tiene acceso con Sanciprian. La invitación de Diego Hurtado para diegoHurtado01 sigue pendiente de aceptación. Los correos de contacto se mantienen fuera del repositorio público.
 
-La consulta pública del 17 de octubre de 2026 mostró main sin protección, ningún PR y un único contribuidor. No se obtuvo acceso autenticado para cambiar la protección, consultar colaboradores o publicar ramas. No se creó ni aprobó un PR en nombre de otro integrante.
+Actualización del 17 de octubre de 2026: se autenticó la cuenta de Marco, se publicaron las ramas chore/persona1-estructura y feat/persona1-ingesta y se protegió main. La regla exige un PR y una aprobación, descarta aprobaciones antiguas, exige conversaciones resueltas y bloquea force push y eliminación. También aplica a administradores. Las aprobaciones de Stefania y la incorporación de los PR siguen pendientes. No se creó ni aprobó un PR en nombre de otro integrante.
 
-Pendiente: PR de scaffold de Persona1 revisado por Persona2; PR de ingesta de Persona1 con reproducción y revisión de Persona2; PR de Persona2 revisado por Persona3; PR de Persona3 revisado por Persona4; PR de Persona4 probado y revisado por Persona1. Cada integrante debe ejecutar su reproducción con la misma versión de datos y partición. El código completo de referencia permite adelantar las comprobaciones técnicas, pero no acredita esas aportaciones ni revisiones.
+PR de estructura de Marco: https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/1. Base main, origen chore/persona1-estructura; revisión solicitada a Stefania.
+
+PR de ingesta de Marco: https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/2. Base provisional chore/persona1-estructura, origen feat/persona1-ingesta; revisión solicitada a Stefania. Después de incorporar la estructura mediante merge commit, cambiar esta base a main y comprobar de nuevo las diferencias y las revisiones. No incorporar este PR en la rama de estructura.
+
+Pendientes: aprobación de la estructura; reproducción y revisión de la ingesta por Stefania; resolver la descarga programática que recibió HTTP 406; PR de Stefania revisado por Diego Martinez; PR de Diego Martinez revisado por Diego Hurtado; PR de Diego Hurtado probado y revisado por Marco. Cada integrante debe ejecutar su reproducción con la misma versión de datos y partición. La referencia local no acredita contribuciones, revisiones ni reproducción oficial del equipo.
