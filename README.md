@@ -100,6 +100,8 @@ main está protegida: una aprobación, descarte de aprobaciones antiguas y conve
 Este cierre se presenta por PR hacia la rama del equipo antes de main. Los PR #6/#7 anteriores entraron a esa rama sin revisión formal registrada; no se declara una revisión inexistente ni se evade la protección. Los notebooks antiguos con días aleatorios son historia exploratoria y no acreditan las métricas cronológicas.
 
 ## Resultados limitaciones y cierre
+La propuesta consolidada está disponible en [PDF](reports/TC5061_Propuesta_Proyecto_Equipo39.pdf) y [Word editable](reports/TC5061_Propuesta_Proyecto_Equipo39.docx). El [informe de cierre y pendientes](reports/Cierre_Actividades_y_Pendientes.txt) distingue las actividades ejecutadas de la revisión independiente, la colaboración individual y el envío en Canvas todavía pendientes. Ambos documentos incluyen el enlace público al repositorio; el cierre técnico se consulta en esta rama hasta completar su revisión e integración.
+
 Las métricas vigentes se documentan en el resumen y el PDF. No deben mezclarse con mibici-equipo39-revision-marco, de días aleatorios. Se requieren capturas de lista, detalle con parámetros/métricas/etiquetas, artefacto y comparación, además de estructura del repositorio y referencias APA 7.
 
 La ejecución de cierre terminó el 18 de octubre de 2026 desde MLflow Projects, en el commit ad74ba344bdfe6770a12ef37577fa7403c54dbc6, con seis runs finalizados, git_dirty=false y 39 pruebas aprobadas. La evidencia está en reports/cierre_experimentos.json y references/evidence/.
