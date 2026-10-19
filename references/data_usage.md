@@ -1,7 +1,0 @@
-# Uso de las fuentes MiBici
-
-Se utilizaron las descargas públicas de https://mibici.net/es/datos-abiertos/ para un ejercicio académico del equipo 39. No se identificó en la página consultada una licencia específica aplicable a los CSV. La publicación como datos abiertos no permite afirmar una licencia Creative Commons concreta. La licencia MIT de este repositorio corresponde al código; no se extiende a los datos de MiBici.
-
-Los originales permanecen localmente en data/raw y data/external. La ingesta utiliza identificador de viaje, fechas y estaciones. No conserva identificadores de usuario ni variables demográficas en los datos normalizados. Los CSV, Parquet, modelos y almacenes MLflow se excluyen de Git y de la entrega académica.
-
-En la ejecución inicial requests recibió HTTP 406 y se usaron descargas manuales del portal. El servidor acepta el cliente identificado como MiBici-Equipo39/0.0.1 (academic data ingestion), que ahora se envía desde dataset.py. El modo --verify-manifest descarga las fuentes ausentes y exige los hashes confirmados, sin cookies, navegador ni cambios en la verificación TLS. Los originales y las salidas continúan excluidos de Git. La evidencia de la reconstrucción automática completa desde un clon sin datos se registra en reports/validacion_descarga_automatica.json; esa validación corresponde a la ingesta de Persona1, no a los módulos de variables y modelos.

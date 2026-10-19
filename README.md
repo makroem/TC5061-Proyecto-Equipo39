@@ -19,7 +19,7 @@ P2 es una aproximación: MiBici no publica inventario, así que el riesgo se con
 - Versión de datos: `data_version` e9de13df..., en `references/data_manifest.json`, con el SHA-256 de cada fuente.
 - Partición: días completos al azar estratificados por mes, 70/15/15 y semilla 39 (252/52/53 días). `references/split_manifest.json` guarda el mapa y su `split_id`; la construcción lo verifica y no lo reescribe.
 - X solo lleva variables de calendario: con días al azar, los rezagos meterían objetivos de días reservados en train.
-- Uso y privacidad: ver `references/data_usage.md`. No se versionan datos, modelos ni carpetas de MLflow.
+- Uso y privacidad: el portal publica los datos como abiertos, pero no se identificó una licencia específica para los CSV; la licencia MIT de este repo cubre solo el código. La ingesta descarta `Usuario_Id`, `Genero` y `Año_de_nacimiento`, y no se versionan datos, modelos ni carpetas de MLflow.
 
 ## Estructura
 
@@ -35,7 +35,7 @@ mibici_equipo39/
     train.py          controlador común
 notebooks/            exploración y refactorización (convención 1.x-iniciales-descripcion)
   refactorizado/      versión vigente de variables y P1
-references/           manifiestos, ML Canvas, uso de datos y ejecución
+references/           manifiestos de datos y partición, y ML Canvas
 reports/              reportes agregados y figuras
 tests/                pruebas de ingesta, variables, aislamiento y P2
 MLproject             entry points de MLflow Projects
@@ -47,7 +47,7 @@ Flujo de notebooks: `1.x` explora, `2.x` refactoriza en funciones y clases, y el
 - P1: `refactorizado/1.1` y `refactorizado/2.1`.
 - P2: `1.2-dm-p2-exploracion-riesgo` y `2.2-dm-p2-refactorizacion`.
 
-Los `2.0`, `1.1` y `2.1` que están directo en `notebooks/` son la versión anterior, con rezagos, y se conservan como historial.
+Los `2.0`, `1.1` y `2.1` que están directo en `notebooks/` son la versión anterior, con rezagos. Se conservan como historial con sus resultados guardados, pero ya no se ejecutan con el módulo actual.
 
 ## Instalación
 
@@ -77,12 +77,15 @@ python -m pytest tests -q
 2. `features` construye las tablas en `data/processed` y verifica la partición.
 3. `train` registra baseline y candidato de cada pregunta en el experimento `mibici-equipo39`. Pide un árbol de Git limpio para que cada run quede ligado a su commit.
 
-Con MLflow Projects (detalle en `references/ejecucion_mlproject.md`):
+Con MLflow Projects, con `.venv` primero en el PATH (en Windows, `$env:Path = "$PWD\.venv\Scripts;$env:Path"`):
 
 ```bash
+export PATH="$PWD/.venv/bin:$PATH" MLFLOW_TRACKING_URI="sqlite:///mlflow.db"
 mlflow run . -e main --env-manager local --experiment-name mibici-equipo39 --run-name main-personaN -P member=personaN
 python -m mlflow ui --backend-store-uri sqlite:///mlflow.db --host 127.0.0.1 --port 5000
 ```
+
+Los runs de modelos quedan anidados bajo el run del proyecto y se filtran con la etiqueta `question`.
 
 También existen `make data`, `make features`, `make train MEMBER=personaN` y `make test`.
 
@@ -101,7 +104,6 @@ Cada run registra rango de fechas, `data_version`, `split_id`, semilla, hiperpar
 - `main` está protegida: todo entra por Pull Request con una aprobación y se mergea con merge commit para conservar la autoría.
 - Ramas `tipo/personaN-descripcion` (por ejemplo `feat/persona3-riesgo-p2`) y commits con Conventional Commits: `feat`, `fix`, `docs`, `test`, `chore`.
 - Cada integrante abre al menos un PR y revisa el de otro.
-- El historial anterior de la ingesta está en `references/README_anterior_persona1.md` y `references/colaboracion.md`.
 
 ## Integrantes
 
