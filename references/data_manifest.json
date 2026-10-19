@@ -1,0 +1,924 @@
+{
+  "source_start": "2025-10-01",
+  "source_end_exclusive": "2026-10-01",
+  "cleaning_schema_version": "3-colab",
+  "chunksize": 100000,
+  "sources": [
+    {
+      "url": "https://mibici.net/site/assets/files/1118/nomenclatura_2026_09.csv",
+      "name": "nomenclatura_2026_09.csv",
+      "sha256": "206e45fe633922b634d858142fa21e6fd9f4c421b6435c02980ef290cc2df90d",
+      "bytes": 40841,
+      "rows": 484,
+      "encoding": "utf-8-sig",
+      "separator": ","
+    },
+    {
+      "month": "2025-10",
+      "url": "https://mibici.net/site/assets/files/115104/datos_abiertos_2025_10.csv",
+      "name": "datos_abiertos_2025_10.csv",
+      "sha256": "505d9b8b59f65fa223f7889189b74b9fe167c9dda11c7e7053536a360c611370",
+      "bytes": 36442309,
+      "encoding": "utf-8-sig",
+      "separator": ",",
+      "counts": {
+        "month": "2025-10",
+        "unknown_departures": 0,
+        "unknown_arrivals": 0,
+        "departure_rows": 420064,
+        "arrival_rows": 420064,
+        "raw_rows": 420064,
+        "missing_trip_id": 0,
+        "duplicates": 0,
+        "invalid_start": 0,
+        "outside_range": 0,
+        "missing_station": 0,
+        "invalid_end": 0,
+        "end_before_start": 0,
+        "retained_rows": 420064
+      }
+    },
+    {
+      "month": "2025-11",
+      "url": "https://mibici.net/site/assets/files/116773/datos_abiertos_2025_11.csv",
+      "name": "datos_abiertos_2025_11.csv",
+      "sha256": "f5c4f1b0c0842339dfdfaac756607314bdf5b64d17cde58d754f5a5a2e1a5fbe",
+      "bytes": 32997087,
+      "encoding": "utf-8-sig",
+      "separator": ",",
+      "counts": {
+        "month": "2025-11",
+        "unknown_departures": 0,
+        "unknown_arrivals": 0,
+        "departure_rows": 380328,
+        "arrival_rows": 380328,
+        "raw_rows": 380328,
+        "missing_trip_id": 0,
+        "duplicates": 0,
+        "invalid_start": 0,
+        "outside_range": 0,
+        "missing_station": 0,
+        "invalid_end": 0,
+        "end_before_start": 0,
+        "retained_rows": 380328
+      }
+    },
+    {
+      "month": "2025-12",
+      "url": "https://mibici.net/site/assets/files/118153/datos_abiertos_2025_12.csv",
+      "name": "datos_abiertos_2025_12.csv",
+      "sha256": "b9fbb7386666ac3d452e3d3ef40ab443c39eef349cd9c97207230371e1d2d001",
+      "bytes": 29089463,
+      "encoding": "utf-8-sig",
+      "separator": ",",
+      "counts": {
+        "month": "2025-12",
+        "unknown_departures": 0,
+        "unknown_arrivals": 0,
+        "departure_rows": 335420,
+        "arrival_rows": 335420,
+        "raw_rows": 335420,
+        "missing_trip_id": 0,
+        "duplicates": 0,
+        "invalid_start": 0,
+        "outside_range": 0,
+        "missing_station": 0,
+        "invalid_end": 0,
+        "end_before_start": 0,
+        "retained_rows": 335420
+      }
+    },
+    {
+      "month": "2026-01",
+      "url": "https://mibici.net/site/assets/files/120163/datos_abiertos_2026_01.csv",
+      "name": "datos_abiertos_2026_01.csv",
+      "sha256": "c40d7a43eb1c0b1523d6267bcdfac1daad04179ef1f0a7cf93f09b2df82285c2",
+      "bytes": 30985189,
+      "encoding": "cp1252",
+      "separator": ",",
+      "counts": {
+        "month": "2026-01",
+        "unknown_departures": 0,
+        "unknown_arrivals": 0,
+        "departure_rows": 357180,
+        "arrival_rows": 357180,
+        "raw_rows": 357180,
+        "missing_trip_id": 0,
+        "duplicates": 0,
+        "invalid_start": 0,
+        "outside_range": 0,
+        "missing_station": 0,
+        "invalid_end": 0,
+        "end_before_start": 0,
+        "retained_rows": 357180
+      }
+    },
+    {
+      "month": "2026-02",
+      "url": "https://mibici.net/site/assets/files/121761/datos_abiertos_2026_02.csv",
+      "name": "datos_abiertos_2026_02.csv",
+      "sha256": "2d78fa9686477bdedbf333423e6aadc63b265aaef038eb0b09701746a155ae1f",
+      "bytes": 28953901,
+      "encoding": "utf-8-sig",
+      "separator": ",",
+      "counts": {
+        "month": "2026-02",
+        "unknown_departures": 0,
+        "unknown_arrivals": 0,
+        "departure_rows": 333756,
+        "arrival_rows": 333756,
+        "raw_rows": 333756,
+        "missing_trip_id": 0,
+        "duplicates": 0,
+        "invalid_start": 0,
+        "outside_range": 0,
+        "missing_station": 0,
+        "invalid_end": 0,
+        "end_before_start": 0,
+        "retained_rows": 333756
+      }
+    },
+    {
+      "month": "2026-03",
+      "url": "https://mibici.net/site/assets/files/123236/datos_abiertos_2026_03.csv",
+      "name": "datos_abiertos_2026_03.csv",
+      "sha256": "97c273aa7465c99d509dfc58436122a979ad51af00bd527cef6144210375d16e",
+      "bytes": 32640591,
+      "encoding": "utf-8-sig",
+      "separator": ",",
+      "counts": {
+        "month": "2026-03",
+        "unknown_departures": 0,
+        "unknown_arrivals": 0,
+        "departure_rows": 376243,
+        "arrival_rows": 376243,
+        "raw_rows": 376243,
+        "missing_trip_id": 0,
+        "duplicates": 0,
+        "invalid_start": 0,
+        "outside_range": 0,
+        "missing_station": 0,
+        "invalid_end": 0,
+        "end_before_start": 0,
+        "retained_rows": 376243
+      }
+    },
+    {
+      "month": "2026-04",
+      "url": "https://mibici.net/site/assets/files/124927/datos_abiertos_2026_04.csv",
+      "name": "datos_abiertos_2026_04.csv",
+      "sha256": "9165342d0169f2c0ba4fb2c944003147c8a95d77f9058361b451cadf141b2483",
+      "bytes": 30523683,
+      "encoding": "utf-8-sig",
+      "separator": ",",
+      "counts": {
+        "month": "2026-04",
+        "unknown_departures": 0,
+        "unknown_arrivals": 0,
+        "departure_rows": 351851,
+        "arrival_rows": 351851,
+        "raw_rows": 351851,
+        "missing_trip_id": 0,
+        "duplicates": 0,
+        "invalid_start": 0,
+        "outside_range": 0,
+        "missing_station": 0,
+        "invalid_end": 0,
+        "end_before_start": 0,
+        "retained_rows": 351851
+      }
+    },
+    {
+      "month": "2026-05",
+      "url": "https://mibici.net/site/assets/files/125943/datos_abiertos_2026_05.csv",
+      "name": "datos_abiertos_2026_05.csv",
+      "sha256": "d0ac16ae3a75b8ac40565176e2e607c99c756a385860caa7e2ffb351082c9d45",
+      "bytes": 27427394,
+      "encoding": "utf-8-sig",
+      "separator": ",",
+      "counts": {
+        "month": "2026-05",
+        "unknown_departures": 0,
+        "unknown_arrivals": 0,
+        "departure_rows": 315895,
+        "arrival_rows": 315895,
+        "raw_rows": 315895,
+        "missing_trip_id": 0,
+        "duplicates": 0,
+        "invalid_start": 0,
+        "outside_range": 0,
+        "missing_station": 0,
+        "invalid_end": 0,
+        "end_before_start": 0,
+        "retained_rows": 315895
+      }
+    },
+    {
+      "month": "2026-06",
+      "url": "https://mibici.net/site/assets/files/127734/datos_abiertos_2026_06.csv",
+      "name": "datos_abiertos_2026_06.csv",
+      "sha256": "a4d195786a3599b155829288a0432cd9e76c6780dc693c0e9579d11e11c49a27",
+      "bytes": 30826027,
+      "encoding": "utf-8-sig",
+      "separator": ",",
+      "counts": {
+        "month": "2026-06",
+        "unknown_departures": 976,
+        "unknown_arrivals": 1078,
+        "departure_rows": 355303,
+        "arrival_rows": 355303,
+        "raw_rows": 355303,
+        "missing_trip_id": 0,
+        "duplicates": 0,
+        "invalid_start": 0,
+        "outside_range": 0,
+        "missing_station": 0,
+        "invalid_end": 0,
+        "end_before_start": 0,
+        "retained_rows": 355303
+      }
+    },
+    {
+      "month": "2026-07",
+      "url": "https://mibici.net/site/assets/files/129006/datos_abiertos_2026_07.csv",
+      "name": "datos_abiertos_2026_07.csv",
+      "sha256": "3f9db9fed985977b175001a984302eae7c61326a75ed93afae9c8fc17bbdb922",
+      "bytes": 33696291,
+      "encoding": "utf-8-sig",
+      "separator": ",",
+      "counts": {
+        "month": "2026-07",
+        "unknown_departures": 984,
+        "unknown_arrivals": 1045,
+        "departure_rows": 388257,
+        "arrival_rows": 388257,
+        "raw_rows": 388257,
+        "missing_trip_id": 0,
+        "duplicates": 0,
+        "invalid_start": 0,
+        "outside_range": 0,
+        "missing_station": 0,
+        "invalid_end": 0,
+        "end_before_start": 0,
+        "retained_rows": 388257
+      }
+    },
+    {
+      "month": "2026-08",
+      "url": "https://mibici.net/site/assets/files/130362/datos_abiertos_2026_08.csv",
+      "name": "datos_abiertos_2026_08.csv",
+      "sha256": "e34f39b9ad204ae0b66f3538894a5f86ed03f46d98701169d3e4d95952d5f671",
+      "bytes": 34158210,
+      "encoding": "utf-8-sig",
+      "separator": ",",
+      "counts": {
+        "month": "2026-08",
+        "unknown_departures": 0,
+        "unknown_arrivals": 0,
+        "departure_rows": 393524,
+        "arrival_rows": 393524,
+        "raw_rows": 393524,
+        "missing_trip_id": 0,
+        "duplicates": 0,
+        "invalid_start": 0,
+        "outside_range": 0,
+        "missing_station": 0,
+        "invalid_end": 0,
+        "end_before_start": 0,
+        "retained_rows": 393524
+      }
+    },
+    {
+      "month": "2026-09",
+      "url": "https://mibici.net/site/assets/files/131825/datos_abiertos_2026_09.csv",
+      "name": "datos_abiertos_2026_09.csv",
+      "sha256": "00b5cf64cc31a502d01044d905f6e033f9bc1db962e771119742fd25c6cb58b3",
+      "bytes": 42566896,
+      "encoding": "utf-8-sig",
+      "separator": ",",
+      "counts": {
+        "month": "2026-09",
+        "unknown_departures": 0,
+        "unknown_arrivals": 0,
+        "departure_rows": 489298,
+        "arrival_rows": 489298,
+        "raw_rows": 490056,
+        "missing_trip_id": 0,
+        "duplicates": 758,
+        "invalid_start": 0,
+        "outside_range": 0,
+        "missing_station": 0,
+        "invalid_end": 0,
+        "end_before_start": 0,
+        "retained_rows": 489298
+      }
+    }
+  ],
+  "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+  "outputs": {
+    "processed/stations.parquet": {
+      "rows": 484,
+      "logical_sha256": "84ed1ce13b7034edadd13cf0d5ae5d2fe8fd05eaa2c8d1bca9b1a130427f548e"
+    },
+    "processed/trips/month=2025-10/part-00000.parquet": {
+      "rows": 100000,
+      "logical_sha256": "3f2c725fa66c55a4e84de7b9bab9a6b034a005e83ab878f488c542e92c2798d5"
+    },
+    "interim/departures/month=2025-10/part-00000.parquet": {
+      "rows": 100000,
+      "logical_sha256": "cb740afea55b28faed24150f32cd0748f1aa8f7a5acca61e71bfdaef196e0167"
+    },
+    "interim/arrivals/month=2025-10/part-00000.parquet": {
+      "rows": 100000,
+      "logical_sha256": "c202279fdd29c01c380ac1d9a4ce95b48a2b32533c95625c154329f92ae216a4"
+    },
+    "processed/trips/month=2025-10/part-00001.parquet": {
+      "rows": 100000,
+      "logical_sha256": "04b84be2248c0f25c6a94dec8cf9067d90dd92118e7ff84a8ddda4fc47f006e1"
+    },
+    "interim/departures/month=2025-10/part-00001.parquet": {
+      "rows": 100000,
+      "logical_sha256": "6f0afaf832bec0a8366e825ec57cd2090b4968943b1fb149dfba7a3adce8c578"
+    },
+    "interim/arrivals/month=2025-10/part-00001.parquet": {
+      "rows": 100000,
+      "logical_sha256": "2a1c0b3acc14a88d8ef689a6785b72af0fb19abca0bab41e8119edff5f377528"
+    },
+    "processed/trips/month=2025-10/part-00002.parquet": {
+      "rows": 100000,
+      "logical_sha256": "98b2789e01d47f20ae6482afd69d402da8b9dade8b73b8fa3d47c151eb5f14c1"
+    },
+    "interim/departures/month=2025-10/part-00002.parquet": {
+      "rows": 100000,
+      "logical_sha256": "cbcef8cddbf318f43f4ca88754528236bd58f71100c7c334c7a377f8a3a410b2"
+    },
+    "interim/arrivals/month=2025-10/part-00002.parquet": {
+      "rows": 100000,
+      "logical_sha256": "aa6a170aae1992634276553295a2b5847793b8f29285a3f28258b4595cf13ebb"
+    },
+    "processed/trips/month=2025-10/part-00003.parquet": {
+      "rows": 100000,
+      "logical_sha256": "1ce7181c1afbc425b25978bc6d9403bf78f3d20304885662b105c6f3897ea203"
+    },
+    "interim/departures/month=2025-10/part-00003.parquet": {
+      "rows": 100000,
+      "logical_sha256": "4e61781902382b885d353ce526695c85c62fad7c9d7b577827c3ba2264eac29c"
+    },
+    "interim/arrivals/month=2025-10/part-00003.parquet": {
+      "rows": 100000,
+      "logical_sha256": "ee514eb369d178450320e85a5f9fc6a16500f34f38171333b5282e491ee2a8da"
+    },
+    "processed/trips/month=2025-10/part-00004.parquet": {
+      "rows": 20064,
+      "logical_sha256": "353f2d0080fd654e1f0082eadf5e75f9847b655d35248a4fa828f0d4a8efc20f"
+    },
+    "interim/departures/month=2025-10/part-00004.parquet": {
+      "rows": 20064,
+      "logical_sha256": "8ebbca21fb74dbeaae183824cff5c6445f4c9f975ced53fc57675ebcafc22592"
+    },
+    "interim/arrivals/month=2025-10/part-00004.parquet": {
+      "rows": 20064,
+      "logical_sha256": "6c54c33b93d781e65c31d8ae3f1937894a5a73b86b831b399ec7a745e079af44"
+    },
+    "processed/trips/month=2025-11/part-00000.parquet": {
+      "rows": 100000,
+      "logical_sha256": "11c1cb4255656c6c96155d81d450527351536c7058af14632f325d902f6d22d9"
+    },
+    "interim/departures/month=2025-11/part-00000.parquet": {
+      "rows": 100000,
+      "logical_sha256": "a728e6d2da7791c519e13cf9fb11e83c212675a58bf6137ed7adf0cbe8ab0363"
+    },
+    "interim/arrivals/month=2025-11/part-00000.parquet": {
+      "rows": 100000,
+      "logical_sha256": "ebac473f2f02590102f86259b5b4eea91942b3a53b73ca9f463e0cd9bae1f7a0"
+    },
+    "processed/trips/month=2025-11/part-00001.parquet": {
+      "rows": 100000,
+      "logical_sha256": "4234b11c36144d568b76984d1fcd8594c6b8f3ec601f61b19a4496bf6f54b726"
+    },
+    "interim/departures/month=2025-11/part-00001.parquet": {
+      "rows": 100000,
+      "logical_sha256": "e38c1e282c0d558c929488cdc8316202171bd2792f77240965d568c9a857e7e7"
+    },
+    "interim/arrivals/month=2025-11/part-00001.parquet": {
+      "rows": 100000,
+      "logical_sha256": "f41b7c4685a442156ca702de3c793d14ac57b87372c0e788f3edeb20a5821488"
+    },
+    "processed/trips/month=2025-11/part-00002.parquet": {
+      "rows": 100000,
+      "logical_sha256": "8d5567bff31e1356c02651337823a3468916c422937fff2676f5a0c10c7b3690"
+    },
+    "interim/departures/month=2025-11/part-00002.parquet": {
+      "rows": 100000,
+      "logical_sha256": "103fcb19aa78b5862621281660bbdfdb999f553394e86ec3398437df2a8001a2"
+    },
+    "interim/arrivals/month=2025-11/part-00002.parquet": {
+      "rows": 100000,
+      "logical_sha256": "f944cc758ef43dcb55484fd780890a0bd7841d0b53e78686d7dec60f14d1dc66"
+    },
+    "processed/trips/month=2025-11/part-00003.parquet": {
+      "rows": 80328,
+      "logical_sha256": "0611439a71452129fc11135be74eafad5aa9143bf5c792985e37d6afdc1cb079"
+    },
+    "interim/departures/month=2025-11/part-00003.parquet": {
+      "rows": 80328,
+      "logical_sha256": "3e57ce4028094cbd8cc8263cb7d9005109b155839349a18968e3d649092e520d"
+    },
+    "interim/arrivals/month=2025-11/part-00003.parquet": {
+      "rows": 80328,
+      "logical_sha256": "0120a65030c9e9b24304dafe768c0ecb080f0ecfa17d8c9967e74f5bb0b7f85f"
+    },
+    "processed/trips/month=2025-12/part-00000.parquet": {
+      "rows": 100000,
+      "logical_sha256": "9a929ce75f6c946321668a736e38e63b0911c3aa826cb904469cf664302bf991"
+    },
+    "interim/departures/month=2025-12/part-00000.parquet": {
+      "rows": 100000,
+      "logical_sha256": "6b8e46b640e1ecfff99f463c7ea79cf50cd5b485705099f97e72006a303a813f"
+    },
+    "interim/arrivals/month=2025-12/part-00000.parquet": {
+      "rows": 100000,
+      "logical_sha256": "d08c12540daa81da203e6799cb10426e61d4174dc08e9b282152917f9f842cce"
+    },
+    "processed/trips/month=2025-12/part-00001.parquet": {
+      "rows": 100000,
+      "logical_sha256": "6aed1da86f5f969dde63315ef817800c18c8fff65624610fdf86ea12960a779f"
+    },
+    "interim/departures/month=2025-12/part-00001.parquet": {
+      "rows": 100000,
+      "logical_sha256": "2b02691fb74a9b23bd5d332889efbd37b312f27384f6c4349f4029ec0ca56fc5"
+    },
+    "interim/arrivals/month=2025-12/part-00001.parquet": {
+      "rows": 100000,
+      "logical_sha256": "6e12b9d56cbd78b7b0eedef2e5751d88f3a807a1ac0c60c528e9f2b67e29eb0f"
+    },
+    "processed/trips/month=2025-12/part-00002.parquet": {
+      "rows": 100000,
+      "logical_sha256": "ef6c1fe7138117b5ff03226b65c34aaa352c3c0648310aacd53fbc5cc36c4ac1"
+    },
+    "interim/departures/month=2025-12/part-00002.parquet": {
+      "rows": 100000,
+      "logical_sha256": "b8b6edca914a353b79ee849a2d309e2b004609ba0d92922411c516da2534d7d3"
+    },
+    "interim/arrivals/month=2025-12/part-00002.parquet": {
+      "rows": 100000,
+      "logical_sha256": "3dc55e29f538592c35669b27b0a35d273dc06f602593dc72788be829ab50eef0"
+    },
+    "processed/trips/month=2025-12/part-00003.parquet": {
+      "rows": 35420,
+      "logical_sha256": "74f2a11021299581454fe63a1372aa8a048d2a5261f9dfd1d76fdfecf48b14e3"
+    },
+    "interim/departures/month=2025-12/part-00003.parquet": {
+      "rows": 35420,
+      "logical_sha256": "7ba953729ec51f43849f01dc1b87583fa2879be0af526829621aa7ddd1c81b31"
+    },
+    "interim/arrivals/month=2025-12/part-00003.parquet": {
+      "rows": 35420,
+      "logical_sha256": "043611ccec2772ac16ed878d8c470b643602bb2de2670726bc91f185a48f8cf2"
+    },
+    "processed/trips/month=2026-01/part-00000.parquet": {
+      "rows": 100000,
+      "logical_sha256": "445f2165bb74c86d9b2b3d01452f6b5e9f77813100ad3601061026772526a664"
+    },
+    "interim/departures/month=2026-01/part-00000.parquet": {
+      "rows": 100000,
+      "logical_sha256": "7a6cdacd4fd007f64eb29890f60f6bc00ce33f7894ef32b21e2455a2f8b0c4f5"
+    },
+    "interim/arrivals/month=2026-01/part-00000.parquet": {
+      "rows": 100000,
+      "logical_sha256": "345ce44489553f048e3e03cc380947fe9e103413da0d08a27b3b135518acc946"
+    },
+    "processed/trips/month=2026-01/part-00001.parquet": {
+      "rows": 100000,
+      "logical_sha256": "84f76fb495eaafe07b738f1a9b968b7319f4c6dcb364c181e31f46e6eb4986da"
+    },
+    "interim/departures/month=2026-01/part-00001.parquet": {
+      "rows": 100000,
+      "logical_sha256": "80daef7abb5c9e037d3c14294013a1cb91e3aea8a178752a0c0588e7ba8cdd01"
+    },
+    "interim/arrivals/month=2026-01/part-00001.parquet": {
+      "rows": 100000,
+      "logical_sha256": "38e42c84ee2fce2c3f94ad897d883fe6d84e33b7b06992d74afdc36e394f6b27"
+    },
+    "processed/trips/month=2026-01/part-00002.parquet": {
+      "rows": 100000,
+      "logical_sha256": "0b98cbb63ea306294fe28ab806cb667f6c8b5059e612f809f08d707b36e79338"
+    },
+    "interim/departures/month=2026-01/part-00002.parquet": {
+      "rows": 100000,
+      "logical_sha256": "0c829933904faf5af662b2ad6022eeaf011e764a1d01f42297fbb8f7d55d742e"
+    },
+    "interim/arrivals/month=2026-01/part-00002.parquet": {
+      "rows": 100000,
+      "logical_sha256": "23d93bea6f2084033bdbcaaa390f045f6073a897134314e87a9a058433f47455"
+    },
+    "processed/trips/month=2026-01/part-00003.parquet": {
+      "rows": 57180,
+      "logical_sha256": "26fca201d94c195d53e7c6dc64f13da3c84bc179acae524ac360c6eb264afe23"
+    },
+    "interim/departures/month=2026-01/part-00003.parquet": {
+      "rows": 57180,
+      "logical_sha256": "296f35540ec4e78c830f559636c7d0c51bbd776dc598cec6ce6665b9f07cbc2f"
+    },
+    "interim/arrivals/month=2026-01/part-00003.parquet": {
+      "rows": 57180,
+      "logical_sha256": "bf82a804e52a05935138393c289320be6d0919fea8abee1c350a37454e488a33"
+    },
+    "processed/trips/month=2026-02/part-00000.parquet": {
+      "rows": 100000,
+      "logical_sha256": "f5c76d9c66bd33add4d07400594794b8a0008cd3073c52ff56d8f50370765839"
+    },
+    "interim/departures/month=2026-02/part-00000.parquet": {
+      "rows": 100000,
+      "logical_sha256": "81b26193122296d77efd852dc1afe73d01bdfd3dee1849fff81cee5a88d7a3aa"
+    },
+    "interim/arrivals/month=2026-02/part-00000.parquet": {
+      "rows": 100000,
+      "logical_sha256": "cd56032b924f61e33e7a4a704634263d18eac880c02a5821878af562763e1aac"
+    },
+    "processed/trips/month=2026-02/part-00001.parquet": {
+      "rows": 100000,
+      "logical_sha256": "6575280031f16900d3e572297228019c76dc5b13a40cfaa7bc5ddfaf36a23b52"
+    },
+    "interim/departures/month=2026-02/part-00001.parquet": {
+      "rows": 100000,
+      "logical_sha256": "7e820ebb9579cd48563c5be22401091f613e91846f3e622d5aa9cc1dabaf98d2"
+    },
+    "interim/arrivals/month=2026-02/part-00001.parquet": {
+      "rows": 100000,
+      "logical_sha256": "2a119f51f73a84ffeec3b0ec839bafb7e2284ab9da38cee086fe603dffed547e"
+    },
+    "processed/trips/month=2026-02/part-00002.parquet": {
+      "rows": 100000,
+      "logical_sha256": "7aa5347fb017510c77adb88d40eec10fa7ffa7dccc9509315a0310412f70ad14"
+    },
+    "interim/departures/month=2026-02/part-00002.parquet": {
+      "rows": 100000,
+      "logical_sha256": "062ff8ce256cd8269de07514a444d72c2ca4517607f442cb6d84089be5fa5b83"
+    },
+    "interim/arrivals/month=2026-02/part-00002.parquet": {
+      "rows": 100000,
+      "logical_sha256": "725f6599bc3ac00a470fbd876afd5aabf43ac1f8f3eb2028e3fe5e860b6cbe68"
+    },
+    "processed/trips/month=2026-02/part-00003.parquet": {
+      "rows": 33756,
+      "logical_sha256": "65b6ccf0deb14c9ae27b94df1fda164016a035040cbfab16a7a5867f67eca164"
+    },
+    "interim/departures/month=2026-02/part-00003.parquet": {
+      "rows": 33756,
+      "logical_sha256": "3d3737857fd9a33c0d03ceafc6b3b39b9028a51e7dfa6acdce9ce1b3d701e0bc"
+    },
+    "interim/arrivals/month=2026-02/part-00003.parquet": {
+      "rows": 33756,
+      "logical_sha256": "980fd769f8bbb8ad77194f156690234b647cb4269ffeff419ce6b1dc60a44cee"
+    },
+    "processed/trips/month=2026-03/part-00000.parquet": {
+      "rows": 100000,
+      "logical_sha256": "60a71e4b5088cdff8bccbe7dbddb053e97c91e5b9ff0fd6f1026265d4b3bae7c"
+    },
+    "interim/departures/month=2026-03/part-00000.parquet": {
+      "rows": 100000,
+      "logical_sha256": "44eac4737af0736eed40e3e308a7e41e4466f824eab539c3fa2d4e8990b5ef2a"
+    },
+    "interim/arrivals/month=2026-03/part-00000.parquet": {
+      "rows": 100000,
+      "logical_sha256": "83ce907fa24106b0b6e411424d8f8f4587786e3eba12f8cec7a046aa464ceb57"
+    },
+    "processed/trips/month=2026-03/part-00001.parquet": {
+      "rows": 100000,
+      "logical_sha256": "e64c2ffd6b505462cbb8ee09fbff46aa9911985c3fc092380f14374797750beb"
+    },
+    "interim/departures/month=2026-03/part-00001.parquet": {
+      "rows": 100000,
+      "logical_sha256": "c95a136f6d5463900a73747a11b537ff61a0b1f8d26eb73958650679b4e0dd72"
+    },
+    "interim/arrivals/month=2026-03/part-00001.parquet": {
+      "rows": 100000,
+      "logical_sha256": "d926aea0b332f5a32e121dee1137aad473105ebecafb32f061eed259a0472a2f"
+    },
+    "processed/trips/month=2026-03/part-00002.parquet": {
+      "rows": 100000,
+      "logical_sha256": "0c041fd6199919df854e495636f8387e47aaea62fc9ec52e707baf925b3a001e"
+    },
+    "interim/departures/month=2026-03/part-00002.parquet": {
+      "rows": 100000,
+      "logical_sha256": "56c33814e1cf5e7cbfc8ebd33b46d02ebd4e6f7d609a28c324a458783ec842d4"
+    },
+    "interim/arrivals/month=2026-03/part-00002.parquet": {
+      "rows": 100000,
+      "logical_sha256": "a520aa3dce776cc7641aea0e816b89461e8ee0ae0485f61792ea8e2fe5cefb2f"
+    },
+    "processed/trips/month=2026-03/part-00003.parquet": {
+      "rows": 76243,
+      "logical_sha256": "2f9217a7b7e76e4224e817b8ae589047286d67de54c933bfebbcd66394709e23"
+    },
+    "interim/departures/month=2026-03/part-00003.parquet": {
+      "rows": 76243,
+      "logical_sha256": "b8fb3ed83d4083d7068ebcb882f258abeefcbe1cc5a475fd13fb23ce2bc7d0e7"
+    },
+    "interim/arrivals/month=2026-03/part-00003.parquet": {
+      "rows": 76243,
+      "logical_sha256": "4c3cefc9fd08ec2d99eb4b3d608e5cb3495bdc418245f70a481cdf733110f4ed"
+    },
+    "processed/trips/month=2026-04/part-00000.parquet": {
+      "rows": 100000,
+      "logical_sha256": "52f392e338e3a18f829a72c5575de5ea9967daa0c3e6bc77116c4125f32ddf9b"
+    },
+    "interim/departures/month=2026-04/part-00000.parquet": {
+      "rows": 100000,
+      "logical_sha256": "f1b83e1fad416112af4d887b224c0440ed9da63d62cb34d6eb9a6878546fe115"
+    },
+    "interim/arrivals/month=2026-04/part-00000.parquet": {
+      "rows": 100000,
+      "logical_sha256": "ee0cb2ebdfdbde6abad015c5defd203f9c8b7383f13e3d02c3d3546da9d03bd5"
+    },
+    "processed/trips/month=2026-04/part-00001.parquet": {
+      "rows": 100000,
+      "logical_sha256": "9a26749dfc61f6c677e594b833422ecd1c912eb0a7c70fa56113fc0818549ecb"
+    },
+    "interim/departures/month=2026-04/part-00001.parquet": {
+      "rows": 100000,
+      "logical_sha256": "a89ee220c08c60ec3ff14f1ada7d5e51b063f7e8be12f5a567f6738f87d42be3"
+    },
+    "interim/arrivals/month=2026-04/part-00001.parquet": {
+      "rows": 100000,
+      "logical_sha256": "e649fc46b011ddcd13cd780d25f1d21713d2cd70ac19190474652fe1b5bc99c0"
+    },
+    "processed/trips/month=2026-04/part-00002.parquet": {
+      "rows": 100000,
+      "logical_sha256": "f0ed5d5af4ea2ed976411ba7ff8402a45fa9be2f84ffc970fdbba74733d76a7e"
+    },
+    "interim/departures/month=2026-04/part-00002.parquet": {
+      "rows": 100000,
+      "logical_sha256": "dd93f2ab9115cec356fd680b9bb3b8dea06a8df084cf3de64fcc043a45d6a030"
+    },
+    "interim/arrivals/month=2026-04/part-00002.parquet": {
+      "rows": 100000,
+      "logical_sha256": "7558cc85c73e7b3b9ea7abe6216876227da2aa484bfd73d271cf5316c107eb4d"
+    },
+    "processed/trips/month=2026-04/part-00003.parquet": {
+      "rows": 51851,
+      "logical_sha256": "1c79577bc3d519dd1902150da8cb65a9c5151b9679bba54ac13cd448194efb8f"
+    },
+    "interim/departures/month=2026-04/part-00003.parquet": {
+      "rows": 51851,
+      "logical_sha256": "aa4e11bfb5028279a44451c14443a4157b5ddae9df00ead434032436d617a1c7"
+    },
+    "interim/arrivals/month=2026-04/part-00003.parquet": {
+      "rows": 51851,
+      "logical_sha256": "e4b1436557d24c49d5938019a2b99719616cd393f7d9ded13609aac1c07d9d86"
+    },
+    "processed/trips/month=2026-05/part-00000.parquet": {
+      "rows": 100000,
+      "logical_sha256": "0fb2a2c14e58afe8820a79034cf81f26850e3c92d347abd8e3497befd741708c"
+    },
+    "interim/departures/month=2026-05/part-00000.parquet": {
+      "rows": 100000,
+      "logical_sha256": "12a608f50db0bf4de72a5868df5b1e873c35b68d8f33d0f2d46ce5c9a7369545"
+    },
+    "interim/arrivals/month=2026-05/part-00000.parquet": {
+      "rows": 100000,
+      "logical_sha256": "d5345bd6e3ac41ef1a0c6b16b322e31cbf0e267b2a64fe8a86d9ffed5ea8005d"
+    },
+    "processed/trips/month=2026-05/part-00001.parquet": {
+      "rows": 100000,
+      "logical_sha256": "8c0a1930dea9e335fffbf3f13c20b07f5718cdc5f269288c5f8d1ef8ac096417"
+    },
+    "interim/departures/month=2026-05/part-00001.parquet": {
+      "rows": 100000,
+      "logical_sha256": "34148ba10cf509d3e64e092eca29504aed14465278cbeb59d6414721dca70bd0"
+    },
+    "interim/arrivals/month=2026-05/part-00001.parquet": {
+      "rows": 100000,
+      "logical_sha256": "8b460b1c3c615829ae2153e3cffb3c507d6e517fba05eb722ae637aaf932b798"
+    },
+    "processed/trips/month=2026-05/part-00002.parquet": {
+      "rows": 100000,
+      "logical_sha256": "36a093ed85e02860a79beb8ad8430b0444dbf4796c5265f67b2b6defacb069ac"
+    },
+    "interim/departures/month=2026-05/part-00002.parquet": {
+      "rows": 100000,
+      "logical_sha256": "759fca204b25e67dd0aea4fb53feb0d2bbfb4ace4ac74b36f9c383841319b347"
+    },
+    "interim/arrivals/month=2026-05/part-00002.parquet": {
+      "rows": 100000,
+      "logical_sha256": "08654a12d788aeaf32f4c5753ed38ce59aafcf86509eff3f73f1c96d67e3c338"
+    },
+    "processed/trips/month=2026-05/part-00003.parquet": {
+      "rows": 15895,
+      "logical_sha256": "c60ad972c7d048eaf166432deaa2b786a965b1526f985918f149b31b87ee34c2"
+    },
+    "interim/departures/month=2026-05/part-00003.parquet": {
+      "rows": 15895,
+      "logical_sha256": "01315561d02c500c7b339abf16cc76871615b2930993759a4c3242cf20f00458"
+    },
+    "interim/arrivals/month=2026-05/part-00003.parquet": {
+      "rows": 15895,
+      "logical_sha256": "4ad80de9d425feba8b6cdb5d2a0b6f29dcec922dae1eccb40d87098b3b23e036"
+    },
+    "processed/trips/month=2026-06/part-00000.parquet": {
+      "rows": 100000,
+      "logical_sha256": "a1306f6d671566aead66ad94d7a837be00a29d6b33b6d712567a25a2076c0bca"
+    },
+    "interim/departures/month=2026-06/part-00000.parquet": {
+      "rows": 100000,
+      "logical_sha256": "195c715428570abb8de5345c2afa71e9b8d1b5eaef8b7db9193e186cebee0b8e"
+    },
+    "interim/arrivals/month=2026-06/part-00000.parquet": {
+      "rows": 100000,
+      "logical_sha256": "444ac9f82f6f8ee19483fd6eb437e724d1f0785d9581859df29e7bf326423892"
+    },
+    "processed/trips/month=2026-06/part-00001.parquet": {
+      "rows": 100000,
+      "logical_sha256": "6f8b52ac6999ebe867000e4cfcfe1475372928ddaa652ca0c169f5aeeb533f4b"
+    },
+    "interim/departures/month=2026-06/part-00001.parquet": {
+      "rows": 100000,
+      "logical_sha256": "5e5d8089d7edb4fd24083588dea79c2f12266745d290115000bfda11f54ed429"
+    },
+    "interim/arrivals/month=2026-06/part-00001.parquet": {
+      "rows": 100000,
+      "logical_sha256": "af63da003748687b1bad158663a7116572b014d4f1e3f59b7bb05f627042d6c9"
+    },
+    "processed/trips/month=2026-06/part-00002.parquet": {
+      "rows": 100000,
+      "logical_sha256": "cd0b8647e0cbba385367994bc716cf909f8df83a8552142e4bc503c5ef7a3319"
+    },
+    "interim/departures/month=2026-06/part-00002.parquet": {
+      "rows": 100000,
+      "logical_sha256": "d40e2b0cbcd566317de7c88a338bbe28698bcde16da13d5b5e4dc7f724c3dd0f"
+    },
+    "interim/arrivals/month=2026-06/part-00002.parquet": {
+      "rows": 100000,
+      "logical_sha256": "3cf2ab7bc5bf68999b96e5d9b3cc3b151ebcff69124bae009ae8d8b6097b84c8"
+    },
+    "processed/trips/month=2026-06/part-00003.parquet": {
+      "rows": 55303,
+      "logical_sha256": "3e24fce1896df6cd29329189574eafb3328bd01f992c8cebe13b8a3127614917"
+    },
+    "interim/departures/month=2026-06/part-00003.parquet": {
+      "rows": 55303,
+      "logical_sha256": "78b50b1f32f15cd97c585fee1dbf36e532894b04a205d8c4b6c652b073ddace2"
+    },
+    "interim/arrivals/month=2026-06/part-00003.parquet": {
+      "rows": 55303,
+      "logical_sha256": "a501481e04433a4e052e594411fa57bcae5ed869b99ee609b8e294fc6ac1b998"
+    },
+    "processed/trips/month=2026-07/part-00000.parquet": {
+      "rows": 100000,
+      "logical_sha256": "1813db1693f2e872135ca95c604894bfb971b8a6f7e41813f87b34d692c60b90"
+    },
+    "interim/departures/month=2026-07/part-00000.parquet": {
+      "rows": 100000,
+      "logical_sha256": "2e74d217cf7b89299acfccee29f468b8c855722489a01712f8a16b9d5ef4b7e6"
+    },
+    "interim/arrivals/month=2026-07/part-00000.parquet": {
+      "rows": 100000,
+      "logical_sha256": "3d4ed96c8cd8bb56d118474378287fba4356e228c92bf37454ec0ec92e13d00b"
+    },
+    "processed/trips/month=2026-07/part-00001.parquet": {
+      "rows": 100000,
+      "logical_sha256": "bfb11137b973079be83f08f344fba128d27ba04359fa3be4c57e21ac2f3fec73"
+    },
+    "interim/departures/month=2026-07/part-00001.parquet": {
+      "rows": 100000,
+      "logical_sha256": "c121ccc6b497984641ca59c2c7f8ccd1738dd0b24e59aa165b3c480e25a875c2"
+    },
+    "interim/arrivals/month=2026-07/part-00001.parquet": {
+      "rows": 100000,
+      "logical_sha256": "c61bc8b17e663ee2673fd9a17884e1d0e04891235ca3c2d651d7696b0b0becff"
+    },
+    "processed/trips/month=2026-07/part-00002.parquet": {
+      "rows": 100000,
+      "logical_sha256": "b95180605c3d5ec4e3abef3849c0fdfe1bfaf704d2f8c0ce31a2fd782db1661d"
+    },
+    "interim/departures/month=2026-07/part-00002.parquet": {
+      "rows": 100000,
+      "logical_sha256": "75fbc127b027d2303b2099affe96ae2b4582ac161d9f3df3423ee9ead7a77d5f"
+    },
+    "interim/arrivals/month=2026-07/part-00002.parquet": {
+      "rows": 100000,
+      "logical_sha256": "60ab57a81c2c9d5ef68149f0a2caf382fb0b0a582a000f55f953923829ea1a84"
+    },
+    "processed/trips/month=2026-07/part-00003.parquet": {
+      "rows": 88257,
+      "logical_sha256": "89e0c14c4943714f0e0fddf21cf3f942e2dab81f43631202eab4a000cf2eb314"
+    },
+    "interim/departures/month=2026-07/part-00003.parquet": {
+      "rows": 88257,
+      "logical_sha256": "5cc97565e3c7b5a73c260493891700ba052a977f6a6c6c02498a3bb2fd82eb23"
+    },
+    "interim/arrivals/month=2026-07/part-00003.parquet": {
+      "rows": 88257,
+      "logical_sha256": "8a3b24788df18b41f0ecbfebb0a8520e3007b8fbbe8f32a4c139f3a8c7cd1160"
+    },
+    "processed/trips/month=2026-08/part-00000.parquet": {
+      "rows": 100000,
+      "logical_sha256": "24cef48fb407d0839ac79d907bac107d5b5780c776d5b0e8940fdc801f995825"
+    },
+    "interim/departures/month=2026-08/part-00000.parquet": {
+      "rows": 100000,
+      "logical_sha256": "f43fa366b3efce24aaa801144377432b6f3df8ed7e1a039662684b1cca5ea26b"
+    },
+    "interim/arrivals/month=2026-08/part-00000.parquet": {
+      "rows": 100000,
+      "logical_sha256": "ba42cf6238453791809271817164471c5d14098a4c94c03fc88e51ed1e1b8d8e"
+    },
+    "processed/trips/month=2026-08/part-00001.parquet": {
+      "rows": 100000,
+      "logical_sha256": "2d5628820348cb19b2a78a9538edfd9b33e1a41b1716bedfc218abcc503498c7"
+    },
+    "interim/departures/month=2026-08/part-00001.parquet": {
+      "rows": 100000,
+      "logical_sha256": "2319e69e7349d42dfd11b471a0fcb07861a6fca3860acc210f646db33f26fd82"
+    },
+    "interim/arrivals/month=2026-08/part-00001.parquet": {
+      "rows": 100000,
+      "logical_sha256": "091e0ac830ad88f6ce7acd1468d72bfd859427124d5f77498cd006779dc753c3"
+    },
+    "processed/trips/month=2026-08/part-00002.parquet": {
+      "rows": 100000,
+      "logical_sha256": "f554806c05461ea7dbc081783e822eb44617da35e975487e95103ee7291cd425"
+    },
+    "interim/departures/month=2026-08/part-00002.parquet": {
+      "rows": 100000,
+      "logical_sha256": "41ba2b5f9688be5113c8bc43f0118bfb4b00031d7e77400ab23aaa4c907c9306"
+    },
+    "interim/arrivals/month=2026-08/part-00002.parquet": {
+      "rows": 100000,
+      "logical_sha256": "27ea0b90026fc12806a32177ad5062122cae79eb814e6ac75649a5d64f54b3cd"
+    },
+    "processed/trips/month=2026-08/part-00003.parquet": {
+      "rows": 93524,
+      "logical_sha256": "eda19e2917671ca1667504156d063e7c9b46aecfc7c9e0a3a7da25bb32b09e95"
+    },
+    "interim/departures/month=2026-08/part-00003.parquet": {
+      "rows": 93524,
+      "logical_sha256": "723b8c697858d9a388117deffde46ec43d8019385326bf4cfce37299f41020cd"
+    },
+    "interim/arrivals/month=2026-08/part-00003.parquet": {
+      "rows": 93524,
+      "logical_sha256": "ab34ac3f502a4a3b6c0ae803a49b8b28bf520383b07eda93cfcddb07b1ce51f8"
+    },
+    "processed/trips/month=2026-09/part-00000.parquet": {
+      "rows": 99840,
+      "logical_sha256": "a006ff71fc5dd412770e59a0e7c03c29bd9e5bf2ce265e77e5b1a851069c79f3"
+    },
+    "interim/departures/month=2026-09/part-00000.parquet": {
+      "rows": 99840,
+      "logical_sha256": "b73d487b88fe40c8e779778c55ae803efe6d056d92d49e3b2b44ecf86076f712"
+    },
+    "interim/arrivals/month=2026-09/part-00000.parquet": {
+      "rows": 99840,
+      "logical_sha256": "6c74ea92b3827d069dd9d95592c6c6dcbf3ee3b53bf120b4cfa1470dd1deb6bb"
+    },
+    "processed/trips/month=2026-09/part-00001.parquet": {
+      "rows": 99869,
+      "logical_sha256": "69cfdaed0f01955442e4fae2aa77a8daca47b9663bb4b2b049d025b800a320a1"
+    },
+    "interim/departures/month=2026-09/part-00001.parquet": {
+      "rows": 99869,
+      "logical_sha256": "cbe4421a01804bae5213e9132f7ab0e05ea0c59da98145ae2fb98cf4ccc4647e"
+    },
+    "interim/arrivals/month=2026-09/part-00001.parquet": {
+      "rows": 99869,
+      "logical_sha256": "4b7f7b8452be58d59aede855b505ea78879a1cdf468232a712d73a6355744a0e"
+    },
+    "processed/trips/month=2026-09/part-00002.parquet": {
+      "rows": 99848,
+      "logical_sha256": "dcac1de5ef15e3af1dd6e3ae70e7a0b65d5c17233d78bdad4e1d2b55637e4698"
+    },
+    "interim/departures/month=2026-09/part-00002.parquet": {
+      "rows": 99848,
+      "logical_sha256": "5f8c1c6664bcd1cbb4ad8ce8ca2dae2b2c49f08901e9428e2251dfd3dc8aab37"
+    },
+    "interim/arrivals/month=2026-09/part-00002.parquet": {
+      "rows": 99848,
+      "logical_sha256": "c7432da51259bc1644cf3079104009365e1e05018280b3e868f228fb80c77b8e"
+    },
+    "processed/trips/month=2026-09/part-00003.parquet": {
+      "rows": 99820,
+      "logical_sha256": "99cf12fbea007b777bc499582d8daa039edf6bfc4f586a860c2f859c687d9df3"
+    },
+    "interim/departures/month=2026-09/part-00003.parquet": {
+      "rows": 99820,
+      "logical_sha256": "903e57acd706dbef49204982abebd08690b6ede9590b8b2979d3fb91ec60d875"
+    },
+    "interim/arrivals/month=2026-09/part-00003.parquet": {
+      "rows": 99820,
+      "logical_sha256": "43511c7896f6f4fe56c23ce78a49b06fc04c84057b9f2652ba9bdc710960be23"
+    },
+    "processed/trips/month=2026-09/part-00004.parquet": {
+      "rows": 89921,
+      "logical_sha256": "951bd192b3948ffc5916bcff96832e6c4e1863afae51ea5a69c2ce5fb9cfbc55"
+    },
+    "interim/departures/month=2026-09/part-00004.parquet": {
+      "rows": 89921,
+      "logical_sha256": "91c35b562c54ad679312044dac0e80048d88fb066170b22b2969d387fcb0ad06"
+    },
+    "interim/arrivals/month=2026-09/part-00004.parquet": {
+      "rows": 89921,
+      "logical_sha256": "2dbf209d62ece2d658726b6bb43c6024f9a836193d22575075683a41d4206f5e"
+    }
+  }
+}

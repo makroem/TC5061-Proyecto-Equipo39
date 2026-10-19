@@ -1,0 +1,12 @@
+{
+  "months": 12,
+  "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+  "raw_rows": 4497877,
+  "retained_rows": 4497119,
+  "catalog_rows": 484,
+  "valid_capacity_stations": 480,
+  "origin_stations": 471,
+  "destination_stations": 471,
+  "union_stations": 471,
+  "source_bytes": 390347882
+}
