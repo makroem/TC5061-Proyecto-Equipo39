@@ -61,10 +61,20 @@ create_environment:
 #################################################################################
 
 
-## Make dataset
+## Descarga y verifica los datos contra el manifiesto
 .PHONY: data
-data: requirements
-	$(PYTHON_INTERPRETER) mibici_equipo39/dataset.py
+data:
+	$(PYTHON_INTERPRETER) -m mibici_equipo39.dataset --verify-manifest
+
+## Construye variables, etiquetas y verifica la partición
+.PHONY: features
+features:
+	$(PYTHON_INTERPRETER) -m mibici_equipo39.features
+
+## Corre P1 y P2 en MLflow (MEMBER=personaN)
+.PHONY: train
+train:
+	$(PYTHON_INTERPRETER) -m mibici_equipo39.modeling.train --question all --member $(or $(MEMBER),persona1)
 
 
 #################################################################################

@@ -16,4 +16,4 @@ entry_points:
   main:
     parameters:
       member: {type: string, default: persona1}
-    command: "python -m mibici_equipo39.modeling.p1 --executor {member} && python -m mibici_equipo39.modeling.p2 --executor {member}"
+    command: "python -m mibici_equipo39.modeling.train --question all --member {member}"

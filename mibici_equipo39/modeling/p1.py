@@ -9,6 +9,7 @@ import numpy as np
 import pandas as pd
 from sklearn.ensemble import HistGradientBoostingRegressor
 from sklearn.metrics import mean_absolute_error, root_mean_squared_error
+from sklearn.preprocessing import TargetEncoder
 
 from mibici_equipo39 import config as C
 from mibici_equipo39 import plots
@@ -35,8 +36,32 @@ class SeasonalMeanBaseline:
         return pred.fillna(self.global_).to_numpy()
 
 
-def make_candidate():
-    return HistGradientBoostingRegressor(**C.P1_HGB_PARAMS)
+ENCODED = ["te_station", "te_station_day_hour"]
+
+
+class StationEncodedHGB:
+    """HGB con calendario y media de salidas por estación y estación-día-hora ajustada solo en train.
+
+    TargetEncoder usa validación cruzada dentro de train, así ninguna fila ve su propio objetivo
+    y ningún día reservado entra a X.
+    """
+
+    def _keys(self, frame):
+        station = frame["station_id"].astype(str)
+        return pd.DataFrame({
+            "te_station": station,
+            "te_station_day_hour": station + "|" + frame["day_of_week"].astype(str) + "|" + frame["hour_of_day"].astype(str),
+        })
+
+    def fit(self, frame, y):
+        self.encoder_ = TargetEncoder(target_type="continuous", cv=5, shuffle=True, random_state=C.SEED)
+        encoded = pd.DataFrame(self.encoder_.fit_transform(self._keys(frame), y), columns=ENCODED, index=frame.index)
+        self.model_ = HistGradientBoostingRegressor(**C.P1_HGB_PARAMS).fit(pd.concat([frame[FEATURE_COLUMNS], encoded], axis=1), y)
+        return self
+
+    def predict(self, frame):
+        encoded = pd.DataFrame(self.encoder_.transform(self._keys(frame)), columns=ENCODED, index=frame.index)
+        return np.clip(self.model_.predict(pd.concat([frame[FEATURE_COLUMNS], encoded], axis=1)), 0, None)
 
 
 def regression_metrics(y, pred, split):
@@ -49,7 +74,7 @@ def regression_metrics(y, pred, split):
 
 
 class P1Experiment:
-    """Baseline estacional contra HistGradientBoosting con calendario sin rezagos."""
+    """Baseline estacional contra HGB con calendario y codificación de estación, sin rezagos."""
 
     def __init__(self, metadata, X, y):
         keep = metadata["station_id"].isin(eligible_stations(metadata, y)).to_numpy()
@@ -59,13 +84,10 @@ class P1Experiment:
         self.train = self.metadata["split"].eq("train").to_numpy()
 
     def fit(self):
-        frame = pd.concat([self.metadata, self.X[["day_of_week", "hour_of_day"]]], axis=1)
+        frame = pd.concat([self.metadata, self.X], axis=1)
         self.baseline = SeasonalMeanBaseline().fit(frame[self.train], self.y[self.train])
-        self.candidate = make_candidate().fit(self.X.loc[self.train, FEATURE_COLUMNS], self.y[self.train])
-        self.predictions = {
-            "baseline": self.baseline.predict(frame),
-            "candidato": np.clip(self.candidate.predict(self.X[FEATURE_COLUMNS]), 0, None),
-        }
+        self.candidate = StationEncodedHGB().fit(frame[self.train], self.y[self.train])
+        self.predictions = {"baseline": self.baseline.predict(frame), "candidato": self.candidate.predict(frame)}
         self.metrics = {k: regression_metrics(self.y.to_numpy(), p, self.metadata["split"]) for k, p in self.predictions.items()}
         self.selected = "candidato" if self.metrics["candidato"]["val_mae"] < self.metrics["baseline"]["val_mae"] else "baseline"
         return self
@@ -77,7 +99,7 @@ class P1Experiment:
     def log(self, executor):
         runs = {
             "baseline": ("P1-baseline-media-estacion-dia-hora", {"model": "seasonal_mean_station_dow_hour"}),
-            "candidato": ("P1-candidato-hgb", {"model": "HistGradientBoostingRegressor", "features": ",".join(FEATURE_COLUMNS), **C.P1_HGB_PARAMS}),
+            "candidato": ("P1-candidato-hgb-estacion", {"model": "HistGradientBoostingRegressor+TargetEncoder", "features": ",".join(FEATURE_COLUMNS + ENCODED), **C.P1_HGB_PARAMS}),
         }
         params = {**common_params(self.metadata), "min_train_departures": C.P1_MIN_TRAIN_DEPARTURES, "selected_model": self.selected}
         tags = common_tags("P1", "regression", executor, "persona2", "viajes iniciados por estación en [t, t+1)")

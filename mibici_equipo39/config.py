@@ -11,6 +11,7 @@ INTERIM = DATA / "interim"
 REFERENCES = ROOT / "references"
 REPORTS = ROOT / "reports"
 FIGURES = REPORTS / "figures"
+MODELS = ROOT / "models"
 TEAM = "39"
 SEED = 39
 SOURCE_START = "2025-10-01"
@@ -25,7 +26,7 @@ FEATURE_SCHEMA_VERSION = "5-random-calendar-only"
 # Se conserva el inicio del manifiesto confirmado para no cambiar la evaluación.
 FEATURES_START = "2025-10-09"
 P1_MIN_TRAIN_DEPARTURES = 100
-P1_HGB_PARAMS = {"loss": "squared_error", "learning_rate": 0.1, "max_iter": 200, "max_leaf_nodes": 31, "random_state": SEED}
+P1_HGB_PARAMS = {"loss": "poisson", "learning_rate": 0.1, "max_iter": 100, "max_leaf_nodes": 31, "random_state": SEED}
 P2_INITIAL_OCCUPANCY, P2_MARGIN = 0.50, 0.10
 P2_SENSITIVITY_OCCUPANCIES = (0.25, 0.75)
 P2_MIN_RECALL = 0.80
