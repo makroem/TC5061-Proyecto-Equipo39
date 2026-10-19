@@ -49,7 +49,7 @@ def regression_metrics(y, pred, split):
 
 
 class P1Experiment:
-    """Baseline estacional contra HistGradientBoosting con calendario y rezagos."""
+    """Baseline estacional contra HistGradientBoosting con calendario sin rezagos."""
 
     def __init__(self, metadata, X, y):
         keep = metadata["station_id"].isin(eligible_stations(metadata, y)).to_numpy()

@@ -39,7 +39,7 @@ class SeasonalRateBaseline:
 
 
 class TargetEncodedHGB:
-    """HistGradientBoosting con calendario, rezagos y tasa histórica por estación y estación-hora."""
+    """HistGradientBoosting con calendario y tasas de estación ajustadas solo en train."""
 
     def _keys(self, frame):
         station = frame["station_id"].astype(str)

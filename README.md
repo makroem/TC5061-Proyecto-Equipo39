@@ -1,5 +1,9 @@
 # TC5061 Proyecto Equipo 39
 
+## Versión de variables en revisión
+
+La corrección de Marco utiliza solo variables de calendario en la evaluación aleatoria y verifica el manifiesto de partición confirmado sin sobrescribirlo. Ver [alcance y pruebas de la corrección](references/correccion_aislamiento_marco.md). Las tablas derivadas deben regenerarse y las métricas de P1/P2 deben repetirse con `FEATURE_SCHEMA_VERSION=5-random-calendar-only`. Las cifras, notebooks y figuras de experimentos anteriores son evidencia de la versión previa, no resultados corregidos. La ejecución final de seis experimentos sigue pendiente de P3 y de las revisiones del equipo.
+
 ## Propósito
 Proyecto académico MiBici para estudiar demanda por estación, presión de flujo y grupos de uso. Esta rama contiene la estructura y la ingesta de Marco. La integración de los módulos del equipo y su ejecución oficial siguen pendientes.
 

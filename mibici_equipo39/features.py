@@ -23,7 +23,9 @@ LAG_FEATURES = (
     + [f"{p}_mean_{w}" for p in ("dep", "arr") for w in WINDOWS]
     + ["net_lag_1", "net_sum_24"]
 )
-FEATURE_COLUMNS = CALENDAR_FEATURES + LAG_FEATURES
+# El reparto aleatorio de días no aísla los rezagos entre conjuntos.
+# Los objetivos reservados nunca deben reaparecer en X de entrenamiento.
+FEATURE_COLUMNS = CALENDAR_FEATURES.copy()
 
 
 def random_grouped_split(df, seed=C.SEED, manifest_path=None, data_version="1"):
@@ -52,7 +54,12 @@ def random_grouped_split(df, seed=C.SEED, manifest_path=None, data_version="1"):
     split_id = hashlib.sha256(json.dumps(content, sort_keys=True).encode()).hexdigest()
     manifest = {"split_id": split_id, **content}
     if manifest_path is not None:
-        Path(manifest_path).write_text(json.dumps(manifest, indent=2, ensure_ascii=False), encoding="utf-8")
+        path = Path(manifest_path)
+        if not path.is_file():
+            raise FileNotFoundError("Falta split_manifest.json confirmado; crear una partición requiere un PR explícito.")
+        confirmed = json.loads(path.read_text(encoding="utf-8"))
+        if confirmed != manifest:
+            raise ValueError("La partición no coincide con split_manifest.json; no se modificó el manifiesto confirmado.")
     return split_df.drop(columns="date"), manifest
 
 
@@ -200,7 +207,8 @@ def build_supervised_tables(df, p2_labels=None, data_version="1"):
     """
     Construye metadata, X y objetivos. P1 es el conteo de salidas en [t, t+1).
 
-    X solo lleva variables disponibles antes de t; los objetivos se usan offline.
+    X solo lleva calendario. Los rezagos se excluyen para no reutilizar objetivos
+    reservados mediante las fechas mezcladas del reparto aleatorio.
     """
     metadata = df[["station_id", "hour", "split"]].rename(columns={"hour": "prediction_time"})
     metadata["data_version"] = data_version
@@ -232,7 +240,7 @@ def load_p2_targets():
 
 @app.command()
 def build():
-    """Construye eventos, malla horaria, calendario, rezagos, partición y tablas supervisadas."""
+    """Construye calendario y tablas con una partición confirmada, sin rezagos en X."""
     data_version = json.loads((C.REFERENCES / "data_manifest.json").read_text())["data_version"]
     departures = pd.read_parquet(C.INTERIM / "departures", columns=["station_id", "timestamp"])
     arrivals = pd.read_parquet(C.INTERIM / "arrivals", columns=["station_id", "timestamp"])
@@ -240,11 +248,11 @@ def build():
 
     events = make_events(departures, arrivals)
     hourly = aggregate_hourly(events, stations)
-    hourly = add_lagged_features(add_calendar_features(hourly))
+    hourly = add_calendar_features(hourly)
     hourly = hourly.loc[hourly["hour"].ge(C.FEATURES_START)].reset_index(drop=True)
     hourly, manifest = random_grouped_split(hourly, manifest_path=SPLIT_PATH, data_version=data_version)
-    if hourly[LAG_FEATURES].isna().any().any():
-        raise ValueError("Quedan rezagos vacíos después de FEATURES_START.")
+    if hourly[FEATURE_COLUMNS].isna().any().any():
+        raise ValueError("Quedan variables de calendario vacías.")
 
     p2_labels = make_capacity_proxy_targets(hourly, events, stations)
     tables = build_supervised_tables(hourly, p2_labels=p2_labels, data_version=data_version)

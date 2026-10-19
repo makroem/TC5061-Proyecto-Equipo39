@@ -21,8 +21,8 @@ TRAIN_SIZE, VAL_SIZE, TEST_SIZE = 0.70, 0.15, 0.15
 SPLIT_STRATEGY = "random_days_month_stratified"
 SPLIT_VERSION = "2"
 CLEANING_SCHEMA_VERSION = "3-colab"
-FEATURE_SCHEMA_VERSION = "4-random-calendar-lags"
-# 1 de octubre excluido por la ingesta y 7 días de calentamiento para el rezago de 168 h.
+FEATURE_SCHEMA_VERSION = "5-random-calendar-only"
+# Se conserva el inicio del manifiesto confirmado para no cambiar la evaluación.
 FEATURES_START = "2025-10-09"
 P1_MIN_TRAIN_DEPARTURES = 100
 P1_HGB_PARAMS = {"loss": "squared_error", "learning_rate": 0.1, "max_iter": 200, "max_leaf_nodes": 31, "random_state": SEED}
