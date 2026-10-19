@@ -1,0 +1,119 @@
+{
+  "P1": {
+    "selected": "baseline",
+    "metrics": {
+      "baseline": {
+        "train_mae": 0.7957515488602567,
+        "train_rmse": 1.4562388690213468,
+        "val_mae": 0.8887753519818337,
+        "val_rmse": 1.6964149888983533,
+        "test_mae": 0.916381318621011,
+        "test_rmse": 1.7182335253495016
+      },
+      "candidato": {
+        "train_mae": 0.8193209366931794,
+        "train_rmse": 4.899155251426984,
+        "val_mae": 0.9853151450450384,
+        "val_rmse": 7.6674109877313645,
+        "test_mae": 0.9979644370157295,
+        "test_rmse": 8.259822345552285
+      }
+    }
+  },
+  "P2": {
+    "selected": "candidato",
+    "metrics": {
+      "baseline": {
+        "val_recall_bikes": 0.0,
+        "val_precision_bikes": 0.0,
+        "val_f1_bikes": 0.0,
+        "val_support_positive_bikes": 2213,
+        "val_ap_bikes": 0.003223053351509432,
+        "test_recall_bikes": 0.0,
+        "test_precision_bikes": 0.0,
+        "test_f1_bikes": 0.0,
+        "test_support_positive_bikes": 3003,
+        "test_ap_bikes": 0.004373623684854416,
+        "val_recall_docks": 0.0,
+        "val_precision_docks": 0.0,
+        "val_f1_docks": 0.0,
+        "val_support_positive_docks": 2926,
+        "val_ap_docks": 0.004261479487806867,
+        "test_recall_docks": 0.0,
+        "test_precision_docks": 0.0,
+        "test_f1_docks": 0.0,
+        "test_support_positive_docks": 3897,
+        "test_ap_docks": 0.005675661505120766,
+        "val_macro_f1": 0.0,
+        "test_macro_f1": 0.0
+      },
+      "candidato": {
+        "val_recall_bikes": 0.8133755083596927,
+        "val_precision_bikes": 0.017116448907400012,
+        "val_f1_bikes": 0.033527357392316645,
+        "val_support_positive_bikes": 2213,
+        "val_ap_bikes": 0.03074210241074484,
+        "test_recall_bikes": 0.8541458541458542,
+        "test_precision_bikes": 0.02175074410440357,
+        "test_f1_bikes": 0.04242123542545274,
+        "test_support_positive_bikes": 3003,
+        "test_ap_bikes": 0.04196446954997955,
+        "val_recall_docks": 0.8113465481886535,
+        "val_precision_docks": 0.02609737597150615,
+        "val_f1_docks": 0.0505681999723089,
+        "val_support_positive_docks": 2926,
+        "val_ap_docks": 0.05135198498131262,
+        "test_recall_docks": 0.7931742365922505,
+        "test_precision_docks": 0.031793215527349775,
+        "test_f1_docks": 0.06113588939764039,
+        "test_support_positive_docks": 3897,
+        "test_ap_docks": 0.09825941292355161,
+        "val_macro_f1": 0.04204777868231277,
+        "test_macro_f1": 0.05177856241154656
+      }
+    }
+  },
+  "P3": {
+    "selected": "candidato",
+    "metrics": {
+      "baseline": {
+        "train_n_clusters": 3,
+        "train_min_cluster_size": 18,
+        "train_min_cluster_share": 0.04878048780487805,
+        "train_silhouette": 0.11284582547591084,
+        "train_davies_bouldin": 2.2588251440302005,
+        "val_n_clusters": 3,
+        "val_min_cluster_size": 24,
+        "val_min_cluster_share": 0.06504065040650407,
+        "val_silhouette": 0.005563705071000712,
+        "val_davies_bouldin": 3.0134815068691148,
+        "test_n_clusters": 3,
+        "test_min_cluster_size": 26,
+        "test_min_cluster_share": 0.07046070460704607,
+        "test_silhouette": 0.07925522718578003,
+        "test_davies_bouldin": 2.874951965715144,
+        "train_stability_ari_mean": 0.7962538380839134,
+        "train_stability_ari_min": 0.7305440072528211
+      },
+      "candidato": {
+        "train_n_clusters": 3,
+        "train_min_cluster_size": 25,
+        "train_min_cluster_share": 0.06775067750677506,
+        "train_silhouette": 0.08153772549733092,
+        "train_davies_bouldin": 3.0699033329920837,
+        "val_n_clusters": 3,
+        "val_min_cluster_size": 46,
+        "val_min_cluster_share": 0.12466124661246612,
+        "val_silhouette": 0.026593711347692978,
+        "val_davies_bouldin": 3.0005039599290324,
+        "test_n_clusters": 3,
+        "test_min_cluster_size": 17,
+        "test_min_cluster_share": 0.04607046070460705,
+        "test_silhouette": 0.051373275011096224,
+        "test_davies_bouldin": 2.9422603614858196,
+        "train_stability_ari_mean": 0.6376083462932979,
+        "train_stability_ari_min": 0.41529720587938224
+      }
+    }
+  }
+}
