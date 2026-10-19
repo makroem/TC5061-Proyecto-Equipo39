@@ -127,26 +127,41 @@ def random_grouped_split(
 
  
     if manifest_path is not None:
-
+        
         manifest_path = Path(manifest_path)
+        
+        if not manifest_path.exists():
 
-        if manifest_path.exists():
-            raise FileExistsError(
-                "split_manifest.json ya existe y no debe sobrescribirse."
-                )
+            with open(
+                    manifest_path,
+                    "w",
+                    encoding="utf-8"
+                    ) as f:
+                
+                    json.dump(
+                        manifest,
+                        f,
+                        indent=2,
+                        ensure_ascii=False
+                        )
+        else:
+            with open(
+                    manifest_path,
+                    "r",
+                    encoding="utf-8"
+                    ) as f:
+                existing_manifest = json.load(f)
+                
+                existing_split_id = (
+                    existing_manifest["split_id"])
 
-        with open(
-                manifest_path,
-                "w",
-                encoding="utf-8"
-                ) as f:
+            if existing_split_id != split_id:
 
-                json.dump(
-                    manifest,
-                    f,
-                    indent=2,
-                    ensure_ascii=False
+                raise ValueError(
+                    "El split existente no coincide "
+                    "con la asignación generada."
                     )
+            
 
     return split_df, manifest
 

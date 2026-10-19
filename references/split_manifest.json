@@ -1,8 +1,7 @@
 {
-  "split_id": "75bdea7e-9fe7-4027-9dcb-7602ac71f486",
   "seed": 39,
   "strategy": "random_days_month_stratified",
-  "data_version": "1",
+  "data_version": "3-random-calendar",
   "days": {
     "train": [
       "2025-10-18",
@@ -376,5 +375,6 @@
       "2026-09-07",
       "2026-10-01"
     ]
-  }
+  },
+  "split_id": "c47056fe23561658155d4af0e07a90c58857922d0c6a161e49a738b6143ee2d2"
 }
