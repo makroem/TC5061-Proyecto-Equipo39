@@ -33,6 +33,7 @@ mibici_equipo39/
     p1.py, p2.py      experimentos por pregunta (baseline y candidato)
     tracking.py       parámetros, etiquetas y runs anidados en MLflow
     train.py          controlador común
+    predict.py        plantilla de ccds para inferencia (sin uso en esta entrega)
 notebooks/            exploración y refactorización (convención 1.x-iniciales-descripcion)
   refactorizado/      versión vigente de variables y P1
 references/           manifiestos de datos y partición, y ML Canvas
@@ -113,3 +114,7 @@ Cada run registra rango de fechas, `data_version`, `split_id`, semilla, hiperpar
 | persona2 | Stefania | a01236059-lab | Exploración, variables, partición, P1 y ML Canvas |
 | persona3 | Diego Martínez | Sanciprian | Etiquetas y modelo de P2, pruebas y MLproject |
 | persona4 | Diego Hurtado | diegoHurtado01 | P3, arquitectura, README final y propuesta |
+
+## Licencia
+
+El código se distribuye con licencia MIT (ver `LICENSE`, generado por Cookiecutter Data Science). La licencia no se extiende a los datos de MiBici.
