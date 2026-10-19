@@ -90,7 +90,14 @@ class P2Experiment:
     def _fit_target(self, factory, target):
         train = self.frame.loc[self.split.eq("train")]
         model = factory() if train[target].nunique() > 1 else make_baseline()
-        score = model.fit(train[COLUMNS], train[target]).predict_proba(self.frame[COLUMNS])[:, 1]
+        model.fit(train[COLUMNS], train[target])
+        positive = np.flatnonzero(model.classes_ == 1)
+        score = (
+            model.predict_proba(self.frame[COLUMNS])[:, positive[0]]
+            if len(positive)
+            else np.zeros(len(self.frame), dtype=float)
+        )
+        fitted_model = type(model.steps[-1][1]).__name__ if hasattr(model, "steps") else type(model).__name__
         y = self.frame[target].to_numpy()
         val = self.split.eq("validation").to_numpy()
         threshold, rule = choose_threshold(y[val], score[val])
@@ -106,6 +113,7 @@ class P2Experiment:
             metrics,
             confusions,
             threshold_search(y[val], score[val]),
+            fitted_model,
         )
 
     def fit(self):
@@ -116,11 +124,13 @@ class P2Experiment:
             {},
             {},
         )
+        self.actual_models = {}
         for kind, factory in MODELS.items():
             results = {name: self._fit_target(factory, target) for name, target in TARGETS.items()}
             self.scores[kind] = {name: r[0] for name, r in results.items()}
             self.thresholds[kind] = {name: r[1] for name, r in results.items()}
             self.searches[kind] = {name: r[4] for name, r in results.items()}
+            self.actual_models[kind] = {name: r[5] for name, r in results.items()}
             self.confusions[kind] = {
                 f"{p}_{name}": r[3][p] for name, r in results.items() for p in ("val", "test")
             }
@@ -234,6 +244,7 @@ class P2Experiment:
                 **extra,
                 **{f"threshold_{n}": t["threshold"] for n, t in thresholds.items()},
                 **{f"threshold_rule_{n}": t["rule"] for n, t in thresholds.items()},
+                **{f"actual_model_{n}": model for n, model in self.actual_models[kind].items()},
             }
             run_tags = {**tags, "model_role": kind, "selected": str(kind == self.selected).lower()}
             log_model_run(

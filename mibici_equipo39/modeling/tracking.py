@@ -14,11 +14,20 @@ from mibici_equipo39 import config as C
 
 def git_state():
     def git(*args):
-        return subprocess.run(
-            ["git", *args], cwd=C.ROOT, capture_output=True, text=True, check=False
-        ).stdout.strip()
+        try:
+            result = subprocess.run(
+                ["git", *args], cwd=C.ROOT, capture_output=True, text=True, check=False
+            )
+        except OSError as exc:
+            raise RuntimeError("No fue posible comprobar Git; no se puede registrar un run trazable.") from exc
+        if result.returncode:
+            raise RuntimeError("Falló la comprobación de Git; no se puede declarar el repositorio limpio.")
+        return result.stdout.strip()
 
-    return git("rev-parse", "HEAD"), bool(git("status", "--porcelain", "--untracked-files=no"))
+    commit = git("rev-parse", "HEAD")
+    if len(commit) not in (40, 64) or any(c not in "0123456789abcdef" for c in commit):
+        raise RuntimeError("Git no devolvió un commit válido para el run.")
+    return commit, bool(git("status", "--porcelain", "--untracked-files=normal"))
 
 
 def common_params(metadata):
