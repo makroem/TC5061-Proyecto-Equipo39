@@ -12,19 +12,17 @@ from mibici_equipo39 import config as C
 app = typer.Typer()
 
 SPLIT_PATH = C.REFERENCES / "split_manifest.json"
-LAGS = (1, 2, 24, 168)
-WINDOWS = (24, 168)
 CALENDAR_FEATURES = [
-    "hour_of_day", "day_of_week", "month", "is_weekend",
-    "hour_sin", "hour_cos", "month_sin", "month_cos",
+    "hour_of_day",
+    "day_of_week",
+    "month",
+    "is_weekend",
+    "hour_sin",
+    "hour_cos",
+    "month_sin",
+    "month_cos",
 ]
-LAG_FEATURES = (
-    [f"{p}_lag_{k}" for p in ("dep", "arr") for k in LAGS]
-    + [f"{p}_mean_{w}" for p in ("dep", "arr") for w in WINDOWS]
-    + ["net_lag_1", "net_sum_24"]
-)
-# El reparto aleatorio de días no aísla los rezagos entre conjuntos.
-# Los objetivos reservados nunca deben reaparecer en X de entrenamiento.
+# Con días al azar, un rezago metería objetivos de días reservados en train; X solo lleva calendario.
 FEATURE_COLUMNS = CALENDAR_FEATURES.copy()
 
 
@@ -45,21 +43,34 @@ def random_grouped_split(df, seed=C.SEED, manifest_path=None, data_version="1"):
         cut_train = int(np.floor(C.TRAIN_SIZE * len(days) + 0.5))
         cut_val = int(np.floor((C.TRAIN_SIZE + C.VAL_SIZE) * len(days) + 0.5))
         for i, day in enumerate(days):
-            assignments[pd.Timestamp(day)] = "train" if i < cut_train else "validation" if i < cut_val else "test"
+            assignments[pd.Timestamp(day)] = (
+                "train" if i < cut_train else "validation" if i < cut_val else "test"
+            )
     split_df["split"] = split_df["date"].map(assignments)
 
-    days = {name: sorted(d.strftime("%Y-%m-%d") for d, s in assignments.items() if s == name)
-            for name in ["train", "validation", "test"]}
-    content = {"seed": seed, "strategy": C.SPLIT_STRATEGY, "data_version": data_version, "days": days}
+    days = {
+        name: sorted(d.strftime("%Y-%m-%d") for d, s in assignments.items() if s == name)
+        for name in ["train", "validation", "test"]
+    }
+    content = {
+        "seed": seed,
+        "strategy": C.SPLIT_STRATEGY,
+        "data_version": data_version,
+        "days": days,
+    }
     split_id = hashlib.sha256(json.dumps(content, sort_keys=True).encode()).hexdigest()
     manifest = {"split_id": split_id, **content}
     if manifest_path is not None:
         path = Path(manifest_path)
         if not path.is_file():
-            raise FileNotFoundError("Falta split_manifest.json confirmado; crear una partición requiere un PR explícito.")
+            raise FileNotFoundError(
+                "Falta split_manifest.json confirmado; crear una partición requiere un PR explícito."
+            )
         confirmed = json.loads(path.read_text(encoding="utf-8"))
         if confirmed != manifest:
-            raise ValueError("La partición no coincide con split_manifest.json; no se modificó el manifiesto confirmado.")
+            raise ValueError(
+                "La partición no coincide con split_manifest.json; no se modificó el manifiesto confirmado."
+            )
     return split_df.drop(columns="date"), manifest
 
 
@@ -81,14 +92,15 @@ def aggregate_hourly(events, stations, start=C.SOURCE_START, end=C.SOURCE_END_EX
     """
     Cuenta salidas y llegadas por estación en intervalos [t, t+1) y completa con ceros.
 
-    Sin la malla completa se pierden las horas sin viajes y los rezagos dejan de ser horas reales.
+    Sin la malla completa se pierden las horas sin viajes y el modelo sobreestima la demanda.
     Solo entran estaciones del catálogo, que P2 y P3 necesitan para capacidad y coordenadas.
     """
     df = events.loc[events["station_id"].isin(stations["station_id"])].copy()
     df["hour"] = df["timestamp"].dt.floor("h")
     df = df.loc[df["hour"].ge(start) & df["hour"].lt(end)]
     counts = (
-        df.groupby(["station_id", "hour", "event"], observed=True).size()
+        df.groupby(["station_id", "hour", "event"], observed=True)
+        .size()
         .unstack("event", fill_value=0)
         .reindex(columns=[-1, 1], fill_value=0)
         .rename(columns={-1: "departures", 1: "arrivals"})
@@ -123,38 +135,6 @@ def add_calendar_features(df):
     return df
 
 
-def add_lagged_features(df):
-    """
-    Agrega rezagos y medias móviles por estación usando solo horas anteriores a t.
-
-    shift(1) va antes de rolling, así la hora objetivo nunca entra en su propia variable.
-    Miden la actividad reciente de cada estación, que explica la demanda de la siguiente
-    hora (P1) y la presión acumulada de salidas contra llegadas (P2).
-    """
-    df = df.sort_values(["station_id", "hour"]).reset_index(drop=True)
-    by_station = df.groupby("station_id", sort=False, observed=True)
-    steps = by_station["hour"].diff().dropna()
-    if by_station.size().nunique() != 1 or not steps.eq(pd.Timedelta("1h")).all():
-        raise ValueError("La malla estación-hora no está completa.")
-
-    def rolling(series, window, how):
-        grouped = series.groupby(df["station_id"], sort=False, observed=True).rolling(window, min_periods=window)
-        return getattr(grouped, how)().reset_index(level=0, drop=True).sort_index()
-
-    net = df["arrivals"] - df["departures"]
-    new = {}
-    for column, prefix in [("departures", "dep"), ("arrivals", "arr")]:
-        for lag in LAGS:
-            new[f"{prefix}_lag_{lag}"] = by_station[column].shift(lag)
-        past = by_station[column].shift(1)
-        for window in WINDOWS:
-            new[f"{prefix}_mean_{window}"] = rolling(past, window, "mean")
-    past_net = net.groupby(df["station_id"], sort=False, observed=True).shift(1)
-    new["net_lag_1"] = past_net
-    new["net_sum_24"] = rolling(past_net, 24, "sum")
-    return pd.concat([df, pd.DataFrame(new).astype("float32")], axis=1)
-
-
 def intra_hour_extremes(events, start=C.SOURCE_START, end=C.SOURCE_END_EXCLUSIVE):
     """
     Mínimo y máximo del flujo acumulado (llegadas menos salidas) dentro de cada hora.
@@ -165,11 +145,19 @@ def intra_hour_extremes(events, start=C.SOURCE_START, end=C.SOURCE_END_EXCLUSIVE
     df = events.assign(hour=events["timestamp"].dt.floor("h"))
     df = df.loc[df["hour"].ge(start) & df["hour"].lt(end)]
     net = df.groupby(["station_id", "hour", "timestamp"], observed=True)["event"].sum()
-    by_hour = net.groupby(level=["station_id", "hour"], observed=True).cumsum().groupby(level=["station_id", "hour"], observed=True)
-    return pd.DataFrame({"flow_min": by_hour.min().clip(upper=0), "flow_max": by_hour.max().clip(lower=0)})
+    by_hour = (
+        net.groupby(level=["station_id", "hour"], observed=True)
+        .cumsum()
+        .groupby(level=["station_id", "hour"], observed=True)
+    )
+    return pd.DataFrame(
+        {"flow_min": by_hour.min().clip(upper=0), "flow_max": by_hour.max().clip(lower=0)}
+    )
 
 
-def proxy_labels(flow_min, flow_max, capacity, occupancy=C.P2_INITIAL_OCCUPANCY, margin=C.P2_MARGIN):
+def proxy_labels(
+    flow_min, flow_max, capacity, occupancy=C.P2_INITIAL_OCCUPANCY, margin=C.P2_MARGIN
+):
     """
     Riesgo aproximado con ocupación inicial hipotética: B*(u) = occupancy * capacidad + flujo.
 
@@ -212,7 +200,11 @@ def build_supervised_tables(df, p2_labels=None, data_version="1"):
     """
     metadata = df[["station_id", "hour", "split"]].rename(columns={"hour": "prediction_time"})
     metadata["data_version"] = data_version
-    result = {"metadata": metadata, "X": df[FEATURE_COLUMNS].copy(), "y_p1": df["departures"].copy()}
+    result = {
+        "metadata": metadata,
+        "X": df[FEATURE_COLUMNS].copy(),
+        "y_p1": df["departures"].copy(),
+    }
     if p2_labels is not None:
         result["y_p2"] = p2_labels.copy()
     return result
@@ -250,7 +242,9 @@ def build():
     hourly = aggregate_hourly(events, stations)
     hourly = add_calendar_features(hourly)
     hourly = hourly.loc[hourly["hour"].ge(C.FEATURES_START)].reset_index(drop=True)
-    hourly, manifest = random_grouped_split(hourly, manifest_path=SPLIT_PATH, data_version=data_version)
+    hourly, manifest = random_grouped_split(
+        hourly, manifest_path=SPLIT_PATH, data_version=data_version
+    )
     if hourly[FEATURE_COLUMNS].isna().any().any():
         raise ValueError("Quedan variables de calendario vacías.")
 
@@ -259,11 +253,17 @@ def build():
     C.PROCESSED.mkdir(parents=True, exist_ok=True)
     tables["metadata"].to_parquet(C.PROCESSED / "metadata.parquet", index=False)
     tables["X"].to_parquet(C.PROCESSED / "X_p1.parquet", index=False)
-    tables["y_p1"].to_frame("target_departures").to_parquet(C.PROCESSED / "y_p1.parquet", index=False)
+    tables["y_p1"].to_frame("target_departures").to_parquet(
+        C.PROCESSED / "y_p1.parquet", index=False
+    )
     tables["y_p2"].to_parquet(C.PROCESSED / "y_p2.parquet", index=False)
-    logger.info(f"P2: y_bikes {p2_labels['y_bikes'].mean():.4f}, y_docks {p2_labels['y_docks'].mean():.4f}")
+    logger.info(
+        f"P2: y_bikes {p2_labels['y_bikes'].mean():.4f}, y_docks {p2_labels['y_docks'].mean():.4f}"
+    )
     counts = {k: len(v) for k, v in manifest["days"].items()}
-    logger.success(f"{len(hourly)} filas, {hourly['station_id'].nunique()} estaciones, split {manifest['split_id'][:12]} {counts}")
+    logger.success(
+        f"{len(hourly)} filas, {hourly['station_id'].nunique()} estaciones, split {manifest['split_id'][:12]} {counts}"
+    )
 
 
 if __name__ == "__main__":

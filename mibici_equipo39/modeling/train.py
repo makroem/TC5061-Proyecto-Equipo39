@@ -27,7 +27,9 @@ def check_inputs(allow_dirty):
         )
     _, dirty = git_state()
     if dirty and not allow_dirty:
-        raise SystemExit("Hay cambios sin commit; los runs finales deben quedar ligados a un commit. Usa --allow-dirty solo para pruebas.")
+        raise SystemExit(
+            "Hay cambios sin commit; los runs finales deben quedar ligados a un commit. Usa --allow-dirty solo para pruebas."
+        )
 
 
 def run(questions, member):
@@ -49,8 +51,11 @@ def run(questions, member):
 def main():
     parser = argparse.ArgumentParser(description="Controlador común de experimentos MiBici")
     parser.add_argument("--question", choices=[*QUESTIONS, "all"], default="all")
-    parser.add_argument("--member", choices=["persona1", "persona2", "persona3", "persona4"],
-                        default=os.environ.get("MIBICI_EXECUTOR", "persona1"))
+    parser.add_argument(
+        "--member",
+        choices=["persona1", "persona2", "persona3", "persona4"],
+        default=os.environ.get("MIBICI_EXECUTOR", "persona1"),
+    )
     parser.add_argument("--allow-dirty", action="store_true")
     args = parser.parse_args()
     check_inputs(args.allow_dirty)

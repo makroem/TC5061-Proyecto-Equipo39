@@ -35,7 +35,7 @@ def test_reserved_departures_cannot_change_training_predictors():
     train = base['split'].eq('train')
     pd.testing.assert_frame_equal(before['X'].loc[train], after['X'].loc[train])
     assert F.FEATURE_COLUMNS == F.CALENDAR_FEATURES
-    assert not set(F.LAG_FEATURES) & set(before['X'])
+    assert list(before['X']) == F.CALENDAR_FEATURES
     assert not {'departures', 'arrivals', 'capacity', 'flow_min', 'flow_max', 'y_bikes', 'y_docks'} & set(before['X'])
 
 

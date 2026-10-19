@@ -1,4 +1,5 @@
 """Parámetros compartidos de descarga, partición y experimentos."""
+
 import os
 from pathlib import Path
 
@@ -26,12 +27,24 @@ FEATURE_SCHEMA_VERSION = "5-random-calendar-only"
 # Se conserva el inicio del manifiesto confirmado para no cambiar la evaluación.
 FEATURES_START = "2025-10-09"
 P1_MIN_TRAIN_DEPARTURES = 100
-P1_HGB_PARAMS = {"loss": "poisson", "learning_rate": 0.1, "max_iter": 100, "max_leaf_nodes": 31, "random_state": SEED}
+P1_HGB_PARAMS = {
+    "loss": "poisson",
+    "learning_rate": 0.1,
+    "max_iter": 100,
+    "max_leaf_nodes": 31,
+    "random_state": SEED,
+}
 P2_INITIAL_OCCUPANCY, P2_MARGIN = 0.50, 0.10
 P2_SENSITIVITY_OCCUPANCIES = (0.25, 0.75)
 P2_MIN_RECALL = 0.80
 P2_THRESHOLDS = tuple(round(0.05 * i, 2) for i in range(1, 20))
-P2_LOGISTIC_PARAMS = {"C": 1.0, "class_weight": "balanced", "solver": "liblinear", "max_iter": 1000, "random_state": SEED}
+P2_LOGISTIC_PARAMS = {
+    "C": 1.0,
+    "class_weight": "balanced",
+    "solver": "liblinear",
+    "max_iter": 1000,
+    "random_state": SEED,
+}
 P3_K, P3_MIN_TRAIN_TRIPS = 3, 100
 EXPERIMENT_NAME = "mibici-equipo39"
 TRACKING_URI = os.environ.get("MLFLOW_TRACKING_URI", "sqlite:///mlflow.db")

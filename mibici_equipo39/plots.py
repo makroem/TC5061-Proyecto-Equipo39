@@ -10,7 +10,11 @@ def p1_error_by_hour(frame, predictions, path):
     for name, pred in predictions.items():
         error = (frame["y"] - pred).abs().groupby(frame["hour_of_day"]).mean()
         ax.plot(error.index, error.values, marker="o", label=name)
-    ax.set(xlabel="Hora del día", ylabel="MAE (viajes por estación)", title="P1: error en prueba por hora")
+    ax.set(
+        xlabel="Hora del día",
+        ylabel="MAE (viajes por estación)",
+        title="P1: error en prueba por hora",
+    )
     ax.legend()
     fig.savefig(path, dpi=120, bbox_inches="tight")
     plt.close(fig)
@@ -26,7 +30,12 @@ def p2_precision_recall(frame, scores, targets, path, min_recall=0.80):
             precision, recall, _ = precision_recall_curve(y, by_target[name][val])
             ax.plot(recall, precision, label=model)
         ax.axvline(min_recall, color="grey", linestyle="--", linewidth=1)
-        ax.set(title=f"P2 riesgo aproximado {name} (validación)", xlabel="recall", ylabel="precisión", ylim=(0, 0.6))
+        ax.set(
+            title=f"P2 riesgo aproximado {name} (validación)",
+            xlabel="recall",
+            ylabel="precisión",
+            ylim=(0, 0.6),
+        )
         ax.legend()
     fig.savefig(path, dpi=120, bbox_inches="tight")
     plt.close(fig)
@@ -40,7 +49,9 @@ def p1_station_week(frame, predictions, path):
     ax.plot(week["prediction_time"], week["y"], color="black", label="real")
     for name, pred in predictions.items():
         ax.plot(week["prediction_time"], pred[week.index], label=name, alpha=0.8)
-    ax.set(xlabel="Hora", ylabel="Salidas", title=f"P1: estación {station}, primeras horas de prueba")
+    ax.set(
+        xlabel="Hora", ylabel="Salidas", title=f"P1: estación {station}, primeras horas de prueba"
+    )
     ax.legend()
     fig.autofmt_xdate()
     fig.savefig(path, dpi=120, bbox_inches="tight")
