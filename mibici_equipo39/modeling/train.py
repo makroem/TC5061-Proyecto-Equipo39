@@ -1,13 +1,17 @@
 import argparse
 import os
+import gc
+import json
 
 from mibici_equipo39 import config as C
 from mibici_equipo39.features import load_p2_targets, load_tables
 from mibici_equipo39.modeling.p1 import P1Experiment
 from mibici_equipo39.modeling.p2 import P2Experiment
+from mibici_equipo39.modeling.p3 import P3Experiment
+import pandas as pd
 from mibici_equipo39.modeling.tracking import git_state
 
-QUESTIONS = ("P1", "P2")
+QUESTIONS = ("P1", "P2", "P3")
 REQUIRED = [
     C.REFERENCES / "data_manifest.json",
     C.REFERENCES / "split_manifest.json",
@@ -15,6 +19,7 @@ REQUIRED = [
     C.PROCESSED / "X_p1.parquet",
     C.PROCESSED / "y_p1.parquet",
     C.PROCESSED / "y_p2.parquet",
+    C.PROCESSED / "stations.parquet",
 ]
 
 
@@ -35,16 +40,23 @@ def check_inputs(allow_dirty):
 def run(questions, member):
     metadata, X, y = load_tables()
     results = {}
-    if "P1" in questions:
-        experiment = P1Experiment(metadata, X, y).fit()
+    for question in questions:
+        if question == "P1":
+            experiment = P1Experiment(metadata, X, y).fit()
+        elif question == "P2":
+            experiment = P2Experiment(metadata, X, load_p2_targets()).fit()
+        elif question == "P3":
+            experiment = P3Experiment(metadata, X, y, pd.read_parquet(C.PROCESSED / "stations.parquet")).fit()
+        else:
+            raise ValueError(f"Pregunta desconocida: {question}")
         experiment.log(member)
-        results["P1"] = experiment
-    if "P2" in questions:
-        experiment = P2Experiment(metadata, X, load_p2_targets()).fit()
-        experiment.log(member)
-        results["P2"] = experiment
-    for question, experiment in results.items():
         print(question, "seleccionado:", experiment.selected)
+        results[question] = {"selected": experiment.selected, "metrics": experiment.metrics}
+        del experiment
+        gc.collect()
+    # El resumen se crea después de cerrar todos los runs para conservar git_dirty=false.
+    C.REPORTS.mkdir(parents=True, exist_ok=True)
+    (C.REPORTS / "experiment_summary.json").write_text(json.dumps(results, indent=2), encoding="utf-8")
     return results
 
 

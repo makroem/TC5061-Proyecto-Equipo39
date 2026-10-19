@@ -71,7 +71,7 @@ data:
 features:
 	$(PYTHON_INTERPRETER) -m mibici_equipo39.features
 
-## Corre P1 y P2 en MLflow (MEMBER=personaN)
+## Corre P1, P2 y P3 en MLflow (MEMBER=personaN)
 .PHONY: train
 train:
 	$(PYTHON_INTERPRETER) -m mibici_equipo39.modeling.train --question all --member $(or $(MEMBER),persona1)

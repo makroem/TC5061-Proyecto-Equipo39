@@ -87,20 +87,19 @@ Variables activas:
 
 Se utilizan ciclos temporales de hora y mes.
 
-Los rezagos y medias moviles permanecen fuera de la comparacion aleatoria actual y se reservan para futuras evaluaciones temporales.
+Los rezagos y medias moviles permanecen fuera de esta comparacion. P1/P2 utilizan solo calendario conocido al predecir. P3 usa 48 perfiles horarios (laborales y fin de semana), normalizados por tipo de dia, y StandardScaler ajustado solo con train; las coordenadas se unen despues para el mapa.
 
 ---
 
 ## Aprendizaje
 
-Se utiliza una particion aleatoria reproducible:
+Se utiliza una particion cronologica confirmada, con semilla de modelos 39:
 
-- Seed = 39
-- Train = 70 %
-- Validation = 15 %
-- Test = 15 %
+- Train: octubre de 2025 a mayo de 2026, 243 dias.
+- Validation: junio y julio de 2026, 61 dias.
+- Test: agosto y septiembre de 2026, 61 dias.
 
-La particion se realiza agrupando dias completos y estratificando por mes mediante `split_manifest.json`.
+La particion respeta dias completos y fechas contiguas mediante `split_manifest.json`. Se conserva el manifiesto aleatorio anterior solo como historial. Test no participa en elegir modelo o umbral. Los grupos de P3 describen el perfil historico; su estabilidad temporal se evalua por separado. El catalogo de septiembre no constituye un inventario observado ni un registro historico de capacidades.
 
 ---
 
@@ -120,7 +119,7 @@ A futuro se recomienda monitorear:
 ## Criterio de Exito
 
 - Baselines reproducibles y ejecutables.
-- Comparar el candidato de P1 contra el baseline utilizando MAE y RMSE sobre validacion y prueba. El resultado podra mostrar mejora o deterioro respecto al baseline y debe reportarse objetivamente. 
-- Los modelos de P2 logran metricas utiles de clasificacion.
-- P3 genera grupos interpretables y evaluables.
+- P1 selecciona por menor val_mae (empate baseline); MAE/RMSE de test se reportan sin reajustar. Una falta de mejora se informa objetivamente.
+- P2 selecciona por val_macro_f1 y declara precision/recall/AP y falsas alertas. Un recall alto del proxy no demuestra utilidad operativa ni falta real de bicicletas.
+- P3 compara KMeans y GMM k=3 por val_silhouette, con grupos train de al menos 5%; evalua Davies Bouldin y ARI de cinco remuestreos train. Si ningun modelo cumple se declara. Interpretacion urbana y efecto operativo requieren validacion adicional.
 - Todos los experimentos son reproducibles utilizando el mismo `split_id` y la misma version de datos.

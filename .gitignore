@@ -216,3 +216,4 @@ models/**
 *.pth
 *.sqlite
 *.sqlite-journal
+reports/figures/runs/

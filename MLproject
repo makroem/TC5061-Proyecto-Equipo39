@@ -13,6 +13,10 @@ entry_points:
     parameters:
       member: {type: string, default: persona1}
     command: "python -m mibici_equipo39.modeling.p2 --executor {member}"
+  p3:
+    parameters:
+      member: {type: string, default: persona1}
+    command: "python -m mibici_equipo39.modeling.p3 --executor {member}"
   main:
     parameters:
       member: {type: string, default: persona1}
