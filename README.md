@@ -1,57 +1,113 @@
-# TC5061 Proyecto Equipo 39
+# TC5061 Proyecto MiBici, Equipo 39
 
-## Versión de variables en revisión
+Propuesta de Machine Learning sobre el sistema de bicicleta pública MiBici (Guadalajara) y su base reproducible: ingesta versionada, variables, experimentos base y registro en MLflow.
 
-La corrección de Marco utiliza solo variables de calendario en la evaluación aleatoria y verifica el manifiesto de partición confirmado sin sobrescribirlo. Ver [alcance y pruebas de la corrección](references/correccion_aislamiento_marco.md). Las tablas derivadas deben regenerarse y las métricas de P1/P2 deben repetirse con `FEATURE_SCHEMA_VERSION=5-random-calendar-only`. Las cifras, notebooks y figuras de experimentos anteriores son evidencia de la versión previa, no resultados corregidos. La ejecución final de seis experimentos sigue pendiente de P3 y de las revisiones del equipo.
+## Preguntas
 
-## Propósito
-Proyecto académico MiBici para estudiar demanda por estación, presión de flujo y grupos de uso. Esta rama contiene la estructura y la ingesta de Marco. La integración de los módulos del equipo y su ejecución oficial siguen pendientes.
+| # | Pregunta | Tarea | Usuario |
+|---|---|---|---|
+| P1 | ¿Cuántos viajes iniciarán en cada estación en la siguiente hora? | Regresión | Operador del sistema, para planear la flota |
+| P2 | ¿Una estación estará en riesgo de quedarse sin bicicletas o sin anclajes en la siguiente hora? | Dos clasificaciones binarias | Equipo de rebalanceo |
+| P3 | ¿Qué grupos de estaciones comparten patrones de uso y dónde están? | Clustering | Planeación urbana y expansión |
 
-## Integrantes y roles
-Integrantes: Marco, Stefania, Diego Martinez, Diego Hurtado.
+P2 es una aproximación: MiBici no publica inventario, así que el riesgo se construye con los viajes y la capacidad publicada (ocupación inicial hipotética de 50%, umbrales de 10% y 90%).
 
-Marco (makroem, identificador técnico persona1) prepara configuración, ingesta, versionado y coordinación. Stefania (a01236059-lab, persona2) implementa variables, partición, P1 y Canvas. Diego Martinez (Sanciprian, persona3) implementa P2. Diego Hurtado (invitación pendiente para diegoHurtado01, persona4) implementa P3, Tracking y propuesta final. Estas asignaciones no acreditan contribuciones o revisiones todavía no realizadas.
+## Datos
 
-## Preguntas y usuarios
-P1 regresión: viajes que se iniciarán por estación en la próxima hora; la usa el operador para planear la flota. P2 clasificación: riesgo aproximado de falta de bicicletas o anclajes en la próxima hora, usando capacidad publicada; la usa rebalanceo. P3 clustering: grupos de estaciones con patrones semejantes y sus coordenadas; lo usa planeación urbana y expansión. P2 es una aproximación sin inventario observado. Ver references/ingesta_interface.md.
-
-## Fuentes y tamaño
-Doce meses de octubre de 2025 a septiembre de 2026. 4497877 filas originales y 4497119 viajes completos retenidos. 484 estaciones en catálogo y 480 con capacidad válida. 390347882 bytes descargados. Fuentes y hashes: references/data_manifest.json. Detalle mensual: reports/calidad_datos_por_mes.csv.
-
-## Licencia y privacidad
-Código con licencia MIT de la plantilla. No se atribuye a los CSV una licencia no identificada. No se publican los archivos de MiBici ni datos de usuario. Ver references/data_usage.md.
+- Fuente: [datos abiertos de MiBici](https://mibici.net/es/datos-abiertos/), con 12 CSV mensuales (octubre de 2025 a septiembre de 2026) y `nomenclatura_2026_09.csv`.
+- Volumen: 4,497,877 filas originales y 4,497,119 viajes retenidos; 484 estaciones en el catálogo, 480 con capacidad válida.
+- Versión de datos: `data_version` e9de13df..., en `references/data_manifest.json`, con el SHA-256 de cada fuente.
+- Partición: días completos al azar estratificados por mes, 70/15/15 y semilla 39 (252/52/53 días). `references/split_manifest.json` guarda el mapa y su `split_id`; la construcción lo verifica y no lo reescribe.
+- X solo lleva variables de calendario: con días al azar, los rezagos meterían objetivos de días reservados en train.
+- Uso y privacidad: ver `references/data_usage.md`. No se versionan datos, modelos ni carpetas de MLflow.
 
 ## Estructura
-data contiene solo marcadores en Git; mibici_equipo39 contiene módulos; notebooks contiene exploración; references contiene manifiestos y contratos; reports contiene agregados; models no contiene modelos serializados. La estructura se generó con ccds 2.3.0 y scaffold Yes. Los archivos de plantilla pendientes de reemplazo no son una solución final.
+
+```text
+mibici_equipo39/
+  config.py           rutas, fechas, semilla e hiperparámetros
+  dataset.py          descarga, limpieza por bloques, Parquet y manifiesto SHA-256
+  features.py         malla estación-hora, calendario, partición y etiquetas de P2
+  plots.py            gráficas registradas como artefactos
+  modeling/
+    p1.py, p2.py      experimentos por pregunta (baseline y candidato)
+    tracking.py       parámetros, etiquetas y runs anidados en MLflow
+    train.py          controlador común
+notebooks/            exploración y refactorización (convención 1.x-iniciales-descripcion)
+  refactorizado/      versión vigente de variables y P1
+references/           manifiestos, ML Canvas, uso de datos y ejecución
+reports/              reportes agregados y figuras
+tests/                pruebas de ingesta, variables, aislamiento y P2
+MLproject             entry points de MLflow Projects
+```
+
+Flujo de notebooks: `1.x` explora, `2.x` refactoriza en funciones y clases, y el resultado pasa al módulo. La versión vigente es esta:
+
+- Variables: `1.0-p2-exploracion-mibici` y `refactorizado/2.0`.
+- P1: `refactorizado/1.1` y `refactorizado/2.1`.
+- P2: `1.2-dm-p2-exploracion-riesgo` y `2.2-dm-p2-refactorizacion`.
+
+Los `2.0`, `1.1` y `2.1` que están directo en `notebooks/` son la versión anterior, con rezagos, y se conservan como historial.
 
 ## Instalación
-Comprueba primero Python 3.11.9 y Git con sus comandos de versión. Si ya están disponibles, reutilízalos. Desde la raíz crea un entorno con python -m venv .venv y, en Windows, ejecuta .venv\Scripts\python.exe -m pip install -r requirements.txt. En Linux o Colab utiliza .venv/bin/python. El lock fija dependencias y marca pywin32 como exclusivo de Windows. Las fechas y la semilla están centralizadas en config.py.
 
-## Ingesta y verificación
-Con el entorno de instalación activado, para reproducir el manifiesto confirmado desde un clon sin datos, ejecuta:
+Requiere Python 3.11.9 y Git.
+
+```bash
+git clone https://github.com/makroem/TC5061-Proyecto-Equipo39.git
+cd TC5061-Proyecto-Equipo39
+python3.11 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+.venv/bin/python -m pip install --no-deps -e .
+.venv/bin/python -m pip check
+```
+
+En Windows usa `py -3.11 -m venv .venv` y `.venv\Scripts\python.exe`. Si no tienes 3.11.9, `uv python install 3.11.9` lo instala.
+
+## Ejecución
 
 ```bash
 python -m mibici_equipo39.dataset --verify-manifest
+python -m mibici_equipo39.features
+python -m mibici_equipo39.modeling.train --question all --member personaN
+python -m pytest tests -q
 ```
 
-El comando descarga automáticamente las trece fuentes oficiales a data/raw y data/external, comprueba sus SHA-256 y reconstruye las salidas antes de compararlas con references/data_manifest.json. Requiere acceso HTTPS a mibici.net y unos 390 MB de descarga, además del espacio de las salidas. El cliente se identifica como MiBici-Equipo39 para evitar el HTTP 406 que el portal devuelve al identificador predeterminado de requests; no requiere cookies ni descargas manuales. Los archivos incompletos se eliminan tras un fallo y la descarga se reintenta hasta tres veces. Un archivo local cuyo hash no coincide se rechaza sin reemplazarlo. No se desactiva la verificación TLS.
+1. La ingesta descarga unos 390 MB y verifica los hashes; `--freeze-manifest` solo se usa para una versión nueva de datos aprobada por PR.
+2. `features` construye las tablas en `data/processed` y verifica la partición.
+3. `train` registra baseline y candidato de cada pregunta en el experimento `mibici-equipo39`. Pide un árbol de Git limpio para que cada run quede ligado a su commit.
 
-Usa --freeze-manifest solo para una nueva versión de datos autorizada; no lo uses para ocultar diferencias al reproducir la versión confirmada. La evidencia de la validación real se registra en reports/validacion_descarga_automatica.json.
+Con MLflow Projects (detalle en `references/ejecucion_mlproject.md`):
 
-## Variables y pruebas
-Las pruebas de Persona1 se ejecutan con python -m pytest tests -v. Incluyen un servidor HTTP local para comprobar la identificación del cliente, reintentos, caché verificada y rechazo de HTML, respuestas vacías y hashes distintos. El notebook notebooks/1.0-p1-auditoria-ingesta.ipynb contiene resultados de la auditoría local. Features y la partición oficial esperan la integración de Persona2; el módulo de plantilla no se debe ejecutar como implementación final. La referencia usa días aleatorios estratificados por mes, seed 39, proporciones aproximadas 70/15/15.
+```bash
+mlflow run . -e main --env-manager local --experiment-name mibici-equipo39 --run-name main-personaN -P member=personaN
+python -m mlflow ui --backend-store-uri sqlite:///mlflow.db --host 127.0.0.1 --port 5000
+```
 
-## Experimento y MLflow Projects
-La implementación completa de referencia se entrega por separado para revisión. Sus ejecuciones usan mibici-equipo39-referencia y executor persona1. El experimento oficial mibici-equipo39 y el comando mlflow run . --env-manager=local esperan los módulos, manifiestos y MLproject integrados. No hay todavía evidencia de ejecución oficial desde main.
+También existen `make data`, `make features`, `make train MEMBER=personaN` y `make test`.
 
-## Flujo Git y GitHub
-Ramas chore/persona1-estructura y feat/persona1-ingesta publicadas el 17 de octubre de 2026. PR de estructura: https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/1. PR de ingesta: https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/2. Ambos solicitan revisión a Stefania. main está protegida con PR, una aprobación, descarte de aprobaciones antiguas y conversaciones resueltas; se bloquean force push y eliminación, también para administradores.
+## Modelos
 
-La base provisional del PR de ingesta es chore/persona1-estructura para mostrar solo los cambios adicionales. Primero incorporar el PR de estructura con merge commit después de su aprobación; después cambiar la base del PR de ingesta a main y volver a comprobar diferencias y revisiones. No incorporar la ingesta en la rama de estructura. La evidencia de descarga automática está separada de la aprobación del PR y de la ejecución oficial del proyecto integrado. Convención de commits chore, feat, fix y docs. Ver references/colaboracion.md.
+| | Baseline | Candidato | Selección |
+|---|---|---|---|
+| P1 | Media de train por estación, día y hora | `TargetEncoder` de estación + `HistGradientBoostingRegressor` Poisson | Menor `val_mae`; hoy gana el baseline |
+| P2 | `DummyClassifier(prior)` por riesgo | One-hot de `station_id`, calendario escalado y `LogisticRegression` liblinear balanceada | Mayor `val_macro_f1`; umbral en rejilla 0.05-0.95 con recall >= 0.80 |
+| P3 | KMeans, k=3 | GaussianMixture, 3 componentes | En desarrollo (persona4) |
 
-## Resultados limitaciones y evidencia
-La comprobación de cierre técnico de Marco está en reports/cierre_marco.json: siete pruebas aprobadas, manifiesto conservado y auditoría de rutas de datos, modelos y Tracking en el historial. También identifica las revisiones y aportaciones que siguen pendientes. Este registro no acredita una ejecución oficial del proyecto integrado.
+Cada run registra rango de fechas, `data_version`, `split_id`, semilla, hiperparámetros, métricas con prefijo `train_`/`val_`/`test_`, y etiquetas de equipo, pregunta y commit. Prueba se evalúa una sola vez.
 
-Ingesta y notebook locales verificables; la reproducción oficial y las evidencias colaborativas están pendientes. La partición aleatoria no mide pronóstico sobre un periodo posterior. El catálogo de capacidad es de septiembre de 2026 y no representa inventario observado. La propuesta debe justificar herramientas con las lecturas del curso y confrontar el criterio temporal de la rúbrica.
+## Flujo de trabajo con Git
 
-Buenas prácticas: config.py centraliza configuración; requirements.txt fija versiones; .gitignore excluye datos, modelos, credenciales y MLflow; data_manifest.json versiona fuentes y salidas; el flujo de PR y las etiquetas oficiales se verificarán cuando exista integración. No se deben presentar pruebas sintéticas ni runs de referencia como resultados oficiales del equipo.
+- `main` está protegida: todo entra por Pull Request con una aprobación y se mergea con merge commit para conservar la autoría.
+- Ramas `tipo/personaN-descripcion` (por ejemplo `feat/persona3-riesgo-p2`) y commits con Conventional Commits: `feat`, `fix`, `docs`, `test`, `chore`.
+- Cada integrante abre al menos un PR y revisa el de otro.
+- El historial anterior de la ingesta está en `references/README_anterior_persona1.md` y `references/colaboracion.md`.
+
+## Integrantes
+
+| Persona | Integrante | GitHub | Rol |
+|---|---|---|---|
+| persona1 | Marco | makroem | Estructura, configuración, ingesta y manifiesto |
+| persona2 | Stefania | a01236059-lab | Exploración, variables, partición, P1 y ML Canvas |
+| persona3 | Diego Martínez | Sanciprian | Etiquetas y modelo de P2, pruebas y MLproject |
+| persona4 | Diego Hurtado | diegoHurtado01 | P3, arquitectura, README final y propuesta |
