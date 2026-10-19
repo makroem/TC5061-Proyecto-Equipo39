@@ -11,10 +11,13 @@ from loguru import logger
 from tqdm import tqdm
 import typer
 
+import hashlib
+
 from mibici_equipo39.config import (
-    PROCESSED_DATA_DIR,
-    INTERIM_DATA_DIR,
-    EXTERNAL_DATA_DIR
+    PROCESSED,
+    INTERIM,
+    EXTERNAL,
+    FEATURE_SCHEMA_VERSION,
 )
 
 app = typer.Typer()
@@ -26,7 +29,7 @@ def random_grouped_split(
     test_size=0.15,
     seed=39,
     manifest_path=None,
-    data_version="1"
+    data_version=FEATURE_SCHEMA_VERSION
 ):
     """
     Divide por días completos estratificando por mes.
@@ -93,44 +96,58 @@ def random_grouped_split(
         .map(assignments)
     )
 
-    split_id = str(uuid.uuid4())
-
     manifest = {
-        "split_id": split_id,
-        "seed": seed,
-        "strategy":
-            "random_days_month_stratified",
-        "data_version": data_version,
-        "days": {
-            split_name: [
-                str(day)
-                for day, group in assignments.items()
-                if group == split_name
-            ]
-            for split_name in [
-                "train",
-                "validation",
-                "test"
+    "seed": seed,
+    "strategy": "random_days_month_stratified",
+    "data_version": data_version,
+    "days": {
+        split_name: [
+            str(day)
+            for day, group in assignments.items()
+            if group == split_name
+        ]
+        for split_name in [
+            "train",
+            "validation",
+            "test"
             ]
         }
     }
 
+    canonical = json.dumps(
+        manifest,
+        sort_keys=True,
+        ensure_ascii=False
+        )
+
+    split_id = hashlib.sha256(
+        canonical.encode("utf-8")
+        ).hexdigest()
+
+    manifest["split_id"] = split_id
+
+ 
     if manifest_path is not None:
 
         manifest_path = Path(manifest_path)
 
-        with open(
-            manifest_path,
-            "w",
-            encoding="utf-8"
-        ) as f:
+        if manifest_path.exists():
+            raise FileExistsError(
+                "split_manifest.json ya existe y no debe sobrescribirse."
+                )
 
-            json.dump(
-                manifest,
-                f,
-                indent=2,
-                ensure_ascii=False
-            )
+        with open(
+                manifest_path,
+                "w",
+                encoding="utf-8"
+                ) as f:
+
+                json.dump(
+                    manifest,
+                    f,
+                    indent=2,
+                    ensure_ascii=False
+                    )
 
     return split_df, manifest
 
@@ -301,7 +318,7 @@ def add_lagged_features(df):
 
     return df
 
-def build_supervised_tables(df, p2_labels=None, data_version="1"):
+def build_supervised_tables(df, p2_labels=None, data_version=FEATURE_SCHEMA_VERSION):
     """
    Construye matrices supervisadas para P1 y P2.
    Requiere que el dataframe ya tenga:
@@ -362,15 +379,15 @@ def build():
     logger.info("Building features...")
 
     departures = pd.read_parquet(
-        INTERIM_DATA_DIR / "departures"
+        INTERIM / "departures"
     )
 
     arrivals = pd.read_parquet(
-        INTERIM_DATA_DIR / "arrivals"
+        INTERIM / "arrivals"
     )
 
     stations = pd.read_csv(
-        EXTERNAL_DATA_DIR / "nomenclatura_2026_09.csv"
+        EXTERNAL / "nomenclatura_2026_09.csv"
     )
 
     logger.info(
@@ -432,25 +449,25 @@ def build():
     y_p1 = tables["y_p1"]
 
 
-    PROCESSED_DATA_DIR.mkdir(
+    PROCESSED.mkdir(
         parents=True,
         exist_ok=True
     )
 
     metadata.to_parquet(
-        PROCESSED_DATA_DIR
+        PROCESSED
         / "metadata.parquet"
     )
 
     X.to_parquet(
-        PROCESSED_DATA_DIR
+        PROCESSED
         / "X_p1.parquet"
     )
 
     y_p1.to_frame(
         name="target_departures"
     ).to_parquet(
-        PROCESSED_DATA_DIR
+        PROCESSED
         / "y_p1.parquet"
     )
 
