@@ -120,7 +120,7 @@ A futuro se recomienda monitorear:
 ## Criterio de Exito
 
 - Baselines reproducibles y ejecutables.
-- El candidato de P1 mejora el MAE de validacion.
+- Comparar el candidato de P1 contra el baseline utilizando MAE y RMSE sobre validacion y prueba. El resultado podra mostrar mejora o deterioro respecto al baseline y debe reportarse objetivamente. 
 - Los modelos de P2 logran metricas utiles de clasificacion.
 - P3 genera grupos interpretables y evaluables.
 - Todos los experimentos son reproducibles utilizando el mismo `split_id` y la misma version de datos.
