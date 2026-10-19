@@ -80,7 +80,7 @@ El repositorio debe estar limpio:
 python -m mibici_equipo39.modeling.train --question all --member persona1
 ```
 
-O ejecuta el entry point con el entorno activado y su directorio de ejecutables primero en PATH:
+O ejecuta el entry point con el entorno activado y su directorio de ejecutables primero en PATH. Projects y los módulos deben compartir el mismo almacén: en PowerShell fija `$env:MLFLOW_TRACKING_URI='sqlite:///mlflow.db'`; en Bash usa `export MLFLOW_TRACKING_URI=sqlite:///mlflow.db`.
 
 ```bash
 mlflow run . -e main --env-manager local --experiment-name mibici-equipo39 --run-name cierre-persona1 -P member=persona1
