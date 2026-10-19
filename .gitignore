@@ -201,6 +201,7 @@ mlartifacts/
 *.db
 *.db-shm
 *.db-wal
+!data/
 data/**
 !data/**/
 !data/**/.gitkeep
