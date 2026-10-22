@@ -94,7 +94,7 @@ def test_pyfunc_with_two_outputs_loads_in_another_process(contract):
     code = ("import json,sys,mlflow,pandas as pd; "
             "m=mlflow.pyfunc.load_model(sys.argv[1]); "
             "x=pd.DataFrame({'hour':[8.0,9.0],'month':[1.0,1.0]}); "
-            "print(m.predict(x).to_json(orient='list'))")
+            "print(json.dumps(m.predict(x).to_dict(orient='list')))")
     result = subprocess.run([sys.executable, "-c", code, saved], cwd=folder,
                             text=True, capture_output=True, check=False)
     assert result.returncode == 0, result.stderr
@@ -110,6 +110,6 @@ def test_projects_parent_is_preserved_with_search_and_candidate_children(contrac
     with tracking.question_run("busqueda-de-prueba") as search:
         with tracking.question_run("candidato-de-prueba") as child:
             assert child.data.tags["mlflow.parentRunId"] == search.info.run_id
-        assert os.environ["MLFLOW_RUN_ID"] == parent_id
+        assert "MLFLOW_RUN_ID" not in os.environ
     assert mlflow.MlflowClient().get_run(search.info.run_id).data.tags["mlflow.parentRunId"] == parent_id
     assert os.environ["MLFLOW_RUN_ID"] == parent_id
