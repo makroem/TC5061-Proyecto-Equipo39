@@ -1,0 +1,64 @@
+{
+  "fecha_verificacion_local": "2026-10-21",
+  "zona_horaria": "America/Mexico_City",
+  "integrante": "Marco",
+  "cuenta": "makroem",
+  "main_integrado": "de5d622707254e275369d3e7c60d340523ce33ce",
+  "main_protegida": true,
+  "pr_cierre": {
+    "numero": 8,
+    "estado": "MERGED",
+    "url": "https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/8",
+    "aprobaciones_independientes": [
+      "a01236059-lab",
+      "diegoHurtado01"
+    ]
+  },
+  "pr_integracion": {
+    "numero": 3,
+    "estado": "MERGED",
+    "url": "https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/3"
+  },
+  "pr_sustituido": {
+    "numero": 5,
+    "estado": "CLOSED",
+    "merge": false,
+    "url": "https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/5"
+  },
+  "validacion_pruebas": {
+    "commit_ejecutado": "63c2abdaab6f98e5726c6b8b3c299d391dc93b6f",
+    "tests": 39,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "arbol_de_main_identico_al_probado": true,
+    "alcance": "39 pruebas en la comprobacion previa al merge; no se volvieron a ejecutar para cambios solo documentales."
+  },
+  "experimentos_anteriores": {
+    "commit": "ad74ba344bdfe6770a12ef37577fa7403c54dbc6",
+    "runs_finalizados": 6,
+    "evidencia": "reports/cierre_experimentos.json",
+    "nueva_ejecucion_mlflow_en_esta_actualizacion": false
+  },
+  "registro_historico_ingesta": "reports/reproduccion_previa_cierre.json conserva la etapa previa a ejecutar los seis experimentos; su alcance no se reescribe.",
+  "actualizacion_actual": "Solo documentacion; no cambia el contenido de los documentos PDF/DOCX, los modulos, las pruebas, los manifiestos ni las metricas.",
+  "pendientes_equipo": [
+    {
+      "responsable": "Diego Hurtado",
+      "actividad": "Acreditar contribucion y PR propio; la revision del PR 8 ya esta realizada."
+    },
+    {
+      "responsable": "Equipo",
+      "actividad": "Contrastar las cuatro lecturas completas del curso."
+    },
+    {
+      "responsable": "Equipo",
+      "actividad": "Confirmar las condiciones de uso especificas de los CSV con la fuente o el curso."
+    },
+    {
+      "responsable": "Responsable del envio",
+      "actividad": "Confirmar entrega en Canvas y conservar el comprobante.",
+      "estado": "No verificable desde GitHub."
+    }
+  ]
+}
