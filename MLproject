@@ -1,0 +1,23 @@
+name: mibici-equipo39
+
+entry_points:
+  ingest:
+    command: "python -m mibici_equipo39.dataset --verify-manifest"
+  features:
+    command: "python -m mibici_equipo39.features"
+  p1:
+    parameters:
+      member: {type: string, default: persona1}
+    command: "python -m mibici_equipo39.modeling.p1 --executor {member}"
+  p2:
+    parameters:
+      member: {type: string, default: persona1}
+    command: "python -m mibici_equipo39.modeling.p2 --executor {member}"
+  p3:
+    parameters:
+      member: {type: string, default: persona1}
+    command: "python -m mibici_equipo39.modeling.p3 --executor {member}"
+  main:
+    parameters:
+      member: {type: string, default: persona1}
+    command: "python -m mibici_equipo39.modeling.train --question all --member {member}"

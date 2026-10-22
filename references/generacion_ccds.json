@@ -1,8 +1,0 @@
-{
-  "generator": "ccds",
-  "version": "2.3.0",
-  "template": "https://github.com/drivendataorg/cookiecutter-data-science",
-  "python": "3.11.9",
-  "include_code_scaffold": "Yes",
-  "module": "mibici_equipo39"
-}

@@ -201,6 +201,7 @@ mlartifacts/
 *.db
 *.db-shm
 *.db-wal
+!data/
 data/**
 !data/**/
 !data/**/.gitkeep
@@ -216,3 +217,4 @@ models/**
 *.pth
 *.sqlite
 *.sqlite-journal
+reports/figures/runs/

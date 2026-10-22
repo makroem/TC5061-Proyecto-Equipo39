@@ -1,4 +1,5 @@
 """Parámetros compartidos de descarga, partición y experimentos."""
+
 import os
 from pathlib import Path
 
@@ -10,20 +11,46 @@ PROCESSED = DATA / "processed"
 INTERIM = DATA / "interim"
 REFERENCES = ROOT / "references"
 REPORTS = ROOT / "reports"
-FIGURES = REPORTS / "figures"
+FIGURES = REPORTS / "figures" / "runs"
+MODELS = ROOT / "models"
 TEAM = "39"
 SEED = 39
 SOURCE_START = "2025-10-01"
 SOURCE_END_EXCLUSIVE = "2026-10-01"
 TIMEZONE = "America/Mexico_City"
 CHUNKSIZE = 100000
-TRAIN_SIZE, VAL_SIZE, TEST_SIZE = 0.70, 0.15, 0.15
-SPLIT_STRATEGY = "random_days_month_stratified"
-SPLIT_VERSION = "2"
+TRAIN_END_EXCLUSIVE = "2026-06-01"
+VALIDATION_END_EXCLUSIVE = "2026-08-01"
+SPLIT_STRATEGY = "chronological_holdout"
+SPLIT_VERSION = "3"
 CLEANING_SCHEMA_VERSION = "3-colab"
-FEATURE_SCHEMA_VERSION = "3-random-calendar"
+FEATURE_SCHEMA_VERSION = "6-chronological-calendar-only"
+FEATURES_START = SOURCE_START
+P1_MIN_TRAIN_DEPARTURES = 100
+P1_HGB_PARAMS = {
+    "loss": "poisson",
+    "learning_rate": 0.1,
+    "max_iter": 100,
+    "max_leaf_nodes": 31,
+    "random_state": SEED,
+}
 P2_INITIAL_OCCUPANCY, P2_MARGIN = 0.50, 0.10
+P2_SENSITIVITY_OCCUPANCIES = (0.25, 0.75)
+P2_MIN_RECALL = 0.80
+P2_THRESHOLDS = tuple(round(0.05 * i, 2) for i in range(1, 20))
+P2_LOGISTIC_PARAMS = {
+    "C": 1.0,
+    "class_weight": "balanced",
+    "solver": "liblinear",
+    "max_iter": 1000,
+    "random_state": SEED,
+}
 P3_K, P3_MIN_TRAIN_TRIPS = 3, 100
+P3_BOOTSTRAPS = 5
+P3_MIN_CLUSTER_SHARE = 0.05
+P3_KMEANS_PARAMS = {"n_clusters": P3_K, "n_init": 20, "random_state": SEED}
+P3_GMM_PARAMS = {"n_components": P3_K, "covariance_type": "diag", "reg_covar": 1e-6,
+                 "n_init": 5, "max_iter": 300, "random_state": SEED}
 EXPERIMENT_NAME = "mibici-equipo39"
 TRACKING_URI = os.environ.get("MLFLOW_TRACKING_URI", "sqlite:///mlflow.db")
 SOURCE_URLS = {

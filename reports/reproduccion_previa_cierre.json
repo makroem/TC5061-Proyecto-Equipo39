@@ -1,0 +1,36 @@
+{
+  "scope": "Entorno nuevo, clon inicialmente sin datos; ingesta automatica y variables cronologicas. Experimentos pendientes de ejecutar en este punto.",
+  "python": "3.11.9",
+  "sklearn": "1.6.1",
+  "mlflow": "2.22.0",
+  "fresh_environment": true,
+  "manual_downloads": 0,
+  "source_hashes_verified": 13,
+  "normalized_outputs_verified_by_ingestion": 151,
+  "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+  "split_id": "ab6301f96f083217512343b4f800bc5ddea51b666492ef05b34da85591cc9bdd",
+  "periods": {
+    "test": {
+      "rows": 686616,
+      "start": "2026-08-01 00:00:00",
+      "end": "2026-09-30 23:00:00",
+      "days": 61
+    },
+    "train": {
+      "rows": 2735208,
+      "start": "2025-10-01 00:00:00",
+      "end": "2026-05-31 23:00:00",
+      "days": 243
+    },
+    "validation": {
+      "rows": 686616,
+      "start": "2026-06-01 00:00:00",
+      "end": "2026-07-31 23:00:00",
+      "days": 61
+    }
+  },
+  "tests_passed": 39,
+  "pip_check": "No broken requirements found",
+  "n_station_hours": 4108440,
+  "n_grid_stations": 469
+}
