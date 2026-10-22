@@ -218,3 +218,6 @@ models/**
 *.sqlite
 *.sqlite-journal
 reports/figures/runs/
+mlflow.db-*
+private_results/
+private_tracking/

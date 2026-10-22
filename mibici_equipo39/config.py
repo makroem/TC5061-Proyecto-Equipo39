@@ -53,6 +53,36 @@ P3_GMM_PARAMS = {"n_components": P3_K, "covariance_type": "diag", "reg_covar": 1
                  "n_init": 5, "max_iter": 300, "random_state": SEED}
 EXPERIMENT_NAME = "mibici-equipo39"
 TRACKING_URI = os.environ.get("MLFLOW_TRACKING_URI", "sqlite:///mlflow.db")
+REGISTRY_URI = os.environ.get("MLFLOW_REGISTRY_URI", TRACKING_URI)
+# Los resultados de la segunda entrega pueden guardarse fuera del clon.
+RESULTS_DIR = Path(os.environ.get("MIBICI_RESULTS_DIR", ROOT / "private_results"))
+MODEL_ALIAS = "champion"
+REGISTERED_MODELS = {
+    "p1": "mibici-equipo39-p1-demanda",
+    "p2": "mibici-equipo39-p2-riesgo",
+    "p3": "mibici-equipo39-p3-grupos",
+}
+STAGE2_SEARCH_PLAN = {
+    "p1": [
+        {"name": "p1_hgb_100", "family": "hgb", "params": dict(P1_HGB_PARAMS)},
+        {"name": "p1_hgb_200", "family": "hgb", "params": {
+            **P1_HGB_PARAMS, "max_iter": 200, "learning_rate": 0.05}},
+        {"name": "p1_rf_300", "family": "random_forest", "params": {
+            "n_estimators": 300, "max_depth": 16, "min_samples_leaf": 20,
+            "max_samples": 0.5, "bootstrap": True, "n_jobs": 2, "random_state": SEED}},
+    ],
+    "p2": [
+        {"name": f"p2_lr_{value:g}", "family": "logistic", "params": {
+            **P2_LOGISTIC_PARAMS, "C": value}} for value in (0.1, 1.0, 10.0)
+    ],
+    "p3": [
+        {"name": "p3_kmeans_4", "family": "kmeans", "params": {
+            **P3_KMEANS_PARAMS, "n_clusters": 4}},
+        {"name": "p3_kmeans_5", "family": "kmeans", "params": {
+            **P3_KMEANS_PARAMS, "n_clusters": 5}},
+        {"name": "p3_gmm_3", "family": "gmm", "params": dict(P3_GMM_PARAMS)},
+    ],
+}
 SOURCE_URLS = {
     "2025-10": "https://mibici.net/site/assets/files/115104/datos_abiertos_2025_10.csv",
     "2025-11": "https://mibici.net/site/assets/files/116773/datos_abiertos_2025_11.csv",

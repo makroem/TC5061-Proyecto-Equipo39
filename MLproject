@@ -1,4 +1,5 @@
 name: mibici-equipo39
+python_env: python_env.yaml
 
 entry_points:
   ingest:

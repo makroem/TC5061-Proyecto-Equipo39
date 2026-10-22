@@ -1,5 +1,16 @@
 # Proyecto MiBici Equipo 39
 
+## Segunda entrega infraestructura de Marco
+
+La rama de infraestructura declara el entorno en `python_env.yaml`, el plan de candidatos
+en `config.STAGE2_SEARCH_PLAN` y el registro común de modelos con firma y ejemplo.
+La preparación, el servidor y las dependencias están descritos en
+[el contrato de infraestructura](references/etapa2/contrato_infraestructura.md).
+El [punto de partida](references/etapa2/starting_point.json) contiene los seis resultados
+históricos verificados contra SQLite. Estos resultados no acreditan corridas de la etapa 2.
+El controlador parametrizado, los adaptadores y el registro final esperan los PR de los
+responsables indicados en el contrato. Los comandos de la entrega anterior siguen vigentes.
+
 Repositorio público: https://github.com/makroem/TC5061-Proyecto-Equipo39
 
 ## Propósito y alcance
