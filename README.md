@@ -3,10 +3,10 @@
 Repositorio público: https://github.com/makroem/TC5061-Proyecto-Equipo39
 
 ## Propósito y alcance
-P1 estima salidas por estación en la siguiente hora; P2 aproxima riesgo de bicicletas o anclajes; P3 agrupa estaciones por uso. El código final vive en `mibici_equipo39`; los notebooks son exploratorios. Este cierre agrega P3 y cambia a evaluación cronológica. Una rama o PR publicado no acredita integración a main ni revisión de otro integrante.
+P1 estima salidas por estación en la siguiente hora; P2 aproxima riesgo de bicicletas o anclajes; P3 agrupa estaciones por uso. El código final vive en `mibici_equipo39`; los notebooks son exploratorios. El cierre de P1/P2/P3 y la evaluación cronológica están integrados en main mediante los PR #8 y #3. El estado de integración, las revisiones y las dependencias restantes se registran en references/cierre_marco.md.
 
 ## Equipo roles y contribuciones
-Marco (`makroem`, persona1): estructura, ingesta, versionado, correcciones, evaluación temporal, cierre de P3 y ejecución de revisión. Stefania (`a01236059-lab`, persona2): propuesta de variables y Canvas, PR #5 y revisiones de ingesta. Diego Martínez (`Sanciprian`, persona3): PR #3 e integración de variables/P1 y P2. Diego Hurtado (`diegoHurtado01`, persona4): rol previsto de P3/Tracking/propuesta, con contribución y revisión pendientes de verificar. El P3 de esta rama lo aporta Marco; no acredita trabajo de otra persona.
+Marco (`makroem`, persona1): estructura, ingesta, versionado, correcciones, evaluación temporal, cierre de P3 y ejecución de revisión. Stefania (`a01236059-lab`, persona2): propuesta de variables y Canvas, PR #5 y revisiones de ingesta. Diego Martínez (`Sanciprian`, persona3): PR #3 e integración de variables/P1 y P2. Diego Hurtado (`diegoHurtado01`, persona4): rol previsto de P3/Tracking/propuesta; revisión del PR #8 verificada. Sigue pendiente acreditar un PR propio y una contribución asociada a su cuenta en main. El P3 de esta rama lo aporta Marco; no acredita trabajo de otra persona.
 
 ## Preguntas y usuarios
 | Pregunta | Resultado | Usuario y decisión |
@@ -44,10 +44,10 @@ La estructura original se generó con ccds 2.3.0, include_code_scaffold Yes (evi
 Python 3.11.9/pandas permiten funciones y bloques de 100,000 filas; PyArrow/Parquet tablas tipadas por mes; scikit-learn pipelines y métricas; MLflow trazabilidad de experimentos; GitHub revisión y autoría. `config.py` centraliza rutas, fechas, semillas e hiperparámetros. Las referencias oficiales sustentan las herramientas; falta relacionarlas con las lecturas asignadas del curso cuando estén disponibles.
 
 ## Instalación
-Requiere Git y Python 3.11.9. Antes de integrar este cierre, clona la rama revisable:
+Requiere Git y Python 3.11.9. Comprueba primero sus versiones y reutiliza las instalaciones disponibles. Clona la rama main integrada:
 
 ```bash
-git clone --branch feat/marco-cierre-entrega https://github.com/makroem/TC5061-Proyecto-Equipo39.git
+git clone --branch main https://github.com/makroem/TC5061-Proyecto-Equipo39.git
 cd TC5061-Proyecto-Equipo39
 python -m venv .venv
 ```
@@ -97,10 +97,10 @@ El experimento mibici-equipo39 registra baseline y candidato por pregunta. Pará
 ## Git GitHub y buenas prácticas
 main está protegida: una aprobación, descarte de aprobaciones antiguas y conversaciones resueltas; force push y eliminación bloqueados también para administradores. Todo cambio hacia main debe pasar por PR revisado. Ramas feat/fix/docs/chore y commits con esos prefijos. Cada persona debe abrir un PR y revisar otro; una ejecución de Marco no sustituye la evidencia de otros.
 
-Este cierre se presenta por PR hacia la rama del equipo antes de main. Los PR #6/#7 anteriores entraron a esa rama sin revisión formal registrada; no se declara una revisión inexistente ni se evade la protección. Los notebooks antiguos con días aleatorios son historia exploratoria y no acreditan las métricas cronológicas.
+El PR #8 se incorporó a la rama de integración y el PR #3 se incorporó a main en el commit de5d622707254e275369d3e7c60d340523ce33ce. El PR #5 se cerró sin merge para evitar sobrescribir la versión consolidada. Las contribuciones y revisiones conservan su historial. Los PR #6/#7 anteriores entraron a esa rama sin revisión formal registrada; no se declara una revisión inexistente ni se evade la protección. Los notebooks antiguos con días aleatorios son historia exploratoria y no acreditan las métricas cronológicas.
 
 ## Resultados limitaciones y cierre
-La propuesta consolidada está disponible en [PDF](reports/TC5061_Propuesta_Proyecto_Equipo39.pdf) y [Word editable](reports/TC5061_Propuesta_Proyecto_Equipo39.docx). El [informe de cierre y pendientes](reports/Cierre_Actividades_y_Pendientes.txt) distingue las actividades ejecutadas de la revisión independiente, la colaboración individual y el envío en Canvas todavía pendientes. Ambos documentos incluyen el enlace público al repositorio; el cierre técnico se consulta en esta rama hasta completar su revisión e integración.
+La propuesta consolidada está disponible en [PDF](reports/TC5061_Propuesta_Proyecto_Equipo39.pdf) y [Word editable](reports/TC5061_Propuesta_Proyecto_Equipo39.docx). El [informe de cierre y pendientes](reports/Cierre_Actividades_y_Pendientes.txt) distingue las actividades integradas de la colaboración individual restante, las lecturas y las condiciones de uso por confirmar. El envío en Canvas no está verificado en GitHub. Ambos documentos incluyen el enlace público al repositorio; el código consolidado se consulta en main. El registro de Marco está en [references/cierre_marco.md](references/cierre_marco.md).
 
 Las métricas vigentes se documentan en el resumen y el PDF. No deben mezclarse con mibici-equipo39-revision-marco, de días aleatorios. Se requieren capturas de lista, detalle con parámetros/métricas/etiquetas, artefacto y comparación, además de estructura del repositorio y referencias APA 7.
 

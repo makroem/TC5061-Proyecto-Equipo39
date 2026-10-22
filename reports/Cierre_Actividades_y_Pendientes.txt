@@ -1,4 +1,4 @@
-CIERRE DE PENDIENTES — EQUIPO 39 — 18 OCTUBRE 2026
+CIERRE DE PENDIENTES — EQUIPO 39 — ACTUALIZACIÓN DEL 21 OCTUBRE 2026
 
 ACTIVIDADES EJECUTADAS
 1. P3 implementada: perfiles de 369 estaciones, KMeans y GMM, evaluación, remuestreo de estabilidad, mapa y figuras.
@@ -8,14 +8,14 @@ ACTIVIDADES EJECUTADAS
 5. 39 pruebas aprobadas; controles de límites temporales, manifiestos y aislamiento de datos reservados.
 6. Capturas auténticas de lista, detalle, artefacto, comparación y estructura; arquitectura versionada, Canvas y README actualizados.
 7. PDF y editable actualizados y revisados en sus 18 páginas. Arial 11, justificado, interlineado 1.5; URL pública comprobada en ambos archivos.
-8. Cambios publicados para revisión en PR #8: https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/8
+8. PR #8 revisado por Stefania y Diego Hurtado e incorporado a la rama de integración. PR #3 aprobado e incorporado a main en de5d622707254e275369d3e7c60d340523ce33ce. PR #5 cerrado sin merge.
+9. Marco revalidó las 39 pruebas sobre 63c2abd y comprobó que main conserva exactamente ese árbol de archivos. Se mantuvieron las protecciones; no se repitieron los experimentos anuales para esta comprobación documental.
 
 PENDIENTES REALES
-- Otro integrante: revisar PR #8. Tras incorporarlo a la rama de Diego Martínez, actualizar y revisar PR #3 antes de integrar a main. PR #5 de Stefania requiere revisión de su versión vigente. main no contiene todavía este cierre.
-- Diego Hurtado: acreditar contribuciones, PR propio y revisión a otro integrante. La ejecución de Marco no sustituye estos requisitos individuales.
+- Diego Hurtado: acreditar contribución y PR propio. Su revisión del PR #8 ya está verificada y no se mantiene como pendiente. La implementación de P3 realizada por Marco no sustituye la contribución individual de Diego Hurtado.
 - Equipo: contrastar la justificación de herramientas con las cuatro lecturas completas del curso. Las vistas editoriales públicas consultadas solo ofrecen respaldo parcial.
 - Equipo: confirmar condiciones/licencia específica aplicable a los CSV con la fuente o el curso; el acceso público no acredita una licencia. Se citó MiBici y no se redistribuyeron los originales.
-- Un integrante: revisar y enviar el PDF en Canvas. El archivo ya está preparado, pero no se ha enviado.
+- Responsable del envío: confirmar si se entregó el PDF en Canvas y conservar el comprobante. GitHub no permite verificar ese envío; no se afirma que esté realizado ni que siga sin realizarse.
 
 LIMITACIONES DE RESULTADOS, NO AUSENCIA DE EXPERIMENTOS
 P1 conserva baseline (MAE test 0.9164). P2 tiene precisión baja (2.18% bicicletas y 3.18% anclajes), y recall de anclajes en test 79.3%; el proxy no mide inventario observado. P3 tiene silhouette de validación 0.0266 y separación débil. No se reajustó por test ni se inventó utilidad operativa.
@@ -26,8 +26,11 @@ Datos/ingesta (15%): ejecución y cifras reales verificadas; condiciones de uso 
 Pipeline/modelos/arquitectura (15%): implementados y documentados; relación con lecturas completa pendiente.
 MLflow (15%): tres preguntas, seis runs y capturas reales disponibles.
 Estructura (15%): carpetas y configuración centralizada; dependencias fijadas; datos/modelos/tracking excluidos.
-Colaboración (10%): parcial, pendiente revisión e integración y evidencia individual faltante.
+Colaboración (10%): revisiones e integración realizadas; queda acreditar la contribución y PR propio de Diego Hurtado.
 Features (10%): funciones reutilizables y pruebas temporales disponibles.
 README y claridad (5%): documento y README actualizados; revisión visual completada.
 
 La estimación anterior de 64/100 correspondía a un avance que carecía de varios de estos elementos y ya no describe este cierre. No se asigna automáticamente la puntuación máxima a un criterio: la evaluación final depende de la revisión docente, la integración del repositorio y la evidencia individual.
+
+REGISTRO DE MARCO
+La ingesta, revisiones, correcciones, resolución de integración y comprobaciones técnicas de Marco están documentadas en references/cierre_marco.md y reports/Estado_Integracion_Marco.json. Las 39 pruebas y la ejecución anual anterior tienen alcances y commits diferenciados. La actualización presente es documental y no modifica código, datos, modelos, partición ni resultados.
