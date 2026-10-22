@@ -1,0 +1,33 @@
+CIERRE DE PENDIENTES — EQUIPO 39 — 18 OCTUBRE 2026
+
+ACTIVIDADES EJECUTADAS
+1. P3 implementada: perfiles de 369 estaciones, KMeans y GMM, evaluación, remuestreo de estabilidad, mapa y figuras.
+2. Partición de P1/P2/P3 corregida: train octubre-mayo, validación junio-julio, prueba agosto-septiembre; ajustes aprendidos solo en train.
+3. Ingesta automática desde copia inicialmente sin datos: 13 fuentes y 151 salidas lógicas verificadas; entorno nuevo con dependencias fijadas.
+4. MLflow Projects ejecutado correctamente: seis runs FINISHED, parámetros, métricas, etiquetas, artefactos y git_dirty=false.
+5. 39 pruebas aprobadas; controles de límites temporales, manifiestos y aislamiento de datos reservados.
+6. Capturas auténticas de lista, detalle, artefacto, comparación y estructura; arquitectura versionada, Canvas y README actualizados.
+7. PDF y editable actualizados y revisados en sus 18 páginas. Arial 11, justificado, interlineado 1.5; URL pública comprobada en ambos archivos.
+8. Cambios publicados para revisión en PR #8: https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/8
+
+PENDIENTES REALES
+- Otro integrante: revisar PR #8. Tras incorporarlo a la rama de Diego Martínez, actualizar y revisar PR #3 antes de integrar a main. PR #5 de Stefania requiere revisión de su versión vigente. main no contiene todavía este cierre.
+- Diego Hurtado: acreditar contribuciones, PR propio y revisión a otro integrante. La ejecución de Marco no sustituye estos requisitos individuales.
+- Equipo: contrastar la justificación de herramientas con las cuatro lecturas completas del curso. Las vistas editoriales públicas consultadas solo ofrecen respaldo parcial.
+- Equipo: confirmar condiciones/licencia específica aplicable a los CSV con la fuente o el curso; el acceso público no acredita una licencia. Se citó MiBici y no se redistribuyeron los originales.
+- Un integrante: revisar y enviar el PDF en Canvas. El archivo ya está preparado, pero no se ha enviado.
+
+LIMITACIONES DE RESULTADOS, NO AUSENCIA DE EXPERIMENTOS
+P1 conserva baseline (MAE test 0.9164). P2 tiene precisión baja (2.18% bicicletas y 3.18% anclajes), y recall de anclajes en test 79.3%; el proxy no mide inventario observado. P3 tiene silhouette de validación 0.0266 y separación débil. No se reajustó por test ni se inventó utilidad operativa.
+
+RELACIÓN CON LA RÚBRICA DETALLADA
+Formulación (15%): documentada para P1/P2/P3, con Canvas y justificación del proxy.
+Datos/ingesta (15%): ejecución y cifras reales verificadas; condiciones de uso específicas por confirmar.
+Pipeline/modelos/arquitectura (15%): implementados y documentados; relación con lecturas completa pendiente.
+MLflow (15%): tres preguntas, seis runs y capturas reales disponibles.
+Estructura (15%): carpetas y configuración centralizada; dependencias fijadas; datos/modelos/tracking excluidos.
+Colaboración (10%): parcial, pendiente revisión e integración y evidencia individual faltante.
+Features (10%): funciones reutilizables y pruebas temporales disponibles.
+README y claridad (5%): documento y README actualizados; revisión visual completada.
+
+La estimación anterior de 64/100 correspondía a un avance que carecía de varios de estos elementos y ya no describe este cierre. No se asigna automáticamente la puntuación máxima a un criterio: la evaluación final depende de la revisión docente, la integración del repositorio y la evidencia individual.

@@ -10,5 +10,5 @@ def test_controller_stops_when_tables_are_missing(tmp_path, monkeypatch):
         train.check_inputs(allow_dirty=True)
 
 
-def test_controller_covers_p1_and_p2():
-    assert train.QUESTIONS == ("P1", "P2")
+def test_controller_covers_three_questions():
+    assert train.QUESTIONS == ("P1", "P2", "P3")

@@ -19,8 +19,7 @@ def hourly_grid():
 
 def split(frame):
     frame = F.add_calendar_features(frame)
-    frame = frame.loc[frame.hour.ge('2025-10-09')].reset_index(drop=True)
-    return F.random_grouped_split(frame, data_version='synthetic-audit')
+    return F.chronological_split(frame, data_version='synthetic-audit')
 
 
 def test_reserved_departures_cannot_change_training_predictors():
@@ -44,7 +43,7 @@ def test_confirmed_split_is_reproduced_without_rewriting(tmp_path):
     path = tmp_path / 'split_manifest.json'
     text = json.dumps(manifest, indent=4) + '\n'
     path.write_text(text, encoding='utf-8')
-    _, reproduced = F.random_grouped_split(frame, data_version='synthetic-audit', manifest_path=path)
+    _, reproduced = F.chronological_split(frame, data_version='synthetic-audit', manifest_path=path)
     assert reproduced == manifest
     assert path.read_text(encoding='utf-8') == text
 
@@ -60,7 +59,7 @@ def test_mismatching_manifest_is_rejected_and_preserved(tmp_path, field, value):
     text = json.dumps(manifest)
     path.write_text(text, encoding='utf-8')
     with pytest.raises(ValueError, match='no coincide'):
-        F.random_grouped_split(frame, data_version='synthetic-audit', manifest_path=path)
+        F.chronological_split(frame, data_version='synthetic-audit', manifest_path=path)
     assert path.read_text(encoding='utf-8') == text
 
 
@@ -68,5 +67,5 @@ def test_missing_confirmed_manifest_does_not_create_one(tmp_path):
     frame, _ = split(hourly_grid())
     path = tmp_path / 'split_manifest.json'
     with pytest.raises(FileNotFoundError, match='PR explícito'):
-        F.random_grouped_split(frame, data_version='synthetic-audit', manifest_path=path)
+        F.chronological_split(frame, data_version='synthetic-audit', manifest_path=path)
     assert not path.exists()

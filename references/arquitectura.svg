@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1300" height="460" viewBox="0 0 1300 460">
+<rect width="1300" height="460" fill="white"/>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#365369"/></marker></defs>
+<g fill="#eaf0f6" stroke="#6d8aa0" stroke-width="2">
+<rect x="20" y="40" width="260" height="100"/><rect x="345" y="40" width="270" height="100"/><rect x="690" y="40" width="280" height="100"/>
+<rect x="345" y="250" width="270" height="100"/><rect x="690" y="250" width="280" height="100"/><rect x="1030" y="250" width="250" height="100"/></g>
+<g fill="black" font-family="Arial" font-size="22" text-anchor="middle">
+<text x="150" y="80">MiBici CSV<tspan x="150" dy="32">12 meses y catálogo</tspan></text>
+<text x="480" y="80">dataset.py<tspan x="480" dy="32">Descarga y limpieza</tspan></text>
+<text x="830" y="80">Parquet y SHA256<tspan x="830" dy="32">data_manifest.json</tspan></text>
+<text x="480" y="290">features.py<tspan x="480" dy="32">Partición cronológica</tspan></text>
+<text x="830" y="290">P1 P2 P3<tspan x="830" dy="32">Train y validación</tspan></text>
+<text x="1155" y="290">MLflow local<tspan x="1155" dy="32">Métricas y artefactos</tspan></text>
+</g><g fill="none" stroke="#365369" stroke-width="3" marker-end="url(#arrow)">
+<path d="M280 90H345"/><path d="M615 90H690"/><path d="M830 140V195H480V250"/><path d="M615 300H690"/><path d="M970 300H1030"/></g>
+<text x="30" y="410" font-family="Arial" font-size="21">Git y PR revisados: código y manifiestos. Datos y almacén MLflow: locales y excluidos de Git.</text>
+</svg>

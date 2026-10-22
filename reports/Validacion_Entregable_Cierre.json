@@ -1,0 +1,32 @@
+{
+  "document": "TC5061_Propuesta_Proyecto_Equipo39.docx",
+  "pdf": "TC5061_Propuesta_Proyecto_Equipo39.pdf",
+  "pages": 18,
+  "format": {
+    "font": "Arial",
+    "size_pt": 11,
+    "alignment": "justified",
+    "line_spacing": 1.5,
+    "verified_in_docx_xml": true
+  },
+  "repository_url": "https://github.com/makroem/TC5061-Proyecto-Equipo39",
+  "anonymous_repository_access": {
+    "api": {
+      "status": 200,
+      "url": "https://api.github.com/repos/makroem/TC5061-Proyecto-Equipo39",
+      "private": false
+    },
+    "html": {
+      "status": 200,
+      "url": "https://github.com/makroem/TC5061-Proyecto-Equipo39"
+    }
+  },
+  "hyperlink_in_docx_and_pdf": true,
+  "all_pages_visually_inspected": true,
+  "main_sha": "008ebccacc55704583f3c90895300cc750f84f14",
+  "main_protected": true,
+  "pending_pr": 8,
+  "model_runs_finished": 6,
+  "tests_passed": 39,
+  "scope": "Technical closure on feat/marco-cierre-entrega; not merged to main; human collaboration and final submission remain pending."
+}

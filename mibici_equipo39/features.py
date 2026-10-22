@@ -22,31 +22,29 @@ CALENDAR_FEATURES = [
     "month_sin",
     "month_cos",
 ]
-# Con días al azar, un rezago metería objetivos de días reservados en train; X solo lleva calendario.
+# Solo se usan entradas disponibles antes de la hora objetivo.
 FEATURE_COLUMNS = CALENDAR_FEATURES.copy()
 
 
-def random_grouped_split(df, seed=C.SEED, manifest_path=None, data_version="1"):
+def chronological_split(df, seed=C.SEED, manifest_path=None, data_version="1"):
     """
-    Divide por días completos estratificando por mes (70/15/15 de config.py).
+    Divide periodos contiguos sin entrenar con fechas posteriores a validación o prueba.
 
-    Ningún día queda en dos conjuntos y todos los meses aparecen en train, val y test.
-    El split_id es el hash del mapa de días, así que la misma semilla da el mismo id.
+    Train: octubre a mayo; validación: junio y julio; test: agosto y septiembre.
+    El manifiesto incluye los límites y los días reales, se verifica sin sobrescribirlo.
     """
     split_df = df.copy()
     split_df["date"] = split_df["hour"].dt.normalize()
-    rng = np.random.default_rng(seed)
-    assignments = {}
-    for _, days in split_df.groupby(split_df["date"].dt.to_period("M"))["date"]:
-        days = np.sort(days.unique())
-        rng.shuffle(days)
-        cut_train = int(np.floor(C.TRAIN_SIZE * len(days) + 0.5))
-        cut_val = int(np.floor((C.TRAIN_SIZE + C.VAL_SIZE) * len(days) + 0.5))
-        for i, day in enumerate(days):
-            assignments[pd.Timestamp(day)] = (
-                "train" if i < cut_train else "validation" if i < cut_val else "test"
-            )
-    split_df["split"] = split_df["date"].map(assignments)
+    start, train_end, val_end, end = map(pd.Timestamp, (
+        C.FEATURES_START, C.TRAIN_END_EXCLUSIVE,
+        C.VALIDATION_END_EXCLUSIVE, C.SOURCE_END_EXCLUSIVE))
+    if not start < train_end < val_end < end:
+        raise ValueError("Los límites temporales deben estar ordenados.")
+    if split_df.empty or not split_df["date"].between(start, end, inclusive="left").all():
+        raise ValueError("La malla debe estar dentro del rango temporal confirmado.")
+    split_df["split"] = np.where(split_df["date"].lt(train_end), "train",
+                                 np.where(split_df["date"].lt(val_end), "validation", "test"))
+    assignments = dict(zip(split_df["date"], split_df["split"]))
 
     days = {
         name: sorted(d.strftime("%Y-%m-%d") for d, s in assignments.items() if s == name)
@@ -55,11 +53,18 @@ def random_grouped_split(df, seed=C.SEED, manifest_path=None, data_version="1"):
     content = {
         "seed": seed,
         "strategy": C.SPLIT_STRATEGY,
+        "version": C.SPLIT_VERSION,
+        "boundaries": {"start": C.FEATURES_START,
+                       "train_end_exclusive": C.TRAIN_END_EXCLUSIVE,
+                       "validation_end_exclusive": C.VALIDATION_END_EXCLUSIVE,
+                       "end_exclusive": C.SOURCE_END_EXCLUSIVE},
         "data_version": data_version,
         "days": days,
     }
     split_id = hashlib.sha256(json.dumps(content, sort_keys=True).encode()).hexdigest()
     manifest = {"split_id": split_id, **content}
+    if any(not days[name] for name in days):
+        raise ValueError("Los tres periodos deben contener días observados.")
     if manifest_path is not None:
         path = Path(manifest_path)
         if not path.is_file():
@@ -195,8 +200,7 @@ def build_supervised_tables(df, p2_labels=None, data_version="1"):
     """
     Construye metadata, X y objetivos. P1 es el conteo de salidas en [t, t+1).
 
-    X solo lleva calendario. Los rezagos se excluyen para no reutilizar objetivos
-    reservados mediante las fechas mezcladas del reparto aleatorio.
+    X solo lleva calendario conocido antes de predecir. Ni flujos ni etiquetas entran a X.
     """
     metadata = df[["station_id", "hour", "split"]].rename(columns={"hour": "prediction_time"})
     metadata["data_version"] = data_version
@@ -215,6 +219,32 @@ def eligible_stations(metadata, y_p1, min_departures=C.P1_MIN_TRAIN_DEPARTURES):
     train = metadata["split"].eq("train")
     totals = y_p1[train].groupby(metadata.loc[train, "station_id"], observed=True).sum()
     return sorted(totals.index[totals.ge(min_departures)])
+
+
+def station_usage_profiles(frame, station_ids, weight=None):
+    """Perfil P3 de 48 proporciones horarias, sin coordenadas ni objetivos de otros periodos.
+
+    Promedia salidas por hora y tipo de día (laboral o fin de semana), incluyendo ceros
+    de la malla, y normaliza cada bloque de 24 horas a suma uno. Las ponderaciones
+    opcionales permiten remuestrear días de train sin duplicar millones de filas.
+    La elegibilidad se fija externamente usando solo viajes de train.
+    """
+    f = frame.loc[frame["station_id"].isin(station_ids)].copy()
+    f["weekend"] = f["prediction_time"].dt.dayofweek.ge(5).astype(int)
+    f["hour"] = f["prediction_time"].dt.hour
+    f["weight"] = f[weight].to_numpy() if weight else 1.0
+    if f["weight"].lt(0).any():
+        raise ValueError("Los pesos del perfil no pueden ser negativos.")
+    f["weighted_departures"] = f["departures"] * f["weight"]
+    groups = f.groupby(["station_id", "weekend", "hour"], observed=True)
+    means = groups["weighted_departures"].sum() / groups["weight"].sum().replace(0, np.nan)
+    columns = pd.MultiIndex.from_product([[0, 1], range(24)], names=["weekend", "hour"])
+    profile = means.unstack(["weekend", "hour"]).reindex(index=station_ids, columns=columns).fillna(0)
+    for day_type in (0, 1):
+        block = profile[day_type]
+        profile.loc[:, day_type] = block.div(block.sum(axis=1).replace(0, 1), axis=0).to_numpy()
+    profile.columns = [f"{'weekend' if d else 'weekday'}_hour_{h:02d}" for d, h in columns]
+    return profile.astype(float)
 
 
 def load_tables():
@@ -242,7 +272,7 @@ def build():
     hourly = aggregate_hourly(events, stations)
     hourly = add_calendar_features(hourly)
     hourly = hourly.loc[hourly["hour"].ge(C.FEATURES_START)].reset_index(drop=True)
-    hourly, manifest = random_grouped_split(
+    hourly, manifest = chronological_split(
         hourly, manifest_path=SPLIT_PATH, data_version=data_version
     )
     if hourly[FEATURE_COLUMNS].isna().any().any():
