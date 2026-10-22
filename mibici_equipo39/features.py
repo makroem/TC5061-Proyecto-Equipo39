@@ -4,10 +4,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from pathlib import Path
-
 from loguru import logger
-from tqdm import tqdm
 import typer
 
 import hashlib
@@ -16,10 +13,11 @@ from mibici_equipo39.config import (
     PROCESSED,
     INTERIM,
     EXTERNAL,
-    FEATURE_SCHEMA_VERSION,
+    REFERENCES
 )
 
 app = typer.Typer()
+
 
 def random_grouped_split(
     df,
@@ -28,7 +26,7 @@ def random_grouped_split(
     test_size=0.15,
     seed=39,
     manifest_path=None,
-    data_version=FEATURE_SCHEMA_VERSION
+    data_version=None
 ):
     """
     Divide por días completos estratificando por mes.
@@ -37,6 +35,11 @@ def random_grouped_split(
     juntos en train, val o test.
     """
 
+    if data_version is None:
+        raise ValueError(
+            "data_version debe proporcionarse."
+            )
+    
     if not np.isclose(
         train_size + val_size + test_size,
         1.0
@@ -152,16 +155,38 @@ def random_grouped_split(
                     ) as f:
                 existing_manifest = json.load(f)
                 
-                existing_split_id = (
-                    existing_manifest["split_id"])
+                existing_manifest_for_hash = (
+                    existing_manifest.copy()
+                   )
 
-            if existing_split_id != split_id:
+            stored_split_id = (
+                existing_manifest_for_hash.pop(
+                    "split_id"
+                    )
+                )
+
+            canonical_existing = json.dumps(
+                existing_manifest_for_hash,
+                sort_keys=True,
+                ensure_ascii=False
+                )
+
+            recomputed_split_id = hashlib.sha256(
+                canonical_existing.encode("utf-8")
+                ).hexdigest()
+
+            if recomputed_split_id != stored_split_id:
 
                 raise ValueError(
-                    "El split existente no coincide "
-                    "con la asignación generada."
+                    "El manifiesto existente fue modificado."
                     )
-            
+
+            if existing_manifest != manifest:
+
+                raise ValueError(
+                    "El manifiesto existente no coincide "
+                    "con la asignación generada."
+                    )       
 
     return split_df, manifest
 
@@ -173,6 +198,16 @@ def make_events(clean_departures, clean_arrivals):
 
     departures = clean_departures.copy()
     arrivals = clean_arrivals.copy()
+    
+    departures["station_id"] = (
+    departures["station_id"]
+    .astype(str)
+    )
+
+    arrivals["station_id"] = (
+        arrivals["station_id"]
+        .astype(str)
+        )
 
     departures["event"] = -1
     arrivals["event"] = 1
@@ -209,6 +244,11 @@ def aggregate_hourly(events, stations, config=None):
 
 
     df = events.copy()
+    
+    df["station_id"] = (
+        df["station_id"]
+        .astype(str)
+        )
 
     # intervalos [t, t+1)
     df["hour"] = df["timestamp"].dt.floor("h")
@@ -255,6 +295,12 @@ def aggregate_hourly(events, stations, config=None):
         stations = stations.rename(
             columns={"id": "station_id"}
          )
+        
+    stations["station_id"] = (
+    stations["station_id"]
+    .astype(str)
+    )
+
 
     all_stations = (
     stations["station_id"]
@@ -332,7 +378,7 @@ def add_lagged_features(df):
 
     return df
 
-def build_supervised_tables(df, p2_labels=None, data_version=FEATURE_SCHEMA_VERSION):
+def build_supervised_tables(df, p2_labels=None, data_version=None):
     """
    Construye matrices supervisadas para P1 y P2.
    Requiere que el dataframe ya tenga:
@@ -400,9 +446,9 @@ def build():
         INTERIM / "arrivals"
     )
 
-    stations = pd.read_csv(
-        EXTERNAL / "nomenclatura_2026_09.csv"
-    )
+    stations = pd.read_parquet(
+        PROCESSED / "stations.parquet"
+        )
 
     logger.info(
         f"Departures: {departures.shape}"
@@ -441,11 +487,23 @@ def build():
         / "split_manifest.json"
     )
 
+    
+    with open(
+            REFERENCES / "data_manifest.json",
+            "r",
+            encoding="utf-8"
+    ) as f:
+
+            data_manifest = json.load(f)
+
+    data_version = data_manifest["data_version"]
+
     hourly, manifest = (
         random_grouped_split(
             hourly,
             seed=39,
-            manifest_path=processed_references
+            manifest_path=processed_references,
+            data_version = data_version
         )
     )
 
@@ -455,7 +513,8 @@ def build():
 
 
     tables = build_supervised_tables(
-        hourly
+        hourly,
+        data_version=data_version
     )
 
     metadata = tables["metadata"]
