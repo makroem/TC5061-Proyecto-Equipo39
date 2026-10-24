@@ -3,6 +3,7 @@ import json
 import os
 from pathlib import Path
 
+import mlflow
 import numpy as np
 import pandas as pd
 from sklearn.compose import ColumnTransformer
@@ -16,6 +17,7 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from mibici_equipo39 import config as C
 from mibici_equipo39 import plots
 from mibici_equipo39.features import FEATURE_COLUMNS, load_p2_targets, load_tables, proxy_labels
+from mibici_equipo39.modeling.stage2 import Fitted, QuestionAdapter
 from mibici_equipo39.modeling.tracking import common_params, common_tags, log_model_run
 
 TARGETS = {"bikes": "y_bikes", "docks": "y_docks"}
@@ -255,6 +257,112 @@ class P2Experiment:
                 texts,
                 [figure],
             )
+
+
+def positive_proba(model, X):
+    """Probabilidad de la clase 1; ceros si train solo tuvo una clase."""
+    positive = np.flatnonzero(model.classes_ == 1)
+    if not len(positive):
+        return np.zeros(len(X), dtype=float)
+    return model.predict_proba(X)[:, positive[0]]
+
+
+class P2RiskModel(mlflow.pyfunc.PythonModel):
+    """Modelo de P2 para MLflow: dos clasificadores con sus umbrales congelados.
+
+    predict devuelve prob_bikes, prob_docks, alert_bikes y alert_docks, una fila por entrada.
+    Si ambas alertas se activan la estación oscila y requiere revisión; no indica que esté
+    vacía y llena a la vez.
+    """
+
+    def __init__(self, pipelines, thresholds):
+        self.pipelines = pipelines
+        self.thresholds = thresholds
+
+    def predict(self, context, model_input, params=None):
+        missing = set(COLUMNS) - set(model_input.columns)
+        if missing:
+            raise ValueError(f"Faltan columnas de entrada: {', '.join(sorted(missing))}.")
+        X = model_input[COLUMNS]
+        probs = {risk: positive_proba(self.pipelines[risk], X) for risk in TARGETS}
+        return pd.DataFrame(
+            {**{f"prob_{r}": p for r, p in probs.items()},
+             **{f"alert_{r}": p >= self.thresholds[r] for r, p in probs.items()}},
+            index=model_input.index,
+        )
+
+
+class P2Adapter(QuestionAdapter):
+    """Conecta P2 con el controlador de la etapa 2."""
+
+    question, selection_metric, greater_is_better = "p2", "val_macro_f1", True
+
+    def baseline(self):
+        return {"name": "baseline", "family": "dummy", "params": {"strategy": "prior"}}
+
+    def load_data(self):
+        metadata, X, _ = load_tables()
+        frame = pd.concat([metadata, X, load_p2_targets()], axis=1)
+        frame = frame.loc[frame["capacity"].notna()].reset_index(drop=True)
+        frame[list(TARGETS.values())] = frame[list(TARGETS.values())].astype(int)
+        return frame
+
+    def _estimator(self, variant):
+        if variant["family"] == "dummy":
+            return DummyClassifier(**variant["params"])
+        if variant["family"] == "logistic":
+            params = {f"logisticregression__{k}": v for k, v in variant["params"].items()}
+            return make_candidate().set_params(**params)
+        raise ValueError(f"Familia de P2 desconocida: {variant['family']}")
+
+    def fit(self, variant, data):
+        """Ajusta las dos cabezas con train y fija sus umbrales con validación."""
+        train = data.loc[data["split"].eq("train")]
+        val = data.loc[data["split"].eq("validation")]
+        pipelines, thresholds, rules, searches = {}, {}, {}, {}
+        for risk, target in TARGETS.items():
+            model = self._estimator(variant) if train[target].nunique() > 1 else make_baseline()
+            pipelines[risk] = model.fit(train[COLUMNS], train[target])
+            y, score = val[target].to_numpy(), positive_proba(pipelines[risk], val[COLUMNS])
+            thresholds[risk], rules[risk] = choose_threshold(y, score)
+            searches[risk] = threshold_search(y, score).to_dict(orient="records")
+        config = {"thresholds": thresholds, "threshold_rules": rules, "threshold_grid": list(C.P2_THRESHOLDS),
+                  "min_recall": C.P2_MIN_RECALL, "initial_occupancy": C.P2_INITIAL_OCCUPANCY,
+                  "margin": C.P2_MARGIN, "input_columns": COLUMNS, "excluded_columns": sorted(FORBIDDEN)}
+        return Fitted(variant, P2RiskModel(pipelines, thresholds), "pyfunc",
+                      extra={"config": config, "evaluation": {"threshold_search_validation": searches}})
+
+    def evaluate(self, fitted, data, split):
+        prefix = {"train": "train", "validation": "val", "test": "test"}[split]
+        frame = data.loc[data["split"].eq(split)]
+        output = fitted.model.predict(None, frame[COLUMNS])
+        metrics = {}
+        for risk, target in TARGETS.items():
+            y = frame[target].to_numpy()
+            values, _ = classification_metrics(y, output[f"prob_{risk}"].to_numpy(), fitted.model.thresholds[risk])
+            metrics.update({f"{prefix}_{k}_{risk}": v for k, v in values.items()})
+            metrics[f"{prefix}_prevalence_{risk}"] = float(y.mean())
+            metrics[f"{prefix}_alerts_per_1000_{risk}"] = 1000 * float(output[f"alert_{risk}"].mean())
+        metrics[f"{prefix}_macro_f1"] = (metrics[f"{prefix}_f1_bikes"] + metrics[f"{prefix}_f1_docks"]) / 2
+        return metrics
+
+    def input_example(self, fitted, data):
+        example = data.loc[data["split"].eq("validation"), COLUMNS].head(3).reset_index(drop=True)
+        example["station_id"] = example["station_id"].astype(str)
+        return example
+
+    def plots(self, fitted, data, folder):
+        frame = data.loc[data["split"].eq("validation")]
+        output = fitted.model.predict(None, frame[COLUMNS])
+        searches = fitted.extra["evaluation"]["threshold_search_validation"]
+        return [
+            plots.p2_confusion_matrices(frame, output, fitted.model.thresholds, folder / "p2_matrices_confusion_validacion.png"),
+            plots.p2_risk_pr_curves(frame, output, folder / "p2_precision_recall_validacion.png", C.P2_MIN_RECALL),
+            plots.p2_threshold_curves(searches, fitted.model.thresholds, folder / "p2_umbrales_validacion.png", C.P2_MIN_RECALL),
+        ]
+
+
+ADAPTER = P2Adapter()
 
 
 def main():
