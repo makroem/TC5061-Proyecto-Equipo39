@@ -111,3 +111,11 @@ def test_controller_search_logs_a_p2_pyfunc_that_loads_in_a_new_process(stage2_e
                             env=environment, capture_output=True, text=True, check=False)
     assert result.returncode == 0, result.stderr[-2000:]
     assert json.loads(result.stdout.strip().splitlines()[-1]) == OUTPUT
+
+
+def test_module_run_as_main_accepts_the_p2_adapter():
+    environment = {k: v for k, v in os.environ.items() if k != "MLFLOW_RUN_ID"}
+    result = subprocess.run([sys.executable, "-m", "mibici_equipo39.modeling.stage2", "--question", "p2",
+                             "--member", "DiegoMartinez"], cwd=REPO, env=environment,
+                            capture_output=True, text=True, check=False)
+    assert result.returncode != 0 and "falta MLFLOW_RUN_ID" in result.stderr, result.stderr[-2000:]

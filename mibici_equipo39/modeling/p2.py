@@ -279,7 +279,7 @@ class P2RiskModel(mlflow.pyfunc.PythonModel):
         self.pipelines = pipelines
         self.thresholds = thresholds
 
-    def predict(self, context, model_input, params=None):
+    def predict(self, context, model_input: pd.DataFrame, params=None) -> pd.DataFrame:
         missing = set(COLUMNS) - set(model_input.columns)
         if missing:
             raise ValueError(f"Faltan columnas de entrada: {', '.join(sorted(missing))}.")
@@ -348,6 +348,7 @@ class P2Adapter(QuestionAdapter):
 
     def input_example(self, fitted, data):
         example = data.loc[data["split"].eq("validation"), COLUMNS].head(3).reset_index(drop=True)
+        example[NUMERIC] = example[NUMERIC].astype(float)
         example["station_id"] = example["station_id"].astype(str)
         return example
 
