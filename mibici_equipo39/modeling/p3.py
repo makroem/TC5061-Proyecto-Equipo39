@@ -86,8 +86,10 @@ def p3_model_cost_metrics(
     }
 
 def fit_p3_variant(profiles, family, params, seed=C.SEED):
-    """Ajusta una variante de P3 solo con train y evalúa los periodos reservados."""
-    required = {"train", "validation", "test"}
+    """Ajusta una variante de P3 con train y evalúa únicamente validation."""
+    periods = ("train", "validation")
+    required = set(periods)
+
     missing = required.difference(profiles)
     if missing:
         raise ValueError(
@@ -111,16 +113,15 @@ def fit_p3_variant(profiles, family, params, seed=C.SEED):
         )
 
     scaler = pipeline.named_steps["scaler"]
-    scaled = {
-        split: scaler.transform(frame)
-        for split, frame in profiles.items()
-        if split in required
-    }
 
+    scaled = {
+        split: scaler.transform(profiles[split])
+        for split in periods
+    }
 
     labels = {
         split: pipeline.predict(profiles[split])
-        for split in required
+        for split in periods
     }
 
     metrics = {}
@@ -128,7 +129,6 @@ def fit_p3_variant(profiles, family, params, seed=C.SEED):
     for split, prefix in (
         ("train", "train"),
         ("validation", "val"),
-        ("test", "test"),
     ):
         metrics.update(
             cluster_metrics(
@@ -151,6 +151,30 @@ def fit_p3_variant(profiles, family, params, seed=C.SEED):
         "labels": labels,
         "metrics": metrics,
         "scaled": scaled,
+    }
+
+def evaluate_p3_test(pipeline, test_profiles):
+    """Evalúa un pipeline P3 ya entrenado sobre el periodo de prueba."""
+    if len(test_profiles) == 0:
+        raise ValueError(
+            "test_profiles no puede estar vacío"
+        )
+
+    scaler = pipeline.named_steps["scaler"]
+
+    scaled_test = scaler.transform(test_profiles)
+    labels_test = pipeline.predict(test_profiles)
+
+    metrics = cluster_metrics(
+        scaled_test,
+        labels_test,
+        "test",
+    )
+
+    return {
+        "labels": labels_test,
+        "metrics": metrics,
+        "scaled": scaled_test,
     }
 
 def p3_stability_scores(
@@ -478,27 +502,133 @@ class P3Experiment:
         return scores
 
     def fit(self):
-        self.scaler = StandardScaler().fit(self.profiles["train"])
-        self.scaled = {name: self.scaler.transform(frame) for name, frame in self.profiles.items()}
-        self.models, self.labels, self.metrics, self.bootstrap_scores = {}, {}, {}, {}
+        self.scaler = StandardScaler().fit(
+            self.profiles["train"]
+        )
+
+        periods = ("train", "validation")
+
+        self.scaled = {
+            name: self.scaler.transform(self.profiles[name])
+            for name in periods
+        }
+
+        self.models = {}
+        self.labels = {}
+        self.metrics = {}
+        self.bootstrap_scores = {}
+
         for role in ("baseline", "candidato"):
-            model = make_model(role).fit(self.scaled["train"])
-            if hasattr(model, "converged_") and not model.converged_:
-                raise RuntimeError("GMM no convergió; no se registra como experimento terminado.")
+            model = make_model(role).fit(
+                self.scaled["train"]
+            )
+
+            if (
+                hasattr(model, "converged_")
+                and not model.converged_
+            ):
+                raise RuntimeError(
+                    "GMM no convergió; no se registra "
+                    "como experimento terminado."
+                )
+
             self.models[role] = model
-            self.labels[role] = {name: model.predict(X) for name, X in self.scaled.items()}
+
+            self.labels[role] = {
+                name: model.predict(self.scaled[name])
+                for name in periods
+            }
+
             metrics = {}
-            for name, prefix in (("train", "train"), ("validation", "val"), ("test", "test")):
-                metrics.update(cluster_metrics(self.scaled[name], self.labels[role][name], prefix))
-            stability = self.stability(role, self.labels[role]["train"])
+
+            for name, prefix in (
+                ("train", "train"),
+                ("validation", "val"),
+            ):
+                metrics.update(
+                    cluster_metrics(
+                        self.scaled[name],
+                        self.labels[role][name],
+                        prefix,
+                    )
+                )
+
+            stability = self.stability(
+                role,
+                self.labels[role]["train"],
+            )
+
             self.bootstrap_scores[role] = stability
-            metrics["train_stability_ari_mean"] = float(np.mean(stability))
-            metrics["train_stability_ari_min"] = float(np.min(stability))
+
+            metrics["train_stability_ari_mean"] = float(
+                np.mean(stability)
+            )
+            metrics["train_stability_ari_min"] = float(
+                np.min(stability)
+            )
+
             self.metrics[role] = metrics
-        eligible = {role: m for role, m in self.metrics.items()
-                    if m.get("train_min_cluster_share", 0) >= C.P3_MIN_CLUSTER_SHARE
-                    and "val_silhouette" in m}
-        self.selected = max(eligible, key=lambda role: eligible[role]["val_silhouette"]) if eligible else "ninguno"
+
+        eligible = {
+            role: metrics
+            for role, metrics in self.metrics.items()
+            if (
+                metrics.get(
+                    "train_min_cluster_share",
+                    0,
+                )
+                >= C.P3_MIN_CLUSTER_SHARE
+                and "val_silhouette" in metrics
+            )
+        }
+
+        self.selected = (
+            max(
+                eligible,
+                key=lambda role: eligible[role][
+                    "val_silhouette"
+                ],
+            )
+            if eligible
+            else "ninguno"
+        )
+
+        return self
+
+    def evaluate_test(self):
+        """Evalúa test después de haber congelado la selección."""
+        if not hasattr(self, "selected"):
+            raise RuntimeError(
+                "Debe ejecutarse fit antes de evaluar test."
+            )
+
+        if self.selected == "ninguno":
+            raise RuntimeError(
+                "No existe una selección válida; "
+                "test permanece reservado."
+            )
+
+        scaled_test = self.scaler.transform(
+            self.profiles["test"]
+        )
+
+        self.scaled["test"] = scaled_test
+
+        for role in ("baseline", "candidato"):
+            labels_test = self.models[role].predict(
+                scaled_test
+            )
+
+            self.labels[role]["test"] = labels_test
+
+            self.metrics[role].update(
+                cluster_metrics(
+                    scaled_test,
+                    labels_test,
+                    "test",
+                )
+            )
+
         return self
 
     def artifacts(self, role):

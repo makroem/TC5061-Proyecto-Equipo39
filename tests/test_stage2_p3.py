@@ -11,6 +11,7 @@ from mibici_equipo39.modeling.p3 import (
     build_p3_artifacts,
     build_p3_pipeline,
     cluster_metrics,
+    evaluate_p3_test,
     fit_p3_variant,
     p3_model_cost_metrics,
     p3_stability_scores,
@@ -128,11 +129,10 @@ def test_cluster_metrics_do_not_invent_silhouette_for_one_group():
     assert "val_silhouette" not in metrics
     assert "val_davies_bouldin" not in metrics
 
-def test_fit_p3_variant_returns_pipeline_labels_and_metrics():
+def test_fit_p3_variant_returns_only_train_and_validation():
     profiles = {
         "train": synthetic_profiles(),
         "validation": synthetic_profiles() + 0.25,
-        "test": synthetic_profiles() + 0.50,
     }
 
     result = fit_p3_variant(
@@ -147,67 +147,69 @@ def test_fit_p3_variant_returns_pipeline_labels_and_metrics():
     assert set(result["labels"]) == {
         "train",
         "validation",
-        "test",
+    }
+
+    assert set(result["scaled"]) == {
+        "train",
+        "validation",
     }
 
     assert len(result["labels"]["train"]) == len(profiles["train"])
     assert len(result["labels"]["validation"]) == len(
         profiles["validation"]
     )
-    assert len(result["labels"]["test"]) == len(profiles["test"])
 
     assert "train_n_clusters" in result["metrics"]
     assert "val_n_clusters" in result["metrics"]
-    assert "test_n_clusters" in result["metrics"]
 
+    assert not any(
+        key.startswith("test_")
+        for key in result["metrics"]
+    )
 
-def test_future_profiles_do_not_change_train_fit():
-    train = synthetic_profiles()
+def test_fit_p3_variant_does_not_access_test():
+    class GuardedProfiles(dict):
+        def __getitem__(self, key):
+            if key == "test":
+                raise AssertionError(
+                    "fit_p3_variant no debe consultar test"
+                )
+            return super().__getitem__(key)
 
-    profiles_a = {
-        "train": train.copy(),
-        "validation": synthetic_profiles() + 10.0,
-        "test": synthetic_profiles() + 20.0,
-    }
+    profiles = GuardedProfiles(
+        {
+            "train": synthetic_profiles(),
+            "validation": synthetic_profiles() + 0.25,
+            "test": synthetic_profiles() + 1000.0,
+        }
+    )
 
-    profiles_b = {
-        "train": train.copy(),
-        "validation": synthetic_profiles() + 1000.0,
-        "test": synthetic_profiles() - 1000.0,
-    }
-
-    result_a = fit_p3_variant(
-        profiles_a,
+    result = fit_p3_variant(
+        profiles,
         "kmeans",
         {"n_clusters": 3, "n_init": 20, "max_iter": 300},
         seed=39,
     )
 
-    result_b = fit_p3_variant(
-        profiles_b,
-        "kmeans",
-        {"n_clusters": 3, "n_init": 20, "max_iter": 300},
-        seed=39,
+    assert set(result["labels"]) == {
+        "train",
+        "validation",
+    }
+
+    assert not any(
+        key.startswith("test_")
+        for key in result["metrics"]
     )
 
-    np.testing.assert_allclose(
-        result_a["pipeline"].named_steps["scaler"].mean_,
-        result_b["pipeline"].named_steps["scaler"].mean_,
-    )
-
-    np.testing.assert_array_equal(
-        result_a["labels"]["train"],
-        result_b["labels"]["train"],
-    )
-
-
-def test_fit_p3_variant_rejects_missing_period():
+def test_fit_p3_variant_rejects_missing_validation():
     profiles = {
         "train": synthetic_profiles(),
-        "validation": synthetic_profiles(),
     }
 
-    with pytest.raises(ValueError, match="faltan perfiles"):
+    with pytest.raises(
+        ValueError,
+        match="faltan perfiles",
+    ):
         fit_p3_variant(
             profiles,
             "kmeans",
@@ -511,12 +513,10 @@ def test_p3_cost_metrics_are_positive_and_normalized():
     assert metrics["predict_ms_per_1000"] >= 0
     assert metrics["model_bytes"] > 0
 
-
 def test_fit_p3_variant_includes_cost_metrics():
     profiles = {
         "train": synthetic_profiles(),
         "validation": synthetic_profiles() + 0.25,
-        "test": synthetic_profiles() + 0.50,
     }
 
     result = fit_p3_variant(
@@ -535,7 +535,6 @@ def test_fit_p3_variant_includes_cost_metrics():
     assert "model_bytes" in result["metrics"]
 
     assert result["metrics"]["model_bytes"] > 0
-
 
 def test_p3_cost_metrics_reject_empty_profiles():
     X = synthetic_profiles()
@@ -560,3 +559,74 @@ def test_p3_cost_metrics_reject_empty_profiles():
             X.iloc[0:0],
             fit_seconds=0.1,
         )
+
+def test_evaluate_p3_test_returns_only_test_results():
+    profiles = {
+        "train": synthetic_profiles(),
+        "validation": synthetic_profiles() + 0.25,
+    }
+
+    fitted = fit_p3_variant(
+        profiles,
+        "kmeans",
+        {"n_clusters": 3, "n_init": 20, "max_iter": 300},
+        seed=39,
+    )
+
+    test_profiles = synthetic_profiles() + 0.50
+
+    result = evaluate_p3_test(
+        fitted["pipeline"],
+        test_profiles,
+    )
+
+    assert len(result["labels"]) == len(test_profiles)
+    assert result["scaled"].shape == test_profiles.shape
+
+    assert "test_n_clusters" in result["metrics"]
+
+    assert all(
+        key.startswith("test_")
+        for key in result["metrics"]
+    )
+
+
+def test_evaluate_p3_test_does_not_modify_fitted_pipeline():
+    profiles = {
+        "train": synthetic_profiles(),
+        "validation": synthetic_profiles() + 0.25,
+    }
+
+    fitted = fit_p3_variant(
+        profiles,
+        "kmeans",
+        {"n_clusters": 3, "n_init": 20, "max_iter": 300},
+        seed=39,
+    )
+
+    pipeline = fitted["pipeline"]
+
+    scaler_mean_before = (
+        pipeline.named_steps["scaler"].mean_.copy()
+    )
+
+    centers_before = (
+        pipeline.named_steps["model"]
+        .cluster_centers_
+        .copy()
+    )
+
+    evaluate_p3_test(
+        pipeline,
+        synthetic_profiles() + 0.50,
+    )
+
+    np.testing.assert_allclose(
+        pipeline.named_steps["scaler"].mean_,
+        scaler_mean_before,
+    )
+
+    np.testing.assert_allclose(
+        pipeline.named_steps["model"].cluster_centers_,
+        centers_before,
+    )

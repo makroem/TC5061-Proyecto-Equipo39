@@ -68,3 +68,51 @@ def test_split_rejects_future_or_missing_periods():
         chronological_split(pd.DataFrame({'hour':pd.to_datetime(['2027-01-01'])}))
     with pytest.raises(ValueError,match='tres periodos'):
         chronological_split(pd.DataFrame({'hour':pd.to_datetime(['2026-01-01'])}))
+
+def test_p3experiment_reserves_test_until_after_selection():
+    metadata, X, y = synthetic_tables()
+
+    stations = pd.DataFrame(
+        {
+            "station_id": [str(i) for i in range(12)],
+        }
+    )
+
+    experiment = P3Experiment(
+        metadata,
+        X,
+        y,
+        stations,
+    ).fit()
+
+    assert experiment.selected in {
+        "baseline",
+        "candidato",
+        "ninguno",
+    }
+
+    assert "test" not in experiment.scaled
+
+    for role in ("baseline", "candidato"):
+        assert "test" not in experiment.labels[role]
+
+        assert not any(
+            key.startswith("test_")
+            for key in experiment.metrics[role]
+        )
+
+    if experiment.selected != "ninguno":
+        selected_before = experiment.selected
+
+        experiment.evaluate_test()
+
+        assert experiment.selected == selected_before
+        assert "test" in experiment.scaled
+
+        for role in ("baseline", "candidato"):
+            assert "test" in experiment.labels[role]
+
+            assert any(
+                key.startswith("test_")
+                for key in experiment.metrics[role]
+            )
