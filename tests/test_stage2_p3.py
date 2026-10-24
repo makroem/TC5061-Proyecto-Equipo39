@@ -5,7 +5,11 @@ from sklearn.cluster import KMeans
 from sklearn.mixture import GaussianMixture
 from sklearn.pipeline import Pipeline
 
-from mibici_equipo39.modeling.p3 import build_p3_pipeline, cluster_metrics
+from mibici_equipo39.modeling.p3 import (
+    build_p3_pipeline,
+    cluster_metrics,
+    fit_p3_variant,
+)
 
 
 def synthetic_profiles(n_samples=24, n_features=48):
@@ -119,3 +123,90 @@ def test_cluster_metrics_do_not_invent_silhouette_for_one_group():
     assert metrics["val_n_clusters"] == 1
     assert "val_silhouette" not in metrics
     assert "val_davies_bouldin" not in metrics
+
+def test_fit_p3_variant_returns_pipeline_labels_and_metrics():
+    profiles = {
+        "train": synthetic_profiles(),
+        "validation": synthetic_profiles() + 0.25,
+        "test": synthetic_profiles() + 0.50,
+    }
+
+    result = fit_p3_variant(
+        profiles,
+        "kmeans",
+        {"n_clusters": 3, "n_init": 20, "max_iter": 300},
+        seed=39,
+    )
+
+    assert isinstance(result["pipeline"], Pipeline)
+
+    assert set(result["labels"]) == {
+        "train",
+        "validation",
+        "test",
+    }
+
+    assert len(result["labels"]["train"]) == len(profiles["train"])
+    assert len(result["labels"]["validation"]) == len(
+        profiles["validation"]
+    )
+    assert len(result["labels"]["test"]) == len(profiles["test"])
+
+    assert "train_n_clusters" in result["metrics"]
+    assert "val_n_clusters" in result["metrics"]
+    assert "test_n_clusters" in result["metrics"]
+
+
+def test_future_profiles_do_not_change_train_fit():
+    train = synthetic_profiles()
+
+    profiles_a = {
+        "train": train.copy(),
+        "validation": synthetic_profiles() + 10.0,
+        "test": synthetic_profiles() + 20.0,
+    }
+
+    profiles_b = {
+        "train": train.copy(),
+        "validation": synthetic_profiles() + 1000.0,
+        "test": synthetic_profiles() - 1000.0,
+    }
+
+    result_a = fit_p3_variant(
+        profiles_a,
+        "kmeans",
+        {"n_clusters": 3, "n_init": 20, "max_iter": 300},
+        seed=39,
+    )
+
+    result_b = fit_p3_variant(
+        profiles_b,
+        "kmeans",
+        {"n_clusters": 3, "n_init": 20, "max_iter": 300},
+        seed=39,
+    )
+
+    np.testing.assert_allclose(
+        result_a["pipeline"].named_steps["scaler"].mean_,
+        result_b["pipeline"].named_steps["scaler"].mean_,
+    )
+
+    np.testing.assert_array_equal(
+        result_a["labels"]["train"],
+        result_b["labels"]["train"],
+    )
+
+
+def test_fit_p3_variant_rejects_missing_period():
+    profiles = {
+        "train": synthetic_profiles(),
+        "validation": synthetic_profiles(),
+    }
+
+    with pytest.raises(ValueError, match="faltan perfiles"):
+        fit_p3_variant(
+            profiles,
+            "kmeans",
+            {"n_clusters": 3, "n_init": 20, "max_iter": 300},
+            seed=39,
+        )

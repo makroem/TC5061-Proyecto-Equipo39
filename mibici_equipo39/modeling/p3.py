@@ -36,6 +36,57 @@ def build_p3_pipeline(family, params, seed=C.SEED):
         ("model", model),
     ])
 
+def fit_p3_variant(profiles, family, params, seed=C.SEED):
+    """Ajusta una variante de P3 solo con train y evalúa los periodos reservados."""
+    required = {"train", "validation", "test"}
+    missing = required.difference(profiles)
+    if missing:
+        raise ValueError(
+            f"faltan perfiles requeridos para P3: {sorted(missing)}"
+        )
+
+    pipeline = build_p3_pipeline(family, params, seed=seed)
+    pipeline.fit(profiles["train"])
+
+    model = pipeline.named_steps["model"]
+    if hasattr(model, "converged_") and not model.converged_:
+        raise RuntimeError(
+            "GMM no convergió; la variante no puede considerarse terminada."
+        )
+
+    scaler = pipeline.named_steps["scaler"]
+    scaled = {
+        split: scaler.transform(frame)
+        for split, frame in profiles.items()
+        if split in required
+    }
+
+    labels = {
+        split: pipeline.predict(profiles[split])
+        for split in required
+    }
+
+    metrics = {}
+    for split, prefix in (
+        ("train", "train"),
+        ("validation", "val"),
+        ("test", "test"),
+    ):
+        metrics.update(
+            cluster_metrics(
+                scaled[split],
+                labels[split],
+                prefix,
+            )
+        )
+
+    return {
+        "pipeline": pipeline,
+        "labels": labels,
+        "metrics": metrics,
+        "scaled": scaled,
+    }
+
 def make_model(role, seed=C.SEED):
     if role == "baseline":
         return KMeans(**{**C.P3_KMEANS_PARAMS, "random_state": seed})
