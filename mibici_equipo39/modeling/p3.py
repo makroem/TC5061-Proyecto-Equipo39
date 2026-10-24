@@ -689,10 +689,24 @@ def main():
     parser = argparse.ArgumentParser(description="P3: grupos de patrones de uso de estaciones")
     parser.add_argument("--executor", default=os.environ.get("MIBICI_EXECUTOR", "persona1"))
     args = parser.parse_args()
-    exp = P3Experiment(*load_tables(), pd.read_parquet(C.PROCESSED / "stations.parquet")).fit()
-    exp.log(args.executor)
-    print(json.dumps({"selected": exp.selected, "metrics": exp.metrics}, indent=2))
+    exp = P3Experiment(
+        *load_tables(),
+        pd.read_parquet(C.PROCESSED / "stations.parquet"),
+    ).fit()
 
+    exp.evaluate_test()
+
+    exp.log(args.executor)
+
+    print(
+        json.dumps(
+            {
+                "selected": exp.selected,
+                "metrics": exp.metrics,
+            },
+            indent=2,
+        )
+    )
 
 if __name__ == "__main__":
     main()
