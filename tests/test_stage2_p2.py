@@ -8,6 +8,7 @@ import sys
 
 import numpy as np
 import pandas as pd
+import mlflow
 import pytest
 
 from mibici_equipo39 import config as C
@@ -35,11 +36,19 @@ def synthetic(n=900, seed=39):
     return frame
 
 
+LR_1 = {"name": "p2_lr_1", "family": "logistic", "params": dict(P2_PLAN[1]["params"])}
+
+
+def fit_and_calibrate(data, variant=LR_1, frozen=None):
+    model = p2.ADAPTER.fit(variant, data)
+    p2.ADAPTER.calibrate(model, data, frozen)
+    return model
+
+
 @pytest.fixture
 def fitted():
     data = synthetic()
-    variant = {"name": "p2_lr_1", "family": "logistic", "params": dict(P2_PLAN[1]["params"])}
-    return p2.ADAPTER.fit(variant, data), data
+    return fit_and_calibrate(data), data
 
 
 def test_risk_model_returns_four_columns_one_row_per_input(fitted):
@@ -81,9 +90,44 @@ def test_metrics_have_split_prefixes_and_macro_f1(fitted):
 def test_single_class_train_falls_back_without_failing():
     data = synthetic()
     data.loc[data["split"].eq("train"), "y_docks"] = 0
-    model = p2.ADAPTER.fit({"name": "p2_lr_1", "family": "logistic", "params": dict(P2_PLAN[1]["params"])}, data)
+    model = fit_and_calibrate(data)
     out = model.model.predict(None, data[p2.COLUMNS].head(5))
     assert (out["prob_docks"] == 0).all() and not out["alert_docks"].any()
+
+
+def test_fit_uses_only_train_and_leaves_thresholds_to_calibrate():
+    data = synthetic()
+    shuffled = data.copy()
+    outside = shuffled["split"].ne("train")
+    shuffled.loc[outside, ["y_bikes", "y_docks"]] = 1 - shuffled.loc[outside, ["y_bikes", "y_docks"]]
+    model, other = p2.ADAPTER.fit(LR_1, data), p2.ADAPTER.fit(LR_1, shuffled)
+    assert model.model.thresholds == {} and "thresholds" not in model.extra["config"]
+    with pytest.raises(ValueError, match="calibrate"):
+        model.model.predict(None, data[p2.COLUMNS].head(3))
+    for risk in p2.TARGETS:
+        np.testing.assert_allclose(p2.positive_proba(model.model.pipelines[risk], data[p2.COLUMNS]),
+                                   p2.positive_proba(other.model.pipelines[risk], data[p2.COLUMNS]))
+
+
+def test_calibration_uses_validation_and_never_test():
+    data = synthetic()
+    flipped = data.copy()
+    test = flipped["split"].eq("test")
+    flipped.loc[test, ["y_bikes", "y_docks"]] = 1 - flipped.loc[test, ["y_bikes", "y_docks"]]
+    assert fit_and_calibrate(data).model.thresholds == fit_and_calibrate(flipped).model.thresholds
+    no_val_positives = data.copy()
+    no_val_positives.loc[no_val_positives["split"].eq("validation"), "y_bikes"] = 0
+    assert fit_and_calibrate(no_val_positives).extra["config"]["threshold_rules"]["bikes"] == "max_f1"
+
+
+def test_frozen_thresholds_are_applied_without_recomputing():
+    data = synthetic()
+    model = fit_and_calibrate(data, frozen={"thresholds": {"bikes": 0.95, "docks": 0.05}})
+    assert model.model.thresholds == {"bikes": 0.95, "docks": 0.05}
+    assert model.extra["config"]["threshold_rules"] == {"bikes": "selection", "docks": "selection"}
+    assert len(model.extra["evaluation"]["threshold_search_validation"]["docks"]) == len(C.P2_THRESHOLDS)
+    with pytest.raises(ValueError, match="bikes y docks"):
+        fit_and_calibrate(data, frozen={"thresholds": {"bikes": 0.5}})
 
 
 def test_controller_search_logs_a_p2_pyfunc_that_loads_in_a_new_process(stage2_env, monkeypatch):
@@ -119,3 +163,36 @@ def test_module_run_as_main_accepts_the_p2_adapter():
                              "--member", "DiegoMartinez"], cwd=REPO, env=environment,
                             capture_output=True, text=True, check=False)
     assert result.returncode != 0 and "falta MLFLOW_RUN_ID" in result.stderr, result.stderr[-2000:]
+
+
+def test_reproduce_keeps_the_thresholds_frozen_in_the_selection(stage2_env, monkeypatch):
+    data = synthetic()
+    monkeypatch.setattr(C, "ROOT", REPO)
+    monkeypatch.setattr(C, "STAGE2_SEARCH_PLAN", {"p2": P2_PLAN})
+    monkeypatch.setattr(stage2, "load_adapter", lambda question: p2.ADAPTER)
+    monkeypatch.setattr(p2.ADAPTER, "load_data", lambda: data)
+    search_id = stage2_env.project_run()
+    summary = stage2.main(["--question", "p2", "--member", "DiegoMartinez"])
+    chosen = summary["selected_variant"]
+    before_test = mlflow.artifacts.load_dict(f"runs:/{search_id}/evaluation/selection_before_test.json")
+    frozen = before_test["calibration"][chosen]
+    original = stage2_env.children(search_id)[chosen]
+    assert original.data.tags["calibration_source"] == "validation"
+    variant = next(v for v in [p2.ADAPTER.baseline(), *P2_PLAN] if v["name"] == chosen)
+    selection = stage2_env.path / "etapa2/selection.json"
+    selection.write_text(json.dumps({"p2": {**variant, "variant": chosen, "run_id": original.info.run_id}}))
+    stage2_env.project_run()
+    with pytest.raises(ValueError, match="calibración congelada"):
+        stage2.main(["--question", "p2", "--model", "selected", "--mode", "reproduce", "--member", "Marco"])
+
+    selection.write_text(json.dumps({"p2": {**variant, "variant": chosen, "run_id": original.info.run_id,
+                                            "calibration": frozen}}))
+    val = data["split"].eq("validation")
+    data.loc[val, ["y_bikes", "y_docks"]] = 1 - data.loc[val, ["y_bikes", "y_docks"]]
+    recomputed = fit_and_calibrate(data, variant).model.thresholds
+    assert recomputed != frozen["thresholds"]
+    parent_id = stage2_env.project_run()
+    stage2.main(["--question", "p2", "--model", "selected", "--mode", "reproduce", "--member", "Marco"])
+    child = stage2_env.children(parent_id)[chosen]
+    resolved = mlflow.artifacts.load_dict(f"runs:/{child.info.run_id}/config/resolved.json")
+    assert resolved["thresholds"] == frozen["thresholds"] and child.data.tags["calibration_source"] == "selection"

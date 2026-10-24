@@ -280,6 +280,8 @@ class P2RiskModel(mlflow.pyfunc.PythonModel):
         self.thresholds = thresholds
 
     def predict(self, context, model_input: pd.DataFrame, params=None) -> pd.DataFrame:
+        if set(self.thresholds) != set(TARGETS):
+            raise ValueError("El modelo no tiene umbrales para ambos riesgos; falta calibrate.")
         missing = set(COLUMNS) - set(model_input.columns)
         if missing:
             raise ValueError(f"Faltan columnas de entrada: {', '.join(sorted(missing))}.")
@@ -296,6 +298,7 @@ class P2Adapter(QuestionAdapter):
     """Conecta P2 con el controlador de la etapa 2."""
 
     question, selection_metric, greater_is_better = "p2", "val_macro_f1", True
+    needs_calibration = True
 
     def baseline(self):
         return {"name": "baseline", "family": "dummy", "params": {"strategy": "prior"}}
@@ -316,21 +319,37 @@ class P2Adapter(QuestionAdapter):
         raise ValueError(f"Familia de P2 desconocida: {variant['family']}")
 
     def fit(self, variant, data):
-        """Ajusta las dos cabezas con train y fija sus umbrales con validación."""
+        """Ajusta las dos cabezas solo con train; los umbrales se fijan después en calibrate."""
         train = data.loc[data["split"].eq("train")]
-        val = data.loc[data["split"].eq("validation")]
-        pipelines, thresholds, rules, searches = {}, {}, {}, {}
+        pipelines = {}
         for risk, target in TARGETS.items():
             model = self._estimator(variant) if train[target].nunique() > 1 else make_baseline()
             pipelines[risk] = model.fit(train[COLUMNS], train[target])
-            y, score = val[target].to_numpy(), positive_proba(pipelines[risk], val[COLUMNS])
-            thresholds[risk], rules[risk] = choose_threshold(y, score)
+        config = {"threshold_grid": list(C.P2_THRESHOLDS), "min_recall": C.P2_MIN_RECALL,
+                  "initial_occupancy": C.P2_INITIAL_OCCUPANCY, "margin": C.P2_MARGIN,
+                  "input_columns": COLUMNS, "excluded_columns": sorted(FORBIDDEN)}
+        return Fitted(variant, P2RiskModel(pipelines, {}), "pyfunc", extra={"config": config})
+
+    def calibrate(self, fitted, data, frozen=None):
+        """Umbral por riesgo elegido con validation o, en una reproducción, el congelado en selection.json.
+
+        La tabla de búsqueda en validation se calcula en ambos casos para las gráficas.
+        """
+        val = data.loc[data["split"].eq("validation")]
+        if frozen is not None and set(frozen.get("thresholds", {})) != set(TARGETS):
+            raise ValueError("La calibración congelada de P2 debe traer umbrales de bikes y docks.")
+        thresholds, rules, searches = {}, {}, {}
+        for risk, target in TARGETS.items():
+            y, score = val[target].to_numpy(), positive_proba(fitted.model.pipelines[risk], val[COLUMNS])
             searches[risk] = threshold_search(y, score).to_dict(orient="records")
-        config = {"thresholds": thresholds, "threshold_rules": rules, "threshold_grid": list(C.P2_THRESHOLDS),
-                  "min_recall": C.P2_MIN_RECALL, "initial_occupancy": C.P2_INITIAL_OCCUPANCY,
-                  "margin": C.P2_MARGIN, "input_columns": COLUMNS, "excluded_columns": sorted(FORBIDDEN)}
-        return Fitted(variant, P2RiskModel(pipelines, thresholds), "pyfunc",
-                      extra={"config": config, "evaluation": {"threshold_search_validation": searches}})
+            if frozen is None:
+                thresholds[risk], rules[risk] = choose_threshold(y, score)
+            else:
+                thresholds[risk], rules[risk] = float(frozen["thresholds"][risk]), "selection"
+        fitted.model.thresholds = thresholds
+        fitted.extra["config"].update(thresholds=thresholds, threshold_rules=rules)
+        fitted.extra["evaluation"] = {"threshold_search_validation": searches}
+        return {"thresholds": thresholds}
 
     def evaluate(self, fitted, data, split):
         prefix = {"train": "train", "validation": "val", "test": "test"}[split]
