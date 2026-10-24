@@ -19,6 +19,7 @@ from sklearn.pipeline import Pipeline
 from mibici_equipo39 import config as C
 from mibici_equipo39.features import load_tables, station_usage_profiles
 from mibici_equipo39.modeling.tracking import common_params, common_tags, log_model_run
+from mibici_equipo39.modeling.stage2 import Fitted, QuestionAdapter
 
 def build_p3_pipeline(family, params, seed=C.SEED):
     """Construye scaler + estimador para una variante de P3 sin ajustar datos."""
@@ -445,6 +446,224 @@ def build_p3_artifacts(
             "ubicacion_grupos": location_path,
         },
     }
+
+class P3Adapter(QuestionAdapter):
+    """Conecta P3 con el controlador reproducible de la Etapa 2."""
+
+    question = "p3"
+    selection_metric = "val_silhouette"
+    greater_is_better = True
+
+    def baseline(self):
+        return {
+            "name": "p3_kmeans_3",
+            "family": "kmeans",
+            "params": dict(C.P3_KMEANS_PARAMS),
+        }
+
+    def load_data(self):
+        metadata, X, y = load_tables()
+
+        train = metadata["split"].eq("train")
+
+        totals = y.loc[train].groupby(
+            metadata.loc[train, "station_id"],
+            observed=True,
+        ).sum()
+
+        station_ids = sorted(
+            totals[
+                totals.ge(C.P3_MIN_TRAIN_TRIPS)
+            ].index.astype(str)
+        )
+
+        if len(station_ids) <= C.P3_K:
+            raise ValueError(
+                "P3 requiere más estaciones elegibles que grupos."
+            )
+
+        frame = metadata[
+            ["station_id", "prediction_time", "split"]
+        ].copy()
+
+        frame["departures"] = y.to_numpy()
+
+        profiles = {
+            split: station_usage_profiles(
+                frame.loc[frame["split"].eq(split)],
+                station_ids,
+            )
+            for split in ("train", "validation", "test")
+        }
+
+        stations = pd.read_parquet(
+            C.PROCESSED / "stations.parquet"
+        )
+
+        return {
+            "metadata": metadata,
+            "frame": frame,
+            "profiles": profiles,
+            "station_ids": station_ids,
+            "stations": stations,
+        }
+
+    def fit(self, variant, data):
+        pipeline = build_p3_pipeline(
+            variant["family"],
+            variant["params"],
+            seed=C.SEED,
+        )
+
+        train_profiles = data["profiles"]["train"]
+
+        pipeline.fit(train_profiles)
+
+        model = pipeline.named_steps["model"]
+
+        if (
+            hasattr(model, "converged_")
+            and not model.converged_
+        ):
+            raise RuntimeError(
+                "GMM no convergió; la variante no puede "
+                "considerarse terminada."
+            )
+
+        train_labels = pipeline.predict(train_profiles)
+
+        scaler = pipeline.named_steps["scaler"]
+        scaled_train = scaler.transform(train_profiles)
+
+        train_metrics = cluster_metrics(
+            scaled_train,
+            train_labels,
+            "train",
+        )
+
+        stability = p3_stability_scores(
+            data["frame"].loc[
+                data["frame"]["split"].eq("train")
+            ],
+            data["station_ids"],
+            train_profiles,
+            train_labels,
+            variant["family"],
+            variant["params"],
+            seed=C.SEED,
+        )
+
+        extra = {
+            "train_labels": train_labels,
+            "train_min_cluster_share": train_metrics.get(
+                "train_min_cluster_share",
+                0.0,
+            ),
+            "stability_ari_mean": float(np.mean(stability)),
+            "stability_ari_min": float(np.min(stability)),
+            "model_bytes": int(
+                len(
+                    pickle.dumps(
+                        pipeline,
+                        protocol=pickle.HIGHEST_PROTOCOL,
+                    )
+                )
+            ),
+        }
+
+        return Fitted(
+            variant=variant,
+            model=pipeline,
+            flavor="sklearn",
+            extra=extra,
+        )
+
+    def evaluate(self, fitted, data, split):
+        prefixes = {
+            "train": "train",
+            "validation": "val",
+            "test": "test",
+        }
+
+        if split not in prefixes:
+            raise ValueError(
+                f"split desconocido para P3: {split}"
+            )
+
+        profiles = data["profiles"][split]
+
+        scaler = fitted.model.named_steps["scaler"]
+        scaled = scaler.transform(profiles)
+        labels = fitted.model.predict(profiles)
+
+        metrics = cluster_metrics(
+            scaled,
+            labels,
+            prefixes[split],
+        )
+
+        if split == "train":
+            metrics.update(
+                {
+                    "train_stability_ari_mean": (
+                        fitted.extra["stability_ari_mean"]
+                    ),
+                    "train_stability_ari_min": (
+                        fitted.extra["stability_ari_min"]
+                    ),
+                    "model_bytes": float(
+                        fitted.extra["model_bytes"]
+                    ),
+                }
+            )
+
+        if split == "validation":
+            # La elegibilidad se decide durante selección,
+            # antes de consultar test.
+            metrics["train_min_cluster_share"] = float(
+                fitted.extra["train_min_cluster_share"]
+            )
+
+        return metrics
+
+    def eligible(self, val_metrics):
+        return (
+            val_metrics.get(
+                "train_min_cluster_share",
+                0.0,
+            )
+            >= C.P3_MIN_CLUSTER_SHARE
+            and self.selection_metric in val_metrics
+        )
+
+    def input_example(self, fitted, data):
+        return (
+            data["profiles"]["train"]
+            .head(3)
+            .copy()
+        )
+
+    def plots(self, fitted, data, folder):
+        train_profiles = data["profiles"]["train"]
+
+        labels = fitted.model.predict(
+            train_profiles
+        )
+
+        artifacts = build_p3_artifacts(
+            train_profiles,
+            data["station_ids"],
+            labels,
+            data["stations"],
+            folder,
+        )
+
+        return list(
+            artifacts["plots"].values()
+        )
+
+
+ADAPTER = P3Adapter()
 
 def make_model(role, seed=C.SEED):
     if role == "baseline":

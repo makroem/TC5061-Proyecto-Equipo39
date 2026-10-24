@@ -15,7 +15,12 @@ from mibici_equipo39.modeling.p3 import (
     fit_p3_variant,
     p3_model_cost_metrics,
     p3_stability_scores,
+    ADAPTER,
+    P3Adapter,
 )
+
+from mibici_equipo39 import config as C
+from mibici_equipo39.modeling import stage2
 
 def synthetic_profiles(n_samples=24, n_features=48):
     """Perfiles sintéticos con la misma dimensión utilizada por P3."""
@@ -630,3 +635,199 @@ def test_evaluate_p3_test_does_not_modify_fitted_pipeline():
         pipeline.named_steps["model"].cluster_centers_,
         centers_before,
     )
+
+def synthetic_adapter_data():
+    """Datos mínimos coherentes con el contrato del ADAPTER de P3."""
+    frame = synthetic_daily_usage(
+        n_stations=12,
+        n_days=28,
+    )
+
+    frame["split"] = "train"
+
+    station_ids = sorted(
+        frame["station_id"].astype(str).unique()
+    )
+
+    train_profiles = station_usage_profiles(
+        frame,
+        station_ids,
+    )
+
+    profiles = {
+        "train": train_profiles,
+        "validation": train_profiles + 0.02,
+        "test": train_profiles + 0.04,
+    }
+
+    return {
+        "frame": frame,
+        "profiles": profiles,
+        "station_ids": station_ids,
+        "stations": synthetic_station_catalog(
+            station_ids
+        ),
+    }
+
+
+def test_p3_adapter_is_registered_for_stage2():
+    assert isinstance(ADAPTER, P3Adapter)
+    assert stage2.load_adapter("p3") is ADAPTER
+
+    assert ADAPTER.question == "p3"
+    assert ADAPTER.selection_metric == "val_silhouette"
+    assert ADAPTER.greater_is_better is True
+
+
+def test_p3_adapter_baseline_is_kmeans_3():
+    baseline = ADAPTER.baseline()
+
+    assert baseline["name"] == "p3_kmeans_3"
+    assert baseline["family"] == "kmeans"
+    assert baseline["params"]["n_clusters"] == 3
+
+
+def test_p3_adapter_fit_does_not_access_test():
+    class GuardedProfiles(dict):
+        def __getitem__(self, key):
+            if key == "test":
+                raise AssertionError(
+                    "P3Adapter.fit no debe consultar test"
+                )
+            return super().__getitem__(key)
+
+    data = synthetic_adapter_data()
+
+    data["profiles"] = GuardedProfiles(
+        data["profiles"]
+    )
+
+    fitted = ADAPTER.fit(
+        ADAPTER.baseline(),
+        data,
+    )
+
+    assert fitted.variant["name"] == "p3_kmeans_3"
+    assert fitted.flavor == "sklearn"
+
+    assert "train_min_cluster_share" in fitted.extra
+    assert "stability_ari_mean" in fitted.extra
+    assert "stability_ari_min" in fitted.extra
+    assert fitted.extra["model_bytes"] > 0
+
+
+def test_p3_adapter_evaluates_validation_and_test_separately():
+    data = synthetic_adapter_data()
+
+    fitted = ADAPTER.fit(
+        ADAPTER.baseline(),
+        data,
+    )
+
+    validation = ADAPTER.evaluate(
+        fitted,
+        data,
+        "validation",
+    )
+
+    assert "val_n_clusters" in validation
+    assert "train_min_cluster_share" in validation
+
+    assert not any(
+        key.startswith("test_")
+        for key in validation
+    )
+
+    test = ADAPTER.evaluate(
+        fitted,
+        data,
+        "test",
+    )
+
+    assert "test_n_clusters" in test
+
+    assert all(
+        key.startswith("test_")
+        for key in test
+    )
+
+
+def test_p3_adapter_eligibility_requires_five_percent_and_silhouette():
+    assert ADAPTER.eligible(
+        {
+            "val_silhouette": 0.20,
+            "train_min_cluster_share": C.P3_MIN_CLUSTER_SHARE,
+        }
+    )
+
+    assert not ADAPTER.eligible(
+        {
+            "val_silhouette": 0.20,
+            "train_min_cluster_share": (
+                C.P3_MIN_CLUSTER_SHARE - 0.001
+            ),
+        }
+    )
+
+    assert not ADAPTER.eligible(
+        {
+            "train_min_cluster_share": 0.25,
+        }
+    )
+
+
+def test_p3_adapter_is_compatible_with_stage2_selection():
+    metrics = {
+        "p3_kmeans_3": {
+            "val_silhouette": 0.10,
+            "train_min_cluster_share": 0.10,
+        },
+        "p3_kmeans_4": {
+            "val_silhouette": 0.20,
+            "train_min_cluster_share": 0.10,
+        },
+        "p3_kmeans_5": {
+            "val_silhouette": 0.15,
+            "train_min_cluster_share": 0.10,
+        },
+        "p3_gmm_3": {
+            "val_silhouette": 0.18,
+            "train_min_cluster_share": 0.10,
+        },
+    }
+
+    chosen, _ = stage2.select(
+        ADAPTER,
+        metrics,
+    )
+
+    assert chosen == "p3_kmeans_4"
+
+
+def test_p3_adapter_generates_input_example_and_plots(tmp_path):
+    data = synthetic_adapter_data()
+
+    fitted = ADAPTER.fit(
+        ADAPTER.baseline(),
+        data,
+    )
+
+    example = ADAPTER.input_example(
+        fitted,
+        data,
+    )
+
+    assert isinstance(example, pd.DataFrame)
+    assert len(example) == 3
+    assert example.shape[1] == 48
+
+    paths = ADAPTER.plots(
+        fitted,
+        data,
+        tmp_path,
+    )
+
+    assert len(paths) == 2
+
+    for path in paths:
+        assert path.is_file()
