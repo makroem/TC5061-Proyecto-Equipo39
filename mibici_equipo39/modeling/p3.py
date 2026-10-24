@@ -12,11 +12,29 @@ from sklearn.cluster import KMeans
 from sklearn.mixture import GaussianMixture
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import adjusted_rand_score, davies_bouldin_score, silhouette_score
+from sklearn.pipeline import Pipeline
 
 from mibici_equipo39 import config as C
 from mibici_equipo39.features import load_tables, station_usage_profiles
 from mibici_equipo39.modeling.tracking import common_params, common_tags, log_model_run
 
+def build_p3_pipeline(family, params, seed=C.SEED):
+    """Construye scaler + estimador para una variante de P3 sin ajustar datos."""
+    family = str(family).strip().lower()
+    resolved = dict(params)
+    resolved.setdefault("random_state", seed)
+
+    if family == "kmeans":
+        model = KMeans(**resolved)
+    elif family == "gmm":
+        model = GaussianMixture(**resolved)
+    else:
+        raise ValueError(f"familia de P3 no soportada: {family}")
+
+    return Pipeline([
+        ("scaler", StandardScaler()),
+        ("model", model),
+    ])
 
 def make_model(role, seed=C.SEED):
     if role == "baseline":
