@@ -8,6 +8,8 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import pickle
+from time import perf_counter
 from sklearn.cluster import KMeans
 from sklearn.mixture import GaussianMixture
 from sklearn.preprocessing import StandardScaler
@@ -36,6 +38,53 @@ def build_p3_pipeline(family, params, seed=C.SEED):
         ("model", model),
     ])
 
+def p3_model_cost_metrics(
+    pipeline,
+    predict_profiles,
+    fit_seconds,
+    repeats=5,
+):
+    """Calcula costo comparable de ajuste, inferencia y tamaño serializado."""
+    if repeats < 1:
+        raise ValueError("repeats debe ser al menos 1")
+
+    if len(predict_profiles) == 0:
+        raise ValueError(
+            "predict_profiles no puede estar vacío"
+        )
+
+    timings = []
+
+    for _ in range(repeats):
+        start = perf_counter()
+        pipeline.predict(predict_profiles)
+        elapsed = perf_counter() - start
+        timings.append(elapsed)
+
+    median_seconds = float(np.median(timings))
+
+    predict_ms_per_1000 = (
+        median_seconds
+        * 1000.0
+        * 1000.0
+        / len(predict_profiles)
+    )
+
+    model_bytes = len(
+        pickle.dumps(
+            pipeline,
+            protocol=pickle.HIGHEST_PROTOCOL,
+        )
+    )
+
+    return {
+        "fit_seconds": float(fit_seconds),
+        "predict_ms_per_1000": float(
+            predict_ms_per_1000
+        ),
+        "model_bytes": int(model_bytes),
+    }
+
 def fit_p3_variant(profiles, family, params, seed=C.SEED):
     """Ajusta una variante de P3 solo con train y evalúa los periodos reservados."""
     required = {"train", "validation", "test"}
@@ -45,8 +94,15 @@ def fit_p3_variant(profiles, family, params, seed=C.SEED):
             f"faltan perfiles requeridos para P3: {sorted(missing)}"
         )
 
-    pipeline = build_p3_pipeline(family, params, seed=seed)
+    pipeline = build_p3_pipeline(
+    	family,
+    	params,
+    	seed=seed,
+    )
+
+    fit_start = perf_counter()
     pipeline.fit(profiles["train"])
+    fit_seconds = perf_counter() - fit_start
 
     model = pipeline.named_steps["model"]
     if hasattr(model, "converged_") and not model.converged_:
@@ -61,12 +117,14 @@ def fit_p3_variant(profiles, family, params, seed=C.SEED):
         if split in required
     }
 
+
     labels = {
         split: pipeline.predict(profiles[split])
         for split in required
     }
 
     metrics = {}
+
     for split, prefix in (
         ("train", "train"),
         ("validation", "val"),
@@ -79,6 +137,14 @@ def fit_p3_variant(profiles, family, params, seed=C.SEED):
                 prefix,
             )
         )
+
+    metrics.update(
+        p3_model_cost_metrics(
+            pipeline,
+            profiles["validation"],
+            fit_seconds,
+        )
+    )
 
     return {
         "pipeline": pipeline,

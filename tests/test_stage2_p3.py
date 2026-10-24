@@ -12,6 +12,7 @@ from mibici_equipo39.modeling.p3 import (
     build_p3_pipeline,
     cluster_metrics,
     fit_p3_variant,
+    p3_model_cost_metrics,
     p3_stability_scores,
 )
 
@@ -477,4 +478,85 @@ def test_p3_artifacts_reject_mismatched_labels(tmp_path):
             np.array([0, 1]),
             stations,
             tmp_path,
+        )
+
+def test_p3_cost_metrics_are_positive_and_normalized():
+    X = synthetic_profiles()
+
+    pipeline = build_p3_pipeline(
+        "kmeans",
+        {
+            "n_clusters": 3,
+            "n_init": 20,
+            "max_iter": 300,
+        },
+        seed=39,
+    )
+
+    start = __import__("time").perf_counter()
+    pipeline.fit(X)
+    fit_seconds = (
+        __import__("time").perf_counter()
+        - start
+    )
+
+    metrics = p3_model_cost_metrics(
+        pipeline,
+        X,
+        fit_seconds,
+        repeats=2,
+    )
+
+    assert metrics["fit_seconds"] >= 0
+    assert metrics["predict_ms_per_1000"] >= 0
+    assert metrics["model_bytes"] > 0
+
+
+def test_fit_p3_variant_includes_cost_metrics():
+    profiles = {
+        "train": synthetic_profiles(),
+        "validation": synthetic_profiles() + 0.25,
+        "test": synthetic_profiles() + 0.50,
+    }
+
+    result = fit_p3_variant(
+        profiles,
+        "kmeans",
+        {
+            "n_clusters": 3,
+            "n_init": 20,
+            "max_iter": 300,
+        },
+        seed=39,
+    )
+
+    assert "fit_seconds" in result["metrics"]
+    assert "predict_ms_per_1000" in result["metrics"]
+    assert "model_bytes" in result["metrics"]
+
+    assert result["metrics"]["model_bytes"] > 0
+
+
+def test_p3_cost_metrics_reject_empty_profiles():
+    X = synthetic_profiles()
+
+    pipeline = build_p3_pipeline(
+        "kmeans",
+        {
+            "n_clusters": 3,
+            "n_init": 20,
+            "max_iter": 300,
+        },
+        seed=39,
+    )
+    pipeline.fit(X)
+
+    with pytest.raises(
+        ValueError,
+        match="no puede estar vacío",
+    ):
+        p3_model_cost_metrics(
+            pipeline,
+            X.iloc[0:0],
+            fit_seconds=0.1,
         )
