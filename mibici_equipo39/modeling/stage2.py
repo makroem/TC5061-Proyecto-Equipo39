@@ -339,4 +339,6 @@ def main(argv=None):
 
 
 if __name__ == "__main__":
-    main()
+    # Con python -m este archivo corre como __main__; se usa el módulo del paquete para que
+    # QuestionAdapter sea la misma clase de la que heredan los adaptadores.
+    import_module("mibici_equipo39.modeling.stage2").main()
