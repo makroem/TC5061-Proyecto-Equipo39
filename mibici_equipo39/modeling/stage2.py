@@ -31,6 +31,8 @@ SPLITS = (("train", "train"), ("validation", "val"), ("test", "test"))
 
 @dataclass
 class Fitted:
+    """extra["config"] se agrega a config/resolved.json y extra["evaluation"] a evaluation/summary.json."""
+
     variant: dict
     model: object
     flavor: str
@@ -228,12 +230,14 @@ def log_child(adapter, data, fitted, metrics, tags, config, experiment_id):
         mlflow.log_metrics(metrics)
         example = adapter.input_example(fitted, data)
         prediction = to_jsonable(predict(fitted, example))
-        resolved = {**{k: v for k, v in config.items() if k != "variants"}, "variant": variant}
+        resolved = {**{k: v for k, v in config.items() if k != "variants"}, "variant": variant,
+                    **fitted.extra.get("config", {})}
+        evaluation = {"metrics": metrics, "selection_metric": adapter.selection_metric,
+                      **fitted.extra.get("evaluation", {})}
         with tempfile.TemporaryDirectory() as tmp:
             plots = adapter.plots(fitted, data, Path(tmp))
             tracking.log_candidate_artifacts(
-                fitted.model, example, resolved, flavor=fitted.flavor, plots=plots,
-                evaluation={"metrics": metrics, "selection_metric": adapter.selection_metric},
+                fitted.model, example, resolved, flavor=fitted.flavor, plots=plots, evaluation=evaluation,
             )
         mlflow.log_dict(prediction, "evaluation/example_prediction.json")
         return run.info.run_id
