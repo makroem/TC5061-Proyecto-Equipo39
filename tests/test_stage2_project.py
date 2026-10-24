@@ -97,3 +97,23 @@ def test_reproduce_trains_only_the_selected_variant(stage2_env):
     assert tags["reproduces_run_id"] == selected.info.run_id
     assert children[summary["selected_variant"]].data.metrics["val_mae"] == pytest.approx(
         selected.data.metrics["val_mae"])
+
+
+def test_adapter_extras_reach_config_and_evaluation(stage2_env, monkeypatch):
+    from conftest import FakeAdapter
+
+    class WithExtras(FakeAdapter):
+        def fit(self, variant, data):
+            fitted = super().fit(variant, data)
+            fitted.extra = {"config": {"thresholds": {"bikes": 0.65}},
+                            "evaluation": {"threshold_search": [{"threshold": 0.65}]}}
+            return fitted
+
+    monkeypatch.setattr(stage2, "load_adapter", lambda question: WithExtras())
+    parent_id = stage2_env.project_run()
+    stage2.main(["--question", "p1", "--member", "DiegoMartinez"])
+    run_id = stage2_env.children(parent_id)["baseline"].info.run_id
+    resolved = mlflow.artifacts.load_dict(f"runs:/{run_id}/config/resolved.json")
+    summary = mlflow.artifacts.load_dict(f"runs:/{run_id}/evaluation/summary.json")
+    assert resolved["thresholds"] == {"bikes": 0.65} and resolved["variant"]["name"] == "baseline"
+    assert summary["threshold_search"] == [{"threshold": 0.65}] and "val_mae" in summary["metrics"]
