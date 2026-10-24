@@ -8,12 +8,12 @@ from sklearn.pipeline import Pipeline
 
 from mibici_equipo39.features import station_usage_profiles
 from mibici_equipo39.modeling.p3 import (
+    build_p3_artifacts,
     build_p3_pipeline,
     cluster_metrics,
     fit_p3_variant,
     p3_stability_scores,
 )
-
 
 def synthetic_profiles(n_samples=24, n_features=48):
     """Perfiles sintéticos con la misma dimensión utilizada por P3."""
@@ -342,4 +342,139 @@ def test_p3_stability_rejects_invalid_bootstrap_count():
                 "max_iter": 300,
             },
             n_bootstraps=0,
+        )
+
+def synthetic_station_catalog(station_ids):
+    return pd.DataFrame(
+        {
+            "station_id": [str(x) for x in station_ids],
+            "station_name": [
+                f"Estación {x}" for x in station_ids
+            ],
+            "latitude": np.linspace(
+                20.60,
+                20.75,
+                len(station_ids),
+            ),
+            "longitude": np.linspace(
+                -103.45,
+                -103.30,
+                len(station_ids),
+            ),
+        }
+    )
+
+
+def test_build_p3_artifacts_generates_tables_and_plots(tmp_path):
+    profiles = synthetic_profiles(
+        n_samples=12,
+        n_features=48,
+    )
+
+    station_ids = [
+        str(i)
+        for i in range(len(profiles))
+    ]
+
+    labels = np.array(
+        [0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2]
+    )
+
+    stations = synthetic_station_catalog(
+        station_ids
+    )
+
+    artifacts = build_p3_artifacts(
+        profiles,
+        station_ids,
+        labels,
+        stations,
+        tmp_path,
+    )
+
+    assert len(artifacts["assignments"]) == 12
+
+    assert set(
+        artifacts["assignments"]["cluster"]
+    ) == {0, 1, 2}
+
+    assert len(
+        artifacts["profiles_by_cluster"]
+    ) == 3
+
+    assert (
+        artifacts["plots"]["perfiles_grupos"]
+    ).is_file()
+
+    assert (
+        artifacts["plots"]["ubicacion_grupos"]
+    ).is_file()
+
+
+def test_p3_artifacts_preserve_station_coordinates(tmp_path):
+    profiles = synthetic_profiles(
+        n_samples=6,
+        n_features=48,
+    )
+
+    station_ids = [
+        str(i)
+        for i in range(6)
+    ]
+
+    labels = np.array(
+        [0, 0, 1, 1, 2, 2]
+    )
+
+    stations = synthetic_station_catalog(
+        station_ids
+    )
+
+    artifacts = build_p3_artifacts(
+        profiles,
+        station_ids,
+        labels,
+        stations,
+        tmp_path,
+    )
+
+    assignments = artifacts["assignments"]
+
+    assert assignments["latitude"].notna().all()
+    assert assignments["longitude"].notna().all()
+
+    assert {
+        "station_id",
+        "station_name",
+        "latitude",
+        "longitude",
+        "cluster",
+    }.issubset(assignments.columns)
+
+
+def test_p3_artifacts_reject_mismatched_labels(tmp_path):
+    profiles = synthetic_profiles(
+        n_samples=6,
+        n_features=48,
+    )
+
+    station_ids = [
+        str(i)
+        for i in range(6)
+    ]
+
+    stations = synthetic_station_catalog(
+        station_ids
+    )
+
+    with pytest.raises(
+        ValueError,
+        match="asignación por estación",
+    ):
+        build_p3_artifacts(
+            profiles,
+            station_ids,
+            np.array([0, 1]),
+            stations,
+            tmp_path,
         )

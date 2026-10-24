@@ -180,6 +180,182 @@ def p3_stability_scores(
 
     return scores
 
+def build_p3_artifacts(
+    train_profiles,
+    station_ids,
+    labels,
+    stations,
+    output_dir,
+):
+    """Genera tablas y figuras interpretables para una variante de P3."""
+    from pathlib import Path
+
+    labels = np.asarray(labels)
+
+    if len(labels) != len(station_ids):
+        raise ValueError(
+            "labels debe contener una asignación por estación"
+        )
+
+    if len(train_profiles) != len(station_ids):
+        raise ValueError(
+            "train_profiles debe contener una fila por estación"
+        )
+
+    required_station_columns = {
+        "station_id",
+        "station_name",
+        "latitude",
+        "longitude",
+    }
+    missing = required_station_columns.difference(stations.columns)
+    if missing:
+        raise ValueError(
+            f"faltan columnas del catálogo de estaciones: {sorted(missing)}"
+        )
+
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    assignments = pd.DataFrame(
+        {
+            "station_id": [str(value) for value in station_ids],
+            "cluster": labels,
+        }
+    )
+
+    station_catalog = stations[
+        [
+            "station_id",
+            "station_name",
+            "latitude",
+            "longitude",
+        ]
+    ].copy()
+
+    station_catalog["station_id"] = (
+        station_catalog["station_id"].astype(str)
+    )
+
+    assignments = assignments.merge(
+        station_catalog,
+        on="station_id",
+        how="left",
+        validate="one_to_one",
+    )
+
+    profiles = train_profiles.copy()
+    profiles["cluster"] = labels
+
+    profiles_by_cluster = (
+        profiles
+        .groupby("cluster", observed=True)
+        .mean(numeric_only=True)
+        .sort_index()
+    )
+
+    profiles_path = output_dir / "perfiles_grupos.png"
+
+    fig, axes = plt.subplots(
+        1,
+        2,
+        figsize=(10, 4),
+    )
+
+    for cluster, row in profiles_by_cluster.iterrows():
+        axes[0].plot(
+            range(24),
+            row.iloc[:24],
+            label=f"Grupo {cluster}",
+        )
+
+        axes[1].plot(
+            range(24),
+            row.iloc[24:48],
+            label=f"Grupo {cluster}",
+        )
+
+    axes[0].set(
+        title="Días laborales",
+        xlabel="Hora",
+        ylabel="Proporción media de salidas",
+    )
+
+    axes[1].set(
+        title="Fin de semana",
+        xlabel="Hora",
+        ylabel="Proporción media de salidas",
+    )
+
+    for ax in axes:
+        ax.legend()
+
+    fig.suptitle(
+        "P3 — perfiles horarios por grupo (train)"
+    )
+
+    fig.savefig(
+        profiles_path,
+        dpi=150,
+        bbox_inches="tight",
+    )
+    plt.close(fig)
+
+    location_path = output_dir / "ubicacion_grupos.png"
+
+    fig, ax = plt.subplots(figsize=(7, 6))
+
+    valid = (
+        assignments["latitude"].notna()
+        & assignments["longitude"].notna()
+    )
+
+    for cluster, group in assignments.loc[valid].groupby(
+        "cluster",
+        observed=True,
+    ):
+        ax.scatter(
+            group["longitude"],
+            group["latitude"],
+            s=18,
+            alpha=0.8,
+            label=f"Grupo {cluster} (n={len(group)})",
+        )
+
+    ax.set(
+        xlabel="Longitud",
+        ylabel="Latitud",
+        title="P3 — ubicación de estaciones por grupo",
+    )
+
+    ax.legend()
+
+    if valid.any():
+        mean_latitude = assignments.loc[
+            valid,
+            "latitude",
+        ].mean()
+
+        ax.set_aspect(
+            1 / np.cos(np.radians(mean_latitude))
+        )
+
+    fig.savefig(
+        location_path,
+        dpi=150,
+        bbox_inches="tight",
+    )
+    plt.close(fig)
+
+    return {
+        "assignments": assignments,
+        "profiles_by_cluster": profiles_by_cluster,
+        "plots": {
+            "perfiles_grupos": profiles_path,
+            "ubicacion_grupos": location_path,
+        },
+    }
+
 def make_model(role, seed=C.SEED):
     if role == "baseline":
         return KMeans(**{**C.P3_KMEANS_PARAMS, "random_state": seed})
