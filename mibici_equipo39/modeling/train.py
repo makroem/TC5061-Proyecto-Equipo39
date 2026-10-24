@@ -36,29 +36,75 @@ def check_inputs(allow_dirty):
             "Hay cambios sin commit; los runs finales deben quedar ligados a un commit. Usa --allow-dirty solo para pruebas."
         )
 
-
 def run(questions, member):
     metadata, X, y = load_tables()
     results = {}
+
     for question in questions:
         if question == "P1":
-            experiment = P1Experiment(metadata, X, y).fit()
+            experiment = P1Experiment(
+                metadata,
+                X,
+                y,
+            ).fit()
+
         elif question == "P2":
-            experiment = P2Experiment(metadata, X, load_p2_targets()).fit()
+            experiment = P2Experiment(
+                metadata,
+                X,
+                load_p2_targets(),
+            ).fit()
+
         elif question == "P3":
-            experiment = P3Experiment(metadata, X, y, pd.read_parquet(C.PROCESSED / "stations.parquet")).fit()
+            experiment = P3Experiment(
+                metadata,
+                X,
+                y,
+                pd.read_parquet(
+                    C.PROCESSED / "stations.parquet"
+                ),
+            ).fit()
+
+            # La selección ya quedó fijada usando train/validation.
+            # Test se consulta solamente después de esa selección.
+            experiment.evaluate_test()
+
         else:
-            raise ValueError(f"Pregunta desconocida: {question}")
+            raise ValueError(
+                f"Pregunta desconocida: {question}"
+            )
+
         experiment.log(member)
-        print(question, "seleccionado:", experiment.selected)
-        results[question] = {"selected": experiment.selected, "metrics": experiment.metrics}
+
+        print(
+            question,
+            "seleccionado:",
+            experiment.selected,
+        )
+
+        results[question] = {
+            "selected": experiment.selected,
+            "metrics": experiment.metrics,
+        }
+
         del experiment
         gc.collect()
-    # El resumen se crea después de cerrar todos los runs para conservar git_dirty=false.
-    C.REPORTS.mkdir(parents=True, exist_ok=True)
-    (C.REPORTS / "experiment_summary.json").write_text(json.dumps(results, indent=2), encoding="utf-8")
-    return results
 
+    # El resumen se crea después de cerrar todos los runs
+    # para conservar git_dirty=false.
+    C.REPORTS.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    (
+        C.REPORTS / "experiment_summary.json"
+    ).write_text(
+        json.dumps(results, indent=2),
+        encoding="utf-8",
+    )
+
+    return results
 
 def main():
     parser = argparse.ArgumentParser(description="Controlador común de experimentos MiBici")
