@@ -45,6 +45,7 @@ class QuestionAdapter(ABC):
     question: str
     selection_metric: str
     greater_is_better: bool
+    needs_calibration = False
 
     @abstractmethod
     def baseline(self) -> dict:
@@ -69,6 +70,14 @@ class QuestionAdapter(ABC):
     @abstractmethod
     def plots(self, fitted, data, folder) -> list:
         """Rutas de las gráficas propias de la pregunta guardadas en folder."""
+
+    def calibrate(self, fitted, data, frozen=None) -> dict:
+        """Fija con validation los parámetros de decisión, como los umbrales de P2; nunca usa test.
+
+        frozen viene de selection.json en una reproducción y se aplica sin recalcular.
+        Devuelve lo aplicado; vacío si la pregunta no calibra.
+        """
+        return {}
 
     def eligible(self, val_metrics) -> bool:
         """Si la variante puede ganar; P3 la usa para exigir grupos válidos."""
@@ -243,14 +252,17 @@ def log_child(adapter, data, fitted, metrics, tags, config, experiment_id):
         return run.info.run_id
 
 
-def fit_all(adapter, data, variants):
-    fitted, val_metrics, seconds = {}, {}, {}
+def fit_all(adapter, data, variants, frozen=None):
+    """fit con train, calibrate con validation y métricas de validación; test no se toca aquí."""
+    fitted, val_metrics, seconds, calibration = {}, {}, {}, {}
     for variant in variants:
+        name = variant["name"]
         start = time.perf_counter()
-        fitted[variant["name"]] = adapter.fit(variant, data)
-        seconds[variant["name"]] = time.perf_counter() - start
-        val_metrics[variant["name"]] = adapter.evaluate(fitted[variant["name"]], data, "validation")
-    return fitted, val_metrics, seconds
+        fitted[name] = adapter.fit(variant, data)
+        seconds[name] = time.perf_counter() - start
+        calibration[name] = adapter.calibrate(fitted[name], data, frozen)
+        val_metrics[name] = adapter.evaluate(fitted[name], data, "validation")
+    return fitted, val_metrics, seconds, calibration
 
 
 def all_metrics(adapter, fitted, data, val_metrics, fit_seconds):
@@ -260,11 +272,11 @@ def all_metrics(adapter, fitted, data, val_metrics, fit_seconds):
 
 
 def run_search(adapter, data, config, base_tags, experiment_id):
-    fitted, val_metrics, seconds = fit_all(adapter, data, config["variants"])
+    fitted, val_metrics, seconds, calibration = fit_all(adapter, data, config["variants"])
     chosen, rule = select(adapter, val_metrics)
-    # La elección queda escrita antes de calcular cualquier métrica de prueba.
-    mlflow.log_dict({"selected_variant": chosen, "rule": rule, "validation_metrics": val_metrics},
-                    "evaluation/selection_before_test.json")
+    # La elección y la calibración quedan escritas antes de calcular cualquier métrica de prueba.
+    mlflow.log_dict({"selected_variant": chosen, "rule": rule, "validation_metrics": val_metrics,
+                     "calibration": calibration}, "evaluation/selection_before_test.json")
     if chosen is None:
         # Sin ganador elegible la prueba queda reservada y la búsqueda termina como FAILED.
         mlflow.set_tags({"selected_variant": "none", "search_status": "sin_ganador_elegible"})
@@ -274,6 +286,8 @@ def run_search(adapter, data, config, base_tags, experiment_id):
     for name, model in fitted.items():
         tags = {**base_tags, "stage_of_work": "baseline" if name == baseline else "candidate",
                 "selected": str(name == chosen).lower()}
+        if calibration[name]:
+            tags["calibration_source"] = "validation"
         if name == baseline and (source := baseline_source_run_id(adapter.question)):
             tags["baseline_source_run_id"] = source
         metrics = all_metrics(adapter, model, data, val_metrics[name], seconds[name])
@@ -284,10 +298,16 @@ def run_search(adapter, data, config, base_tags, experiment_id):
 
 def run_reproduce(adapter, data, config, base_tags, experiment_id):
     selection = read_selection(adapter.question)
-    fitted, val_metrics, seconds = fit_all(adapter, data, config["variants"])
+    frozen = selection.get("calibration") or None
+    if adapter.needs_calibration and not frozen:
+        raise ValueError(f"selection.json no trae la calibración congelada de {adapter.question}; "
+                         "la reproducción no la recalcula con validation.")
+    fitted, val_metrics, seconds, _ = fit_all(adapter, data, config["variants"], frozen)
     name = config["variants"][0]["name"]
     metrics = all_metrics(adapter, fitted[name], data, val_metrics[name], seconds[name])
     tags = {**base_tags, "stage_of_work": "reproduce", "reproduces_run_id": selection.get("run_id", "")}
+    if frozen:
+        tags["calibration_source"] = "selection"
     run_id = log_child(adapter, data, fitted[name], metrics, tags, config, experiment_id)
     mlflow.set_tags({"selected_variant": name, "selected_run_id": run_id})
     return name, {name: run_id}

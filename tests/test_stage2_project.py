@@ -65,6 +65,7 @@ def test_selection_is_written_before_any_test_metric(stage2_env):
     selection = mlflow.artifacts.load_dict(f"runs:/{parent_id}/evaluation/selection_before_test.json")
     assert set(selection["validation_metrics"]) == {"baseline", "ridge_01", "ridge_10", "ridge_1000"}
     assert "test_" not in json.dumps(selection)
+    assert selection["calibration"] == {name: {} for name in selection["validation_metrics"]}
 
 
 def test_a_tie_at_six_decimals_keeps_the_baseline():
