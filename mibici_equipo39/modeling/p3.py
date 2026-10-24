@@ -95,9 +95,9 @@ def fit_p3_variant(profiles, family, params, seed=C.SEED):
         )
 
     pipeline = build_p3_pipeline(
-    	family,
-    	params,
-    	seed=seed,
+        family,
+        params,
+        seed=seed,
     )
 
     fit_start = perf_counter()
