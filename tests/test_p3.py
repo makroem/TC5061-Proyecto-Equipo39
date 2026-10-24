@@ -2,7 +2,8 @@
 import numpy as np
 import pandas as pd
 import pytest
-
+import sys
+from mibici_equipo39.modeling import p3
 from mibici_equipo39.features import chronological_split, station_usage_profiles
 from mibici_equipo39.modeling.p3 import P3Experiment, cluster_metrics
 
@@ -68,3 +69,120 @@ def test_split_rejects_future_or_missing_periods():
         chronological_split(pd.DataFrame({'hour':pd.to_datetime(['2027-01-01'])}))
     with pytest.raises(ValueError,match='tres periodos'):
         chronological_split(pd.DataFrame({'hour':pd.to_datetime(['2026-01-01'])}))
+
+def test_p3experiment_reserves_test_until_after_selection():
+    metadata, X, y = synthetic_tables()
+
+    stations = pd.DataFrame(
+        {
+            "station_id": [str(i) for i in range(12)],
+        }
+    )
+
+    experiment = P3Experiment(
+        metadata,
+        X,
+        y,
+        stations,
+    ).fit()
+
+    assert experiment.selected in {
+        "baseline",
+        "candidato",
+        "ninguno",
+    }
+
+    assert "test" not in experiment.scaled
+
+    for role in ("baseline", "candidato"):
+        assert "test" not in experiment.labels[role]
+
+        assert not any(
+            key.startswith("test_")
+            for key in experiment.metrics[role]
+        )
+
+    if experiment.selected != "ninguno":
+        selected_before = experiment.selected
+
+        experiment.evaluate_test()
+
+        assert experiment.selected == selected_before
+        assert "test" in experiment.scaled
+
+        for role in ("baseline", "candidato"):
+            assert "test" in experiment.labels[role]
+
+            assert any(
+                key.startswith("test_")
+                for key in experiment.metrics[role]
+            )
+
+def test_p3_main_evaluates_test_before_log(monkeypatch):
+    calls = []
+
+    class FakeExperiment:
+        def __init__(self, *args):
+            self.selected = None
+            self.metrics = {
+                "baseline": {"val_silhouette": 0.10},
+                "candidato": {"val_silhouette": 0.20},
+            }
+
+        def fit(self):
+            calls.append("fit")
+            self.selected = "candidato"
+            return self
+
+        def evaluate_test(self):
+            calls.append("evaluate_test")
+
+            assert self.selected == "candidato"
+
+            self.metrics["baseline"]["test_n_clusters"] = 3
+            self.metrics["candidato"]["test_n_clusters"] = 3
+
+            return self
+
+        def log(self, executor):
+            calls.append("log")
+
+            assert executor == "persona4"
+
+            for role in ("baseline", "candidato"):
+                assert any(
+                    key.startswith("test_")
+                    for key in self.metrics[role]
+                )
+
+    monkeypatch.setattr(
+        p3,
+        "P3Experiment",
+        FakeExperiment,
+    )
+
+    monkeypatch.setattr(
+        p3,
+        "load_tables",
+        lambda: (object(), object(), object()),
+    )
+
+    monkeypatch.setattr(
+        p3.pd,
+        "read_parquet",
+        lambda *args, **kwargs: object(),
+    )
+
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        ["p3", "--executor", "persona4"],
+    )
+
+    p3.main()
+
+    assert calls == [
+        "fit",
+        "evaluate_test",
+        "log",
+    ]
