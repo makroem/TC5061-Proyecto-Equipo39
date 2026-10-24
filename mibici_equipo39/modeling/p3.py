@@ -87,6 +87,99 @@ def fit_p3_variant(profiles, family, params, seed=C.SEED):
         "scaled": scaled,
     }
 
+def p3_stability_scores(
+    train_frame,
+    station_ids,
+    train_profiles,
+    reference_labels,
+    family,
+    params,
+    seed=C.SEED,
+    n_bootstraps=C.P3_BOOTSTRAPS,
+):
+    """Evalúa estabilidad con remuestreos de días completos de train."""
+    required_columns = {"station_id", "prediction_time", "departures"}
+    missing_columns = required_columns.difference(train_frame.columns)
+    if missing_columns:
+        raise ValueError(
+            f"faltan columnas requeridas para estabilidad P3: "
+            f"{sorted(missing_columns)}"
+        )
+
+    if n_bootstraps < 1:
+        raise ValueError("n_bootstraps debe ser al menos 1")
+
+    reference_labels = np.asarray(reference_labels)
+    if len(reference_labels) != len(station_ids):
+        raise ValueError(
+            "reference_labels debe contener una asignación por estación"
+        )
+
+    dates = pd.to_datetime(
+        train_frame["prediction_time"]
+    ).dt.normalize()
+
+    days = pd.Index(dates.drop_duplicates())
+
+    if len(days) == 0:
+        raise ValueError(
+            "no hay días de entrenamiento disponibles para estabilidad"
+        )
+
+    rng = np.random.default_rng(seed)
+    scores = []
+
+    for i in range(n_bootstraps):
+        sampled_days = pd.Series(
+            pd.to_datetime(
+                rng.choice(
+                    days.to_numpy(),
+                    size=len(days),
+                    replace=True,
+                )
+            )
+        )
+
+        multiplicity = sampled_days.value_counts()
+
+        weighted = train_frame.copy()
+        weighted["sample_weight"] = (
+            dates.map(multiplicity).fillna(0).to_numpy()
+        )
+
+        bootstrap_profiles = station_usage_profiles(
+            weighted,
+            station_ids,
+            weight="sample_weight",
+        )
+
+        pipeline = build_p3_pipeline(
+            family,
+            params,
+            seed=seed + i + 1,
+        )
+
+        pipeline.fit(bootstrap_profiles)
+
+        model = pipeline.named_steps["model"]
+        if hasattr(model, "converged_") and not model.converged_:
+            raise RuntimeError(
+                "GMM no convergió durante la evaluación de estabilidad."
+            )
+
+        bootstrap_labels = pipeline.predict(train_profiles)
+
+        scores.append(
+            float(
+                adjusted_rand_score(
+                    reference_labels,
+                    bootstrap_labels,
+                )
+            )
+        )
+
+    return scores
+
 def make_model(role, seed=C.SEED):
     if role == "baseline":
         return KMeans(**{**C.P3_KMEANS_PARAMS, "random_state": seed})

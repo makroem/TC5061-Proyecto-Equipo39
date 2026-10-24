@@ -5,10 +5,13 @@ from sklearn.cluster import KMeans
 from sklearn.mixture import GaussianMixture
 from sklearn.pipeline import Pipeline
 
+
+from mibici_equipo39.features import station_usage_profiles
 from mibici_equipo39.modeling.p3 import (
     build_p3_pipeline,
     cluster_metrics,
     fit_p3_variant,
+    p3_stability_scores,
 )
 
 
@@ -209,4 +212,134 @@ def test_fit_p3_variant_rejects_missing_period():
             "kmeans",
             {"n_clusters": 3, "n_init": 20, "max_iter": 300},
             seed=39,
+        )
+
+def synthetic_daily_usage(n_stations=12, n_days=28):
+    """Genera días completos para probar estabilidad temporal de P3."""
+    rng = np.random.default_rng(39)
+    start = pd.Timestamp("2026-01-01")
+    rows = []
+
+    for day in range(n_days):
+        for station in range(n_stations):
+            group = station % 3
+
+            for hour in range(24):
+                if group == 0:
+                    peak = 4.0 if 7 <= hour <= 10 else 1.0
+                elif group == 1:
+                    peak = 4.0 if 16 <= hour <= 19 else 1.0
+                else:
+                    peak = 3.0 if 11 <= hour <= 14 else 1.0
+
+                rows.append(
+                    {
+                        "station_id": str(station),
+                        "prediction_time": (
+                            start
+                            + pd.Timedelta(days=day)
+                            + pd.Timedelta(hours=hour)
+                        ),
+                        "departures": int(
+                            rng.poisson(peak + 0.5)
+                        ),
+                    }
+                )
+
+    return pd.DataFrame(rows)
+
+
+@pytest.mark.parametrize(
+    ("family", "params"),
+    [
+        (
+            "kmeans",
+            {
+                "n_clusters": 4,
+                "n_init": 20,
+                "max_iter": 300,
+            },
+        ),
+        (
+            "gmm",
+            {
+                "n_components": 3,
+                "covariance_type": "diag",
+                "n_init": 5,
+                "max_iter": 300,
+                "reg_covar": 1e-6,
+            },
+        ),
+    ],
+)
+def test_p3_stability_supports_stage2_variants(family, params):
+    frame = synthetic_daily_usage()
+
+    station_ids = sorted(
+        frame["station_id"].unique()
+    )
+
+    profiles = station_usage_profiles(
+        frame,
+        station_ids,
+    )
+
+    pipeline = build_p3_pipeline(
+        family,
+        params,
+        seed=39,
+    )
+    pipeline.fit(profiles)
+
+    reference_labels = pipeline.predict(profiles)
+
+    scores = p3_stability_scores(
+        frame,
+        station_ids,
+        profiles,
+        reference_labels,
+        family,
+        params,
+        seed=39,
+        n_bootstraps=3,
+    )
+
+    assert len(scores) == 3
+    assert all(np.isfinite(score) for score in scores)
+    assert all(-1.0 <= score <= 1.0 for score in scores)
+
+
+def test_p3_stability_rejects_invalid_bootstrap_count():
+    frame = synthetic_daily_usage()
+    station_ids = sorted(frame["station_id"].unique())
+
+    profiles = station_usage_profiles(
+        frame,
+        station_ids,
+    )
+
+    pipeline = build_p3_pipeline(
+        "kmeans",
+        {
+            "n_clusters": 3,
+            "n_init": 20,
+            "max_iter": 300,
+        },
+        seed=39,
+    )
+    pipeline.fit(profiles)
+
+    with pytest.raises(ValueError, match="n_bootstraps"):
+        p3_stability_scores(
+            frame,
+            station_ids,
+            profiles,
+            pipeline.predict(profiles),
+            "kmeans",
+            {
+                "n_clusters": 3,
+                "n_init": 20,
+                "max_iter": 300,
+            },
+            n_bootstraps=0,
         )
