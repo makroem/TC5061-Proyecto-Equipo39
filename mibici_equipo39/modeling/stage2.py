@@ -265,6 +265,10 @@ def run_search(adapter, data, config, base_tags, experiment_id):
     # La elección queda escrita antes de calcular cualquier métrica de prueba.
     mlflow.log_dict({"selected_variant": chosen, "rule": rule, "validation_metrics": val_metrics},
                     "evaluation/selection_before_test.json")
+    if chosen is None:
+        # Sin ganador elegible la prueba queda reservada y la búsqueda termina como FAILED.
+        mlflow.set_tags({"selected_variant": "none", "search_status": "sin_ganador_elegible"})
+        raise RuntimeError(f"Búsqueda detenida antes de evaluar prueba: {rule}.")
     baseline = adapter.baseline()["name"]
     run_ids = {}
     for name, model in fitted.items():

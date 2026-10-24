@@ -117,3 +117,28 @@ def test_adapter_extras_reach_config_and_evaluation(stage2_env, monkeypatch):
     summary = mlflow.artifacts.load_dict(f"runs:/{run_id}/evaluation/summary.json")
     assert resolved["thresholds"] == {"bikes": 0.65} and resolved["variant"]["name"] == "baseline"
     assert summary["threshold_search"] == [{"threshold": 0.65}] and "val_mae" in summary["metrics"]
+
+
+def test_search_without_an_eligible_variant_stops_before_test(stage2_env, monkeypatch):
+    from conftest import FakeAdapter
+
+    splits = []
+
+    class NoneEligible(FakeAdapter):
+        def eligible(self, val_metrics):
+            return False
+
+        def evaluate(self, fitted, data, split):
+            splits.append(split)
+            return super().evaluate(fitted, data, split)
+
+    monkeypatch.setattr(stage2, "load_adapter", lambda question: NoneEligible())
+    parent_id = stage2_env.project_run()
+    with pytest.raises(RuntimeError, match="antes de evaluar prueba"):
+        stage2.main(["--question", "p1", "--member", "DiegoMartinez"])
+    assert "test" not in splits and set(splits) == {"validation"}
+    selection = mlflow.artifacts.load_dict(f"runs:/{parent_id}/evaluation/selection_before_test.json")
+    assert selection["selected_variant"] is None
+    parent = stage2_env.client.get_run(parent_id)
+    assert parent.info.status == "FAILED" and parent.data.tags["search_status"] == "sin_ganador_elegible"
+    assert stage2_env.children(parent_id) == {}
