@@ -57,3 +57,63 @@ def p1_station_week(frame, predictions, path):
     fig.savefig(path, dpi=120, bbox_inches="tight")
     plt.close(fig)
     return path
+
+def p1_real_vs_predicho(y_true, y_pred, path):
+    fig, ax = plt.subplots(figsize=(6, 6))
+
+    ax.scatter(
+        y_true,
+        y_pred,
+        alpha=0.3,
+        s=10,
+    )
+
+    low = min(y_true.min(), y_pred.min())
+    high = max(y_true.max(), y_pred.max())
+
+    ax.plot(
+        [low, high],
+        [low, high],
+        color="red",
+        linestyle="--",
+    )
+
+    ax.set(
+        xlabel="Viajes reales por estación y hora",
+        ylabel="Viajes predichos por estación y hora",
+        title="Real vs predicho (prueba)",
+    )
+
+    fig.savefig(path, dpi=120, bbox_inches="tight")
+    plt.close(fig)
+
+    return path
+
+def p1_residuales(y_true, y_pred, path):
+    residuals = y_true - y_pred
+
+    fig, ax = plt.subplots(figsize=(8, 4))
+
+    ax.scatter(
+        y_pred,
+        residuals,
+        alpha=0.3,
+        s=10,
+    )
+
+    ax.axhline(
+        0,
+        color="red",
+        linestyle="--",
+    )
+
+    ax.set(
+        xlabel="Viajes predichos por estación y hora",
+        ylabel="Residual",
+        title="Residuales (prueba)",
+    )
+
+    fig.savefig(path, dpi=120, bbox_inches="tight")
+    plt.close(fig)
+
+    return path

@@ -27,13 +27,32 @@ CLEANING_SCHEMA_VERSION = "3-colab"
 FEATURE_SCHEMA_VERSION = "6-chronological-calendar-only"
 FEATURES_START = SOURCE_START
 P1_MIN_TRAIN_DEPARTURES = 100
-P1_HGB_PARAMS = {
+P1_HGB_100_PARAMS = {
     "loss": "poisson",
     "learning_rate": 0.1,
     "max_iter": 100,
     "max_leaf_nodes": 31,
     "random_state": SEED,
 }
+
+P1_HGB_200_PARAMS = {
+    "loss": "poisson",
+    "learning_rate": 0.05,
+    "max_iter": 200,
+    "max_leaf_nodes": 31,
+    "random_state": SEED,
+}
+
+P1_RF_300_PARAMS = {
+    "n_estimators": 300,
+    "max_depth": 16,
+    "min_samples_leaf":20,
+    "max_samples": 0.5,
+    "bootstrap": True,
+    "n_jobs": 2,
+    "random_state": SEED,
+}
+
 P2_INITIAL_OCCUPANCY, P2_MARGIN = 0.50, 0.10
 P2_SENSITIVITY_OCCUPANCIES = (0.25, 0.75)
 P2_MIN_RECALL = 0.80
