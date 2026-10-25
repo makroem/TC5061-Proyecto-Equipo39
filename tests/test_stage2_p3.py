@@ -831,3 +831,83 @@ def test_p3_adapter_generates_input_example_and_plots(tmp_path):
 
     for path in paths:
         assert path.is_file()
+
+def test_p3_tie_break_uses_validation_cost_without_test():
+    class GuardedProfiles(dict):
+        def __getitem__(self, key):
+            if key == "test":
+                raise AssertionError("No debe consultar test")
+            return super().__getitem__(key)
+
+    data = synthetic_adapter_data()
+    data["profiles"] = GuardedProfiles(data["profiles"])
+
+    fitted = ADAPTER.fit(ADAPTER.baseline(), data)
+    validation = ADAPTER.evaluate(fitted, data, "validation")
+
+    assert fitted.extra["fit_seconds"] >= 0
+    assert validation["val_predict_ms_per_1000"] >= 0
+    assert validation["val_model_bytes"] > 0
+
+    assert not any(
+        key.startswith("test_") for key in validation
+    )
+
+    assert ADAPTER.tie_break(fitted, validation) == (
+        validation["val_predict_ms_per_1000"],
+        int(validation["val_model_bytes"]),
+    )
+
+
+@pytest.mark.parametrize(
+    ("time_k4", "size_k4", "time_k5", "size_k5"),
+    [
+        (5.0, 100, 3.0, 900),
+        (3.0, 900, 3.0, 100),
+    ],
+)
+def test_p3_tied_candidates_choose_lower_cost(
+    time_k4, size_k4, time_k5, size_k5
+):
+    metrics = {
+        "p3_kmeans_3": {
+            "val_silhouette": 0.10,
+            "train_min_cluster_share": 0.10,
+        },
+        "p3_kmeans_4": {
+            "val_silhouette": 0.20,
+            "train_min_cluster_share": 0.10,
+            "val_predict_ms_per_1000": time_k4,
+            "val_model_bytes": size_k4,
+        },
+        "p3_kmeans_5": {
+            "val_silhouette": 0.20,
+            "train_min_cluster_share": 0.10,
+            "val_predict_ms_per_1000": time_k5,
+            "val_model_bytes": size_k5,
+        },
+    }
+
+    selected, rule = stage2.select(ADAPTER, metrics)
+
+    assert selected == "p3_kmeans_5"
+    assert "menor costo" in rule
+
+
+def test_p3_baseline_has_priority_over_lower_cost():
+    metrics = {
+        "p3_kmeans_3": {
+            "val_silhouette": 0.20,
+            "train_min_cluster_share": 0.10,
+        },
+        "p3_kmeans_4": {
+            "val_silhouette": 0.20,
+            "train_min_cluster_share": 0.10,
+            "val_predict_ms_per_1000": 0.01,
+            "val_model_bytes": 100,
+        },
+    }
+
+    selected, _ = stage2.select(ADAPTER, metrics)
+
+    assert selected == "p3_kmeans_3"
