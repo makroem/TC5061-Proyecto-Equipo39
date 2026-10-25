@@ -143,3 +143,60 @@ def test_search_without_an_eligible_variant_stops_before_test(stage2_env, monkey
     parent = stage2_env.client.get_run(parent_id)
     assert parent.info.status == "FAILED" and parent.data.tags["search_status"] == "sin_ganador_elegible"
     assert stage2_env.children(parent_id) == {}
+
+
+def cost_adapter():
+    """FakeAdapter que desempata por tiempo de inferencia y después por tamaño, como P1."""
+    from conftest import FakeAdapter
+
+    class Costed(FakeAdapter):
+        def tie_break(self, fitted, val_metrics):
+            return (val_metrics["val_predict_ms_per_1000"], val_metrics["val_model_bytes"])
+
+    return Costed()
+
+
+def test_tied_candidates_are_broken_by_the_adapter_cost():
+    metrics = {"baseline": {"val_mae": 2.0, "val_predict_ms_per_1000": 1, "val_model_bytes": 1},
+               "ridge_01": {"val_mae": 1.0000001, "val_predict_ms_per_1000": 9, "val_model_bytes": 1},
+               "ridge_10": {"val_mae": 1.0, "val_predict_ms_per_1000": 3, "val_model_bytes": 50},
+               "ridge_1000": {"val_mae": 1.0, "val_predict_ms_per_1000": 3, "val_model_bytes": 20}}
+    chosen, rule = stage2.select(cost_adapter(), metrics)
+    assert chosen == "ridge_1000" and "menor costo" in rule
+
+
+def test_the_baseline_still_wins_a_tie_even_if_a_candidate_is_cheaper():
+    metrics = {"baseline": {"val_mae": 1.0, "val_predict_ms_per_1000": 9, "val_model_bytes": 9},
+               "ridge_01": {"val_mae": 1.0, "val_predict_ms_per_1000": 1, "val_model_bytes": 1}}
+    assert stage2.select(cost_adapter(), metrics)[0] == "baseline"
+
+
+def test_without_tie_break_the_plan_order_is_kept():
+    from conftest import FakeAdapter
+
+    metrics = {"baseline": {"val_mae": 2.0}, "ridge_01": {"val_mae": 1.0}, "ridge_10": {"val_mae": 1.0}}
+    assert stage2.select(FakeAdapter(), metrics)[0] == "ridge_01"
+
+
+def test_search_applies_the_tie_break_with_the_fitted_models(stage2_env, monkeypatch):
+    from conftest import FakeAdapter
+
+    seen = {}
+
+    class TiedByAlpha(FakeAdapter):
+        def evaluate(self, fitted, data, split):
+            metrics = super().evaluate(fitted, data, split)
+            if split == "validation" and fitted.variant["family"] != "dummy":
+                metrics["val_mae"] = 0.5
+            return metrics
+
+        def tie_break(self, fitted, val_metrics):
+            seen[fitted.variant["name"]] = fitted.model
+            return (-fitted.model.alpha,)
+
+    monkeypatch.setattr(stage2, "load_adapter", lambda question: TiedByAlpha())
+    parent_id = stage2_env.project_run()
+    summary = stage2.main(["--question", "p1", "--member", "DiegoMartinez"])
+    assert summary["selected_variant"] == "ridge_1000" and set(seen) == {"ridge_01", "ridge_10", "ridge_1000"}
+    selection = mlflow.artifacts.load_dict(f"runs:/{parent_id}/evaluation/selection_before_test.json")
+    assert selection["selected_variant"] == "ridge_1000" and "menor costo" in selection["rule"]
