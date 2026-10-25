@@ -221,3 +221,6 @@ reports/figures/runs/
 mlflow.db-*
 private_results/
 private_tracking/
+
+#
+Etapa2/
