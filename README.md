@@ -1,15 +1,33 @@
 # Proyecto MiBici Equipo 39
 
-## Segunda entrega infraestructura de Marco
+## Estado de integración de la Etapa 2
 
-La rama de infraestructura declara el entorno en `python_env.yaml`, el plan de candidatos
-en `config.STAGE2_SEARCH_PLAN` y el registro común de modelos con firma y ejemplo.
-La preparación, el servidor y las dependencias están descritos en
-[el contrato de infraestructura](references/etapa2/contrato_infraestructura.md).
-El [punto de partida](references/etapa2/starting_point.json) contiene los seis resultados
-históricos verificados contra SQLite. Estos resultados no acreditan corridas de la etapa 2.
-El controlador parametrizado, los adaptadores y el registro final esperan los PR de los
-responsables indicados en el contrato. Los comandos de la entrega anterior siguen vigentes.
+La Etapa 2 utiliza un controlador común de experimentación,
+ADAPTERS para P1, P2 y P3, MLflow Projects y Model Registry.
+
+El controlador común y el registro de modelos se integraron
+mediante el PR #12. La implementación de P2 se incorporó
+mediante el PR #13. Las mejoras de P3 y su conexión con
+el controlador se incorporaron mediante los PR #11 y #14.
+
+La configuración de candidatos se encuentra en
+`config.STAGE2_SEARCH_PLAN`, y los puntos de entrada de
+experimentación y registro están definidos en `MLproject`.
+
+La arquitectura técnica de esta etapa se documenta en
+[Arquitectura de la Etapa 2](references/etapa2/arquitectura.md).
+
+Las condiciones del entorno y del servidor se describen en
+[Contrato de infraestructura](references/etapa2/contrato_infraestructura.md).
+
+El [punto de partida](references/etapa2/starting_point.json)
+conserva los resultados históricos utilizados como referencia.
+Estos resultados no sustituyen las nuevas corridas oficiales
+de la Etapa 2.
+
+Las pruebas automatizadas verifican la implementación,
+pero no acreditan por sí solas la selección oficial de
+modelos, su registro como champion ni la reproducción final.
 
 Repositorio público: https://github.com/makroem/TC5061-Proyecto-Equipo39
 
@@ -17,8 +35,15 @@ Repositorio público: https://github.com/makroem/TC5061-Proyecto-Equipo39
 P1 estima salidas por estación en la siguiente hora; P2 aproxima riesgo de bicicletas o anclajes; P3 agrupa estaciones por uso. El código final vive en `mibici_equipo39`; los notebooks son exploratorios. El cierre de P1/P2/P3 y la evaluación cronológica están integrados en main mediante los PR #8 y #3. El estado de integración, las revisiones y las dependencias restantes se registran en references/cierre_marco.md.
 
 ## Equipo roles y contribuciones
-Marco (`makroem`, persona1): estructura, ingesta, versionado, correcciones, evaluación temporal, cierre de P3 y ejecución de revisión. Stefania (`a01236059-lab`, persona2): propuesta de variables y Canvas, PR #5 y revisiones de ingesta. Diego Martínez (`Sanciprian`, persona3): PR #3 e integración de variables/P1 y P2. Diego Hurtado (`diegoHurtado01`, persona4): rol previsto de P3/Tracking/propuesta; revisión del PR #8 verificada. Sigue pendiente acreditar un PR propio y una contribución asociada a su cuenta en main. El P3 de esta rama lo aporta Marco; no acredita trabajo de otra persona.
+Marco (`makroem`, persona1): infraestructura del proyecto, ingesta, versionado de datos, evaluación temporal, implementación inicial de P3 y coordinación de integración.
 
+Stefania (`a01236059-lab`, persona2): propuesta de variables, ML Canvas, exploración de P1 y participación en las revisiones de integración.
+
+Diego Martínez (`Sanciprian`, persona3): integración de variables y modelos, desarrollo de P2 para la Etapa 2, controlador común de experimentación, registro de modelos y puntos de entrada de MLflow Projects (PR #12 y #13).
+
+Diego Hurtado (`diegoHurtado01`, persona4): preparación experimental de P3 para la Etapa 2, incorporación de variantes KMeans y Gaussian Mixture, métricas de estabilidad y costo, artefactos interpretables y pruebas automatizadas (PR #11). Implementación del ADAPTER de P3 para el controlador común (PR #14). Revisión formal del controlador y de P2 mediante los PR #12 y #13. Responsable de la documentación de arquitectura y consolidación del reporte de experimentos de la Etapa 2.
+
+Las contribuciones integradas conservan su autoría en Git y GitHub. Las corridas oficiales, la selección definitiva de modelos y la reproducción final requieren evidencias independientes de las pruebas automatizadas.
 ## Preguntas y usuarios
 | Pregunta | Resultado | Usuario y decisión |
 |---|---|---|
@@ -38,7 +63,7 @@ La ingesta elimina identificadores de usuario y variables demográficas. Los ori
 
 La data_version no cambia. Se cambia split_id y se incorpora todo octubre, sin el antiguo descarte de ocho días. `references/split_manifest_random_days_v2.json` conserva el manifiesto anterior solo como historia. El proceso normal verifica el nuevo manifiesto sin sobrescribirlo. Las ocho entradas de P1/P2 son calendario conocido al predecir; modelos, codificadores y elegibilidad se ajustan solo en train. Selección y umbrales usan validación. Test no modifica el diseño.
 
-## Pipeline modelos y métricas
+## Pipeline y métricas de referencia (Etapa 1)
 | Pregunta | Baseline | Candidato | Selección previa a prueba |
 |---|---|---|---|
 | P1 | Media train estación/día/hora con respaldos | HGB Poisson y TargetEncoder train | Menor val_mae, empate baseline |
@@ -84,26 +109,109 @@ python -m pytest tests -q
 
 La ingesta descarga sin pasos manuales, normaliza columnas/codificación/fechas, comprueba trece fuentes y hashes lógicos. `--freeze-manifest` solo se usa para aprobar una versión nueva de datos. Las pruebas cubren temporalidad, aislamiento, manifiestos, proxy P2, perfiles P3 y trazabilidad. Si el temporal del sistema tiene permisos incorrectos, usa una carpeta nueva con `--basetemp=../pytest-mibici-nuevo`.
 
-## Experimento y MLflow Projects
-El repositorio debe estar limpio:
 
-```bash
-python -m mibici_equipo39.modeling.train --question all --member persona1
+## Experimentación de la Etapa 2 con MLflow Projects
+
+La Etapa 2 utiliza el punto de entrada `train` de `MLproject` y el
+controlador `mibici_equipo39.modeling.stage2`.
+
+El controlador recibe la pregunta (`p1`, `p2` o `p3`), el modelo,
+los hiperparámetros, el integrante responsable y el modo de ejecución.
+
+### Configuración de MLflow
+
+El repositorio debe estar limpio y los datos procesados y manifiestos
+deben encontrarse disponibles antes de iniciar una búsqueda.
+
+En PowerShell, para utilizar el servidor configurado según el
+contrato de infraestructura:
+
+```powershell
+$env:MLFLOW_TRACKING_URI = "http://127.0.0.1:5000"
+$env:MLFLOW_REGISTRY_URI = $env:MLFLOW_TRACKING_URI
+$env:MIBICI_RESULTS_DIR = Join-Path $env:LOCALAPPDATA "MiBiciEquipo39\resultados"
 ```
 
-O ejecuta el entry point con el entorno activado y su directorio de ejecutables primero en PATH. Projects y los módulos deben compartir el mismo almacén: en PowerShell fija `$env:MLFLOW_TRACKING_URI='sqlite:///mlflow.db'`; en Bash usa `export MLFLOW_TRACKING_URI=sqlite:///mlflow.db`.
+El servidor debe estar iniciado y el usuario debe contar con acceso
+al almacén correspondiente. Las corridas de prueba no sustituyen
+las corridas oficiales del equipo.
 
-```bash
-mlflow run . -e main --env-manager local --experiment-name mibici-equipo39 --run-name cierre-persona1 -P member=persona1
+### Búsqueda de modelos
+
+Ejemplo de búsqueda de P3 ejecutada por Diego Hurtado:
+
+```powershell
+mlflow run . -e train --env-manager local --experiment-name mibici-equipo39 -P question=p3 -P model=search -P member=DiegoHurtado -P mode=search
 ```
 
-Hay ejecución individual con --question P1, P2 o P3 y entry points p1, p2, p3. El resumen se genera al terminar en `reports/experiment_summary.json`. Las figuras van a `reports/figures/runs/`, ignorado en Git para no ensuciar el código entre runs. Las capturas finales pueden guardarse en `references/evidence/`; son evidencia, no el almacén de tracking.
+La búsqueda compara el baseline y las tres variantes candidatas
+configuradas en `config.STAGE2_SEARCH_PLAN`.
 
-```bash
-python -m mlflow ui --backend-store-uri sqlite:///mlflow.db --host 127.0.0.1 --port 5000
+Los modelos se ajustan con train y se seleccionan con validation.
+Antes de consultar test, la selección se registra en
+`evaluation/selection_before_test.json`.
+
+Si ninguna variante cumple la regla de elegibilidad, la búsqueda
+termina sin evaluar test.
+
+### Reproducción de una selección aprobada
+
+La reproducción requiere el archivo oficial
+`references/etapa2/selection.json`, que contiene la variante y
+sus hiperparámetros congelados.
+
+```powershell
+mlflow run . -e train --env-manager local --experiment-name mibici-equipo39 -P question=p3 -P model=selected -P member=DiegoHurtado -P mode=reproduce
 ```
 
-El experimento mibici-equipo39 registra baseline y candidato por pregunta. Parámetros: data_version, split_id, fechas, semilla y modelo. Etiquetas: equipo, pregunta, ejecutor y commit. Cada run incluye métricas con prefijo del conjunto y artefactos. No se registran credenciales o datos de usuarios. El almacén local se reconstruye; no se entrega.
+Este procedimiento no realiza una nueva búsqueda ni modifica
+los hiperparámetros utilizando test.
+
+### Registro de modelos
+
+Después de contar con una selección oficial aprobada, el punto
+de entrada `registry` permite registrar la corrida seleccionada.
+
+```powershell
+mlflow run . -e registry --env-manager local --experiment-name mibici-equipo39 -P question=p3 -P source_run_id=ID_REAL_DEL_RUN
+```
+
+`ID_REAL_DEL_RUN` debe sustituirse por el identificador real de la
+corrida seleccionada. No es un comando que deba ejecutarse antes
+de disponer de dicha selección.
+
+El registro verifica trazabilidad, versiones y carga del modelo
+antes de asignar el alias `champion`.
+
+### Verificación del Model Registry
+
+```powershell
+mlflow run . -e verify_registry --env-manager local --experiment-name mibici-equipo39
+```
+
+La verificación carga los modelos registrados por alias y contrasta
+sus predicciones con los ejemplos almacenados.
+
+### Evidencia y resultados
+
+MLflow conserva las corridas padre e hijas, métricas, parámetros,
+etiquetas, modelos, firmas y artefactos de interpretación.
+
+Las búsquedas y reproducciones generan resúmenes en el directorio
+privado configurado por `MIBICI_RESULTS_DIR`.
+
+Las evidencias oficiales deben identificar el commit, la versión
+de los datos, la partición, las corridas y el modelo seleccionado.
+
+### Compatibilidad con la primera entrega
+
+Los puntos de entrada históricos `p1`, `p2`, `p3` y `main` siguen
+disponibles en `MLproject`. No sustituyen al controlador `train`
+de la Etapa 2.
+
+La arquitectura y sus componentes se describen en
+[Arquitectura de la Etapa 2](references/etapa2/arquitectura.md).
+
 
 ## Git GitHub y buenas prácticas
 main está protegida: una aprobación, descarte de aprobaciones antiguas y conversaciones resueltas; force push y eliminación bloqueados también para administradores. Todo cambio hacia main debe pasar por PR revisado. Ramas feat/fix/docs/chore y commits con esos prefijos. Cada persona debe abrir un PR y revisar otro; una ejecución de Marco no sustituye la evidencia de otros.
@@ -113,13 +221,13 @@ El PR #8 se incorporó a la rama de integración y el PR #3 se incorporó a main
 ## Resultados limitaciones y cierre
 La propuesta consolidada está disponible en [PDF](reports/TC5061_Propuesta_Proyecto_Equipo39.pdf) y [Word editable](reports/TC5061_Propuesta_Proyecto_Equipo39.docx). El [informe de cierre y pendientes](reports/Cierre_Actividades_y_Pendientes.txt) distingue las actividades integradas de la colaboración individual restante, las lecturas y las condiciones de uso por confirmar. El envío en Canvas no está verificado en GitHub. Ambos documentos incluyen el enlace público al repositorio; el código consolidado se consulta en main. El registro de Marco está en [references/cierre_marco.md](references/cierre_marco.md).
 
-Las métricas vigentes se documentan en el resumen y el PDF. No deben mezclarse con mibici-equipo39-revision-marco, de días aleatorios. Se requieren capturas de lista, detalle con parámetros/métricas/etiquetas, artefacto y comparación, además de estructura del repositorio y referencias APA 7.
+Las métricas históricas de la primera entrega se documentan en el resumen y el PDF. No constituyen resultados oficiales de la Etapa 2. No deben mezclarse con mibici-equipo39-revision-marco, de días aleatorios. Se requieren capturas de lista, detalle con parámetros/métricas/etiquetas, artefacto y comparación, además de estructura del repositorio y referencias APA 7.
 
 La ejecución de cierre terminó el 18 de octubre de 2026 desde MLflow Projects, en el commit ad74ba344bdfe6770a12ef37577fa7403c54dbc6, con seis runs finalizados, git_dirty=false y 39 pruebas aprobadas. La evidencia está en reports/cierre_experimentos.json y references/evidence/.
 
 Resultados: P1 conserva baseline (val_mae 0.888775; test_mae 0.916381; test_rmse 1.718234). P2 selecciona logística (val_macro_f1 0.042048; test_macro_f1 0.051779); en test, recall de bicicletas 0.8541 y de anclajes 0.7932, con precisión 0.0218/0.0318. P3 selecciona GMM para 369 estaciones (val_silhouette 0.026594; test_silhouette 0.051373; ARI medio de remuestreo train 0.637608). Los grupos se superponen y no se presume que estén suficientemente separados para decisiones operativas.
 
-Limitaciones: proxy P2 sin inventario, capacidad/ubicación retrospectivas de septiembre, estaciones nuevas sin train excluidas, un año de fuentes y un holdout temporal. No hay despliegue ni impacto operativo demostrado. Permanecen pendientes revisiones de otros integrantes y contribución personal faltante.
+Limitaciones: proxy P2 sin inventario, capacidad/ubicación retrospectivas de septiembre, estaciones nuevas sin train excluidas, un año de fuentes y un holdout temporal. No hay despliegue ni impacto operativo demostrado. Las aportaciones de Diego Hurtado se integraron mediante los PR #11 y #14. La selección oficial, el registro de modelos y la reproducción final de la Etapa 2 requieren evidencias independientes.
 
 ## Relación parcial con las lecturas
 La introducción pública de Wilson, capítulo 6, respalda la comparación objetiva de alternativas; se conserva el baseline de P1 aunque exista un candidato más complejo. La vista pública de Thompson, capítulo 7, distingue crear un modelo de demostrar su utilidad y enumera seguimiento de experimentos y repositorios en 7.4.2; se aplica con MLflow y con límites operativos explícitos. Solo se consultaron estas vistas públicas, no los capítulos completos ni Lauchande 5 o Huyen 6. Falta contrastar las cuatro lecturas asignadas.
