@@ -1,8 +1,32 @@
 name: mibici-equipo39
+python_env: python_env.yaml
 
 entry_points:
   ingest:
-    command: "python -m mibici_equipo39.dataset --verify-manifest"
+    command: >-
+      python -m mibici_equipo39.dataset --verify-manifest
+      && python -m mibici_equipo39.features
+  train:
+    parameters:
+      question: {type: string}
+      model: {type: string, default: search}
+      hyperparameters: {type: string, default: config}
+      member: {type: string, default: config}
+      mode: {type: string, default: search}
+    command: >-
+      python -m mibici_equipo39.modeling.stage2
+      --question {question} --model {model}
+      --hyperparameters {hyperparameters}
+      --member {member} --mode {mode}
+  registry:
+    parameters:
+      question: {type: string}
+      source_run_id: {type: string}
+    command: >-
+      python -m mibici_equipo39.registry register
+      --question {question} --source-run-id {source_run_id}
+  verify_registry:
+    command: "python -m mibici_equipo39.registry verify"
   features:
     command: "python -m mibici_equipo39.features"
   p1:
