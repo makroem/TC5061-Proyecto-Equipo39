@@ -79,6 +79,14 @@ class QuestionAdapter(ABC):
         """
         return {}
 
+    def tie_break(self, fitted, val_metrics) -> tuple:
+        """Clave de costo para candidatos empatados en la métrica a 6 decimales; gana la menor.
+
+        Solo usa el modelo ajustado y validation. P1 compara tiempo de inferencia y tamaño;
+        sin clave se conserva el orden del plan.
+        """
+        return ()
+
     def eligible(self, val_metrics) -> bool:
         """Si la variante puede ganar; P3 la usa para exigir grupos válidos."""
         return True
@@ -202,8 +210,9 @@ def to_jsonable(prediction):
     return {"kind": "array", "data": np.asarray(prediction).tolist()}
 
 
-def select(adapter, val_metrics):
-    """Mejor métrica de validación entre las elegibles; el baseline gana un empate a 6 decimales."""
+def select(adapter, val_metrics, fitted=None):
+    """Mejor métrica de validación entre las elegibles; el baseline gana un empate a 6 decimales
+    y entre candidatos empatados decide el tie_break del adaptador."""
     metric, sign = adapter.selection_metric, 1 if adapter.greater_is_better else -1
     eligible = {name: m for name, m in val_metrics.items() if adapter.eligible(m) and metric in m}
     if not eligible:
@@ -211,9 +220,13 @@ def select(adapter, val_metrics):
     best = max(round(sign * m[metric], 6) for m in eligible.values())
     tied = [name for name, m in eligible.items() if round(sign * m[metric], 6) == best]
     baseline = adapter.baseline()["name"]
-    chosen = baseline if baseline in tied else tied[0]
     goal = "mayor" if adapter.greater_is_better else "menor"
-    return chosen, f"{goal} {metric} entre elegibles; empate a 6 decimales lo gana el baseline"
+    rule = f"{goal} {metric} entre elegibles; empate a 6 decimales lo gana el baseline"
+    if baseline in tied or len(tied) == 1:
+        return (baseline if baseline in tied else tied[0]), rule
+    keys = {name: tuple(adapter.tie_break(fitted[name] if fitted else None, val_metrics[name])) for name in tied}
+    chosen = min(tied, key=keys.get)
+    return chosen, f"{rule}; empate entre {', '.join(tied)} resuelto por menor costo {keys}"
 
 
 def baseline_source_run_id(question):
@@ -273,7 +286,7 @@ def all_metrics(adapter, fitted, data, val_metrics, fit_seconds):
 
 def run_search(adapter, data, config, base_tags, experiment_id):
     fitted, val_metrics, seconds, calibration = fit_all(adapter, data, config["variants"])
-    chosen, rule = select(adapter, val_metrics)
+    chosen, rule = select(adapter, val_metrics, fitted)
     # La elección y la calibración quedan escritas antes de calcular cualquier métrica de prueba.
     mlflow.log_dict({"selected_variant": chosen, "rule": rule, "validation_metrics": val_metrics,
                      "calibration": calibration}, "evaluation/selection_before_test.json")
