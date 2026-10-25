@@ -3,7 +3,7 @@
 ## Estado de integración de la Etapa 2
 
 La Etapa 2 utiliza un controlador común de experimentación,
-ADAPTERS para P1, P2 y P3, MLflow Projects y Model Registry.
+MLflow Projects y Model Registry. Los ADAPTERS de P2 y P3 estan integrados; el ADAPTER de P1 sigue pendiente en el PR #16.
 
 El controlador común y el registro de modelos se integraron
 mediante el PR #12. La implementación de P2 se incorporó
@@ -32,7 +32,7 @@ modelos, su registro como champion ni la reproducción final.
 Repositorio público: https://github.com/makroem/TC5061-Proyecto-Equipo39
 
 ## Propósito y alcance
-P1 estima salidas por estación en la siguiente hora; P2 aproxima riesgo de bicicletas o anclajes; P3 agrupa estaciones por uso. El código final vive en `mibici_equipo39`; los notebooks son exploratorios. El cierre de P1/P2/P3 y la evaluación cronológica están integrados en main mediante los PR #8 y #3. El estado de integración, las revisiones y las dependencias restantes se registran en references/cierre_marco.md.
+P1 estima salidas por estación en la siguiente hora; P2 aproxima riesgo de bicicletas o anclajes; P3 agrupa estaciones por uso. El código final vive en `mibici_equipo39`; los notebooks son exploratorios. Los modelos historicos de P1/P2/P3 y su evaluacion cronologica se integraron mediante los PR #8 y #3. Esto no equivale a la integracion de los tres ADAPTERS de Etapa 2: P1 depende del PR #16. El estado de integración, las revisiones y las dependencias restantes se registran en references/cierre_marco.md.
 
 ## Equipo roles y contribuciones
 Marco (`makroem`, persona1): infraestructura del proyecto, ingesta, versionado de datos, evaluación temporal, implementación inicial de P3 y coordinación de integración.
@@ -154,6 +154,12 @@ Antes de consultar test, la selección se registra en
 Si ninguna variante cumple la regla de elegibilidad, la búsqueda
 termina sin evaluar test.
 
+### Calibración de P2
+
+P2 utiliza `fit(train)` y posteriormente `calibrate(validation)` antes de seleccionar la variante y evaluar test. Se establecen umbrales independientes para bicicletas y anclajes, priorizando precisión con recall mínimo de 0.80 y utilizando F1 como alternativa cuando ningún umbral cumple.
+
+La calibración se registra antes de test. En una reproducción se reutilizan los umbrales congelados en `references/etapa2/selection.json`.
+
 ### Reproducción de una selección aprobada
 
 La reproducción requiere el archivo oficial
@@ -166,6 +172,24 @@ mlflow run . -e train --env-manager local --experiment-name mibici-equipo39 -P q
 
 Este procedimiento no realiza una nueva búsqueda ni modifica
 los hiperparámetros utilizando test.
+
+### Desempate por costo de P3
+
+El PR #18 integró al controlador común el contrato
+`tie_break()` para resolver empates mediante criterios
+específicos de cada ADAPTER, preservando la prioridad
+del baseline.
+
+El PR #19 propone implementar esta regla en P3:
+entre candidatos elegibles con igual métrica de selección,
+se prioriza el menor tiempo de inferencia por 1,000
+observaciones de validación y posteriormente el menor
+tamaño serializado del modelo. El conjunto test no
+participa en el desempate.
+
+El PR #19 continúa pendiente de revisión y no
+forma parte todavía de `main`.
+
 
 ### Registro de modelos
 

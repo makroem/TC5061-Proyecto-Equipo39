@@ -36,73 +36,73 @@ Las tres preguntas abordadas son: P1, predicción de demanda; P2, clasificación
 
 flowchart TD
 
-&#x20;   A["Datos abiertos MiBici<br/>12 CSV de viajes y catálogo"] --> B["dataset.py<br/>Ingesta, limpieza y verificación"]
+    A["Datos abiertos MiBici<br/>12 CSV de viajes y catálogo"] --> B["dataset.py<br/>Ingesta, limpieza y verificación"]
 
-&#x20;   B --> C["data/raw, external y processed"]
+    B --> C["data/raw, external y processed"]
 
-&#x20;   B --> D["data_manifest.json<br/>Versión de datos"]
+    B --> D["data_manifest.json<br/>Versión de datos"]
 
-&#x20;   C --> E["features.py<br/>Variables y partición cronológica"]
+    C --> E["features.py<br/>Variables y partición cronológica"]
 
-&#x20;   E --> F["Tablas procesadas<br/>Train / Validation / Test"]
+    E --> F["Tablas procesadas<br/>Train / Validation / Test"]
 
-&#x20;   E --> G["split_manifest.json<br/>Versión de partición"]
-
-
-
-&#x20;   F --> H["MLflow Projects<br/>MLproject: train"]
-
-&#x20;   H --> I["stage2.py<br/>Controlador común"]
-
-&#x20;   I --> J["QuestionAdapter P1"]
-
-&#x20;   I --> K["QuestionAdapter P2"]
-
-&#x20;   I --> L["QuestionAdapter P3"]
+    E --> G["split_manifest.json<br/>Versión de partición"]
 
 
 
-&#x20;   J --> M["Baseline + 3 candidatos"]
+    F --> H["MLflow Projects<br/>MLproject: train"]
 
-&#x20;   K --> M
+    H --> I["stage2.py<br/>Controlador común"]
 
-&#x20;   L --> M
+    I --> J["QuestionAdapter P1"]
 
+    I --> K["QuestionAdapter P2"]
 
-
-&#x20;   M --> N["Ajuste con train<br/>Evaluación con validation"]
-
-&#x20;   N --> O{"¿Existe variante elegible?"}
-
-&#x20;   O -->|No| P["Búsqueda detenida<br/>Sin consultar test"]
-
-&#x20;   O -->|Sí| Q["Selección congelada<br/>selection_before_test.json"]
-
-&#x20;   Q --> R["Evaluación final con test"]
-
-&#x20;   R --> S["MLflow Tracking<br/>Runs, métricas y artefactos"]
-
-&#x20;   S --> T["Revisión de selección oficial"]
-
-&#x20;   T --> U["Model Registry<br/>Alias champion"]
-
-&#x20;   U --> V["Verificación de carga<br/>y reproducción"]
+    I --> L["QuestionAdapter P3"]
 
 
 
-&#x20;   D -.-> I
+    J --> M["Baseline + 3 candidatos"]
 
-&#x20;   G -.-> I
+    K --> M
 
-&#x20;   W["Git y GitHub<br/>Commit, PR y revisión"] -.-> I
+    L --> M
 
-&#x20;   W -.-> S
+
+
+    M --> N["Ajuste con train<br/>Evaluación con validation"]
+
+    N --> O{"¿Existe variante elegible?"}
+
+    O -->|No| P["Búsqueda detenida<br/>Sin consultar test"]
+
+    O -->|Sí| Q["Selección congelada<br/>selection_before_test.json"]
+
+    Q --> R["Evaluación final con test"]
+
+    R --> S["MLflow Tracking<br/>Runs, métricas y artefactos"]
+
+    S --> T["Revisión de selección oficial"]
+
+    T --> U["Model Registry<br/>Alias champion"]
+
+    U --> V["Verificación de carga<br/>y reproducción"]
+
+
+
+    D -.-> I
+
+    G -.-> I
+
+    W["Git y GitHub<br/>Commit, PR y revisión"] -.-> I
+
+    W -.-> S
 
 ```
 
 
 
-El diagrama representa el flujo implementado. La ejecución oficial, la asignación de alias y la validación final deben acreditarse mediante sus propias evidencias.
+El diagrama representa la arquitectura objetivo. Los ADAPTERS de P2 y P3 estan integrados, mientras que P1 depende del PR #16. La ejecucion conjunta de las tres preguntas aun requiere verificar esa integracion. La ejecución oficial, la asignación de alias y la validación final deben acreditarse mediante sus propias evidencias.
 
 
 
@@ -135,13 +135,9 @@ El módulo `mibici_equipo39/features.py` construye las tablas de entrenamiento y
 
 
 | Conjunto | Periodo | Uso |
-
 |---|---|---|
-
 | Entrenamiento | Octubre 2025 – mayo 2026 | Ajuste de modelos y transformaciones |
-
 | Validación | Junio – julio 2026 | Comparación y selección |
-
 | Prueba | Agosto – septiembre 2026 | Evaluación final de desempeño |
 
 
@@ -158,11 +154,11 @@ El módulo `mibici_equipo39/modeling/stage2.py` implementa el controlador parame
 
 
 
-Cada pregunta dispone de un ADAPTER compatible con `QuestionAdapter`. Esta interfaz proporciona métodos para definir el baseline, cargar datos, ajustar variantes, evaluar particiones, generar ejemplos y producir gráficas.
+La arquitectura contempla un ADAPTER por pregunta compatible con `QuestionAdapter`. P2 y P3 estan integrados; P1 continua pendiente del PR #16. Esta interfaz proporciona métodos para definir el baseline, cargar datos, ajustar variantes, evaluar particiones, generar ejemplos y producir gráficas.
 
 
 
-El controlador permite reutilizar el mismo flujo experimental en P1, P2 y P3 sin combinar sus objetivos ni sus criterios de evaluación.
+El controlador permite reutilizar el mismo flujo experimental en P1, P2 y P3 sin combinar sus objetivos ni sus criterios de evaluación. La ejecucion consolidada de P1, P2 y P3 requiere integrar y verificar primero el ADAPTER de P1.
 
 
 
@@ -175,13 +171,9 @@ El plan de experimentación está centralizado en `config.STAGE2_SEARCH_PLAN`.
 
 
 | Pregunta | Baseline | Tres candidatos | Criterio principal |
-
 |---|---|---|---|
-
 | P1 | Baseline de demanda | HGB 100, HGB 200, Random Forest 300 | Menor `val_mae` |
-
 | P2 | DummyClassifier | Regresión logística C=0.1, C=1 y C=10 | Mayor `val_macro_f1` |
-
 | P3 | KMeans k=3 | KMeans k=4, KMeans k=5 y GMM de 3 componentes | Mayor `val_silhouette`, con elegibilidad |
 
 
@@ -200,6 +192,18 @@ P3 también calcula la estabilidad mediante ARI utilizando remuestreos de días 
 
 ### 3.5 Separación de selección y evaluación final
 
+**Calibración de P2 en la Etapa 2.**
+
+El `P2Adapter` separa el entrenamiento de los modelos y la calibración de sus umbrales. `fit()` utiliza exclusivamente `train` para ajustar dos clasificadores independientes: riesgo de bicicletas (`bikes`) y riesgo de anclajes (`docks`).
+
+Después, `calibrate()` utiliza `validation` para establecer un umbral por riesgo. Examina valores de 0.05 a 0.95 en incrementos de 0.05. Prioriza la mayor precisión cuando `recall >= 0.80`; si ningún umbral cumple, selecciona el mayor F1. En caso de empate, utiliza el umbral más alto.
+
+El controlador sigue la secuencia `fit(train) -> calibrate(validation) -> evaluate(validation) -> seleccion -> evaluate(test)`. Antes de consultar test, registra la variante elegida, las métricas de validación y los umbrales en `evaluation/selection_before_test.json`.
+
+Los umbrales quedan incorporados al modelo `P2RiskModel`. Durante una reproducción se reutilizan los valores congelados en `references/etapa2/selection.json`, sin volver a optimizarlos con validación. Si faltan los umbrales de alguno de los dos riesgos, la reproducción se rechaza.
+
+El conjunto test permanece reservado hasta después de la selección.
+
 
 
 El controlador ajusta los modelos con entrenamiento y utiliza validación para comparar alternativas.
@@ -216,6 +220,40 @@ Si no existe una variante elegible, la búsqueda se detiene sin consultar test. 
 
 Esta separación evita utilizar el conjunto de prueba para elegir el modelo o modificar sus hiperparámetros.
 
+
+
+### 3.6 Desempate por costo de P3
+
+El PR #18 incorporó al controlador común el mecanismo
+`QuestionAdapter.tie_break()` para resolver empates mediante
+criterios definidos por cada pregunta. El baseline conserva
+prioridad cuando participa en un empate.
+
+En P3, el criterio principal sigue siendo maximizar
+`val_silhouette`, considerando solamente las variantes que
+cumplen la elegibilidad de un grupo mínimo del 5%.
+Cuando dos candidatos empatan en la métrica de selección,
+la propuesta de `P3Adapter.tie_break()` utiliza, en orden:
+
+1. Menor tiempo de inferencia por cada 1,000 observaciones,
+   medido con perfiles de validación.
+2. Menor tamaño serializado del modelo.
+
+El tiempo de ajuste se registra como métrica de costo,
+pero no sustituye el criterio de desempate anterior.
+Ni la selección ni la medición del desempate
+consultan el conjunto test.
+
+La implementación específica y sus pruebas fueron
+propuestas por Diego Hurtado en el PR #19,
+commit `ff31bee`. Dicho PR permanece abierto y sujeto a
+revisión; por lo tanto, esta mejora todavía no debe
+considerarse integrada en `main`.
+
+La validación local reportada incluye 33 pruebas de P3
+aprobadas y 114 pruebas del repositorio aprobadas con
+una prueba de P2 excluida por un fallo independiente de
+carga de artefactos MLflow en Windows.
 
 
 ## 4. MLflow Projects y trazabilidad
@@ -311,27 +349,16 @@ Las pruebas automatizadas verifican contratos y comportamiento del código, pero
 
 
 | Componente | Ubicación |
-
 |---|---|
-
 | Configuración | `mibici_equipo39/config.py` |
-
 | Ingesta | `mibici_equipo39/dataset.py` |
-
 | Variables | `mibici_equipo39/features.py` |
-
 | Controlador | `mibici_equipo39/modeling/stage2.py` |
-
 | Adaptadores | `mibici_equipo39/modeling/p1.py`, `p2.py`, `p3.py` |
-
 | Registro | `mibici_equipo39/registry.py` |
-
 | Tracking | `mibici_equipo39/modeling/tracking.py` |
-
 | Ejecución | `MLproject` |
-
 | Contrato de infraestructura | `references/etapa2/contrato_infraestructura.md` |
-
 | Manifiestos | `references/data_manifest.json` y `references/split_manifest.json` |
 
 
