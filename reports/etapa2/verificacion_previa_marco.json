@@ -1,0 +1,231 @@
+{
+  "date": "2026-10-25",
+  "member": "Marco",
+  "scope": "Verificacion previa de P3, en almacen aislado; no son resultados oficiales consolidados.",
+  "commit": "4ad9e03c04fe66b6523be8fb2240c1537ed6574d",
+  "execution": "mlflow run . -e train --env-manager local --experiment-name mibici-equipo39 -P question=p3 -P model=search -P member=Marco -P mode=search",
+  "data_source": "Copia verificada de tablas locales con la misma data_version y split_id; no se reconstruyo la ingesta desde un clon sin datos.",
+  "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+  "parent_run_id": "71ecf5f8c05e48e0a5c7ce797334b1aa",
+  "parent_status": "FINISHED",
+  "children": [
+    {
+      "variant": "p3_gmm_3",
+      "run_id": "c9ce8faf71644278a005e344810c1efa",
+      "role": "candidate",
+      "status": "FINISHED",
+      "signature_and_example": true,
+      "saved_prediction_matches": true,
+      "artifact_folders": [
+        "config",
+        "data",
+        "evaluation",
+        "model",
+        "plots"
+      ],
+      "metrics": {
+        "train_n_clusters": 3.0,
+        "train_min_cluster_size": 25.0,
+        "train_min_cluster_share": 0.06775067750677506,
+        "train_silhouette": 0.08153772549733092,
+        "train_davies_bouldin": 3.0699033329920837,
+        "train_stability_ari_mean": 0.49161608005495216,
+        "train_stability_ari_min": 0.2732687685390185,
+        "model_bytes": 7893.0,
+        "train_fit_seconds": 0.12255400000140071,
+        "val_n_clusters": 3.0,
+        "val_min_cluster_size": 46.0,
+        "val_min_cluster_share": 0.12466124661246612,
+        "val_silhouette": 0.026593711347692978,
+        "val_davies_bouldin": 3.0005039599290324,
+        "val_predict_ms_per_1000": 4.827913286815572,
+        "val_model_bytes": 7893.0,
+        "test_n_clusters": 3.0,
+        "test_min_cluster_size": 17.0,
+        "test_min_cluster_share": 0.04607046070460705,
+        "test_silhouette": 0.051373275011096224,
+        "test_davies_bouldin": 2.9422603614858196,
+        "fit_seconds": 10.432631000003312
+      }
+    },
+    {
+      "variant": "p3_kmeans_5",
+      "run_id": "38b197e954ad46acb97c9e45e1664070",
+      "role": "candidate",
+      "status": "FINISHED",
+      "signature_and_example": true,
+      "saved_prediction_matches": true,
+      "artifact_folders": [
+        "config",
+        "data",
+        "evaluation",
+        "model",
+        "plots"
+      ],
+      "metrics": {
+        "train_n_clusters": 5.0,
+        "train_min_cluster_size": 22.0,
+        "train_min_cluster_share": 0.05962059620596206,
+        "train_silhouette": 0.06829290251431142,
+        "train_davies_bouldin": 2.649034703321203,
+        "train_stability_ari_mean": 0.45119736119769743,
+        "train_stability_ari_min": 0.3913067650243668,
+        "model_bytes": 6503.0,
+        "train_fit_seconds": 0.16852759999164846,
+        "val_n_clusters": 5.0,
+        "val_min_cluster_size": 26.0,
+        "val_min_cluster_share": 0.07046070460704607,
+        "val_silhouette": -0.043167122129876986,
+        "val_davies_bouldin": 3.4650386710404733,
+        "val_predict_ms_per_1000": 7.419512179039096,
+        "val_model_bytes": 6503.0,
+        "test_n_clusters": 5.0,
+        "test_min_cluster_size": 24.0,
+        "test_min_cluster_share": 0.06504065040650407,
+        "test_silhouette": 0.02726582323143914,
+        "test_davies_bouldin": 3.2328710641754315,
+        "fit_seconds": 9.722784999990836
+      }
+    },
+    {
+      "variant": "p3_kmeans_4",
+      "run_id": "a9552225ef9946f1a65f5f2e78442ce9",
+      "role": "candidate",
+      "status": "FINISHED",
+      "signature_and_example": true,
+      "saved_prediction_matches": true,
+      "artifact_folders": [
+        "config",
+        "data",
+        "evaluation",
+        "model",
+        "plots"
+      ],
+      "metrics": {
+        "train_n_clusters": 4.0,
+        "train_min_cluster_size": 27.0,
+        "train_min_cluster_share": 0.07317073170731707,
+        "train_silhouette": 0.07154332883558714,
+        "train_davies_bouldin": 2.5433898952892156,
+        "train_stability_ari_mean": 0.6787445883997301,
+        "train_stability_ari_min": 0.5785083932415619,
+        "model_bytes": 6119.0,
+        "train_fit_seconds": 0.18540899999788962,
+        "val_n_clusters": 4.0,
+        "val_min_cluster_size": 29.0,
+        "val_min_cluster_share": 0.07859078590785908,
+        "val_silhouette": -0.019897724613091517,
+        "val_davies_bouldin": 3.1374780067195838,
+        "val_predict_ms_per_1000": 4.148238480815457,
+        "val_model_bytes": 6119.0,
+        "test_n_clusters": 4.0,
+        "test_min_cluster_size": 32.0,
+        "test_min_cluster_share": 0.08672086720867209,
+        "test_silhouette": 0.028181818211264295,
+        "test_davies_bouldin": 3.054132881302322,
+        "fit_seconds": 12.139950400000089
+      }
+    },
+    {
+      "variant": "p3_kmeans_3",
+      "run_id": "42379131f22449fa89af96b9a26ee208",
+      "role": "baseline",
+      "status": "FINISHED",
+      "signature_and_example": true,
+      "saved_prediction_matches": true,
+      "artifact_folders": [
+        "config",
+        "data",
+        "evaluation",
+        "model",
+        "plots"
+      ],
+      "metrics": {
+        "train_n_clusters": 3.0,
+        "train_min_cluster_size": 18.0,
+        "train_min_cluster_share": 0.04878048780487805,
+        "train_silhouette": 0.11284582547591084,
+        "train_davies_bouldin": 2.2588251440302005,
+        "train_stability_ari_mean": 0.8564746561613529,
+        "train_stability_ari_min": 0.7430166912023979,
+        "model_bytes": 5735.0,
+        "train_fit_seconds": 0.29633090000425,
+        "val_n_clusters": 3.0,
+        "val_min_cluster_size": 24.0,
+        "val_min_cluster_share": 0.06504065040650407,
+        "val_silhouette": 0.005563705071000712,
+        "val_davies_bouldin": 3.0134815068691148,
+        "val_predict_ms_per_1000": 7.984552872846746,
+        "val_model_bytes": 5735.0,
+        "test_n_clusters": 3.0,
+        "test_min_cluster_size": 26.0,
+        "test_min_cluster_share": 0.07046070460704607,
+        "test_silhouette": 0.07925522718578003,
+        "test_davies_bouldin": 2.874951965715144,
+        "fit_seconds": 10.199862399997073
+      }
+    }
+  ],
+  "validation_selection": {
+    "selected_variant": "p3_gmm_3",
+    "rule": "mayor val_silhouette entre elegibles; empate a 6 decimales lo gana el baseline",
+    "validation_metrics": {
+      "p3_kmeans_3": {
+        "val_n_clusters": 3,
+        "val_min_cluster_size": 24,
+        "val_min_cluster_share": 0.06504065040650407,
+        "val_silhouette": 0.005563705071000712,
+        "val_davies_bouldin": 3.0134815068691148,
+        "train_min_cluster_share": 0.04878048780487805,
+        "val_predict_ms_per_1000": 7.984552872846746,
+        "val_model_bytes": 5735.0
+      },
+      "p3_kmeans_4": {
+        "val_n_clusters": 4,
+        "val_min_cluster_size": 29,
+        "val_min_cluster_share": 0.07859078590785908,
+        "val_silhouette": -0.019897724613091517,
+        "val_davies_bouldin": 3.1374780067195838,
+        "train_min_cluster_share": 0.07317073170731707,
+        "val_predict_ms_per_1000": 4.148238480815457,
+        "val_model_bytes": 6119.0
+      },
+      "p3_kmeans_5": {
+        "val_n_clusters": 5,
+        "val_min_cluster_size": 26,
+        "val_min_cluster_share": 0.07046070460704607,
+        "val_silhouette": -0.043167122129876986,
+        "val_davies_bouldin": 3.4650386710404733,
+        "train_min_cluster_share": 0.05962059620596206,
+        "val_predict_ms_per_1000": 7.419512179039096,
+        "val_model_bytes": 6503.0
+      },
+      "p3_gmm_3": {
+        "val_n_clusters": 3,
+        "val_min_cluster_size": 46,
+        "val_min_cluster_share": 0.12466124661246612,
+        "val_silhouette": 0.026593711347692978,
+        "val_davies_bouldin": 3.0005039599290324,
+        "train_min_cluster_share": 0.06775067750677506,
+        "val_predict_ms_per_1000": 4.827913286815572,
+        "val_model_bytes": 7893.0
+      }
+    },
+    "calibration": {
+      "p3_kmeans_3": {},
+      "p3_kmeans_4": {},
+      "p3_kmeans_5": {},
+      "p3_gmm_3": {}
+    }
+  },
+  "working_tree_clean": true,
+  "forbidden_history_paths": [],
+  "registry_versions_created": 0,
+  "official_store_modified": false,
+  "pending": [
+    "Integrar P1 y aprobar PR 15",
+    "Ejecutar flujo oficial completo y comprobar ingesta desde clon limpio",
+    "Justificar y aprobar selecciones; registrar y verificar los tres modelos",
+    "Capturas oficiales y reporte final"
+  ]
+}
