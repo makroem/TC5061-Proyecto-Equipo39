@@ -332,6 +332,8 @@ class P1Adapter(QuestionAdapter):
         
         frame = pd.concat([data["metadata"], data["X"]], axis=1,)
         
+        model.fit(frame[train], data["y"][train])
+        
         
         return Fitted(variant=variant, model=model, flavor="sklearn",)
     
@@ -369,7 +371,6 @@ class P1Adapter(QuestionAdapter):
         
         return {f"{prefix}_mae": float(mae), f"{prefix}_rmse": float(rmse),
                 f"{prefix}_predict_ms_per_1000": float(predict_ms_per_1000),
-                f"{prefix}_model_bytes": int(fitted.extra["model_bytes"]),
                 f"{prefix}_model_bytes": int(model_size),
                 }
     
@@ -389,6 +390,9 @@ class P1Adapter(QuestionAdapter):
         
         months = dates.dt.to_period("M")
         
+        monthly_path = folder / "monthly_mae.csv"
+        hourly_path = folder / "error_por_hora.csv"
+        
         monthly_mae = pd.DataFrame({
         "month": months.astype(str),
         "actual": data["y"].loc[validation].to_numpy(),
@@ -402,7 +406,7 @@ class P1Adapter(QuestionAdapter):
             .mean()
         )
         
-        monthly_mae.to_csv(folder / "monthly_mae.csv")
+        monthly_mae.to_csv(monthly_path)
         
         hourly_mae = pd.DataFrame({"hour_of_day": frame.loc[
             validation,
@@ -419,9 +423,12 @@ class P1Adapter(QuestionAdapter):
             .mean()
         )
         
-        hourly_mae.to_csv(folder / "error_por_hora.csv")
+        hourly_mae.to_csv(hourly_path)
             
-        return [plots.p1_real_vs_predicho(
+        return [
+            monthly_path,
+            hourly_path,
+            plots.p1_real_vs_predicho(
             test["y"],
             pred,
             folder / "real_vs_predicho.png",),

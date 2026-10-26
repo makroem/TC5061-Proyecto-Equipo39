@@ -96,9 +96,12 @@ def test_controller_search_logs_a_p1_model_that_loads_in_a_new_process(
     f"runs:/{run.info.run_id}/evaluation/example_prediction.json")
 
     code = ("import json, sys, mlflow; "
+            "from pathlib import Path;"
+            "from mlflow.models import Model;"
            "local = mlflow.artifacts.download_artifacts(sys.argv[1]); "
-           "example = Model.load(local + '/MLmodel').load_input_example(local); "
-           "print(json.dumps(list(mlflow.pyfunc.load_model(local).predict(example).columns)))"
+           "example=Model.load(str(Path(local) / 'MLmodel')).load_input_example(local);"
+           "pred=mlflow.pyfunc.load_model(local).predict(example);"
+           "print(json.dumps(pred.tolist()))"
     )
     environment = {**os.environ, "MLFLOW_TRACKING_URI": stage2_env.uri}
     environment.pop("MLFLOW_RUN_ID", None)
@@ -109,7 +112,7 @@ def test_controller_search_logs_a_p1_model_that_loads_in_a_new_process(
     got = json.loads(
         result.stdout.strip().splitlines()[-1]
         )
-    assert got == expected["data"]
+    np.testing.assert_allclose(got, expected["data"],)
 
 def sample_frame():
     return pd.DataFrame(
