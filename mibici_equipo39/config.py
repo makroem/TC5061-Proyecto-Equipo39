@@ -35,6 +35,8 @@ P1_HGB_100_PARAMS = {
     "random_state": SEED,
 }
 
+P1_HGB_PARAMS = P1_HGB_100_PARAMS
+
 P1_HGB_200_PARAMS = {
     "loss": "poisson",
     "learning_rate": 0.05,
@@ -84,11 +86,8 @@ REGISTERED_MODELS = {
 STAGE2_SEARCH_PLAN = {
     "p1": [
         {"name": "p1_hgb_100", "family": "hgb", "params": dict(P1_HGB_100_PARAMS)},
-        {"name": "p1_hgb_200", "family": "hgb", "params": {
-            **P1_HGB_200_PARAMS, "max_iter": 200, "learning_rate": 0.05}},
-        {"name": "p1_rf_300", "family": "random_forest", "params": {
-            "n_estimators": 300, "max_depth": 16, "min_samples_leaf": 20,
-            "max_samples": 0.5, "bootstrap": True, "n_jobs": 2, "random_state": SEED}},
+        {"name": "p1_hgb_200", "family": "hgb", "params": dict(P1_HGB_200_PARAMS)},
+        {"name": "p1_rf_300", "family": "random_forest", "params": dict(P1_RF_300_PARAMS)},
     ],
     "p2": [
         {"name": f"p2_lr_{value:g}", "family": "logistic", "params": {

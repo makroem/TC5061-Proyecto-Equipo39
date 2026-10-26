@@ -15,6 +15,7 @@ from mibici_equipo39 import config as C
 from mibici_equipo39 import plots
 from mibici_equipo39.features import FEATURE_COLUMNS, eligible_stations, load_tables
 from mibici_equipo39.modeling.tracking import common_params, common_tags, log_model_run
+from mibici_equipo39.modeling.stage2 import Fitted, QuestionAdapter
 
 SPLITS = {"train": "train", "val": "validation", "test": "test"}
 
@@ -139,8 +140,8 @@ class P1Experiment:
                 frame[self.train],
                 self.y[self.train])
             
-            self.model_sizes[n]=model_bytes(model)
             self.fit_seconds[n] = (time.perf_counter() - start)
+            self.model_sizes[n] = model_bytes(model)
             self.models[n] = model
         
         start = time.perf_counter()
@@ -291,6 +292,106 @@ class P1Experiment:
                 run_name, run_tags, {**params, **extra}, self.metrics[name], texts, figures
             )
 
+
+class P1Adapter(QuestionAdapter):
+    question = "p1"
+    selection_metric = "val_mae"
+    greater_is_better = False
+    
+    def baseline(self):
+        return {
+            "name": "baseline",
+            "family": "baseline",
+            "params": {},
+            }
+    def load_data(self):
+        metadata, X, y = load_tables()
+        keep = metadata["station_id"].isin(
+            eligible_stations(metadata, y)).to_numpy()
+        
+        return {"metadata": metadata[keep].reset_index(drop=True),
+                "X": X[keep].reset_index(drop=True),
+                "y": y[keep].reset_index(drop=True),
+                }
+    def fit(self, variant, data):
+        if variant["family"]== "baseline":
+            model= SeasonalMeanBaseline()
+        elif variant["family"]=="hgb":
+            model = StationEncodedRegressor(
+                HistGradientBoostingRegressor(
+                **variant["params"])
+                )
+        elif variant["family"] == "random_forest":
+            model=StationEncodedRegressor(
+                RandomForestRegressor(**variant["params"]))
+            
+        else:
+            raise ValueError(f"Familia desconocida para P1: {variant['family']}")
+        
+        train = data["metadata"]["split"].eq("train")
+        
+        frame = pd.concat([data["metadata"], data["X"]], axis=1,)
+        
+        model.fit(frame[train], data["y"][train])
+        
+        extra={"model_bytes": model_bytes(model),}
+        
+        return Fitted(variant=variant, model=model, flavor="sklearn", extra=extra,)
+    
+    def input_example(self, fitted, data):
+        frame = pd.concat([data["metadata"], data["X"]],
+                          axis=1,)
+        return (frame.loc[frame["split"].eq("validation")].head(3).reset_index(drop=True))
+    
+    def tie_break(self, fitted, val_metrics):
+        return (val_metrics["predict_ms_per_1000"], 
+                val_metrics["model_bytes"],)
+    
+    def evaluate(self, fitted, data, split):
+        prefix = {"train": "train",
+                  "validation": "val",
+                  "test": "test",}[split]
+        
+        frame = pd.concat([data["metadata"], data["X"]], axis=1,)
+        
+        mask = data["metadata"]["split"].eq(split)
+        
+        frame_split = frame.loc[mask]
+                
+        start = time.perf_counter()
+        pred = fitted.model.predict(frame_split)
+        elapsed = time.perf_counter() - start
+        predict_ms_per_1000 = (elapsed * 1000.0 * 1000.0 / len(frame_split))
+
+        
+        mae = mean_absolute_error(data["y"][mask], pred)
+        rmse = root_mean_squared_error(data["y"][mask], pred)
+        
+        return {f"{prefix}_mae": float(mae), f"{prefix}_rmse": float(rmse),
+                "predict_ms_per_1000": float(predict_ms_per_1000),
+                "model_bytes": int(fitted.extra["model_bytes"]),
+                }
+    
+        
+    def plots(self, fitted, data, folder):
+        frame = pd.concat([data["metadata"], data["X"]], axis=1,)
+            
+        test = frame.loc[data["metadata"]["split"].eq("test")].copy()
+        test["y"] = data["y"].loc[test.index]
+        pred = fitted.model.predict(test)
+            
+        return [plots.p1_real_vs_predicho(
+            test["y"],
+            pred,
+            folder / "real_vs_predicho.png",),
+            plots.p1_residuales(
+                test["y"],
+                pred, 
+                folder / "residuales.png",),
+            ]
+        
+        
+ADAPTER = P1Adapter()
 
 def model_bytes(model):
     return len (pickle.dumps(model))
