@@ -180,15 +180,14 @@ El PR #18 integró al controlador común el contrato
 específicos de cada ADAPTER, preservando la prioridad
 del baseline.
 
-El PR #19 propone implementar esta regla en P3:
+El PR #19 implementó e integró esta regla en P3:
 entre candidatos elegibles con igual métrica de selección,
 se prioriza el menor tiempo de inferencia por 1,000
 observaciones de validación y posteriormente el menor
 tamaño serializado del modelo. El conjunto test no
 participa en el desempate.
 
-El PR #19 continúa pendiente de revisión y no
-forma parte todavía de `main`.
+El PR #19 fue aprobado por Marco e integrado en `main` mediante el commit `4ad9e03`.
 
 
 ### Registro de modelos

@@ -233,7 +233,7 @@ En P3, el criterio principal sigue siendo maximizar
 `val_silhouette`, considerando solamente las variantes que
 cumplen la elegibilidad de un grupo mínimo del 5%.
 Cuando dos candidatos empatan en la métrica de selección,
-la propuesta de `P3Adapter.tie_break()` utiliza, en orden:
+la implementación integrada de `P3Adapter.tie_break()` utiliza, en orden:
 
 1. Menor tiempo de inferencia por cada 1,000 observaciones,
    medido con perfiles de validación.
@@ -244,11 +244,7 @@ pero no sustituye el criterio de desempate anterior.
 Ni la selección ni la medición del desempate
 consultan el conjunto test.
 
-La implementación específica y sus pruebas fueron
-propuestas por Diego Hurtado en el PR #19,
-commit `ff31bee`. Dicho PR permanece abierto y sujeto a
-revisión; por lo tanto, esta mejora todavía no debe
-considerarse integrada en `main`.
+La implementación de P3 y sus pruebas de desempate fueron aportadas por Diego Hurtado mediante el PR #19, commit `ff31bee`. Marco aprobó la revisión tras verificar 50 pruebas de P3 y del controlador, sin fallos. El PR fue integrado en `main` mediante el commit `4ad9e03`. Esta verificación no acredita corridas oficiales ni registro del modelo ganador.
 
 La validación local reportada incluye 33 pruebas de P3
 aprobadas y 114 pruebas del repositorio aprobadas con
