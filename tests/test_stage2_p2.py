@@ -145,9 +145,9 @@ def test_controller_search_logs_a_p2_pyfunc_that_loads_in_a_new_process(stage2_e
     plots = {a.path for a in stage2_env.client.list_artifacts(run.info.run_id, "plots")}
     assert {"plots/p2_matrices_confusion_validacion.png", "plots/p2_precision_recall_validacion.png",
             "plots/p2_umbrales_validacion.png"} <= plots
-    code = ("import json, sys, mlflow; from mlflow.models import Model; "
+    code = ("import json, sys, mlflow; from pathlib import Path; from mlflow.models import Model; "
             "local = mlflow.artifacts.download_artifacts(sys.argv[1]); "
-            "example = Model.load(local + '/MLmodel').load_input_example(local); "
+            "example = Model.load(str(Path(local) / 'MLmodel')).load_input_example(local); "
             "print(json.dumps(list(mlflow.pyfunc.load_model(local).predict(example).columns)))")
     environment = {**os.environ, "MLFLOW_TRACKING_URI": stage2_env.uri}
     environment.pop("MLFLOW_RUN_ID", None)
