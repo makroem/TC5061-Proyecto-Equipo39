@@ -73,6 +73,7 @@ def test_controller_search_logs_a_p1_model_that_loads_in_a_new_process(
     monkeypatch,):
     
     data = synthetic_p1()
+    monkeypatch.setattr(C, "ROOT", REPO)
     monkeypatch.setattr(p1.ADAPTER, "load_data", lambda: data)
     monkeypatch.setattr(
         stage2,
@@ -81,7 +82,6 @@ def test_controller_search_logs_a_p1_model_that_loads_in_a_new_process(
     monkeypatch.setattr(C, "STAGE2_SEARCH_PLAN", {"p1": P1_PLAN})
     
     parent_id = stage2_env.project_run()
-
     summary = stage2.main(
         [
             "--question",
@@ -92,34 +92,24 @@ def test_controller_search_logs_a_p1_model_that_loads_in_a_new_process(
     )
 
     run = stage2_env.children(parent_id)[summary["selected_variant"]]
+    expected = mlflow.artifacts.load_dict(
+    f"runs:/{run.info.run_id}/evaluation/example_prediction.json")
 
-    code = (
-    "import sys, mlflow;"
-    "m = mlflow.pyfunc.load_model(sys.argv[1]);"
-    "print(type(m).__name__)"
+    code = ("import json, sys, mlflow; "
+           "local = mlflow.artifacts.download_artifacts(sys.argv[1]); "
+           "example = Model.load(local + '/MLmodel').load_input_example(local); "
+           "print(json.dumps(list(mlflow.pyfunc.load_model(local).predict(example).columns)))"
     )
-    environment = {
-        **os.environ,
-        "MLFLOW_TRACKING_URI": stage2_env.uri,
-    }
-
+    environment = {**os.environ, "MLFLOW_TRACKING_URI": stage2_env.uri}
     environment.pop("MLFLOW_RUN_ID", None)
-
-    result = subprocess.run(
-        [
-            sys.executable,
-            "-c",
-            code,
-            f"runs:/{run.info.run_id}/model",
-        ],
-        cwd=REPO,
-        env=environment,
-        capture_output=True,
-        text=True,
-        check=False,
-    )
+    result = subprocess.run([sys.executable, "-c", code, f"runs:/{run.info.run_id}/model"], cwd=REPO,
+                           env=environment, capture_output=True, text=True, check=False)
 
     assert result.returncode == 0, result.stderr[-2000:]
+    got = json.loads(
+        result.stdout.strip().splitlines()[-1]
+        )
+    assert got == expected["data"]
 
 def sample_frame():
     return pd.DataFrame(

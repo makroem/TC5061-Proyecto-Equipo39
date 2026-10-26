@@ -332,20 +332,19 @@ class P1Adapter(QuestionAdapter):
         
         frame = pd.concat([data["metadata"], data["X"]], axis=1,)
         
-        model.fit(frame[train], data["y"][train])
         
-        extra={"model_bytes": model_bytes(model),}
-        
-        return Fitted(variant=variant, model=model, flavor="sklearn", extra=extra,)
+        return Fitted(variant=variant, model=model, flavor="sklearn",)
     
     def input_example(self, fitted, data):
         frame = pd.concat([data["metadata"], data["X"]],
                           axis=1,)
-        return (frame.loc[frame["split"].eq("validation")].head(3).reset_index(drop=True))
+        columns = ["station_id"] + FEATURE_COLUMNS
+        
+        return (frame.loc[frame["split"].eq("validation"), columns].head(3).reset_index(drop=True))
     
     def tie_break(self, fitted, val_metrics):
-        return (val_metrics["predict_ms_per_1000"], 
-                val_metrics["model_bytes"],)
+        return (val_metrics["val_predict_ms_per_1000"], 
+                val_metrics["val_model_bytes"],)
     
     def evaluate(self, fitted, data, split):
         prefix = {"train": "train",
@@ -362,23 +361,65 @@ class P1Adapter(QuestionAdapter):
         pred = fitted.model.predict(frame_split)
         elapsed = time.perf_counter() - start
         predict_ms_per_1000 = (elapsed * 1000.0 * 1000.0 / len(frame_split))
-
+        model_size=model_bytes(fitted.model)
         
         mae = mean_absolute_error(data["y"][mask], pred)
         rmse = root_mean_squared_error(data["y"][mask], pred)
         
+        
         return {f"{prefix}_mae": float(mae), f"{prefix}_rmse": float(rmse),
-                "predict_ms_per_1000": float(predict_ms_per_1000),
-                "model_bytes": int(fitted.extra["model_bytes"]),
+                f"{prefix}_predict_ms_per_1000": float(predict_ms_per_1000),
+                f"{prefix}_model_bytes": int(fitted.extra["model_bytes"]),
+                f"{prefix}_model_bytes": int(model_size),
                 }
     
         
     def plots(self, fitted, data, folder):
+        folder.mkdir(parents=True, exist_ok=True)
+        validation = data["metadata"]["split"].eq("validation")
         frame = pd.concat([data["metadata"], data["X"]], axis=1,)
-            
+        pred_all = fitted.model.predict(frame)    
+        
         test = frame.loc[data["metadata"]["split"].eq("test")].copy()
         test["y"] = data["y"].loc[test.index]
         pred = fitted.model.predict(test)
+        dates = pd.to_datetime(
+            data["metadata"].loc[validation, "prediction_time"]
+            )
+        
+        months = dates.dt.to_period("M")
+        
+        monthly_mae = pd.DataFrame({
+        "month": months.astype(str),
+        "actual": data["y"].loc[validation].to_numpy(),
+        "pred": pred_all[validation.to_numpy()],})
+        
+        monthly_mae = (monthly_mae.assign(
+            mae=lambda x: (
+                x["actual"] - x["pred"]).abs()
+            )
+            .groupby("month")["mae"]
+            .mean()
+        )
+        
+        monthly_mae.to_csv(folder / "monthly_mae.csv")
+        
+        hourly_mae = pd.DataFrame({"hour_of_day": frame.loc[
+            validation,
+            "hour_of_day"],
+            "actual": data["y"].loc[validation].to_numpy(),
+            "pred": pred_all[validation.to_numpy()],}
+            )
+        
+        hourly_mae = (hourly_mae.assign(
+            mae=lambda x: (
+                x["actual"] - x["pred"]).abs()
+            )
+            .groupby("hour_of_day")["mae"]
+            .mean()
+        )
+        
+        hourly_mae.to_csv(folder / "error_por_hora.csv")
             
         return [plots.p1_real_vs_predicho(
             test["y"],
