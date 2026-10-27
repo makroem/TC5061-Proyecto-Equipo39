@@ -3,7 +3,7 @@ Rama: feat/stefania-a6-p1
 
 ## Pruebas
 python -m pytest tests/test_stage2_p1.py -v
-Resultado: 7 passed
+Resultado: 6 passed
 
 # Ejecucion local
 python -m mibici_equipo39.modeling.p1
