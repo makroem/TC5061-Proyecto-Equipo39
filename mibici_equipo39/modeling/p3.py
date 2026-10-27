@@ -517,7 +517,9 @@ class P3Adapter(QuestionAdapter):
 
         train_profiles = data["profiles"]["train"]
 
+        fit_start = perf_counter()
         pipeline.fit(train_profiles)
+        fit_seconds = perf_counter() - fit_start
 
         model = pipeline.named_steps["model"]
 
@@ -561,6 +563,7 @@ class P3Adapter(QuestionAdapter):
             ),
             "stability_ari_mean": float(np.mean(stability)),
             "stability_ari_min": float(np.min(stability)),
+            "fit_seconds": float(fit_seconds),
             "model_bytes": int(
                 len(
                     pickle.dumps(
@@ -614,14 +617,28 @@ class P3Adapter(QuestionAdapter):
                     "model_bytes": float(
                         fitted.extra["model_bytes"]
                     ),
+                    "train_fit_seconds": float(
+                        fitted.extra["fit_seconds"]
+                    ),
                 }
             )
 
         if split == "validation":
             # La elegibilidad se decide durante selección,
             # antes de consultar test.
+            cost = p3_model_cost_metrics(
+                fitted.model,
+                profiles,
+                fitted.extra["fit_seconds"],
+            )
             metrics["train_min_cluster_share"] = float(
                 fitted.extra["train_min_cluster_share"]
+            )
+            metrics["val_predict_ms_per_1000"] = float(
+                cost["predict_ms_per_1000"]
+            )
+            metrics["val_model_bytes"] = float(
+                cost["model_bytes"]
             )
 
         return metrics
@@ -634,6 +651,13 @@ class P3Adapter(QuestionAdapter):
             )
             >= C.P3_MIN_CLUSTER_SHARE
             and self.selection_metric in val_metrics
+        )
+
+    def tie_break(self, fitted, val_metrics):
+        """Desempate por inferencia y tama?o, sin usar test."""
+        return (
+            float(val_metrics["val_predict_ms_per_1000"]),
+            int(val_metrics["val_model_bytes"]),
         )
 
     def input_example(self, fitted, data):

@@ -1,0 +1,3 @@
+"archivo","seccion","autor","fecha","question","run_id","model_version","descripcion","fuente"
+"evidence/E13_estructura_modulo.jpg","Estructura del repositorio","Marco","2026-10-25","","","","Vista real de mibici_equipo39 en main; evidencia parcial de estructura, no cierre de las tres preguntas.","https://github.com/makroem/TC5061-Proyecto-Equipo39/tree/main/mibici_equipo39"
+"evidence/E14_colaboracion_p3.jpg","Colaboracion","Marco","2026-10-25","P3","","","Revision y merge del PR 19 realizados por Marco; no acredita por si sola la participacion de los cuatro integrantes.","https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/19#pullrequestreview-5645558408"
