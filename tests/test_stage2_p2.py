@@ -196,3 +196,43 @@ def test_reproduce_keeps_the_thresholds_frozen_in_the_selection(stage2_env, monk
     child = stage2_env.children(parent_id)[chosen]
     resolved = mlflow.artifacts.load_dict(f"runs:/{child.info.run_id}/config/resolved.json")
     assert resolved["thresholds"] == frozen["thresholds"] and child.data.tags["calibration_source"] == "selection"
+
+
+def test_occupancy_sensitivity_compares_frozen_alerts_with_alternative_labels():
+    frame = pd.DataFrame({"capacity": [20.0] * 4, "flow_min": [-4.0, -9.0, 0.0, 0.0],
+                          "flow_max": [0.0, 0.0, 4.0, 9.0], "y_bikes": [0, 1, 0, 0], "y_docks": [0, 0, 0, 1]})
+    output = pd.DataFrame({"alert_bikes": [True, True, False, False], "alert_docks": [False, False, False, True]})
+    result = p2.occupancy_sensitivity(frame, output)
+    assert set(result) == {"0.25", "0.75"}
+    low, high = result["0.25"], result["0.75"]
+    assert low["bikes"]["prevalence"] > frame["y_bikes"].mean() and low["bikes"]["recall"] == 1.0
+    assert high["docks"]["prevalence"] > frame["y_docks"].mean() and high["docks"]["precision"] == 1.0
+    assert low["docks"]["support_positive"] == 0 and low["docks"]["recall"] is None
+
+
+def test_metrics_without_positives_are_marked_not_evaluable():
+    data = synthetic()
+    model = fit_and_calibrate(data)
+    data.loc[data["split"].eq("test"), "y_bikes"] = 0
+    metrics = p2.ADAPTER.evaluate(model, data, "test")
+    for name in ("recall", "f1", "ap"):
+        assert f"test_{name}_bikes" not in metrics
+        assert "sin positivos" in model.extra["evaluation"]["not_evaluable"][f"test_{name}_bikes"]
+    assert "test_macro_f1" not in metrics and "test_macro_f1" in model.extra["evaluation"]["not_evaluable"]
+    assert metrics["test_support_positive_bikes"] == 0 and "test_recall_docks" in metrics
+
+
+def test_sensitivity_and_not_evaluable_reach_the_child_summary(stage2_env, monkeypatch):
+    data = synthetic()
+    monkeypatch.setattr(C, "ROOT", REPO)
+    monkeypatch.setattr(C, "STAGE2_SEARCH_PLAN", {"p2": P2_PLAN})
+    monkeypatch.setattr(p2.ADAPTER, "load_data", lambda: data)
+    monkeypatch.setattr(stage2, "load_adapter", lambda question: p2.ADAPTER)
+    parent_id = stage2_env.project_run()
+    stage2.main(["--question", "p2", "--member", "DiegoMartinez"])
+    baseline = stage2_env.children(parent_id)["baseline"]
+    summary = mlflow.artifacts.load_dict(f"runs:/{baseline.info.run_id}/evaluation/summary.json")
+    assert set(summary["initial_occupancy_sensitivity"]) == {"validation", "test"}
+    assert set(summary["initial_occupancy_sensitivity"]["test"]) == {"0.25", "0.75"}
+    assert "val_precision_bikes" in summary["not_evaluable"] and "val_precision_bikes" not in baseline.data.metrics
+    assert baseline.data.metrics["val_macro_f1"] == 0
