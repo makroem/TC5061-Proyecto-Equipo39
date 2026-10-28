@@ -1,0 +1,26 @@
+{
+  "question": "P3",
+  "variant": "p3_gmm_3",
+  "run_id": "46ce752d830c4edfbbb6cd7e05aabc86",
+  "parent_run_id": "09bfe57afcea4438b67aa7afc37ed56d",
+  "git_commit": "97f0033d1669bea64f38d86cf78f680dffbd3062",
+  "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+  "split_id": "ab6301f96f083217512343b4f800bc5ddea51b666492ef05b34da85591cc9bdd",
+  "shared_with": "Diego Hurtado",
+  "artifacts": [
+    {
+      "path": "perfiles_grupos.png",
+      "mlflow_path": "plots/perfiles_grupos.png",
+      "sha256": "f00e5495be21dbda7bf41783e665ef55fbdd6e2d63681fe5a23e042488c2bb49",
+      "bytes": 121045,
+      "original_unchanged": true
+    },
+    {
+      "path": "ubicacion_grupos.png",
+      "mlflow_path": "plots/ubicacion_grupos.png",
+      "sha256": "9fc7ab83a4dba5a270a1a0e1b17e85c88b2b51d2aa4188b7417ebfb3d94633c0",
+      "bytes": 73282,
+      "original_unchanged": true
+    }
+  ]
+}
