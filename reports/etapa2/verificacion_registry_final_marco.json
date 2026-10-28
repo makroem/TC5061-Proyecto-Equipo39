@@ -1,0 +1,107 @@
+{
+  "date": "2026-10-27",
+  "executor": "Marco",
+  "experiment": "mibici-equipo39",
+  "code_commit": "288a592aba240983c8d21c8128c16be4cbf0f2df",
+  "verification_run_id": "77d302adcd404ab7aa8be53c4eeb2896",
+  "verification_status": "FINISHED",
+  "verification_entry_point": "verify_registry",
+  "load_by_alias": {
+    "p1": {
+      "uri": "models:/mibici-equipo39-p1-demanda@champion",
+      "version": "1",
+      "rows": 3,
+      "status": "ok"
+    },
+    "p2": {
+      "uri": "models:/mibici-equipo39-p2-riesgo@champion",
+      "version": "1",
+      "rows": 3,
+      "status": "ok"
+    },
+    "p3": {
+      "uri": "models:/mibici-equipo39-p3-grupos@champion",
+      "version": "1",
+      "rows": 3,
+      "status": "ok"
+    }
+  },
+  "models": {
+    "p1": {
+      "name": "mibici-equipo39-p1-demanda",
+      "version": "1",
+      "alias": "champion",
+      "source_run_id": "66414a8b45164d3a8f5b9f42e7cb387b",
+      "source_kind": "reproduction",
+      "variant_id": "baseline",
+      "git_commit": "288a592aba240983c8d21c8128c16be4cbf0f2df",
+      "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+      "split_version": "3",
+      "delivery": "A6",
+      "load_check": "ok",
+      "description": "P1 demanda: viajes que inician por estación en la siguiente hora, para planear flota. Producción académica: el alias champion identifica la versión elegida; no es un servicio desplegado.",
+      "version_description": "baseline (reproduction). Corrida 66414a8b45164d3a8f5b9f42e7cb387b, commit 288a592, data_version e9de13df5e9b, split_version 3.",
+      "status": "READY",
+      "version_tags": {
+        "source_run_id": "66414a8b45164d3a8f5b9f42e7cb387b",
+        "source_kind": "reproduction",
+        "variant_id": "baseline",
+        "git_commit": "288a592aba240983c8d21c8128c16be4cbf0f2df",
+        "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+        "split_version": "3",
+        "delivery": "A6"
+      }
+    },
+    "p2": {
+      "name": "mibici-equipo39-p2-riesgo",
+      "version": "1",
+      "alias": "champion",
+      "source_run_id": "73804085f3944b54ac2f99542eec38be",
+      "source_kind": "reproduction",
+      "variant_id": "p2_lr_0.1",
+      "git_commit": "288a592aba240983c8d21c8128c16be4cbf0f2df",
+      "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+      "split_version": "3",
+      "delivery": "A6",
+      "load_check": "ok",
+      "description": "P2 riesgo aproximado: probabilidad y alerta de falta de bicicletas y de anclajes en la siguiente hora. Etiquetas derivadas de viajes y capacidad publicada, sin inventario observado. Producción académica: el alias champion identifica la versión elegida; no es un servicio desplegado.",
+      "version_description": "p2_lr_0.1 (reproduction). Corrida 73804085f3944b54ac2f99542eec38be, commit 288a592, data_version e9de13df5e9b, split_version 3.",
+      "status": "READY",
+      "version_tags": {
+        "source_run_id": "73804085f3944b54ac2f99542eec38be",
+        "source_kind": "reproduction",
+        "variant_id": "p2_lr_0.1",
+        "git_commit": "288a592aba240983c8d21c8128c16be4cbf0f2df",
+        "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+        "split_version": "3",
+        "delivery": "A6"
+      }
+    },
+    "p3": {
+      "name": "mibici-equipo39-p3-grupos",
+      "version": "1",
+      "alias": "champion",
+      "source_run_id": "fb847f28e5484ff885e8ef9b44afb2d7",
+      "source_kind": "reproduction",
+      "variant_id": "p3_gmm_3",
+      "git_commit": "288a592aba240983c8d21c8128c16be4cbf0f2df",
+      "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+      "split_version": "3",
+      "delivery": "A6",
+      "load_check": "ok",
+      "description": "P3 grupos: asignación de estaciones a perfiles horarios de uso, para análisis de planeación. Producción académica: el alias champion identifica la versión elegida; no es un servicio desplegado.",
+      "version_description": "p3_gmm_3 (reproduction). Corrida fb847f28e5484ff885e8ef9b44afb2d7, commit 288a592, data_version e9de13df5e9b, split_version 3.",
+      "status": "READY",
+      "version_tags": {
+        "source_run_id": "fb847f28e5484ff885e8ef9b44afb2d7",
+        "source_kind": "reproduction",
+        "variant_id": "p3_gmm_3",
+        "git_commit": "288a592aba240983c8d21c8128c16be4cbf0f2df",
+        "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+        "split_version": "3",
+        "delivery": "A6"
+      }
+    }
+  },
+  "scope": "Producción académica mediante alias champion; no es un servicio desplegado."
+}
