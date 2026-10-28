@@ -35,7 +35,7 @@ El PR #22 quedó integrado después de las revisiones de Stefania, Diego Martine
 
 El [PR #25](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/25), revisado e integrado por Diego Hurtado, incorporó las evidencias de reproducción y registro. El [PR #26](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/26), de Diego Hurtado y revisado e integrado por Marco, completó la [interpretación de los perfiles horarios y el mapa de P3](reports/etapa2/p3.md). Ambas actividades están cerradas.
 
-El [cierre técnico y sus evidencias](reports/etapa2/cierre_tecnico_marco.md) conserva corridas, versiones, linaje, comandos y límites. Quedan por completar las capturas legibles de la interfaz y la consolidación del reporte. Las capturas deben mostrar la comparación con corridas anidadas, los artefactos de una candidata y las tres versiones registradas con alias y linaje. El envío en Canvas no está verificado.
+El [cierre técnico y sus evidencias](reports/etapa2/cierre_tecnico_marco.md) conserva corridas, versiones, linaje, comandos y límites. Las [19 capturas de la interfaz](reports/etapa2/capturas_mlflow_marco.md) documentan búsquedas anidadas, comparaciones, artefactos y las tres versiones registradas con alias y linaje. Queda revisar este conjunto e incorporarlo al Word y PDF consolidados. El envío en Canvas no está verificado.
 
 Repositorio público: https://github.com/makroem/TC5061-Proyecto-Equipo39
 
