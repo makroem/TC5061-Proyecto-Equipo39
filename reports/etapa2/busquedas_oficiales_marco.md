@@ -1,6 +1,6 @@
 # Búsquedas oficiales de Marco - Etapa 2
 
-Estado: resultados ejecutados y comprobados. Las selecciones automáticas se publican para revisión del equipo; este documento no acredita todavía modelos registrados por alias ni reproducción final.
+Estado al 27 de octubre de 2026: búsquedas verificadas y selecciones aprobadas por los responsables de P1, P2 y P3, integradas mediante el PR #22. La reproducción y el registro posteriores están comprobados en el [cierre técnico](cierre_tecnico_marco.md). Las tablas de este documento conservan las métricas de las búsquedas originales.
 
 La ingesta descargó nuevamente los doce meses desde un clon nuevo. Se conservaron 4,497,119 de 4,497,877 viajes y se construyeron 4,108,440 filas de estación por hora. La partición conserva 243 días de entrenamiento, 61 de validación y 61 de prueba.
 
@@ -79,12 +79,10 @@ La elegibilidad exige un grupo mínimo de 5% en entrenamiento. Se selecciona por
 
 Responsable de revisar el análisis y la propuesta: Diego Hurtado.
 
-## Pendientes de cierre
+## Estado de cierre
 
-1. Revisar y aprobar las propuestas de selection.json y las justificaciones por pregunta.
-2. Integrar estas referencias mediante PR revisado antes de ejecutar la reproducción oficial.
-3. Marco ejecuta reproducción por MLflow Projects, conservando calibración de P2, y comprueba los resultados.
-4. Completar registro y carga de los tres modelos por alias champion, junto con Diego Martinez.
-5. Capturar comparaciones, artefactos y linaje de modelos; completar el reporte con las aportaciones del equipo.
+Las revisiones de las tres selecciones y su integración están completas. Marco ejecutó las reproducciones, conservó la calibración aprobada de P2 y verificó coincidencia de métricas, modelos y artefactos. Los tres modelos se registraron con alias `champion` y se cargaron correctamente en una ejecución independiente.
+
+Quedan las capturas de la interfaz, la interpretación de los grupos de P3 y la consolidación del reporte. Los responsables, dependencias y archivos de comprobación están en el [cierre técnico](cierre_tecnico_marco.md).
 
 La base historica se respaldo antes de agregar las corridas. Se conserva el intento de ingesta fallido por configuración inicial del entorno, seguido por la reconstruccion verificada. No se incluyen viajes, Parquet, bases SQLite, carpetas de MLflow ni modelos serializados en Git.

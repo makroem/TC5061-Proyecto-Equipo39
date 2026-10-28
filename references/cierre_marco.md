@@ -1,6 +1,12 @@
 # Registro de validación e integración de Marco
 
-Actualización: 21 de octubre de 2026, America/Mexico_City.
+## Estado actual de la Etapa 2
+
+Actualización: 27 de octubre de 2026, America/Mexico_City. Las búsquedas y selecciones del PR #22, el cierre de P2 del PR #23 y la justificación de P3 del PR #24 están integrados. Marco completó las tres reproducciones y el registro con carga por alias `champion`. El [cierre técnico](../reports/etapa2/cierre_tecnico_marco.md) contiene las evidencias y los pendientes actuales de capturas, interpretación de P3 y reporte.
+
+Diego Hurtado ya acredita aportaciones y PR propios en esta etapa, incluidos los PR #11, #14, #17, #19 y #24. El apartado siguiente conserva el corte histórico del 21 de octubre; sus pendientes no representan el estado actual de la Etapa 2.
+
+## Registro histórico del 21 de octubre de 2026
 
 ## Trabajo realizado
 

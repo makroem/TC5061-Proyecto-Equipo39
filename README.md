@@ -3,7 +3,7 @@
 ## Estado de integración de la Etapa 2
 
 La Etapa 2 utiliza un controlador común de experimentación,
-MLflow Projects y Model Registry. Los ADAPTERS de P2 y P3 estan integrados; el ADAPTER de P1 sigue pendiente en el PR #16.
+MLflow Projects y Model Registry. Los ADAPTERS de P1, P2 y P3 están integrados; P1 se incorporó mediante el PR #16.
 
 El controlador común y el registro de modelos se integraron
 mediante el PR #12. La implementación de P2 se incorporó
@@ -29,10 +29,16 @@ Las pruebas automatizadas verifican la implementación,
 pero no acreditan por sí solas la selección oficial de
 modelos, su registro como champion ni la reproducción final.
 
+### Cierre técnico del 27 de octubre de 2026
+
+El PR #22 quedó integrado después de las revisiones de Stefania, Diego Martinez y Diego Hurtado. Las tres selecciones se reprodujeron con métricas coincidentes y los modelos se registraron como versión 1 con alias `champion`. Su carga por nombre y predicciones se comprobaron en una ejecución independiente de MLflow Projects. El PR #24 incorporó la justificación de P3 revisada por Marco.
+
+El [cierre técnico y sus evidencias](reports/etapa2/cierre_tecnico_marco.md) conserva corridas, versiones, linaje, comandos y límites. Quedan por completar las capturas de la interfaz, la interpretación de los perfiles y el mapa de P3, y la consolidación del reporte. El envío en Canvas no está verificado.
+
 Repositorio público: https://github.com/makroem/TC5061-Proyecto-Equipo39
 
 ## Propósito y alcance
-P1 estima salidas por estación en la siguiente hora; P2 aproxima riesgo de bicicletas o anclajes; P3 agrupa estaciones por uso. El código final vive en `mibici_equipo39`; los notebooks son exploratorios. Los modelos historicos de P1/P2/P3 y su evaluacion cronologica se integraron mediante los PR #8 y #3. Esto no equivale a la integracion de los tres ADAPTERS de Etapa 2: P1 depende del PR #16. El estado de integración, las revisiones y las dependencias restantes se registran en references/cierre_marco.md.
+P1 estima salidas por estación en la siguiente hora; P2 aproxima riesgo de bicicletas o anclajes; P3 agrupa estaciones por uso. El código final vive en `mibici_equipo39`; los notebooks son exploratorios. Los modelos historicos de P1/P2/P3 y su evaluacion cronologica se integraron mediante los PR #8 y #3. Los tres ADAPTERS de la Etapa 2 también están integrados, incluida la aportación de P1 del PR #16. El estado de integración, las revisiones y las dependencias restantes se registran en references/cierre_marco.md.
 
 ## Equipo roles y contribuciones
 Marco (`makroem`, persona1): infraestructura del proyecto, ingesta, versionado de datos, evaluación temporal, implementación inicial de P3 y coordinación de integración.
@@ -43,7 +49,7 @@ Diego Martínez (`Sanciprian`, persona3): integración de variables y modelos, d
 
 Diego Hurtado (`diegoHurtado01`, persona4): preparación experimental de P3 para la Etapa 2, incorporación de variantes KMeans y Gaussian Mixture, métricas de estabilidad y costo, artefactos interpretables y pruebas automatizadas (PR #11). Implementación del ADAPTER de P3 para el controlador común (PR #14). Revisión formal del controlador y de P2 mediante los PR #12 y #13. Responsable de la documentación de arquitectura y consolidación del reporte de experimentos de la Etapa 2.
 
-Las contribuciones integradas conservan su autoría en Git y GitHub. Las corridas oficiales, la selección definitiva de modelos y la reproducción final requieren evidencias independientes de las pruebas automatizadas.
+Las contribuciones integradas conservan su autoría en Git y GitHub. Las corridas oficiales, las selecciones aprobadas, su reproducción y la carga por alias se documentan en el cierre técnico, con evidencia independiente de las pruebas automatizadas.
 ## Preguntas y usuarios
 | Pregunta | Resultado | Usuario y decisión |
 |---|---|---|
@@ -250,7 +256,7 @@ La ejecución de cierre terminó el 18 de octubre de 2026 desde MLflow Projects,
 
 Resultados: P1 conserva baseline (val_mae 0.888775; test_mae 0.916381; test_rmse 1.718234). P2 selecciona logística (val_macro_f1 0.042048; test_macro_f1 0.051779); en test, recall de bicicletas 0.8541 y de anclajes 0.7932, con precisión 0.0218/0.0318. P3 selecciona GMM para 369 estaciones (val_silhouette 0.026594; test_silhouette 0.051373; ARI medio de remuestreo train 0.637608). Los grupos se superponen y no se presume que estén suficientemente separados para decisiones operativas.
 
-Limitaciones: proxy P2 sin inventario, capacidad/ubicación retrospectivas de septiembre, estaciones nuevas sin train excluidas, un año de fuentes y un holdout temporal. No hay despliegue ni impacto operativo demostrado. Las aportaciones de Diego Hurtado se integraron mediante los PR #11 y #14. La selección oficial, el registro de modelos y la reproducción final de la Etapa 2 requieren evidencias independientes.
+Limitaciones: proxy P2 sin inventario, capacidad/ubicación retrospectivas de septiembre, estaciones nuevas sin train excluidas, un año de fuentes y un holdout temporal. No hay despliegue ni impacto operativo demostrado. Las aportaciones de Diego Hurtado se integraron mediante los PR #11 y #14. La selección oficial, la reproducción y el registro de la Etapa 2 se documentan por separado en el [cierre técnico](reports/etapa2/cierre_tecnico_marco.md).
 
 ## Relación parcial con las lecturas
 La introducción pública de Wilson, capítulo 6, respalda la comparación objetiva de alternativas; se conserva el baseline de P1 aunque exista un candidato más complejo. La vista pública de Thompson, capítulo 7, distingue crear un modelo de demostrar su utilidad y enumera seguimiento de experimentos y repositorios en 7.4.2; se aplica con MLflow y con límites operativos explícitos. Solo se consultaron estas vistas públicas, no los capítulos completos ni Lauchande 5 o Huyen 6. Falta contrastar las cuatro lecturas asignadas.
