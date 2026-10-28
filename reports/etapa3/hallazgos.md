@@ -4,6 +4,13 @@ Revisión de Marco, 28 de octubre de 2026. Alcance: código del módulo, version
 fijadas del proyecto, archivos versionados y referencias Git disponibles en el clon.
 Esta revisión no sustituye la validación final después de integrar los PR de la Etapa 3.
 
+Actualización posterior: la rama `fix/marco-a7-dependencias` propone versiones
+corregidas de certifi, requests, pytest y python-dotenv. El auditor deja de reportar
+avisos en esos cuatro paquetes, pero MLflow y PyArrow continúan abiertos.
+Consultar los [resultados de la actualización](actualizacion_dependencias.json)
+y su [procedimiento](../../references/etapa3/actualizacion_dependencias.md).
+Los conteos y versiones que siguen se conservan como diagnóstico previo al cambio.
+
 ## Corregido: validaciones que desaparecían con optimización
 
 Bandit identificó tres usos de `assert` en `dataset.py`: conservación de conteos y
