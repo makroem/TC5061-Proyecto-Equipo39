@@ -83,6 +83,8 @@ Responsable de revisar el análisis y la propuesta: Diego Hurtado.
 
 Las revisiones de las tres selecciones y su integración están completas. Marco ejecutó las reproducciones, conservó la calibración aprobada de P2 y verificó coincidencia de métricas, modelos y artefactos. Los tres modelos se registraron con alias `champion` y se cargaron correctamente en una ejecución independiente.
 
-Quedan las capturas de la interfaz, la interpretación de los grupos de P3 y la consolidación del reporte. Los responsables, dependencias y archivos de comprobación están en el [cierre técnico](cierre_tecnico_marco.md).
+El cierre documental de reproducción y registro se integró mediante el PR #25, revisado por Diego Hurtado. La [interpretación de los grupos de P3](p3.md) quedó integrada mediante el PR #26, revisado por Marco, y conserva las gráficas originales y las limitaciones de separación y estabilidad.
+
+Quedan las capturas legibles de la interfaz y la consolidación del reporte. Los responsables, dependencias y archivos de comprobación están en el [cierre técnico](cierre_tecnico_marco.md).
 
 La base historica se respaldo antes de agregar las corridas. Se conserva el intento de ingesta fallido por configuración inicial del entorno, seguido por la reconstruccion verificada. No se incluyen viajes, Parquet, bases SQLite, carpetas de MLflow ni modelos serializados en Git.

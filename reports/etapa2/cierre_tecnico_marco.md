@@ -12,6 +12,10 @@ El [PR 23](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/23) incorpor
 
 Marco revisó e integró el [PR 24](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/24), de Diego Hurtado, en `1e6e89b2de21d497936624f7065d7de42066fb53`. Ese cambio amplía la justificación de P3; modifica documentación y no altera el código de las reproducciones.
 
+Diego Hurtado revisó e integró el [PR 25](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/25), de Marco, en `44f4dc73d2cfe1a72ae2e7eeb042dd4807df5c47`. Quedaron incorporadas las comprobaciones de reproducción, registro y carga por alias, junto con las dos gráficas originales de la búsqueda seleccionada de P3.
+
+Marco contrastó la interpretación de Diego Hurtado con esas gráficas, los tamaños de los grupos, la comparación oficial y el linaje del modelo. El [PR 26](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/26) quedó aprobado e integrado en `6f7cbafcfa08c6545cf5b592d8de5133d01fb6e0`. La interpretación de los perfiles horarios y la distribución geográfica de P3 está terminada. Estos dos cambios son documentales y no representan nuevos entrenamientos.
+
 ## Resultados reproducidos
 
 La versión de los datos y la partición coinciden con las búsquedas oficiales. Se conservaron las selecciones aprobadas y no se repitió la calibración de P2 ni se seleccionó con test.
@@ -82,19 +86,28 @@ P1 conserva el baseline porque los tres candidatos tuvieron mayor MAE de validac
 
 | Pendiente | Responsable | Qué necesita |
 |---|---|---|
-| Revisar este cierre documental antes de integrarlo | Otro integrante con permisos de escritura | Contrastar las evidencias y aprobar el PR de Marco |
-| Interpretar perfiles horarios y distribución de los grupos de P3 | Diego Hurtado | Inspeccionar `plots/perfiles_grupos.png`, `plots/ubicacion_grupos.png` y asignaciones del modelo seleccionado |
 | Completar capturas de comparaciones con nested runs, artefactos y tres modelos con linaje y alias | Marco, en coordinación con Diego Hurtado | Acceso visual al servidor local y capturas reales legibles |
-| Consolidar Word y PDF de la entrega | Diego Hurtado, con las aportaciones del equipo | Resultados, interpretación de P3, capturas y referencias APA 7 |
+| Consolidar Word y PDF de la entrega | Diego Hurtado, con las aportaciones del equipo | Incorporar los resultados y la interpretación de P3 ya integrados; completar las capturas y referencias APA 7 |
 | Confirmar el envío en Canvas | Integrante designado por el equipo | PDF final y comprobante de entrega |
 
 El Word previo contiene un corte anterior y debe actualizarse antes de presentarlo como reporte final. La evidencia técnica disponible no acredita el envío en Canvas.
+
+### Comprobación de las capturas pendientes
+
+Con el servidor del equipo en ejecución, abrir `http://127.0.0.1:5000` y seleccionar el experimento `mibici-equipo39`. No es necesario repetir las búsquedas ni registrar nuevas versiones para obtener estas capturas.
+
+1. Mostrar las búsquedas oficiales de P1, P2 y P3 con la corrida padre expandida y sus cuatro variantes. Abrir la comparación del baseline y las tres candidatas de cada pregunta; verificar que sean legibles los nombres, las métricas de validación y prueba y los hiperparámetros relevantes. Si la tabla no cabe, tomar capturas complementarias que permitan identificar las mismas corridas.
+2. Abrir una corrida candidata oficial y su pestaña de artefactos. Mostrar el modelo con firma y ejemplo de entrada, los manifiestos en `data/`, la configuración en `config/` y al menos una gráfica en `plots/`. Las gráficas guardadas por el modelo complementan esta evidencia; no sustituyen la captura de la interfaz.
+3. En Models, mostrar los tres modelos de la tabla anterior. Abrir la versión 1 de cada uno y capturar el alias `champion`, la corrida de origen y su linaje: commit, versión de datos y partición. Cuando esos campos estén en la corrida vinculada, incluir también esa pantalla.
+4. Comprobar las imágenes antes de incorporarlas al reporte: texto legible, columnas relevantes visibles, identidad de la corrida y ausencia de credenciales o información personal ajena al proyecto. Una imagen recortada que omite los resultados no cierra este pendiente.
+
+El paquete visual sigue pendiente de validación completa. No se declara terminada la entrega a partir de capturas parciales.
 
 ## Archivos de evidencia
 
 - [Comparaciones y justificación de las búsquedas](busquedas_oficiales_marco.md).
 - [Verificación de las reproducciones](verificacion_reproduccion_final_marco.json): métricas, comparación, configuración, firmas y evaluación.
 - [Verificación del registro](verificacion_registry_final_marco.json): versiones, alias, descripciones, linaje y carga independiente.
-- [Justificación de P3](p3.md), incorporada mediante el PR 24.
+- [Justificación e interpretación visual de P3](p3.md), incorporadas mediante los PR 24 y 26.
 
 Estos archivos contienen resultados y metadatos. No incluyen viajes, bases de MLflow, modelos serializados ni credenciales.
