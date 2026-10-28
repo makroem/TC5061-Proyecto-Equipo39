@@ -204,10 +204,11 @@ def clean_trips(frame, db):
         counts[reason] = int(mask.sum())
         frame = frame.loc[~mask]
     counts["retained_rows"] = len(frame)
-    assert (
+    if (
         sum(v for k, v in counts.items() if k not in ["raw_rows", "retained_rows"]) + len(frame)
-        == counts["raw_rows"]
-    )
+        != counts["raw_rows"]
+    ):
+        raise ValueError("Los conteos de limpieza no conservan las filas de entrada.")
     arrivals = frame.copy()
     dep = departures[["trip_id", "origin_id", "started_at"]].rename(
         columns={"origin_id": "station_id", "started_at": "timestamp"}
@@ -227,6 +228,15 @@ def write_part(frame, build, relative, keys, output_hashes):
         "rows": len(frame),
         "logical_sha256": logical_hash(frame, keys),
     }
+
+
+def remove_data_directory(path):
+    """Elimina solo una subcarpeta de data; la protección también rige con python -O."""
+    path = Path(path)
+    root, target = C.DATA.resolve(), path.resolve()
+    if target == root or not target.is_relative_to(root):
+        raise ValueError("La carpeta a eliminar debe estar dentro de data.")
+    shutil.rmtree(path)
 
 
 def ingest(mode):
@@ -258,8 +268,7 @@ def ingest(mode):
     stations, encoding, separator = clean_stations(station_path)
     build = C.DATA / "_build"
     if build.exists():
-        assert build.resolve().is_relative_to(C.DATA.resolve())
-        shutil.rmtree(build)
+        remove_data_directory(build)
     build.mkdir()
     hashes, sources, rows = {}, [], []
     write_part(stations, build, Path("processed/stations.parquet"), ["station_id"], hashes)
@@ -363,10 +372,9 @@ def ingest(mode):
     for folder in ["processed", "interim"]:
         destination = C.DATA / folder
         if destination.exists():
-            assert destination.resolve().is_relative_to(C.DATA.resolve())
-            shutil.rmtree(destination)
+            remove_data_directory(destination)
         shutil.move(str(build / folder), str(destination))
-    shutil.rmtree(build)
+    remove_data_directory(build)
     if mode == "freeze":
         save_json(manifest_path, manifest)
     quality = {

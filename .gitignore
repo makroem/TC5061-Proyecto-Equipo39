@@ -222,4 +222,10 @@ mlflow.db-*
 private_results/
 private_tracking/
 
+# Entornos y salidas locales de calidad (Etapa 3)
+.venv-*/
+private_quality/
+*.sqlite-shm
+*.sqlite-wal
+
 

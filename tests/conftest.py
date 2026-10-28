@@ -26,6 +26,14 @@ PLAN = [
 PREFIX = {"train": "train", "validation": "val", "test": "test"}
 
 
+def pytest_collection_modifyitems(items):
+    """Separa las pruebas que usan HTTP local o un almacén temporal de MLflow."""
+    local_services = {"source", "contract", "stage2_env"}
+    for item in items:
+        if local_services.intersection(item.fixturenames):
+            item.add_marker(pytest.mark.integration)
+
+
 class FakeAdapter(stage2.QuestionAdapter):
     question, selection_metric, greater_is_better = "p1", "val_mae", False
 

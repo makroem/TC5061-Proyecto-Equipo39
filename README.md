@@ -1,5 +1,18 @@
 # Proyecto MiBici Equipo 39
 
+## Etapa 3: pruebas, validación y seguridad
+
+El trabajo inicial de Marco incorpora un entorno de calidad separado, pruebas de
+ingesta y una revisión preliminar de seguridad. La configuración de PyTest está en
+`pyproject.toml`. Las pruebas usan datos sintéticos y almacenes temporales.
+
+- [Contrato y dependencias del equipo](references/etapa3/contrato_calidad.md).
+- [Instalación, ejecución y alcance de las verificaciones](references/etapa3/ejecucion_marco.md).
+- [Matriz de pruebas y responsables](reports/etapa3/matriz_pruebas.md).
+
+Los aportes de P1, P2/DeepChecks y P3 de esta etapa deben integrarse y revisarse antes
+de que Marco ejecute el cierre desde un clon limpio y Diego Hurtado consolide las evidencias.
+
 ## Estado de integración de la Etapa 2
 
 La Etapa 2 utiliza un controlador común de experimentación,

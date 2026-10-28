@@ -39,6 +39,7 @@ def test_git_failure_cannot_be_reported_as_clean(monkeypatch, failed_command):
         tracking.git_state()
 
 
+@pytest.mark.integration
 def test_new_untracked_code_is_dirty(tmp_path, monkeypatch):
     def git(*args):
         subprocess.run(['git', *args], cwd=tmp_path, check=True, capture_output=True)
