@@ -33,7 +33,9 @@ modelos, su registro como champion ni la reproducción final.
 
 El PR #22 quedó integrado después de las revisiones de Stefania, Diego Martinez y Diego Hurtado. Las tres selecciones se reprodujeron con métricas coincidentes y los modelos se registraron como versión 1 con alias `champion`. Su carga por nombre y predicciones se comprobaron en una ejecución independiente de MLflow Projects. El PR #24 incorporó la justificación de P3 revisada por Marco.
 
-El [cierre técnico y sus evidencias](reports/etapa2/cierre_tecnico_marco.md) conserva corridas, versiones, linaje, comandos y límites. Quedan por completar las capturas de la interfaz, la interpretación de los perfiles y el mapa de P3, y la consolidación del reporte. El envío en Canvas no está verificado.
+El [PR #25](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/25), revisado e integrado por Diego Hurtado, incorporó las evidencias de reproducción y registro. El [PR #26](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/26), de Diego Hurtado y revisado e integrado por Marco, completó la [interpretación de los perfiles horarios y el mapa de P3](reports/etapa2/p3.md). Ambas actividades están cerradas.
+
+El [cierre técnico y sus evidencias](reports/etapa2/cierre_tecnico_marco.md) conserva corridas, versiones, linaje, comandos y límites. Quedan por completar las capturas legibles de la interfaz y la consolidación del reporte. Las capturas deben mostrar la comparación con corridas anidadas, los artefactos de una candidata y las tres versiones registradas con alias y linaje. El envío en Canvas no está verificado.
 
 Repositorio público: https://github.com/makroem/TC5061-Proyecto-Equipo39
 
