@@ -1,0 +1,124 @@
+{
+  "responsible": "Marco",
+  "tested_code_commit": "b00703251085ada10693d5b31fc69b99ab6640ae",
+  "scope": "Evidencia preliminar de Etapa 3; controles sinteticos y diagnostico de seguridad",
+  "environment_files_sha256": {
+    "requirements.txt": "109828edfd4ebe3db70b7ab527714bd4a7aa4e92ca00a7ee811da31151a3ae40",
+    "requirements-quality.txt": "0ce64e693fcf2b684772dfde87f848f6b80ba1c225fb664f89bbd6fee0ce9bf0",
+    "requirements-deepchecks.txt": "1a59bc64ea93cd37853325fd2f675ed8d98dd0099ead473c3f6642a13791b2c6",
+    "scripts/check_deepchecks_env.py": "b597265445308db845595fe22509c01a26ffffc987cc2b6993325f95db8d2ad2"
+  },
+  "source_record_sha256": {
+    "ingesta.log": "15dc7dfe122e7963296fccfea5388c4f6e091127e97b9e9cb757d7759ca36249",
+    "ingesta.xml": "5a0c8e31c3729450c4379ea3932b889ac04d30e5ba7f7388111af5f6a6f90c4f",
+    "coverage_ingesta.json": "b1f0db3b3d7743b61ef22f5abe4dab07155e8ef64c618badaea571cf15de6e23",
+    "fast.log": "cd7c7493aa09bfbc6adc378776906dc36f28dd888b23bb993384cfe39eb81823",
+    "fast.xml": "94cf217ca130ced013c889c0568efa7ac9accaedfc9160699a5e102b27e82a23",
+    "full.log": "36a3299b5c5f7a3563ac61a593d387af1116b116acc8ecfbdb4eb5b89c35bbe2",
+    "full.xml": "9c400d83650de390d46d5cbb4bfe4ede3ffe2cd62e70819ee96bf208a57c6c52",
+    "coverage_total.json": "a516235bdc661cb25fa0329f82cffd1043a9c2d06d5a7b9683173f4d5596c4d5",
+    "bandit.json": "eefd973ff86fec8adb29681c0b88cce2bb5e4dd3e65a1c0fa29a27b30b883bef",
+    "pip_audit.json": "66df6fdeab0ad0a46121a41c1b86c9d0fc54255e7a183e1d1213e7548a527ade",
+    "pip_audit_quality.json": "1e2d4ddaa6d31b00408c86b1ec9347d249c7e2f1f6e91d1edbe3e20bf87608f5",
+    "pip_audit_deepchecks.json": "aa96bf79e268f96533550f532cffe6b0f4016aec7e152a7105ee74541770d2e4",
+    "exclusions.log": "0ee4b990af075b087f432cf11d1ba3cd5ae1538072a9820fe38493ec36eccbdd"
+  },
+  "captures": [
+    {
+      "file": "reports/figures/etapa3/E01_entornos.jpg",
+      "sha256": "106de83be170080b874ca75ab628a7d3223203c6cdbdc3bd7f5e18a38c79b36d",
+      "size_bytes": 61381,
+      "dimensions": [
+        1264,
+        732
+      ],
+      "captured_at": "2026-10-28T11:57:20-06:00",
+      "source_description": "Registro de versiones exportado; pip check de ambos entornos",
+      "source_html_sha256": "73dd8d5514d86a332b73eb3d5d1378d71ec2b155aed8954a8934e28a533cffa3"
+    },
+    {
+      "file": "reports/figures/etapa3/E02_estructura.jpg",
+      "sha256": "5aff255350875ff2a618aafddb6a2157a629bdbab2f3f8513517aeee0ef6ef78",
+      "size_bytes": 84640,
+      "dimensions": [
+        1264,
+        721
+      ],
+      "captured_at": "2026-10-28T11:57:40-06:00",
+      "source_description": "Inventario exportado de git ls-files del commit probado",
+      "source_html_sha256": "0bd7f02fd9f0dedf0e48d11716084094395aef4903f6dece1cf410eb7e6d26e0"
+    },
+    {
+      "file": "reports/figures/etapa3/E03_ingesta.jpg",
+      "sha256": "8272d801c5aaaa26576a0874e9c8dcb7f84ea923895504d55479498f518f43d5",
+      "size_bytes": 67644,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "captured_at": "2026-10-28T11:57:41-06:00",
+      "source_description": "Extracto exportado de PyTest de ingesta y cobertura",
+      "source_html_sha256": "283e53a921044147f0da78f59fdac8a0e349e6096bdce7f1561c0e3e669bd916"
+    },
+    {
+      "file": "reports/figures/etapa3/E04_deepchecks_variable.jpg",
+      "sha256": "38e5b52e0908c8c2816b6e30da110b4d9e764eedb794ff3fa00721cbaa543c7f",
+      "size_bytes": 70398,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "captured_at": "2026-10-28T12:02:29-06:00",
+      "source_description": "HTML nativo de DeepChecks: control sintetico positivo",
+      "source_html_sha256": "bba7a757c0682d28eb8755d6c2ccfbcd992e34429478389cfa120e1f720865e4"
+    },
+    {
+      "file": "reports/figures/etapa3/E05_deepchecks_constante.jpg",
+      "sha256": "e76edbe4bbe27811a3226a07abbf610078150d0adf8acf2588002fd8fe143936",
+      "size_bytes": 86653,
+      "dimensions": [
+        1264,
+        796
+      ],
+      "captured_at": "2026-10-28T12:02:18-06:00",
+      "source_description": "HTML nativo de DeepChecks: control sintetico negativo",
+      "source_html_sha256": "e388b489d40457ee6dd049127243326ae0c6e8f437bb30ba7575cc147daf9f08"
+    },
+    {
+      "file": "reports/figures/etapa3/E06_suite_sintetica.jpg",
+      "sha256": "f19b690f8440bc0940dd40f1032976a971baa3f992d43f05ff08baeaab52a301",
+      "size_bytes": 149340,
+      "dimensions": [
+        1264,
+        758
+      ],
+      "captured_at": "2026-10-28T11:57:43-06:00",
+      "source_description": "Extracto exportado de PyTest completo y cobertura",
+      "source_html_sha256": "c62591b74ae7340518e578a6408119f40ce463ac07738c3a3f995648c80b5d82"
+    },
+    {
+      "file": "reports/figures/etapa3/E09_seguridad.jpg",
+      "sha256": "dc8aec290343db8bf067d58bc394b15f787c4ff57acdb4d22914135d648ee42e",
+      "size_bytes": 93748,
+      "dimensions": [
+        1264,
+        737
+      ],
+      "captured_at": "2026-10-28T11:58:09-06:00",
+      "source_description": "Resumen exportado de Bandit, pip-audit y Gitleaks",
+      "source_html_sha256": "ffcdcfa38321887cdfdb82359037d216a69579242f9551682b53a2a0f46650bb"
+    },
+    {
+      "file": "reports/figures/etapa3/E10_exclusiones.jpg",
+      "sha256": "b55d0f4addba1d057324efeace740feb9a75e6e80fd6e87c2f5d5535922652be",
+      "size_bytes": 70651,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "captured_at": "2026-10-28T11:58:09-06:00",
+      "source_description": "Salida exportada de git check-ignore -v",
+      "source_html_sha256": "7f60d222ee6379d8f85f00674a6de150dd8cd974c2c2c885498248959ae6ee46"
+    }
+  ]
+}

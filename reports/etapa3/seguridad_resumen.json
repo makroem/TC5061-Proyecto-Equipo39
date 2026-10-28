@@ -1,0 +1,346 @@
+{
+  "checked_at": "2026-10-28T11:55:24-06:00",
+  "source_commit": "b00703251085ada10693d5b31fc69b99ab6640ae",
+  "status": "OPEN_FINDINGS",
+  "bandit": {
+    "version": "1.9.4",
+    "exit_code": 1,
+    "scope": "mibici_equipo39",
+    "initial_count": 8,
+    "resolved_in_ingestion": 3,
+    "findings": [
+      {
+        "rule": "B403",
+        "file": "mibici_equipo39/modeling/p1.py",
+        "line": 12,
+        "severity": "LOW",
+        "confidence": "HIGH"
+      },
+      {
+        "rule": "B403",
+        "file": "mibici_equipo39/modeling/p3.py",
+        "line": 11,
+        "severity": "LOW",
+        "confidence": "HIGH"
+      },
+      {
+        "rule": "B404",
+        "file": "mibici_equipo39/modeling/tracking.py",
+        "line": 6,
+        "severity": "LOW",
+        "confidence": "HIGH"
+      },
+      {
+        "rule": "B607",
+        "file": "mibici_equipo39/modeling/tracking.py",
+        "line": 18,
+        "severity": "LOW",
+        "confidence": "HIGH"
+      },
+      {
+        "rule": "B603",
+        "file": "mibici_equipo39/modeling/tracking.py",
+        "line": 18,
+        "severity": "LOW",
+        "confidence": "HIGH"
+      }
+    ]
+  },
+  "pip_audit": {
+    "version": "2.10.1",
+    "project": {
+      "packages_checked": 119,
+      "reported_entries": 68,
+      "unique_package_advisory_pairs": 36,
+      "packages_with_findings": [
+        {
+          "package": "certifi",
+          "version": "2026.7.22",
+          "reported_entries": 2,
+          "advisories": [
+            {
+              "id": "PYSEC-2026-4320",
+              "fix_versions_reported": [
+                "2026.10.18",
+                "2026.10.19"
+              ]
+            }
+          ]
+        },
+        {
+          "package": "mlflow",
+          "version": "2.22.0",
+          "reported_entries": 56,
+          "advisories": [
+            {
+              "id": "CVE-2026-116691",
+              "fix_versions_reported": [
+                "3.17.0"
+              ]
+            },
+            {
+              "id": "CVE-2026-53995",
+              "fix_versions_reported": [
+                "3.17.2"
+              ]
+            },
+            {
+              "id": "GHSA-gqvg-gmmx-x4hm",
+              "fix_versions_reported": [
+                "3.15.0"
+              ]
+            },
+            {
+              "id": "PYSEC-2025-52",
+              "fix_versions_reported": [
+                "2.22.2",
+                "3.1.0"
+              ]
+            },
+            {
+              "id": "PYSEC-2026-1639",
+              "fix_versions_reported": [
+                "3.4.0rc0"
+              ]
+            },
+            {
+              "id": "PYSEC-2026-1640",
+              "fix_versions_reported": [
+                "2.22.4",
+                "3.0.0"
+              ]
+            },
+            {
+              "id": "PYSEC-2026-1656",
+              "fix_versions_reported": [
+                "3.5.0"
+              ]
+            },
+            {
+              "id": "PYSEC-2026-1660",
+              "fix_versions_reported": []
+            },
+            {
+              "id": "PYSEC-2026-195",
+              "fix_versions_reported": [
+                "3.10.1"
+              ]
+            },
+            {
+              "id": "PYSEC-2026-2219",
+              "fix_versions_reported": [
+                "3.9.0"
+              ]
+            },
+            {
+              "id": "PYSEC-2026-2220",
+              "fix_versions_reported": [
+                "3.10.0",
+                "3.11.0rc0"
+              ]
+            },
+            {
+              "id": "PYSEC-2026-2221",
+              "fix_versions_reported": [
+                "3.10.0",
+                "3.11.0"
+              ]
+            },
+            {
+              "id": "PYSEC-2026-2222",
+              "fix_versions_reported": [
+                "3.11.0"
+              ]
+            },
+            {
+              "id": "PYSEC-2026-2654",
+              "fix_versions_reported": [
+                "3.10.0"
+              ]
+            },
+            {
+              "id": "PYSEC-2026-2655",
+              "fix_versions_reported": [
+                "3.11.0"
+              ]
+            },
+            {
+              "id": "PYSEC-2026-2656",
+              "fix_versions_reported": [
+                "3.9.0rc0"
+              ]
+            },
+            {
+              "id": "PYSEC-2026-2657",
+              "fix_versions_reported": []
+            },
+            {
+              "id": "PYSEC-2026-2658",
+              "fix_versions_reported": [
+                "3.8.0rc0"
+              ]
+            },
+            {
+              "id": "PYSEC-2026-2659",
+              "fix_versions_reported": [
+                "3.11.0rc0"
+              ]
+            },
+            {
+              "id": "PYSEC-2026-2660",
+              "fix_versions_reported": [
+                "3.10.0"
+              ]
+            },
+            {
+              "id": "PYSEC-2026-2661",
+              "fix_versions_reported": [
+                "3.8.0rc0"
+              ]
+            },
+            {
+              "id": "PYSEC-2026-3686",
+              "fix_versions_reported": [
+                "3.13.0rc0"
+              ]
+            },
+            {
+              "id": "PYSEC-2026-3687",
+              "fix_versions_reported": [
+                "3.15.0"
+              ]
+            },
+            {
+              "id": "PYSEC-2026-419",
+              "fix_versions_reported": []
+            },
+            {
+              "id": "PYSEC-2026-421",
+              "fix_versions_reported": [
+                "3.8.0rc0"
+              ]
+            },
+            {
+              "id": "PYSEC-2026-423",
+              "fix_versions_reported": [
+                "3.8.1"
+              ]
+            },
+            {
+              "id": "PYSEC-2026-424",
+              "fix_versions_reported": [
+                "3.9.0"
+              ]
+            },
+            {
+              "id": "PYSEC-2026-425",
+              "fix_versions_reported": [
+                "3.9.0rc0"
+              ]
+            },
+            {
+              "id": "PYSEC-2026-93",
+              "fix_versions_reported": [
+                "3.11.0rc0",
+                "3.11.1"
+              ]
+            },
+            {
+              "id": "PYSEC-2026-94",
+              "fix_versions_reported": [
+                "3.11.0rc0"
+              ]
+            }
+          ]
+        },
+        {
+          "package": "pyarrow",
+          "version": "19.0.1",
+          "reported_entries": 2,
+          "advisories": [
+            {
+              "id": "PYSEC-2026-113",
+              "fix_versions_reported": [
+                "23.0.1"
+              ]
+            }
+          ]
+        },
+        {
+          "package": "pytest",
+          "version": "8.3.5",
+          "reported_entries": 2,
+          "advisories": [
+            {
+              "id": "PYSEC-2026-1845",
+              "fix_versions_reported": [
+                "9.0.3"
+              ]
+            }
+          ]
+        },
+        {
+          "package": "python-dotenv",
+          "version": "1.0.1",
+          "reported_entries": 2,
+          "advisories": [
+            {
+              "id": "PYSEC-2026-2270",
+              "fix_versions_reported": [
+                "1.2.2"
+              ]
+            }
+          ]
+        },
+        {
+          "package": "requests",
+          "version": "2.32.3",
+          "reported_entries": 4,
+          "advisories": [
+            {
+              "id": "PYSEC-2026-1872",
+              "fix_versions_reported": [
+                "2.32.4"
+              ]
+            },
+            {
+              "id": "PYSEC-2026-2275",
+              "fix_versions_reported": [
+                "2.33.0"
+              ]
+            }
+          ]
+        }
+      ],
+      "skipped": []
+    },
+    "quality_additions": {
+      "packages_checked": 19,
+      "reported_entries": 0,
+      "unique_package_advisory_pairs": 0,
+      "packages_with_findings": [],
+      "skipped": []
+    },
+    "deepchecks_environment": {
+      "packages_checked": 112,
+      "reported_entries": 0,
+      "unique_package_advisory_pairs": 0,
+      "packages_with_findings": [],
+      "skipped": []
+    }
+  },
+  "gitleaks": {
+    "version": "8.30.1",
+    "history_commits": 87,
+    "history_findings": 0,
+    "tracked_snapshot_findings": 0,
+    "scope": "referencias disponibles del clon y snapshot de archivos del commit; no paquetes instalados"
+  },
+  "audited_file_sha256": {
+    "requirements.txt": "109828edfd4ebe3db70b7ab527714bd4a7aa4e92ca00a7ee811da31151a3ae40",
+    "requirements-quality.txt": "0ce64e693fcf2b684772dfde87f848f6b80ba1c225fb664f89bbd6fee0ce9bf0",
+    "requirements-deepchecks.txt": "1a59bc64ea93cd37853325fd2f675ed8d98dd0099ead473c3f6642a13791b2c6",
+    "scripts/check_deepchecks_env.py": "b597265445308db845595fe22509c01a26ffffc987cc2b6993325f95db8d2ad2"
+  },
+  "source_commit_scope": "Codigo del modulo y snapshot inicial; los requisitos y el script separados se identifican por SHA256."
+}

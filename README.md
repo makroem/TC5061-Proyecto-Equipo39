@@ -9,6 +9,10 @@ ingesta y una revisión preliminar de seguridad. La configuración de PyTest est
 - [Contrato y dependencias del equipo](references/etapa3/contrato_calidad.md).
 - [Instalación, ejecución y alcance de las verificaciones](references/etapa3/ejecucion_marco.md).
 - [Matriz de pruebas y responsables](reports/etapa3/matriz_pruebas.md).
+- [Avance de Marco y dependencias pendientes](reports/etapa3/avance_marco.md).
+- [Entorno comprobado de DeepChecks](references/etapa3/deepchecks_entorno.md).
+- [Hallazgos de seguridad y seguimiento](reports/etapa3/hallazgos.md).
+- [Capturas y origen de la evidencia](reports/etapa3/evidencias_marco.md).
 
 Los aportes de P1, P2/DeepChecks y P3 de esta etapa deben integrarse y revisarse antes
 de que Marco ejecute el cierre desde un clon limpio y Diego Hurtado consolide las evidencias.

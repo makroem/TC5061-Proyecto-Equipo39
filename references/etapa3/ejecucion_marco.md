@@ -33,19 +33,21 @@ La comprobación realizada para esta entrega corresponde a Windows y Python 3.11
 
 ## 2. Ejecutar pruebas
 
-Crear una carpeta temporal nueva por ejecución. Esto evita conflictos de permisos
-con carpetas dejadas por otros usuarios o ejecuciones previas de Windows.
+Usar una carpeta temporal nueva y una ruta corta. Esto evita conflictos de permisos
+y el límite de longitud de rutas de Windows al guardar artefactos de MLflow.
 
 ```powershell
 $runA7 = Get-Date -Format 'yyyyMMdd_HHmmss'
+$tempA7 = Join-Path ([System.IO.Path]::GetTempPath()) ('eq39_' + [guid]::NewGuid().ToString('N').Substring(0,8))
+if (Test-Path -LiteralPath $tempA7) { throw 'Usar un temporal nuevo.' }
 $env:OMP_NUM_THREADS = '4'
 $env:OPENBLAS_NUM_THREADS = '4'
 $env:MKL_NUM_THREADS = '4'
 New-Item -ItemType Directory -Force private_quality | Out-Null
 .venv-a7/Scripts/python.exe -m pytest --collect-only -q
-.venv-a7/Scripts/python.exe -m pytest -m 'not integration and not data_quality' -q --basetemp="private_quality/tmp_rapidas_$runA7"
-.venv-a7/Scripts/python.exe -m pytest tests/test_ingesta_calidad.py tests/test_data.py tests/test_download.py tests/test_runtime_regressions.py -q --basetemp="private_quality/tmp_ingesta_$runA7" --cov=mibici_equipo39.dataset --cov-report=term-missing --cov-report=json:private_quality/coverage_ingesta.json
-.venv-a7/Scripts/python.exe -m pytest -q --basetemp="private_quality/tmp_completa_$runA7" --cov=mibici_equipo39 --cov-report=term-missing --cov-report=json:private_quality/coverage_total.json --junitxml=private_quality/pytest.xml
+.venv-a7/Scripts/python.exe -m pytest -m 'not integration and not data_quality' -q --basetemp="$tempA7-rapidas"
+.venv-a7/Scripts/python.exe -m pytest tests/test_ingesta_calidad.py tests/test_data.py tests/test_download.py tests/test_runtime_regressions.py -q --basetemp="$tempA7-ingesta" --cov=mibici_equipo39.dataset --cov-report=term-missing --cov-report=json:private_quality/coverage_ingesta.json
+.venv-a7/Scripts/python.exe -m pytest -q --basetemp="$tempA7-completa" --cov=mibici_equipo39 --cov-report=term-missing --cov-report=json:private_quality/coverage_total.json --junitxml=private_quality/pytest.xml
 ```
 
 Comprobar `$LASTEXITCODE` después de cada ejecución. Una salida 0 confirma que las
@@ -88,9 +90,14 @@ gitleaks dir --redact=100 --report-format json --report-path private_quality/git
 ```
 
 El segundo escaneo cubre los archivos del commit, sin mezclar dependencias instaladas
-o datos locales. Publicar los cambios antes de escanear este snapshot; en caso contrario
+o datos locales. Guardar los cambios en un commit local antes de escanear este snapshot; en caso contrario
 los archivos sin commit no estarán incluidos. El historial abarca las referencias
 disponibles en el clon; no incluye commits inaccesibles del servidor.
+
+Con esta versión del auditor y `--disable-pip`, el archivo de calidad reportó solo sus
+19 requisitos adicionales. Por eso son obligatorias ambas auditorías: `requirements.txt`
+para los 119 paquetes del proyecto y `requirements-quality.txt` para los adicionales.
+No interpretar un resultado limpio de los adicionales como aprobación del entorno completo.
 
 ## 5. Evidencia y revisión
 
