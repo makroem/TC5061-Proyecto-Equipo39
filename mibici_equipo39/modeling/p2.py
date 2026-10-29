@@ -267,6 +267,26 @@ def positive_proba(model, X):
     return model.predict_proba(X)[:, positive[0]]
 
 
+def occupancy_sensitivity(frame, output, occupancies=C.P2_SENSITIVITY_OCCUPANCIES):
+    """Etiquetas con otra ocupación inicial contra las alertas ya congeladas; no cambia la etiqueta principal."""
+    out = {}
+    for occupancy in occupancies:
+        labels = dict(zip(TARGETS, proxy_labels(frame["flow_min"], frame["flow_max"], frame["capacity"],
+                                                occupancy=occupancy)))
+        out[str(occupancy)] = {}
+        for risk, target in TARGETS.items():
+            y = labels[risk].to_numpy()
+            _, precision, recall, _ = _scores(y, output[f"alert_{risk}"].to_numpy())
+            out[str(occupancy)][risk] = {
+                "prevalence": float(y.mean()),
+                "changed_vs_main": float((y != frame[target].to_numpy()).mean()),
+                "support_positive": int(y.sum()),
+                "recall": float(recall) if y.sum() else None,
+                "precision": float(precision) if output[f"alert_{risk}"].any() else None,
+            }
+    return out
+
+
 class P2RiskModel(mlflow.pyfunc.PythonModel):
     """Modelo de P2 para MLflow: dos clasificadores con sus umbrales congelados.
 
@@ -352,17 +372,35 @@ class P2Adapter(QuestionAdapter):
         return {"thresholds": thresholds}
 
     def evaluate(self, fitted, data, split):
+        """Métricas por riesgo; las que no se pueden calcular se omiten y su causa queda en evaluation."""
         prefix = {"train": "train", "validation": "val", "test": "test"}[split]
         frame = data.loc[data["split"].eq(split)]
         output = fitted.model.predict(None, frame[COLUMNS])
+        evaluation = fitted.extra.setdefault("evaluation", {})
+        not_evaluable = evaluation.setdefault("not_evaluable", {})
         metrics = {}
         for risk, target in TARGETS.items():
             y = frame[target].to_numpy()
             values, _ = classification_metrics(y, output[f"prob_{risk}"].to_numpy(), fitted.model.thresholds[risk])
+            if not values["support_positive"]:
+                for name in ("recall", "f1"):
+                    values.pop(name)
+                    not_evaluable[f"{prefix}_{name}_{risk}"] = f"sin positivos de {risk} en {split}"
+                not_evaluable[f"{prefix}_ap_{risk}"] = f"sin positivos de {risk} en {split}"
+            if not output[f"alert_{risk}"].any():
+                values.pop("precision")
+                not_evaluable[f"{prefix}_precision_{risk}"] = f"el modelo no emite alertas de {risk} en {split}"
             metrics.update({f"{prefix}_{k}_{risk}": v for k, v in values.items()})
             metrics[f"{prefix}_prevalence_{risk}"] = float(y.mean())
             metrics[f"{prefix}_alerts_per_1000_{risk}"] = 1000 * float(output[f"alert_{risk}"].mean())
-        metrics[f"{prefix}_macro_f1"] = (metrics[f"{prefix}_f1_bikes"] + metrics[f"{prefix}_f1_docks"]) / 2
+        f1 = [metrics.get(f"{prefix}_f1_{risk}") for risk in TARGETS]
+        if None in f1:
+            not_evaluable[f"{prefix}_macro_f1"] = "falta el F1 de algún riesgo"
+        else:
+            metrics[f"{prefix}_macro_f1"] = sum(f1) / len(f1)
+        if split in ("validation", "test"):
+            evaluation.setdefault("initial_occupancy_sensitivity", {})[split] = occupancy_sensitivity(
+                frame, output)
         return metrics
 
     def input_example(self, fitted, data):

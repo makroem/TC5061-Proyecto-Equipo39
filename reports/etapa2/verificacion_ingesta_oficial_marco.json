@@ -1,0 +1,39 @@
+{
+  "fecha_utc": "2026-10-27T02:58:31.094926+00:00",
+  "ejecutor": "Marco",
+  "commit": "97f0033d1669bea64f38d86cf78f680dffbd3062",
+  "ingest_run_id": "ceb86b882e884e4ba1ef4743159175aa",
+  "estado": "FINISHED",
+  "origen": "Clon nuevo de GitHub, sin tablas ni CSV precargados; descarga de las fuentes oficiales por el punto de entrada ingest.",
+  "comando": "mlflow run . -e ingest --env-manager local --experiment-name mibici-equipo39 --run-name A6-ingesta-Marco-20261026",
+  "meses": 12,
+  "calidad": {
+    "months": 12,
+    "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+    "raw_rows": 4497877,
+    "retained_rows": 4497119,
+    "catalog_rows": 484,
+    "valid_capacity_stations": 480,
+    "origin_stations": 471,
+    "destination_stations": 471,
+    "union_stations": 471,
+    "source_bytes": 390347882
+  },
+  "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+  "split_id": "ab6301f96f083217512343b4f800bc5ddea51b666492ef05b34da85591cc9bdd",
+  "split_strategy": "chronological_holdout",
+  "git_dirty": false,
+  "filas_estacion_hora": 4108440,
+  "estaciones_tabla_horaria": 469,
+  "dias_por_conjunto": {
+    "train": 243,
+    "validation": 61,
+    "test": 61
+  },
+  "intento_previo_fallido": {
+    "run_id": "f9aa88f70ba54c17a6544bdcbd47c1ea",
+    "causa": "Python no disponible en PATH del subproceso; corregido al usar el entorno existente y salida UTF-8.",
+    "conservado_en_historial": true
+  },
+  "observacion": "La verificacion de ingesta no acredita por si sola las busquedas ni el registro de modelos."
+}

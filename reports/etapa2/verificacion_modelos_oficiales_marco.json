@@ -1,0 +1,1315 @@
+{
+  "date": "2026-10-26",
+  "executor": "Marco",
+  "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+  "split_id": "ab6301f96f083217512343b4f800bc5ddea51b666492ef05b34da85591cc9bdd",
+  "questions": {
+    "p3": {
+      "summary": {
+        "question": "p3",
+        "mode": "search",
+        "selected_variant": "p3_gmm_3",
+        "parent_run_id": "09bfe57afcea4438b67aa7afc37ed56d",
+        "child_run_ids": {
+          "p3_kmeans_3": "9ebdd55d4b1c49efb646a1996e1bb52f",
+          "p3_kmeans_4": "433f3934e5bf4d9d94498eebad7345d8",
+          "p3_kmeans_5": "30653da773ac4b5da092d290003af730",
+          "p3_gmm_3": "46ce752d830c4edfbbb6cd7e05aabc86"
+        },
+        "git_commit": "97f0033d1669bea64f38d86cf78f680dffbd3062"
+      },
+      "selection_before_test": {
+        "selected_variant": "p3_gmm_3",
+        "rule": "mayor val_silhouette entre elegibles; empate a 6 decimales lo gana el baseline",
+        "validation_metrics": {
+          "p3_kmeans_3": {
+            "val_n_clusters": 3,
+            "val_min_cluster_size": 24,
+            "val_min_cluster_share": 0.06504065040650407,
+            "val_silhouette": 0.005563705071000712,
+            "val_davies_bouldin": 3.0134815068691148,
+            "train_min_cluster_share": 0.04878048780487805,
+            "val_predict_ms_per_1000": 5.715989146815729,
+            "val_model_bytes": 5735.0
+          },
+          "p3_kmeans_4": {
+            "val_n_clusters": 4,
+            "val_min_cluster_size": 29,
+            "val_min_cluster_share": 0.07859078590785908,
+            "val_silhouette": -0.019897724613091517,
+            "val_davies_bouldin": 3.1374780067195838,
+            "train_min_cluster_share": 0.07317073170731707,
+            "val_predict_ms_per_1000": 7.113550116401418,
+            "val_model_bytes": 6119.0
+          },
+          "p3_kmeans_5": {
+            "val_n_clusters": 5,
+            "val_min_cluster_size": 26,
+            "val_min_cluster_share": 0.07046070460704607,
+            "val_silhouette": -0.043167122129876986,
+            "val_davies_bouldin": 3.4650386710404733,
+            "train_min_cluster_share": 0.05962059620596206,
+            "val_predict_ms_per_1000": 5.3056910745092845,
+            "val_model_bytes": 6503.0
+          },
+          "p3_gmm_3": {
+            "val_n_clusters": 3,
+            "val_min_cluster_size": 46,
+            "val_min_cluster_share": 0.12466124661246612,
+            "val_silhouette": 0.026593711347692978,
+            "val_davies_bouldin": 3.0005039599290324,
+            "train_min_cluster_share": 0.06775067750677506,
+            "val_predict_ms_per_1000": 5.153658500743833,
+            "val_model_bytes": 7893.0
+          }
+        },
+        "calibration": {
+          "p3_kmeans_3": {},
+          "p3_kmeans_4": {},
+          "p3_kmeans_5": {},
+          "p3_gmm_3": {}
+        }
+      },
+      "children": [
+        {
+          "variant": "p3_kmeans_3",
+          "run_id": "9ebdd55d4b1c49efb646a1996e1bb52f",
+          "role": "baseline",
+          "selected": false,
+          "metrics": {
+            "train_n_clusters": 3.0,
+            "train_min_cluster_size": 18.0,
+            "train_min_cluster_share": 0.04878048780487805,
+            "train_silhouette": 0.11284582547591084,
+            "train_davies_bouldin": 2.2588251440302005,
+            "train_stability_ari_mean": 0.8564746561613529,
+            "train_stability_ari_min": 0.7430166912023979,
+            "model_bytes": 5735.0,
+            "train_fit_seconds": 0.26550169999245554,
+            "val_n_clusters": 3.0,
+            "val_min_cluster_size": 24.0,
+            "val_min_cluster_share": 0.06504065040650407,
+            "val_silhouette": 0.005563705071000712,
+            "val_davies_bouldin": 3.0134815068691148,
+            "val_predict_ms_per_1000": 5.715989146815729,
+            "val_model_bytes": 5735.0,
+            "test_n_clusters": 3.0,
+            "test_min_cluster_size": 26.0,
+            "test_min_cluster_share": 0.07046070460704607,
+            "test_silhouette": 0.07925522718578003,
+            "test_davies_bouldin": 2.874951965715144,
+            "fit_seconds": 10.031293099978939
+          },
+          "configuration": {
+            "delivery": "A6",
+            "question": "p3",
+            "model": "search",
+            "mode": "search",
+            "hyperparameters_source": "config",
+            "member": "Marco",
+            "experiment": "mibici-equipo39",
+            "seed": 39,
+            "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+            "split_id": "ab6301f96f083217512343b4f800bc5ddea51b666492ef05b34da85591cc9bdd",
+            "split_version": "3",
+            "split_strategy": "chronological_holdout",
+            "feature_schema_version": "6-chronological-calendar-only",
+            "variant": {
+              "name": "p3_kmeans_3",
+              "family": "kmeans",
+              "params": {
+                "n_clusters": 3,
+                "n_init": 20,
+                "random_state": 39
+              }
+            }
+          },
+          "signature": {
+            "inputs": "[{\"type\": \"double\", \"name\": \"weekday_hour_00\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_01\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_02\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_03\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_04\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_05\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_06\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_07\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_08\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_09\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_10\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_11\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_12\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_13\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_14\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_15\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_16\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_17\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_18\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_19\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_20\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_21\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_22\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_23\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_00\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_01\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_02\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_03\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_04\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_05\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_06\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_07\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_08\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_09\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_10\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_11\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_12\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_13\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_14\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_15\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_16\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_17\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_18\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_19\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_20\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_21\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_22\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_23\", \"required\": true}]",
+            "outputs": "[{\"type\": \"tensor\", \"tensor-spec\": {\"dtype\": \"int32\", \"shape\": [-1]}}]",
+            "params": null
+          },
+          "model_reload_verified": true,
+          "plots": [
+            "plots/perfiles_grupos.png",
+            "plots/ubicacion_grupos.png"
+          ]
+        },
+        {
+          "variant": "p3_kmeans_4",
+          "run_id": "433f3934e5bf4d9d94498eebad7345d8",
+          "role": "candidate",
+          "selected": false,
+          "metrics": {
+            "train_n_clusters": 4.0,
+            "train_min_cluster_size": 27.0,
+            "train_min_cluster_share": 0.07317073170731707,
+            "train_silhouette": 0.07154332883558714,
+            "train_davies_bouldin": 2.5433898952892156,
+            "train_stability_ari_mean": 0.6787445883997301,
+            "train_stability_ari_min": 0.5785083932415619,
+            "model_bytes": 6119.0,
+            "train_fit_seconds": 0.09579130000201985,
+            "val_n_clusters": 4.0,
+            "val_min_cluster_size": 29.0,
+            "val_min_cluster_share": 0.07859078590785908,
+            "val_silhouette": -0.019897724613091517,
+            "val_davies_bouldin": 3.1374780067195838,
+            "val_predict_ms_per_1000": 7.113550116401418,
+            "val_model_bytes": 6119.0,
+            "test_n_clusters": 4.0,
+            "test_min_cluster_size": 32.0,
+            "test_min_cluster_share": 0.08672086720867209,
+            "test_silhouette": 0.028181818211264295,
+            "test_davies_bouldin": 3.054132881302322,
+            "fit_seconds": 9.514712499978486
+          },
+          "configuration": {
+            "delivery": "A6",
+            "question": "p3",
+            "model": "search",
+            "mode": "search",
+            "hyperparameters_source": "config",
+            "member": "Marco",
+            "experiment": "mibici-equipo39",
+            "seed": 39,
+            "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+            "split_id": "ab6301f96f083217512343b4f800bc5ddea51b666492ef05b34da85591cc9bdd",
+            "split_version": "3",
+            "split_strategy": "chronological_holdout",
+            "feature_schema_version": "6-chronological-calendar-only",
+            "variant": {
+              "name": "p3_kmeans_4",
+              "family": "kmeans",
+              "params": {
+                "n_clusters": 4,
+                "n_init": 20,
+                "random_state": 39
+              }
+            }
+          },
+          "signature": {
+            "inputs": "[{\"type\": \"double\", \"name\": \"weekday_hour_00\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_01\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_02\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_03\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_04\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_05\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_06\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_07\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_08\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_09\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_10\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_11\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_12\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_13\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_14\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_15\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_16\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_17\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_18\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_19\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_20\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_21\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_22\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_23\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_00\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_01\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_02\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_03\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_04\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_05\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_06\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_07\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_08\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_09\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_10\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_11\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_12\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_13\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_14\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_15\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_16\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_17\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_18\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_19\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_20\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_21\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_22\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_23\", \"required\": true}]",
+            "outputs": "[{\"type\": \"tensor\", \"tensor-spec\": {\"dtype\": \"int32\", \"shape\": [-1]}}]",
+            "params": null
+          },
+          "model_reload_verified": true,
+          "plots": [
+            "plots/perfiles_grupos.png",
+            "plots/ubicacion_grupos.png"
+          ]
+        },
+        {
+          "variant": "p3_kmeans_5",
+          "run_id": "30653da773ac4b5da092d290003af730",
+          "role": "candidate",
+          "selected": false,
+          "metrics": {
+            "train_n_clusters": 5.0,
+            "train_min_cluster_size": 22.0,
+            "train_min_cluster_share": 0.05962059620596206,
+            "train_silhouette": 0.06829290251431142,
+            "train_davies_bouldin": 2.649034703321203,
+            "train_stability_ari_mean": 0.45119736119769743,
+            "train_stability_ari_min": 0.3913067650243668,
+            "model_bytes": 6503.0,
+            "train_fit_seconds": 0.18484979998902418,
+            "val_n_clusters": 5.0,
+            "val_min_cluster_size": 26.0,
+            "val_min_cluster_share": 0.07046070460704607,
+            "val_silhouette": -0.043167122129876986,
+            "val_davies_bouldin": 3.4650386710404733,
+            "val_predict_ms_per_1000": 5.3056910745092845,
+            "val_model_bytes": 6503.0,
+            "test_n_clusters": 5.0,
+            "test_min_cluster_size": 24.0,
+            "test_min_cluster_share": 0.06504065040650407,
+            "test_silhouette": 0.02726582323143914,
+            "test_davies_bouldin": 3.2328710641754315,
+            "fit_seconds": 10.26953770002001
+          },
+          "configuration": {
+            "delivery": "A6",
+            "question": "p3",
+            "model": "search",
+            "mode": "search",
+            "hyperparameters_source": "config",
+            "member": "Marco",
+            "experiment": "mibici-equipo39",
+            "seed": 39,
+            "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+            "split_id": "ab6301f96f083217512343b4f800bc5ddea51b666492ef05b34da85591cc9bdd",
+            "split_version": "3",
+            "split_strategy": "chronological_holdout",
+            "feature_schema_version": "6-chronological-calendar-only",
+            "variant": {
+              "name": "p3_kmeans_5",
+              "family": "kmeans",
+              "params": {
+                "n_clusters": 5,
+                "n_init": 20,
+                "random_state": 39
+              }
+            }
+          },
+          "signature": {
+            "inputs": "[{\"type\": \"double\", \"name\": \"weekday_hour_00\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_01\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_02\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_03\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_04\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_05\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_06\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_07\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_08\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_09\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_10\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_11\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_12\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_13\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_14\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_15\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_16\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_17\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_18\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_19\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_20\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_21\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_22\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_23\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_00\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_01\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_02\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_03\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_04\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_05\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_06\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_07\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_08\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_09\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_10\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_11\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_12\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_13\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_14\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_15\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_16\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_17\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_18\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_19\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_20\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_21\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_22\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_23\", \"required\": true}]",
+            "outputs": "[{\"type\": \"tensor\", \"tensor-spec\": {\"dtype\": \"int32\", \"shape\": [-1]}}]",
+            "params": null
+          },
+          "model_reload_verified": true,
+          "plots": [
+            "plots/perfiles_grupos.png",
+            "plots/ubicacion_grupos.png"
+          ]
+        },
+        {
+          "variant": "p3_gmm_3",
+          "run_id": "46ce752d830c4edfbbb6cd7e05aabc86",
+          "role": "candidate",
+          "selected": true,
+          "metrics": {
+            "train_n_clusters": 3.0,
+            "train_min_cluster_size": 25.0,
+            "train_min_cluster_share": 0.06775067750677506,
+            "train_silhouette": 0.08153772549733092,
+            "train_davies_bouldin": 3.0699033329920837,
+            "train_stability_ari_mean": 0.49161608005495216,
+            "train_stability_ari_min": 0.2732687685390185,
+            "model_bytes": 7893.0,
+            "train_fit_seconds": 0.08622470000409521,
+            "val_n_clusters": 3.0,
+            "val_min_cluster_size": 46.0,
+            "val_min_cluster_share": 0.12466124661246612,
+            "val_silhouette": 0.026593711347692978,
+            "val_davies_bouldin": 3.0005039599290324,
+            "val_predict_ms_per_1000": 5.153658500743833,
+            "val_model_bytes": 7893.0,
+            "test_n_clusters": 3.0,
+            "test_min_cluster_size": 17.0,
+            "test_min_cluster_share": 0.04607046070460705,
+            "test_silhouette": 0.051373275011096224,
+            "test_davies_bouldin": 2.9422603614858196,
+            "fit_seconds": 9.112264600000344
+          },
+          "configuration": {
+            "delivery": "A6",
+            "question": "p3",
+            "model": "search",
+            "mode": "search",
+            "hyperparameters_source": "config",
+            "member": "Marco",
+            "experiment": "mibici-equipo39",
+            "seed": 39,
+            "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+            "split_id": "ab6301f96f083217512343b4f800bc5ddea51b666492ef05b34da85591cc9bdd",
+            "split_version": "3",
+            "split_strategy": "chronological_holdout",
+            "feature_schema_version": "6-chronological-calendar-only",
+            "variant": {
+              "name": "p3_gmm_3",
+              "family": "gmm",
+              "params": {
+                "n_components": 3,
+                "covariance_type": "diag",
+                "reg_covar": 1e-06,
+                "n_init": 5,
+                "max_iter": 300,
+                "random_state": 39
+              }
+            }
+          },
+          "signature": {
+            "inputs": "[{\"type\": \"double\", \"name\": \"weekday_hour_00\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_01\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_02\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_03\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_04\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_05\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_06\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_07\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_08\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_09\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_10\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_11\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_12\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_13\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_14\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_15\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_16\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_17\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_18\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_19\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_20\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_21\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_22\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekday_hour_23\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_00\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_01\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_02\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_03\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_04\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_05\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_06\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_07\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_08\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_09\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_10\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_11\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_12\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_13\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_14\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_15\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_16\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_17\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_18\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_19\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_20\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_21\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_22\", \"required\": true}, {\"type\": \"double\", \"name\": \"weekend_hour_23\", \"required\": true}]",
+            "outputs": "[{\"type\": \"tensor\", \"tensor-spec\": {\"dtype\": \"int64\", \"shape\": [-1]}}]",
+            "params": null
+          },
+          "model_reload_verified": true,
+          "plots": [
+            "plots/perfiles_grupos.png",
+            "plots/ubicacion_grupos.png"
+          ]
+        }
+      ]
+    },
+    "p2": {
+      "summary": {
+        "question": "p2",
+        "mode": "search",
+        "selected_variant": "p2_lr_0.1",
+        "parent_run_id": "e0d9f693f211405ba3dcd80b357be4cb",
+        "child_run_ids": {
+          "baseline": "c6762ec2086049cfa4be6ca011ecf92f",
+          "p2_lr_0.1": "b24e7ffdf7524a96914dbe1e0fa7f356",
+          "p2_lr_1": "57dfa008aaca49f2938733cdeb68a7a2",
+          "p2_lr_10": "96fcb94e40cf44e8baaad4c48a6cb939"
+        },
+        "git_commit": "97f0033d1669bea64f38d86cf78f680dffbd3062"
+      },
+      "selection_before_test": {
+        "selected_variant": "p2_lr_0.1",
+        "rule": "mayor val_macro_f1 entre elegibles; empate a 6 decimales lo gana el baseline",
+        "validation_metrics": {
+          "baseline": {
+            "val_recall_bikes": 0.0,
+            "val_precision_bikes": 0.0,
+            "val_f1_bikes": 0.0,
+            "val_support_positive_bikes": 2213,
+            "val_ap_bikes": 0.003223053351509432,
+            "val_prevalence_bikes": 0.003223053351509432,
+            "val_alerts_per_1000_bikes": 0.0,
+            "val_recall_docks": 0.0,
+            "val_precision_docks": 0.0,
+            "val_f1_docks": 0.0,
+            "val_support_positive_docks": 2926,
+            "val_ap_docks": 0.004261479487806867,
+            "val_prevalence_docks": 0.004261479487806867,
+            "val_alerts_per_1000_docks": 0.0,
+            "val_macro_f1": 0.0
+          },
+          "p2_lr_0.1": {
+            "val_recall_bikes": 0.8088567555354722,
+            "val_precision_bikes": 0.0171865848623633,
+            "val_f1_bikes": 0.0336580045880185,
+            "val_support_positive_bikes": 2213,
+            "val_ap_bikes": 0.030978830953398803,
+            "val_prevalence_bikes": 0.003223053351509432,
+            "val_alerts_per_1000_bikes": 151.68740606102975,
+            "val_recall_docks": 0.8075871496924129,
+            "val_precision_docks": 0.026364234790079103,
+            "val_f1_docks": 0.051061530981578514,
+            "val_support_positive_docks": 2926,
+            "val_ap_docks": 0.05156742735425882,
+            "val_prevalence_docks": 0.004261479487806867,
+            "val_alerts_per_1000_docks": 130.53730178149067,
+            "val_macro_f1": 0.04235976778479851
+          },
+          "p2_lr_1": {
+            "val_recall_bikes": 0.8133755083596927,
+            "val_precision_bikes": 0.017116448907400012,
+            "val_f1_bikes": 0.033527357392316645,
+            "val_support_positive_bikes": 2213,
+            "val_ap_bikes": 0.03074210241074484,
+            "val_prevalence_bikes": 0.003223053351509432,
+            "val_alerts_per_1000_bikes": 153.1598448040826,
+            "val_recall_docks": 0.8113465481886535,
+            "val_precision_docks": 0.02609737597150615,
+            "val_f1_docks": 0.0505681999723089,
+            "val_support_positive_docks": 2926,
+            "val_ap_docks": 0.05135198498131262,
+            "val_prevalence_docks": 0.004261479487806867,
+            "val_alerts_per_1000_docks": 132.48598925745978,
+            "val_macro_f1": 0.04204777868231277
+          },
+          "p2_lr_10": {
+            "val_recall_bikes": 0.8133755083596927,
+            "val_precision_bikes": 0.017093692427494256,
+            "val_f1_bikes": 0.03348369994884435,
+            "val_support_positive_bikes": 2213,
+            "val_ap_bikes": 0.030719631257329846,
+            "val_prevalence_bikes": 0.003223053351509432,
+            "val_alerts_per_1000_bikes": 153.36374334416908,
+            "val_recall_docks": 0.8113465481886535,
+            "val_precision_docks": 0.02605326982803086,
+            "val_f1_docks": 0.0504853956000723,
+            "val_support_positive_docks": 2926,
+            "val_ap_docks": 0.05131717186198906,
+            "val_prevalence_docks": 0.004261479487806867,
+            "val_alerts_per_1000_docks": 132.7102776515549,
+            "val_macro_f1": 0.04198454777445833
+          }
+        },
+        "calibration": {
+          "baseline": {
+            "thresholds": {
+              "bikes": 0.95,
+              "docks": 0.95
+            }
+          },
+          "p2_lr_0.1": {
+            "thresholds": {
+              "bikes": 0.65,
+              "docks": 0.7
+            }
+          },
+          "p2_lr_1": {
+            "thresholds": {
+              "bikes": 0.65,
+              "docks": 0.7
+            }
+          },
+          "p2_lr_10": {
+            "thresholds": {
+              "bikes": 0.65,
+              "docks": 0.7
+            }
+          }
+        }
+      },
+      "children": [
+        {
+          "variant": "baseline",
+          "run_id": "c6762ec2086049cfa4be6ca011ecf92f",
+          "role": "baseline",
+          "selected": false,
+          "metrics": {
+            "train_recall_bikes": 0.0,
+            "train_precision_bikes": 0.0,
+            "train_f1_bikes": 0.0,
+            "train_support_positive_bikes": 11072.0,
+            "train_ap_bikes": 0.004047955402294816,
+            "train_prevalence_bikes": 0.004047955402294816,
+            "train_alerts_per_1000_bikes": 0.0,
+            "train_recall_docks": 0.0,
+            "train_precision_docks": 0.0,
+            "train_f1_docks": 0.0,
+            "train_support_positive_docks": 14114.0,
+            "train_ap_docks": 0.0051601194497822465,
+            "train_prevalence_docks": 0.0051601194497822465,
+            "train_alerts_per_1000_docks": 0.0,
+            "train_macro_f1": 0.0,
+            "val_recall_bikes": 0.0,
+            "val_precision_bikes": 0.0,
+            "val_f1_bikes": 0.0,
+            "val_support_positive_bikes": 2213.0,
+            "val_ap_bikes": 0.003223053351509432,
+            "val_prevalence_bikes": 0.003223053351509432,
+            "val_alerts_per_1000_bikes": 0.0,
+            "val_recall_docks": 0.0,
+            "val_precision_docks": 0.0,
+            "val_f1_docks": 0.0,
+            "val_support_positive_docks": 2926.0,
+            "val_ap_docks": 0.004261479487806867,
+            "val_prevalence_docks": 0.004261479487806867,
+            "val_alerts_per_1000_docks": 0.0,
+            "val_macro_f1": 0.0,
+            "test_recall_bikes": 0.0,
+            "test_precision_bikes": 0.0,
+            "test_f1_bikes": 0.0,
+            "test_support_positive_bikes": 3003.0,
+            "test_ap_bikes": 0.004373623684854416,
+            "test_prevalence_bikes": 0.004373623684854416,
+            "test_alerts_per_1000_bikes": 0.0,
+            "test_recall_docks": 0.0,
+            "test_precision_docks": 0.0,
+            "test_f1_docks": 0.0,
+            "test_support_positive_docks": 3897.0,
+            "test_ap_docks": 0.005675661505120766,
+            "test_prevalence_docks": 0.005675661505120766,
+            "test_alerts_per_1000_docks": 0.0,
+            "test_macro_f1": 0.0,
+            "fit_seconds": 2.9277211999869905
+          },
+          "configuration": {
+            "delivery": "A6",
+            "question": "p2",
+            "model": "search",
+            "mode": "search",
+            "hyperparameters_source": "config",
+            "member": "Marco",
+            "experiment": "mibici-equipo39",
+            "seed": 39,
+            "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+            "split_id": "ab6301f96f083217512343b4f800bc5ddea51b666492ef05b34da85591cc9bdd",
+            "split_version": "3",
+            "split_strategy": "chronological_holdout",
+            "feature_schema_version": "6-chronological-calendar-only",
+            "variant": {
+              "name": "baseline",
+              "family": "dummy",
+              "params": {
+                "strategy": "prior"
+              }
+            },
+            "threshold_grid": [
+              0.05,
+              0.1,
+              0.15,
+              0.2,
+              0.25,
+              0.3,
+              0.35,
+              0.4,
+              0.45,
+              0.5,
+              0.55,
+              0.6,
+              0.65,
+              0.7,
+              0.75,
+              0.8,
+              0.85,
+              0.9,
+              0.95
+            ],
+            "min_recall": 0.8,
+            "initial_occupancy": 0.5,
+            "margin": 0.1,
+            "input_columns": [
+              "hour_of_day",
+              "day_of_week",
+              "month",
+              "is_weekend",
+              "hour_sin",
+              "hour_cos",
+              "month_sin",
+              "month_cos",
+              "station_id"
+            ],
+            "excluded_columns": [
+              "arrivals",
+              "capacity",
+              "departures",
+              "flow_max",
+              "flow_min",
+              "y_bikes",
+              "y_docks"
+            ],
+            "thresholds": {
+              "bikes": 0.95,
+              "docks": 0.95
+            },
+            "threshold_rules": {
+              "bikes": "max_f1",
+              "docks": "max_f1"
+            }
+          },
+          "signature": {
+            "inputs": "[{\"type\": \"double\", \"name\": \"hour_of_day\", \"required\": true}, {\"type\": \"double\", \"name\": \"day_of_week\", \"required\": true}, {\"type\": \"double\", \"name\": \"month\", \"required\": true}, {\"type\": \"double\", \"name\": \"is_weekend\", \"required\": true}, {\"type\": \"double\", \"name\": \"hour_sin\", \"required\": true}, {\"type\": \"double\", \"name\": \"hour_cos\", \"required\": true}, {\"type\": \"double\", \"name\": \"month_sin\", \"required\": true}, {\"type\": \"double\", \"name\": \"month_cos\", \"required\": true}, {\"type\": \"string\", \"name\": \"station_id\", \"required\": true}]",
+            "outputs": "[{\"type\": \"double\", \"name\": \"prob_bikes\", \"required\": true}, {\"type\": \"double\", \"name\": \"prob_docks\", \"required\": true}, {\"type\": \"boolean\", \"name\": \"alert_bikes\", \"required\": true}, {\"type\": \"boolean\", \"name\": \"alert_docks\", \"required\": true}]",
+            "params": null
+          },
+          "model_reload_verified": true,
+          "plots": [
+            "plots/p2_matrices_confusion_validacion.png",
+            "plots/p2_precision_recall_validacion.png",
+            "plots/p2_umbrales_validacion.png"
+          ]
+        },
+        {
+          "variant": "p2_lr_0.1",
+          "run_id": "b24e7ffdf7524a96914dbe1e0fa7f356",
+          "role": "candidate",
+          "selected": true,
+          "metrics": {
+            "train_recall_bikes": 0.8380599710982659,
+            "train_precision_bikes": 0.024308457268304696,
+            "train_f1_bikes": 0.04724650004709884,
+            "train_support_positive_bikes": 11072.0,
+            "train_ap_bikes": 0.04547883650319656,
+            "train_prevalence_bikes": 0.004047955402294816,
+            "train_alerts_per_1000_bikes": 139.55757660843344,
+            "train_recall_docks": 0.7808558877710076,
+            "train_precision_docks": 0.03588850174216028,
+            "train_f1_docks": 0.06862305575273035,
+            "train_support_positive_docks": 14114.0,
+            "train_ap_docks": 0.11427336752307139,
+            "train_prevalence_docks": 0.0051601194497822465,
+            "train_alerts_per_1000_docks": 112.27299715414696,
+            "train_macro_f1": 0.057934777899914594,
+            "val_recall_bikes": 0.8088567555354722,
+            "val_precision_bikes": 0.0171865848623633,
+            "val_f1_bikes": 0.0336580045880185,
+            "val_support_positive_bikes": 2213.0,
+            "val_ap_bikes": 0.030978830953398803,
+            "val_prevalence_bikes": 0.003223053351509432,
+            "val_alerts_per_1000_bikes": 151.68740606102975,
+            "val_recall_docks": 0.8075871496924129,
+            "val_precision_docks": 0.026364234790079103,
+            "val_f1_docks": 0.051061530981578514,
+            "val_support_positive_docks": 2926.0,
+            "val_ap_docks": 0.05156742735425882,
+            "val_prevalence_docks": 0.004261479487806867,
+            "val_alerts_per_1000_docks": 130.53730178149067,
+            "val_macro_f1": 0.04235976778479851,
+            "test_recall_bikes": 0.8494838494838495,
+            "test_precision_bikes": 0.021859281411470338,
+            "test_f1_bikes": 0.04262180044108802,
+            "test_support_positive_bikes": 3003.0,
+            "test_ap_bikes": 0.042226145820596174,
+            "test_prevalence_bikes": 0.004373623684854416,
+            "test_alerts_per_1000_bikes": 169.96545376163678,
+            "test_recall_docks": 0.789838337182448,
+            "test_precision_docks": 0.03212541226568697,
+            "test_f1_docks": 0.061739662417635316,
+            "test_support_positive_docks": 3897.0,
+            "test_ap_docks": 0.09864514665750257,
+            "test_prevalence_docks": 0.005675661505120766,
+            "test_alerts_per_1000_docks": 139.5423351625945,
+            "test_macro_f1": 0.052180731429361665,
+            "fit_seconds": 74.00347990001319
+          },
+          "configuration": {
+            "delivery": "A6",
+            "question": "p2",
+            "model": "search",
+            "mode": "search",
+            "hyperparameters_source": "config",
+            "member": "Marco",
+            "experiment": "mibici-equipo39",
+            "seed": 39,
+            "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+            "split_id": "ab6301f96f083217512343b4f800bc5ddea51b666492ef05b34da85591cc9bdd",
+            "split_version": "3",
+            "split_strategy": "chronological_holdout",
+            "feature_schema_version": "6-chronological-calendar-only",
+            "variant": {
+              "name": "p2_lr_0.1",
+              "family": "logistic",
+              "params": {
+                "C": 0.1,
+                "class_weight": "balanced",
+                "solver": "liblinear",
+                "max_iter": 1000,
+                "random_state": 39
+              }
+            },
+            "threshold_grid": [
+              0.05,
+              0.1,
+              0.15,
+              0.2,
+              0.25,
+              0.3,
+              0.35,
+              0.4,
+              0.45,
+              0.5,
+              0.55,
+              0.6,
+              0.65,
+              0.7,
+              0.75,
+              0.8,
+              0.85,
+              0.9,
+              0.95
+            ],
+            "min_recall": 0.8,
+            "initial_occupancy": 0.5,
+            "margin": 0.1,
+            "input_columns": [
+              "hour_of_day",
+              "day_of_week",
+              "month",
+              "is_weekend",
+              "hour_sin",
+              "hour_cos",
+              "month_sin",
+              "month_cos",
+              "station_id"
+            ],
+            "excluded_columns": [
+              "arrivals",
+              "capacity",
+              "departures",
+              "flow_max",
+              "flow_min",
+              "y_bikes",
+              "y_docks"
+            ],
+            "thresholds": {
+              "bikes": 0.65,
+              "docks": 0.7
+            },
+            "threshold_rules": {
+              "bikes": "recall_floor",
+              "docks": "recall_floor"
+            }
+          },
+          "signature": {
+            "inputs": "[{\"type\": \"double\", \"name\": \"hour_of_day\", \"required\": true}, {\"type\": \"double\", \"name\": \"day_of_week\", \"required\": true}, {\"type\": \"double\", \"name\": \"month\", \"required\": true}, {\"type\": \"double\", \"name\": \"is_weekend\", \"required\": true}, {\"type\": \"double\", \"name\": \"hour_sin\", \"required\": true}, {\"type\": \"double\", \"name\": \"hour_cos\", \"required\": true}, {\"type\": \"double\", \"name\": \"month_sin\", \"required\": true}, {\"type\": \"double\", \"name\": \"month_cos\", \"required\": true}, {\"type\": \"string\", \"name\": \"station_id\", \"required\": true}]",
+            "outputs": "[{\"type\": \"double\", \"name\": \"prob_bikes\", \"required\": true}, {\"type\": \"double\", \"name\": \"prob_docks\", \"required\": true}, {\"type\": \"boolean\", \"name\": \"alert_bikes\", \"required\": true}, {\"type\": \"boolean\", \"name\": \"alert_docks\", \"required\": true}]",
+            "params": null
+          },
+          "model_reload_verified": true,
+          "plots": [
+            "plots/p2_matrices_confusion_validacion.png",
+            "plots/p2_precision_recall_validacion.png",
+            "plots/p2_umbrales_validacion.png"
+          ]
+        },
+        {
+          "variant": "p2_lr_1",
+          "run_id": "57dfa008aaca49f2938733cdeb68a7a2",
+          "role": "candidate",
+          "selected": false,
+          "metrics": {
+            "train_recall_bikes": 0.8409501445086706,
+            "train_precision_bikes": 0.024143841388627425,
+            "train_f1_bikes": 0.04694002555965305,
+            "train_support_positive_bikes": 11072.0,
+            "train_ap_bikes": 0.04513794380079819,
+            "train_prevalence_bikes": 0.004047955402294816,
+            "train_alerts_per_1000_bikes": 140.9936648328025,
+            "train_recall_docks": 0.7846818761513391,
+            "train_precision_docks": 0.03550532980684459,
+            "train_f1_docks": 0.0679366578844862,
+            "train_support_positive_docks": 14114.0,
+            "train_ap_docks": 0.11378172378487547,
+            "train_prevalence_docks": 0.0051601194497822465,
+            "train_alerts_per_1000_docks": 114.04068721647495,
+            "train_macro_f1": 0.05743834172206963,
+            "val_recall_bikes": 0.8133755083596927,
+            "val_precision_bikes": 0.017116448907400012,
+            "val_f1_bikes": 0.033527357392316645,
+            "val_support_positive_bikes": 2213.0,
+            "val_ap_bikes": 0.03074210241074484,
+            "val_prevalence_bikes": 0.003223053351509432,
+            "val_alerts_per_1000_bikes": 153.1598448040826,
+            "val_recall_docks": 0.8113465481886535,
+            "val_precision_docks": 0.02609737597150615,
+            "val_f1_docks": 0.0505681999723089,
+            "val_support_positive_docks": 2926.0,
+            "val_ap_docks": 0.05135198498131262,
+            "val_prevalence_docks": 0.004261479487806867,
+            "val_alerts_per_1000_docks": 132.48598925745978,
+            "val_macro_f1": 0.04204777868231277,
+            "test_recall_bikes": 0.8541458541458542,
+            "test_precision_bikes": 0.02175074410440357,
+            "test_f1_bikes": 0.04242123542545274,
+            "test_support_positive_bikes": 3003.0,
+            "test_ap_bikes": 0.04196446954997955,
+            "test_prevalence_bikes": 0.004373623684854416,
+            "test_alerts_per_1000_bikes": 171.75102240553673,
+            "test_recall_docks": 0.7931742365922505,
+            "test_precision_docks": 0.031793215527349775,
+            "test_f1_docks": 0.06113588939764039,
+            "test_support_positive_docks": 3897.0,
+            "test_ap_docks": 0.09825941292355161,
+            "test_prevalence_docks": 0.005675661505120766,
+            "test_alerts_per_1000_docks": 141.5958847448938,
+            "test_macro_f1": 0.05177856241154656,
+            "fit_seconds": 88.38814860000275
+          },
+          "configuration": {
+            "delivery": "A6",
+            "question": "p2",
+            "model": "search",
+            "mode": "search",
+            "hyperparameters_source": "config",
+            "member": "Marco",
+            "experiment": "mibici-equipo39",
+            "seed": 39,
+            "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+            "split_id": "ab6301f96f083217512343b4f800bc5ddea51b666492ef05b34da85591cc9bdd",
+            "split_version": "3",
+            "split_strategy": "chronological_holdout",
+            "feature_schema_version": "6-chronological-calendar-only",
+            "variant": {
+              "name": "p2_lr_1",
+              "family": "logistic",
+              "params": {
+                "C": 1.0,
+                "class_weight": "balanced",
+                "solver": "liblinear",
+                "max_iter": 1000,
+                "random_state": 39
+              }
+            },
+            "threshold_grid": [
+              0.05,
+              0.1,
+              0.15,
+              0.2,
+              0.25,
+              0.3,
+              0.35,
+              0.4,
+              0.45,
+              0.5,
+              0.55,
+              0.6,
+              0.65,
+              0.7,
+              0.75,
+              0.8,
+              0.85,
+              0.9,
+              0.95
+            ],
+            "min_recall": 0.8,
+            "initial_occupancy": 0.5,
+            "margin": 0.1,
+            "input_columns": [
+              "hour_of_day",
+              "day_of_week",
+              "month",
+              "is_weekend",
+              "hour_sin",
+              "hour_cos",
+              "month_sin",
+              "month_cos",
+              "station_id"
+            ],
+            "excluded_columns": [
+              "arrivals",
+              "capacity",
+              "departures",
+              "flow_max",
+              "flow_min",
+              "y_bikes",
+              "y_docks"
+            ],
+            "thresholds": {
+              "bikes": 0.65,
+              "docks": 0.7
+            },
+            "threshold_rules": {
+              "bikes": "recall_floor",
+              "docks": "recall_floor"
+            }
+          },
+          "signature": {
+            "inputs": "[{\"type\": \"double\", \"name\": \"hour_of_day\", \"required\": true}, {\"type\": \"double\", \"name\": \"day_of_week\", \"required\": true}, {\"type\": \"double\", \"name\": \"month\", \"required\": true}, {\"type\": \"double\", \"name\": \"is_weekend\", \"required\": true}, {\"type\": \"double\", \"name\": \"hour_sin\", \"required\": true}, {\"type\": \"double\", \"name\": \"hour_cos\", \"required\": true}, {\"type\": \"double\", \"name\": \"month_sin\", \"required\": true}, {\"type\": \"double\", \"name\": \"month_cos\", \"required\": true}, {\"type\": \"string\", \"name\": \"station_id\", \"required\": true}]",
+            "outputs": "[{\"type\": \"double\", \"name\": \"prob_bikes\", \"required\": true}, {\"type\": \"double\", \"name\": \"prob_docks\", \"required\": true}, {\"type\": \"boolean\", \"name\": \"alert_bikes\", \"required\": true}, {\"type\": \"boolean\", \"name\": \"alert_docks\", \"required\": true}]",
+            "params": null
+          },
+          "model_reload_verified": true,
+          "plots": [
+            "plots/p2_matrices_confusion_validacion.png",
+            "plots/p2_precision_recall_validacion.png",
+            "plots/p2_umbrales_validacion.png"
+          ]
+        },
+        {
+          "variant": "p2_lr_10",
+          "run_id": "96fcb94e40cf44e8baaad4c48a6cb939",
+          "role": "candidate",
+          "selected": false,
+          "metrics": {
+            "train_recall_bikes": 0.8411307803468208,
+            "train_precision_bikes": 0.024118008095446505,
+            "train_f1_bikes": 0.046891481943028335,
+            "train_support_positive_bikes": 11072.0,
+            "train_ap_bikes": 0.04509254188004175,
+            "train_prevalence_bikes": 0.004047955402294816,
+            "train_alerts_per_1000_bikes": 141.17500387539084,
+            "train_recall_docks": 0.7851778376080487,
+            "train_precision_docks": 0.03545910939464818,
+            "train_f1_docks": 0.06785389553732976,
+            "train_support_positive_docks": 14114.0,
+            "train_ap_docks": 0.11370939585248488,
+            "train_prevalence_docks": 0.0051601194497822465,
+            "train_alerts_per_1000_docks": 114.26151137317528,
+            "train_macro_f1": 0.05737268874017905,
+            "val_recall_bikes": 0.8133755083596927,
+            "val_precision_bikes": 0.017093692427494256,
+            "val_f1_bikes": 0.03348369994884435,
+            "val_support_positive_bikes": 2213.0,
+            "val_ap_bikes": 0.030719631257329846,
+            "val_prevalence_bikes": 0.003223053351509432,
+            "val_alerts_per_1000_bikes": 153.36374334416908,
+            "val_recall_docks": 0.8113465481886535,
+            "val_precision_docks": 0.02605326982803086,
+            "val_f1_docks": 0.0504853956000723,
+            "val_support_positive_docks": 2926.0,
+            "val_ap_docks": 0.05131717186198906,
+            "val_prevalence_docks": 0.004261479487806867,
+            "val_alerts_per_1000_docks": 132.7102776515549,
+            "val_macro_f1": 0.04198454777445833,
+            "test_recall_bikes": 0.8548118548118548,
+            "test_precision_bikes": 0.02172312535436536,
+            "test_f1_bikes": 0.04236952431254745,
+            "test_support_positive_bikes": 3003.0,
+            "test_ap_bikes": 0.04193488183014163,
+            "test_prevalence_bikes": 0.004373623684854416,
+            "test_alerts_per_1000_bikes": 172.10347559625757,
+            "test_recall_docks": 0.7936874518860662,
+            "test_precision_docks": 0.031736422495613544,
+            "test_f1_docks": 0.06103240064722365,
+            "test_support_positive_docks": 3897.0,
+            "test_ap_docks": 0.09819883606594416,
+            "test_prevalence_docks": 0.005675661505120766,
+            "test_alerts_per_1000_docks": 141.9410558448973,
+            "test_macro_f1": 0.05170096247988555,
+            "fit_seconds": 99.76192819999414
+          },
+          "configuration": {
+            "delivery": "A6",
+            "question": "p2",
+            "model": "search",
+            "mode": "search",
+            "hyperparameters_source": "config",
+            "member": "Marco",
+            "experiment": "mibici-equipo39",
+            "seed": 39,
+            "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+            "split_id": "ab6301f96f083217512343b4f800bc5ddea51b666492ef05b34da85591cc9bdd",
+            "split_version": "3",
+            "split_strategy": "chronological_holdout",
+            "feature_schema_version": "6-chronological-calendar-only",
+            "variant": {
+              "name": "p2_lr_10",
+              "family": "logistic",
+              "params": {
+                "C": 10.0,
+                "class_weight": "balanced",
+                "solver": "liblinear",
+                "max_iter": 1000,
+                "random_state": 39
+              }
+            },
+            "threshold_grid": [
+              0.05,
+              0.1,
+              0.15,
+              0.2,
+              0.25,
+              0.3,
+              0.35,
+              0.4,
+              0.45,
+              0.5,
+              0.55,
+              0.6,
+              0.65,
+              0.7,
+              0.75,
+              0.8,
+              0.85,
+              0.9,
+              0.95
+            ],
+            "min_recall": 0.8,
+            "initial_occupancy": 0.5,
+            "margin": 0.1,
+            "input_columns": [
+              "hour_of_day",
+              "day_of_week",
+              "month",
+              "is_weekend",
+              "hour_sin",
+              "hour_cos",
+              "month_sin",
+              "month_cos",
+              "station_id"
+            ],
+            "excluded_columns": [
+              "arrivals",
+              "capacity",
+              "departures",
+              "flow_max",
+              "flow_min",
+              "y_bikes",
+              "y_docks"
+            ],
+            "thresholds": {
+              "bikes": 0.65,
+              "docks": 0.7
+            },
+            "threshold_rules": {
+              "bikes": "recall_floor",
+              "docks": "recall_floor"
+            }
+          },
+          "signature": {
+            "inputs": "[{\"type\": \"double\", \"name\": \"hour_of_day\", \"required\": true}, {\"type\": \"double\", \"name\": \"day_of_week\", \"required\": true}, {\"type\": \"double\", \"name\": \"month\", \"required\": true}, {\"type\": \"double\", \"name\": \"is_weekend\", \"required\": true}, {\"type\": \"double\", \"name\": \"hour_sin\", \"required\": true}, {\"type\": \"double\", \"name\": \"hour_cos\", \"required\": true}, {\"type\": \"double\", \"name\": \"month_sin\", \"required\": true}, {\"type\": \"double\", \"name\": \"month_cos\", \"required\": true}, {\"type\": \"string\", \"name\": \"station_id\", \"required\": true}]",
+            "outputs": "[{\"type\": \"double\", \"name\": \"prob_bikes\", \"required\": true}, {\"type\": \"double\", \"name\": \"prob_docks\", \"required\": true}, {\"type\": \"boolean\", \"name\": \"alert_bikes\", \"required\": true}, {\"type\": \"boolean\", \"name\": \"alert_docks\", \"required\": true}]",
+            "params": null
+          },
+          "model_reload_verified": true,
+          "plots": [
+            "plots/p2_matrices_confusion_validacion.png",
+            "plots/p2_precision_recall_validacion.png",
+            "plots/p2_umbrales_validacion.png"
+          ]
+        }
+      ]
+    },
+    "p1": {
+      "summary": {
+        "question": "p1",
+        "mode": "search",
+        "selected_variant": "baseline",
+        "parent_run_id": "310ec0be030047fc851669c8e91d863c",
+        "child_run_ids": {
+          "baseline": "0a540d20ad8d4edc8290a85c64de79f1",
+          "p1_hgb_100": "85c05dad49944fff856f7ff00601632b",
+          "p1_hgb_200": "ad8fad3ebaf94e07a1f5d673f1609b9e",
+          "p1_rf_300": "9bb2a49e849b4c8f8e7d34406ea77eb4"
+        },
+        "git_commit": "97f0033d1669bea64f38d86cf78f680dffbd3062"
+      },
+      "selection_before_test": {
+        "selected_variant": "baseline",
+        "rule": "menor val_mae entre elegibles; empate a 6 decimales lo gana el baseline",
+        "validation_metrics": {
+          "baseline": {
+            "val_mae": 0.8887753519818337,
+            "val_rmse": 1.6964149888983533,
+            "val_predict_ms_per_1000": 1.6307210448891136,
+            "val_model_bytes": 1121792
+          },
+          "p1_hgb_100": {
+            "val_mae": 0.9853151450450384,
+            "val_rmse": 7.6674109877313645,
+            "val_predict_ms_per_1000": 7.546312956310537,
+            "val_model_bytes": 1506008
+          },
+          "p1_hgb_200": {
+            "val_mae": 0.9097328271920462,
+            "val_rmse": 1.8051764244607562,
+            "val_predict_ms_per_1000": 13.861773068572221,
+            "val_model_bytes": 1862753
+          },
+          "p1_rf_300": {
+            "val_mae": 0.9198911604188764,
+            "val_rmse": 1.8263316315379394,
+            "val_predict_ms_per_1000": 27.995589356839066,
+            "val_model_bytes": 425636972
+          }
+        },
+        "calibration": {
+          "baseline": {},
+          "p1_hgb_100": {},
+          "p1_hgb_200": {},
+          "p1_rf_300": {}
+        }
+      },
+      "children": [
+        {
+          "variant": "baseline",
+          "run_id": "0a540d20ad8d4edc8290a85c64de79f1",
+          "role": "baseline",
+          "selected": true,
+          "metrics": {
+            "train_mae": 0.7957515488602567,
+            "train_rmse": 1.4562388690213468,
+            "train_predict_ms_per_1000": 1.4393430693608358,
+            "train_model_bytes": 1121792.0,
+            "val_mae": 0.8887753519818337,
+            "val_rmse": 1.6964149888983533,
+            "val_predict_ms_per_1000": 1.6307210448891136,
+            "val_model_bytes": 1121792.0,
+            "test_mae": 0.916381318621011,
+            "test_rmse": 1.7182335253495016,
+            "test_predict_ms_per_1000": 1.2419347076151441,
+            "test_model_bytes": 1121792.0,
+            "fit_seconds": 3.5348489000170957
+          },
+          "configuration": {
+            "delivery": "A6",
+            "question": "p1",
+            "model": "search",
+            "mode": "search",
+            "hyperparameters_source": "config",
+            "member": "Marco",
+            "experiment": "mibici-equipo39",
+            "seed": 39,
+            "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+            "split_id": "ab6301f96f083217512343b4f800bc5ddea51b666492ef05b34da85591cc9bdd",
+            "split_version": "3",
+            "split_strategy": "chronological_holdout",
+            "feature_schema_version": "6-chronological-calendar-only",
+            "variant": {
+              "name": "baseline",
+              "family": "baseline",
+              "params": {}
+            }
+          },
+          "signature": {
+            "inputs": "[{\"type\": \"string\", \"name\": \"station_id\", \"required\": true}, {\"type\": \"integer\", \"name\": \"hour_of_day\", \"required\": true}, {\"type\": \"integer\", \"name\": \"day_of_week\", \"required\": true}, {\"type\": \"integer\", \"name\": \"month\", \"required\": true}, {\"type\": \"long\", \"name\": \"is_weekend\", \"required\": true}, {\"type\": \"double\", \"name\": \"hour_sin\", \"required\": true}, {\"type\": \"double\", \"name\": \"hour_cos\", \"required\": true}, {\"type\": \"double\", \"name\": \"month_sin\", \"required\": true}, {\"type\": \"double\", \"name\": \"month_cos\", \"required\": true}]",
+            "outputs": "[{\"type\": \"tensor\", \"tensor-spec\": {\"dtype\": \"float64\", \"shape\": [-1]}}]",
+            "params": null
+          },
+          "model_reload_verified": true,
+          "plots": [
+            "plots/error_por_hora.csv",
+            "plots/monthly_mae.csv",
+            "plots/real_vs_predicho.png",
+            "plots/residuales.png"
+          ]
+        },
+        {
+          "variant": "p1_hgb_100",
+          "run_id": "85c05dad49944fff856f7ff00601632b",
+          "role": "candidate",
+          "selected": false,
+          "metrics": {
+            "train_mae": 0.8193209366931794,
+            "train_rmse": 4.899155251426984,
+            "train_predict_ms_per_1000": 8.306288777740946,
+            "train_model_bytes": 1506008.0,
+            "val_mae": 0.9853151450450384,
+            "val_rmse": 7.6674109877313645,
+            "val_predict_ms_per_1000": 7.546312956310537,
+            "val_model_bytes": 1506008.0,
+            "test_mae": 0.9979644370157295,
+            "test_rmse": 8.259822345552285,
+            "test_predict_ms_per_1000": 7.317681075711911,
+            "test_model_bytes": 1506008.0,
+            "fit_seconds": 37.53052979998756
+          },
+          "configuration": {
+            "delivery": "A6",
+            "question": "p1",
+            "model": "search",
+            "mode": "search",
+            "hyperparameters_source": "config",
+            "member": "Marco",
+            "experiment": "mibici-equipo39",
+            "seed": 39,
+            "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+            "split_id": "ab6301f96f083217512343b4f800bc5ddea51b666492ef05b34da85591cc9bdd",
+            "split_version": "3",
+            "split_strategy": "chronological_holdout",
+            "feature_schema_version": "6-chronological-calendar-only",
+            "variant": {
+              "name": "p1_hgb_100",
+              "family": "hgb",
+              "params": {
+                "loss": "poisson",
+                "learning_rate": 0.1,
+                "max_iter": 100,
+                "max_leaf_nodes": 31,
+                "random_state": 39
+              }
+            }
+          },
+          "signature": {
+            "inputs": "[{\"type\": \"string\", \"name\": \"station_id\", \"required\": true}, {\"type\": \"integer\", \"name\": \"hour_of_day\", \"required\": true}, {\"type\": \"integer\", \"name\": \"day_of_week\", \"required\": true}, {\"type\": \"integer\", \"name\": \"month\", \"required\": true}, {\"type\": \"long\", \"name\": \"is_weekend\", \"required\": true}, {\"type\": \"double\", \"name\": \"hour_sin\", \"required\": true}, {\"type\": \"double\", \"name\": \"hour_cos\", \"required\": true}, {\"type\": \"double\", \"name\": \"month_sin\", \"required\": true}, {\"type\": \"double\", \"name\": \"month_cos\", \"required\": true}]",
+            "outputs": "[{\"type\": \"tensor\", \"tensor-spec\": {\"dtype\": \"float64\", \"shape\": [-1]}}]",
+            "params": null
+          },
+          "model_reload_verified": true,
+          "plots": [
+            "plots/error_por_hora.csv",
+            "plots/monthly_mae.csv",
+            "plots/real_vs_predicho.png",
+            "plots/residuales.png"
+          ]
+        },
+        {
+          "variant": "p1_hgb_200",
+          "run_id": "ad8fad3ebaf94e07a1f5d673f1609b9e",
+          "role": "candidate",
+          "selected": false,
+          "metrics": {
+            "train_mae": 0.7935054239427509,
+            "train_rmse": 1.4641314462290445,
+            "train_predict_ms_per_1000": 12.586246333664798,
+            "train_model_bytes": 1862753.0,
+            "val_mae": 0.9097328271920462,
+            "val_rmse": 1.8051764244607562,
+            "val_predict_ms_per_1000": 13.861773068572221,
+            "val_model_bytes": 1862753.0,
+            "test_mae": 0.9317485573870828,
+            "test_rmse": 1.7568152012443121,
+            "test_predict_ms_per_1000": 12.07373661647965,
+            "test_model_bytes": 1862753.0,
+            "fit_seconds": 63.9554763000051
+          },
+          "configuration": {
+            "delivery": "A6",
+            "question": "p1",
+            "model": "search",
+            "mode": "search",
+            "hyperparameters_source": "config",
+            "member": "Marco",
+            "experiment": "mibici-equipo39",
+            "seed": 39,
+            "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+            "split_id": "ab6301f96f083217512343b4f800bc5ddea51b666492ef05b34da85591cc9bdd",
+            "split_version": "3",
+            "split_strategy": "chronological_holdout",
+            "feature_schema_version": "6-chronological-calendar-only",
+            "variant": {
+              "name": "p1_hgb_200",
+              "family": "hgb",
+              "params": {
+                "loss": "poisson",
+                "learning_rate": 0.05,
+                "max_iter": 200,
+                "max_leaf_nodes": 31,
+                "random_state": 39
+              }
+            }
+          },
+          "signature": {
+            "inputs": "[{\"type\": \"string\", \"name\": \"station_id\", \"required\": true}, {\"type\": \"integer\", \"name\": \"hour_of_day\", \"required\": true}, {\"type\": \"integer\", \"name\": \"day_of_week\", \"required\": true}, {\"type\": \"integer\", \"name\": \"month\", \"required\": true}, {\"type\": \"long\", \"name\": \"is_weekend\", \"required\": true}, {\"type\": \"double\", \"name\": \"hour_sin\", \"required\": true}, {\"type\": \"double\", \"name\": \"hour_cos\", \"required\": true}, {\"type\": \"double\", \"name\": \"month_sin\", \"required\": true}, {\"type\": \"double\", \"name\": \"month_cos\", \"required\": true}]",
+            "outputs": "[{\"type\": \"tensor\", \"tensor-spec\": {\"dtype\": \"float64\", \"shape\": [-1]}}]",
+            "params": null
+          },
+          "model_reload_verified": true,
+          "plots": [
+            "plots/error_por_hora.csv",
+            "plots/monthly_mae.csv",
+            "plots/real_vs_predicho.png",
+            "plots/residuales.png"
+          ]
+        },
+        {
+          "variant": "p1_rf_300",
+          "run_id": "9bb2a49e849b4c8f8e7d34406ea77eb4",
+          "role": "candidate",
+          "selected": false,
+          "metrics": {
+            "train_mae": 0.7820844068199437,
+            "train_rmse": 1.415845142876775,
+            "train_predict_ms_per_1000": 24.188607616704363,
+            "train_model_bytes": 425636972.0,
+            "val_mae": 0.9198911604188764,
+            "val_rmse": 1.8263316315379394,
+            "val_predict_ms_per_1000": 27.995589356839066,
+            "val_model_bytes": 425636972.0,
+            "test_mae": 0.9355618989347191,
+            "test_rmse": 1.7281290623752705,
+            "test_predict_ms_per_1000": 25.13638192874952,
+            "test_model_bytes": 425636972.0,
+            "fit_seconds": 1268.9465739000007
+          },
+          "configuration": {
+            "delivery": "A6",
+            "question": "p1",
+            "model": "search",
+            "mode": "search",
+            "hyperparameters_source": "config",
+            "member": "Marco",
+            "experiment": "mibici-equipo39",
+            "seed": 39,
+            "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+            "split_id": "ab6301f96f083217512343b4f800bc5ddea51b666492ef05b34da85591cc9bdd",
+            "split_version": "3",
+            "split_strategy": "chronological_holdout",
+            "feature_schema_version": "6-chronological-calendar-only",
+            "variant": {
+              "name": "p1_rf_300",
+              "family": "random_forest",
+              "params": {
+                "n_estimators": 300,
+                "max_depth": 16,
+                "min_samples_leaf": 20,
+                "max_samples": 0.5,
+                "bootstrap": true,
+                "n_jobs": 2,
+                "random_state": 39
+              }
+            }
+          },
+          "signature": {
+            "inputs": "[{\"type\": \"string\", \"name\": \"station_id\", \"required\": true}, {\"type\": \"integer\", \"name\": \"hour_of_day\", \"required\": true}, {\"type\": \"integer\", \"name\": \"day_of_week\", \"required\": true}, {\"type\": \"integer\", \"name\": \"month\", \"required\": true}, {\"type\": \"long\", \"name\": \"is_weekend\", \"required\": true}, {\"type\": \"double\", \"name\": \"hour_sin\", \"required\": true}, {\"type\": \"double\", \"name\": \"hour_cos\", \"required\": true}, {\"type\": \"double\", \"name\": \"month_sin\", \"required\": true}, {\"type\": \"double\", \"name\": \"month_cos\", \"required\": true}]",
+            "outputs": "[{\"type\": \"tensor\", \"tensor-spec\": {\"dtype\": \"float64\", \"shape\": [-1]}}]",
+            "params": null
+          },
+          "model_reload_verified": true,
+          "plots": [
+            "plots/error_por_hora.csv",
+            "plots/monthly_mae.csv",
+            "plots/real_vs_predicho.png",
+            "plots/residuales.png"
+          ]
+        }
+      ]
+    }
+  },
+  "registry_versions_created": 0,
+  "scope": "Busquedas oficiales; seleccion automatica pendiente de revision del equipo.",
+  "complete": true,
+  "models_verified_count": 12,
+  "pending": [
+    "Revision de justificaciones y selecciones por responsables.",
+    "Publicacion revisada de selection.json antes de reproduccion y registro.",
+    "Capturas oficiales y actualizacion del reporte."
+  ]
+}

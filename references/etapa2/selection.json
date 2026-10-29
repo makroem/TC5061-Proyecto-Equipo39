@@ -1,0 +1,53 @@
+{
+  "p1": {
+    "variant": "baseline",
+    "family": "baseline",
+    "params": {},
+    "run_id": "0a540d20ad8d4edc8290a85c64de79f1",
+    "parent_run_id": "310ec0be030047fc851669c8e91d863c",
+    "git_commit": "97f0033d1669bea64f38d86cf78f680dffbd3062",
+    "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+    "split_id": "ab6301f96f083217512343b4f800bc5ddea51b666492ef05b34da85591cc9bdd",
+    "calibration": {}
+  },
+  "p2": {
+    "variant": "p2_lr_0.1",
+    "family": "logistic",
+    "params": {
+      "C": 0.1,
+      "class_weight": "balanced",
+      "solver": "liblinear",
+      "max_iter": 1000,
+      "random_state": 39
+    },
+    "run_id": "b24e7ffdf7524a96914dbe1e0fa7f356",
+    "parent_run_id": "e0d9f693f211405ba3dcd80b357be4cb",
+    "git_commit": "97f0033d1669bea64f38d86cf78f680dffbd3062",
+    "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+    "split_id": "ab6301f96f083217512343b4f800bc5ddea51b666492ef05b34da85591cc9bdd",
+    "calibration": {
+      "thresholds": {
+        "bikes": 0.65,
+        "docks": 0.7
+      }
+    }
+  },
+  "p3": {
+    "variant": "p3_gmm_3",
+    "family": "gmm",
+    "params": {
+      "n_components": 3,
+      "covariance_type": "diag",
+      "reg_covar": 1e-06,
+      "n_init": 5,
+      "max_iter": 300,
+      "random_state": 39
+    },
+    "run_id": "46ce752d830c4edfbbb6cd7e05aabc86",
+    "parent_run_id": "09bfe57afcea4438b67aa7afc37ed56d",
+    "git_commit": "97f0033d1669bea64f38d86cf78f680dffbd3062",
+    "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+    "split_id": "ab6301f96f083217512343b4f800bc5ddea51b666492ef05b34da85591cc9bdd",
+    "calibration": {}
+  }
+}
