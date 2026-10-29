@@ -1,0 +1,32 @@
+{
+  "scope": "compatibilidad con datos sinteticos; no valida CSV reales",
+  "status": "PASS",
+  "cases": {
+    "variable": {
+      "condition_passed": true,
+      "html": "variable.html",
+      "sha256": "bba7a757c0682d28eb8755d6c2ccfbcd992e34429478389cfa120e1f720865e4"
+    },
+    "constant": {
+      "condition_passed": false,
+      "html": "constant.html",
+      "sha256": "e388b489d40457ee6dd049127243326ae0c6e8f437bb30ba7575cc147daf9f08"
+    }
+  },
+  "versions": {
+    "deepchecks": "0.19.1",
+    "numpy": "1.26.4",
+    "pandas": "2.2.3",
+    "scikit-learn": "1.6.1",
+    "plotly": "5.24.1",
+    "ipython": "8.37.0"
+  },
+  "execution_files_sha256": {
+    "requirements-deepchecks.txt": "1a59bc64ea93cd37853325fd2f675ed8d98dd0099ead473c3f6642a13791b2c6",
+    "scripts/check_deepchecks_env.py": "b597265445308db845595fe22509c01a26ffffc987cc2b6993325f95db8d2ad2"
+  },
+  "additional_verified_version": {
+    "pyarrow": "23.0.1"
+  },
+  "checked_on": "2026-10-28"
+}

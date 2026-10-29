@@ -17,6 +17,14 @@ classifiers = [
 ]
 requires-python = "==3.11.9"
 
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--strict-markers"
+markers = [
+    "integration: contratos que ejecutan procesos o servicios locales aislados",
+    "data_quality: validacion de datos preparados; no forma parte de la suite sintetica",
+]
+
 
 [tool.ruff]
 line-length = 99

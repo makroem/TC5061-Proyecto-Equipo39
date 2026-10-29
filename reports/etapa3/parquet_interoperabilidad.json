@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "expected": {
+    "rows": 2,
+    "columns": [
+      "station_id",
+      "count",
+      "timestamp"
+    ],
+    "hash": "bbb82db80a9f58ee28500f62ee7bc23541434b3855a292004535d6690faa916d"
+  },
+  "actual": {
+    "rows": 2,
+    "columns": [
+      "station_id",
+      "count",
+      "timestamp"
+    ],
+    "hash": "bbb82db80a9f58ee28500f62ee7bc23541434b3855a292004535d6690faa916d"
+  },
+  "scope": "Intercambio de un Parquet sintetico; no valida datos reales",
+  "writer": {
+    "numpy": "2.1.3",
+    "pyarrow": "19.0.1"
+  },
+  "reader": {
+    "numpy": "1.26.4",
+    "pyarrow": "23.0.1"
+  }
+}
