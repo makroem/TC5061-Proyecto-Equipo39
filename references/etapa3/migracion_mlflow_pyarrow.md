@@ -12,6 +12,28 @@ MLflow 3 registra los modelos como objetos propios. Las nuevas corridas guardan 
 
 El formato de los modelos scikit-learn se fija en `cloudpickle`: el baseline de P1 contiene objetos pandas que no admite el nuevo formato predeterminado. Solo se cargan modelos propios con origen y hashes comprobados. Un archivo pickle/cloudpickle de origen desconocido no se considera seguro.
 
+## Resultados comprobados el 28 de octubre de 2026
+
+| Verificación | Resultado |
+|---|---|
+| Suite de esta rama | 161 pruebas aprobadas, 0 fallos, 0 omisiones y 23 advertencias de las bibliotecas. No incluye el PR #31 pendiente. |
+| Dependencias del proyecto | 132 paquetes fijados consultados; 0 avisos conocidos en esa consulta. `pip check` sin conflictos. |
+| Migración de la copia SQLite | Integridad correcta; 34 corridas, 500 archivos de artefactos y tres modelos conservados. |
+| Recuperación con el entorno anterior | MLflow 2.22.0/PyArrow 19.0.1 cargan los tres alias desde el respaldo restaurado. |
+| Parquet | Cinco tablas verificadas entre versiones, en escritura/relectura y después de reconstruirlas desde las fuentes. |
+| Ingesta real mediante Projects | 12 meses, 4,497,119 viajes y 4,108,440 filas de características; manifiestos confirmados. |
+| Reproducción y registro nuevos | P1, P2 y P3 terminan mediante Projects, conservan las métricas y cargan por `champion` en el almacén de prueba. |
+
+La comparación incluye 68 métricas y conteos: seis de P1, 45 de P2 y 17 de P3. Se excluyeron tiempos y tamaños serializados, que dependen del entorno. La tolerancia de la comprobación numérica fue relativa `1e-10` y absoluta `1e-12`.
+
+| Pregunta y selección | Métrica | Validación anterior / nueva | Prueba anterior / nueva |
+|---|---|---|---|
+| P1: baseline estacional | MAE | 0.888775 / 0.888775 | 0.916381 / 0.916381 |
+| P2: logística C=0.1 | F1 macro | 0.042360 / 0.042360 | 0.052181 / 0.052181 |
+| P3: GMM de tres componentes | Silhouette | 0.026594 / 0.026594 | 0.051373 / 0.051373 |
+
+Estos resultados acreditan compatibilidad; no son una mejora predictiva ni una nueva elección de modelos. Los valores completos, identificadores y límites del ensayo están en el [resumen verificable](../../reports/etapa3/migracion_mlflow_pyarrow.json).
+
 ## 1. Comprobar el entorno antes de instalar
 
 Abrir PowerShell en la raíz del repositorio y comprobar las instalaciones:

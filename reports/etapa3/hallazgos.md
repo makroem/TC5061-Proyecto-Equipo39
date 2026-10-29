@@ -11,6 +11,17 @@ Consultar los [resultados de la actualización](actualizacion_dependencias.json)
 y su [procedimiento](../../references/etapa3/actualizacion_dependencias.md).
 Los conteos y versiones que siguen se conservan como diagnóstico previo al cambio.
 
+Seguimiento posterior del 28 de octubre: `feat/marco-a7-migracion-mlflow` propone
+MLflow 3.17.2, PyArrow 23.0.1 y Tornado 6.6. La auditoría de los 132 requisitos
+del proyecto no reporta avisos conocidos; la suite de esa rama pasa 161 pruebas.
+La migración y la recuperación se verificaron en copias, y se reprodujeron P1,
+P2 y P3 con las métricas anteriores. Consultar el
+[resumen del ensayo](migracion_mlflow_pyarrow.json) y el
+[procedimiento de cambio](../../references/etapa3/migracion_mlflow_pyarrow.md).
+La integración requiere revisión independiente; el servidor oficial anterior
+permanece sin cambios. Este seguimiento no cierra DeepChecks ni las observaciones
+de Bandit indicadas abajo.
+
 ## Corregido: validaciones que desaparecían con optimización
 
 Bandit identificó tres usos de `assert` en `dataset.py`: conservación de conteos y
