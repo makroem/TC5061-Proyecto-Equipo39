@@ -80,6 +80,8 @@ Iniciar la copia en un puerto diferente, desde una terminal dedicada:
 
 El lanzador comprueba versiones y esquema antes de iniciar el servidor. Rechaza una base antigua para evitar actualizarla al arrancar. Escucha únicamente en `127.0.0.1`.
 
+En Windows el servidor informa que su servicio de trabajos no está disponible. La ejecución de este proyecto utiliza MLflow Projects local; no requiere ni acredita ese servicio adicional.
+
 Abrir http://127.0.0.1:5001. Capturar la lista de corridas históricas y el registro con los tres modelos y sus alias. Verificar las firmas, ejemplos y el linaje. Las capturas deben identificar el entorno de ensayo y no mostrar rutas personales ni credenciales.
 
 ## 4. Verificar los datos y ejecutar el proyecto
@@ -134,6 +136,8 @@ Marco prepara el código, las comprobaciones y el PR. Otro integrante revisa los
 Si falla la aceptación, detener el servidor nuevo y volver al almacén anterior con su entorno anterior, o utilizar la copia `restored/` ya verificada. No copiar una base migrada sobre el respaldo. Si existen corridas posteriores al cambio, conservarlas aparte y reconciliarlas antes de volver a admitir escrituras. No mezclar bases SQLite ni sobrescribir modelos.
 
 Las pruebas del ensayo y sus límites se registran en `reports/etapa3/migracion_mlflow_pyarrow.json`. La validación de una copia no afirma que el servidor oficial ya haya cambiado de versión.
+
+Las [capturas del registro y de las corridas](../../reports/etapa3/evidence/migracion/README.md) identifican expresamente el almacén de ensayo.
 
 ## Referencias
 
