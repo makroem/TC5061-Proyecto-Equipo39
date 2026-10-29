@@ -82,7 +82,7 @@ def stage2_env(tmp_path, monkeypatch):
     monkeypatch.setattr(C, "STAGE2_SEARCH_PLAN", {"p1": PLAN})
     monkeypatch.setenv("MLFLOW_TRACKING_URI", uri)
     monkeypatch.setenv("MLFLOW_REGISTRY_URI", uri)
-    (tmp_path / "requirements.txt").write_text("mlflow==2.22.0\nscikit-learn==1.6.1\n")
+    (tmp_path / "requirements.txt").write_text(f"mlflow=={mlflow.__version__}\nscikit-learn==1.6.1\n")
     (tmp_path / "mibici_equipo39").mkdir()
     (tmp_path / "mibici_equipo39/__init__.py").write_text("")
     (tmp_path / "etapa2").mkdir()
