@@ -28,7 +28,7 @@ La revisión se realizó en una rama independiente, sin modificar los modelos of
 
 
 
-Se incorporó `tests/test\_stage3\_p3.py`, con 12 pruebas adicionales desarrolladas utilizando datos sintéticos.
+Se incorporó `tests/test_stage3_p3.py`, con 12 pruebas adicionales desarrolladas utilizando datos sintéticos.
 
 
 
@@ -67,7 +67,7 @@ Se utilizó Bandit 1.9.4, instalado en un entorno virtual independiente para evi
 
 
 
-**Archivo analizado:** `mibici\_equipo39/modeling/p3.py`
+**Archivo analizado:** `mibici_equipo39/modeling/p3.py`
 
 
 **Preparación del entorno para reproducir el análisis (Windows PowerShell):**
