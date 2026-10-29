@@ -41,19 +41,12 @@ Los casos amplían la cobertura de condiciones límite relacionadas con perfiles
 
 
 | Ejecución | Resultado |
-
 |---|---|
-
 | Nuevas pruebas de Etapa 3 | 12 aprobadas |
-
 | Pruebas conjuntas de P3 | 52 aprobadas |
-
 | Suite completa del repositorio | 167 aprobadas |
-
 | Fallos de la suite completa | 0 |
-
 | Advertencias de PyTest | 32 |
-
 | Duración de la suite completa | 67.16 segundos |
 
 
@@ -77,39 +70,43 @@ Se utilizó Bandit 1.9.4, instalado en un entorno virtual independiente para evi
 **Archivo analizado:** `mibici\_equipo39/modeling/p3.py`
 
 
+**Preparación del entorno para reproducir el análisis (Windows PowerShell):**
+
+Se requiere Python 3.11 y el lanzador `py` de Windows. Desde la raíz del repositorio, se puede crear un entorno virtual aislado e instalar la misma versión de Bandit utilizada en la revisión:
+
+```powershell
+py -3.11 -m venv "$env:TEMP\tc5061-bandit"
+& "$env:TEMP\tc5061-bandit\Scripts\python.exe" -m pip install "bandit==1.9.4"
+```
+
+Estos comandos son instrucciones de preparación para reproducir el análisis; no es necesario ejecutarlos nuevamente si el entorno ya está configurado. La instalación se realiza fuera del repositorio y no modifica las dependencias declaradas del proyecto.
+
+Una vez preparado el entorno, se puede ejecutar el comando documentado a continuación desde la raíz del repositorio.
+
 
 **Comando ejecutado:**
 
 
-
 ```powershell
-
-\& "$env:TEMP\\tc5061-bandit\\Scripts\\python.exe" -m bandit .\\mibici\_equipo39\\modeling\\p3.py -f txt
-
+& "$env:TEMP\tc5061-bandit\Scripts\python.exe" -m bandit .\mibici_equipo39\modeling\p3.py -f txt
 ```
 
+**Nota de reproducibilidad:** El análisis se ejecutó desde la raíz del repositorio utilizando Bandit 1.9.4 instalado en un entorno virtual aislado, ubicado en `$env:TEMP\tc5061-bandit`. Este entorno debe existir y tener Bandit instalado antes de ejecutar el comando. La ruta corresponde al entorno utilizado en esta verificación local.
 
+El código de salida `1` de Bandit es esperado mientras permanezca el hallazgo B403 documentado. El análisis identificó un único hallazgo de severidad baja relacionado con la importación de `pickle`, sin hallazgos de severidad media o alta.
 
 ### 3.1 Resultados
 
 
 
 | Indicador | Resultado |
-
 |---|---|
-
 | Líneas de código analizadas | 794 |
-
 | Hallazgos de severidad alta | 0 |
-
 | Hallazgos de severidad media | 0 |
-
 | Hallazgos de severidad baja | 1 |
-
 | Regla identificada | B403 |
-
 | Confianza del hallazgo | Alta |
-
 | Ubicación | Línea 11 |
 
 
