@@ -1,0 +1,167 @@
+{
+  "checked_at": "2026-10-28T14:04:56-06:00",
+  "tested_commit": "8b63701a158d6ab9191143f3283bcc18fd5a9022",
+  "base_commit": "1ac7ab02a9ccacf1d384f6e651b9edae4916a234",
+  "status": "PARTIAL_REMEDIATION_PENDING_REVIEW",
+  "requirements_sha256": "5ee191f436a3a31b0bf1c9576d871bec00f112004f5f86c9fb00f05f5f387761",
+  "compatibility_script_sha256": "08ca69577f5b61eedc05f429ec0c3b6534cf27f7d1828b742211b94a4b06609d",
+  "changes": [
+    {
+      "package": "certifi",
+      "before": "2026.7.22",
+      "after": "2026.10.23"
+    },
+    {
+      "package": "requests",
+      "before": "2.32.3",
+      "after": "2.34.2"
+    },
+    {
+      "package": "pytest",
+      "before": "8.3.5",
+      "after": "9.0.3"
+    },
+    {
+      "package": "python-dotenv",
+      "before": "1.0.1",
+      "after": "1.2.2"
+    }
+  ],
+  "tests": {
+    "tests": 155,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "duration_seconds": 210.56
+  },
+  "coverage": {
+    "covered_lines": 1483,
+    "num_statements": 1845,
+    "percent_covered": 80.37940379403794,
+    "percent_covered_display": "80",
+    "missing_lines": 362,
+    "excluded_lines": 0,
+    "percent_statements_covered": 80.37940379403794,
+    "percent_statements_covered_display": "80"
+  },
+  "compatibility": {
+    "scope": "HTTPS del catálogo y configuración sintética",
+    "python": "3.11.9",
+    "versions": {
+      "certifi": "2026.10.23",
+      "requests": "2.34.2",
+      "pytest": "9.0.3",
+      "python-dotenv": "1.2.2",
+      "mlflow": "2.22.0",
+      "pyarrow": "19.0.1"
+    },
+    "https": {
+      "status": "PASS",
+      "http_status": 200,
+      "host": "mibici.net",
+      "tls_verification": true,
+      "sample_bytes": 1024,
+      "ca_bundle_sha256": "2ef52ad56b4803e264045c915e55c236cbfa045b84b81efefc218a19eb44bd2b"
+    },
+    "dotenv": {
+      "status": "PASS",
+      "synthetic_parse": true,
+      "existing_environment_preserved": true
+    },
+    "status": "PASS"
+  },
+  "audit": {
+    "tool": "pip-audit 2.10.1",
+    "packages_checked": 119,
+    "before_reported_entries": 68,
+    "after_reported_entries": 58,
+    "before_unique_package_advisory_pairs": 36,
+    "after_unique_package_advisory_pairs": 31,
+    "remaining": [
+      {
+        "package": "mlflow",
+        "version": "2.22.0",
+        "reported_entries": 56,
+        "advisory_ids": [
+          "CVE-2026-116691",
+          "CVE-2026-53995",
+          "GHSA-gqvg-gmmx-x4hm",
+          "PYSEC-2025-52",
+          "PYSEC-2026-1639",
+          "PYSEC-2026-1640",
+          "PYSEC-2026-1656",
+          "PYSEC-2026-1660",
+          "PYSEC-2026-195",
+          "PYSEC-2026-2219",
+          "PYSEC-2026-2220",
+          "PYSEC-2026-2221",
+          "PYSEC-2026-2222",
+          "PYSEC-2026-2654",
+          "PYSEC-2026-2655",
+          "PYSEC-2026-2656",
+          "PYSEC-2026-2657",
+          "PYSEC-2026-2658",
+          "PYSEC-2026-2659",
+          "PYSEC-2026-2660",
+          "PYSEC-2026-2661",
+          "PYSEC-2026-3686",
+          "PYSEC-2026-3687",
+          "PYSEC-2026-419",
+          "PYSEC-2026-421",
+          "PYSEC-2026-423",
+          "PYSEC-2026-424",
+          "PYSEC-2026-425",
+          "PYSEC-2026-93",
+          "PYSEC-2026-94"
+        ]
+      },
+      {
+        "package": "pyarrow",
+        "version": "19.0.1",
+        "reported_entries": 2,
+        "advisory_ids": [
+          "PYSEC-2026-113"
+        ]
+      }
+    ],
+    "skipped": []
+  },
+  "bandit_new_script_findings": 0,
+  "mlflow_constraint": {
+    "python": "3.11.9",
+    "mlflow": "2.22.0",
+    "pyarrow": "19.0.1",
+    "mlflow_requirements": [
+      "pyarrow<20,>=4.0.0",
+      "pyarrow; extra == \"extras\""
+    ],
+    "pip_check": "PASS"
+  },
+  "source_records_sha256": {
+    "pytest.xml": "5da4112acc46ed61109611622386cb93b3b603cd90c8bc3df01fe40b3b6dc8cd",
+    "pytest.log": "a2d999edac6633adb61088deb4a330dd840ee6bd00bea9a3b8ae60da603e2a27",
+    "coverage.json": "191316b7d00b58d6ffaee54d9e12d5f0fc149f148cf9cb91d884b18bb47ae9af",
+    "pip_check.log": "672aec65a45bed50e70229c70934a7eebf0462595c459b83023027645d57cccf",
+    "pip_audit_after.json": "4218eeda189ac7ecfdb0bab69f5d5f23366f13eba78b39555d374be6d8b21b58",
+    "compatibility.json": "db2c80b3f6d1b3f21790495519f5b5582fa2ae64c35ef479f61a3368db630f59",
+    "bandit_script.json": "51a7fe6a09b2bc5d21bf9ea1dac3bef1b3ef0fc762490eae2f8422cffca11bd4",
+    "mlflow_constraint.json": "6b4cb0223ee3846e9368bc66404e9172534c3ff9c6a0fb2de5a25113236e6949"
+  },
+  "limits": [
+    "No se migraron el servidor, la base ni los modelos oficiales.",
+    "MLflow y PyArrow siguen pendientes de una migracion conjunta.",
+    "El cierre de datos reales requiere los aportes del equipo.",
+    "La publicacion de un PR no equivale a su aprobacion ni integracion."
+  ],
+  "evidence": {
+    "file": "reports/figures/etapa3/E12_actualizacion_dependencias.jpg",
+    "sha256": "dafeaa3dbc8851759fc4705840e38ca469a8cb665466cd04934e18940c71865c",
+    "dimensions": [
+      1264,
+      1073
+    ],
+    "captured_at": "2026-10-28T14:06:23-06:00",
+    "source_html_sha256": "d1be7d66d8f5426541f4c78b9d7299efe2d0fe7d5722ce7b9e42e4e9343525f1",
+    "description": "Captura de navegador de un registro exportado de ejecuciones reales; no es una consola."
+  }
+}

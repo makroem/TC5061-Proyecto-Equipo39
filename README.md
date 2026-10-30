@@ -12,6 +12,7 @@ ingesta y una revisión preliminar de seguridad. La configuración de PyTest est
 - [Avance de Marco y dependencias pendientes](reports/etapa3/avance_marco.md).
 - [Entorno comprobado de DeepChecks](references/etapa3/deepchecks_entorno.md).
 - [Hallazgos de seguridad y seguimiento](reports/etapa3/hallazgos.md).
+- [Actualización parcial de dependencias y reproducción](references/etapa3/actualizacion_dependencias.md).
 - [Capturas y origen de la evidencia](reports/etapa3/evidencias_marco.md).
 
 Los aportes de P1, P2/DeepChecks y P3 de esta etapa deben integrarse y revisarse antes

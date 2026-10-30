@@ -31,3 +31,14 @@ Los comandos para repetir las comprobaciones están en
 Los registros completos, temporales y HTML originales se conservan en
 `private_quality/`, excluido de Git; las versiones públicas contienen solo resultados
 revisados. No se publican CSV de MiBici, modelos, bases de MLflow ni valores de credenciales.
+
+## Actualización posterior: dependencias
+
+[E12: actualización parcial](../figures/etapa3/E12_actualizacion_dependencias.jpg)
+documenta la ejecución del commit `8b63701a158d6ab9191143f3283bcc18fd5a9022`
+con cuatro versiones corregidas. Es una captura de un registro exportado de
+resultados reales, identificada como tal. La suite aprobó 155 pruebas y la auditoría
+redujo de seis a dos los paquetes con avisos. MLflow y PyArrow continúan pendientes.
+Sus hashes y fuentes están en
+[actualizacion_dependencias.json](actualizacion_dependencias.json); esta captura
+complementa las ocho anteriores y no modifica sus resultados históricos.
