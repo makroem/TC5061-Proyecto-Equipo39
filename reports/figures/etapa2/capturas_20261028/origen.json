@@ -1,0 +1,361 @@
+{
+  "fecha_revision": "2026-10-28",
+  "experimento": "mibici-equipo39",
+  "experiment_id": "1",
+  "interfaz": "MLflow 2.22.0",
+  "servidor_local": "http://127.0.0.1:5000",
+  "capturas": [
+    {
+      "archivo": "01_registry_tres_modelos.jpg",
+      "descripcion": "Registro de los tres modelos, versión 1 y alias champion.",
+      "corridas": [
+        "66414a8b45164d3a8f5b9f42e7cb387b",
+        "73804085f3944b54ac2f99542eec38be",
+        "fb847f28e5484ff885e8ef9b44afb2d7"
+      ],
+      "sha256": "d6c19b423b29f5563449736049c18446acc00413921d11b5b256acb16bbd4de5",
+      "pixeles": [
+        1280,
+        720
+      ],
+      "fecha_archivo_utc": "2026-10-28T15:38:44.865731+00:00",
+      "tratamiento": "captura de pantalla",
+      "recorte_ltrb": null
+    },
+    {
+      "archivo": "02_p1_champion_linaje.jpg",
+      "descripcion": "P1: versión 1, alias, corrida de reproducción, commit y versión de datos.",
+      "corridas": [
+        "66414a8b45164d3a8f5b9f42e7cb387b"
+      ],
+      "sha256": "c95c4770d4bb847123ed354ceaa5ef880dc5e55311aefde374c9258420bee6d1",
+      "pixeles": [
+        1264,
+        977
+      ],
+      "fecha_archivo_utc": "2026-10-28T15:39:32.597199+00:00",
+      "tratamiento": "captura de pantalla",
+      "recorte_ltrb": null
+    },
+    {
+      "archivo": "03_p2_champion_linaje.jpg",
+      "descripcion": "P2: versión 1, alias, corrida de reproducción, commit y versión de datos.",
+      "corridas": [
+        "73804085f3944b54ac2f99542eec38be"
+      ],
+      "sha256": "acc5395c3d7e7edd7107010dd13d124b0f7e8bfda0c19ef2c8491332c43c6f35",
+      "pixeles": [
+        1264,
+        977
+      ],
+      "fecha_archivo_utc": "2026-10-28T15:39:54.400087+00:00",
+      "tratamiento": "captura de pantalla",
+      "recorte_ltrb": null
+    },
+    {
+      "archivo": "04_p3_champion_linaje.jpg",
+      "descripcion": "P3: versión 1, alias, corrida de reproducción, commit y versión de datos.",
+      "corridas": [
+        "fb847f28e5484ff885e8ef9b44afb2d7"
+      ],
+      "sha256": "8e831c8399444208f77e1d7f4d54f00894a3a61dd827953fd92478593770c4b7",
+      "pixeles": [
+        1264,
+        977
+      ],
+      "fecha_archivo_utc": "2026-10-28T15:40:07.806564+00:00",
+      "tratamiento": "captura de pantalla",
+      "recorte_ltrb": null
+    },
+    {
+      "archivo": "05_p3_arbol_artefactos.jpg",
+      "descripcion": "P3 reproducida: árbol de config, data, model y plots; firma y ejemplo guardados en model.",
+      "corridas": [
+        "fb847f28e5484ff885e8ef9b44afb2d7"
+      ],
+      "sha256": "11f0722a9eac3277822abf9abd84eff7f9e58e1899d86bfaeee4741d0fbfa3f2",
+      "pixeles": [
+        330,
+        700
+      ],
+      "fecha_archivo_utc": "2026-10-28T15:52:20.981909+00:00",
+      "tratamiento": "recorte de pantalla",
+      "recorte_ltrb": [
+        0,
+        0,
+        330,
+        700
+      ]
+    },
+    {
+      "archivo": "06_p3_firma_modelo.jpg",
+      "descripcion": "P3 reproducida: detalle inicial del esquema de 48 entradas y URI de carga del modelo.",
+      "corridas": [
+        "fb847f28e5484ff885e8ef9b44afb2d7"
+      ],
+      "sha256": "f8c602bc34b5e3db5f02c69a157febac2b98c3673253d6b6ecf9db913e56e51b",
+      "pixeles": [
+        950,
+        405
+      ],
+      "fecha_archivo_utc": "2026-10-28T15:51:10.199120+00:00",
+      "tratamiento": "recorte de pantalla",
+      "recorte_ltrb": [
+        330,
+        293,
+        1280,
+        698
+      ]
+    },
+    {
+      "archivo": "07_p3_corridas_anidadas.jpg",
+      "descripcion": "P3: búsqueda padre desplegada, baseline KMeans 3 y tres candidatas.",
+      "corridas": [
+        "46ce752d830c4edfbbb6cd7e05aabc86",
+        "30653da773ac4b5da092d290003af730",
+        "433f3934e5bf4d9d94498eebad7345d8",
+        "9ebdd55d4b1c49efb646a1996e1bb52f"
+      ],
+      "sha256": "5b309381dca5fce7e986fa4e927f453259dc74d13f61712a4b80ae59e80b0d8c",
+      "pixeles": [
+        1280,
+        720
+      ],
+      "fecha_archivo_utc": "2026-10-28T15:56:04.281278+00:00",
+      "tratamiento": "captura de pantalla",
+      "recorte_ltrb": null
+    },
+    {
+      "archivo": "08_p3_comparacion_prueba.jpg",
+      "descripcion": "P3: comparación de prueba; GMM 3, KMeans 5, KMeans 4 y baseline KMeans 3.",
+      "corridas": [
+        "46ce752d830c4edfbbb6cd7e05aabc86",
+        "30653da773ac4b5da092d290003af730",
+        "433f3934e5bf4d9d94498eebad7345d8",
+        "9ebdd55d4b1c49efb646a1996e1bb52f"
+      ],
+      "sha256": "b2dac7a602d93f8438d82cd6841850ce6ef0a7cd04c7196fc1ad30a938c61063",
+      "pixeles": [
+        1264,
+        1010
+      ],
+      "fecha_archivo_utc": "2026-10-28T15:54:35.792885+00:00",
+      "tratamiento": "captura de pantalla",
+      "recorte_ltrb": null
+    },
+    {
+      "archivo": "09_p3_comparacion_validacion.jpg",
+      "descripcion": "P3: comparación de validación y estabilidad de entrenamiento, en el mismo orden.",
+      "corridas": [
+        "46ce752d830c4edfbbb6cd7e05aabc86",
+        "30653da773ac4b5da092d290003af730",
+        "433f3934e5bf4d9d94498eebad7345d8",
+        "9ebdd55d4b1c49efb646a1996e1bb52f"
+      ],
+      "sha256": "1422b34b396504e1de67f5b08d8c2989a6bd35b4898efa5977409528ca369dfa",
+      "pixeles": [
+        1264,
+        1010
+      ],
+      "fecha_archivo_utc": "2026-10-28T15:55:10.575694+00:00",
+      "tratamiento": "captura de pantalla",
+      "recorte_ltrb": null
+    },
+    {
+      "archivo": "10_p1_corridas_anidadas.jpg",
+      "descripcion": "P1: búsqueda padre desplegada, baseline y tres candidatas.",
+      "corridas": [
+        "9bb2a49e849b4c8f8e7d34406ea77eb4",
+        "ad8fad3ebaf94e07a1f5d673f1609b9e",
+        "85c05dad49944fff856f7ff00601632b",
+        "0a540d20ad8d4edc8290a85c64de79f1"
+      ],
+      "sha256": "48feea36a9e59f19eebd75f73f9e85f27624b51410d4bc53e9cbab14005d0e78",
+      "pixeles": [
+        1280,
+        720
+      ],
+      "fecha_archivo_utc": "2026-10-28T15:56:38.556827+00:00",
+      "tratamiento": "captura de pantalla",
+      "recorte_ltrb": null
+    },
+    {
+      "archivo": "11_p1_comparacion_prueba.jpg",
+      "descripcion": "P1: prueba y costos; Random Forest 300, HGB 200, HGB 100 y baseline.",
+      "corridas": [
+        "9bb2a49e849b4c8f8e7d34406ea77eb4",
+        "ad8fad3ebaf94e07a1f5d673f1609b9e",
+        "85c05dad49944fff856f7ff00601632b",
+        "0a540d20ad8d4edc8290a85c64de79f1"
+      ],
+      "sha256": "134efab410d564a159039095a99f459c4715ff62d96a14c5c3ef4cff69ae9c42",
+      "pixeles": [
+        1264,
+        1010
+      ],
+      "fecha_archivo_utc": "2026-10-28T15:57:18.838483+00:00",
+      "tratamiento": "captura de pantalla",
+      "recorte_ltrb": null
+    },
+    {
+      "archivo": "12_p1_comparacion_validacion.jpg",
+      "descripcion": "P1: validación y costos, conservando el mismo orden de corridas.",
+      "corridas": [
+        "9bb2a49e849b4c8f8e7d34406ea77eb4",
+        "ad8fad3ebaf94e07a1f5d673f1609b9e",
+        "85c05dad49944fff856f7ff00601632b",
+        "0a540d20ad8d4edc8290a85c64de79f1"
+      ],
+      "sha256": "b8ae1bbe25a7f88f4918d8d66fad8431a9513f43b4da8012d4c34957ac4642dc",
+      "pixeles": [
+        1264,
+        1010
+      ],
+      "fecha_archivo_utc": "2026-10-28T15:57:33.296338+00:00",
+      "tratamiento": "captura de pantalla",
+      "recorte_ltrb": null
+    },
+    {
+      "archivo": "13_p2_corridas_anidadas.jpg",
+      "descripcion": "P2: búsqueda padre desplegada, baseline y tres candidatas.",
+      "corridas": [
+        "96fcb94e40cf44e8baaad4c48a6cb939",
+        "57dfa008aaca49f2938733cdeb68a7a2",
+        "b24e7ffdf7524a96914dbe1e0fa7f356",
+        "c6762ec2086049cfa4be6ca011ecf92f"
+      ],
+      "sha256": "a767ea7e6623677ed33cf569ab17c908bf02abb28504d14679ef5a98d0e5f752",
+      "pixeles": [
+        1280,
+        720
+      ],
+      "fecha_archivo_utc": "2026-10-28T16:00:09.950710+00:00",
+      "tratamiento": "captura de pantalla",
+      "recorte_ltrb": null
+    },
+    {
+      "archivo": "14_p2_comparacion_prueba.jpg",
+      "descripcion": "P2: precisión y recall de prueba; C=10, C=1, C=0.1 y baseline.",
+      "corridas": [
+        "96fcb94e40cf44e8baaad4c48a6cb939",
+        "57dfa008aaca49f2938733cdeb68a7a2",
+        "b24e7ffdf7524a96914dbe1e0fa7f356",
+        "c6762ec2086049cfa4be6ca011ecf92f"
+      ],
+      "sha256": "6661ca63940fc4973ba33a9b622b3a3ee70a71ad2b7825bb27a2cf2fe31da61a",
+      "pixeles": [
+        1264,
+        995
+      ],
+      "fecha_archivo_utc": "2026-10-28T16:01:17.223440+00:00",
+      "tratamiento": "captura de pantalla",
+      "recorte_ltrb": null
+    },
+    {
+      "archivo": "15_p2_comparacion_validacion.jpg",
+      "descripcion": "P2: F1, precisión, recall y AP de validación, en el mismo orden.",
+      "corridas": [
+        "96fcb94e40cf44e8baaad4c48a6cb939",
+        "57dfa008aaca49f2938733cdeb68a7a2",
+        "b24e7ffdf7524a96914dbe1e0fa7f356",
+        "c6762ec2086049cfa4be6ca011ecf92f"
+      ],
+      "sha256": "516fc3e138bf0f85bcf3349ff47f856470bed0f166d54a351106c571bdc2c86b",
+      "pixeles": [
+        1264,
+        1010
+      ],
+      "fecha_archivo_utc": "2026-10-28T16:01:41.631293+00:00",
+      "tratamiento": "captura de pantalla",
+      "recorte_ltrb": null
+    },
+    {
+      "archivo": "16_p2_hiperparametros.jpg",
+      "descripcion": "P2: hiperparámetros de logística y baseline en las cuatro corridas.",
+      "corridas": [
+        "96fcb94e40cf44e8baaad4c48a6cb939",
+        "57dfa008aaca49f2938733cdeb68a7a2",
+        "b24e7ffdf7524a96914dbe1e0fa7f356",
+        "c6762ec2086049cfa4be6ca011ecf92f"
+      ],
+      "sha256": "474c41b86b61ae3b448a98b106e62e821f0975bb743dde915eb321f77d867360",
+      "pixeles": [
+        1264,
+        987
+      ],
+      "fecha_archivo_utc": "2026-10-28T16:01:01.530895+00:00",
+      "tratamiento": "captura de pantalla",
+      "recorte_ltrb": null
+    },
+    {
+      "archivo": "17_p2_comparacion_f1_prueba.jpg",
+      "descripcion": "P2: F1, AP y alertas por mil de prueba, en el mismo orden.",
+      "corridas": [
+        "96fcb94e40cf44e8baaad4c48a6cb939",
+        "57dfa008aaca49f2938733cdeb68a7a2",
+        "b24e7ffdf7524a96914dbe1e0fa7f356",
+        "c6762ec2086049cfa4be6ca011ecf92f"
+      ],
+      "sha256": "4d22fdeafe7a3749c1519e5c2ff6b891e7dd9fc7126dae1bdd81fc80de0b9e14",
+      "pixeles": [
+        1264,
+        1010
+      ],
+      "fecha_archivo_utc": "2026-10-28T16:01:56.008108+00:00",
+      "tratamiento": "captura de pantalla",
+      "recorte_ltrb": null
+    },
+    {
+      "archivo": "18_p2_matriz_bicicletas_validacion.jpg",
+      "descripcion": "P2 candidata C=0.1: panel de bicicletas de la matriz de confusión de validación; umbral 0.65.",
+      "corridas": [
+        "b24e7ffdf7524a96914dbe1e0fa7f356"
+      ],
+      "sha256": "68dcaf3672b4b6c00684080b7d7615020ed5a02e2d8e645d8980e7af1c049d98",
+      "pixeles": [
+        590,
+        450
+      ],
+      "fecha_archivo_utc": "2026-10-28T16:08:52.521242+00:00",
+      "tratamiento": "recorte de pantalla",
+      "recorte_ltrb": [
+        330,
+        250,
+        920,
+        700
+      ]
+    },
+    {
+      "archivo": "19_p2_artefacto_matriz_contexto.jpg",
+      "descripcion": "P2 candidata C=0.1: identidad de la corrida y selección del artefacto de matrices de confusión.",
+      "corridas": [
+        "b24e7ffdf7524a96914dbe1e0fa7f356"
+      ],
+      "sha256": "b79b1479d2be17f26f9c41d64e46073583112c771a40345fad55473cbb26b1c5",
+      "pixeles": [
+        330,
+        700
+      ],
+      "fecha_archivo_utc": "2026-10-28T16:12:31.999893+00:00",
+      "tratamiento": "recorte de pantalla",
+      "recorte_ltrb": [
+        0,
+        0,
+        330,
+        700
+      ]
+    }
+  ],
+  "busquedas_padre": {
+    "p1": "310ec0be030047fc851669c8e91d863c",
+    "p2": "e0d9f693f211405ba3dcd80b357be4cb",
+    "p3": "09bfe57afcea4438b67aa7afc37ed56d"
+  },
+  "commit_busquedas": "97f0033d1669bea64f38d86cf78f680dffbd3062",
+  "commit_reproducciones": "288a592aba240983c8d21c8128c16be4cbf0f2df",
+  "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+  "split_version": 3,
+  "split_strategy": "chronological_holdout",
+  "seed": 39,
+  "nota": "Las vistas del registro corresponden a reproducciones; las comparaciones corresponden a las búsquedas oficiales. Los recortes de artefactos excluyen la ruta local y conservan el contenido visible del panel. La interfaz redondea las métricas; consultar los CSV oficiales para la precisión completa."
+}

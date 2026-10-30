@@ -1,5 +1,23 @@
 # Proyecto MiBici Equipo 39
 
+## Etapa 3: pruebas, validación y seguridad
+
+El trabajo inicial de Marco incorpora un entorno de calidad separado, pruebas de
+ingesta y una revisión preliminar de seguridad. La configuración de PyTest está en
+`pyproject.toml`. Las pruebas usan datos sintéticos y almacenes temporales.
+
+- [Contrato y dependencias del equipo](references/etapa3/contrato_calidad.md).
+- [Instalación, ejecución y alcance de las verificaciones](references/etapa3/ejecucion_marco.md).
+- [Matriz de pruebas y responsables](reports/etapa3/matriz_pruebas.md).
+- [Avance de Marco y dependencias pendientes](reports/etapa3/avance_marco.md).
+- [Entorno comprobado de DeepChecks](references/etapa3/deepchecks_entorno.md).
+- [Hallazgos de seguridad y seguimiento](reports/etapa3/hallazgos.md).
+- [Actualización parcial de dependencias y reproducción](references/etapa3/actualizacion_dependencias.md).
+- [Capturas y origen de la evidencia](reports/etapa3/evidencias_marco.md).
+
+Los aportes de P1, P2/DeepChecks y P3 de esta etapa deben integrarse y revisarse antes
+de que Marco ejecute el cierre desde un clon limpio y Diego Hurtado consolide las evidencias.
+
 ## Estado de integración de la Etapa 2
 
 La Etapa 2 utiliza un controlador común de experimentación,
@@ -35,7 +53,7 @@ El PR #22 quedó integrado después de las revisiones de Stefania, Diego Martine
 
 El [PR #25](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/25), revisado e integrado por Diego Hurtado, incorporó las evidencias de reproducción y registro. El [PR #26](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/26), de Diego Hurtado y revisado e integrado por Marco, completó la [interpretación de los perfiles horarios y el mapa de P3](reports/etapa2/p3.md). Ambas actividades están cerradas.
 
-El [cierre técnico y sus evidencias](reports/etapa2/cierre_tecnico_marco.md) conserva corridas, versiones, linaje, comandos y límites. Quedan por completar las capturas legibles de la interfaz y la consolidación del reporte. Las capturas deben mostrar la comparación con corridas anidadas, los artefactos de una candidata y las tres versiones registradas con alias y linaje. El envío en Canvas no está verificado.
+El [cierre técnico y sus evidencias](reports/etapa2/cierre_tecnico_marco.md) conserva corridas, versiones, linaje, comandos y límites. Las [19 capturas de la interfaz](reports/etapa2/capturas_mlflow_marco.md) documentan búsquedas anidadas, comparaciones, artefactos y las tres versiones registradas con alias y linaje. Queda revisar este conjunto e incorporarlo al Word y PDF consolidados. El envío en Canvas no está verificado.
 
 Repositorio público: https://github.com/makroem/TC5061-Proyecto-Equipo39
 
