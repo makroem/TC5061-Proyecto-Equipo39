@@ -1,5 +1,6 @@
 # Entorno independiente de DeepChecks, verificado en Windows con Python 3.11.9.
 # No instalar junto con requirements.txt: utiliza NumPy 1.26.4.
+# setuptools da pkg_resources a DeepChecks; loguru y typer permiten importar features.py.
 Jinja2==3.1.6
 MarkupSafe==3.0.4
 PyNomaly==0.4.0
@@ -18,6 +19,7 @@ category_encoders==2.11.2
 certifi==2026.10.23
 cffi==2.1.1
 charset-normalizer==3.5.2
+click==8.5.0
 cloudpickle==3.1.2
 colorama==0.4.6
 comm==0.2.3
@@ -53,8 +55,11 @@ jupyterlab_pygments==0.3.0
 jupyterlab_widgets==3.0.17
 kiwisolver==1.5.1
 lark==1.3.1
+loguru==0.7.3
+markdown-it-py==4.2.0
 matplotlib==3.10.0
 matplotlib-inline==0.2.2
+mdurl==0.1.2
 mistune==3.4.0
 narwhals==2.28.0
 nbclient==0.11.0
@@ -88,9 +93,12 @@ requests==2.34.2
 rfc3339-validator==0.1.4
 rfc3986-validator==0.1.1
 rfc3987-syntax==1.1.0
+rich==15.0.0
 rpds-py==2026.9.1
 scikit-learn==1.6.1
 scipy==1.17.1
+setuptools==65.5.0
+shellingham==1.5.4
 six==1.17.0
 soupsieve==3.0.4
 stack-data==0.6.3
@@ -102,6 +110,7 @@ tinycss2==1.5.1
 tornado==6.6
 tqdm==4.70.1
 traitlets==5.16.1
+typer==0.15.2
 typing_extensions==4.16.0
 tzdata==2026.6
 uri-template==1.3.0
