@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-29",
+  "scope": "Verificacion de la rama de migracion despues de incorporar main con los PR 30 y 31.",
+  "tested_commit": "4e2c17c17d0e4b98f55eb6d3f3af7fc090d40334",
+  "main_commit": "8fa6c908775727cd24994429c4e2534c76901340",
+  "previous_migration_commit": "b85255081e23446d3afb0a6ec83c2fc0532a73da",
+  "environment": {
+    "python": "3.11.9",
+    "mlflow": "3.17.2",
+    "pyarrow": "23.0.1",
+    "pytest": "9.0.3"
+  },
+  "tests": {
+    "tests": 173,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 173,
+    "warnings": 23,
+    "seconds": 1202.11
+  },
+  "pip_check": "PASS",
+  "command": "python -m pytest -q",
+  "execution_note": "En Windows se uso un directorio temporal nuevo y corto, y se exporto el resultado en formato JUnit XML. Las pruebas usan datos sinteticos y almacenes temporales.",
+  "integration": {
+    "pr30": "MERGED",
+    "pr31": "MERGED",
+    "pr32": "Pendiente de una nueva aprobacion tras cambiar su base a main.",
+    "official_tracking_server_changed": false
+  },
+  "limits": [
+    "No sustituye la validacion DeepChecks sobre datos reales.",
+    "No acredita las aportaciones P1 y P2 pendientes de la Etapa 3.",
+    "No vuelve a ejecutar la ingesta anual ni el entrenamiento real; esos resultados siguen asociados al ensayo anterior.",
+    "El cambio del servidor requiere integrar el PR 32 y coordinar una pausa de escrituras."
+  ]
+}

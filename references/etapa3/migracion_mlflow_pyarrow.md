@@ -34,6 +34,26 @@ La comparación incluye 68 métricas y conteos: seis de P1, 45 de P2 y 17 de P3.
 
 Estos resultados acreditan compatibilidad; no son una mejora predictiva ni una nueva elección de modelos. Los valores completos, identificadores y límites del ensayo están en el [resumen verificable](../../reports/etapa3/migracion_mlflow_pyarrow.json).
 
+## Seguimiento del 29 de octubre de 2026
+
+El PR #30 de dependencias y el PR #31 de pruebas P3 ya están integrados en `main`.
+La rama de migración incorporó ese estado sin conflictos. La suite completa del
+commit `4e2c17c17d0e4b98f55eb6d3f3af7fc090d40334` aprobó **173 pruebas**, con
+0 fallos, 0 errores, 0 omisiones y 23 advertencias, en 1202.11 segundos.
+`pip check` no encontró incompatibilidades. Los conteos anteriores corresponden
+al ensayo del 28 de octubre y se conservan como antecedente.
+
+Los resultados nuevos están en el
+[resumen de integración](../../reports/etapa3/integracion_migracion_20261029.json).
+Frente a la versión de migración previamente revisada, el código de entrenamiento,
+los scripts y las dependencias permanecen iguales; se incorporaron las pruebas P3
+que ya estaban en `main`, junto con la documentación integrada.
+
+El PR #32 ahora apunta a `main`. GitHub descartó automáticamente su aprobación
+anterior por el cambio de base y exige una nueva revisión. El servidor oficial
+todavía conserva su entorno anterior. El cambio operativo requiere esa aprobación,
+la integración y una pausa de escrituras coordinada con el equipo.
+
 ## 1. Comprobar el entorno antes de instalar
 
 Abrir PowerShell en la raíz del repositorio y comprobar las instalaciones:
