@@ -86,13 +86,14 @@ P1 conserva el baseline porque los tres candidatos tuvieron mayor MAE de validac
 
 | Pendiente | Responsable | Qué necesita |
 |---|---|---|
-| Completar capturas de comparaciones con nested runs, artefactos y tres modelos con linaje y alias | Marco, en coordinación con Diego Hurtado | Acceso visual al servidor local y capturas reales legibles |
-| Consolidar Word y PDF de la entrega | Diego Hurtado, con las aportaciones del equipo | Incorporar los resultados y la interpretación de P3 ya integrados; completar las capturas y referencias APA 7 |
+| Revisar las 19 capturas y su índice | Diego Hurtado o Diego Martinez | Conjunto publicado en el PR de evidencias de Marco |
+| Integrar el PR de capturas | Marco | Aprobación válida de otro integrante y protecciones de main |
+| Consolidar Word y PDF de la entrega | Diego Hurtado, con las aportaciones del equipo | Incorporar los resultados y la interpretación de P3 ya integrados, las capturas revisadas y las referencias APA 7 |
 | Confirmar el envío en Canvas | Integrante designado por el equipo | PDF final y comprobante de entrega |
 
 El Word previo contiene un corte anterior y debe actualizarse antes de presentarlo como reporte final. La evidencia técnica disponible no acredita el envío en Canvas.
 
-### Comprobación de las capturas pendientes
+### Consulta y comprobación de las capturas
 
 Con el servidor del equipo en ejecución, abrir `http://127.0.0.1:5000` y seleccionar el experimento `mibici-equipo39`. No es necesario repetir las búsquedas ni registrar nuevas versiones para obtener estas capturas.
 
@@ -101,9 +102,11 @@ Con el servidor del equipo en ejecución, abrir `http://127.0.0.1:5000` y selecc
 3. En Models, mostrar los tres modelos de la tabla anterior. Abrir la versión 1 de cada uno y capturar el alias `champion`, la corrida de origen y su linaje: commit, versión de datos y partición. Cuando esos campos estén en la corrida vinculada, incluir también esa pantalla.
 4. Comprobar las imágenes antes de incorporarlas al reporte: texto legible, columnas relevantes visibles, identidad de la corrida y ausencia de credenciales o información personal ajena al proyecto. Una imagen recortada que omite los resultados no cierra este pendiente.
 
-El paquete visual sigue pendiente de validación completa. No se declara terminada la entrega a partir de capturas parciales.
+El [índice de 19 capturas](capturas_mlflow_marco.md) permite consultar las vistas generadas y sus corridas. Las imágenes de artefactos incluyen recortes identificados; el índice describe su alcance. Los hiperparámetros completos se conservan en los CSV de comparación. La revisión del PR y la incorporación al reporte siguen pendientes; disponer de estas imágenes no acredita el envío de la entrega.
 
 ## Archivos de evidencia
+
+- [Capturas de la interfaz y pies de imagen](capturas_mlflow_marco.md).
 
 - [Comparaciones y justificación de las búsquedas](busquedas_oficiales_marco.md).
 - [Verificación de las reproducciones](verificacion_reproduccion_final_marco.json): métricas, comparación, configuración, firmas y evaluación.
