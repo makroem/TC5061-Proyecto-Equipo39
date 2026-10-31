@@ -82,7 +82,7 @@ entorno `.venv-deepchecks` con DeepChecks 0.19.1 y NumPy 1.26.4. Tardó unos 32 
    comparación por columna en su equipo.
 2. **`requirements-deepchecks.txt` no fijaba `setuptools`.** DeepChecks importa `pkg_resources`.
    Con `python -m venv` en 3.11 se instala setuptools 65.5.0 por defecto, pero con otras herramientas
-   el entorno queda roto. Se fija 65.5.0, igual que el entorno de Marco, junto con loguru y typer para
+   el entorno queda roto. Se fija 65.5.0, la versión incluida en Python 3.11.9, junto con loguru y typer para
    que el motor use `features.py` en lugar de copiar sus reglas. Las versiones son las de
    `requirements.txt`.
 3. **LabelDrift no sirve para etiquetas raras.** Usa V de Cramér: una prevalencia diez veces mayor
@@ -104,7 +104,7 @@ entorno `.venv-deepchecks` con DeepChecks 0.19.1 y NumPy 1.26.4. Tardó unos 32 
   debe ser de la variante seleccionada, comparación de la predicción al cargar y la llamada a Git sin
   shell que rechaza salidas que no son un commit.
 
-Suite completa en el entorno del proyecto: 205 pruebas aprobadas.
+Suite completa combinada con main (MLflow 3.17.2 y PyArrow 23.0.1): 211 pruebas aprobadas.
 
 ## Pendiente
 
