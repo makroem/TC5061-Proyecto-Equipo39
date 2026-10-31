@@ -1,0 +1,164 @@
+{
+ "date": "2026-10-31",
+ "scope": "Comprobacion local en macOS ARM con el comparador del PR 36; hashes y conteos, sin filas del catalogo.",
+ "comparator_commit": "7e31eff",
+ "comparator_sha256": "99e9eeacbc8fdbcb66ba33f2e701284aecd952afbf927f5d4dd48c0600449d4b",
+ "commands": [
+  "python scripts/check_station_manifest.py --output private_quality/estaciones_macos_proyecto.json",
+  ".venv-deepchecks/bin/python scripts/check_station_manifest.py --verify-outputs --output private_quality/estaciones_macos_deepchecks.json",
+  "python scripts/explain_station_hash.py"
+ ],
+ "checks": {
+  "project": {
+   "status": "FAIL",
+   "environment": {
+    "os": "Darwin",
+    "machine": "arm64",
+    "python": "3.11.9",
+    "pandas": "2.2.3",
+    "numpy": "2.1.3",
+    "pyarrow": "23.0.1"
+   },
+   "checks": {
+    "source_sha256_matches": true,
+    "stored_matches_manifest": false,
+    "rebuilt_matches_manifest": false,
+    "stored_equals_rebuilt": true,
+    "inputs_unchanged": true
+   },
+   "outputs_checked": 0,
+   "outputs_mismatched": [],
+   "stored_logical_sha256": "6559e1e45604a5156c4673d23ad6632d8084a278c2be4e639d8b6e7deef3abd8",
+   "columns_equal_to_windows": {
+    "station_id": {
+     "dtype": true,
+     "csv": true,
+     "values": true
+    },
+    "station_name": {
+     "dtype": true,
+     "csv": true,
+     "values": true
+    },
+    "latitude": {
+     "dtype": true,
+     "csv": false,
+     "values": false
+    },
+    "longitude": {
+     "dtype": true,
+     "csv": true,
+     "values": true
+    },
+    "capacity": {
+     "dtype": true,
+     "csv": true,
+     "values": true
+    },
+    "valid_capacity": {
+     "dtype": true,
+     "csv": true,
+     "values": true
+    },
+    "valid_coordinates": {
+     "dtype": true,
+     "csv": true,
+     "values": true
+    }
+   },
+   "names_with_outer_spaces": 11
+  },
+  "deepchecks": {
+   "status": "FAIL",
+   "environment": {
+    "os": "Darwin",
+    "machine": "arm64",
+    "python": "3.11.9",
+    "pandas": "2.2.3",
+    "numpy": "1.26.4",
+    "pyarrow": "23.0.1"
+   },
+   "checks": {
+    "source_sha256_matches": true,
+    "stored_matches_manifest": false,
+    "rebuilt_matches_manifest": false,
+    "stored_equals_rebuilt": true,
+    "all_outputs_match": false,
+    "inputs_unchanged": true
+   },
+   "outputs_checked": 151,
+   "outputs_mismatched": [
+    "processed/stations.parquet"
+   ],
+   "stored_logical_sha256": "6559e1e45604a5156c4673d23ad6632d8084a278c2be4e639d8b6e7deef3abd8",
+   "columns_equal_to_windows": {
+    "station_id": {
+     "dtype": true,
+     "csv": true,
+     "values": true
+    },
+    "station_name": {
+     "dtype": true,
+     "csv": true,
+     "values": true
+    },
+    "latitude": {
+     "dtype": true,
+     "csv": false,
+     "values": false
+    },
+    "longitude": {
+     "dtype": true,
+     "csv": true,
+     "values": true
+    },
+    "capacity": {
+     "dtype": true,
+     "csv": true,
+     "values": true
+    },
+    "valid_capacity": {
+     "dtype": true,
+     "csv": true,
+     "values": true
+    },
+    "valid_coordinates": {
+     "dtype": true,
+     "csv": true,
+     "values": true
+    }
+   },
+   "names_with_outer_spaces": 11
+  }
+ },
+ "explanation": {
+  "environment": {
+   "os": "Darwin",
+   "machine": "arm64",
+   "pandas": "2.2.3",
+   "numpy": "2.1.3"
+  },
+  "local_matches_manifest": false,
+  "emulations": {
+   "un_redondeo": {
+    "matches_local_values": true,
+    "matches_manifest_hash": false
+   },
+   "dos_redondeos": {
+    "matches_local_values": false,
+    "matches_manifest_hash": true
+   }
+  },
+  "differences_between_emulations": {
+   "latitude": {
+    "rows": 15,
+    "max_degrees": 7.105427357601002e-15
+   },
+   "longitude": {
+    "rows": 0,
+    "max_degrees": 0.0
+   }
+  }
+ },
+ "limitations": "La emulacion reproduce los valores y el hash; no se inspecciono el binario compilado de pandas. No se ejecuto en Windows el script de explicacion."
+}

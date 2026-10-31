@@ -69,21 +69,31 @@ entorno `.venv-deepchecks` con DeepChecks 0.19.1 y NumPy 1.26.4. Tardó unos 32 
   columnas no ayudan a separar grupos. La deriva de perfiles queda bajo 0.2 en 46 de 48 horas; la
   mayor es 0.29 a las 5 h de fin de semana.
 - **FAIL de linaje:** `processed/stations.parquet` tiene las 484 filas esperadas, pero su hash lógico
-  no coincide con el manifiesto. Los otros 150 archivos sí coinciden.
+  no coincide con el manifiesto en macOS ARM. Los otros 150 archivos sí coinciden. La causa es de
+  redondeo (hallazgo 1); en Windows este archivo coincide.
 
 ## Hallazgos
 
-1. **Hash de estaciones distinto en macOS.** El CSV de origen tiene el SHA256 del manifiesto y
-   `clean_stations` produce exactamente el mismo Parquet que el local, pero `logical_hash` da otro
-   valor, con pandas 2.2.3 en ambos entornos. La ingesta oficial de Marco corrió con
-   `--verify-manifest` en Windows y terminó bien, así que el hash parece depender de la plataforma.
-   En macOS, `--verify-manifest` fallaría por este archivo. Hay 11 nombres de estación con espacios
-   al inicio o al final, que son el primer candidato. Responsable de confirmarlo: Marco, con una
-   comparación por columna en su equipo.
+1. **Hash de estaciones distinto en macOS ARM: es de redondeo, no de datos.** Con el comparador de
+   Marco (#36), solo `latitude` difiere de Windows; las otras seis columnas y los 11 nombres con
+   espacios coinciden. Al convertir texto a número, pandas acumula `number * 10 + dígito`. La emulación
+   con un solo redondeo (FMA, disponible en ARM) reproduce los 484 valores de macOS, y la de dos
+   redondeos reproduce el hash del manifiesto, el mismo que da Windows x86-64. Cambian 15 latitudes, como máximo
+   7e-15 grados, menos de un nanómetro. Ninguna longitud cambia. Las coordenadas no entran a ningún
+   modelo; P3 solo las usa en su mapa e interpretación. Se reproduce con
+   `scripts/explain_station_hash.py`; la evidencia está en
+   [verificacion_estaciones_macos_20261031.json](verificacion_estaciones_macos_20261031.json).
+   No se inspeccionó el binario compilado de pandas. La otra diferencia del comparador,
+   `manifest_sha256`, es solo el fin de línea CRLF de Git en Windows.
+
+   **Consecuencia:** en macOS ARM, `salidas_del_manifiesto` y `--verify-manifest` fallan por este
+   archivo. No se cambia el manifiesto ni la política: la corrida final se hace en x86-64, donde
+   coinciden los 151 archivos. Usar una conversión exacta quitaría la diferencia, pero cambiaría el
+   hash oficial, así que queda como decisión del equipo.
 2. **`requirements-deepchecks.txt` no fijaba `setuptools`.** DeepChecks importa `pkg_resources`.
-   Con `python -m venv` en 3.11 se instala setuptools 65.5.0 por defecto, pero con otras herramientas
-   el entorno queda roto. Se fija 65.5.0, la versión incluida en Python 3.11.9, junto con loguru y typer para
-   que el motor use `features.py` en lugar de copiar sus reglas. Las versiones son las de
+   Se fija 81.0.0, igual que #36: según la auditoría de Marco, la 65.5.0 tiene cinco avisos y esta dos. Los
+   dos restantes siguen abiertos porque `pkg_resources` desaparece en 82.0.0. También se agregan loguru y
+   typer para que el motor use `features.py` en lugar de copiar sus reglas, con las versiones de
    `requirements.txt`.
 3. **LabelDrift no sirve para etiquetas raras.** Usa V de Cramér: una prevalencia diez veces mayor
    (0.4% a 4%) da 0.12 y pasa el umbral de 0.15. Para P2 se reemplaza por la razón de prevalencia
@@ -100,14 +110,17 @@ entorno `.venv-deepchecks` con DeepChecks 0.19.1 y NumPy 1.26.4. Tardó unos 32 
 - `tests/test_stage3_p2.py` (8): límites inclusivos de la etiqueta, alerta en el umbral exacto,
   entrada vacía, train con una sola clase, validación sin positivos, probabilidades en [0, 1], tipos
   inválidos y reproducción sin calibración congelada.
+- `tests/test_station_hash.py` (5): la emulación de los dos redondeos y su comparación con el
+  manifiesto.
 - `tests/test_stage3_registro.py` (14): cada problema de linaje bloquea el registro, la reproducción
   debe ser de la variante seleccionada, comparación de la predicción al cargar y la llamada a Git sin
   shell que rechaza salidas que no son un commit.
 
-Suite completa combinada con main (MLflow 3.17.2 y PyArrow 23.0.1): 211 pruebas aprobadas.
+Suite completa combinada con main (MLflow 3.17.2 y PyArrow 23.0.1): 216 pruebas aprobadas.
 
 ## Pendiente
 
 - Stefania y Diego Hurtado confirman los criterios de P1 y P3 en la política. Después se congela
   (`"frozen": true`) y se corre `--stage final` una sola vez.
-- Resolver el hash de estaciones antes de la corrida final; no se cambia la política para que pase.
+- La corrida final se hace en x86-64. El equipo decide si conserva el manifiesto actual, como se
+  recomienda aquí, o cambia a una conversión exacta. No se cambia la política para que pase.
