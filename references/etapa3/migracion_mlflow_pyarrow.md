@@ -54,6 +54,48 @@ anterior por el cambio de base y exige una nueva revisión. El servidor oficial
 todavía conserva su entorno anterior. El cambio operativo requiere esa aprobación,
 la integración y una pausa de escrituras coordinada con el equipo.
 
+## Activación del 30 de octubre de 2026
+
+El PR #32 quedó aprobado e integrado en `main`, en el commit
+`2f2ccdc7133f786884d06c44af84ad7dd800b648`. Marco activó el servidor con
+MLflow 3.17.2 y PyArrow 23.0.1 después de la pausa de escrituras acordada.
+La pausa comenzó a las 20:17:38 y terminó a las 20:22:45, hora de Ciudad de México.
+El servicio quedó disponible en `http://127.0.0.1:5000`, limitado a la máquina
+que lo aloja. El almacén anterior y el respaldo final se conservaron intactos.
+
+La comprobación a través del servicio conservó las 34 corridas y los 500 archivos
+de artefactos, incluidos sus identificadores y hashes. La interfaz y la ruta de
+salud respondieron con HTTP 200. Los modelos P1, P2 y P3 cargaron por `champion`
+y reprodujeron las predicciones de sus ejemplos almacenados, con firma y linaje.
+El [registro de activación](../../reports/etapa3/activacion_servidor_20261030.json)
+contiene horarios, versiones, corridas de origen y alcance de las comprobaciones.
+
+Las corridas conservan su estado histórico: 33 finalizadas y una ingesta del
+26 de octubre marcada como `RUNNING`. La migración no modifica ese estado ni
+lo interpreta como evidencia de un proceso que siga ejecutándose.
+
+Para comprobar el servicio desde el entorno actualizado, en la máquina que lo aloja:
+
+```powershell
+$env:MLFLOW_TRACKING_URI = 'http://127.0.0.1:5000'
+$env:MLFLOW_REGISTRY_URI = $env:MLFLOW_TRACKING_URI
+Invoke-RestMethod "$env:MLFLOW_TRACKING_URI/health"
+Invoke-RestMethod "$env:MLFLOW_TRACKING_URI/version"
+python -m mibici_equipo39.registry verify
+```
+
+Esta comprobación consulta el registro y carga los ejemplos; no crea una nueva
+corrida de entrenamiento. Para reiniciar el servicio se utiliza
+`scripts/start_tracking.ps1` con el entorno nuevo y la ubicación privada del
+almacén migrado. Las rutas locales, las bases y los modelos permanecen fuera de Git.
+
+Las 173 pruebas del 29 de octubre siguen asociadas al commit documentado en su
+resumen. El código y las pruebas integrados coinciden con esa versión; durante
+la activación se verificó el servicio, sin repetir la suite ni el entrenamiento.
+DeepChecks sobre datos reales y las contribuciones restantes de la Etapa 3
+conservan su seguimiento independiente. Antes de recuperar el almacén anterior,
+deben detenerse las escrituras y preservarse las corridas creadas después del cambio.
+
 ## 1. Comprobar el entorno antes de instalar
 
 Abrir PowerShell en la raíz del repositorio y comprobar las instalaciones:
