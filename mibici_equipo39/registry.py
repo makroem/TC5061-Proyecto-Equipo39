@@ -61,8 +61,16 @@ def check_run(run, question):
     return kind
 
 
+def model_uri_for_run(run_id):
+    """Usa la URI registrada por MLflow 3 o la ubicación histórica de MLflow 2."""
+    tags = mlflow.MlflowClient().get_run(run_id).data.tags
+    if tags.get("artifact_contract") == "3" and not tags.get("model_uri"):
+        raise ValueError(f"La corrida {run_id} declara contrato 3 pero no tiene model_uri.")
+    return tags.get("model_uri") or f"runs:/{run_id}/model"
+
+
 def load_example(run_id):
-    local = Path(mlflow.artifacts.download_artifacts(f"runs:/{run_id}/model"))
+    local = Path(mlflow.artifacts.download_artifacts(model_uri_for_run(run_id)))
     metadata = mlflow.models.Model.load(str(local / "MLmodel"))
     if metadata.signature is None:
         raise ValueError(f"El modelo de {run_id} no tiene firma.")
@@ -106,7 +114,7 @@ def register(question, source_run_id):
     name = C.REGISTERED_MODELS[question]
     if not client.search_registered_models(filter_string=f"name = '{name}'"):
         client.create_registered_model(name, description=f"{DESCRIPTIONS[question]} {LIFECYCLE}")
-    version = str(mlflow.register_model(f"runs:/{source_run_id}/model", name).version)
+    version = str(mlflow.register_model(model_uri_for_run(source_run_id), name).version)
     tags = run.data.tags
     lineage = {"source_run_id": source_run_id, "source_kind": kind, "variant_id": tags.get("variant_id", ""),
                "git_commit": tags.get("git_commit", ""), "data_version": tags.get("data_version", ""),

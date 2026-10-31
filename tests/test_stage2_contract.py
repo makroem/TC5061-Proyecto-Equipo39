@@ -19,14 +19,15 @@ from mibici_equipo39.modeling.tracking import log_candidate_artifacts
 def contract(tmp_path, monkeypatch):
     monkeypatch.setattr(C, "ROOT", tmp_path)
     monkeypatch.setattr(C, "REFERENCES", tmp_path)
-    (tmp_path / "requirements.txt").write_text("mlflow==2.22.0\nscikit-learn==1.6.1\n")
+    (tmp_path / "requirements.txt").write_text(f"mlflow=={mlflow.__version__}\nscikit-learn==1.6.1\n")
     (tmp_path / "mibici_equipo39").mkdir()
     (tmp_path / "mibici_equipo39/__init__.py").write_text("")
     (tmp_path / "data_manifest.json").write_text(json.dumps({"data_version": "fixture"}))
     (tmp_path / "split_manifest.json").write_text(json.dumps({
         "data_version": "fixture", "split_id": "fixture-split", "version": "3"}))
     previous = mlflow.get_tracking_uri()
-    mlflow.set_tracking_uri((tmp_path / "tracking").as_uri())
+    mlflow.set_tracking_uri(f"sqlite:///{tmp_path / 'mlflow.db'}")
+    mlflow.create_experiment("prueba-contrato-no-oficial", artifact_location=(tmp_path / "artifacts").as_uri())
     mlflow.set_experiment("prueba-contrato-no-oficial")
     X = pd.DataFrame({"hour": [8.0, 9.0], "month": [1.0, 1.0]})
     model = DummyRegressor().fit(X, [1.0, 3.0])
@@ -43,7 +44,11 @@ def test_model_loads_in_another_process_with_manifests_and_signature(contract):
                                       evaluation={"val_mae": 1.0})
     client = mlflow.MlflowClient()
     assert {a.path for a in client.list_artifacts(run.info.run_id)} == {
-        "model", "config", "data", "plots", "evaluation"}
+        "config", "data", "plots", "evaluation"}
+    tags = client.get_run(run.info.run_id).data.tags
+    assert tags["model_uri"] == uri and tags["artifact_contract"] == "3"
+    logged = mlflow.get_logged_model(tags["model_id"])
+    assert logged.source_run_id == run.info.run_id
     saved = mlflow.artifacts.download_artifacts(uri)
     metadata = mlflow.models.Model.load(str(Path(saved) / "MLmodel"))
     assert metadata.signature is not None

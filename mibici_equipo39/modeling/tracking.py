@@ -172,11 +172,14 @@ def log_candidate_artifacts(model, input_example, resolved_config, *,
     requirements = [line.strip() for line in (C.ROOT / "requirements.txt").read_text().splitlines()
                     if line.strip() and not line.lstrip().startswith("#")]
     # Empaqueta el módulo para cargar clases propias sin depender del clon original.
-    kwargs = dict(artifact_path="model", signature=signature,
+    kwargs = dict(name="model", signature=signature,
                   input_example=input_example, pip_requirements=requirements,
                   code_paths=[str(C.ROOT / "mibici_equipo39")])
     if flavor == "sklearn":
-        info = mlflow.sklearn.log_model(sk_model=model, **kwargs)
+        # Conserva el formato de los modelos propios, incluido el baseline con pandas.
+        info = mlflow.sklearn.log_model(
+            sk_model=model, serialization_format="cloudpickle", **kwargs
+        )
     else:
         info = mlflow.pyfunc.log_model(python_model=model, **kwargs)
     with tempfile.TemporaryDirectory() as tmp:
@@ -192,6 +195,9 @@ def log_candidate_artifacts(model, input_example, resolved_config, *,
         mlflow.log_dict(evaluation, "evaluation/summary.json")
     for plot in plots:
         mlflow.log_artifact(str(plot), "plots")
+    # MLflow 3 almacena el modelo fuera de los artefactos del run.
+    # Conservar la URI devuelta evita construir una ubicación que ya no existe.
     mlflow.set_tags({"data_version": data_version, "split_id": split["split_id"],
-                     "split_version": split["version"], "artifact_contract": "2"})
+                     "split_version": split["version"], "artifact_contract": "3",
+                     "model_uri": info.model_uri, "model_id": info.model_id})
     return info.model_uri

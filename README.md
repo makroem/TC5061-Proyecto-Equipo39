@@ -13,6 +13,7 @@ ingesta y una revisión preliminar de seguridad. La configuración de PyTest est
 - [Entorno comprobado de DeepChecks](references/etapa3/deepchecks_entorno.md).
 - [Hallazgos de seguridad y seguimiento](reports/etapa3/hallazgos.md).
 - [Actualización parcial de dependencias y reproducción](references/etapa3/actualizacion_dependencias.md).
+- [Migración conjunta de MLflow/PyArrow: respaldo, verificación y restauración](references/etapa3/migracion_mlflow_pyarrow.md).
 - [Capturas y origen de la evidencia](reports/etapa3/evidencias_marco.md).
 
 Los aportes de P1, P2/DeepChecks y P3 de esta etapa deben integrarse y revisarse antes
@@ -145,6 +146,15 @@ El controlador recibe la pregunta (`p1`, `p2` o `p3`), el modelo,
 los hiperparámetros, el integrante responsable y el modo de ejecución.
 
 ### Configuración de MLflow
+
+Esta rama utiliza MLflow 3.17.2 y PyArrow 23.0.1. Antes de conectar el entorno nuevo a una base existente de MLflow 2, seguir el [procedimiento de migración sobre una copia](references/etapa3/migracion_mlflow_pyarrow.md). El servidor oficial anterior no se actualiza automáticamente con la instalación de estas dependencias.
+
+El 30 de octubre de 2026 se activó y verificó el servidor local migrado después de
+integrar el PR #32. Se conservaron 34 corridas, 500 archivos de artefactos y los
+tres modelos `champion`; el almacén anterior y el respaldo permanecen intactos.
+El [registro de activación](reports/etapa3/activacion_servidor_20261030.json)
+documenta el alcance y los horarios. El endpoint `http://127.0.0.1:5000` corresponde
+a la máquina que aloja el servicio; la pausa de escrituras ya terminó.
 
 El repositorio debe estar limpio y los datos procesados y manifiestos
 deben encontrarse disponibles antes de iniciar una búsqueda.
