@@ -1,4 +1,4 @@
-# Revisión de calidad y seguridad de P3 — Etapa 3
+# Revisión de calidad y seguridad de P1 — Etapa 3
 
 ## Objetivo
 Ampliar la cobertura de pruebas automatizadas relacionadas con P1, las variables de calendario y la partición cronológica utilizadas por el proyecto, así como revisar los hallazgos de seguridad previamente documentados para este componente.
@@ -15,29 +15,30 @@ Se incorporaron nuevos casos de prueba en:
 
 Las pruebas utilizan exclusivamente datos sintéticos y amplían la validación de condiciones límite previamente identificadas para la Etapa 3.
 
-    ## prueba para variables de calendario
+## prueba para variables de calendario
 
-    Se agregaron pruebas para verificar:
+Se agregaron pruebas para verificar:
     
-    Clasificación correcta de días laborales y fines de semana mediante is_weekend.
-    Cálculo correcto de variables cíclicas:
-    - hour_sin
-    - hour_cos
-    - month_sin
-    - month_cos
+Clasificación correcta de días laborales y fines de semana mediante is_weekend.
+Cálculo correcto de variables cíclicas:
+- hour_sin
+- hour_cos
+- month_sin
+- month_cos
 
-    ## Prueba para particion cronológica
+## Prueba para particion cronológica
 
-    Se agregaron pruebas para validar:
+Se agregaron pruebas para validar:
     
-    - Rechazo de fechas fuera del rango temporal confirmado.- - Rechazo de conjuntos que no contienen observaciones suficientes para alguno de los periodos train, validation, test
+- Rechazo de fechas fuera del rango temporal confirmado.
+- Rechazo de conjuntos que no contienen observaciones suficientes para alguno de los periodos train, validation, test
 
-    ## Prueba de casos limites de P1
+## Prueba de casos limites de P1
 
-    Se agregaron pruebas para validar:
+Se agregaron pruebas para validar:
     
-    - Rechazo de datos de entrenamiento vacíos.- Rechazo de esquemas incompletos cuando faltan columnas requeridas.
-    - Manejo controlado de errores asociados a entradas inválidas.
+- Rechazo de datos de entrenamiento vacíos.- Rechazo de esquemas incompletos cuando faltan columnas requeridas.
+- Manejo controlado de errores asociados a entradas inválidas.
 
 ## Revisión de seguridad
 Se revisó el hallazgo previamente documentado asociado al uso de pickle dentro del componente P1.
