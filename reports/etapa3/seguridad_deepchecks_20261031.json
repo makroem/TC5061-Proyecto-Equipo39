@@ -1,0 +1,146 @@
+{
+  "date": "2026-10-31",
+  "status": "PARTIAL_REMEDIATION_OPEN_FINDINGS",
+  "audit_tool": "pip-audit 2.10.1",
+  "audit_scope": "requirements-deepchecks.txt del PR35 en 45d7a3b; segunda auditoria sustituye solo setuptools 65.5.0 por 81.0.0. No es una auditoria de todos los paquetes instalados.",
+  "audit_command": "python -m pip_audit -r ARCHIVO_DE_REQUISITOS --no-deps --disable-pip --progress-spinner off -f json",
+  "before": {
+    "dependencies_checked": 120,
+    "packages_with_findings": [
+      {
+        "name": "setuptools",
+        "version": "65.5.0",
+        "raw_entries": 9,
+        "unique_identifiers": 5,
+        "findings": [
+          {
+            "id": "PYSEC-2022-43012",
+            "fix_versions": [
+              "65.5.1"
+            ],
+            "aliases": [
+              "BIT-setuptools-2022-40897",
+              "CVE-2022-40897",
+              "GHSA-r9hx-vwmv-q579"
+            ]
+          },
+          {
+            "id": "PYSEC-2025-49",
+            "fix_versions": [
+              "78.1.1"
+            ],
+            "aliases": [
+              "BIT-setuptools-2025-47273",
+              "CVE-2025-47273",
+              "GHSA-5rjg-fvgr-3xxf"
+            ]
+          },
+          {
+            "id": "PYSEC-2026-1918",
+            "fix_versions": [
+              "70.0.0"
+            ],
+            "aliases": [
+              "BIT-setuptools-2024-6345",
+              "CVE-2024-6345",
+              "GHSA-cx63-2mw6-8hw5"
+            ]
+          },
+          {
+            "id": "PYSEC-2026-3447",
+            "fix_versions": [
+              "83.0.0"
+            ],
+            "aliases": [
+              "BIT-setuptools-2026-59890",
+              "CVE-2026-59890",
+              "GHSA-h35f-9h28-mq5c"
+            ]
+          },
+          {
+            "id": "GHSA-xmj3-9gf7-h52w",
+            "fix_versions": [
+              "84.1.0"
+            ],
+            "aliases": []
+          }
+        ]
+      }
+    ],
+    "report_sha256": "fca5f1c5fc33fc8648101a2b0837e8be6cd04c77c71fe4e3437ff32c6c58b5e7"
+  },
+  "after": {
+    "dependencies_checked": 120,
+    "packages_with_findings": [
+      {
+        "name": "setuptools",
+        "version": "81.0.0",
+        "raw_entries": 3,
+        "unique_identifiers": 2,
+        "findings": [
+          {
+            "id": "PYSEC-2026-3447",
+            "fix_versions": [
+              "83.0.0"
+            ],
+            "aliases": [
+              "BIT-setuptools-2026-59890",
+              "CVE-2026-59890",
+              "GHSA-h35f-9h28-mq5c"
+            ]
+          },
+          {
+            "id": "GHSA-xmj3-9gf7-h52w",
+            "fix_versions": [
+              "84.1.0"
+            ],
+            "aliases": []
+          }
+        ]
+      }
+    ],
+    "report_sha256": "a086e260d4fda69abd91dcb72de982ab270a98240203499c30974e9ccbf351fa"
+  },
+  "requirements_before_sha256": "e2038c2fdb1f1ea9c690634eeacf084fbb729994635a43e53cb94530328da5be",
+  "requirements_after_sha256": "5c22dd55e7c5065032e6df19e719dacd0868a65be55a194e9fc1ddee225ed2fe",
+  "pip_check": "PASS",
+  "compatibility_controls": {
+    "scope": "compatibilidad con datos sinteticos; no valida CSV reales",
+    "status": "PASS",
+    "cases": {
+      "variable": {
+        "condition_passed": true,
+        "html": "variable.html",
+        "sha256": "de9866d871570fc864d50f5a7861e7ce01c0440edb0834ae1c5ba902c15f5244"
+      },
+      "constant": {
+        "condition_passed": false,
+        "html": "constant.html",
+        "sha256": "d43126c3c0fda115f1c90f4f4701391626bb23df16b58d5af6a7c0a5a270b10f"
+      }
+    },
+    "versions": {
+      "deepchecks": "0.19.1",
+      "numpy": "1.26.4",
+      "pandas": "2.2.3",
+      "scikit-learn": "1.6.1",
+      "plotly": "5.24.1",
+      "ipython": "8.37.0"
+    }
+  },
+  "setuptools_verified": "81.0.0",
+  "remaining": {
+    "PYSEC-2026-3447": "Exclusiones Unicode al construir distribuciones; correccion indicada desde 83.0.0.",
+    "GHSA-xmj3-9gf7-h52w": "Ruta heredada de instalacion de paquetes en Windows; correccion indicada desde 84.1.0."
+  },
+  "compatibility_limit": "DeepChecks 0.19.1 importa pkg_resources, retirado por Setuptools desde 82.0.0. No se declara segura una actualizacion directa sin adaptar y probar la dependencia.",
+  "restrictions": [
+    "Entorno separado dedicado a validacion; no construir ni publicar distribuciones desde el.",
+    "No usar instalaciones heredadas de paquetes.",
+    "Estas restricciones no eliminan los avisos; resolver o documentar su tratamiento antes del cierre."
+  ],
+  "references": [
+    "https://setuptools.pypa.io/en/latest/history.html",
+    "https://pypi.org/project/deepchecks/0.19.1/"
+  ]
+}
