@@ -51,7 +51,10 @@ def test_search_logs_baseline_and_three_nested_candidates(stage2_env):
         assert tags["delivery"] == "A6" and tags["question"] == "p1" and tags["git_dirty"] == "false"
         assert {"train_mae", "val_mae", "test_mae", "fit_seconds"} <= set(run.data.metrics)
         folders = {a.path for a in stage2_env.client.list_artifacts(run.info.run_id)}
-        assert {"model", "data", "config", "plots", "evaluation"} <= folders
+        assert {"data", "config", "plots", "evaluation"} <= folders
+        logged = mlflow.get_logged_model(tags["model_id"])
+        assert logged.source_run_id == run.info.run_id
+        assert tags["model_uri"] == f"models:/{logged.model_id}"
     assert children["baseline"].data.tags["baseline_source_run_id"] == "historico-p1"
     parent = stage2_env.client.get_run(parent_id)
     assert parent.data.tags["stage_of_work"] == "search"
