@@ -4,6 +4,16 @@ Fecha de comprobación: 28 de octubre de 2026. Rama: `chore/marco-a7-calidad`.
 Repositorio: [TC5061-Proyecto-Equipo39](https://github.com/makroem/TC5061-Proyecto-Equipo39).
 Código probado: `b00703251085ada10693d5b31fc69b99ab6640ae`.
 
+Actualización del 30 de octubre: los PR #29, #30, #31 y #32 ya están integrados.
+La migración conjunta pasó la validación del servicio y el servidor local quedó
+activo con MLflow 3.17.2 y PyArrow 23.0.1. La pausa de escrituras terminó a las
+20:22:45, hora de Ciudad de México. Consultar el
+[registro de activación](activacion_servidor_20261030.json) y el
+[procedimiento actualizado](../../references/etapa3/migracion_mlflow_pyarrow.md).
+Los resultados y pendientes del 28 de octubre que siguen se conservan como
+antecedente. El cierre conjunto continúa sujeto a la revisión de P1, DeepChecks
+sobre datos reales y las aportaciones restantes de la Etapa 3.
+
 Actualización posterior del mismo día: Marco preparó la rama
 `fix/marco-a7-dependencias`, dependiente del PR #29, con cuatro versiones corregidas.
 La [actualización de dependencias](../../references/etapa3/actualizacion_dependencias.md)
