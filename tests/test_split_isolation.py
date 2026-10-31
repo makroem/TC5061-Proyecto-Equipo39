@@ -69,3 +69,52 @@ def test_missing_confirmed_manifest_does_not_create_one(tmp_path):
     with pytest.raises(FileNotFoundError, match='PR explícito'):
         F.chronological_split(frame, data_version='synthetic-audit', manifest_path=path)
     assert not path.exists()
+
+
+@pytest.mark.parametrize(
+    "hour",
+    [
+        "2025-09-30 23:00:00",
+        "2026-10-01 00:00:00",
+    ],
+)
+def test_dates_outside_confirmed_range_are_rejected(hour):
+    frame = pd.DataFrame({
+        "station_id": pd.array(["1"], dtype="string"),
+        "hour": pd.to_datetime([hour]),
+        "departures": [0],
+        "arrivals": [0],
+    })
+
+    frame = F.add_calendar_features(frame)
+
+    with pytest.raises(
+        ValueError,
+        match="rango temporal confirmado",
+    ):
+        F.chronological_split(frame)
+
+
+def test_requires_observed_days_in_all_three_splits():
+    hours = pd.date_range(
+        "2025-10-01",
+        "2026-05-01",
+        freq="h",
+        inclusive="left",
+    )
+
+    frame = pd.DataFrame({
+        "station_id": pd.array(["1"] * len(hours), dtype="string"),
+        "hour": hours,
+        "departures": np.zeros(len(hours), dtype=int),
+        "arrivals": np.zeros(len(hours), dtype=int),
+    })
+
+    frame = F.add_calendar_features(frame)
+
+    with pytest.raises(
+        ValueError,
+        match="Los tres periodos deben contener días observados",
+    ):
+        F.chronological_split(frame)
+        

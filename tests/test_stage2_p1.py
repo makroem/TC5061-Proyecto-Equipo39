@@ -1,12 +1,11 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Oct 24 09:36:43 2026
 
-@author: stefa
+"""
+P1 de la etapa 1 con datos sintéticos
+Incluye prueba de search logs, serializacion,
 """
 
 import pickle
-
+import pytest
 import mlflow
 
 import numpy as np
@@ -215,3 +214,15 @@ def test_baseline_fallback_returns_value():
 
     assert not np.isnan(pred).any()
     assert pred[0] >= 0
+    
+    
+def test_missing_station_id_column_raises_error():
+    frame = sample_frame().drop(columns=["station_id"])
+    y = sample_target()
+
+    model = StationEncodedRegressor(
+        HistGradientBoostingRegressor(**C.P1_HGB_100_PARAMS)
+    )
+
+    with pytest.raises(KeyError, match="station_id"):
+        model.fit(frame, y)
