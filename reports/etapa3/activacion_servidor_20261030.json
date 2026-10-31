@@ -1,0 +1,91 @@
+{
+  "date": "2026-10-30",
+  "status": "ACTIVE_VERIFIED",
+  "code_commit": "2f2ccdc7133f786884d06c44af84ad7dd800b648",
+  "merged_pull_request": 32,
+  "endpoint": "http://127.0.0.1:5000",
+  "access_scope": "Local a la maquina que aloja el servicio.",
+  "environment": {
+    "python": "3.11.9",
+    "mlflow": "3.17.2",
+    "pyarrow": "23.0.1"
+  },
+  "write_pause": {
+    "started_at": "2026-10-30T20:17:38-06:00",
+    "released_at": "2026-10-30T20:22:45-06:00",
+    "status": "COMPLETED"
+  },
+  "acceptance": {
+    "verified_at": "2026-10-30T20:21:17.066040-06:00",
+    "health_status": 200,
+    "ui_status": 200,
+    "runs_preserved": 34,
+    "artifacts_preserved": 500,
+    "historical_content_preserved": true,
+    "original_unchanged": true,
+    "backup_unchanged": true,
+    "models": {
+      "p1": {
+        "uri": "models:/mibici-equipo39-p1-demanda@champion",
+        "version": "1",
+        "rows": 3,
+        "status": "ok"
+      },
+      "p2": {
+        "uri": "models:/mibici-equipo39-p2-riesgo@champion",
+        "version": "1",
+        "rows": 3,
+        "status": "ok"
+      },
+      "p3": {
+        "uri": "models:/mibici-equipo39-p3-grupos@champion",
+        "version": "1",
+        "rows": 3,
+        "status": "ok"
+      }
+    },
+    "lineage": {
+      "p1": {
+        "name": "mibici-equipo39-p1-demanda",
+        "version": "1",
+        "alias": "champion",
+        "run_id": "66414a8b45164d3a8f5b9f42e7cb387b"
+      },
+      "p2": {
+        "name": "mibici-equipo39-p2-riesgo",
+        "version": "1",
+        "alias": "champion",
+        "run_id": "73804085f3944b54ac2f99542eec38be"
+      },
+      "p3": {
+        "name": "mibici-equipo39-p3-grupos",
+        "version": "1",
+        "alias": "champion",
+        "run_id": "fb847f28e5484ff885e8ef9b44afb2d7"
+      }
+    },
+    "new_training_run_created": false
+  },
+  "verification_scope": "Los identificadores de corridas, el contenido historico y los hashes de artefactos coinciden con el respaldo final. Las firmas, ejemplos y predicciones se comprobaron cargando los tres modelos por alias a traves del servicio.",
+  "historical_run_statuses": {
+    "FINISHED": 33,
+    "RUNNING": 1
+  },
+  "historical_status_note": "Se conservo el estado de una corrida de ingesta del 26 de octubre. La migracion no certifica que ese proceso siga ejecutandose ni modifica su resultado.",
+  "previous_test_evidence": {
+    "date": "2026-10-29",
+    "passed": 173,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "warnings": 23,
+    "tested_commit": "4e2c17c17d0e4b98f55eb6d3f3af7fc090d40334",
+    "rerun_during_activation": false
+  },
+  "limits": [
+    "La verificacion de predicciones usa los ejemplos almacenados de cada modelo.",
+    "No se realizo otra busqueda de modelos ni se cambiaron las selecciones o las particiones.",
+    "La validacion DeepChecks sobre datos reales y la integracion de las contribuciones restantes mantienen su seguimiento independiente.",
+    "La base, los modelos, los artefactos y los registros completos permanecen fuera de Git."
+  ]
+}
