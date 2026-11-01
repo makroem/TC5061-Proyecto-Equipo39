@@ -23,8 +23,12 @@ con la política congelada (`"frozen": true`); con la política en borrador term
 | 1 | Fallo crítico de datos |
 | 2 | Error de ejecución u obligatoria sin evaluar |
 
-Si DeepChecks no se puede importar (por ejemplo, en el entorno del proyecto con NumPy 2), sus
-comprobaciones quedan NOT_EVALUATED con la causa y la salida es 2. Nunca cuentan como aprobadas.
+Si hay un fallo crítico y también una obligatoria sin evaluar, la salida es 1, porque el defecto de
+datos ya está confirmado.
+
+Si DeepChecks no se puede importar (por ejemplo, en el entorno del proyecto con NumPy 2) o falla al
+preparar o ejecutar una comprobación, esta queda NOT_EVALUATED con la causa y nunca cuenta como
+aprobada. Si es obligatoria, la salida es 2. Cualquier otro error inesperado también sale con 2.
 
 ## Qué revisa
 
@@ -103,8 +107,9 @@ entorno `.venv-deepchecks` con DeepChecks 0.19.1 y NumPy 1.26.4. Tardó unos 32 
 
 ## Pruebas
 
-- `tests/test_data_checks.py` (16): datos limpios, seis daños críticos con salida 1, partición y
-  data_version alteradas, DeepChecks no disponible con salida 2, avisos que no cambian la salida,
+- `tests/test_data_checks.py` (23): datos limpios, seis daños críticos con salida 1, partición y
+  data_version alteradas, DeepChecks no disponible con salida 2, error al preparar el dataset,
+  error inesperado, precedencia de las salidas, avisos que no cambian la salida,
   etapa final con política congelada, tabla faltante y, si existe `.venv-deepchecks`, la corrida real
   de DeepChecks con un control positivo y uno negativo (variable constante).
 - `tests/test_stage3_p2.py` (8): límites inclusivos de la etiqueta, alerta en el umbral exacto,
@@ -116,11 +121,11 @@ entorno `.venv-deepchecks` con DeepChecks 0.19.1 y NumPy 1.26.4. Tardó unos 32 
   debe ser de la variante seleccionada, comparación de la predicción al cargar y la llamada a Git sin
   shell que rechaza salidas que no son un commit.
 
-Suite completa combinada con main (MLflow 3.17.2 y PyArrow 23.0.1): 216 pruebas aprobadas.
+Suite completa combinada con main (MLflow 3.17.2 y PyArrow 23.0.1): 223 pruebas aprobadas.
 
 ## Pendiente
 
-- Stefania y Diego Hurtado confirman los criterios de P1 y P3 en la política. Después se congela
-  (`"frozen": true`) y se corre `--stage final` una sola vez.
+- Stefania ya confirmó los criterios de P1 en la política y Diego Hurtado revisó favorablemente los
+  de P3. Falta congelarla (`"frozen": true`) y correr `--stage final` una sola vez.
 - La corrida final se hace en x86-64. El equipo decide si conserva el manifiesto actual, como se
   recomienda aquí, o cambia a una conversión exacta. No se cambia la política para que pase.

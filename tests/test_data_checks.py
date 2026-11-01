@@ -4,6 +4,7 @@ import json
 import os
 from pathlib import Path
 import subprocess
+from types import SimpleNamespace
 
 import numpy as np
 import pandas as pd
@@ -183,6 +184,43 @@ def test_unavailable_deepchecks_is_not_evaluated_and_never_counts_as_passed(qual
     assert deepchecks and {r["status"] for r in deepchecks} == {"NOT_EVALUATED"}
     assert all(r["detail"]["causa"] == "DeepChecks no disponible" for r in deepchecks)
     assert summary["totals"]["FAIL"] == 0
+
+
+def test_dataset_preparation_error_is_not_evaluated_with_its_cause(quality, tmp_path, monkeypatch):
+    def fail(*args, **kwargs):
+        raise RuntimeError("fallo simulado")
+
+    deepchecks = SimpleNamespace(version="prueba", CheckResult=type("CheckResult", (), {}))
+    monkeypatch.setattr(Q, "load_deepchecks", lambda: (deepchecks, None))
+    monkeypatch.setattr(Q, "deepchecks_dataset", fail)
+
+    code, summary = run_checks(tmp_path, deepchecks=True)
+
+    rows = [r for r in summary["results"] if r["tool"] == "deepchecks"]
+    assert code == 2
+    assert rows and {r["status"] for r in rows} == {"NOT_EVALUATED"}
+    assert {r["detail"]["causa"] for r in rows} == {"RuntimeError: fallo simulado"}
+    assert summary["exit_code"] == 2 and summary["totals"]["FAIL"] == 0
+
+
+def test_unexpected_error_outside_the_checks_exits_with_two(quality, tmp_path, monkeypatch):
+    def fail(*args, **kwargs):
+        raise RuntimeError("fallo simulado")
+
+    monkeypatch.setattr(Q, "question_frames", fail)
+
+    assert run_checks(tmp_path) == (2, None)
+
+
+@pytest.mark.parametrize("rows, expected", [
+    ([("PASS", "critical"), ("WARN", "warning")], 0),
+    ([("NOT_EVALUATED", "warning")], 0),
+    ([("NOT_EVALUATED", "critical")], 2),
+    ([("FAIL", "critical")], 1),
+    ([("FAIL", "critical"), ("NOT_EVALUATED", "critical")], 1),
+])
+def test_exit_code_precedence(rows, expected):
+    assert Q.exit_code([{"status": s, "severity": v} for s, v in rows]) == expected
 
 
 def test_warning_checks_do_not_change_the_exit_code(quality, tmp_path):

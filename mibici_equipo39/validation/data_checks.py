@@ -5,7 +5,8 @@ references/etapa3/quality_policy.json. Se ejecuta en .venv-deepchecks; si DeepCh
 importar, sus comprobaciones quedan NOT_EVALUATED y nunca cuentan como aprobadas.
 
 Salida 0: obligatorias completas sin fallos; 1: fallo crítico de datos; 2: error de ejecución
-o comprobación obligatoria sin evaluar.
+o comprobación obligatoria sin evaluar. Si hay un fallo crítico y también una obligatoria sin
+evaluar, la salida es 1, porque el defecto de datos ya está confirmado.
 """
 
 import argparse
@@ -210,7 +211,8 @@ def deepchecks_check(dc, entry):
 
 def deepchecks_status(dc, result, severity):
     if not isinstance(result, dc.CheckResult):
-        return "NOT_EVALUATED", {"causa": str(getattr(result, "exception", result))}
+        error = getattr(result, "exception", result)
+        return "NOT_EVALUATED", {"causa": f"{type(error).__name__}: {error}"}
     if not result.have_conditions() or not result.conditions_results:
         return "NOT_EVALUATED", {"causa": "la comprobación no evaluó su condición"}
     passed = all(c.is_pass() for c in result.conditions_results)
@@ -248,10 +250,10 @@ def run_question(question, spec, inputs, splits, dc, dc_error, policy, html):
                     results.append({**row, "status": "NOT_EVALUATED",
                                     "detail": {"causa": dc_error}})
                     continue
-                datasets = [deepchecks_dataset(dc, spec, frames[s], label, policy["seed"],
-                                               policy["deepchecks_sample_rows"])
-                            for s in [first, second] if s]
                 try:
+                    datasets = [deepchecks_dataset(dc, spec, frames[s], label, policy["seed"],
+                                                   policy["deepchecks_sample_rows"])
+                                for s in [first, second] if s]
                     result = deepchecks_check(dc, entry).run(*datasets)
                 except Exception as exc:
                     result = exc
@@ -329,7 +331,8 @@ def main(argv=None):
     output = args.output or C.ROOT / "private_quality" / "data_checks" / args.stage
     try:
         summary = run(questions, args.stage, args.policy or policy_path(), output)
-    except (FileNotFoundError, KeyError, ValueError, json.JSONDecodeError) as exc:
+    # Un error sin capturar saldría con 1, que aquí significa fallo de datos.
+    except Exception as exc:
         print(f"Error de ejecución: {type(exc).__name__}: {exc}")
         return 2
     for r in summary["results"]:
