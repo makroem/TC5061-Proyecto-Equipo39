@@ -26,6 +26,9 @@ class SeasonalMeanBaseline:
     levels = (["station_id", "day_of_week", "hour_of_day"], ["station_id", "hour_of_day"])
 
     def fit(self, frame, y):
+        if frame.empty or len(y) == 0:
+            raise ValueError("No se puede entrenar con datos vacíos.")
+        
         self.means_ = [
             y.groupby([frame[k] for k in keys], observed=True).mean().rename("mean")
             for keys in self.levels

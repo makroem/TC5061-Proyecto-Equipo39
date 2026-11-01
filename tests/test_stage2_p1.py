@@ -1,12 +1,13 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Oct 24 09:36:43 2026
 
-@author: stefa
+"""
+Pruebas de P1 con datos sintéticos.
+
+Incluye validaciones de serialización, carga de modelos,
+casos límite y manejo de errores.
 """
 
 import pickle
-
+import pytest
 import mlflow
 
 import numpy as np
@@ -215,3 +216,57 @@ def test_baseline_fallback_returns_value():
 
     assert not np.isnan(pred).any()
     assert pred[0] >= 0
+    
+    
+def test_missing_station_id_column_raises_error():
+    frame = sample_frame().drop(columns=["station_id"])
+    y = sample_target()
+
+    model = StationEncodedRegressor(
+        HistGradientBoostingRegressor(**C.P1_HGB_100_PARAMS)
+    )
+
+    with pytest.raises(KeyError, match="station_id"):
+        model.fit(frame, y)
+        
+        
+def test_baseline_rejects_empty_training_data():
+    frame = sample_frame().iloc[0:0].copy()
+    y = sample_target().iloc[0:0]
+
+    with pytest.raises(ValueError, match="vacíos"):
+        SeasonalMeanBaseline().fit(frame, y)
+        
+def test_station_encoded_regressor_rejects_empty_training_data():
+    frame = sample_frame().iloc[0:0].copy()
+    y = sample_target().iloc[0:0]
+
+    model = StationEncodedRegressor(
+        HistGradientBoostingRegressor(**C.P1_HGB_100_PARAMS)
+    )
+
+    with pytest.raises(ValueError):
+        model.fit(frame, y)
+        
+def test_baseline_uses_station_day_hour_then_station_hour_then_global():
+    frame = pd.DataFrame({
+        "station_id": ["A", "A", "A", "B"],
+        "day_of_week": [1, 1, 2, 1],
+        "hour_of_day": [8, 8, 8, 9],
+        })
+
+    y = pd.Series([10, 20, 30, 100])
+    
+    baseline=SeasonalMeanBaseline().fit(frame, y)
+    
+    predict_frame = pd.DataFrame({
+    "station_id": ["A", "A", "Z"],
+    "day_of_week": [1, 5, 5],
+    "hour_of_day": [8, 8, 12],})
+    
+    pred = baseline.predict(predict_frame)
+    
+    assert pred[0] == 15
+    assert pred[1] == 20
+    assert pred[2] == 40
+    
