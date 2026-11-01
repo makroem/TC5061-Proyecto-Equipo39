@@ -306,7 +306,10 @@ class P2RiskModel(mlflow.pyfunc.PythonModel):
         if missing:
             raise ValueError(f"Faltan columnas de entrada: {', '.join(sorted(missing))}.")
         X = model_input[COLUMNS]
-        probs = {risk: positive_proba(self.pipelines[risk], X) for risk in TARGETS}
+        if X.empty:
+            probs = {risk: np.zeros(0, dtype=float) for risk in TARGETS}
+        else:
+            probs = {risk: positive_proba(self.pipelines[risk], X) for risk in TARGETS}
         return pd.DataFrame(
             {**{f"prob_{r}": p for r, p in probs.items()},
              **{f"alert_{r}": p >= self.thresholds[r] for r, p in probs.items()}},
