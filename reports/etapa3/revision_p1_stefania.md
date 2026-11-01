@@ -37,7 +37,9 @@ Se agregaron pruebas para validar:
 
 Se agregaron pruebas para validar:
     
-- Rechazo de datos de entrenamiento vacíos.- Rechazo de esquemas incompletos cuando faltan columnas requeridas.
+- Rechazo de datos de entrenamiento vacíos en SeasonalMeanBaseline.
+- Rechazo de datos de entrenamiento vacíos en StationEncodedRegressor.
+- Rechazo de esquemas incompletos cuando faltan columnas requeridas.
 - Manejo controlado de errores asociados a entradas inválidas.
 
 ## Revisión de seguridad
