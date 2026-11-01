@@ -1,7 +1,9 @@
 
 """
-P1 de la etapa 1 con datos sintéticos
-Incluye prueba de search logs, serializacion,
+Pruebas de P1 con datos sintéticos.
+
+Incluye validaciones de serialización, carga de modelos,
+casos límite y manejo de errores.
 """
 
 import pickle
@@ -248,12 +250,12 @@ def test_station_encoded_regressor_rejects_empty_training_data():
         
 def test_baseline_uses_station_day_hour_then_station_hour_then_global():
     frame = pd.DataFrame({
-    "station_id": ["A", "A", "A"],
-    "day_of_week": [1, 1, 2],
-    "hour_of_day": [8, 8, 8],
-    })
-    
-    y = pd.Series([10, 20, 30])
+        "station_id": ["A", "A", "A", "B"],
+        "day_of_week": [1, 1, 2, 1],
+        "hour_of_day": [8, 8, 8, 9],
+        })
+
+    y = pd.Series([10, 20, 30, 100])
     
     baseline=SeasonalMeanBaseline().fit(frame, y)
     
@@ -266,5 +268,5 @@ def test_baseline_uses_station_day_hour_then_station_hour_then_global():
     
     assert pred[0] == 15
     assert pred[1] == 20
-    assert pred[2] == 20
+    assert pred[2] == 40
     
