@@ -1,0 +1,176 @@
+{
+  "checked_at": "2026-10-31T16:53:36-06:00",
+  "scope": "Contraste de la evidencia de macOS de Diego Martinez con la repeticion de Marco en Windows. No sustituye la validacion final de calidad.",
+  "status": "ROUNDING_EXPLANATION_REPRODUCED_WITH_PORTABILITY_LIMITATION",
+  "source": {
+    "contributor": "Diego Martinez",
+    "pull_request": 35,
+    "commit": "94624fa7d71a05ca16bd672b7adf4887b8c0e0c0",
+    "script_url": "https://github.com/makroem/TC5061-Proyecto-Equipo39/blob/94624fa7d71a05ca16bd672b7adf4887b8c0e0c0/scripts/explain_station_hash.py",
+    "script_sha256": "21ebd92c2b93e090592b1f792e5d4276768404f7b0f042bf374dc1420cc5a368",
+    "tests_url": "https://github.com/makroem/TC5061-Proyecto-Equipo39/blob/94624fa7d71a05ca16bd672b7adf4887b8c0e0c0/tests/test_station_hash.py",
+    "tests_sha256": "fcad80eb4336a128274b5a9a719cc4929899a01a3ca8e5db927b36897aed4661",
+    "macos_report_url": "https://github.com/makroem/TC5061-Proyecto-Equipo39/blob/94624fa7d71a05ca16bd672b7adf4887b8c0e0c0/reports/etapa3/verificacion_estaciones_macos_20261031.json",
+    "macos_report_sha256": "bdc4b605c869ff9e3a5176942cfdbb1b516debe216ffe663e6b9c576346ff1d9",
+    "original_files_executed_without_edits": true
+  },
+  "tests_executed_in_windows": {
+    "passed": 5,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "duration_seconds": 1.25,
+    "python": "3.11.9",
+    "numpy": "2.1.3",
+    "full_project_suite_repeated": false,
+    "xml_sha256": "28c303e3c6db3162119a1b0863d32ba72dc9cd620310f0be1dbad939c2a4caca"
+  },
+  "windows_checks": [
+    {
+      "environment": {
+        "os": "Windows",
+        "machine": "AMD64",
+        "pandas": "2.2.3",
+        "numpy": "2.1.3"
+      },
+      "local_matches_manifest": true,
+      "emulations": {
+        "un_redondeo": {
+          "matches_local_values": false,
+          "matches_manifest_hash": false
+        },
+        "dos_redondeos": {
+          "matches_local_values": true,
+          "matches_manifest_hash": true
+        }
+      },
+      "differences_between_emulations": {
+        "latitude": {
+          "rows": 15,
+          "max_degrees": 7.105427357601002e-15
+        },
+        "longitude": {
+          "rows": 0,
+          "max_degrees": 0.0
+        }
+      },
+      "inputs_unchanged": true,
+      "logical_hashes": {
+        "un_redondeo": "6559e1e45604a5156c4673d23ad6632d8084a278c2be4e639d8b6e7deef3abd8",
+        "dos_redondeos": "84ed1ce13b7034edadd13cf0d5ae5d2fe8fd05eaa2c8d1bca9b1a130427f548e"
+      },
+      "manifest_lf_sha256": "1432deda619d2a54ae4f60462b29a4d899b91eab9827de40dcaa291b233f83e6",
+      "manifest_crlf_sha256": "5e4f5178e45cf38d1cb5844a204959181f0b55733f6009e9e6dd78330b68d42b",
+      "source_sha256": "206e45fe633922b634d858142fa21e6fd9f4c421b6435c02980ef290cc2df90d",
+      "explanation_script_sha256": "21ebd92c2b93e090592b1f792e5d4276768404f7b0f042bf374dc1420cc5a368"
+    },
+    {
+      "environment": {
+        "os": "Windows",
+        "machine": "AMD64",
+        "pandas": "2.2.3",
+        "numpy": "1.26.4"
+      },
+      "local_matches_manifest": true,
+      "emulations": {
+        "un_redondeo": {
+          "matches_local_values": false,
+          "matches_manifest_hash": false
+        },
+        "dos_redondeos": {
+          "matches_local_values": true,
+          "matches_manifest_hash": true
+        }
+      },
+      "differences_between_emulations": {
+        "latitude": {
+          "rows": 15,
+          "max_degrees": 7.105427357601002e-15
+        },
+        "longitude": {
+          "rows": 0,
+          "max_degrees": 0.0
+        }
+      },
+      "inputs_unchanged": true,
+      "logical_hashes": {
+        "un_redondeo": "6559e1e45604a5156c4673d23ad6632d8084a278c2be4e639d8b6e7deef3abd8",
+        "dos_redondeos": "84ed1ce13b7034edadd13cf0d5ae5d2fe8fd05eaa2c8d1bca9b1a130427f548e"
+      },
+      "manifest_lf_sha256": "1432deda619d2a54ae4f60462b29a4d899b91eab9827de40dcaa291b233f83e6",
+      "manifest_crlf_sha256": "5e4f5178e45cf38d1cb5844a204959181f0b55733f6009e9e6dd78330b68d42b",
+      "source_sha256": "206e45fe633922b634d858142fa21e6fd9f4c421b6435c02980ef290cc2df90d",
+      "explanation_script_sha256": "21ebd92c2b93e090592b1f792e5d4276768404f7b0f042bf374dc1420cc5a368"
+    }
+  ],
+  "macos_report_summary": {
+    "author": "Diego Martinez",
+    "platform": "Darwin arm64",
+    "numpy_versions": [
+      "2.1.3",
+      "1.26.4"
+    ],
+    "source_matches_manifest": true,
+    "catalogue_matches_manifest": false,
+    "catalogue_logical_sha256": "6559e1e45604a5156c4673d23ad6632d8084a278c2be4e639d8b6e7deef3abd8",
+    "names_with_outer_spaces": 11,
+    "columns_equal_to_windows": {
+      "station_id": {
+        "dtype": true,
+        "csv": true,
+        "values": true
+      },
+      "station_name": {
+        "dtype": true,
+        "csv": true,
+        "values": true
+      },
+      "latitude": {
+        "dtype": true,
+        "csv": false,
+        "values": false
+      },
+      "longitude": {
+        "dtype": true,
+        "csv": true,
+        "values": true
+      },
+      "capacity": {
+        "dtype": true,
+        "csv": true,
+        "values": true
+      },
+      "valid_capacity": {
+        "dtype": true,
+        "csv": true,
+        "values": true
+      },
+      "valid_coordinates": {
+        "dtype": true,
+        "csv": true,
+        "values": true
+      }
+    },
+    "outputs_checked": 151,
+    "outputs_mismatched": [
+      "processed/stations.parquet"
+    ],
+    "executed_by_marco_on_macos": false
+  },
+  "conclusions": [
+    "La emulacion de dos redondeos coincide con los valores de Windows y el hash oficial en ambos entornos.",
+    "La emulacion de un redondeo reproduce exactamente el hash reportado en macOS en ambos entornos.",
+    "Las emulaciones difieren en 15 latitudes y ninguna longitud; diferencia maxima 7.105427357601002e-15 grados.",
+    "La evidencia de macOS conserva los mismos tipos y hashes de valores de las otras seis columnas.",
+    "Los hashes de bytes del manifiesto con LF y CRLF se calcularon en memoria; no se reescribio el archivo."
+  ],
+  "limitations": [
+    "No se inspecciono el binario de pandas; no se afirma haber demostrado el uso de una instruccion concreta del procesador.",
+    "La coincidencia exacta del catalogo oficial no se reproduce en macOS ARM. El control debe seguir reportando esa diferencia.",
+    "El conjunto integrado y la etapa final esperan correcciones, revisiones y confirmacion de la politica.",
+    "Esta comprobacion no cierra los dos avisos de setuptools descritos en seguridad_deepchecks_20261031.json."
+  ],
+  "data_or_manifest_rewritten": false,
+  "policy_changed": false,
+  "final_quality_execution_performed": false
+}

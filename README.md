@@ -14,6 +14,7 @@ ingesta y una revisión preliminar de seguridad. La configuración de PyTest est
 - [Hallazgos de seguridad y seguimiento](reports/etapa3/hallazgos.md).
 - [Actualización parcial de dependencias y reproducción](references/etapa3/actualizacion_dependencias.md).
 - [Migración conjunta de MLflow/PyArrow: respaldo, verificación y restauración](references/etapa3/migracion_mlflow_pyarrow.md).
+- [Verificación del catálogo en Windows y revisión del entorno DeepChecks](references/etapa3/verificacion_estaciones.md).
 - [Capturas y origen de la evidencia](reports/etapa3/evidencias_marco.md).
 
 Los aportes de P1, P2/DeepChecks y P3 de esta etapa deben integrarse y revisarse antes
