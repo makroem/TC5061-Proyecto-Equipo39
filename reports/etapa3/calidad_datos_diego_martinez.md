@@ -125,7 +125,8 @@ Suite completa combinada con main (MLflow 3.17.2 y PyArrow 23.0.1): 229 pruebas 
 
 ## Pendiente
 
-- Stefania ya confirmó los criterios de P1 en la política y Diego Hurtado revisó favorablemente los
-  de P3. Falta congelarla (`"frozen": true`) y correr `--stage final` una sola vez.
+- La política quedó congelada (`"frozen": true`) el 1 de noviembre de 2026, sin cambiar reglas ni
+  umbrales, después de que Stefania confirmó los criterios de P1 y Diego Hurtado los de P3. Falta
+  correr `--stage final` una sola vez.
 - La corrida final se hace en x86-64. El equipo decide si conserva el manifiesto actual, como se
   recomienda aquí, o cambia a una conversión exacta. No se cambia la política para que pase.

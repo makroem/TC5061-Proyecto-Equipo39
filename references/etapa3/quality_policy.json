@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "frozen": false,
+  "frozen": true,
   "owner": "Diego Martinez",
   "reviewers": {
     "p1": "Stefania",
