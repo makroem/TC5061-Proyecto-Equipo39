@@ -1,0 +1,314 @@
+{
+  "date": "2026-10-31",
+  "checked_at": "2026-10-31T16:25:35.683192-06:00",
+  "reproduction_code_commit": "e09a0eb5f03ba03d6d897f680fbe9801eb2cef52",
+  "related_pr": 35,
+  "related_pr_head": "45d7a3bd60be0fcfacf86c9537bf0b0bb4ed611d",
+  "scope": "Comprobacion local en Windows; no confirma la causa de la diferencia reportada en macOS.",
+  "script_sha256": "99e9eeacbc8fdbcb66ba33f2e701284aecd952afbf927f5d4dd48c0600449d4b",
+  "checks": {
+    "project": {
+      "status": "PASS",
+      "environment": {
+        "os": "Windows",
+        "machine": "AMD64",
+        "python": "3.11.9",
+        "pandas": "2.2.3",
+        "numpy": "2.1.3",
+        "pyarrow": "23.0.1"
+      },
+      "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+      "expected_stations": {
+        "rows": 484,
+        "logical_sha256": "84ed1ce13b7034edadd13cf0d5ae5d2fe8fd05eaa2c8d1bca9b1a130427f548e"
+      },
+      "source_sha256": "206e45fe633922b634d858142fa21e6fd9f4c421b6435c02980ef290cc2df90d",
+      "parquet_sha256": "971475e2b60b88b42d1ea8941289b107b1029f58d63e42b1b7427af5915246ad",
+      "manifest_sha256": "5e4f5178e45cf38d1cb5844a204959181f0b55733f6009e9e6dd78330b68d42b",
+      "encoding": "utf-8-sig",
+      "separator": ",",
+      "checks": {
+        "source_sha256_matches": true,
+        "stored_matches_manifest": true,
+        "rebuilt_matches_manifest": true,
+        "stored_equals_rebuilt": true,
+        "inputs_unchanged": true
+      },
+      "tables": {
+        "stored": {
+          "rows": 484,
+          "logical_sha256": "84ed1ce13b7034edadd13cf0d5ae5d2fe8fd05eaa2c8d1bca9b1a130427f548e",
+          "columns": {
+            "station_id": {
+              "dtype": "string",
+              "nulls": 0,
+              "csv_sha256": "0faec292396420f8c8ddbbd301d5b10cd37b4c59738cb6b55ce74a7099f88584",
+              "values_sha256": "d3f1b88d6ab167102b9c76584e108813a3bd9f73e7cb10f6a0910aad30a722cd"
+            },
+            "station_name": {
+              "dtype": "string",
+              "nulls": 0,
+              "csv_sha256": "01819b8ca606e16dc8c96ef2bee3480de9ad6cf341614489f0e647b62b8afe0a",
+              "values_sha256": "c3814232dd06f65cbfd8062535e422feb37a741f8d8c9613b4f2cf8de2842389"
+            },
+            "latitude": {
+              "dtype": "Float64",
+              "nulls": 0,
+              "csv_sha256": "979b4068f524216c1513f0b23fe549afdbc8f7e073b0fdc69c245a4de60462bb",
+              "values_sha256": "96a8588ac75989709c491b2e7742952a3c0cbc51a871cb4c83bf05d9659d077e"
+            },
+            "longitude": {
+              "dtype": "Float64",
+              "nulls": 0,
+              "csv_sha256": "1f31576366844e95016bfba3b83c5f50933c50fd6a3ff3b2db6d310671fa189e",
+              "values_sha256": "10c11febd69ba26936d2a050a3a7be6f52f1772c17f2e56700a6c6ff08ef045a"
+            },
+            "capacity": {
+              "dtype": "Int64",
+              "nulls": 0,
+              "csv_sha256": "afa14cadc5b4d506d6038c7d94d3f6eba1e9b4c6389bce4131168e2c10274b85",
+              "values_sha256": "5853b9bb1b4a3b910046c2ffbb8124e1060a83f6e3da859b9b2a5be827e24569"
+            },
+            "valid_capacity": {
+              "dtype": "boolean",
+              "nulls": 0,
+              "csv_sha256": "faa2943077b5422eacf14c0d3f2f0d85fb5edb04f164962d92da12c3db4598d5",
+              "values_sha256": "fbf2d48389f736d0a29d3ca0a222714c427087a94d91e7baeea0ab26fd3a5612"
+            },
+            "valid_coordinates": {
+              "dtype": "boolean",
+              "nulls": 0,
+              "csv_sha256": "653341992e2b56d83139ab7b29796230909929ad6b56d6605b54f087a6279abd",
+              "values_sha256": "df39f62ff389e83d6e914b2e4c918714497badfc273bc1d0deb8aaf72e08daf7"
+            }
+          },
+          "names_with_outer_spaces": 11
+        },
+        "rebuilt_from_csv": {
+          "rows": 484,
+          "logical_sha256": "84ed1ce13b7034edadd13cf0d5ae5d2fe8fd05eaa2c8d1bca9b1a130427f548e",
+          "columns": {
+            "station_id": {
+              "dtype": "string",
+              "nulls": 0,
+              "csv_sha256": "0faec292396420f8c8ddbbd301d5b10cd37b4c59738cb6b55ce74a7099f88584",
+              "values_sha256": "d3f1b88d6ab167102b9c76584e108813a3bd9f73e7cb10f6a0910aad30a722cd"
+            },
+            "station_name": {
+              "dtype": "string",
+              "nulls": 0,
+              "csv_sha256": "01819b8ca606e16dc8c96ef2bee3480de9ad6cf341614489f0e647b62b8afe0a",
+              "values_sha256": "c3814232dd06f65cbfd8062535e422feb37a741f8d8c9613b4f2cf8de2842389"
+            },
+            "latitude": {
+              "dtype": "Float64",
+              "nulls": 0,
+              "csv_sha256": "979b4068f524216c1513f0b23fe549afdbc8f7e073b0fdc69c245a4de60462bb",
+              "values_sha256": "96a8588ac75989709c491b2e7742952a3c0cbc51a871cb4c83bf05d9659d077e"
+            },
+            "longitude": {
+              "dtype": "Float64",
+              "nulls": 0,
+              "csv_sha256": "1f31576366844e95016bfba3b83c5f50933c50fd6a3ff3b2db6d310671fa189e",
+              "values_sha256": "10c11febd69ba26936d2a050a3a7be6f52f1772c17f2e56700a6c6ff08ef045a"
+            },
+            "capacity": {
+              "dtype": "Int64",
+              "nulls": 0,
+              "csv_sha256": "afa14cadc5b4d506d6038c7d94d3f6eba1e9b4c6389bce4131168e2c10274b85",
+              "values_sha256": "5853b9bb1b4a3b910046c2ffbb8124e1060a83f6e3da859b9b2a5be827e24569"
+            },
+            "valid_capacity": {
+              "dtype": "boolean",
+              "nulls": 0,
+              "csv_sha256": "faa2943077b5422eacf14c0d3f2f0d85fb5edb04f164962d92da12c3db4598d5",
+              "values_sha256": "fbf2d48389f736d0a29d3ca0a222714c427087a94d91e7baeea0ab26fd3a5612"
+            },
+            "valid_coordinates": {
+              "dtype": "boolean",
+              "nulls": 0,
+              "csv_sha256": "653341992e2b56d83139ab7b29796230909929ad6b56d6605b54f087a6279abd",
+              "values_sha256": "df39f62ff389e83d6e914b2e4c918714497badfc273bc1d0deb8aaf72e08daf7"
+            }
+          },
+          "names_with_outer_spaces": 11
+        }
+      },
+      "outputs": {
+        "performed": false,
+        "checked": 0,
+        "mismatches": []
+      }
+    },
+    "deepchecks": {
+      "status": "PASS",
+      "environment": {
+        "os": "Windows",
+        "machine": "AMD64",
+        "python": "3.11.9",
+        "pandas": "2.2.3",
+        "numpy": "1.26.4",
+        "pyarrow": "23.0.1"
+      },
+      "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+      "expected_stations": {
+        "rows": 484,
+        "logical_sha256": "84ed1ce13b7034edadd13cf0d5ae5d2fe8fd05eaa2c8d1bca9b1a130427f548e"
+      },
+      "source_sha256": "206e45fe633922b634d858142fa21e6fd9f4c421b6435c02980ef290cc2df90d",
+      "parquet_sha256": "971475e2b60b88b42d1ea8941289b107b1029f58d63e42b1b7427af5915246ad",
+      "manifest_sha256": "5e4f5178e45cf38d1cb5844a204959181f0b55733f6009e9e6dd78330b68d42b",
+      "encoding": "utf-8-sig",
+      "separator": ",",
+      "checks": {
+        "source_sha256_matches": true,
+        "stored_matches_manifest": true,
+        "rebuilt_matches_manifest": true,
+        "stored_equals_rebuilt": true,
+        "inputs_unchanged": true
+      },
+      "tables": {
+        "stored": {
+          "rows": 484,
+          "logical_sha256": "84ed1ce13b7034edadd13cf0d5ae5d2fe8fd05eaa2c8d1bca9b1a130427f548e",
+          "columns": {
+            "station_id": {
+              "dtype": "string",
+              "nulls": 0,
+              "csv_sha256": "0faec292396420f8c8ddbbd301d5b10cd37b4c59738cb6b55ce74a7099f88584",
+              "values_sha256": "d3f1b88d6ab167102b9c76584e108813a3bd9f73e7cb10f6a0910aad30a722cd"
+            },
+            "station_name": {
+              "dtype": "string",
+              "nulls": 0,
+              "csv_sha256": "01819b8ca606e16dc8c96ef2bee3480de9ad6cf341614489f0e647b62b8afe0a",
+              "values_sha256": "c3814232dd06f65cbfd8062535e422feb37a741f8d8c9613b4f2cf8de2842389"
+            },
+            "latitude": {
+              "dtype": "Float64",
+              "nulls": 0,
+              "csv_sha256": "979b4068f524216c1513f0b23fe549afdbc8f7e073b0fdc69c245a4de60462bb",
+              "values_sha256": "96a8588ac75989709c491b2e7742952a3c0cbc51a871cb4c83bf05d9659d077e"
+            },
+            "longitude": {
+              "dtype": "Float64",
+              "nulls": 0,
+              "csv_sha256": "1f31576366844e95016bfba3b83c5f50933c50fd6a3ff3b2db6d310671fa189e",
+              "values_sha256": "10c11febd69ba26936d2a050a3a7be6f52f1772c17f2e56700a6c6ff08ef045a"
+            },
+            "capacity": {
+              "dtype": "Int64",
+              "nulls": 0,
+              "csv_sha256": "afa14cadc5b4d506d6038c7d94d3f6eba1e9b4c6389bce4131168e2c10274b85",
+              "values_sha256": "5853b9bb1b4a3b910046c2ffbb8124e1060a83f6e3da859b9b2a5be827e24569"
+            },
+            "valid_capacity": {
+              "dtype": "boolean",
+              "nulls": 0,
+              "csv_sha256": "faa2943077b5422eacf14c0d3f2f0d85fb5edb04f164962d92da12c3db4598d5",
+              "values_sha256": "fbf2d48389f736d0a29d3ca0a222714c427087a94d91e7baeea0ab26fd3a5612"
+            },
+            "valid_coordinates": {
+              "dtype": "boolean",
+              "nulls": 0,
+              "csv_sha256": "653341992e2b56d83139ab7b29796230909929ad6b56d6605b54f087a6279abd",
+              "values_sha256": "df39f62ff389e83d6e914b2e4c918714497badfc273bc1d0deb8aaf72e08daf7"
+            }
+          },
+          "names_with_outer_spaces": 11
+        },
+        "rebuilt_from_csv": {
+          "rows": 484,
+          "logical_sha256": "84ed1ce13b7034edadd13cf0d5ae5d2fe8fd05eaa2c8d1bca9b1a130427f548e",
+          "columns": {
+            "station_id": {
+              "dtype": "string",
+              "nulls": 0,
+              "csv_sha256": "0faec292396420f8c8ddbbd301d5b10cd37b4c59738cb6b55ce74a7099f88584",
+              "values_sha256": "d3f1b88d6ab167102b9c76584e108813a3bd9f73e7cb10f6a0910aad30a722cd"
+            },
+            "station_name": {
+              "dtype": "string",
+              "nulls": 0,
+              "csv_sha256": "01819b8ca606e16dc8c96ef2bee3480de9ad6cf341614489f0e647b62b8afe0a",
+              "values_sha256": "c3814232dd06f65cbfd8062535e422feb37a741f8d8c9613b4f2cf8de2842389"
+            },
+            "latitude": {
+              "dtype": "Float64",
+              "nulls": 0,
+              "csv_sha256": "979b4068f524216c1513f0b23fe549afdbc8f7e073b0fdc69c245a4de60462bb",
+              "values_sha256": "96a8588ac75989709c491b2e7742952a3c0cbc51a871cb4c83bf05d9659d077e"
+            },
+            "longitude": {
+              "dtype": "Float64",
+              "nulls": 0,
+              "csv_sha256": "1f31576366844e95016bfba3b83c5f50933c50fd6a3ff3b2db6d310671fa189e",
+              "values_sha256": "10c11febd69ba26936d2a050a3a7be6f52f1772c17f2e56700a6c6ff08ef045a"
+            },
+            "capacity": {
+              "dtype": "Int64",
+              "nulls": 0,
+              "csv_sha256": "afa14cadc5b4d506d6038c7d94d3f6eba1e9b4c6389bce4131168e2c10274b85",
+              "values_sha256": "5853b9bb1b4a3b910046c2ffbb8124e1060a83f6e3da859b9b2a5be827e24569"
+            },
+            "valid_capacity": {
+              "dtype": "boolean",
+              "nulls": 0,
+              "csv_sha256": "faa2943077b5422eacf14c0d3f2f0d85fb5edb04f164962d92da12c3db4598d5",
+              "values_sha256": "fbf2d48389f736d0a29d3ca0a222714c427087a94d91e7baeea0ab26fd3a5612"
+            },
+            "valid_coordinates": {
+              "dtype": "boolean",
+              "nulls": 0,
+              "csv_sha256": "653341992e2b56d83139ab7b29796230909929ad6b56d6605b54f087a6279abd",
+              "values_sha256": "df39f62ff389e83d6e914b2e4c918714497badfc273bc1d0deb8aaf72e08daf7"
+            }
+          },
+          "names_with_outer_spaces": 11
+        }
+      },
+      "outputs": {
+        "performed": false,
+        "checked": 0,
+        "mismatches": []
+      }
+    }
+  },
+  "all_outputs": {
+    "environment": {
+      "os": "Windows",
+      "machine": "AMD64",
+      "python": "3.11.9",
+      "pandas": "2.2.3",
+      "numpy": "1.26.4",
+      "pyarrow": "23.0.1"
+    },
+    "setuptools_at_check": "65.5.0",
+    "performed": true,
+    "checked": 151,
+    "mismatches": []
+  },
+  "deepchecks_final_environment_setuptools": "81.0.0",
+  "tests": {
+    "comparator_cases_passed": 6,
+    "failures": 0,
+    "errors": 0,
+    "warnings": 14,
+    "seconds": 1.099,
+    "previous_ingestion_and_comparator_cases_passed": 38,
+    "overlap_note": "La ejecucion inicial incluye cinco de los seis casos finales; no se suman ambas cifras.",
+    "log_sha256": "25c371f5f8a03cbc89d9dc0be476dbfe525d92b3c8f89b4458d0e4e1e54a9496"
+  },
+  "bandit": {
+    "version": "1.9.4",
+    "scope": "scripts/check_station_manifest.py",
+    "findings": 0,
+    "report_sha256": "66590078c897a59712ebcfc58fdf7a8f353fb334ce9db9e8889c914f92360e51"
+  },
+  "limits": [
+    "No se ejecutaron los chequeos de calidad reales del PR35; se comprobo identidad de archivos con el algoritmo existente.",
+    "La politica sigue en borrador y la etapa final no se ejecuto.",
+    "No se modificaron datos, manifiestos, particiones ni modelos.",
+    "La comparacion entre sistemas requiere los mismos resultados producidos en macOS."
+  ]
+}

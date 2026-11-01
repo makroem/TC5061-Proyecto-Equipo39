@@ -121,7 +121,7 @@ entorno `.venv-deepchecks` con DeepChecks 0.19.1 y NumPy 1.26.4. Tardó unos 32 
   debe ser de la variante seleccionada, comparación de la predicción al cargar y la llamada a Git sin
   shell que rechaza salidas que no son un commit.
 
-Suite completa combinada con main (MLflow 3.17.2 y PyArrow 23.0.1): 223 pruebas aprobadas.
+Suite completa combinada con main (MLflow 3.17.2 y PyArrow 23.0.1): 229 pruebas aprobadas.
 
 ## Pendiente
 
