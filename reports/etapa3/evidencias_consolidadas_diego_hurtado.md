@@ -26,22 +26,19 @@ Esta consolidación busca facilitar la revisión de resultados, conservar la tra
 
 ## 2. Estado de integración
 
-
-
 Las contribuciones técnicas de P1, P2, P3, DeepChecks e infraestructura de calidad se encuentran integradas en `main`.
 
+El PR #37 incorporó la primera consolidación documental de Diego Hurtado. El PR #38 de Marco incorporó el cierre integrado, las correcciones de dependencias y sus resultados de verificación.
 
+**Commit de integración final:** `fd28d965465cadd5a736253cace0b3c23c92820b`.
 
-El commit integrado utilizado como referencia inicial es `e9ac7fdf9f04428b0d56d3af1eb5fece543c6033`.
+La política `references/etapa3/quality_policy.json` permanece congelada con `frozen: true`, sin cambios en las reglas ni los umbrales.
 
+La verificación inicial del código integrado corresponde al commit `03e1143`. Después de corregir las dependencias se ejecutó nuevamente la suite completa sobre `0dd8c6e`, con 238 pruebas aprobadas.
 
+La validación final sobre datos reales se realizó una sola vez, con la política congelada. Sus resultados fueron 100 PASS, 3 WARN, 0 FAIL y 0 NOT_EVALUATED.
 
-La política `references/etapa3/quality_policy.json` se encuentra congelada con `frozen: true`.
-
-
-
-La integración de código no sustituye la ejecución final de calidad desde un clon limpio. Los resultados de dicha ejecución deberán incorporarse por separado.
-
+Los resultados técnicos están publicados y documentados. Las capturas directas nuevas del cierre aún están pendientes.
 
 
 ## 3. Inventario de capturas preliminares
@@ -199,35 +196,63 @@ Las observaciones abiertas requieren seguimiento y no deben interpretarse como u
 
 ## 6. Validación final integrada
 
+**Estado: validación técnica final ejecutada y documentada.**
 
+Marco realizó la verificación integrada sobre el código de `main` con Python 3.11.9, utilizando un clon nuevo y entornos independientes.
 
-**Estado: pendiente de incorporar evidencia de ejecución final.**
+### 6.1 Pruebas automatizadas
 
+| Indicador | Resultado |
+|---|---|
+| Pruebas aprobadas | 238 |
+| Fallos | 0 |
+| Errores | 0 |
+| Pruebas omitidas | 0 |
+| Advertencias de PyTest | 23 |
+| Cobertura global | 82.14 % |
+| Líneas cubiertas | 1,725 de 2,100 |
 
+La suite se ejecutó inicialmente sobre `03e1143` y nuevamente con las dependencias corregidas sobre `0dd8c6e`. Ambas ejecuciones reportaron 238 pruebas aprobadas.
 
-Con los PR técnicos integrados y la política congelada, Marco deberá documentar la reproducción independiente de las comprobaciones de calidad sobre el código integrado.
+Fuentes:
+- [Cierre integrado de Marco](cierre_integrado_marco_20261101.md)
+- [Resultados estructurados del cierre](cierre_integrado_marco_20261101.json)
+- [Revisión posterior a las correcciones](revision_pr38_20261101.json)
 
+### 6.2 Validación final de datos
 
+| Estado | Resultado |
+|---|---:|
+| PASS | 100 |
+| WARN | 3 |
+| FAIL | 0 |
+| NOT_EVALUATED | 0 |
 
-La consolidación final deberá registrar:
+Las tres advertencias corresponden a variables constantes en perfiles horarios de P3 durante determinadas horas de madrugada.
 
+Estas condiciones permanecen registradas como advertencias, sin modificar los modelos, la política de calidad ni los manifiestos oficiales.
 
+Se verificaron 155 archivos procesados mediante SHA256 y 151 hashes lógicos del manifiesto oficial. La descarga anual no se repitió.
 
-- Commit exacto, entorno y versiones de dependencias.
+Fuente: [Validación final de datos](validacion_final_datos_20261101.json).
 
-- Resultados de la suite completa de PyTest.
+### 6.3 Seguridad y dependencias
 
-- Comprobación de datos, particiones y manifiestos.
+La revisión de seguridad documentó ocho observaciones de severidad baja en Bandit, sin hallazgos de severidad media o alta.
 
-- Resultados de DeepChecks en `--stage final`.
+Las versiones corregidas del entorno de calidad pasaron las verificaciones de compatibilidad y dependencias. La auditoría de los requisitos candidatos no encontró avisos conocidos en los paquetes revisados del entorno principal.
 
-- Hallazgos de seguridad y seguimiento de vulnerabilidades.
+El entorno independiente de DeepChecks conserva dos avisos conocidos relacionados con `setuptools 81.0.0`. Estos hallazgos permanecen abiertos, con restricciones de uso y seguimiento asignado a Marco y Diego Martínez.
 
-- Evidencias visuales reales, fechas, procedencia y limitaciones.
+Fuente: [Reporte de seguridad del cierre](seguridad_cierre_20261101.json).
 
+### 6.4 Evidencia visual del cierre
 
+Las nueve capturas históricas identificadas en este documento corresponden a verificaciones preliminares y se conservan con su procedencia original.
 
-No se asignan cifras finales ni identificadores de capturas que todavía no hayan sido publicados.
+Las capturas directas nuevas del cierre integrado todavía no están publicadas. Los reportes JSON constituyen registros documentales de ejecución y no deben presentarse como capturas de pantalla.
+
+La incorporación de estas imágenes queda pendiente de su publicación por Marco.
 
 
 
@@ -249,14 +274,24 @@ Los datos originales de MiBici, los modelos, las bases de MLflow y los artefacto
 
 ## 8. Estado de la consolidación
 
+**Estado documental: actualizado con los resultados del cierre técnico integrado.**
 
+La consolidación realizada por Diego Hurtado incluye:
 
-La documentación técnica integrada y las nueve capturas preliminares están identificadas.
+- Documentación de las contribuciones de los cuatro integrantes.
+- Inventario de nueve capturas preliminares con sus rutas y limitaciones.
+- Referencias a los resultados originales de P1, P2, P3 y DeepChecks.
+- Resultados finales de las 238 pruebas automatizadas y su cobertura.
+- Validación final de datos con 100 PASS, 3 WARN, 0 FAIL y 0 NOT_EVALUATED.
+- Resultados de las verificaciones de seguridad y dependencias.
+- Trazabilidad mediante commits, reportes y documentos originales.
 
+El README principal fue actualizado con los resultados integrados mediante el PR #38 y contiene el enlace a esta consolidación documental.
 
+### Pendientes de cierre visual
 
-El README se encuentra en proceso de actualización por Diego Hurtado, mientras que la ejecución final integrada y sus capturas dependen de la verificación correspondiente de Marco.
+Marco debe publicar las capturas directas nuevas del cierre integrado. Una vez disponibles, Diego Hurtado deberá incorporarlas al inventario, verificar sus referencias y completar la consolidación visual.
 
+Los dos avisos conocidos del entorno DeepChecks permanecen bajo seguimiento técnico de Marco y Diego Martínez.
 
-
-La actividad documental podrá cerrarse cuando la evidencia final esté disponible, sus resultados sean consistentes con el código comprobado y los enlaces del README hayan sido revisados.
+La validación técnica final está documentada, mientras que el cierre de la evidencia visual permanece pendiente. Esta distinción evita presentar resultados históricos como si correspondieran a la ejecución definitiva.
