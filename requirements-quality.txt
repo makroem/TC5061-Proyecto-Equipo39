@@ -2,6 +2,11 @@
 # El entorno del proyecto conserva sus versiones en requirements.txt.
 -r requirements.txt
 
+# Herramientas de instalacion; no heredar las versiones del creador del entorno.
+pip==26.2
+setuptools==84.1.0
+wheel==0.46.2
+
 bandit==1.9.4
 boolean.py==5.0
 CacheControl==0.14.4

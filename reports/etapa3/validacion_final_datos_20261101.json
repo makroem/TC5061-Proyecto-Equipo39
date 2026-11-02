@@ -1,0 +1,1436 @@
+{
+  "stage": "final",
+  "questions": [
+    "p1",
+    "p2",
+    "p3"
+  ],
+  "splits": [
+    "train",
+    "validation",
+    "test"
+  ],
+  "created_utc": "2026-11-02T01:04:21+00:00",
+  "commit": "03e114317db5e445f7905489b9a76f61b00e5b5e",
+  "git_dirty": false,
+  "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+  "split_id": "ab6301f96f083217512343b4f800bc5ddea51b666492ef05b34da85591cc9bdd",
+  "policy": {
+    "path": "quality_policy.json",
+    "sha256": "68de388b6cb765a7e3f5cfe519f2b55dcb541977627b2ca598a6d506433f77c2",
+    "version": 1,
+    "frozen": true
+  },
+  "environment": {
+    "python": "3.11.9",
+    "pandas": "2.2.3",
+    "numpy": "1.26.4",
+    "deepchecks": "0.19.1"
+  },
+  "deepchecks_sample_rows": 100000,
+  "counts": {
+    "p1": {
+      "train": {
+        "filas": 2152008,
+        "estaciones": 369
+      },
+      "validation": {
+        "filas": 540216,
+        "estaciones": 369
+      },
+      "test": {
+        "filas": 540216,
+        "estaciones": 369
+      }
+    },
+    "p2": {
+      "train": {
+        "filas": 2735208,
+        "estaciones": 469,
+        "positivos": {
+          "y_bikes": 11072,
+          "y_docks": 14114
+        }
+      },
+      "validation": {
+        "filas": 686616,
+        "estaciones": 469,
+        "positivos": {
+          "y_bikes": 2213,
+          "y_docks": 2926
+        }
+      },
+      "test": {
+        "filas": 686616,
+        "estaciones": 469,
+        "positivos": {
+          "y_bikes": 3003,
+          "y_docks": 3897
+        }
+      }
+    },
+    "p3": {
+      "train": {
+        "filas": 369,
+        "estaciones": 369
+      },
+      "validation": {
+        "filas": 369,
+        "estaciones": 369
+      },
+      "test": {
+        "filas": 369,
+        "estaciones": 369
+      }
+    }
+  },
+  "totals": {
+    "PASS": 100,
+    "WARN": 3,
+    "FAIL": 0,
+    "NOT_EVALUATED": 0
+  },
+  "exit_code": 0,
+  "results": [
+    {
+      "question": "datos",
+      "id": "version_de_datos",
+      "severity": "critical",
+      "split": "todos",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "tablas": [
+          "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7"
+        ],
+        "data_manifest": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+        "split_manifest": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7"
+      }
+    },
+    {
+      "question": "datos",
+      "id": "tablas_alineadas",
+      "severity": "critical",
+      "split": "todos",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "filas": {
+          "metadata": 4108440,
+          "X": 4108440,
+          "y_p1": 4108440,
+          "y_p2": 4108440
+        }
+      }
+    },
+    {
+      "question": "datos",
+      "id": "particion_del_manifiesto",
+      "severity": "critical",
+      "split": "todos",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "filas_fuera_de_su_conjunto": 0,
+        "split_id": "ab6301f96f083217512343b4f800bc5ddea51b666492ef05b34da85591cc9bdd"
+      }
+    },
+    {
+      "question": "datos",
+      "id": "salidas_del_manifiesto",
+      "severity": "critical",
+      "split": "todos",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "archivos": 151,
+        "distintos": []
+      }
+    },
+    {
+      "question": "p1",
+      "id": "variables_del_modelo",
+      "severity": "critical",
+      "split": "train",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "columnas_x": [
+          "hour_of_day",
+          "day_of_week",
+          "month",
+          "is_weekend",
+          "hour_sin",
+          "hour_cos",
+          "month_sin",
+          "month_cos"
+        ]
+      }
+    },
+    {
+      "question": "p1",
+      "id": "variables_del_modelo",
+      "severity": "critical",
+      "split": "validation",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "columnas_x": [
+          "hour_of_day",
+          "day_of_week",
+          "month",
+          "is_weekend",
+          "hour_sin",
+          "hour_cos",
+          "month_sin",
+          "month_cos"
+        ]
+      }
+    },
+    {
+      "question": "p1",
+      "id": "variables_del_modelo",
+      "severity": "critical",
+      "split": "test",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "columnas_x": [
+          "hour_of_day",
+          "day_of_week",
+          "month",
+          "is_weekend",
+          "hour_sin",
+          "hour_cos",
+          "month_sin",
+          "month_cos"
+        ]
+      }
+    },
+    {
+      "question": "p1",
+      "id": "sin_nulos",
+      "severity": "critical",
+      "split": "train",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "nulos": {}
+      }
+    },
+    {
+      "question": "p1",
+      "id": "sin_nulos",
+      "severity": "critical",
+      "split": "validation",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "nulos": {}
+      }
+    },
+    {
+      "question": "p1",
+      "id": "sin_nulos",
+      "severity": "critical",
+      "split": "test",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "nulos": {}
+      }
+    },
+    {
+      "question": "p1",
+      "id": "llave_unica",
+      "severity": "critical",
+      "split": "train",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "repetidos": 0
+      }
+    },
+    {
+      "question": "p1",
+      "id": "llave_unica",
+      "severity": "critical",
+      "split": "validation",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "repetidos": 0
+      }
+    },
+    {
+      "question": "p1",
+      "id": "llave_unica",
+      "severity": "critical",
+      "split": "test",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "repetidos": 0
+      }
+    },
+    {
+      "question": "p1",
+      "id": "dominios",
+      "severity": "critical",
+      "split": "train",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "fuera_de_dominio": {}
+      }
+    },
+    {
+      "question": "p1",
+      "id": "dominios",
+      "severity": "critical",
+      "split": "validation",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "fuera_de_dominio": {}
+      }
+    },
+    {
+      "question": "p1",
+      "id": "dominios",
+      "severity": "critical",
+      "split": "test",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "fuera_de_dominio": {}
+      }
+    },
+    {
+      "question": "p1",
+      "id": "malla_completa",
+      "severity": "critical",
+      "split": "train",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "filas": 2152008,
+        "estaciones": 369,
+        "horas": 5832
+      }
+    },
+    {
+      "question": "p1",
+      "id": "malla_completa",
+      "severity": "critical",
+      "split": "validation",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "filas": 540216,
+        "estaciones": 369,
+        "horas": 1464
+      }
+    },
+    {
+      "question": "p1",
+      "id": "malla_completa",
+      "severity": "critical",
+      "split": "test",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "filas": 540216,
+        "estaciones": 369,
+        "horas": 1464
+      }
+    },
+    {
+      "question": "p1",
+      "id": "estaciones_elegibles",
+      "severity": "critical",
+      "split": "train",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "estaciones": 369,
+        "minimo": 1
+      }
+    },
+    {
+      "question": "p1",
+      "id": "estaciones_elegibles",
+      "severity": "critical",
+      "split": "validation",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "estaciones": 369,
+        "minimo": 1
+      }
+    },
+    {
+      "question": "p1",
+      "id": "estaciones_elegibles",
+      "severity": "critical",
+      "split": "test",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "estaciones": 369,
+        "minimo": 1
+      }
+    },
+    {
+      "question": "p1",
+      "id": "variable_constante",
+      "severity": "critical",
+      "split": "train",
+      "tool": "deepchecks",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "Passed for 10 relevant columns"
+        ]
+      }
+    },
+    {
+      "question": "p1",
+      "id": "variable_constante",
+      "severity": "critical",
+      "split": "validation",
+      "tool": "deepchecks",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "Passed for 10 relevant columns"
+        ]
+      }
+    },
+    {
+      "question": "p1",
+      "id": "variable_constante",
+      "severity": "critical",
+      "split": "test",
+      "tool": "deepchecks",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "Passed for 10 relevant columns"
+        ]
+      }
+    },
+    {
+      "question": "p1",
+      "id": "tipos_mezclados",
+      "severity": "critical",
+      "split": "train",
+      "tool": "deepchecks",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "10 columns passed: found 0 columns with negligible types mix, and 10 columns without any types mix"
+        ]
+      }
+    },
+    {
+      "question": "p1",
+      "id": "tipos_mezclados",
+      "severity": "critical",
+      "split": "validation",
+      "tool": "deepchecks",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "10 columns passed: found 0 columns with negligible types mix, and 10 columns without any types mix"
+        ]
+      }
+    },
+    {
+      "question": "p1",
+      "id": "tipos_mezclados",
+      "severity": "critical",
+      "split": "test",
+      "tool": "deepchecks",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "10 columns passed: found 0 columns with negligible types mix, and 10 columns without any types mix"
+        ]
+      }
+    },
+    {
+      "question": "p1",
+      "id": "correlacion_con_objetivo",
+      "severity": "warning",
+      "split": "train",
+      "tool": "deepchecks",
+      "label": "target_departures",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "Passed for 9 relevant columns"
+        ]
+      }
+    },
+    {
+      "question": "p1",
+      "id": "correlacion_con_objetivo",
+      "severity": "warning",
+      "split": "validation",
+      "tool": "deepchecks",
+      "label": "target_departures",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "Passed for 9 relevant columns"
+        ]
+      }
+    },
+    {
+      "question": "p1",
+      "id": "correlacion_con_objetivo",
+      "severity": "warning",
+      "split": "test",
+      "tool": "deepchecks",
+      "label": "target_departures",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "Passed for 9 relevant columns"
+        ]
+      }
+    },
+    {
+      "question": "p1",
+      "id": "mezcla_entre_conjuntos",
+      "severity": "critical",
+      "split": "train_vs_validation",
+      "tool": "deepchecks",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "No samples mix found"
+        ]
+      }
+    },
+    {
+      "question": "p1",
+      "id": "mezcla_entre_conjuntos",
+      "severity": "critical",
+      "split": "train_vs_test",
+      "tool": "deepchecks",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "No samples mix found"
+        ]
+      }
+    },
+    {
+      "question": "p1",
+      "id": "deriva_de_variables",
+      "severity": "warning",
+      "split": "train_vs_validation",
+      "tool": "deepchecks",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "Passed for 6 columns out of 6 columns.\nFound column \"station_id\" has the highest categorical drift score: 0\nFound column \"day_of_week\" has the highest numerical drift score: 0.02"
+        ]
+      }
+    },
+    {
+      "question": "p1",
+      "id": "deriva_de_variables",
+      "severity": "warning",
+      "split": "train_vs_test",
+      "tool": "deepchecks",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "Passed for 6 columns out of 6 columns.\nFound column \"station_id\" has the highest categorical drift score: 0\nFound column \"day_of_week\" has the highest numerical drift score: 0.02"
+        ]
+      }
+    },
+    {
+      "question": "p1",
+      "id": "deriva_del_objetivo",
+      "severity": "warning",
+      "split": "train_vs_validation",
+      "tool": "deepchecks",
+      "label": "target_departures",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "Label's drift score Kolmogorov-Smirnov is 5.39E-3"
+        ]
+      }
+    },
+    {
+      "question": "p1",
+      "id": "deriva_del_objetivo",
+      "severity": "warning",
+      "split": "train_vs_test",
+      "tool": "deepchecks",
+      "label": "target_departures",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "Label's drift score Kolmogorov-Smirnov is 0.03"
+        ]
+      }
+    },
+    {
+      "question": "p1",
+      "id": "estaciones_nuevas",
+      "severity": "warning",
+      "split": "train_vs_validation",
+      "tool": "deepchecks",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "Passed for 1 relevant feature"
+        ]
+      }
+    },
+    {
+      "question": "p1",
+      "id": "estaciones_nuevas",
+      "severity": "warning",
+      "split": "train_vs_test",
+      "tool": "deepchecks",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "Passed for 1 relevant feature"
+        ]
+      }
+    },
+    {
+      "question": "p2",
+      "id": "variables_del_modelo",
+      "severity": "critical",
+      "split": "train",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "columnas_x": [
+          "hour_of_day",
+          "day_of_week",
+          "month",
+          "is_weekend",
+          "hour_sin",
+          "hour_cos",
+          "month_sin",
+          "month_cos"
+        ]
+      }
+    },
+    {
+      "question": "p2",
+      "id": "variables_del_modelo",
+      "severity": "critical",
+      "split": "validation",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "columnas_x": [
+          "hour_of_day",
+          "day_of_week",
+          "month",
+          "is_weekend",
+          "hour_sin",
+          "hour_cos",
+          "month_sin",
+          "month_cos"
+        ]
+      }
+    },
+    {
+      "question": "p2",
+      "id": "variables_del_modelo",
+      "severity": "critical",
+      "split": "test",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "columnas_x": [
+          "hour_of_day",
+          "day_of_week",
+          "month",
+          "is_weekend",
+          "hour_sin",
+          "hour_cos",
+          "month_sin",
+          "month_cos"
+        ]
+      }
+    },
+    {
+      "question": "p2",
+      "id": "sin_nulos",
+      "severity": "critical",
+      "split": "train",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "nulos": {}
+      }
+    },
+    {
+      "question": "p2",
+      "id": "sin_nulos",
+      "severity": "critical",
+      "split": "validation",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "nulos": {}
+      }
+    },
+    {
+      "question": "p2",
+      "id": "sin_nulos",
+      "severity": "critical",
+      "split": "test",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "nulos": {}
+      }
+    },
+    {
+      "question": "p2",
+      "id": "llave_unica",
+      "severity": "critical",
+      "split": "train",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "repetidos": 0
+      }
+    },
+    {
+      "question": "p2",
+      "id": "llave_unica",
+      "severity": "critical",
+      "split": "validation",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "repetidos": 0
+      }
+    },
+    {
+      "question": "p2",
+      "id": "llave_unica",
+      "severity": "critical",
+      "split": "test",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "repetidos": 0
+      }
+    },
+    {
+      "question": "p2",
+      "id": "dominios",
+      "severity": "critical",
+      "split": "train",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "fuera_de_dominio": {}
+      }
+    },
+    {
+      "question": "p2",
+      "id": "dominios",
+      "severity": "critical",
+      "split": "validation",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "fuera_de_dominio": {}
+      }
+    },
+    {
+      "question": "p2",
+      "id": "dominios",
+      "severity": "critical",
+      "split": "test",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "fuera_de_dominio": {}
+      }
+    },
+    {
+      "question": "p2",
+      "id": "etiqueta_reproducible",
+      "severity": "critical",
+      "split": "train",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "distintas": {
+          "y_bikes": 0,
+          "y_docks": 0
+        }
+      }
+    },
+    {
+      "question": "p2",
+      "id": "etiqueta_reproducible",
+      "severity": "critical",
+      "split": "validation",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "distintas": {
+          "y_bikes": 0,
+          "y_docks": 0
+        }
+      }
+    },
+    {
+      "question": "p2",
+      "id": "etiqueta_reproducible",
+      "severity": "critical",
+      "split": "test",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "distintas": {
+          "y_bikes": 0,
+          "y_docks": 0
+        }
+      }
+    },
+    {
+      "question": "p2",
+      "id": "malla_completa",
+      "severity": "critical",
+      "split": "train",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "filas": 2735208,
+        "estaciones": 469,
+        "horas": 5832
+      }
+    },
+    {
+      "question": "p2",
+      "id": "malla_completa",
+      "severity": "critical",
+      "split": "validation",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "filas": 686616,
+        "estaciones": 469,
+        "horas": 1464
+      }
+    },
+    {
+      "question": "p2",
+      "id": "malla_completa",
+      "severity": "critical",
+      "split": "test",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "filas": 686616,
+        "estaciones": 469,
+        "horas": 1464
+      }
+    },
+    {
+      "question": "p2",
+      "id": "positivos_por_riesgo",
+      "severity": "critical",
+      "split": "train",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "positivos": {
+          "y_bikes": 11072,
+          "y_docks": 14114
+        },
+        "minimo": 100
+      }
+    },
+    {
+      "question": "p2",
+      "id": "positivos_por_riesgo",
+      "severity": "critical",
+      "split": "validation",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "positivos": {
+          "y_bikes": 2213,
+          "y_docks": 2926
+        },
+        "minimo": 100
+      }
+    },
+    {
+      "question": "p2",
+      "id": "positivos_por_riesgo",
+      "severity": "critical",
+      "split": "test",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "positivos": {
+          "y_bikes": 3003,
+          "y_docks": 3897
+        },
+        "minimo": 100
+      }
+    },
+    {
+      "question": "p2",
+      "id": "variable_constante",
+      "severity": "critical",
+      "split": "train",
+      "tool": "deepchecks",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "Passed for 10 relevant columns"
+        ]
+      }
+    },
+    {
+      "question": "p2",
+      "id": "variable_constante",
+      "severity": "critical",
+      "split": "validation",
+      "tool": "deepchecks",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "Passed for 10 relevant columns"
+        ]
+      }
+    },
+    {
+      "question": "p2",
+      "id": "variable_constante",
+      "severity": "critical",
+      "split": "test",
+      "tool": "deepchecks",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "Passed for 10 relevant columns"
+        ]
+      }
+    },
+    {
+      "question": "p2",
+      "id": "tipos_mezclados",
+      "severity": "critical",
+      "split": "train",
+      "tool": "deepchecks",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "10 columns passed: found 0 columns with negligible types mix, and 10 columns without any types mix"
+        ]
+      }
+    },
+    {
+      "question": "p2",
+      "id": "tipos_mezclados",
+      "severity": "critical",
+      "split": "validation",
+      "tool": "deepchecks",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "10 columns passed: found 0 columns with negligible types mix, and 10 columns without any types mix"
+        ]
+      }
+    },
+    {
+      "question": "p2",
+      "id": "tipos_mezclados",
+      "severity": "critical",
+      "split": "test",
+      "tool": "deepchecks",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "10 columns passed: found 0 columns with negligible types mix, and 10 columns without any types mix"
+        ]
+      }
+    },
+    {
+      "question": "p2",
+      "id": "correlacion_con_objetivo",
+      "severity": "warning",
+      "split": "train",
+      "tool": "deepchecks",
+      "label": "y_bikes",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "Passed for 9 relevant columns"
+        ]
+      }
+    },
+    {
+      "question": "p2",
+      "id": "correlacion_con_objetivo",
+      "severity": "warning",
+      "split": "train",
+      "tool": "deepchecks",
+      "label": "y_docks",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "Passed for 9 relevant columns"
+        ]
+      }
+    },
+    {
+      "question": "p2",
+      "id": "correlacion_con_objetivo",
+      "severity": "warning",
+      "split": "validation",
+      "tool": "deepchecks",
+      "label": "y_bikes",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "Passed for 9 relevant columns"
+        ]
+      }
+    },
+    {
+      "question": "p2",
+      "id": "correlacion_con_objetivo",
+      "severity": "warning",
+      "split": "validation",
+      "tool": "deepchecks",
+      "label": "y_docks",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "Passed for 9 relevant columns"
+        ]
+      }
+    },
+    {
+      "question": "p2",
+      "id": "correlacion_con_objetivo",
+      "severity": "warning",
+      "split": "test",
+      "tool": "deepchecks",
+      "label": "y_bikes",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "Passed for 9 relevant columns"
+        ]
+      }
+    },
+    {
+      "question": "p2",
+      "id": "correlacion_con_objetivo",
+      "severity": "warning",
+      "split": "test",
+      "tool": "deepchecks",
+      "label": "y_docks",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "Passed for 9 relevant columns"
+        ]
+      }
+    },
+    {
+      "question": "p2",
+      "id": "mezcla_entre_conjuntos",
+      "severity": "critical",
+      "split": "train_vs_validation",
+      "tool": "deepchecks",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "No samples mix found"
+        ]
+      }
+    },
+    {
+      "question": "p2",
+      "id": "mezcla_entre_conjuntos",
+      "severity": "critical",
+      "split": "train_vs_test",
+      "tool": "deepchecks",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "No samples mix found"
+        ]
+      }
+    },
+    {
+      "question": "p2",
+      "id": "deriva_de_variables",
+      "severity": "warning",
+      "split": "train_vs_validation",
+      "tool": "deepchecks",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "Passed for 6 columns out of 6 columns.\nFound column \"station_id\" has the highest categorical drift score: 0\nFound column \"day_of_week\" has the highest numerical drift score: 0.02"
+        ]
+      }
+    },
+    {
+      "question": "p2",
+      "id": "deriva_de_variables",
+      "severity": "warning",
+      "split": "train_vs_test",
+      "tool": "deepchecks",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "Passed for 6 columns out of 6 columns.\nFound column \"station_id\" has the highest categorical drift score: 0\nFound column \"day_of_week\" has the highest numerical drift score: 0.02"
+        ]
+      }
+    },
+    {
+      "question": "p2",
+      "id": "prevalencia_por_riesgo",
+      "severity": "warning",
+      "split": "train_vs_validation",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "razon_contra_train": {
+          "y_bikes": 0.796,
+          "y_docks": 0.826
+        }
+      }
+    },
+    {
+      "question": "p2",
+      "id": "prevalencia_por_riesgo",
+      "severity": "warning",
+      "split": "train_vs_test",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "razon_contra_train": {
+          "y_bikes": 1.08,
+          "y_docks": 1.1
+        }
+      }
+    },
+    {
+      "question": "p2",
+      "id": "estaciones_nuevas",
+      "severity": "warning",
+      "split": "train_vs_validation",
+      "tool": "deepchecks",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "Passed for 1 relevant feature"
+        ]
+      }
+    },
+    {
+      "question": "p2",
+      "id": "estaciones_nuevas",
+      "severity": "warning",
+      "split": "train_vs_test",
+      "tool": "deepchecks",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "Passed for 1 relevant feature"
+        ]
+      }
+    },
+    {
+      "question": "p3",
+      "id": "perfil_de_48_horas",
+      "severity": "critical",
+      "split": "train",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "columnas": 48
+      }
+    },
+    {
+      "question": "p3",
+      "id": "perfil_de_48_horas",
+      "severity": "critical",
+      "split": "validation",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "columnas": 48
+      }
+    },
+    {
+      "question": "p3",
+      "id": "perfil_de_48_horas",
+      "severity": "critical",
+      "split": "test",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "columnas": 48
+      }
+    },
+    {
+      "question": "p3",
+      "id": "sin_nulos",
+      "severity": "critical",
+      "split": "train",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "nulos": {}
+      }
+    },
+    {
+      "question": "p3",
+      "id": "sin_nulos",
+      "severity": "critical",
+      "split": "validation",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "nulos": {}
+      }
+    },
+    {
+      "question": "p3",
+      "id": "sin_nulos",
+      "severity": "critical",
+      "split": "test",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "nulos": {}
+      }
+    },
+    {
+      "question": "p3",
+      "id": "llave_unica",
+      "severity": "critical",
+      "split": "train",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "repetidos": 0
+      }
+    },
+    {
+      "question": "p3",
+      "id": "llave_unica",
+      "severity": "critical",
+      "split": "validation",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "repetidos": 0
+      }
+    },
+    {
+      "question": "p3",
+      "id": "llave_unica",
+      "severity": "critical",
+      "split": "test",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "repetidos": 0
+      }
+    },
+    {
+      "question": "p3",
+      "id": "proporciones",
+      "severity": "critical",
+      "split": "train",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "bloques_invalidos": {}
+      }
+    },
+    {
+      "question": "p3",
+      "id": "proporciones",
+      "severity": "critical",
+      "split": "validation",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "bloques_invalidos": {}
+      }
+    },
+    {
+      "question": "p3",
+      "id": "proporciones",
+      "severity": "critical",
+      "split": "test",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "bloques_invalidos": {}
+      }
+    },
+    {
+      "question": "p3",
+      "id": "estaciones_suficientes",
+      "severity": "critical",
+      "split": "train",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "estaciones": 369,
+        "minimo": 4
+      }
+    },
+    {
+      "question": "p3",
+      "id": "estaciones_suficientes",
+      "severity": "critical",
+      "split": "validation",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "estaciones": 369,
+        "minimo": 4
+      }
+    },
+    {
+      "question": "p3",
+      "id": "estaciones_suficientes",
+      "severity": "critical",
+      "split": "test",
+      "tool": "integridad",
+      "status": "PASS",
+      "detail": {
+        "estaciones": 369,
+        "minimo": 4
+      }
+    },
+    {
+      "question": "p3",
+      "id": "variable_constante",
+      "severity": "warning",
+      "split": "train",
+      "tool": "deepchecks",
+      "status": "WARN",
+      "detail": {
+        "condiciones": [
+          "Found 6 out of 48 columns with a single value: ['weekday_hour_02', 'weekday_hour_03', 'weekday_hour_04', 'weekend_hour_02', 'weekend_hour_03', 'weekend_hour_04']"
+        ]
+      }
+    },
+    {
+      "question": "p3",
+      "id": "variable_constante",
+      "severity": "warning",
+      "split": "validation",
+      "tool": "deepchecks",
+      "status": "WARN",
+      "detail": {
+        "condiciones": [
+          "Found 1 out of 48 columns with a single value: ['weekday_hour_03']"
+        ]
+      }
+    },
+    {
+      "question": "p3",
+      "id": "variable_constante",
+      "severity": "warning",
+      "split": "test",
+      "tool": "deepchecks",
+      "status": "WARN",
+      "detail": {
+        "condiciones": [
+          "Found 5 out of 48 columns with a single value: ['weekday_hour_02', 'weekday_hour_03', 'weekend_hour_02', 'weekend_hour_03', 'weekend_hour_04']"
+        ]
+      }
+    },
+    {
+      "question": "p3",
+      "id": "perfiles_duplicados",
+      "severity": "warning",
+      "split": "train",
+      "tool": "deepchecks",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "Found 0% duplicate data"
+        ]
+      }
+    },
+    {
+      "question": "p3",
+      "id": "perfiles_duplicados",
+      "severity": "warning",
+      "split": "validation",
+      "tool": "deepchecks",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "Found 0% duplicate data"
+        ]
+      }
+    },
+    {
+      "question": "p3",
+      "id": "perfiles_duplicados",
+      "severity": "warning",
+      "split": "test",
+      "tool": "deepchecks",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "Found 0% duplicate data"
+        ]
+      }
+    },
+    {
+      "question": "p3",
+      "id": "deriva_de_perfiles",
+      "severity": "warning",
+      "split": "train_vs_validation",
+      "tool": "deepchecks",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "Passed for 46 columns out of 48 columns.\nFound column \"weekend_hour_05\" has the highest numerical drift score: 0.29"
+        ]
+      }
+    },
+    {
+      "question": "p3",
+      "id": "deriva_de_perfiles",
+      "severity": "warning",
+      "split": "train_vs_test",
+      "tool": "deepchecks",
+      "status": "PASS",
+      "detail": {
+        "condiciones": [
+          "Passed for 47 columns out of 48 columns.\nFound column \"weekend_hour_05\" has the highest numerical drift score: 0.2"
+        ]
+      }
+    }
+  ]
+}

@@ -4,7 +4,7 @@
 
 La Etapa 3 del proyecto MiBici Equipo 39 está orientada a fortalecer la calidad del software, ampliar las pruebas automatizadas, comprobar la integridad de los datos y documentar los hallazgos de seguridad.
 
-Las contribuciones técnicas de los cuatro integrantes ya fueron revisadas e integradas en `main`. La política de calidad está congelada, pero la validación final desde un clon limpio y la consolidación de sus evidencias todavía requieren la ejecución correspondiente.
+Las contribuciones técnicas de los cuatro integrantes ya fueron revisadas e integradas en `main`. La política de calidad está congelada. La [verificación integrada del 1 de noviembre](reports/etapa3/cierre_integrado_marco_20261101.md) documenta 238 pruebas aprobadas y la corrida final de datos: 100 PASS, 3 WARN, 0 FAIL y 0 NOT_EVALUATED. La comprobación inicial corresponde al commit `03e1143`. La [suite completa posterior al ajuste de dependencias](reports/etapa3/revision_pr38_20261101.json) volvió a aprobar las 238 pruebas, sin omisiones, sobre `0dd8c6e`. La evaluación final de datos no se repitió.
 
 ### Contribuciones del equipo
 
@@ -54,7 +54,7 @@ El motor identifica cuatro estados:
 
 La ejecución de desarrollo documentada reportó 64 PASS, 2 WARN y 1 FAIL. El FAIL se relaciona con una discrepancia de hash del catálogo de estaciones en macOS ARM, investigada y contrastada con el entorno Windows. El resultado original se conserva sin modificar los manifiestos para ocultar la diferencia.
 
-La etapa `final` deberá ejecutarse sobre el código integrado y los datos oficiales, conforme al contrato de calidad y a la política congelada.
+La etapa `final` se ejecutó una sola vez sobre el código integrado y los datos oficiales, con la política congelada. El [resumen original](reports/etapa3/validacion_final_datos_20261101.json) conserva todas las comprobaciones. Las tres advertencias corresponden a variables constantes de P3 y permanecen visibles.
 
 ### Seguridad y dependencias
 
@@ -79,9 +79,9 @@ Las capturas preliminares documentan pruebas y verificaciones anteriores a la in
 
 ### Pendientes del cierre integrado
 
-La validación final corresponde a Marco, quien deberá reproducir las comprobaciones desde un clon limpio utilizando la versión integrada del repositorio y la política congelada.
+Marco completó la suite integrada y la validación final desde un clon nuevo, con entornos instalados desde cero y tablas procesadas verificadas contra los manifiestos. La descarga anual no se repitió.
 
-Una vez publicados sus resultados, se incorporarán las cifras finales de pruebas, el resultado de DeepChecks, las verificaciones de seguridad, las capturas correspondientes y las limitaciones identificadas.
+Los [resultados del cierre](reports/etapa3/cierre_integrado_marco_20261101.json) y la [revisión de seguridad](reports/etapa3/seguridad_cierre_20261101.json) documentan el alcance y las limitaciones. Siguen pendientes las capturas directas nuevas y el seguimiento de dos avisos de seguridad del entorno independiente de DeepChecks. Las capturas preliminares no sustituyen las de esta ejecución.
 
 Diego Hurtado es responsable de consolidar el README y la organización de las evidencias para la entrega final del equipo.
 

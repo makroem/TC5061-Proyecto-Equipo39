@@ -1,0 +1,286 @@
+{
+  "date_local": "2026-11-01",
+  "timezone": "America/Mexico_City",
+  "responsible": "Marco",
+  "reviewer": "Diego Hurtado",
+  "pull_request": "https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/38",
+  "tested_commit": "0dd8c6e7cfcc5969bab56941d394b0dc7edbbf47",
+  "started_at": "2026-11-01T20:15:05.5472860-06:00",
+  "finished_at": "2026-11-01T20:29:36.7579421-06:00",
+  "git_dirty_before": false,
+  "git_dirty_after": false,
+  "environment": {
+    "python": "3.11.9",
+    "quality": {
+      "expected_packages": 154,
+      "mismatches": {},
+      "versions": {
+        "pip": "26.2",
+        "setuptools": "84.1.0",
+        "numpy": "2.1.3",
+        "pandas": "2.2.3",
+        "pyarrow": "23.0.1",
+        "pyasn1": "0.6.5",
+        "wheel": "0.46.2",
+        "mlflow": "3.17.2",
+        "pytest": "9.0.3",
+        "pytest-cov": "7.1.0"
+      },
+      "pip_check": "PASS"
+    },
+    "deepchecks": {
+      "expected_packages": 121,
+      "mismatches": {},
+      "versions": {
+        "pip": "26.2",
+        "setuptools": "81.0.0",
+        "numpy": "1.26.4",
+        "pandas": "2.2.3",
+        "pyarrow": "23.0.1"
+      },
+      "pip_check": "PASS"
+    },
+    "environment_origin": "Entornos independientes creados para el cierre, con todos los requisitos actualizados. Las rutas locales de la rama apuntan a esos entornos; no se modifica el servidor oficial."
+  },
+  "pytest": {
+    "tests": 238,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "seconds": 852.816,
+    "warnings": 23,
+    "exit_code": 0,
+    "command": ".\\.venv-a7\\Scripts\\python.exe -m pytest tests -q --cov=mibici_equipo39 --cov-report=term-missing --cov-report=json:private_quality/revision_pr38_20261101/coverage.json --junitxml=private_quality/revision_pr38_20261101/pytest.xml --durations=10",
+    "temporary_directory": "Directorio temporal nuevo por ejecucion; ruta local omitida del resumen publico.",
+    "junit_sha256": "4bbe32d7fa77627b93734fbcb555105fec824f52b03b24014df120d17d375541",
+    "log_sha256": "4a9c10f394e4e52f8bac564dca9284a77547c2eb3d0e8da452ac990e12bb21ed",
+    "coverage_sha256": "f1cd7609dcbd9edfc8327f6bba1bdf65c84ca82750dc35eb30c1165e9230326a",
+    "coverage": {
+      "covered_lines": 1725,
+      "num_statements": 2100,
+      "percent_covered": 82.14285714285714,
+      "percent_covered_display": "82",
+      "missing_lines": 375,
+      "excluded_lines": 0,
+      "percent_statements_covered": 82.14285714285714,
+      "percent_statements_covered_display": "82"
+    },
+    "coverage_by_file": {
+      "mibici_equipo39/__init__.py": {
+        "covered_lines": 0,
+        "num_statements": 0,
+        "percent_covered": 100.0,
+        "percent_covered_display": "100",
+        "missing_lines": 0,
+        "excluded_lines": 0,
+        "percent_statements_covered": 100.0,
+        "percent_statements_covered_display": "100"
+      },
+      "mibici_equipo39/config.py": {
+        "covered_lines": 49,
+        "num_statements": 49,
+        "percent_covered": 100.0,
+        "percent_covered_display": "100",
+        "missing_lines": 0,
+        "excluded_lines": 0,
+        "percent_statements_covered": 100.0,
+        "percent_statements_covered_display": "100"
+      },
+      "mibici_equipo39/dataset.py": {
+        "covered_lines": 221,
+        "num_statements": 232,
+        "percent_covered": 95.25862068965517,
+        "percent_covered_display": "95",
+        "missing_lines": 11,
+        "excluded_lines": 0,
+        "percent_statements_covered": 95.25862068965517,
+        "percent_statements_covered_display": "95"
+      },
+      "mibici_equipo39/features.py": {
+        "covered_lines": 125,
+        "num_statements": 149,
+        "percent_covered": 83.89261744966443,
+        "percent_covered_display": "84",
+        "missing_lines": 24,
+        "excluded_lines": 0,
+        "percent_statements_covered": 83.89261744966443,
+        "percent_statements_covered_display": "84"
+      },
+      "mibici_equipo39/modeling/__init__.py": {
+        "covered_lines": 0,
+        "num_statements": 0,
+        "percent_covered": 100.0,
+        "percent_covered_display": "100",
+        "missing_lines": 0,
+        "excluded_lines": 0,
+        "percent_statements_covered": 100.0,
+        "percent_statements_covered_display": "100"
+      },
+      "mibici_equipo39/modeling/p1.py": {
+        "covered_lines": 111,
+        "num_statements": 200,
+        "percent_covered": 55.5,
+        "percent_covered_display": "56",
+        "missing_lines": 89,
+        "excluded_lines": 0,
+        "percent_statements_covered": 55.5,
+        "percent_statements_covered_display": "56"
+      },
+      "mibici_equipo39/modeling/p2.py": {
+        "covered_lines": 198,
+        "num_statements": 234,
+        "percent_covered": 84.61538461538461,
+        "percent_covered_display": "85",
+        "missing_lines": 36,
+        "excluded_lines": 0,
+        "percent_statements_covered": 84.61538461538461,
+        "percent_statements_covered_display": "85"
+      },
+      "mibici_equipo39/modeling/p3.py": {
+        "covered_lines": 276,
+        "num_statements": 330,
+        "percent_covered": 83.63636363636364,
+        "percent_covered_display": "84",
+        "missing_lines": 54,
+        "excluded_lines": 0,
+        "percent_statements_covered": 83.63636363636364,
+        "percent_statements_covered_display": "84"
+      },
+      "mibici_equipo39/modeling/predict.py": {
+        "covered_lines": 0,
+        "num_statements": 15,
+        "percent_covered": 0.0,
+        "percent_covered_display": "0",
+        "missing_lines": 15,
+        "excluded_lines": 0,
+        "percent_statements_covered": 0.0,
+        "percent_statements_covered_display": "0"
+      },
+      "mibici_equipo39/modeling/stage2.py": {
+        "covered_lines": 237,
+        "num_statements": 249,
+        "percent_covered": 95.18072289156626,
+        "percent_covered_display": "95",
+        "missing_lines": 12,
+        "excluded_lines": 0,
+        "percent_statements_covered": 95.18072289156626,
+        "percent_statements_covered_display": "95"
+      },
+      "mibici_equipo39/modeling/tracking.py": {
+        "covered_lines": 91,
+        "num_statements": 121,
+        "percent_covered": 75.20661157024793,
+        "percent_covered_display": "75",
+        "missing_lines": 30,
+        "excluded_lines": 0,
+        "percent_statements_covered": 75.20661157024793,
+        "percent_statements_covered_display": "75"
+      },
+      "mibici_equipo39/modeling/train.py": {
+        "covered_lines": 36,
+        "num_statements": 50,
+        "percent_covered": 72.0,
+        "percent_covered_display": "72",
+        "missing_lines": 14,
+        "excluded_lines": 0,
+        "percent_statements_covered": 72.0,
+        "percent_statements_covered_display": "72"
+      },
+      "mibici_equipo39/plots.py": {
+        "covered_lines": 64,
+        "num_statements": 98,
+        "percent_covered": 65.3061224489796,
+        "percent_covered_display": "65",
+        "missing_lines": 34,
+        "excluded_lines": 0,
+        "percent_statements_covered": 65.3061224489796,
+        "percent_statements_covered_display": "65"
+      },
+      "mibici_equipo39/registry.py": {
+        "covered_lines": 110,
+        "num_statements": 127,
+        "percent_covered": 86.61417322834646,
+        "percent_covered_display": "87",
+        "missing_lines": 17,
+        "excluded_lines": 0,
+        "percent_statements_covered": 86.61417322834646,
+        "percent_statements_covered_display": "87"
+      },
+      "mibici_equipo39/validation/__init__.py": {
+        "covered_lines": 0,
+        "num_statements": 0,
+        "percent_covered": 100.0,
+        "percent_covered_display": "100",
+        "missing_lines": 0,
+        "excluded_lines": 0,
+        "percent_statements_covered": 100.0,
+        "percent_statements_covered_display": "100"
+      },
+      "mibici_equipo39/validation/data_checks.py": {
+        "covered_lines": 207,
+        "num_statements": 246,
+        "percent_covered": 84.14634146341463,
+        "percent_covered_display": "84",
+        "missing_lines": 39,
+        "excluded_lines": 0,
+        "percent_statements_covered": 84.14634146341463,
+        "percent_statements_covered_display": "84"
+      }
+    }
+  },
+  "review_items": {
+    "powershell_paths": "Corregidas a rutas explicitas de Windows en el instructivo y el reporte. Se validaron siete bloques de PowerShell y se ejecutaron ambas comprobaciones de version.",
+    "integrated_work": "La referencia a PR tecnicos pendientes fue reemplazada por su estado integrado y el revisor actual del PR38.",
+    "complete_suite_after_dependencies": "PASS: suite completa ejecutada con las 154 versiones del entorno de calidad y las 121 del entorno DeepChecks verificadas."
+  },
+  "preflight": {
+    "real_final_repeated": false,
+    "deepchecks_python": "3.11.9",
+    "checked_at": "2026-11-01T20:28:21.8245016-06:00",
+    "powershell_blocks_validated": 7,
+    "quality_python": "3.11.9",
+    "reviewer": "diegoHurtado01",
+    "files": [
+      {
+        "sha256": "a0ce64da17e65854f2df801e99a2b9cd5d5b9274179d787cb9b599b11466e6ba",
+        "path": "requirements.txt"
+      },
+      {
+        "sha256": "fcb565f556df4ac6b16431a9f439df03533d03a4431451fec8b0d59ebf280b09",
+        "path": "requirements-quality.txt"
+      },
+      {
+        "sha256": "2d8480269491b2166da4ca35be45c16e64c8585ea44f85b5dc5cabc6a0ca8006",
+        "path": "requirements-deepchecks.txt"
+      },
+      {
+        "sha256": "7bc054340b406f4d152e2c716c8e435ba5b8fe0a9b8c98573574cf37d523ba07",
+        "path": "python_env.yaml"
+      },
+      {
+        "sha256": "68de388b6cb765a7e3f5cfe519f2b55dcb541977627b2ca598a6d506433f77c2",
+        "path": "references/etapa3/quality_policy.json"
+      },
+      {
+        "sha256": "5e4f5178e45cf38d1cb5844a204959181f0b55733f6009e9e6dd78330b68d42b",
+        "path": "references/data_manifest.json"
+      },
+      {
+        "sha256": "ba50456ad76740336336eadb10694dfb04bce6771371784ce60a8bc132050c63",
+        "path": "references/split_manifest.json"
+      }
+    ]
+  },
+  "real_data_final": {
+    "repeated": false,
+    "source_report": "validacion_final_datos_20261101.json",
+    "source_report_sha256": "021000930c3f9dcfbc1dfaa1f19029951ee3806f999dd54895c98084dff21e23",
+    "policy_changed": false,
+    "manifests_changed": false
+  },
+  "pending": [
+    "Nueva revision independiente de Diego Hurtado; la correccion de los puntos solicitados no equivale a una aprobacion.",
+    "Capturas directas nuevas y consolidacion visual.",
+    "Seguimiento de los dos avisos de setuptools del entorno DeepChecks."
+  ]
+}

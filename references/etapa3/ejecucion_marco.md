@@ -1,8 +1,10 @@
 # Ejecución de las verificaciones de Marco
 
 Ejecutar desde la raíz del repositorio. Estos pasos comprueban la infraestructura
-disponible; la validación final de datos reales depende del motor de Diego Martinez
-y de los criterios revisados de P1, P2 y P3.
+disponible. El motor de Diego Martinez y los criterios revisados de P1, P2 y P3
+ya se integraron. El [cierre del 1 de noviembre](../../reports/etapa3/cierre_integrado_marco_20261101.md)
+registra la ejecución independiente con la política congelada. En Windows, usar
+una ruta corta desde la creación del clon: también evita errores al instalar DeepChecks.
 
 ## 1. Comprobar las instalaciones
 
@@ -10,10 +12,10 @@ En PowerShell:
 
 ```powershell
 Get-Command git, python, py -ErrorAction SilentlyContinue
-Test-Path .venv-a7/Scripts/python.exe
+Test-Path .\.venv-a7\Scripts\python.exe
 ```
 
-Si existe el entorno, comprobar su versión con `.venv-a7/Scripts/python.exe --version`.
+Si existe el entorno, comprobar su versión con `.\.venv-a7\Scripts\python.exe --version`.
 Si no existe, comprobar que el intérprete elegido sea Python 3.11.9 antes de crearlo.
 Se puede usar la ruta de una instalación disponible. Solo si falta Python, instalarlo
 desde [Python 3.11.9](https://www.python.org/downloads/release/python-3119/).
@@ -22,13 +24,13 @@ Comprobar Git con `git --version`; si falta, usar [Git para Windows](https://git
 ```powershell
 python --version
 python -m venv .venv-a7
-.venv-a7/Scripts/python.exe -m pip install -r requirements-quality.txt
-.venv-a7/Scripts/python.exe -m pip install --no-deps -e .
-.venv-a7/Scripts/python.exe -m pip check
+.\.venv-a7\Scripts\python.exe -m pip install -r requirements-quality.txt
+.\.venv-a7\Scripts\python.exe -m pip install --no-deps -e .
+.\.venv-a7\Scripts\python.exe -m pip check
 ```
 
 No es necesario activar el entorno ni cambiar la política de ejecución de PowerShell.
-En Linux/macOS sustituir `.venv-a7/Scripts/python.exe` por `.venv-a7/bin/python`.
+En Linux/macOS sustituir `.\.venv-a7\Scripts\python.exe` por `.venv-a7/bin/python`.
 La comprobación realizada para esta entrega corresponde a Windows y Python 3.11.9.
 
 ## 2. Ejecutar pruebas
@@ -44,10 +46,10 @@ $env:OMP_NUM_THREADS = '4'
 $env:OPENBLAS_NUM_THREADS = '4'
 $env:MKL_NUM_THREADS = '4'
 New-Item -ItemType Directory -Force private_quality | Out-Null
-.venv-a7/Scripts/python.exe -m pytest --collect-only -q
-.venv-a7/Scripts/python.exe -m pytest -m 'not integration and not data_quality' -q --basetemp="$tempA7-rapidas"
-.venv-a7/Scripts/python.exe -m pytest tests/test_ingesta_calidad.py tests/test_data.py tests/test_download.py tests/test_runtime_regressions.py -q --basetemp="$tempA7-ingesta" --cov=mibici_equipo39.dataset --cov-report=term-missing --cov-report=json:private_quality/coverage_ingesta.json
-.venv-a7/Scripts/python.exe -m pytest -q --basetemp="$tempA7-completa" --cov=mibici_equipo39 --cov-report=term-missing --cov-report=json:private_quality/coverage_total.json --junitxml=private_quality/pytest.xml
+.\.venv-a7\Scripts\python.exe -m pytest --collect-only -q
+.\.venv-a7\Scripts\python.exe -m pytest -m 'not integration and not data_quality' -q --basetemp="$tempA7-rapidas"
+.\.venv-a7\Scripts\python.exe -m pytest tests/test_ingesta_calidad.py tests/test_data.py tests/test_download.py tests/test_runtime_regressions.py -q --basetemp="$tempA7-ingesta" --cov=mibici_equipo39.dataset --cov-report=term-missing --cov-report=json:private_quality/coverage_ingesta.json
+.\.venv-a7\Scripts\python.exe -m pytest -q --basetemp="$tempA7-completa" --cov=mibici_equipo39 --cov-report=term-missing --cov-report=json:private_quality/coverage_total.json --junitxml=private_quality/pytest.xml
 ```
 
 Comprobar `$LASTEXITCODE` después de cada ejecución. Una salida 0 confirma que las
@@ -57,11 +59,11 @@ de problemas en los CSV reales. No se descargan datos ni se reentrenan modelos o
 ## 3. Análisis estático y dependencias
 
 ```powershell
-.venv-a7/Scripts/python.exe -m bandit --version
-.venv-a7/Scripts/python.exe -m pip_audit --version
-.venv-a7/Scripts/python.exe -m bandit -r mibici_equipo39 -f json -o private_quality/bandit.json
-.venv-a7/Scripts/python.exe -m pip_audit -r requirements.txt --no-deps --disable-pip --progress-spinner off -f json -o private_quality/pip_audit.json
-.venv-a7/Scripts/python.exe -m pip_audit -r requirements-quality.txt --no-deps --disable-pip --progress-spinner off -f json -o private_quality/pip_audit_quality.json
+.\.venv-a7\Scripts\python.exe -m bandit --version
+.\.venv-a7\Scripts\python.exe -m pip_audit --version
+.\.venv-a7\Scripts\python.exe -m bandit -r mibici_equipo39 -f json -o private_quality/bandit.json
+.\.venv-a7\Scripts\python.exe -m pip_audit -r requirements.txt --no-deps --disable-pip --progress-spinner off -f json -o private_quality/pip_audit.json
+.\.venv-a7\Scripts\python.exe -m pip_audit -r requirements-quality.txt --no-deps --disable-pip --progress-spinner off -f json -o private_quality/pip_audit_quality.json
 ```
 
 El análisis consulta las versiones fijadas. `--no-deps --disable-pip` evita resolver
@@ -95,9 +97,16 @@ los archivos sin commit no estarán incluidos. El historial abarca las referenci
 disponibles en el clon; no incluye commits inaccesibles del servidor.
 
 Con esta versión del auditor y `--disable-pip`, el archivo de calidad reportó solo sus
-19 requisitos adicionales. Por eso son obligatorias ambas auditorías: `requirements.txt`
-para los 119 paquetes del proyecto y `requirements-quality.txt` para los adicionales.
+requisitos adicionales de calidad. Por eso son obligatorias ambas auditorías: `requirements.txt`
+para los paquetes del proyecto y `requirements-quality.txt` para los adicionales.
 No interpretar un resultado limpio de los adicionales como aprobación del entorno completo.
+
+La corrección del 1 de noviembre fija también las herramientas de instalación en
+`requirements-quality.txt`, alineadas con `python_env.yaml`. Para el entorno independiente
+ejecutar además la auditoría de `requirements-deepchecks.txt`. DeepChecks conserva
+una versión distinta de `setuptools` por compatibilidad; no instalar los dos entornos juntos.
+Los conteos actuales y sus avisos están en el
+[reporte de seguridad del cierre](../../reports/etapa3/seguridad_cierre_20261101.json).
 
 ## 5. Evidencia y revisión
 
@@ -106,9 +115,9 @@ los registros completos en `private_quality/`; publicar únicamente los resúmen
 y capturas revisados. Las capturas de registros deben identificarse como tales.
 Los avisos y comprobaciones pendientes permanecen visibles.
 
-El primer PR de Marco requiere revisión de Stefania. El cierre integrado espera
-los PR técnicos del equipo. Los modelos registrados y los manifiestos oficiales
-no se modifican para obtener resultados favorables en las pruebas.
+Los PR técnicos #31, #33, #35 y #36 ya están integrados. El PR #38 de Marco
+está asignado a Diego Hurtado para revisión independiente. Los modelos registrados
+y los manifiestos oficiales se conservan durante las comprobaciones.
 
 ## Fuentes de consulta
 
