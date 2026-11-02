@@ -38,7 +38,7 @@ La verificación inicial del código integrado corresponde al commit `03e1143`. 
 
 La validación final sobre datos reales se realizó una sola vez, con la política congelada. Sus resultados fueron 100 PASS, 3 WARN, 0 FAIL y 0 NOT_EVALUATED.
 
-Los resultados técnicos están publicados y documentados. Las capturas directas nuevas del cierre aún están pendientes.
+Los resultados técnicos están publicados y documentados. Las [nueve capturas originales del cierre](capturas_finales_20261101.md) están disponibles con su manifiesto para la revisión visual.
 
 
 ## 3. Inventario de capturas preliminares
@@ -250,9 +250,9 @@ Fuente: [Reporte de seguridad del cierre](seguridad_cierre_20261101.json).
 
 Las nueve capturas históricas identificadas en este documento corresponden a verificaciones preliminares y se conservan con su procedencia original.
 
-Las capturas directas nuevas del cierre integrado todavía no están publicadas. Los reportes JSON constituyen registros documentales de ejecución y no deben presentarse como capturas de pantalla.
+Marco incorporó [nueve capturas originales del cierre](capturas_finales_20261101.md), con su [manifiesto de procedencia y hashes](capturas_finales_20261101.json). Incluyen el HTML original de DeepChecks y vistas de los registros de pruebas y seguridad. Los JSON siguen siendo registros documentales; las imágenes corresponden a su consulta posterior en navegador, no a una ejecución en vivo.
 
-La incorporación de estas imágenes queda pendiente de su publicación por Marco.
+Diego Hurtado debe revisar el inventario y confirmar la consolidación visual.
 
 
 
@@ -290,7 +290,7 @@ El README principal fue actualizado con los resultados integrados mediante el PR
 
 ### Pendientes de cierre visual
 
-Marco debe publicar las capturas directas nuevas del cierre integrado. Una vez disponibles, Diego Hurtado deberá incorporarlas al inventario, verificar sus referencias y completar la consolidación visual.
+Las capturas y sus referencias ya están incorporadas en el inventario de Marco. Diego Hurtado debe revisar esta aportación y confirmar la consolidación visual.
 
 Los dos avisos conocidos del entorno DeepChecks permanecen bajo seguimiento técnico de Marco y Diego Martínez.
 

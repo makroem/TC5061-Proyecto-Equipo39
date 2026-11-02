@@ -74,13 +74,12 @@ La etapa `final` requiere las tablas oficiales y la política congelada. Los com
 
 Los JSON publicados son reportes de ejecución. El HTML original de DeepChecks y los registros completos permanecen en el almacenamiento local de calidad. No se publican tablas de MiBici, modelos, bases de datos ni archivos de entornos.
 
-Las capturas directas nuevas del cierre aún no están incorporadas. Las imágenes anteriores conservan su fecha y alcance; no se reutilizan como prueba de esta ejecución.
+Las [nueve capturas originales del cierre](capturas_finales_20261101.md) y su manifiesto ya están incorporados a esta aportación. Las imágenes anteriores conservan su fecha y alcance. El PR #38 fue aprobado e integrado por Diego Hurtado; el PR #39 fue revisado e integrado por Marco.
 
 | Responsable | Pendiente | Dependencia |
 |---|---|---|
-| Diego Hurtado | Revisar el PR #38 de correcciones y cierre de Marco | Cambios y evidencias publicados en la rama de revisión |
-| Marco | Incorporar las capturas directas del cierre | Disponibilidad de captura de las ventanas con resultados reales |
-| Diego Hurtado | Completar la consolidación visual y sus enlaces | Capturas nuevas y resultados de este cierre |
+| Diego Hurtado | Revisar las nueve capturas originales y confirmar la consolidación visual | Imágenes, inventario y manifiesto publicados en la rama de revisión |
+| Marco | Integrar la aportación visual | Aprobación independiente del PR de capturas |
 | Marco y Diego Martinez | Dar seguimiento a los dos avisos del entorno DeepChecks | Una solución compatible; los avisos siguen abiertos |
 
 El PR #37 de Diego Hurtado fue revisado por Marco e integrado después de comprobar 46 enlaces locales y contrastar las cifras con los reportes de origen. La evidencia de colaboración conserva la autoría y las revisiones de cada integrante.

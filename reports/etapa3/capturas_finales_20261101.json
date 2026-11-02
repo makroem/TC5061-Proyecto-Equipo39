@@ -1,0 +1,188 @@
+{
+  "date_local": "2026-11-01",
+  "timezone": "America/Mexico_City",
+  "responsible": "Marco",
+  "capture_method": "Capturas directas del navegador, conservadas como JPEG sin recomprimir ni retocar. F04 corresponde a una región seleccionada durante la captura.",
+  "main_at_capture": "0bdf9880baab38926e89b823bdf1de2238fbdbec",
+  "pytest_tested_commit": "0dd8c6e7cfcc5969bab56941d394b0dc7edbbf47",
+  "real_data_tested_commit": "03e114317db5e445f7905489b9a76f61b00e5b5e",
+  "limitations": [
+    "Las capturas se obtuvieron después de las ejecuciones, consultando sus registros originales; no representan una nueva corrida.",
+    "La salida de cobertura de consola redondea a 82%; el JSON registra 82.142857%, presentado como 82.14%.",
+    "El HTML de DeepChecks conserva tres condiciones marcadas con una cruz; el motor aplica la política congelada y las registra como WARN.",
+    "F08 es la visualización de un reporte documental publicado; los otros registros locales conservan sus huellas originales.",
+    "GitHub muestra algunas fechas en UTC; el cierre y esta documentación emplean la fecha local de Ciudad de México."
+  ],
+  "images": [
+    {
+      "id": "F01",
+      "file": "reports/figures/etapa3/cierre_20261101/F01_PR38_integrado.jpg",
+      "title": "Integración del cierre técnico",
+      "scope": "Página pública del PR #38; aprobado e integrado por Diego Hurtado.",
+      "source": "https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/38",
+      "sha256": "fd763ceedef53ba03e4c1e602d2b7e185a36887e2adfd7af197c359450402c90",
+      "bytes": 120156,
+      "dimensions": [
+        1265,
+        712
+      ],
+      "captured_at_utc": "2026-11-02T04:06:48.610875+00:00",
+      "postprocessing": "none"
+    },
+    {
+      "id": "F02",
+      "file": "reports/figures/etapa3/cierre_20261101/F02_PR39_integrado.jpg",
+      "title": "Integración documental",
+      "scope": "Página pública del PR #39; revisado e integrado por Marco.",
+      "source": "https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/39",
+      "sha256": "27984a757ee0fd061e6b2a74875f9f57273a5d55d8604d701ccde9f331988eca",
+      "bytes": 97555,
+      "dimensions": [
+        1265,
+        712
+      ],
+      "captured_at_utc": "2026-11-02T04:06:10.299345+00:00",
+      "postprocessing": "none"
+    },
+    {
+      "id": "F03",
+      "file": "reports/figures/etapa3/cierre_20261101/F03_DeepChecks_original.jpg",
+      "title": "Informe original de DeepChecks",
+      "scope": "Vista del HTML producido en la corrida final. Las tres cruces por columnas constantes se conservan; la política congelada las clasifica como WARN.",
+      "source": "private_quality/data_checks/final/deepchecks.html",
+      "sha256": "e5445ccb6945fe977a7bd47a0800ca173b89a67f53623e12726a8a97b6f5a768",
+      "bytes": 140336,
+      "dimensions": [
+        1265,
+        712
+      ],
+      "captured_at_utc": "2026-11-02T03:58:20.815525+00:00",
+      "postprocessing": "none",
+      "source_file": {
+        "file": "deepchecks.html",
+        "sha256": "8543e3d851c697a70d870864fd35174d4876f9d599db211d51fb9a8118df08e7"
+      }
+    },
+    {
+      "id": "F04",
+      "file": "reports/figures/etapa3/cierre_20261101/F04_PyTest_registro_original.jpg",
+      "title": "Suite completa y cobertura",
+      "scope": "Región de cobertura y resultado del registro original consultado en navegador: 238 aprobadas, 23 avisos; no es una consola en vivo.",
+      "source": "private_quality/revision_pr38_20261101/pytest.log",
+      "sha256": "cf184d0be37afc05a6c90d4ae7bac9d92faf69903a3b28dc453d9d5f76b2f9d4",
+      "bytes": 171193,
+      "dimensions": [
+        1265,
+        573
+      ],
+      "captured_at_utc": "2026-11-02T04:00:38.939371+00:00",
+      "postprocessing": "none",
+      "source_file": {
+        "file": "pytest.txt",
+        "sha256": "4a9c10f394e4e52f8bac564dca9284a77547c2eb3d0e8da452ac990e12bb21ed"
+      },
+      "capture_region": {
+        "x": 0,
+        "y": 1063,
+        "width": 1265,
+        "height": 573,
+        "coordinates": "document pixels; region selected at capture time"
+      }
+    },
+    {
+      "id": "F05",
+      "file": "reports/figures/etapa3/cierre_20261101/F05_Validacion_linaje_original.jpg",
+      "title": "Linaje de la validación",
+      "scope": "Vista del resumen original: commit, versiones, partición, política congelada y fecha de ejecución.",
+      "source": "private_quality/data_checks/final/summary.json",
+      "sha256": "289836d5a3a5b12ebde721f05e81c44dcd05829cbc09f097a380c9e254ea777d",
+      "bytes": 58647,
+      "dimensions": [
+        1265,
+        712
+      ],
+      "captured_at_utc": "2026-11-02T04:02:43.376039+00:00",
+      "postprocessing": "none",
+      "source_file": {
+        "file": "validacion_final.json",
+        "sha256": "021000930c3f9dcfbc1dfaa1f19029951ee3806f999dd54895c98084dff21e23"
+      }
+    },
+    {
+      "id": "F06",
+      "file": "reports/figures/etapa3/cierre_20261101/F06_Validacion_totales_original.jpg",
+      "title": "Totales y controles de integridad",
+      "scope": "Vista del mismo resumen original: 100 PASS, 3 WARN, 0 FAIL, 0 NOT_EVALUATED y salida 0.",
+      "source": "private_quality/data_checks/final/summary.json",
+      "sha256": "0dd6bb9a86be0cfd8daffbb57b3fc3d68aac6fa52d540690aa5f094f09495a74",
+      "bytes": 55509,
+      "dimensions": [
+        1265,
+        712
+      ],
+      "captured_at_utc": "2026-11-02T04:04:21.830776+00:00",
+      "postprocessing": "none",
+      "source_file": {
+        "file": "validacion_final.json",
+        "sha256": "021000930c3f9dcfbc1dfaa1f19029951ee3806f999dd54895c98084dff21e23"
+      }
+    },
+    {
+      "id": "F07",
+      "file": "reports/figures/etapa3/cierre_20261101/F07_Bandit_original.jpg",
+      "title": "Análisis estático de seguridad",
+      "scope": "Vista del JSON original de Bandit: ocho hallazgos bajos, ninguno medio o alto, sin errores ni pruebas omitidas.",
+      "source": "private_quality/cierre_20261101/bandit.json",
+      "sha256": "a55e15407d20b68873fe3ab2bb4324ac156f3a8e35cc7f98129b1029b3f9f944",
+      "bytes": 60215,
+      "dimensions": [
+        1265,
+        712
+      ],
+      "captured_at_utc": "2026-11-02T04:04:40.031070+00:00",
+      "postprocessing": "none",
+      "source_file": {
+        "file": "bandit.json",
+        "sha256": "347008bc74adcb51b4f7e0d529784dee397cc021fb12992534d634cda0914127"
+      }
+    },
+    {
+      "id": "F08",
+      "file": "reports/figures/etapa3/cierre_20261101/F08_Dependencias_resultado_publicado.jpg",
+      "title": "Auditoría de dependencias",
+      "scope": "Captura del reporte estructurado ya publicado, sección proposed. Conserva los dos avisos de setuptools en DeepChecks; no es salida directa de pip-audit.",
+      "source": "reports/etapa3/seguridad_cierre_20261101.json",
+      "sha256": "347f04d626a838e5619417fd89a125a2a9b7de0cfeef0b1cc3aff2cda4ef4656",
+      "bytes": 61625,
+      "dimensions": [
+        1265,
+        712
+      ],
+      "captured_at_utc": "2026-11-02T04:05:07.808421+00:00",
+      "postprocessing": "none",
+      "source_file": {
+        "file": "seguridad.json",
+        "sha256": "102278f3085743cb0c93d14830d7ba1b7290ec3572eff770f8861c6e84530f11"
+      }
+    },
+    {
+      "id": "F09",
+      "file": "reports/figures/etapa3/cierre_20261101/F09_Gitleaks_registro_original.jpg",
+      "title": "Revisión de secretos",
+      "scope": "Vista del registro original del escaneo: 118 commits disponibles, sin hallazgos. Corresponde al estado comprobado antes de integrar los PR #38 y #39.",
+      "source": "private_quality/revision_pr38_20261101/gitleaks_history.log",
+      "sha256": "4e8e18d7a3538801fde5610d1159182fb6e20d1a9336c2e0535bd85b4589dcf0",
+      "bytes": 14716,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "captured_at_utc": "2026-11-02T04:07:01.917752+00:00",
+      "postprocessing": "none",
+      "source_file": {
+        "file": "gitleaks.txt",
+        "sha256": "cb1c67ab754eb555beb93edb80c609c2e14d5ce616c03f427b623e55e084a39f"
+      }
+    }
+  ]
+}
