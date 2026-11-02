@@ -1,0 +1,420 @@
+{
+  "date": "2026-11-01",
+  "responsible": "Marco",
+  "main_commit": "03e114317db5e445f7905489b9a76f61b00e5b5e",
+  "status": "REMEDIATION_PROPOSED_REVIEW_REQUIRED_WITH_OPEN_FINDINGS",
+  "scope": "Auditorias estaticas de requisitos fijados. La suite y los datos finales corresponden al commit integrado indicado; los cambios de dependencias se verifican por separado.",
+  "tools": {
+    "pip-audit": "2.10.1",
+    "Bandit": "1.9.4",
+    "Gitleaks": "8.30.1"
+  },
+  "before": {
+    "project": {
+      "packages_checked": 132,
+      "findings": [
+        {
+          "package": "pyasn1",
+          "version": "0.6.4",
+          "raw_entries": 4,
+          "unique_findings": [
+            {
+              "id": "CVE-2026-119196",
+              "fix_versions": [
+                "0.6.5"
+              ]
+            },
+            {
+              "id": "CVE-2026-119194",
+              "fix_versions": [
+                "0.6.5"
+              ]
+            },
+            {
+              "id": "CVE-2026-119197",
+              "fix_versions": [
+                "0.6.5"
+              ]
+            },
+            {
+              "id": "CVE-2026-119195",
+              "fix_versions": [
+                "0.6.5"
+              ]
+            }
+          ]
+        }
+      ],
+      "report_sha256": "5aa00968adca1ca8af03e943177233596b6efeb2a8b15b6b167d63ada121c767"
+    },
+    "quality_additional": {
+      "packages_checked": 19,
+      "findings": [],
+      "report_sha256": "1e2d4ddaa6d31b00408c86b1ec9347d249c7e2f1f6e91d1edbe3e20bf87608f5"
+    },
+    "deepchecks": {
+      "packages_checked": 120,
+      "findings": [
+        {
+          "package": "setuptools",
+          "version": "81.0.0",
+          "raw_entries": 3,
+          "unique_findings": [
+            {
+              "id": "PYSEC-2026-3447",
+              "fix_versions": [
+                "83.0.0"
+              ]
+            },
+            {
+              "id": "GHSA-xmj3-9gf7-h52w",
+              "fix_versions": [
+                "84.1.0"
+              ]
+            }
+          ]
+        }
+      ],
+      "report_sha256": "cb067dcb174456b9e4fdf77caa5e9a1e91cb0dc158448df701a86846c5290d52"
+    },
+    "bootstrap_installed": {
+      "packages_checked": 3,
+      "findings": [
+        {
+          "package": "pip",
+          "version": "24.0",
+          "raw_entries": 12,
+          "unique_findings": [
+            {
+              "id": "PYSEC-2026-1795",
+              "fix_versions": [
+                "25.3"
+              ]
+            },
+            {
+              "id": "PYSEC-2026-1796",
+              "fix_versions": [
+                "26.0"
+              ]
+            },
+            {
+              "id": "PYSEC-2026-2875",
+              "fix_versions": [
+                "26.1"
+              ]
+            },
+            {
+              "id": "PYSEC-2026-2876",
+              "fix_versions": [
+                "26.1"
+              ]
+            },
+            {
+              "id": "PYSEC-2026-196",
+              "fix_versions": [
+                "26.1.2"
+              ]
+            },
+            {
+              "id": "PYSEC-2026-3721",
+              "fix_versions": [
+                "26.2.0"
+              ]
+            }
+          ]
+        },
+        {
+          "package": "setuptools",
+          "version": "65.5.0",
+          "raw_entries": 9,
+          "unique_findings": [
+            {
+              "id": "PYSEC-2022-43012",
+              "fix_versions": [
+                "65.5.1"
+              ]
+            },
+            {
+              "id": "PYSEC-2025-49",
+              "fix_versions": [
+                "78.1.1"
+              ]
+            },
+            {
+              "id": "PYSEC-2026-1918",
+              "fix_versions": [
+                "70.0.0"
+              ]
+            },
+            {
+              "id": "PYSEC-2026-3447",
+              "fix_versions": [
+                "83.0.0"
+              ]
+            },
+            {
+              "id": "GHSA-xmj3-9gf7-h52w",
+              "fix_versions": [
+                "84.1.0"
+              ]
+            }
+          ]
+        }
+      ],
+      "report_sha256": "e57f1f04afc9a1b9931d5e00048c5275c78354e9daabc9b0b13a6954893c46fd"
+    },
+    "bootstrap_mlproject": {
+      "packages_checked": 3,
+      "findings": [
+        {
+          "package": "pip",
+          "version": "24.0",
+          "raw_entries": 12,
+          "unique_findings": [
+            {
+              "id": "PYSEC-2026-1795",
+              "fix_versions": [
+                "25.3"
+              ]
+            },
+            {
+              "id": "PYSEC-2026-1796",
+              "fix_versions": [
+                "26.0"
+              ]
+            },
+            {
+              "id": "PYSEC-2026-2875",
+              "fix_versions": [
+                "26.1"
+              ]
+            },
+            {
+              "id": "PYSEC-2026-2876",
+              "fix_versions": [
+                "26.1"
+              ]
+            },
+            {
+              "id": "PYSEC-2026-196",
+              "fix_versions": [
+                "26.1.2"
+              ]
+            },
+            {
+              "id": "PYSEC-2026-3721",
+              "fix_versions": [
+                "26.2.0"
+              ]
+            }
+          ]
+        },
+        {
+          "package": "setuptools",
+          "version": "69.5.1",
+          "raw_entries": 7,
+          "unique_findings": [
+            {
+              "id": "PYSEC-2025-49",
+              "fix_versions": [
+                "78.1.1"
+              ]
+            },
+            {
+              "id": "PYSEC-2026-1918",
+              "fix_versions": [
+                "70.0.0"
+              ]
+            },
+            {
+              "id": "PYSEC-2026-3447",
+              "fix_versions": [
+                "83.0.0"
+              ]
+            },
+            {
+              "id": "GHSA-xmj3-9gf7-h52w",
+              "fix_versions": [
+                "84.1.0"
+              ]
+            }
+          ]
+        },
+        {
+          "package": "wheel",
+          "version": "0.43.0",
+          "raw_entries": 1,
+          "unique_findings": [
+            {
+              "id": "CVE-2026-24049",
+              "fix_versions": [
+                "0.46.2"
+              ]
+            }
+          ]
+        }
+      ],
+      "report_sha256": "f6e5fd568425e1d9bf56654ba2897107fccf1b65f95b6bb3e3e2cbc772537414"
+    }
+  },
+  "proposed": {
+    "project": {
+      "packages_checked": 132,
+      "findings": [],
+      "report_sha256": "fce092f57775806b6e2df17a92b493d3ca4d2d91f724c1aea6629a638b3d8487"
+    },
+    "quality_additional_including_bootstrap": {
+      "packages_checked": 22,
+      "findings": [],
+      "report_sha256": "0b994f2da0b8e300e2137cdd0b677096988b797f6186ac10e72108da6b0a87a1"
+    },
+    "deepchecks": {
+      "packages_checked": 121,
+      "findings": [
+        {
+          "package": "setuptools",
+          "version": "81.0.0",
+          "raw_entries": 3,
+          "unique_findings": [
+            {
+              "id": "PYSEC-2026-3447",
+              "fix_versions": [
+                "83.0.0"
+              ]
+            },
+            {
+              "id": "GHSA-xmj3-9gf7-h52w",
+              "fix_versions": [
+                "84.1.0"
+              ]
+            }
+          ]
+        }
+      ],
+      "report_sha256": "fbab81aee77aeb140caa9c4547924ca91213daf466700e4eca5ca9dcc27e0f2f"
+    },
+    "mlproject_bootstrap": {
+      "packages_checked": 3,
+      "findings": [],
+      "report_sha256": "3c4a2c3e362c4bb22646bc1b908324a43c32637620d2491bb5a307fef33605b6"
+    }
+  },
+  "bandit": {
+    "high": 0,
+    "medium": 0,
+    "low": 8,
+    "findings": [
+      {
+        "test_id": "B403",
+        "severity": "LOW",
+        "file": "mibici_equipo39/modeling/p1.py",
+        "line": 12
+      },
+      {
+        "test_id": "B403",
+        "severity": "LOW",
+        "file": "mibici_equipo39/modeling/p3.py",
+        "line": 11
+      },
+      {
+        "test_id": "B404",
+        "severity": "LOW",
+        "file": "mibici_equipo39/modeling/tracking.py",
+        "line": 6
+      },
+      {
+        "test_id": "B607",
+        "severity": "LOW",
+        "file": "mibici_equipo39/modeling/tracking.py",
+        "line": 18
+      },
+      {
+        "test_id": "B603",
+        "severity": "LOW",
+        "file": "mibici_equipo39/modeling/tracking.py",
+        "line": 18
+      },
+      {
+        "test_id": "B404",
+        "severity": "LOW",
+        "file": "mibici_equipo39/validation/data_checks.py",
+        "line": 20
+      },
+      {
+        "test_id": "B603",
+        "severity": "LOW",
+        "file": "mibici_equipo39/validation/data_checks.py",
+        "line": 46
+      },
+      {
+        "test_id": "B603",
+        "severity": "LOW",
+        "file": "mibici_equipo39/validation/data_checks.py",
+        "line": 49
+      }
+    ],
+    "interpretation": "B403: uso de pickle.dumps para tamano o huella; no se identifico pickle.load/loads en esos puntos. B404/B603/B607: Git con argumentos fijos, sin shell. Se mantienen visibles; el ejecutable de Git depende de un PATH confiable."
+  },
+  "gitleaks": {
+    "history_commits_scanned": 115,
+    "history_findings": 0,
+    "history_report_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "scope": "Referencias disponibles en el clon; no cubre objetos inaccesibles del servidor. El cambio documental del PR37 esta incluido."
+  },
+  "remaining": {
+    "setuptools_deepchecks": "81.0.0 conserva PYSEC-2026-3447 y GHSA-xmj3-9gf7-h52w. DeepChecks 0.19.1 utiliza pkg_resources y no admite una actualizacion directa a 84.1.0.",
+    "restrictions": [
+      "Mantener un entorno exclusivo de validacion.",
+      "No construir ni publicar distribuciones desde ese entorno.",
+      "No usar instalaciones heredadas de paquetes.",
+      "Las restricciones reducen la exposicion; no eliminan los avisos ni equivalen a una aceptacion formal del riesgo."
+    ],
+    "follow_up": "Marco y Diego Martinez: evaluar una version compatible de DeepChecks o una adaptacion mantenible antes de declarar cerrados los dos avisos."
+  },
+  "references": [
+    "https://github.com/pyasn1/pyasn1/releases/tag/v0.6.5",
+    "https://setuptools.pypa.io/en/latest/history.html",
+    "https://pypi.org/project/pip/26.2/",
+    "https://pypi.org/project/wheel/0.46.2/"
+  ],
+  "compatibility": {
+    "status": "PASS",
+    "expected_packages": 154,
+    "mismatches": {},
+    "versions": {
+      "pyasn1": "0.6.5",
+      "pip": "26.2",
+      "setuptools": "84.1.0",
+      "wheel": "0.46.2",
+      "mlflow": "3.17.2",
+      "pyarrow": "23.0.1",
+      "numpy": "2.1.3",
+      "packaging": "24.2"
+    },
+    "pip_check": "PASS",
+    "scope": "Entorno nuevo de la comprobacion base, actualizado despues de finalizar las 238 pruebas, con todos los requisitos candidatos instalados; no modifica el servidor oficial."
+  },
+  "build_check": {
+    "python": "3.11.9",
+    "pip": "26.2",
+    "setuptools": "84.1.0",
+    "wheel": "0.46.2",
+    "editable_install": "PASS",
+    "pip_check": "PASS",
+    "scope": "Entorno nuevo para construir e instalar el paquete sin sus dependencias de ejecucion.",
+    "log_sha256": "b4ebeb409467c463c708fc99ccc98bca9050c0f4dedab8b85ae20cc6fce2f070"
+  },
+  "candidate_tests": {
+    "tests": 23,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "time": 90.817,
+    "warnings": 14,
+    "files": [
+      "tests/test_stage2_project.py",
+      "tests/test_tracking_migration.py"
+    ]
+  },
+  "deepchecks_candidate_pip_check": "PASS"
+}

@@ -1,6 +1,7 @@
 # Entorno independiente de DeepChecks, verificado en Windows con Python 3.11.9.
 # No instalar junto con requirements.txt: utiliza NumPy 1.26.4.
 # setuptools da pkg_resources a DeepChecks; loguru y typer permiten importar features.py.
+pip==26.2
 Jinja2==3.1.6
 MarkupSafe==3.0.4
 PyNomaly==0.4.0
