@@ -54,14 +54,14 @@ El [reporte de seguridad](seguridad_cierre_20261101.json) conserva los resultado
 Usar una ruta corta en Windows y seguir primero las [instrucciones de comprobación e instalación](../../references/etapa3/ejecucion_marco.md). Mantener separados los entornos de calidad y DeepChecks. Desde la raíz del repositorio:
 
 ```powershell
-.venv-a7/Scripts/python.exe -m pip check
-.venv-deepchecks/Scripts/python.exe -m pip check
-.venv-a7/Scripts/python.exe -m pytest tests -q
-.venv-deepchecks/Scripts/python.exe -m mibici_equipo39.validation.data_checks --question all --stage final
-.venv-a7/Scripts/python.exe -m pip_audit -r requirements.txt --no-deps --disable-pip --progress-spinner off
-.venv-a7/Scripts/python.exe -m pip_audit -r requirements-quality.txt --no-deps --disable-pip --progress-spinner off
-.venv-a7/Scripts/python.exe -m pip_audit -r requirements-deepchecks.txt --no-deps --disable-pip --progress-spinner off
-.venv-a7/Scripts/python.exe -m bandit -r mibici_equipo39
+.\.venv-a7\Scripts\python.exe -m pip check
+.\.venv-deepchecks\Scripts\python.exe -m pip check
+.\.venv-a7\Scripts\python.exe -m pytest tests -q
+.\.venv-deepchecks\Scripts\python.exe -m mibici_equipo39.validation.data_checks --question all --stage final
+.\.venv-a7\Scripts\python.exe -m pip_audit -r requirements.txt --no-deps --disable-pip --progress-spinner off
+.\.venv-a7\Scripts\python.exe -m pip_audit -r requirements-quality.txt --no-deps --disable-pip --progress-spinner off
+.\.venv-a7\Scripts\python.exe -m pip_audit -r requirements-deepchecks.txt --no-deps --disable-pip --progress-spinner off
+.\.venv-a7\Scripts\python.exe -m bandit -r mibici_equipo39
 ```
 
 La etapa `final` requiere las tablas oficiales y la política congelada. Los comandos anteriores documentan la reproducción; no son una indicación de repetir la evaluación de test para ajustar criterios. Una auditoría con salida 1 y hallazgos requiere interpretación, no ocultar su resultado.
@@ -74,7 +74,7 @@ Las capturas directas nuevas del cierre aún no están incorporadas. Las imágen
 
 | Responsable | Pendiente | Dependencia |
 |---|---|---|
-| Stefania | Revisar el PR de correcciones y cierre de Marco | Cambios y evidencias publicados en la rama de revisión |
+| Diego Hurtado | Revisar el PR #38 de correcciones y cierre de Marco | Cambios y evidencias publicados en la rama de revisión |
 | Marco | Incorporar las capturas directas del cierre | Disponibilidad de captura de las ventanas con resultados reales |
 | Diego Hurtado | Completar la consolidación visual y sus enlaces | Capturas nuevas y resultados de este cierre |
 | Marco y Diego Martinez | Dar seguimiento a los dos avisos del entorno DeepChecks | Una solución compatible; los avisos siguen abiertos |
