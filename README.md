@@ -81,7 +81,7 @@ Las capturas preliminares documentan pruebas y verificaciones anteriores a la in
 
 Marco completó la suite integrada y la validación final desde un clon nuevo, con entornos instalados desde cero y tablas procesadas verificadas contra los manifiestos. La descarga anual no se repitió.
 
-Los [resultados del cierre](reports/etapa3/cierre_integrado_marco_20261101.json) y la [revisión de seguridad](reports/etapa3/seguridad_cierre_20261101.json) documentan el alcance y las limitaciones. Siguen pendientes las capturas directas nuevas y el seguimiento de dos avisos de seguridad del entorno independiente de DeepChecks. Las capturas preliminares no sustituyen las de esta ejecución.
+Los [resultados del cierre](reports/etapa3/cierre_integrado_marco_20261101.json) y la [revisión de seguridad](reports/etapa3/seguridad_cierre_20261101.json) documentan el alcance y las limitaciones. Las [nueve capturas originales del cierre](reports/etapa3/capturas_finales_20261101.md) muestran los registros de pruebas, validación y seguridad, además de la integración de los PR #38 y #39. Su procedencia y alcance se conservan en el inventario. Sigue abierto el seguimiento de dos avisos de seguridad del entorno independiente de DeepChecks.
 
 Diego Hurtado es responsable de consolidar el README y la organización de las evidencias para la entrega final del equipo.
 
