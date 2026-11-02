@@ -38,7 +38,7 @@ La verificación inicial del código integrado corresponde al commit `03e1143`. 
 
 La validación final sobre datos reales se realizó una sola vez, con la política congelada. Sus resultados fueron 100 PASS, 3 WARN, 0 FAIL y 0 NOT_EVALUATED.
 
-Los resultados técnicos están publicados y documentados. Las [nueve capturas originales del cierre](capturas_finales_20261101.md) están disponibles con su manifiesto para la revisión visual.
+Los resultados técnicos están publicados y documentados. Las [nueve capturas originales del cierre](capturas_finales_20261101.md) fueron revisadas visualmente y verificadas contra su manifiesto durante la revisión del PR #40.
 
 
 ## 3. Inventario de capturas preliminares
@@ -252,7 +252,7 @@ Las nueve capturas históricas identificadas en este documento corresponden a ve
 
 Marco incorporó [nueve capturas originales del cierre](capturas_finales_20261101.md), con su [manifiesto de procedencia y hashes](capturas_finales_20261101.json). Incluyen el HTML original de DeepChecks y vistas de los registros de pruebas y seguridad. Los JSON siguen siendo registros documentales; las imágenes corresponden a su consulta posterior en navegador, no a una ejecución en vivo.
 
-Diego Hurtado debe revisar el inventario y confirmar la consolidación visual.
+Diego Hurtado revisó las nueve capturas F01-F09, verificó sus hashes SHA256, tamaños, dimensiones y correspondencia con los reportes originales. El PR #40 fue aprobado e integrado en main.
 
 
 
@@ -288,10 +288,10 @@ La consolidación realizada por Diego Hurtado incluye:
 
 El README principal fue actualizado con los resultados integrados mediante el PR #38 y contiene el enlace a esta consolidación documental.
 
-### Pendientes de cierre visual
+### Cierre de la consolidación visual
 
-Las capturas y sus referencias ya están incorporadas en el inventario de Marco. Diego Hurtado debe revisar esta aportación y confirmar la consolidación visual.
+Las capturas y sus referencias ya están incorporadas en el inventario de Marco. La revisión visual fue completada por Diego Hurtado y las evidencias se integraron mediante el PR #40.
 
 Los dos avisos conocidos del entorno DeepChecks permanecen bajo seguimiento técnico de Marco y Diego Martínez.
 
-La validación técnica final está documentada, mientras que el cierre de la evidencia visual permanece pendiente. Esta distinción evita presentar resultados históricos como si correspondieran a la ejecución definitiva.
+La validación técnica final y la consolidación visual están documentadas e integradas en main. Esta distinción evita presentar resultados históricos como si correspondieran a la ejecución definitiva.
