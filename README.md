@@ -2,23 +2,90 @@
 
 ## Etapa 3: pruebas, validación y seguridad
 
-El trabajo inicial de Marco incorpora un entorno de calidad separado, pruebas de
-ingesta y una revisión preliminar de seguridad. La configuración de PyTest está en
-`pyproject.toml`. Las pruebas usan datos sintéticos y almacenes temporales.
+La Etapa 3 del proyecto MiBici Equipo 39 está orientada a fortalecer la calidad del software, ampliar las pruebas automatizadas, comprobar la integridad de los datos y documentar los hallazgos de seguridad.
 
-- [Contrato y dependencias del equipo](references/etapa3/contrato_calidad.md).
-- [Instalación, ejecución y alcance de las verificaciones](references/etapa3/ejecucion_marco.md).
-- [Matriz de pruebas y responsables](reports/etapa3/matriz_pruebas.md).
-- [Avance de Marco y dependencias pendientes](reports/etapa3/avance_marco.md).
-- [Entorno comprobado de DeepChecks](references/etapa3/deepchecks_entorno.md).
-- [Hallazgos de seguridad y seguimiento](reports/etapa3/hallazgos.md).
-- [Actualización parcial de dependencias y reproducción](references/etapa3/actualizacion_dependencias.md).
-- [Migración conjunta de MLflow/PyArrow: respaldo, verificación y restauración](references/etapa3/migracion_mlflow_pyarrow.md).
-- [Verificación del catálogo en Windows y revisión del entorno DeepChecks](references/etapa3/verificacion_estaciones.md).
-- [Capturas y origen de la evidencia](reports/etapa3/evidencias_marco.md).
+Las contribuciones técnicas de los cuatro integrantes ya fueron revisadas e integradas en `main`. La política de calidad está congelada, pero la validación final desde un clon limpio y la consolidación de sus evidencias todavía requieren la ejecución correspondiente.
 
-Los aportes de P1, P2/DeepChecks y P3 de esta etapa deben integrarse y revisarse antes
-de que Marco ejecute el cierre desde un clon limpio y Diego Hurtado consolide las evidencias.
+### Contribuciones del equipo
+
+| Responsable | Contribución | Evidencia |
+|---|---|---|
+| Marco | Entorno de calidad, ingesta, seguridad, dependencias y verificación del catálogo | [Avance técnico](reports/etapa3/avance_marco.md) |
+| Stefania | Ampliación de pruebas de P1, calendario, partición y revisión de seguridad | [Revisión de P1](reports/etapa3/revision_p1_stefania.md) |
+| Diego Martínez | Motor DeepChecks, política de calidad, pruebas de P2 y contratos del registro | [Calidad de datos](reports/etapa3/calidad_datos_diego_martinez.md) |
+| Diego Hurtado | Pruebas adicionales de P3, perfiles horarios y análisis de seguridad | [Revisión de P3](reports/etapa3/revision_p3_diego_hurtado.md) |
+
+Las contribuciones se integraron mediante los PR #31 (P3), #33 (P1), #35 (DeepChecks/P2) y #36 (verificación del catálogo y dependencias), además de las aportaciones iniciales de infraestructura y calidad.
+
+### Pruebas automatizadas
+
+Las pruebas utilizan PyTest, datos sintéticos y recursos temporales para comprobar condiciones normales, casos límite y comportamientos ante errores.
+
+La configuración central de PyTest se encuentra en `pyproject.toml`.
+
+Para ejecutar la suite desde la raíz del repositorio, con el entorno del proyecto configurado:
+
+```bash
+python -m pytest tests -q
+```
+
+La ejecución combinada documentada por Diego Martínez reportó 229 pruebas aprobadas. Este resultado corresponde a las verificaciones realizadas durante el desarrollo y no sustituye la validación final independiente sobre el código integrado.
+
+### Validación de calidad con DeepChecks
+
+El motor se implementa en:
+
+`mibici_equipo39/validation/data_checks.py`
+
+La política de calidad se encuentra en:
+
+`references/etapa3/quality_policy.json`
+
+La política fue congelada con `frozen: true`, después de la revisión de criterios de P1 y P3 por sus responsables, sin modificar las reglas ni los umbrales acordados.
+
+El motor identifica cuatro estados:
+
+| Estado | Interpretación |
+|---|---|
+| PASS | Comprobación satisfactoria |
+| WARN | Advertencia que requiere interpretación |
+| FAIL | Incumplimiento del criterio definido |
+| NOT_EVALUATED | Comprobación no ejecutada, con causa registrada |
+
+La ejecución de desarrollo documentada reportó 64 PASS, 2 WARN y 1 FAIL. El FAIL se relaciona con una discrepancia de hash del catálogo de estaciones en macOS ARM, investigada y contrastada con el entorno Windows. El resultado original se conserva sin modificar los manifiestos para ocultar la diferencia.
+
+La etapa `final` deberá ejecutarse sobre el código integrado y los datos oficiales, conforme al contrato de calidad y a la política congelada.
+
+### Seguridad y dependencias
+
+Se realizaron revisiones mediante Bandit, auditorías de dependencias, comprobaciones de exclusiones y análisis de seguridad de los componentes P1, P2 y P3.
+
+Los hallazgos identificados se encuentran documentados con sus limitaciones y acciones de seguimiento. Las observaciones de severidad baja y los avisos restantes de dependencias no deben interpretarse como una auditoría completamente libre de riesgos.
+
+### Documentación y evidencias
+
+- [Contrato de calidad de la Etapa 3](references/etapa3/contrato_calidad.md)
+- [Instalación y ejecución de verificaciones](references/etapa3/ejecucion_marco.md)
+- [Matriz inicial de pruebas](reports/etapa3/matriz_pruebas.md)
+- [Entorno de DeepChecks](references/etapa3/deepchecks_entorno.md)
+- [Hallazgos de seguridad](reports/etapa3/hallazgos.md)
+- [Migración de MLflow y PyArrow](references/etapa3/migracion_mlflow_pyarrow.md)
+- [Verificación de estaciones entre entornos](references/etapa3/verificacion_estaciones.md)
+- [Capturas preliminares y su procedencia](reports/etapa3/evidencias_marco.md)
+- [Manifiesto de evidencias](reports/etapa3/evidencias_manifest.json)
+- [Consolidación de evidencias de la Etapa 3 — Diego Hurtado](reports/etapa3/evidencias_consolidadas_diego_hurtado.md)
+
+Las capturas preliminares documentan pruebas y verificaciones anteriores a la integración completa. Sus fechas, alcance y procedencia deben conservarse y distinguirse de las capturas de la validación final.
+
+### Pendientes del cierre integrado
+
+La validación final corresponde a Marco, quien deberá reproducir las comprobaciones desde un clon limpio utilizando la versión integrada del repositorio y la política congelada.
+
+Una vez publicados sus resultados, se incorporarán las cifras finales de pruebas, el resultado de DeepChecks, las verificaciones de seguridad, las capturas correspondientes y las limitaciones identificadas.
+
+Diego Hurtado es responsable de consolidar el README y la organización de las evidencias para la entrega final del equipo.
+
+La integración de los PR técnicos no constituye por sí misma la verificación final de calidad ni demuestra la ausencia de vulnerabilidades.
 
 ## Estado de integración de la Etapa 2
 
