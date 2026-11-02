@@ -4,7 +4,7 @@
 
 La Etapa 3 del proyecto MiBici Equipo 39 está orientada a fortalecer la calidad del software, ampliar las pruebas automatizadas, comprobar la integridad de los datos y documentar los hallazgos de seguridad.
 
-Las contribuciones técnicas de los cuatro integrantes ya fueron revisadas e integradas en `main`. La política de calidad está congelada. La [verificación integrada del 1 de noviembre](reports/etapa3/cierre_integrado_marco_20261101.md) documenta 238 pruebas aprobadas y la corrida final de datos: 100 PASS, 3 WARN, 0 FAIL y 0 NOT_EVALUATED. Sus resultados corresponden al commit `03e1143`; las correcciones posteriores de dependencias se verifican por separado en ese mismo informe.
+Las contribuciones técnicas de los cuatro integrantes ya fueron revisadas e integradas en `main`. La política de calidad está congelada. La [verificación integrada del 1 de noviembre](reports/etapa3/cierre_integrado_marco_20261101.md) documenta 238 pruebas aprobadas y la corrida final de datos: 100 PASS, 3 WARN, 0 FAIL y 0 NOT_EVALUATED. La comprobación inicial corresponde al commit `03e1143`. La [suite completa posterior al ajuste de dependencias](reports/etapa3/revision_pr38_20261101.json) volvió a aprobar las 238 pruebas, sin omisiones, sobre `0dd8c6e`. La evaluación final de datos no se repitió.
 
 ### Contribuciones del equipo
 

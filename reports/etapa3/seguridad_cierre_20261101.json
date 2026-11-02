@@ -416,5 +416,17 @@
       "tests/test_tracking_migration.py"
     ]
   },
-  "deepchecks_candidate_pip_check": "PASS"
+  "deepchecks_candidate_pip_check": "PASS",
+  "candidate_full_suite": {
+    "report": "revision_pr38_20261101.json",
+    "tested_commit": "0dd8c6e7cfcc5969bab56941d394b0dc7edbbf47",
+    "tests": 238,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "seconds": 852.816,
+    "warnings": 23,
+    "exit_code": 0,
+    "coverage_percent": 82.14285714285714
+  }
 }

@@ -3,6 +3,9 @@
 Fecha: 1 de noviembre de 2026, hora de Ciudad de México.
 Repositorio: [TC5061-Proyecto-Equipo39](https://github.com/makroem/TC5061-Proyecto-Equipo39).
 Código integrado comprobado: `03e114317db5e445f7905489b9a76f61b00e5b5e`.
+Código comprobado con dependencias corregidas: `0dd8c6e7cfcc5969bab56941d394b0dc7edbbf47`.
+
+Actualización de la revisión del PR #38: se corrigieron las rutas de PowerShell y se ejecutó la suite completa con las versiones nuevas. El [registro de esta comprobación](revision_pr38_20261101.json) conserva el entorno, los resultados y el commit probado.
 
 Después de integrar los PR #33, #35 y #37, ejecuté las comprobaciones desde un clon nuevo. Los dos entornos se instalaron con Python 3.11.9. El repositorio estaba limpio antes y después de la ejecución. Se conservaron los registros originales, incluidos los avisos y el intento de instalación que falló por la longitud de la ruta en Windows.
 
@@ -10,7 +13,8 @@ Después de integrar los PR #33, #35 y #37, ejecuté las comprobaciones desde un
 
 | Comprobación | Resultado | Alcance |
 |---|---|---|
-| Suite completa de PyTest | 238 aprobadas; 0 fallos, errores u omisiones; 23 avisos | Código integrado, datos sintéticos y recursos temporales |
+| Suite completa sobre main | 238 aprobadas; 0 fallos, errores u omisiones; 23 avisos | Código integrado antes del ajuste de dependencias |
+| Suite completa con dependencias corregidas | 238 aprobadas; 0 fallos, errores u omisiones; 23 avisos | Rama del PR #38, datos sintéticos y recursos temporales |
 | Cobertura global | 1,725 de 2,100 líneas: 82.14 % | Módulo completo; ninguna línea excluida del cálculo |
 | Validación final de datos | 100 PASS, 3 WARN, 0 FAIL y 0 NOT_EVALUATED; salida 0 | P1, P2 y P3; train, validation y test |
 | Política de calidad | Versión 1, congelada; hash sin cambios | No se ajustaron reglas ni umbrales después de consultar test |
@@ -19,7 +23,7 @@ Después de integrar los PR #33, #35 y #37, ejecuté las comprobaciones desde un
 | Secretos en historial | Sin hallazgos en 115 commits analizados | Referencias disponibles en el clon; incluye el PR #37 |
 | Bandit | 8 observaciones bajas; 0 medias y 0 altas | Observaciones conservadas y explicadas en el reporte de seguridad |
 
-La suite terminó a las 19:10:59. La corrida final de datos se inició a las 18:50:33 y produjo su resumen a las 19:04:21. Se ejecutó una sola vez sobre datos reales con la política congelada.
+La suite inicial terminó a las 19:10:59. La suite completa con las versiones corregidas terminó a las 20:29:36, en 14 minutos y 12 segundos. La corrida final de datos se inició a las 18:50:33 y produjo su resumen a las 19:04:21. Se ejecutó una sola vez sobre datos reales con la política congelada.
 
 Los resultados detallados y las huellas de los registros están en [cierre_integrado_marco_20261101.json](cierre_integrado_marco_20261101.json). El [resumen original de validación](validacion_final_datos_20261101.json) conserva las 103 comprobaciones, sus criterios y resultados.
 
@@ -41,7 +45,7 @@ La política clasifica estas condiciones como advertencias. Se conservan para in
 
 La auditoría detectó cuatro avisos en `pyasn1 0.6.4` y avisos adicionales en las herramientas de instalación heredadas. La propuesta actualiza `pyasn1` a 0.6.5, `pip` a 26.2, `setuptools` a 84.1.0 y `wheel` a 0.46.2 en los entornos compatibles. El archivo de MLflow Projects y el entorno de calidad conservan las mismas versiones de esas herramientas.
 
-Se instaló la propuesta después de terminar la suite base. Los 154 requisitos del entorno de calidad coincidieron con las versiones fijadas y `pip check` pasó. Con esas versiones se ejecutaron las pruebas de MLflow Projects y migración: **23 aprobadas, 0 fallos y 14 avisos**. También se construyó e instaló el paquete en un entorno nuevo. Estos controles no se presentan como otra ejecución de las 238 pruebas ni como un reentrenamiento.
+Se instaló la propuesta después de terminar la suite base. Los 154 requisitos del entorno de calidad coincidieron con las versiones fijadas y `pip check` pasó. Con esas versiones se ejecutaron las pruebas de MLflow Projects y migración: **23 aprobadas, 0 fallos y 14 avisos**. También se construyó e instaló el paquete en un entorno nuevo. Después de la revisión de Diego Hurtado se ejecutó también la suite completa con esas versiones: **238 pruebas aprobadas, 23 avisos y ninguna omitida**. La cobertura global fue del **82.14 %**. Los resultados iniciales y específicos se conservan como antecedente. No se repitió la validación final sobre datos reales ni se reentrenaron modelos oficiales.
 
 La auditoría de la propuesta no encontró avisos conocidos en los 132 requisitos del proyecto, los 22 requisitos adicionales de calidad ni las tres herramientas declaradas de construcción. Se revisaron por separado porque el auditor no incorpora automáticamente todos los archivos referenciados con `-r` en el modo utilizado.
 

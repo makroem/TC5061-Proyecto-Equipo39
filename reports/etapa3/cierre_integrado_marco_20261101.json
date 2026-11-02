@@ -273,7 +273,29 @@
       "junit_sha256": "ca07fca946bdba39305a936835b64b25b99cf912272efa90032555ae9d843ace"
     },
     "deepchecks_pip_check": "PASS",
-    "scope": "La suite completa y la corrida final corresponden a main antes de la correccion de dependencias. Despues se verifico la instalacion exacta de los requisitos candidatos y se ejecutaron 23 pruebas de contratos de Projects y migracion. No se repitio final ni se reentrenaron modelos oficiales."
+    "scope": "La suite inicial y la corrida final de datos corresponden a main antes de la correccion. Despues del ajuste se ejecutaron 23 contratos especificos y, atendiendo la revision del PR38, la suite completa: 238 aprobadas, 23 avisos y ninguna omitida. La corrida final sobre datos reales no se repitio.",
+    "full_suite": {
+      "report": "revision_pr38_20261101.json",
+      "tested_commit": "0dd8c6e7cfcc5969bab56941d394b0dc7edbbf47",
+      "tests": 238,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 852.816,
+      "warnings": 23,
+      "exit_code": 0,
+      "junit_sha256": "4bbe32d7fa77627b93734fbcb555105fec824f52b03b24014df120d17d375541",
+      "coverage": {
+        "covered_lines": 1725,
+        "num_statements": 2100,
+        "percent_covered": 82.14285714285714,
+        "percent_covered_display": "82",
+        "missing_lines": 375,
+        "excluded_lines": 0,
+        "percent_statements_covered": 82.14285714285714,
+        "percent_statements_covered_display": "82"
+      }
+    }
   },
   "security_report": "seguridad_cierre_20261101.json",
   "limitations": [
