@@ -10,14 +10,14 @@ Desde la raíz del repositorio, en PowerShell:
 
 ```powershell
 python --version
-Test-Path .venv-deepchecks/Scripts/python.exe
+Test-Path .\.venv-deepchecks\Scripts\python.exe
 ```
 
 Si ya existe, consultar primero su versión y los paquetes instalados:
 
 ```powershell
-.venv-deepchecks/Scripts/python.exe --version
-.venv-deepchecks/Scripts/python.exe -m pip show deepchecks setuptools numpy
+.\.venv-deepchecks\Scripts\python.exe --version
+.\.venv-deepchecks\Scripts\python.exe -m pip show deepchecks setuptools numpy
 ```
 
 Crear el entorno únicamente si falta y usar Python 3.11.9:
@@ -29,15 +29,16 @@ python -m venv .venv-deepchecks
 Instalar las versiones fijadas y preparar la compatibilidad:
 
 ```powershell
-.venv-deepchecks/Scripts/python.exe -m pip install -r requirements-deepchecks.txt
-.venv-deepchecks/Scripts/python.exe scripts/prepare_deepchecks.py
-.venv-deepchecks/Scripts/python.exe -m pip check
-.venv-deepchecks/Scripts/python.exe scripts/check_deepchecks_env.py
+.\.venv-deepchecks\Scripts\python.exe -m pip install -r requirements-deepchecks.txt
+.\.venv-deepchecks\Scripts\python.exe scripts/prepare_deepchecks.py
+.\.venv-deepchecks\Scripts\python.exe -m pip check
+.\.venv-deepchecks\Scripts\python.exe scripts/check_deepchecks_env.py
 ```
 
 Comprobar `$LASTEXITCODE` después de cada comando; detenerse si no es cero.
-En Linux/macOS se sustituye `Scripts/python.exe` por `bin/python`; la verificación
-de esta actualización corresponde a Windows x86-64.
+En Linux/macOS usar `.venv-deepchecks/bin/python` o `.venv-a7/bin/python`,
+según el entorno, en lugar del ejecutable de Windows. La verificación de esta
+actualización corresponde a Windows x86-64.
 
 ## Por qué se prepara el paquete
 
@@ -69,8 +70,8 @@ que debe incumplir la condición; exporta ambos HTML a
 y exportación, pero no sustituye la validación de datos reales.
 
 ```powershell
-.venv-a7/Scripts/python.exe -m pytest tests/test_deepchecks_preparation.py tests/test_data_checks.py -q
-.venv-a7/Scripts/python.exe -m pip_audit -r requirements-deepchecks.txt --no-deps --disable-pip --progress-spinner off
+.\.venv-a7\Scripts\python.exe -m pytest tests/test_deepchecks_preparation.py tests/test_data_checks.py -q
+.\.venv-a7\Scripts\python.exe -m pip_audit -r requirements-deepchecks.txt --no-deps --disable-pip --progress-spinner off
 ```
 
 Las pruebas del motor usan datos sintéticos y comprueban también errores y

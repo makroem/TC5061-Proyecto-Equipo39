@@ -76,7 +76,7 @@ En Windows, desde la raíz del repositorio y con el entorno correspondiente:
 
 ```powershell
 python scripts/check_station_manifest.py --output private_quality/estaciones_windows_proyecto.json
-.venv-deepchecks/Scripts/python.exe scripts/check_station_manifest.py --verify-outputs --output private_quality/estaciones_windows_deepchecks.json
+.\.venv-deepchecks\Scripts\python.exe scripts/check_station_manifest.py --verify-outputs --output private_quality/estaciones_windows_deepchecks.json
 ```
 
 En macOS, desde la raíz del repositorio:
