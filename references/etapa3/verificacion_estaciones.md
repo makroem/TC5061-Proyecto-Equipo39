@@ -1,5 +1,7 @@
 # Verificación del catálogo y seguimiento del entorno DeepChecks
 
+> Estado posterior: el [cierre adicional de Marco](../../reports/etapa3/cierre_adicional_marco.md) documenta la corrección compatible de DeepChecks, 245 pruebas aprobadas y la auditoría de 122 requisitos sin avisos conocidos. Los resultados y pendientes descritos más abajo corresponden a la fecha histórica de este documento. La corrección adicional se presenta para revisión independiente por PR.
+
 Marco realizó esta comprobación el 31 de octubre de 2026, después del aviso de
 Diego Martinez en el [PR #35](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/35).
 El objetivo fue confirmar el resultado en Windows y comparar los valores con la

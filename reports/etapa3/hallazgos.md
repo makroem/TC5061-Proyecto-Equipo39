@@ -1,5 +1,7 @@
 # Hallazgos preliminares de seguridad y ejecución
 
+> Estado posterior: el [cierre adicional de Marco](cierre_adicional_marco.md) documenta la corrección compatible de DeepChecks, 245 pruebas aprobadas y la auditoría de 122 requisitos sin avisos conocidos. Los resultados y pendientes descritos más abajo corresponden a la fecha histórica de este documento. La corrección adicional se presenta para revisión independiente por PR.
+
 Revisión de Marco, 28 de octubre de 2026. Alcance: código del módulo, versiones
 fijadas del proyecto, archivos versionados y referencias Git disponibles en el clon.
 Esta revisión no sustituye la validación final después de integrar los PR de la Etapa 3.

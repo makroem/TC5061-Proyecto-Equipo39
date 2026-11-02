@@ -9,6 +9,8 @@ Actualización de la revisión del PR #38: se corrigieron las rutas de PowerShel
 
 Después de integrar los PR #33, #35 y #37, ejecuté las comprobaciones desde un clon nuevo. Los dos entornos se instalaron con Python 3.11.9. El repositorio estaba limpio antes y después de la ejecución. Se conservaron los registros originales, incluidos los avisos y el intento de instalación que falló por la longitud de la ruta en Windows.
 
+> Actualización posterior: el [cierre adicional de Marco](cierre_adicional_marco.md) resuelve la compatibilidad de DeepChecks con setuptools 84.1.0, registra 245 pruebas aprobadas y una auditoría de 122 requisitos sin avisos conocidos. Este documento conserva las cifras y circunstancias de la ejecución anterior. La actualización requiere revisión independiente e integración por PR.
+
 ## Resultados
 
 | Comprobación | Resultado | Alcance |
@@ -80,6 +82,6 @@ Las [nueve capturas originales del cierre](capturas_finales_20261101.md) y su ma
 |---|---|---|
 | Diego Hurtado | Completado: revisión de las nueve capturas y consolidación visual | PR #40 aprobado e integrado |
 | Marco | Completado: incorporación de las capturas finales | PR #40 integrado en main |
-| Marco y Diego Martinez | Dar seguimiento a los dos avisos del entorno DeepChecks | Una solución compatible; los avisos siguen abiertos |
+| Marco | Solución compatible implementada y validada en el [cierre adicional](cierre_adicional_marco.md) | Pendiente de revisión independiente e integración por PR |
 
 El PR #37 de Diego Hurtado fue revisado por Marco e integrado después de comprobar 46 enlaces locales y contrastar las cifras con los reportes de origen. La evidencia de colaboración conserva la autoría y las revisiones de cada integrante.

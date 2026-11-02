@@ -35,6 +35,10 @@ La comprobación realizada para esta entrega corresponde a Windows y Python 3.11
 
 ## 2. Ejecutar pruebas
 
+Antes de la suite completa, preparar también el [entorno de DeepChecks](deepchecks_entorno.md).
+Su instalación requiere ejecutar `scripts/prepare_deepchecks.py` después de instalar
+los requisitos. Así se incluyen las pruebas que utilizan la biblioteca en el entorno separado.
+
 Usar una carpeta temporal nueva y una ruta corta. Esto evita conflictos de permisos
 y el límite de longitud de rutas de Windows al guardar artefactos de MLflow.
 
@@ -103,8 +107,9 @@ No interpretar un resultado limpio de los adicionales como aprobación del entor
 
 La corrección del 1 de noviembre fija también las herramientas de instalación en
 `requirements-quality.txt`, alineadas con `python_env.yaml`. Para el entorno independiente
-ejecutar además la auditoría de `requirements-deepchecks.txt`. DeepChecks conserva
-una versión distinta de `setuptools` por compatibilidad; no instalar los dos entornos juntos.
+ejecutar además la auditoría de `requirements-deepchecks.txt`. DeepChecks usa `setuptools 84.1.0` después de ejecutar
+`scripts/prepare_deepchecks.py`, según la [guía del entorno](deepchecks_entorno.md).
+No instalar los dos entornos juntos.
 Los conteos actuales y sus avisos están en el
 [reporte de seguridad del cierre](../../reports/etapa3/seguridad_cierre_20261101.json).
 

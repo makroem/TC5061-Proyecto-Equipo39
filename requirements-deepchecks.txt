@@ -1,6 +1,6 @@
 # Entorno independiente de DeepChecks, verificado en Windows con Python 3.11.9.
 # No instalar junto con requirements.txt: utiliza NumPy 1.26.4.
-# setuptools da pkg_resources a DeepChecks; loguru y typer permiten importar features.py.
+# Ejecutar scripts/prepare_deepchecks.py despues de instalar; ver references/etapa3/deepchecks_entorno.md.
 pip==26.2
 Jinja2==3.1.6
 MarkupSafe==3.0.4
@@ -98,7 +98,7 @@ rich==15.0.0
 rpds-py==2026.9.1
 scikit-learn==1.6.1
 scipy==1.17.1
-setuptools==81.0.0
+setuptools==84.1.0
 shellingham==1.5.4
 six==1.17.0
 soupsieve==3.0.4
@@ -121,4 +121,5 @@ webcolors==25.10.0
 webencodings==0.6.1
 websocket-client==1.9.2
 widgetsnbextension==4.0.16
+win32-setctime==1.2.1; sys_platform == "win32"
 wrapt==2.5.1
