@@ -116,7 +116,7 @@ y capturas revisados. Las capturas de registros deben identificarse como tales.
 Los avisos y comprobaciones pendientes permanecen visibles.
 
 Los PR técnicos #31, #33, #35 y #36 ya están integrados. El PR #38 de Marco
-fue aprobado e integrado por Diego Hurtado el 1 de noviembre. Las capturas finales se documentan en [el inventario de cierre](../../reports/etapa3/capturas_finales_20261101.md), pendiente de revisión visual independiente. Los modelos registrados
+fue aprobado e integrado por Diego Hurtado el 1 de noviembre. Las capturas finales se documentan en [el inventario de cierre](../../reports/etapa3/capturas_finales_20261101.md), revisado y aprobado por Diego Hurtado mediante el PR #40. Los modelos registrados
 y los manifiestos oficiales se conservan durante las comprobaciones.
 
 ## Fuentes de consulta

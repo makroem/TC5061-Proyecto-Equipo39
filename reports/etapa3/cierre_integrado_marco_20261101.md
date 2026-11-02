@@ -78,8 +78,8 @@ Las [nueve capturas originales del cierre](capturas_finales_20261101.md) y su ma
 
 | Responsable | Pendiente | Dependencia |
 |---|---|---|
-| Diego Hurtado | Revisar las nueve capturas originales y confirmar la consolidación visual | Imágenes, inventario y manifiesto publicados en la rama de revisión |
-| Marco | Integrar la aportación visual | Aprobación independiente del PR de capturas |
+| Diego Hurtado | Completado: revisión de las nueve capturas y consolidación visual | PR #40 aprobado e integrado |
+| Marco | Completado: incorporación de las capturas finales | PR #40 integrado en main |
 | Marco y Diego Martinez | Dar seguimiento a los dos avisos del entorno DeepChecks | Una solución compatible; los avisos siguen abiertos |
 
 El PR #37 de Diego Hurtado fue revisado por Marco e integrado después de comprobar 46 enlaces locales y contrastar las cifras con los reportes de origen. La evidencia de colaboración conserva la autoría y las revisiones de cada integrante.

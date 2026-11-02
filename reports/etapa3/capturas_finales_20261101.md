@@ -32,6 +32,6 @@ Las capturas se obtuvieron después de las ejecuciones. Las vistas de registros 
 
 ## Revisión y pendientes
 
-Las nueve imágenes quedan disponibles para la revisión de Diego Hurtado y su integración al inventario consolidado. Marco podrá integrar esta aportación cuando reciba la aprobación independiente correspondiente.
+Diego Hurtado revisó las nueve imágenes y confirmó su correspondencia con los reportes de cierre. El PR #40 fue aprobado e integrado en main el 1 de noviembre de 2026.
 
 Los dos avisos de `setuptools 81.0.0` en el entorno de DeepChecks permanecen abiertos, bajo seguimiento de Marco y Diego Martinez. Las restricciones de uso documentadas no equivalen a resolverlos. No se repitió la validación final de datos ni se modificaron modelos, manifiestos o reglas de calidad.
