@@ -1,0 +1,44 @@
+{
+  "fecha": "2026-11-02",
+  "responsable": "Marco",
+  "alcance": "Protección del destino del Registry en el flujo reproduce. No se repitieron los entrenamientos históricos ni se modificó el Registry oficial.",
+  "pruebas": {
+    "archivo": "tests/test_reproduce_workflow.py",
+    "aprobadas": 22,
+    "fallos": 0,
+    "errores": 0,
+    "omitidas": 0,
+    "duracion_segundos": 1.573,
+    "casos": [
+      "Bloqueo sin autorización explícita del destino.",
+      "Bloqueo cuando la URI autorizada difiere de la configurada.",
+      "Una autorización para SQLite no autoriza un Registry compartido heredado del entorno.",
+      "Los procesos hijos reciben el destino comprobado.",
+      "Se conservan los controles de selección versionada, hija exacta y fallo de entrenamiento."
+    ],
+    "aislamiento": "Las pruebas del flujo usan clientes y lanzamientos controlados; no escriben en el servidor oficial."
+  },
+  "comando_mlflow": {
+    "comando": "mlflow run . -e reproduce --env-manager local --experiment-name mibici-equipo39 -P member=Marco",
+    "entorno": "Tracking y Registry configurados hacia una base SQLite local nueva, excluida de Git.",
+    "approved_registry_uri": "unapproved (valor predeterminado)",
+    "codigo_salida": 1,
+    "resultado_esperado": "Registro bloqueado antes de ingesta, entrenamiento o registro.",
+    "run_id": "e75d5b9292444b96a0df2de51e0271ef",
+    "estado_corrida_contenedora": "FAILED",
+    "modelos_registrados": 0,
+    "versiones_registradas": 0,
+    "aliases_registrados": 0
+  },
+  "bandit": {
+    "archivo": "mibici_equipo39/reproduce.py",
+    "hallazgos": 0,
+    "errores": 0
+  },
+  "limites": [
+    "La corrida contenedora puede crearse antes del bloqueo; el comando termina con error deliberadamente.",
+    "Autorizar otra URI es una decisión explícita del ejecutor. El ejemplo documentado autoriza únicamente el almacén independiente.",
+    "La autorización no convierte la asignación secuencial de tres aliases en una operación transaccional.",
+    "Esta validación complementa la reproducción histórica documentada; no acredita una nueva descarga ni un nuevo entrenamiento completo."
+  ]
+}
