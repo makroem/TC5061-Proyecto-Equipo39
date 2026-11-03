@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "model_name": "mibici-equipo39-p1-demanda",
+  "model_version": "1",
+  "source_run_id": "66414a8b45164d3a8f5b9f42e7cb387b",
+  "training_commit": "288a592aba240983c8d21c8128c16be4cbf0f2df",
+  "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+  "resolved_alias": "champion",
+  "signature": {
+    "inputs": "[{\"type\": \"string\", \"name\": \"station_id\", \"required\": true}, {\"type\": \"integer\", \"name\": \"hour_of_day\", \"required\": true}, {\"type\": \"integer\", \"name\": \"day_of_week\", \"required\": true}, {\"type\": \"integer\", \"name\": \"month\", \"required\": true}, {\"type\": \"long\", \"name\": \"is_weekend\", \"required\": true}, {\"type\": \"double\", \"name\": \"hour_sin\", \"required\": true}, {\"type\": \"double\", \"name\": \"hour_cos\", \"required\": true}, {\"type\": \"double\", \"name\": \"month_sin\", \"required\": true}, {\"type\": \"double\", \"name\": \"month_cos\", \"required\": true}]",
+    "outputs": "[{\"type\": \"tensor\", \"tensor-spec\": {\"dtype\": \"float64\", \"shape\": [-1]}}]",
+    "params": null
+  },
+  "files": {
+    "code/mibici_equipo39/__init__.py": "5515d727e91509bf7d5e30a8bcccebe142130404a6c0392e09ae9387a097d2af",
+    "code/mibici_equipo39/config.py": "97e476c7d8cb7e8d197afd68064fac4bfd886fbafc2d3e381a8bd403147e15c4",
+    "code/mibici_equipo39/dataset.py": "b33840b9670223db451dabeabd6cd0c437c73017ed4550fd97f74f29bfc2698e",
+    "code/mibici_equipo39/features.py": "34cf95177adcf9a5ede9cbee5f37360bdc32f9486b02e4e248288febdc33f6b5",
+    "code/mibici_equipo39/modeling/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "code/mibici_equipo39/modeling/p1.py": "4c66493e90208f666e93b96ef110d7341a293792d0941c5a1f8dec9178d4faf6",
+    "code/mibici_equipo39/modeling/p2.py": "08fb4c8a462766fd9647cdad058adbf731bd6eaebde4cced8f554f86e77391b4",
+    "code/mibici_equipo39/modeling/p3.py": "b1abe0057dae776ac3d8da0a60ddc7abfa425717acc21c55d7736045cfb8ed7b",
+    "code/mibici_equipo39/modeling/predict.py": "1586c9087228aadc5d8f9edf3fac064bd6ab5956acdd9a3bba62008b4d10a739",
+    "code/mibici_equipo39/modeling/stage2.py": "bbea35197899ff8a62a7f61836d5ca7b9b1cdf87e9a8519f4b29ab1729f6f5d5",
+    "code/mibici_equipo39/modeling/tracking.py": "05f8b68bb6dab8f2c5cfa884f8a574d76261f4a1a5583829e2552b8629c1f559",
+    "code/mibici_equipo39/modeling/train.py": "8e66f37b79529fa6e27b8caf38e124fab8a0117c6a83213e0b18b03af346fde0",
+    "code/mibici_equipo39/plots.py": "5e4d21086ee2a1a979e08b153d357e36a4263df5113b2213b31cf466cba14aa6",
+    "code/mibici_equipo39/registry.py": "3d9f946c7c0947eb3244199a312209517b058863653da335cc8f2e4ee82c14a9",
+    "conda.yaml": "9d7b4b16f58e86043812d80ba57eaa0c6cdc0927c024894577ed3ea589bb66ee",
+    "input_example.json": "d86ea635aff83fd6250394953bdca69b85aebd0fed798a08cd56d906eff68760",
+    "MLmodel": "5991eebb969e060da769e251b67f4e704ae58e3b3bbdd7913698252f48f3cc1d",
+    "model.pkl": "f0ac3cf7d9e4ac7ce9cf925e6602e556aa9d5f03d5072462a8c66f79993161b8",
+    "python_env.yaml": "6eb9ae9f6edf12992b8c502af6e2c583f6a18464841be81a0e995389e004f33a",
+    "registered_model_meta": "cf57f66b8e122ac34810585fba1963ec1d70f07d278c79c74a7b560e7129c56a",
+    "requirements.txt": "276ac7233f3d7ef63ed08dbeff98fc50ebbe334f25e861e1aeb7d5030bd33d15",
+    "serving_input_example.json": "28c9d9d25df1a9bf1b51225eb1601f40267b762bd8f18ba1c9eca6d801e69e27"
+  },
+  "bundle_sha256": "dedce1eb08bda971a42fba311224c88e56f75cd2789dbb391e9445951931bd80"
+}

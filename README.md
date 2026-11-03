@@ -361,3 +361,47 @@ La introducción pública de Wilson, capítulo 6, respalda la comparación objet
 
 - Wilson: https://livebook.manning.com/book/machine-learning-engineering-in-action/chapter-6
 - Thompson: https://livebook.manning.com/book/managing-machine-learning-projects/chapter-7
+
+## Etapa 4: preparación del modelo para la API
+
+Marco preparó la recuperación y carga verificadas de P1. El [contrato inicial](references/etapa4/contrato_api.md) distribuye esquemas, API y contenedor entre los cuatro integrantes. La API HTTP y la imagen OCI todavía requieren esos módulos; esta sección documenta lo que ya se puede ejecutar.
+
+### Entorno de servicio
+
+Comprueba primero `python --version` (3.11.9) y si ya existe `.venv-api`. Solo si falta, créalo. Después instala las versiones fijadas:
+
+```powershell
+python -m venv .venv-api
+$pythonApi = '.venv-api\Scripts\python.exe'
+& $pythonApi -m pip install -r requirements-api-dev.txt
+& $pythonApi -m pip check
+```
+
+`requirements-api.txt` usa MLflow Skinny 3.17.2 para cliente y carga local, más las dependencias de P1 y FastAPI. No instala un servidor de tracking. El servidor oficial conserva su entorno completo anterior. El modelo mantiene intacto su archivo histórico de dependencias; MLflow puede advertir diferencias con ese entorno. Se comprobó paridad en el entorno de servicio de Windows; la imagen Linux debe verificarse durante su construcción.
+
+### Recuperar exactamente el modelo aprobado
+
+Usa el servidor oficial iniciado según la sección de MLflow; `127.0.0.1` se refiere a la computadora que aloja ese servidor. Otro integrante necesita acceso autorizado al mismo Registry y sus artefactos, no una base vacía. No hay un servidor público compartido configurado por esta entrega.
+
+```powershell
+$env:MLFLOW_TRACKING_URI = 'http://127.0.0.1:5000'
+$env:MLFLOW_REGISTRY_URI = $env:MLFLOW_TRACKING_URI
+& $pythonApi -B -m mibici_equipo39.serving.export_model --manifest references/etapa4/model_manifest.json --output models/serving/p1
+& $pythonApi -B -m mibici_equipo39.serving.verify_model
+```
+
+El primer comando descarga la versión numérica fijada y verifica las 22 huellas. Si ya está presente, comprueba el paquete sin sobrescribirlo. El segundo compara 72 entradas de calendario con una carga independiente por nombre y versión desde el Registry, verifica repetición y prueba la carga local con solicitudes de red bloqueadas. No solicita un run_id ni ejecuta entrenamiento.
+
+Para preparar una selección nueva se utiliza `--name mibici-equipo39-p1-demanda --alias champion --output <destino-nuevo> --manifest-out <manifiesto-nuevo>`, después de una revisión del cambio. No sobrescribas el manifiesto de esta entrega para seguir un alias que haya cambiado.
+
+### Pruebas y seguridad del arranque
+
+```powershell
+& $pythonApi -B -m pytest tests/api --confcutdir=tests/api -q
+& $pythonApi -m bandit -r mibici_equipo39/serving -f json -o reports/etapa4/bandit_api.json
+& $pythonApi -m pip_audit --no-deps --disable-pip -r requirements-api.txt -f json -o reports/etapa4/pip_audit_api.json
+```
+
+`--confcutdir` mantiene las pruebas unitarias de servicio independientes de las fixtures de entrenamiento de la etapa anterior. Si Windows impide crear temporales, agrega `--basetemp=private_results/etapa4/pruebas-nueva-carpeta` y utiliza un nombre que todavía no exista. La suite anterior se ejecuta con el entorno completo de calidad, no con el entorno reducido de servicio.
+
+Resultados y límites: [arranque de Marco](reports/etapa4/arranque_marco.md), [paridad real](reports/etapa4/paridad_modelo_marco.json) y [revisión de seguridad](reports/etapa4/seguridad_api.md). La comparación local no sustituye la predicción desde el contenedor que debe documentarse al integrar FastAPI.

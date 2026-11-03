@@ -1,0 +1,37 @@
+{
+  "date_local": "2026-11-02",
+  "responsible": "Marco",
+  "base_commit": "5344be3498bd3d46459c7e905e341fd6f5aec0c2",
+  "checks": {
+    "base_pytest": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "238",
+      "time": "306.860",
+      "timestamp": "2026-11-02T19:45:12.541976-06:00",
+      "source_sha256": "c08e57a113b6121a7a9527ec0c5a50928462a43da75dae5523dabf45f8d99bb9"
+    },
+    "api_pytest": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "31",
+      "time": "1.135",
+      "timestamp": "2026-11-02T19:54:34.207098-06:00",
+      "source_sha256": "7ce7879101072f142a9dfc04f56747ce94018429ea87e293f8305243f32da0fb"
+    }
+  },
+  "reproduction_manifest_match": true,
+  "git_models_tracked": [],
+  "remaining": [
+    "independent_review",
+    "pydantic_adapter",
+    "fastapi_http",
+    "linux_container",
+    "registry_screenshot",
+    "clean_clone_end_to_end"
+  ]
+}
