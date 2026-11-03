@@ -37,6 +37,11 @@ El paquete registrado conserva las dependencias históricas de entrenamiento. ML
 - [Resultado de paridad](paridad_modelo_marco.json).
 - [Resumen verificable de pruebas](verificacion_marco.json).
 - [Revisión de seguridad](seguridad_api.md).
+- [Captura original del Registry de P1 y procedencia](captura_registry_p1.md).
+
+## Evidencia del Registry completada
+
+El 2 de noviembre de 2026 se incorporó la captura E02 proporcionada por Marco. Muestra el servidor local oficial en el puerto 5000, el modelo `mibici-equipo39-p1-demanda`, su versión 1 y el alias `champion`. La corrida de origen, el commit y la versión de datos visibles coinciden con el manifiesto del modelo. Se conserva el PNG original sin recortes ni modificaciones; la huella y el alcance están en el [registro de la captura](captura_registry_p1.md).
 
 ## Pendientes y responsables
 
@@ -46,7 +51,6 @@ El paquete registrado conserva las dependencias históricas de entrenamiento. ML
 | Implementar contrato Pydantic y adaptador tabular | Stefania | Firma y tipos del manifiesto; cargador listo. |
 | Implementar FastAPI y pruebas HTTP | Diego Martinez | Puede avanzar con fixtures; integra esquemas de Stefania y cargador de Marco. |
 | Containerfile, exclusiones y prueba Linux | Diego Hurtado, con Marco para dependencias | Requisitos preparados; construcción completa necesita API y esquemas. |
-| Captura nueva del Registry | Marco | La consulta y descarga oficiales funcionan. La sesión de captura se interrumpió antes de obtener una imagen válida; no se incluye una imagen ajena. |
 | Reproducción desde clon limpio y captura del contenedor | Marco y Diego Hurtado | Requiere módulos integrados y revisados. |
 
 No se declara terminada la etapa 4: este PR entrega el arranque técnico y los insumos de Marco. La evidencia de una API respondiendo desde un contenedor se obtendrá después de integrar los módulos restantes.

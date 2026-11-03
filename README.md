@@ -405,3 +405,5 @@ Para preparar una selección nueva se utiliza `--name mibici-equipo39-p1-demanda
 `--confcutdir` mantiene las pruebas unitarias de servicio independientes de las fixtures de entrenamiento de la etapa anterior. Si Windows impide crear temporales, agrega `--basetemp=private_results/etapa4/pruebas-nueva-carpeta` y utiliza un nombre que todavía no exista. La suite anterior se ejecuta con el entorno completo de calidad, no con el entorno reducido de servicio.
 
 Resultados y límites: [arranque de Marco](reports/etapa4/arranque_marco.md), [paridad real](reports/etapa4/paridad_modelo_marco.json) y [revisión de seguridad](reports/etapa4/seguridad_api.md). La comparación local no sustituye la predicción desde el contenedor que debe documentarse al integrar FastAPI.
+
+La [captura E02 del Registry de P1](reports/etapa4/captura_registry_p1.md) muestra la versión 1, el alias `champion` y su linaje. Se conserva la imagen original proporcionada por Marco el 2 de noviembre de 2026, junto con su huella SHA-256.
