@@ -43,6 +43,6 @@ El README contiene exportación del modelo, instalación, construcción, ejecuci
 
 Se permite la estación desconocida como respuesta de respaldo del baseline (media global); no se interpreta como una estimación aprendida para esa estación. El servicio está publicado solo en localhost, no tiene una prueba de carga ni un despliegue público autenticado.
 
-El catálogo histórico no es necesario para atender predicciones: la imagen usa el modelo empaquetado. Su recuperación se atiende en el [PR #46](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/46); la disponibilidad de un respaldo compartido para una descarga desde cero aún debe acordarse.
+El catálogo histórico no es necesario para atender predicciones: la imagen usa el modelo empaquetado. Su recuperación se atiende en el [PR #46](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/46); el respaldo de Google Drive ya está publicado y su descarga real sin sesión fue verificada; falta integrar el PR revisado para disponer de esa recuperación en main.
 
 La revisión de Diego Hurtado y el merge de los PR siguen pendientes. La comprobación de cierre sobre `main` se realiza después de la integración; los resultados aquí corresponden a la rama de implementación.
