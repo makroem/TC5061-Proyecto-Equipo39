@@ -13,7 +13,7 @@ En el entorno separado de DeepChecks, desde la raíz del repositorio:
 .venv-deepchecks/bin/python -m mibici_equipo39.validation.data_checks --question all --stage development
 ```
 
-En Windows usar `.venv-deepchecks/Scripts/python.exe`. El resumen y el HTML de DeepChecks quedan en
+En Windows usar `.\.venv-deepchecks\Scripts\python.exe`. El resumen y el HTML de DeepChecks quedan en
 `private_quality/data_checks/<etapa>/`, fuera de Git. `--stage final` agrega prueba y solo corre
 con la política congelada (`"frozen": true`); con la política en borrador termina con código 2.
 

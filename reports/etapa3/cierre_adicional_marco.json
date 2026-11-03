@@ -1,0 +1,300 @@
+{
+  "recorded_at_utc": "2026-11-02T05:38:57.665519+00:00",
+  "base_commit": "5344be3498bd3d46459c7e905e341fd6f5aec0c2",
+  "branch": "fix/marco-cierre-evidencias-deepchecks",
+  "executor": "Marco",
+  "platform": "Windows x86-64",
+  "python": "3.11.9",
+  "scope": "Entorno nuevo de DeepChecks, suite del proyecto y actualización de una captura histórica. No se repitió la validación de CSV oficiales.",
+  "code_sha256": {
+    "requirements-deepchecks.txt": "3a998eb64e1996f04335175225f64e284b7c42d2d4cd06e34b4ec1f854b23ba0",
+    "scripts/prepare_deepchecks.py": "d8fa24c35d2b06a2b40e96464d3c7cbd86941934d50264525d291dda342d064b",
+    "tests/test_deepchecks_preparation.py": "4a7efd2418ab0946db17adba40518fe53cbfdf743d8c9e940ad34f2750096cc7"
+  },
+  "environment": {
+    "required": 122,
+    "applicable": 122,
+    "mismatches": [],
+    "setuptools": "84.1.0",
+    "pkg_resources_available": false,
+    "pip_check": "PASS",
+    "deepchecks": "0.19.1",
+    "numpy": "1.26.4",
+    "installation": "entorno independiente nuevo"
+  },
+  "adaptation": {
+    "deepchecks": "0.19.1",
+    "adaptation": "stdlib-metadata-packaging-v1",
+    "files": [
+      {
+        "file": "utils/display.py",
+        "original_sha256": "c41da32ba473058d848434942d1416431e110aa89031ddc8639cc787ec30c612",
+        "adapted_sha256": "d49dbd3de9f5c114426b8fce6889d65b8233ccb1c6a72f89c4ba99f0b70e5b09",
+        "changed": true
+      },
+      {
+        "file": "core/serialization/dataframe/html.py",
+        "original_sha256": "73e96417a059e3784851f71fe8daf382260350173f16ceadbdf30d23b04a9c3d",
+        "adapted_sha256": "ae4c029fb9eec26a97a3240831c6909447e19b0403a8ba5c9acabab359af672b",
+        "changed": true
+      }
+    ],
+    "status": "PASS"
+  },
+  "adaptation_repeat": {
+    "deepchecks": "0.19.1",
+    "adaptation": "stdlib-metadata-packaging-v1",
+    "files": [
+      {
+        "file": "utils/display.py",
+        "original_sha256": "c41da32ba473058d848434942d1416431e110aa89031ddc8639cc787ec30c612",
+        "adapted_sha256": "d49dbd3de9f5c114426b8fce6889d65b8233ccb1c6a72f89c4ba99f0b70e5b09",
+        "changed": false
+      },
+      {
+        "file": "core/serialization/dataframe/html.py",
+        "original_sha256": "73e96417a059e3784851f71fe8daf382260350173f16ceadbdf30d23b04a9c3d",
+        "adapted_sha256": "ae4c029fb9eec26a97a3240831c6909447e19b0403a8ba5c9acabab359af672b",
+        "changed": false
+      }
+    ],
+    "status": "PASS"
+  },
+  "pytest": {
+    "tests": "245",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "448.602",
+    "timestamp": "2026-11-01T23:26:02.700917-06:00"
+  },
+  "pytest_warnings": 23,
+  "pytest_exit": 0,
+  "coverage": "No se recalculó en esta ejecución. La cobertura histórica de 82.14% corresponde a la suite anterior.",
+  "smoke": {
+    "scope": "compatibilidad con datos sinteticos; no valida CSV reales",
+    "status": "PASS",
+    "cases": {
+      "variable": {
+        "condition_passed": true,
+        "html": "variable.html",
+        "sha256": "3859c13daffab431a9eed2de9c62f2127118e9e2221b1a5ad2ff803582458a29"
+      },
+      "constant": {
+        "condition_passed": false,
+        "html": "constant.html",
+        "sha256": "585daafd4f06527b2227d7cbc886ddff67d1134a714bb7634440d3d29c17a62a"
+      }
+    },
+    "versions": {
+      "deepchecks": "0.19.1",
+      "numpy": "1.26.4",
+      "pandas": "2.2.3",
+      "scikit-learn": "1.6.1",
+      "plotly": "5.24.1",
+      "ipython": "8.37.0"
+    }
+  },
+  "dependency_audit": {
+    "packages": 122,
+    "known_vulnerabilities": 0,
+    "skipped": 0,
+    "exit_code": 0,
+    "report": "auditoria_deepchecks_20261101.json"
+  },
+  "bandit_new_script": {
+    "findings": 0,
+    "errors": 0,
+    "lines": 75
+  },
+  "evidence": {
+    "docx_modified_members": [
+      "word/document.xml",
+      "word/media/image8.jpg"
+    ],
+    "docx_changed_paragraphs": [
+      {
+        "index": 254,
+        "before": "Captura auténtica de la pestaña Artifacts del run P1 baseline y su figura p1_mae_por_hora.png. La figura completa también aparece en la sección P1 del documento.",
+        "after": "Consulta del 1 de noviembre de 2026 en MLflow 3.17.2 de la corrida histórica P1 baseline. El artefacto p1_mae_por_hora.png conserva su contenido original; solo se actualizó la captura de la interfaz."
+      }
+    ],
+    "pdf_pages_before": 18,
+    "pdf_pages_after": 18,
+    "pdf_text_differences": [
+      {
+        "page": 12,
+        "removed": {
+          "https://scikit-learn.org/1.6/modules/clustering.html": 1,
+          "https://scikit-learn.org/1.6/modules/model_evaluation.html": 1
+        },
+        "added": {
+          "https://scikit-": 2,
+          "learn.org/1.6/modules/clustering.html": 1,
+          "learn.org/1.6/modules/model_evaluation.html": 1
+        }
+      },
+      {
+        "page": 16,
+        "removed": {
+          "Captura": 1,
+          "auténtica": 1,
+          "pestaña": 1,
+          "Artifacts": 1,
+          "del": 1,
+          "run": 1,
+          "P1": 1,
+          "baseline": 1,
+          "y": 1,
+          "figura": 2,
+          "p1_mae_por_hora.png.": 1,
+          "La": 1,
+          "completa": 1,
+          "también": 1,
+          "aparece": 1,
+          "sección": 1,
+          "documento.": 1
+        },
+        "added": {
+          "de": 3,
+          "2026": 1,
+          "Consulta": 1,
+          "1": 1,
+          "noviembre": 1,
+          "MLflow": 1,
+          "3.17.2": 1,
+          "la": 1,
+          "corrida": 1,
+          "histórica": 1,
+          "baseline.": 1,
+          "El": 1,
+          "artefacto": 1,
+          "p1_mae_por_hora.png": 1,
+          "conserva": 1,
+          "contenido": 1,
+          "original;": 1,
+          "solo": 1,
+          "se": 1,
+          "actualizó": 1,
+          "captura": 1,
+          "interfaz.": 1
+        }
+      }
+    ],
+    "run_id": "cfa19d964f654a98b432c60ecb6effc3",
+    "run_records_unchanged": {
+      "metrics": {
+        "records": 6,
+        "unchanged": true
+      },
+      "latest_metrics": {
+        "records": 6,
+        "unchanged": true
+      },
+      "params": {
+        "records": 19,
+        "unchanged": true
+      },
+      "tags": {
+        "records": 16,
+        "unchanged": true
+      }
+    },
+    "consultation_copy_changed_fields": [
+      "artifact_uri"
+    ],
+    "source_database_sha256": "33fce213bc77be3fa6b27572d78a46f5f661b7b4d142445074e9ebc8ec1fb61b",
+    "artifacts": [
+      {
+        "path": "error_por_hora.csv",
+        "sha256": "7bdd5ceb8369a7c4f4e6e616a332927bf827e6ec0472beca4f04534196a481fa"
+      },
+      {
+        "path": "evaluation_notes.txt",
+        "sha256": "903527eb7254f4ac5e62703f105c6367ebff46b3e01d1c314aa69088b5ad6281"
+      },
+      {
+        "path": "figures/p1_mae_por_hora.png",
+        "sha256": "87180dc3898fc67b78afdfc66835439958f66bd32544958649d92bcb4d8d2925"
+      },
+      {
+        "path": "figures/p1_semana_estacion.png",
+        "sha256": "e799a23a274e6966ee893f9f0ef5a536a5cb7025971d90623a5ed456dddf9a2a"
+      },
+      {
+        "path": "metrics.json",
+        "sha256": "0d10ad7414cfa7523af2316b214d629e7fa2bc3c84bba621fffa6cb3003be161"
+      }
+    ],
+    "screenshot_sha256": "9cb7c93392190b85b561a586c0e9b34ea26dffd72775cd10957883efc8072796"
+  },
+  "documents": {
+    "reports/TC5061_Propuesta_Proyecto_Equipo39.docx": {
+      "sha256": "dac1d2e50b563a4100002d8b11ac5ad29aa0476e9919b0a7951ca3db1669f49f",
+      "bytes": 623157
+    },
+    "reports/TC5061_Propuesta_Proyecto_Equipo39.pdf": {
+      "sha256": "fe1812a6a69cfca0cc55330e4a2521fad04ae76e947efede39848b48e32fbefa",
+      "bytes": 985925
+    }
+  },
+  "local_records": {
+    "install.log": {
+      "sha256": "5d909f00b9d60a499f02f67aef4dbcad2ba2a2ebe466479889484676831c3624",
+      "bytes": 33116
+    },
+    "pip_check.txt": {
+      "sha256": "672aec65a45bed50e70229c70934a7eebf0462595c459b83023027645d57cccf",
+      "bytes": 31
+    },
+    "preparation.json": {
+      "sha256": "d66610c6361f086b88b796648d6fdf98adb43e8a6bc5153f248ad89ec312e9a3",
+      "bytes": 661
+    },
+    "preparation_repeat.json": {
+      "sha256": "d854f5fc51fa49d0ac2ecd44a182cebd61c89507625c075d273f5e61296e35a1",
+      "bytes": 663
+    },
+    "smoke/summary.json": {
+      "sha256": "ea99c6499df7033056a7c61d0913ec2be570b389997d024f20d794a7c4f361af",
+      "bytes": 649
+    },
+    "pytest.log": {
+      "sha256": "74ae1a3b4c7ef6da378e10b4988f7c654b156444277876bc35a9df4f9dd4bda3",
+      "bytes": 5236
+    },
+    "pytest.xml": {
+      "sha256": "2d5c67e7f1b14937929ef5bf188a6f5535397a9a1654746562cc9814bff85782",
+      "bytes": 30443
+    },
+    "pip_audit_completo.json": {
+      "sha256": "21e17b4a4a1d804607a8af8fe8e32a2c116845c48f552ef7098acbd027e34fea",
+      "bytes": 7010
+    },
+    "bandit_preparation.json": {
+      "sha256": "b9671f46fa891677437a21a67b74d35e801df8b56c1e4e9547d684dacd90aa4c",
+      "bytes": 777
+    },
+    "evidence_checks.json": {
+      "sha256": "838a845cc10d0100f4b795c935786135cc2d571fe1b1d9aa3988ac7dec0c1428",
+      "bytes": 3372
+    }
+  },
+  "limits": [
+    "Comprobado en Windows x86-64; no acredita ejecución en macOS o Linux.",
+    "Se conserva la validación final histórica de 100 PASS, 3 WARN, 0 FAIL y 0 NOT_EVALUATED.",
+    "La adaptación es local y debe revisarse al actualizar DeepChecks.",
+    "Los resultados de auditoría dependen de los avisos conocidos en la fecha de consulta."
+  ],
+  "code_hash_scope": "code_sha256 registra los bytes locales ejecutados; code_sha256_lf registra el contenido normalizado de Git. Las diferencias de saltos de línea no cambian el código.",
+  "code_sha256_lf": {
+    "requirements-deepchecks.txt": "6091a6664c00a615f442c9e473e4ba5dc2b1ae7ca97e2f7bc1994351bcc5de6f",
+    "scripts/prepare_deepchecks.py": "d8fa24c35d2b06a2b40e96464d3c7cbd86941934d50264525d291dda342d064b",
+    "tests/test_deepchecks_preparation.py": "4a7efd2418ab0946db17adba40518fe53cbfdf743d8c9e940ad34f2750096cc7"
+  },
+  "document_quality_review": {
+    "pages_visually_reviewed": 18,
+    "local_links_checked": 185,
+    "missing_links": 0
+  }
+}

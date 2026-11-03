@@ -1,63 +1,89 @@
-# Compatibilidad de DeepChecks
+# Entorno de DeepChecks
 
-Marco comprobó DeepChecks 0.19.1 el 28 de octubre de 2026 con Python 3.11.9.
-El entorno del proyecto conserva NumPy 2.1.3. Aunque el instalador acepta esa
-combinación, importar `deepchecks.tabular.checks` falla porque el paquete utiliza
-`np.Inf`, retirado en NumPy 2. Por eso DeepChecks se ejecuta en un entorno independiente.
+DeepChecks 0.19.1 se ejecuta en un entorno separado con Python 3.11.9 y NumPy
+1.26.4. El entorno de entrenamiento conserva NumPy 2.1.3. No se mezclan los dos
+archivos de requisitos ni se cambian los modelos oficiales para validar datos.
 
-## Entorno comprobado
+## Comprobar antes de instalar
 
-`requirements-deepchecks.txt` fija las 112 dependencias del entorno separado,
-incluyendo NumPy 1.26.4, pandas 2.2.3, scikit-learn 1.6.1, Plotly 5.24.1,
-IPython 8.37.0 y PyArrow 23.0.1.
-Se comprobó la importación y `pip check`, además de ejecutar y exportar dos casos.
-No se cambiaron las versiones de entrenamiento ni se cargaron modelos serializados allí.
-
-Antes de instalar, comprobar si el entorno ya existe:
+Desde la raíz del repositorio, en PowerShell:
 
 ```powershell
-Test-Path .venv-deepchecks/Scripts/python.exe
+python --version
+Test-Path .\.venv-deepchecks\Scripts\python.exe
 ```
 
-Si existe, verificar primero `.venv-deepchecks/Scripts/python.exe --version` y
-`.venv-deepchecks/Scripts/python.exe -m pip show deepchecks numpy`.
-Si falta, crearlo con el Python 3.11.9 previamente comprobado:
+Si ya existe, consultar primero su versión y los paquetes instalados:
+
+```powershell
+.\.venv-deepchecks\Scripts\python.exe --version
+.\.venv-deepchecks\Scripts\python.exe -m pip show deepchecks setuptools numpy
+```
+
+Crear el entorno únicamente si falta y usar Python 3.11.9:
 
 ```powershell
 python -m venv .venv-deepchecks
-.venv-deepchecks/Scripts/python.exe -m pip install -r requirements-deepchecks.txt
-.venv-deepchecks/Scripts/python.exe -m pip check
-.venv-deepchecks/Scripts/python.exe scripts/check_deepchecks_env.py
 ```
 
-En Linux/macOS usar `.venv-deepchecks/bin/python`; esa plataforma no se ha probado aquí.
-El script genera `private_quality/deepchecks_smoke/variable.html`, `constant.html`
-y `summary.json`. Abrir ambos HTML en el navegador para verificar que se muestran.
+Instalar las versiones fijadas y preparar la compatibilidad:
 
-## Qué demuestra la comprobación
+```powershell
+.\.venv-deepchecks\Scripts\python.exe -m pip install -r requirements-deepchecks.txt
+.\.venv-deepchecks\Scripts\python.exe scripts/prepare_deepchecks.py
+.\.venv-deepchecks\Scripts\python.exe -m pip check
+.\.venv-deepchecks\Scripts\python.exe scripts/check_deepchecks_env.py
+```
 
-El caso variable satisface la condición de no tener una sola constante. El caso
-constante incumple esa condición. El programa termina correctamente solo si se observan
-ambos resultados y las comprobaciones se ejecutaron. Los HTML se exportan sin requerir
-conexión para consultar sus resultados. Los hashes quedan en el resumen.
+Comprobar `$LASTEXITCODE` después de cada comando; detenerse si no es cero.
+En Linux/macOS usar `.venv-deepchecks/bin/python` o `.venv-a7/bin/python`,
+según el entorno, en lugar del ejecutable de Windows. La verificación de esta
+actualización corresponde a Windows x86-64.
 
-Esto demuestra compatibilidad básica de importación, ejecución, detección negativa
-y exportación. No demuestra todavía que todos los checks que elegirá Diego Martinez
-sean compatibles ni que los datos reales cumplan los criterios de calidad.
+## Por qué se prepara el paquete
 
-## Entrega a Diego Martinez
+La versión publicada de DeepChecks importa `pkg_resources` en dos utilidades de
+presentación. Ese módulo ya no está disponible en setuptools 84.1.0. Mantener
+setuptools 81.0.0 conservaba dos avisos de seguridad documentados en el cierre
+anterior. La solución actual fija 84.1.0 y aplica una adaptación explícita:
 
-Puede reutilizar este entorno para implementar `validation/data_checks.py` y probar
-sus comprobaciones con fixtures antes de usar datos reales. Debe confirmar que los
-Parquet leídos corresponden a los manifiestos oficiales y mantener las particiones.
-Si necesita otro formato, el exportador debe conservar esquema, conteos y hashes.
-El contrato de estados y códigos de salida está en [contrato_calidad.md](contrato_calidad.md).
+- `utils/display.py` consulta los paquetes mediante `importlib.metadata` y normaliza sus nombres con `packaging.utils.canonicalize_name`.
+- `core/serialization/dataframe/html.py` compara versiones con `packaging.version.parse`.
 
-Las dependencias de este entorno también se auditan; compatibilidad funcional no
-equivale a ausencia de vulnerabilidades. Consultar el resumen y los hallazgos de seguridad.
+El script comprueba la versión 0.19.1 y los hashes SHA256 de ambos archivos antes
+de escribir. Si detecta otro contenido, termina con error. Puede ejecutarse otra
+vez sin volver a modificar los archivos. Conserva los avisos de licencia de
+DeepChecks e incorpora una nota de modificación local. No cambia checks,
+condiciones, métricas, muestras ni umbrales. No modifica el código del entrenamiento.
 
-La auditoría de las 112 versiones no reportó avisos conocidos el 28 de octubre de 2026.
-Un Parquet sintético escrito por el entorno del proyecto se leyó con este entorno,
-conservando columnas, dos registros y el hash lógico. El resultado se conserva en
-[parquet_interoperabilidad.json](../../reports/etapa3/parquet_interoperabilidad.json).
-Esa prueba de transporte no acredita que todos los checks o los datos reales estén validados.
+Después de reinstalar DeepChecks con `--force-reinstall`, repetir la preparación.
+Para una versión nueva de DeepChecks se debe revisar esta adaptación; el script
+no aplica cambios automáticamente a versiones diferentes. Los hashes originales
+y adaptados quedan en su salida JSON. El entorno es una instalación de la versión
+oficial con dos archivos adaptados localmente, no una publicación nueva del proveedor.
+
+## Verificación y evidencia
+
+El control sintético ejecuta un caso variable que debe aprobarse y uno constante
+que debe incumplir la condición; exporta ambos HTML a
+`private_quality/deepchecks_smoke/`. Esto comprueba importación, detección negativa
+y exportación, pero no sustituye la validación de datos reales.
+
+```powershell
+.\.venv-a7\Scripts\python.exe -m pytest tests/test_deepchecks_preparation.py tests/test_data_checks.py -q
+.\.venv-a7\Scripts\python.exe -m pip_audit -r requirements-deepchecks.txt --no-deps --disable-pip --progress-spinner off
+```
+
+Las pruebas del motor usan datos sintéticos y comprueban también errores y
+condiciones fallidas. Los resultados de la actualización se conservan en
+[el cierre adicional](../../reports/etapa3/cierre_adicional_marco.md). La evaluación
+real del 1 de noviembre mantiene sus resultados originales y su política congelada.
+
+## Fuentes
+
+- [DeepChecks 0.19.1 en PyPI](https://pypi.org/project/deepchecks/0.19.1/).
+- [Código y licencia de DeepChecks](https://github.com/deepchecks/deepchecks).
+- [Setuptools 84.1.0](https://github.com/pypa/setuptools/releases/tag/v84.1.0).
+- [Aviso de seguridad de setuptools](https://github.com/pypa/setuptools/security/advisories/GHSA-xmj3-9gf7-h52w).
+- [importlib.metadata](https://docs.python.org/3.11/library/importlib.metadata.html).
+- [Versiones en packaging](https://packaging.pypa.io/en/stable/version.html).

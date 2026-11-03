@@ -6,6 +6,8 @@ La Etapa 3 del proyecto MiBici Equipo 39 está orientada a fortalecer la calidad
 
 Las contribuciones técnicas de los cuatro integrantes ya fueron revisadas e integradas en `main`. La política de calidad está congelada. La [verificación integrada del 1 de noviembre](reports/etapa3/cierre_integrado_marco_20261101.md) documenta 238 pruebas aprobadas y la corrida final de datos: 100 PASS, 3 WARN, 0 FAIL y 0 NOT_EVALUATED. La comprobación inicial corresponde al commit `03e1143`. La [suite completa posterior al ajuste de dependencias](reports/etapa3/revision_pr38_20261101.json) volvió a aprobar las 238 pruebas, sin omisiones, sobre `0dd8c6e`. La evaluación final de datos no se repitió.
 
+La [actualización de compatibilidad de DeepChecks](reports/etapa3/cierre_adicional_marco.md) añade siete pruebas: la suite completa aprueba **245 pruebas**, sin fallos ni omisiones. El entorno independiente usa setuptools 84.1.0 y su auditoría de 122 requisitos no encontró vulnerabilidades conocidas. Esta actualización conserva la validación final de datos y requiere la revisión independiente de su PR para integrarse en `main`.
+
 ### Contribuciones del equipo
 
 | Responsable | Contribución | Evidencia |
@@ -24,6 +26,8 @@ Las pruebas utilizan PyTest, datos sintéticos y recursos temporales para compro
 La configuración central de PyTest se encuentra en `pyproject.toml`.
 
 Para ejecutar la suite desde la raíz del repositorio, con el entorno del proyecto configurado:
+
+Preparar también el [entorno independiente de DeepChecks](references/etapa3/deepchecks_entorno.md), incluida la adaptación de compatibilidad indicada en esa guía, para que se ejecuten las pruebas que utilizan la biblioteca.
 
 ```bash
 python -m pytest tests -q
@@ -60,7 +64,7 @@ La etapa `final` se ejecutó una sola vez sobre el código integrado y los datos
 
 Se realizaron revisiones mediante Bandit, auditorías de dependencias, comprobaciones de exclusiones y análisis de seguridad de los componentes P1, P2 y P3.
 
-Los hallazgos identificados se encuentran documentados con sus limitaciones y acciones de seguimiento. Las observaciones de severidad baja y los avisos restantes de dependencias no deben interpretarse como una auditoría completamente libre de riesgos.
+Los hallazgos identificados se encuentran documentados con sus limitaciones y acciones de seguimiento. La corrección de DeepChecks atiende los dos avisos de setuptools del cierre anterior; las observaciones bajas de Bandit permanecen documentadas. Una auditoría sin vulnerabilidades conocidas no demuestra ausencia de todos los riesgos.
 
 ### Documentación y evidencias
 
@@ -81,9 +85,9 @@ Las capturas preliminares documentan pruebas y verificaciones anteriores a la in
 
 Marco completó la suite integrada y la validación final desde un clon nuevo, con entornos instalados desde cero y tablas procesadas verificadas contra los manifiestos. La descarga anual no se repitió.
 
-Los [resultados del cierre](reports/etapa3/cierre_integrado_marco_20261101.json) y la [revisión de seguridad](reports/etapa3/seguridad_cierre_20261101.json) documentan el alcance y las limitaciones. Las [nueve capturas originales del cierre](reports/etapa3/capturas_finales_20261101.md) muestran los registros de pruebas, validación y seguridad, además de la integración de los PR #38 y #39. Su procedencia y alcance se conservan en el inventario. Sigue abierto el seguimiento de dos avisos de seguridad del entorno independiente de DeepChecks.
+Los [resultados del cierre](reports/etapa3/cierre_integrado_marco_20261101.json) y la [revisión de seguridad](reports/etapa3/seguridad_cierre_20261101.json) documentan el alcance y las limitaciones de esa ejecución. Las [nueve capturas originales del cierre](reports/etapa3/capturas_finales_20261101.md) muestran los registros de pruebas, validación y seguridad, además de la integración de los PR #38 y #39. Su procedencia y alcance se conservan en el inventario. El [cierre adicional](reports/etapa3/cierre_adicional_marco.md) documenta la solución posterior para los dos avisos de DeepChecks, la suite de 245 pruebas y la captura histórica renovada.
 
-Diego Hurtado es responsable de consolidar el README y la organización de las evidencias para la entrega final del equipo.
+Diego Hurtado completó la consolidación del README y las evidencias mediante los PR #40 y #41. La actualización adicional de Marco queda sujeta a revisión independiente e integración por PR.
 
 La integración de los PR técnicos no constituye por sí misma la verificación final de calidad ni demuestra la ausencia de vulnerabilidades.
 

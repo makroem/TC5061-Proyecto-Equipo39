@@ -34,4 +34,4 @@ Las capturas se obtuvieron después de las ejecuciones. Las vistas de registros 
 
 Diego Hurtado revisó las nueve imágenes y confirmó su correspondencia con los reportes de cierre. El PR #40 fue aprobado e integrado en main el 1 de noviembre de 2026.
 
-Los dos avisos de `setuptools 81.0.0` en el entorno de DeepChecks permanecen abiertos, bajo seguimiento de Marco y Diego Martinez. Las restricciones de uso documentadas no equivalen a resolverlos. No se repitió la validación final de datos ni se modificaron modelos, manifiestos o reglas de calidad.
+La captura F08 conserva los dos avisos presentes en aquella auditoría. El [cierre adicional de Marco](cierre_adicional_marco.md) documenta la solución posterior con setuptools 84.1.0 y la nueva auditoría sin vulnerabilidades conocidas, sujeta a revisión e integración. No se sustituyó F08 para aparentar que la ejecución anterior tenía ese resultado. No se repitió la validación final de datos ni se modificaron modelos, manifiestos o reglas de calidad.

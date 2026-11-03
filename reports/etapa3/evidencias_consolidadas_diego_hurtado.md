@@ -242,7 +242,7 @@ La revisión de seguridad documentó ocho observaciones de severidad baja en Ban
 
 Las versiones corregidas del entorno de calidad pasaron las verificaciones de compatibilidad y dependencias. La auditoría de los requisitos candidatos no encontró avisos conocidos en los paquetes revisados del entorno principal.
 
-El entorno independiente de DeepChecks conserva dos avisos conocidos relacionados con `setuptools 81.0.0`. Estos hallazgos permanecen abiertos, con restricciones de uso y seguimiento asignado a Marco y Diego Martínez.
+La revisión histórica identificó dos avisos relacionados con `setuptools 81.0.0` en DeepChecks. El [cierre adicional de Marco](cierre_adicional_marco.md) documenta su solución con 84.1.0, una adaptación acotada y pruebas de compatibilidad. La actualización requiere revisión independiente antes de integrarse.
 
 Fuente: [Reporte de seguridad del cierre](seguridad_cierre_20261101.json).
 
@@ -292,6 +292,6 @@ El README principal fue actualizado con los resultados integrados mediante el PR
 
 Las capturas y sus referencias ya están incorporadas en el inventario de Marco. La revisión visual fue completada por Diego Hurtado y las evidencias se integraron mediante el PR #40.
 
-Los dos avisos conocidos del entorno DeepChecks permanecen bajo seguimiento técnico de Marco y Diego Martínez.
+Los dos avisos de DeepChecks cuentan con una solución implementada y verificada por Marco en el [cierre adicional](cierre_adicional_marco.md). La nueva suite aprueba 245 pruebas; las cifras de 238 pruebas y las capturas anteriores se conservan como antecedentes de su propia ejecución.
 
 La validación técnica final y la consolidación visual están documentadas e integradas en main. Esta distinción evita presentar resultados históricos como si correspondieran a la ejecución definitiva.
