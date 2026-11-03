@@ -2,6 +2,10 @@ name: mibici-equipo39
 python_env: python_env.yaml
 
 entry_points:
+  reproduce:
+    parameters:
+      member: {type: string, default: config}
+    command: "python -m mibici_equipo39.reproduce --member {member}"
   ingest:
     command: >-
       python -m mibici_equipo39.dataset --verify-manifest
