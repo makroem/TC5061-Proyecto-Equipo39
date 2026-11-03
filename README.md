@@ -404,3 +404,19 @@ Para preparar una selección nueva se utiliza `--name mibici-equipo39-p1-demanda
 Resultados y límites: [arranque de Marco](reports/etapa4/arranque_marco.md), [paridad real](reports/etapa4/paridad_modelo_marco.json) y [revisión de seguridad](reports/etapa4/seguridad_api.md). La comparación local no sustituye la predicción desde el contenedor que debe documentarse al integrar FastAPI.
 
 La [captura E02 del Registry de P1](reports/etapa4/captura_registry_p1.md) muestra la versión 1, el alias `champion` y su linaje. Se conserva la imagen original proporcionada por Marco el 2 de noviembre de 2026, junto con su huella SHA-256.
+
+### Recuperación del catálogo histórico
+
+El 3 de noviembre de 2026 el portal enlaza el catálogo de octubre y la URL de septiembre responde 404. Se conserva septiembre para reproducir el modelo aprobado. Una copia histórica verificada permite continuar sin cambiar datos, partición ni modelos.
+
+`MIBICI_SOURCE_CACHE` indica una carpeta externa al repositorio que contiene `nomenclatura_2026_09.csv`. En PowerShell, usa la ruta real de tu respaldo:
+
+```powershell
+$env:MIBICI_SOURCE_CACHE = 'D:\RespaldoEquipo39'
+python -B -m mibici_equipo39.prepare_catalog
+mlflow run . -e ingest --env-manager local
+```
+
+El primer comando Python comprueba únicamente el catálogo; es opcional. La ingesta y el flujo `reproduce` aplican la misma recuperación automáticamente. El orden es: archivo local verificado, copia de la carpeta configurada, fuente oficial y, si falla, `MIBICI_STATIONS_BACKUP_URL`. Esta última debe ser una descarga HTTPS del mismo archivo, nunca la página de vista previa de una carpeta. Configurar su valor fuera de Git; no incluir credenciales en el código ni en capturas. Una URL que requiera autenticación interactiva no funciona como descarga automática.
+
+La copia y la URL alternativas requieren el SHA256 congelado; un respaldo alterado se rechaza. El modo `freeze` conserva la descarga oficial y no adopta respaldos. Los CSV permanecen fuera de Git. Todavía debe acordarse la ubicación compartida para que otro equipo sin la copia local pueda descargarla. Ver [recuperación comprobada](reports/etapa4/recuperacion_catalogo_20261103.md).
