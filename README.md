@@ -389,6 +389,15 @@ $env:MLFLOW_REGISTRY_URI = $env:MLFLOW_TRACKING_URI
 
 El primer comando descarga la versión numérica fijada y verifica las 22 huellas. Si ya está presente, comprueba el paquete sin sobrescribirlo. El segundo compara 72 entradas de calendario con una carga independiente por nombre y versión desde el Registry, verifica repetición y prueba la carga local con solicitudes de red bloqueadas. No solicita un run_id ni ejecuta entrenamiento.
 
+Para ampliar la comprobación a cinco estaciones conocidas, una desconocida, los doce meses, los siete días y las 24 horas:
+
+```powershell
+& $pythonApi -B -m mibici_equipo39.serving.verify_model --profile extended
+if ($LASTEXITCODE -ne 0) { throw 'La comparación ampliada no terminó correctamente.' }
+```
+
+Este perfil comprueba 12,096 entradas artificiales y guarda `reports/etapa4/paridad_modelo_ampliada_marco.json`, separado del resultado básico. Las estaciones conocidas se contrastan con las tablas del baseline antes de predecir. Se obtuvo diferencia máxima 0.0 en Windows; esto no mide exactitud frente a viajes reales ni demuestra compatibilidad Linux. El mes no interviene en las medias del baseline elegido. Resultados, versión del código y pendientes: [seguimiento de la comprobación ampliada](reports/etapa4/seguimiento_marco_20261102.md).
+
 Para preparar una selección nueva se utiliza `--name mibici-equipo39-p1-demanda --alias champion --output <destino-nuevo> --manifest-out <manifiesto-nuevo>`, después de una revisión del cambio. No sobrescribas el manifiesto de esta entrega para seguir un alias que haya cambiado.
 
 ### Pruebas y seguridad del arranque

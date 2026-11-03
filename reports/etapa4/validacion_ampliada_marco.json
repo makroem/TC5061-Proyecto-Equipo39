@@ -1,0 +1,81 @@
+{
+  "fecha_local": "2026-11-02",
+  "responsable": "Marco",
+  "main_integrado": "c9db414b7461cbb941ed9f79bc5dec8d3716c1a9",
+  "codigo_paridad": "24937f7a9342927599ddf4481d497e8fea125dce",
+  "pruebas_integracion": {
+    "comando": "python -m pytest tests/test_reproduce_workflow.py tests/api -q",
+    "entorno": "completo de entrenamiento y validación",
+    "resultado": {
+      "tests": 53,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "time": 1.875
+    },
+    "advertencias": 16
+  },
+  "pruebas_servicio": {
+    "comando": "python -B -m pytest tests/api -q",
+    "resultado": {
+      "tests": 38,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "time": 1.118
+    },
+    "advertencias": 14
+  },
+  "entorno_servicio": {
+    "platform": "Windows",
+    "python": "3.11.9",
+    "mlflow-skinny": "3.17.2",
+    "scikit-learn": "1.6.1",
+    "pandas": "2.2.3",
+    "numpy": "2.1.3"
+  },
+  "paridad": {
+    "comando": "python -B -m mibici_equipo39.serving.verify_model --profile extended",
+    "archivo": "paridad_modelo_ampliada_marco.json",
+    "filas": 12096,
+    "diferencia_absoluta_maxima": 0.0
+  },
+  "registry_oficial": {
+    "aliases_antes_y_despues": [
+      {
+        "name": "mibici-equipo39-p1-demanda",
+        "version": "1",
+        "run_id": "66414a8b45164d3a8f5b9f42e7cb387b"
+      },
+      {
+        "name": "mibici-equipo39-p2-riesgo",
+        "version": "1",
+        "run_id": "73804085f3944b54ac2f99542eec38be"
+      },
+      {
+        "name": "mibici-equipo39-p3-grupos",
+        "version": "1",
+        "run_id": "fb847f28e5484ff885e8ef9b44afb2d7"
+      }
+    ],
+    "sin_cambios": true
+  },
+  "bandit": {
+    "alcance": "mibici_equipo39/serving/verify_model.py",
+    "errores": 0,
+    "hallazgos": [
+      {
+        "id": "B404",
+        "severidad": "LOW"
+      }
+    ],
+    "interpretacion": "Se conserva el aviso LOW B404 por importar subprocess; la llamada usa código fijo, argumentos explícitos y no utiliza shell."
+  },
+  "limites": [
+    "No verifica HTTP, FastAPI ni un contenedor Linux.",
+    "Los casos son artificiales de calendario; no miden exactitud frente a viajes reales ni estabilidad temporal.",
+    "El baseline seleccionado no usa month para calcular la media; recorrer meses comprueba compatibilidad de entrada, no sensibilidad estacional.",
+    "Las advertencias de dependencias históricas del paquete no se eliminan modificando el modelo.",
+    "La disponibilidad de las fuentes CSV es un requisito separado: la consulta HEAD del catálogo de septiembre devolvió HTTP 404 el 2 de noviembre de 2026."
+  ]
+}
