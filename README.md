@@ -407,16 +407,24 @@ La [captura E02 del Registry de P1](reports/etapa4/captura_registry_p1.md) muest
 
 ### Recuperación del catálogo histórico
 
-El 3 de noviembre de 2026 el portal enlaza el catálogo de octubre y la URL de septiembre responde 404. Se conserva septiembre para reproducir el modelo aprobado. Una copia histórica verificada permite continuar sin cambiar datos, partición ni modelos.
+El 3 de noviembre de 2026 el portal enlaza el catálogo de octubre y la URL de septiembre responde 404. Se conserva septiembre para reproducir el modelo aprobado. Marco publicó una copia exacta en el [respaldo de Google Drive](https://drive.google.com/file/d/1O48-8Mnav45t60JtcKTka7G2QPiUCttS/view), con permiso de lectura mediante enlace. No se cambian datos, partición ni modelos.
 
-`MIBICI_SOURCE_CACHE` indica una carpeta externa al repositorio que contiene `nomenclatura_2026_09.csv`. En PowerShell, usa la ruta real de tu respaldo:
+La URL HTTPS de descarga está configurada en `config.py`. Una instalación nueva no necesita iniciar sesión en Google ni definir una URL manualmente. Desde el entorno completo del proyecto:
 
 ```powershell
-$env:MIBICI_SOURCE_CACHE = 'D:\RespaldoEquipo39'
 python -B -m mibici_equipo39.prepare_catalog
 mlflow run . -e ingest --env-manager local
 ```
 
-El primer comando Python comprueba únicamente el catálogo; es opcional. La ingesta y el flujo `reproduce` aplican la misma recuperación automáticamente. El orden es: archivo local verificado, copia de la carpeta configurada, fuente oficial y, si falla, `MIBICI_STATIONS_BACKUP_URL`. Esta última debe ser una descarga HTTPS del mismo archivo, nunca la página de vista previa de una carpeta. Configurar su valor fuera de Git; no incluir credenciales en el código ni en capturas. Una URL que requiera autenticación interactiva no funciona como descarga automática.
+El primer comando comprueba únicamente el catálogo y es opcional. La ingesta y el flujo `reproduce` aplican la misma recuperación automáticamente. El orden es: archivo local verificado, carpeta de respaldo opcional, fuente oficial y respaldo HTTPS si falla la fuente oficial.
 
-La copia y la URL alternativas requieren el SHA256 congelado; un respaldo alterado se rechaza. El modo `freeze` conserva la descarga oficial y no adopta respaldos. Los CSV permanecen fuera de Git. Todavía debe acordarse la ubicación compartida para que otro equipo sin la copia local pueda descargarla. Ver [recuperación comprobada](reports/etapa4/recuperacion_catalogo_20261103.md).
+Si ya tienes una copia histórica, puedes evitar su descarga configurando `MIBICI_SOURCE_CACHE` con la ruta real de una carpeta externa al repositorio:
+
+```powershell
+$env:MIBICI_SOURCE_CACHE = 'D:\RespaldoEquipo39'
+python -B -m mibici_equipo39.prepare_catalog
+```
+
+`MIBICI_STATIONS_BACKUP_URL` permite sustituir la ubicación HTTPS sin editar el código. Debe entregar exactamente el mismo CSV; no puede ser una página de vista previa, una carpeta ni una descarga que pida autenticación interactiva. No incluyas credenciales en código o capturas. Un valor vacío desactiva el respaldo remoto.
+
+La copia local y la descarga alternativa requieren el SHA256 congelado; cualquier contenido distinto se rechaza, incluyendo páginas de acceso o avisos de Drive. El modo `freeze` conserva la descarga oficial y no adopta respaldos. Los CSV permanecen fuera de Git. El respaldo depende de la disponibilidad de Drive y de conservar su permiso de lectura. Se verificó la descarga real sin sesión de Google y la recuperación desde un directorio sin copia local. Ver [recuperación comprobada](reports/etapa4/recuperacion_catalogo_20261103.md).

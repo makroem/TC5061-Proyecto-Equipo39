@@ -118,4 +118,7 @@ SOURCE_URLS = {
 STATIONS_URL = "https://mibici.net/site/assets/files/1118/nomenclatura_2026_09.csv"
 # Respaldo opcional del mismo archivo histórico; nunca cambia el hash esperado.
 SOURCE_CACHE_DIR = Path(os.environ["MIBICI_SOURCE_CACHE"]) if os.environ.get("MIBICI_SOURCE_CACHE") else None
-STATIONS_BACKUP_URL = os.environ.get("MIBICI_STATIONS_BACKUP_URL") or None
+STATIONS_BACKUP_URL = os.environ.get(
+    "MIBICI_STATIONS_BACKUP_URL",
+    "https://drive.google.com/uc?export=download&id=1O48-8Mnav45t60JtcKTka7G2QPiUCttS",
+) or None
