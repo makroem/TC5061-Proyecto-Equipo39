@@ -1,0 +1,15 @@
+{
+  "verified_at_utc": "2026-11-03T01:53:24.396029+00:00",
+  "responsible": "Marco",
+  "model_name": "mibici-equipo39-p1-demanda",
+  "model_version": "1",
+  "source_run_id": "66414a8b45164d3a8f5b9f42e7cb387b",
+  "bundle_sha256": "dedce1eb08bda971a42fba311224c88e56f75cd2789dbb391e9445951931bd80",
+  "rows": 72,
+  "reference_process": "isolated_python_registry_numeric_version",
+  "max_absolute_difference": 0.0,
+  "repeat_predictions_equal": true,
+  "local_requests_network_disabled": true,
+  "bundle_unchanged_after_load": true,
+  "scope": "Windows Python; no prueba de API o contenedor"
+}
