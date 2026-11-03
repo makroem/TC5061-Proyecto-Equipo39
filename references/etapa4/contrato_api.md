@@ -1,72 +1,44 @@
-# Contrato inicial de la API — Etapa 4
+# Contrato de la API P1 — Etapa 4
 
-Responsable del arranque: Marco. Fecha: 2 de noviembre de 2026.
-Base integrada: `5344be3498bd3d46459c7e905e341fd6f5aec0c2`.
+Actualización: 3 de noviembre de 2026. Implementación: Marco. Revisión independiente: Diego Hurtado.
 
 ## Modelo y alcance
 
-Se empaqueta P1, demanda esperada de viajes por estación en la hora objetivo. El Registry oficial resolvió `mibici-equipo39-p1-demanda@champion` a la versión **1**, run `66414a8b45164d3a8f5b9f42e7cb387b`, variante `baseline` (media estacional). No se vuelve a entrenar ni se modifica el alias. Nombre, versión, commit de entrenamiento, versión de datos y las 22 huellas están en [model_manifest.json](model_manifest.json).
+Se sirve P1, demanda esperada de viajes por estación en la hora objetivo. El modelo aprobado es `mibici-equipo39-p1-demanda`, versión **1**, run `66414a8b45164d3a8f5b9f42e7cb387b`, variante baseline. El manifiesto [model_manifest.json](model_manifest.json) conserva el nombre, versión, commit de entrenamiento, versión de datos y las 22 huellas.
 
-La opción elegida es descargar el paquete completo del Registry y copiarlo a la imagen. La descarga necesita acceso al almacén oficial; la inferencia usa únicamente el paquete local. Los hashes detectan cambios respecto al manifiesto aprobado; no certifican la seguridad de un modelo obtenido de una fuente desconocida. El manifiesto y el código se revisan mediante PR.
+Se descarga la versión numérica del Registry antes de construir y se incluye el paquete completo en la imagen. La inferencia no necesita acceder al Registry ni a los CSV. No se vuelve a entrenar, no se cambia el alias y se conserva la partición temporal del modelo vigente. Los hashes verifican integridad contra el manifiesto revisado; el paquete serializado debe provenir del almacén de confianza del equipo.
 
-El código integrado usa doce meses y partición temporal (`chronological_holdout`). Se conserva esta configuración. La mención a partición aleatoria en el manual inicial no describe el modelo vigente; esta etapa no modifica datos ni particiones.
+## Solicitud y validación
 
-## Interfaz para los otros módulos
+`POST /predict` recibe `{"instances": [...]}`, con entre 1 y 100 filas. Se implementó con Pydantic estricto: no convierte cadenas en enteros ni acepta booleanos como números, valores no finitos, campos adicionales o calendario incoherente.
 
-- `Settings.from_env()` entrega `model_dir` y `model_manifest` como `Path`.
-- `load_model(model_dir, manifest_path)` devuelve un `LoadedModel` con `model`, `manifest` y `predict(frame)`.
-- La carga valida inventario, firma y run antes de deserializar. Cargar una sola vez en el ciclo de inicio de FastAPI.
-- `MODEL_DIR` apunta localmente a `models/serving/p1`; en el contenedor debe ser `/app/model`.
-- `MODEL_MANIFEST` apunta al JSON versionado, copiado a una ruta conocida dentro de la imagen.
-- Usar `python -B` o `PYTHONDONTWRITEBYTECODE=1` para evitar que el código incluido en el modelo cree archivos nuevos dentro del paquete verificado.
-- El consumidor HTTP no puede proporcionar rutas, nombres de modelo, URI ni versiones arbitrarias.
-
-## Firma observada de P1
-
-La solicitud propuesta es `{"instances": [...]}`, con 1 a 100 filas. Stefania implementa los esquemas y confirma sus reglas en un PR; este documento establece el acuerdo inicial, no afirma que la API exista.
-
-| Campo | Tipo tabular exigido | Regla propuesta |
+| Campo | Tipo tabular | Regla |
 |---|---|---|
-| station_id | string/object | Texto no vacío. Mantener el identificador como texto. |
-| hour_of_day | int32 | Entero de 0 a 23. |
-| day_of_week | int32 | Entero de 0 a 6; lunes = 0. |
-| month | int32 | Entero de 1 a 12. |
-| is_weekend | int64 | 0 o 1; coherente con el día. |
-| hour_sin | float64 | seno(2π × hora / 24). |
-| hour_cos | float64 | coseno(2π × hora / 24). |
-| month_sin | float64 | seno(2π × mes / 12). |
-| month_cos | float64 | coseno(2π × mes / 12). |
+| station_id | object/string | Texto de 1 a 6 dígitos, sin ceros iniciales. |
+| hour_of_day | int32 | De 0 a 23. |
+| day_of_week | int32 | De 0 a 6, lunes = 0. |
+| month | int32 | De 1 a 12. |
+| is_weekend | int64 | 1 si el día es 5 o 6; en otro caso 0. |
+| hour_sin / hour_cos | float64 | seno/coseno de 2π × hora / 24. |
+| month_sin / month_cos | float64 | seno/coseno de 2π × mes / 12. |
 
-Rechazar valores no finitos, campos extra y entradas inconsistentes. Documentar tolerancia numérica para los campos cíclicos. El baseline tiene respaldo por estación/hora y luego media global; Stefania debe decidir y probar el tratamiento público de una estación no conocida. La comprobación técnica de Marco incluye una estación artificial no conocida, sin convertirla en recomendación de uso.
+Los valores cíclicos usan tolerancia absoluta de `1e-6`. La API acepta identificadores numéricos desconocidos: el baseline aplica su media global cuando no encuentra la estación. Esto conserva el comportamiento registrado y no acredita una estimación específica para una estación nueva; debe considerarse una respuesta de respaldo. Los ejemplos son artificiales y no contienen datos de usuarios.
 
-La respuesta propuesta contiene `model_name`, `model_version`, `model_bundle_sha256` y `predictions`. Cada predicción conserva `station_id` y `predicted_trips`, en el orden de entrada. La salida representa demanda esperada, puede ser decimal y no se redondea para las pruebas de paridad.
+La respuesta contiene `model_name`, `model_version`, `model_bundle_sha256` y `predictions`. Cada predicción conserva `station_id` y `predicted_trips` en el orden solicitado. Se devuelven valores decimales sin redondearlos; salidas negativas, no finitas o de tamaño incorrecto provocan un error controlado.
 
-## Endpoints a implementar por Diego Martinez
+## Servicio y errores
 
-- `GET /health`: proceso disponible.
-- `GET /ready`: modelo verificado y cargado; 503 si no está preparado.
-- `POST /predict`: inferencia validada; 422 para solicitudes inválidas.
-- `GET /docs`: contrato interactivo.
+- `GET /health`: 200 cuando el proceso responde.
+- `GET /ready`: 200 con el linaje cuando el modelo se cargó; 503 si falló su preparación.
+- `POST /predict`: 200 con las predicciones, 422 para solicitudes inválidas, 503 si no está preparado y 500 para un fallo de inferencia.
+- `GET /docs`: contrato interactivo; `/openapi.json` publica su definición.
 
-No exponer trazas internas al cliente. El proceso escucha `0.0.0.0:8000` dentro del contenedor; el motor publica `127.0.0.1:8000:8000` en la computadora.
+La carga verifica inventario, firma y corrida antes de deserializar, y ocurre una vez por proceso durante el inicio de FastAPI. El cliente no puede elegir rutas, modelos, URI ni versiones. Las respuestas de error no incluyen trazas, rutas internas ni el cuerpo original. Un fallo al cargar deja `/health` disponible y `/ready` en 503 para que el operador pueda diagnosticarlo y reiniciar después de corregirlo.
 
-## Entregas y dependencias
+`MODEL_DIR` usa `models/serving/p1` localmente y `/app/model` en la imagen. `MODEL_MANIFEST` indica el JSON aprobado. Ejecutar con `python -B` evita alterar el paquete con bytecode. El contenedor escucha en 8000 y se publica solo en la interfaz local del equipo.
 
-| Responsable | Puede comenzar ahora | Necesita para cerrar |
-|---|---|---|
-| Marco | Exportador, cargador, manifiesto, dependencias, seguridad y revisión de contrato. | API, esquemas y contenedor integrados para verificar un clon limpio. |
-| Stefania | `schemas.py`, `predictor.py`, ejemplos y pruebas usando esta firma. | Revisar el manifiesto y contrastar sus casos con el modelo oficial. |
-| Diego Martinez | `app.py`, errores HTTP y pruebas con cargador controlado. | Esquemas/adaptador de Stefania y cargador de Marco para inferencia real. |
-| Diego Hurtado | Revisar el PR de Marco, preparar motor y Containerfile. | API y esquemas para probar el contenedor; debe validar estas dependencias también en Linux. |
+## Responsables y continuidad
 
-El primer ensayo Linux puede usar ramas de trabajo identificadas antes del merge. No se necesita esperar a que toda la solución esté integrada para detectar incompatibilidades. El cierre desde clon limpio sí se hace sobre `main` con los PR aprobados.
+La [distribución vigente](distribucion_actual.md) sustituye las asignaciones iniciales: Marco completa esquemas, adaptador, API y preparación del contenedor; Diego Hurtado revisa y repite la validación de despliegue. Stefania y Diego Martinez realizan revisiones acotadas de ejemplos y documentación. Sus tareas no son dependencias técnicas para la implementación y pueden ser cubiertas por Marco o Diego Hurtado conservando la autoría real.
 
-## Archivos y exclusiones
-
-Versionar código de `mibici_equipo39/serving/`, `tests/api/`, requisitos, este contrato, manifiesto y resúmenes/capturas revisados. `models/serving/p1`, entornos, bases de MLflow, datos, credenciales y salidas privadas permanecen excluidos. Las reglas actuales de `.gitignore` ya lo cubren; se verificaron sin reemplazar el archivo.
-
-Diego Hurtado debe permitir el paquete P1 en el contexto de construcción aunque Git lo ignore. `.containerignore` y `.dockerignore` no deben excluir por accidente el modelo que se copiará. Usar copias explícitas, usuario sin privilegios y no incorporar la base de MLflow ni credenciales a la imagen.
-
-## Criterio de cierre
-
-Este arranque no acredita una API ni un contenedor funcionando. Falta la validación HTTP, Linux, captura de predicción real y reproducción final. Los responsables deben conservar una revisión real de otro integrante y registrar evidencia de sus pruebas.
+La captura original del Registry y los manifiestos conservan su contenido. Las pruebas HTTP locales y las pruebas desde el contenedor se documentan por separado; no se presentan como equivalentes.
