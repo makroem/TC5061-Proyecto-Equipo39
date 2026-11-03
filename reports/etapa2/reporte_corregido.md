@@ -46,11 +46,12 @@ New-Item -ItemType Directory -Force private_tracking | Out-Null
 $env:MLFLOW_TRACKING_URI = 'sqlite:///private_tracking/reproduccion.db'
 $env:MLFLOW_REGISTRY_URI = $env:MLFLOW_TRACKING_URI
 mlflow run . -e reproduce --env-manager local `
-  --experiment-name mibici-equipo39 -P member=Marco
+  --experiment-name mibici-equipo39 -P member=Marco `
+  -P approved_registry_uri=sqlite:///private_tracking/reproduccion.db
 if ($LASTEXITCODE -ne 0) { throw 'Revisar el error de reproducción.' }
 ```
 
-El flujo valida las selecciones, ejecuta la ingesta y las características, reproduce las tres preguntas y registra las hijas exactas que acaba de generar. Finalmente carga los tres modelos por alias. No solicita run_id ni busca la corrida más reciente del servidor.
+El destino debe autorizarse con approved_registry_uri y coincidir con el Registry configurado; de otro modo, el flujo se bloquea antes de ingerir, entrenar o registrar modelos. El comando autoriza solo la base independiente indicada. Después valida las selecciones, reproduce las tres preguntas, registra sus hijas exactas y carga los modelos por alias. No solicita run_id ni busca la última corrida global.
 
 El resumen se guarda como private_results/stage2/workflow_<identificador>.json y como evaluation/reproduction.json en MLflow. Para consultar la interfaz de este almacén:
 

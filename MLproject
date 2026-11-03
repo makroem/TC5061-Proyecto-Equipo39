@@ -5,7 +5,10 @@ entry_points:
   reproduce:
     parameters:
       member: {type: string, default: config}
-    command: "python -m mibici_equipo39.reproduce --member {member}"
+      approved_registry_uri: {type: string, default: unapproved}
+    command: >-
+      python -m mibici_equipo39.reproduce --member {member}
+      --approved-registry-uri {approved_registry_uri}
   ingest:
     command: >-
       python -m mibici_equipo39.dataset --verify-manifest

@@ -5,10 +5,40 @@ import copy
 import json
 from pathlib import Path
 from types import SimpleNamespace
+from unittest.mock import Mock
 
 import pytest
 
 from mibici_equipo39 import config as C, reproduce
+
+
+@pytest.mark.parametrize("uri", ["http://127.0.0.1:5000", "sqlite:///private_tracking/reproduccion.db"])
+@pytest.mark.parametrize("approval", [None, "sqlite:///otra-base.db"])
+def test_registry_writes_require_explicit_matching_destination(monkeypatch, uri, approval):
+    monkeypatch.setattr(C, "REGISTRY_URI", uri)
+    monkeypatch.setenv("MLFLOW_REGISTRY_URI", uri)
+    monkeypatch.setenv("MLFLOW_TRACKING_URI", uri)
+    monkeypatch.setenv("MLFLOW_RUN_ID", "workflow")
+    client = Mock(side_effect=AssertionError("No debe conectarse al Registry"))
+    start = Mock(side_effect=AssertionError("No debe abrir una corrida"))
+    launch = Mock(side_effect=AssertionError("No debe iniciar ingesta, entrenamiento ni registro"))
+    monkeypatch.setattr(reproduce.mlflow, "MlflowClient", client)
+    monkeypatch.setattr(reproduce.mlflow, "start_run", start)
+    monkeypatch.setattr(reproduce, "launch", launch)
+    args = ["--member", "Marco"]
+    if approval is not None:
+        args += ["--approved-registry-uri", approval]
+    with pytest.raises(ValueError, match="Registro bloqueado"):
+        reproduce.main(args)
+    client.assert_not_called()
+    start.assert_not_called()
+    launch.assert_not_called()
+
+
+def test_local_approval_does_not_authorize_an_inherited_shared_registry(monkeypatch):
+    monkeypatch.setattr(C, "REGISTRY_URI", "http://127.0.0.1:5000")
+    with pytest.raises(ValueError, match="no coincide"):
+        reproduce.validate_registry_approval("sqlite:///private_tracking/reproduccion.db")
 
 
 @pytest.fixture
@@ -73,8 +103,13 @@ def test_a_failed_parent_cannot_provide_a_child():
 
 
 @pytest.mark.parametrize("failure", [None, "p2"])
-def test_workflow_passes_generated_ids_and_stops_before_registry_on_training_failure(tmp_path, monkeypatch, failure):
+@pytest.mark.parametrize("registry_uri", ["sqlite:///private_tracking/reproduccion.db", "http://127.0.0.1:5000"])
+def test_workflow_passes_generated_ids_and_stops_before_registry_on_training_failure(tmp_path, monkeypatch, failure, registry_uri):
     calls, records = [], []
+    monkeypatch.setattr(C, "TRACKING_URI", "sqlite:///private_tracking/tracking.db")
+    monkeypatch.setattr(C, "REGISTRY_URI", registry_uri)
+    monkeypatch.setenv("MLFLOW_TRACKING_URI", "http://otro-servidor:5000")
+    monkeypatch.setenv("MLFLOW_REGISTRY_URI", "http://otro-servidor:5000")
     monkeypatch.setenv("MLFLOW_RUN_ID", "workflow")
     monkeypatch.setattr(C, "RESULTS_DIR", tmp_path)
     monkeypatch.setattr(reproduce.tracking, "git_state", lambda: ("a" * 40, False))
@@ -88,19 +123,23 @@ def test_workflow_passes_generated_ids_and_stops_before_registry_on_training_fai
     monkeypatch.setattr(reproduce, "selected_child", lambda client, pid, q, s: f"child-{pid}")
 
     def launch(entry, parameters=None):
+        assert reproduce.os.environ["MLFLOW_REGISTRY_URI"] == registry_uri
+        assert reproduce.os.environ["MLFLOW_TRACKING_URI"] == C.TRACKING_URI
+        assert reproduce.mlflow.get_registry_uri() == registry_uri
         calls.append((entry, parameters))
         if entry == "train" and parameters["question"] == failure:
             raise RuntimeError("entrenamiento fallido")
         return f"{entry}-{len(calls)}"
 
     monkeypatch.setattr(reproduce, "launch", launch)
+    args = ["--member", "Marco", "--approved-registry-uri", registry_uri]
     if failure:
         with pytest.raises(RuntimeError, match="entrenamiento fallido"):
-            reproduce.main(["--member", "Marco"])
+            reproduce.main(args)
         assert not any(entry == "registry" for entry, _ in calls)
         assert not list(tmp_path.rglob("workflow_*.json"))
     else:
-        result = reproduce.main(["--member", "Marco"])
+        result = reproduce.main(args)
         assert [c[0] for c in calls] == ["ingest", "train", "train", "train", "registry", "registry", "registry", "verify_registry"]
         assert [p["source_run_id"] for e, p in calls if e == "registry"] == ["child-train-2", "child-train-3", "child-train-4"]
         assert result["status"] == "FINISHED" and records[-1] == result

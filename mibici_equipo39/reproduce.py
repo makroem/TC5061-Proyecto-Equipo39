@@ -11,6 +11,18 @@ from mibici_equipo39 import config as C
 from mibici_equipo39.modeling import stage2, tracking
 
 
+def validate_registry_approval(approved_uri):
+    """Exige autorización explícita del destino antes de reproducir o cambiar alias."""
+    if not approved_uri or approved_uri == "unapproved":
+        raise ValueError(
+            "Registro bloqueado: indica approved_registry_uri con el destino autorizado. "
+            "Para una comprobación utiliza un almacén independiente."
+        )
+    if approved_uri != C.REGISTRY_URI:
+        raise ValueError("Registro bloqueado: el destino autorizado no coincide con MLFLOW_REGISTRY_URI.")
+    return approved_uri
+
+
 def validate_selections():
     """Comprueba las tres selecciones antes de descargar datos o entrenar."""
     data = json.loads((C.REFERENCES / "data_manifest.json").read_text(encoding="utf-8"))
@@ -71,7 +83,9 @@ def selected_child(client, parent_id, question, selection):
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--member", default="config")
+    parser.add_argument("--approved-registry-uri", default="unapproved")
     args = parser.parse_args(argv)
+    registry_uri = validate_registry_approval(args.approved_registry_uri)
     member = stage2.resolve_member(args.member)
     workflow_id = os.environ.pop("MLFLOW_RUN_ID", None)
     if not workflow_id:
@@ -79,8 +93,12 @@ def main(argv=None):
     commit, dirty = tracking.git_state()
     if dirty:
         raise RuntimeError("Hay cambios sin commit; la reproducción requiere un clon limpio.")
+    # Los procesos hijos reciben exactamente el destino comprobado, incluso si
+    # el entorno había cambiado después de importar la configuración.
+    os.environ["MLFLOW_TRACKING_URI"] = C.TRACKING_URI
+    os.environ["MLFLOW_REGISTRY_URI"] = registry_uri
     mlflow.set_tracking_uri(C.TRACKING_URI)
-    mlflow.set_registry_uri(C.REGISTRY_URI)
+    mlflow.set_registry_uri(registry_uri)
     client = mlflow.MlflowClient()
     parent = client.get_run(workflow_id)
     if client.get_experiment(parent.info.experiment_id).name != C.EXPERIMENT_NAME:

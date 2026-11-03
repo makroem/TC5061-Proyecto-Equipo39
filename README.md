@@ -299,10 +299,12 @@ El PR #19 fue aprobado por Marco e integrado en `main` mediante el commit `4ad9e
 La [guía de reproducción](reports/etapa2/reproduccion.md) describe instalación, almacén independiente, validación y límites de disponibilidad de los datos. Con el entorno fijo instalado y las variables de tracking configuradas:
 
 ```powershell
-mlflow run . -e reproduce --env-manager local --experiment-name mibici-equipo39 -P member=Marco
+mlflow run . -e reproduce --env-manager local --experiment-name mibici-equipo39 -P member=Marco -P approved_registry_uri=sqlite:///private_tracking/reproduccion.db
 ```
 
 El punto de entrada encadena ingesta, reproducción de las tres selecciones, registro y carga por alias. Obtiene los identificadores de las corridas recién generadas; no requiere `Read-Host` ni copiar un `run_id`. `references/etapa2/selection.json` ya contiene las selecciones aprobadas y sus umbrales. No se edita durante una reproducción.
+
+El registro está bloqueado por defecto. `approved_registry_uri` autoriza expresamente el destino y debe coincidir exactamente con `MLFLOW_REGISTRY_URI` (o con el tracking si no se definió un Registry separado). El valor literal del ejemplo autoriza solo la base independiente indicada: una configuración hacia el servidor oficial se rechaza antes de iniciar los pasos. MLflow Projects puede crear la corrida contenedora antes de esa comprobación, pero no se inicia la ingesta ni se registran modelos o cambian alias. El parámetro se registra en MLflow; no incluir credenciales en la URI.
 
 El registro se realiza en el almacén configurado. Para una comprobación usar una base independiente, como indica la guía, y no el servidor oficial. El 2 de noviembre de 2026 la descarga nueva del catálogo respondió 404; la prueba con copias históricas verificadas no elimina esa limitación externa.
 

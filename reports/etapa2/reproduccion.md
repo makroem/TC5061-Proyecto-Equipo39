@@ -26,7 +26,7 @@ Para comprobar la reproducción sin escribir en el servidor oficial, usar una ba
 New-Item -ItemType Directory -Force private_tracking | Out-Null
 $env:MLFLOW_TRACKING_URI = 'sqlite:///private_tracking/reproduccion.db'
 $env:MLFLOW_REGISTRY_URI = $env:MLFLOW_TRACKING_URI
-mlflow run . -e reproduce --env-manager local --experiment-name mibici-equipo39 -P member=Marco
+mlflow run . -e reproduce --env-manager local --experiment-name mibici-equipo39 -P member=Marco -P approved_registry_uri=sqlite:///private_tracking/reproduccion.db
 if ($LASTEXITCODE -ne 0) { throw 'La reproducción no terminó; consultar el error antes de continuar.' }
 ```
 
@@ -36,9 +36,13 @@ El resultado queda en `private_results/stage2/workflow_<identificador>.json` y e
 
 ## Selecciones y control del registro
 
+El flujo bloquea el registro por defecto. El parámetro `approved_registry_uri` debe indicar literalmente el destino autorizado y coincidir con `MLFLOW_REGISTRY_URI`; si esta variable no existe, se utiliza el destino de tracking configurado. La comprobación ocurre antes de conectarse al Registry, ingerir datos o entrenar. MLflow Projects puede crear su corrida contenedora antes del bloqueo; esa corrida fallida no crea versiones ni cambia aliases.
+
+El comando documentado autoriza únicamente `sqlite:///private_tracking/reproduccion.db`. Si el entorno apunta al servidor oficial, el comando se rechaza. Para autorizar deliberadamente otro destino se debe revisar su URI y escribirla explícitamente en el parámetro; no sustituir el valor literal por una variable que acepte inadvertidamente cualquier servidor. Los procesos hijos reciben el destino validado. El parámetro queda registrado en MLflow y no debe contener contraseñas ni tokens.
+
 `references/etapa2/selection.json` ya forma parte del repositorio. Contiene P1 baseline, P2 logística C=0.1 con umbrales 0.65 y 0.70, y P3 GMM de tres componentes. El flujo verifica la versión de datos, la partición, los hiperparámetros y la calibración antes de entrenar. No hay que editar ese archivo para repetir la selección aprobada. Una futura selección distinta debe discutirse y versionarse en otro PR antes de reproducirla.
 
-Si un entrenamiento falla, no se inicia ningún registro. El registro verifica origen, estado, firma y carga antes de asignar cada alias. La asignación de los tres alias es secuencial, no transaccional; un fallo durante registro puede dejar una parte registrada en el almacén elegido. Por eso la comprobación se hace en un almacén independiente y se revisa `verify_registry` al final. No se promueve automáticamente una corrida al servidor oficial.
+Si un entrenamiento falla, no se inicia ningún registro. El registro verifica origen, estado, firma y carga antes de asignar cada alias. La asignación de los tres alias es secuencial, no transaccional; un fallo durante registro puede dejar una parte registrada en el almacén autorizado. Por eso la comprobación se hace en un almacén independiente y se revisa `verify_registry` al final. El servidor oficial requiere una autorización explícita de su destino; el comando de comprobación anterior no la concede.
 
 Los puntos de entrada `train`, `registry` y `verify_registry` siguen disponibles para tareas específicas; ya no son pasos manuales necesarios de la reproducción completa.
 
@@ -55,6 +59,12 @@ El comando completo terminó en el commit `d3ddd10`, desde una copia limpia del 
 La corrida del flujo es `1506890ec2ca4b2f9f8c9f853d7565f7` y la verificación final es `397bd04519c3497299c06be2813c2ee1`. Los identificadores detallados y límites constan en [validacion_correcciones_20261102.json](validacion_correcciones_20261102.json).
 
 Pasaron 101 pruebas del flujo, los adaptadores, los artefactos y el registro, con 0 fallos y 21 advertencias, en 579.56 segundos. No se repitió toda la auditoría de seguridad de la tercera etapa. El intento inicial sin caché que devolvió 404 queda documentado y no se presenta como una descarga exitosa.
+
+## Comprobación adicional de la protección del Registry
+
+La protección del destino pasó 22 pruebas del flujo, sin fallos ni omisiones. Se ejecutó también `mlflow run` con la autorización predeterminada ausente y una base SQLite nueva: terminó con el bloqueo previsto, sin modelos, versiones ni aliases registrados. La corrida contenedora quedó como `FAILED`, que es el resultado esperado de este ensayo. Bandit no encontró hallazgos en `reproduce.py`.
+
+Los casos comprueban que una autorización local no permite escribir en el servidor compartido, que los procesos hijos heredan el destino validado y que se conservan los controles de selección y vínculo entre corridas. El detalle está en [validacion_proteccion_registry_20261102.json](validacion_proteccion_registry_20261102.json). Este ensayo complementa las pruebas históricas; no repite el entrenamiento ni modifica el Registry oficial.
 
 ## Revisión de Diego Hurtado
 
