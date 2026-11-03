@@ -1,0 +1,28 @@
+{
+  "checked_at_utc": "2026-11-03T21:57:45.5937182Z",
+  "container_name": "mibici-e39-p1-20261103",
+  "container_id": "cd0c5361e6a7276829223c2af751a683281edeef2069f3fbab023fe04778cbce",
+  "image_id": "sha256:69cc6de014e04336aa5e39da7253a2e209739441a228e1275d581045c2498242",
+  "os": "linux",
+  "architecture": "amd64",
+  "state": "running",
+  "health": "healthy",
+  "user": "10001:10001",
+  "readonly_rootfs": true,
+  "cap_drop": [
+    "ALL"
+  ],
+  "security_options": [
+    "no-new-privileges:true"
+  ],
+  "ports": {
+    "8000/tcp": [
+      {
+        "HostIp": "127.0.0.1",
+        "HostPort": "18040"
+      }
+    ]
+  },
+  "code_commit": "73204ca",
+  "docker_version": "29.9.2"
+}

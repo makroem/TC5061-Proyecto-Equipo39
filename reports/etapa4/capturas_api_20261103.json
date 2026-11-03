@@ -1,0 +1,22 @@
+{
+  "captures": [
+    {
+      "file": "evidence/E03_api_contenedor_respuesta_200.jpg",
+      "sha256": "b0e34ec1e603706ffae065b5f06f577dbd475fd571a9d73c45be400902b2d2a5",
+      "bytes": 34407,
+      "captured_at_utc": "2026-11-03T22:02:24.891105+00:00",
+      "source_url": "http://127.0.0.1:18040/docs#/default/predict_predict_post",
+      "description": "Captura original del navegador tras ejecutar el ejemplo válido. Sin edición de imagen."
+    },
+    {
+      "file": "evidence/E04_api_contenedor_pagina_completa.jpg",
+      "sha256": "496de42a009174e8d84d186d211c6684f8b5236ce78c5d8eb71dd4f1ed592040",
+      "bytes": 187920,
+      "captured_at_utc": "2026-11-03T22:02:25.484697+00:00",
+      "source_url": "http://127.0.0.1:18040/docs#/default/predict_predict_post",
+      "description": "Captura original del navegador tras ejecutar el ejemplo válido. Sin edición de imagen."
+    }
+  ],
+  "code_commit": "73204ca",
+  "container_image": "sha256:69cc6de014e04336aa5e39da7253a2e209739441a228e1275d581045c2498242"
+}

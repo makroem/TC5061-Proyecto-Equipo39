@@ -1,0 +1,36 @@
+{
+  "checked_at_utc": "2026-11-03T21:57:44.296287+00:00",
+  "transport": "HTTP",
+  "service_url": "http://127.0.0.1:18040",
+  "rows": 72,
+  "status_codes": {
+    "/health": 200,
+    "/ready": 200,
+    "/docs": 200
+  },
+  "invalid_inputs_status": 422,
+  "repeat_identical": true,
+  "max_abs_difference": 0.0,
+  "model_name": "mibici-equipo39-p1-demanda",
+  "model_version": "1",
+  "bundle_sha256": "dedce1eb08bda971a42fba311224c88e56f75cd2789dbb391e9445951931bd80",
+  "bundle_unchanged": true,
+  "example": {
+    "input": {
+      "station_id": "10",
+      "hour_of_day": 0,
+      "day_of_week": 5,
+      "month": 6,
+      "is_weekend": 1,
+      "hour_sin": 0.0,
+      "hour_cos": 1.0,
+      "month_sin": 1.2246467991473532e-16,
+      "month_cos": -1.0
+    },
+    "output": {
+      "station_id": "10",
+      "predicted_trips": 0.14285714285714285
+    }
+  },
+  "scope": "HTTP against local package; container execution requires engine evidence."
+}
