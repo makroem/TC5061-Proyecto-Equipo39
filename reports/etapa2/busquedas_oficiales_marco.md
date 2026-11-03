@@ -88,3 +88,8 @@ El cierre documental de reproducción y registro se integró mediante el PR #25,
 Las [capturas de la interfaz](capturas_mlflow_marco.md) ya están preparadas y revisadas visualmente. Quedan su revisión por otro integrante y la incorporación al reporte consolidado. Los responsables, dependencias y archivos de comprobación están en el [cierre técnico](cierre_tecnico_marco.md).
 
 La base historica se respaldo antes de agregar las corridas. Se conserva el intento de ingesta fallido por configuración inicial del entorno, seguido por la reconstruccion verificada. No se incluyen viajes, Parquet, bases SQLite, carpetas de MLflow ni modelos serializados en Git.
+
+
+## Actualización documental del 2 de noviembre de 2026
+
+Las tablas de este documento mantienen los resultados históricos. El análisis ampliado de costo y estabilidad está en [P1](p1.md) y [P2](p2.md). La [reproducción actual](reproduccion.md) ya no solicita identificadores. Marco prepara la corrección del reporte y Diego Hurtado realiza la revisión independiente; no se reabren las selecciones históricas.

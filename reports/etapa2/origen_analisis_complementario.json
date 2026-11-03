@@ -1,0 +1,38 @@
+{
+  "date": "2026-11-02",
+  "sources": [
+    {
+      "source": "runs:/0a540d20ad8d4edc8290a85c64de79f1/plots/monthly_mae.csv",
+      "sha256": "d6bc45a76682c8d1c6b2fbfd15e23ddce6fb5f4dfaad9b983f91c38eaee398fe"
+    },
+    {
+      "source": "runs:/85c05dad49944fff856f7ff00601632b/plots/monthly_mae.csv",
+      "sha256": "efdba4e732a83fce737916d28150838418dcfdce6c147db86486e7323cbea342"
+    },
+    {
+      "source": "runs:/ad8fad3ebaf94e07a1f5d673f1609b9e/plots/monthly_mae.csv",
+      "sha256": "def5a9f69912a6663575fafea254d91453dd351594c071e9e47aba50f2392bcd"
+    },
+    {
+      "source": "runs:/9bb2a49e849b4c8f8e7d34406ea77eb4/plots/monthly_mae.csv",
+      "sha256": "b549a82761e4e81892f204a0c5394caa5668e0db63a5676e500e107e6aed76b8"
+    },
+    {
+      "source": "runs:/0a540d20ad8d4edc8290a85c64de79f1/plots/error_por_hora.csv",
+      "sha256": "926f7c32ab3f7dc1735f588420a4f2381a1ef3112cbc234be8e15950e7209bb5"
+    },
+    {
+      "source": "runs:/85c05dad49944fff856f7ff00601632b/plots/error_por_hora.csv",
+      "sha256": "00146670f9a84969a9068ea41bcd0ab8abbc434b161cd8565f04434923aa53d9"
+    },
+    {
+      "source": "runs:/ad8fad3ebaf94e07a1f5d673f1609b9e/plots/error_por_hora.csv",
+      "sha256": "c963729fc02531086ddaddaea86a728610d37fe076dcd97aa48e9a7936ea3ff5"
+    },
+    {
+      "source": "runs:/9bb2a49e849b4c8f8e7d34406ea77eb4/plots/error_por_hora.csv",
+      "sha256": "eec8f87fdb9f94e707d4e3bd0c1f70024f4f63e80c39c3c8fe71fff87b671d1c"
+    }
+  ],
+  "note": "Extractos agregados de artefactos oficiales históricos; sin nuevos ajustes ni datos individuales."
+}

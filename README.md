@@ -294,30 +294,21 @@ participa en el desempate.
 El PR #19 fue aprobado por Marco e integrado en `main` mediante el commit `4ad9e03`.
 
 
-### Registro de modelos
+### Reproducción completa y registro
 
-Después de contar con una selección oficial aprobada, el punto
-de entrada `registry` permite registrar la corrida seleccionada.
-
-```powershell
-mlflow run . -e registry --env-manager local --experiment-name mibici-equipo39 -P question=p3 -P source_run_id=ID_REAL_DEL_RUN
-```
-
-`ID_REAL_DEL_RUN` debe sustituirse por el identificador real de la
-corrida seleccionada. No es un comando que deba ejecutarse antes
-de disponer de dicha selección.
-
-El registro verifica trazabilidad, versiones y carga del modelo
-antes de asignar el alias `champion`.
-
-### Verificación del Model Registry
+La [guía de reproducción](reports/etapa2/reproduccion.md) describe instalación, almacén independiente, validación y límites de disponibilidad de los datos. Con el entorno fijo instalado y las variables de tracking configuradas:
 
 ```powershell
-mlflow run . -e verify_registry --env-manager local --experiment-name mibici-equipo39
+mlflow run . -e reproduce --env-manager local --experiment-name mibici-equipo39 -P member=Marco
 ```
 
-La verificación carga los modelos registrados por alias y contrasta
-sus predicciones con los ejemplos almacenados.
+El punto de entrada encadena ingesta, reproducción de las tres selecciones, registro y carga por alias. Obtiene los identificadores de las corridas recién generadas; no requiere `Read-Host` ni copiar un `run_id`. `references/etapa2/selection.json` ya contiene las selecciones aprobadas y sus umbrales. No se edita durante una reproducción.
+
+El registro se realiza en el almacén configurado. Para una comprobación usar una base independiente, como indica la guía, y no el servidor oficial. El 2 de noviembre de 2026 la descarga nueva del catálogo respondió 404; la prueba con copias históricas verificadas no elimina esa limitación externa.
+
+### Reporte corregido
+
+El [reporte editable](reports/etapa2/ReporteParte2_MLflow_Equipo39.docx) y su [PDF](reports/etapa2/TC5061_Reporte_MLFlow_Equipo39.pdf) integran las tablas y capturas oficiales, el análisis de costo y estabilidad y la distinción entre evidencia histórica y validación del flujo actual. Las correcciones se implementan por Marco y su revisión independiente corresponde a Diego Hurtado.
 
 ### Evidencia y resultados
 

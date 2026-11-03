@@ -42,7 +42,7 @@ Las tablas completas, con hiperparámetros y métricas, están en [P1](p1_compar
 
 1. Usar las capturas de búsquedas y comparaciones en la sección de resultados de cada pregunta; conservar los pies de imagen y el orden de las columnas. Mostrar las tablas numéricas con al menos seis decimales cuando sea necesario distinguir variantes.
 2. Incorporar las vistas de artefactos y los tres modelos registrados en la sección de evidencias del paso 10. Presentar los recortes junto con su contexto e identificador de corrida.
-3. Diego Hurtado consolida el Word y el PDF con los resultados e interpretaciones ya revisados. Otro integrante revisa este conjunto de capturas mediante Pull Request; Marco podrá integrarlo después de la aprobación.
+3. Marco consolida la versión corregida del Word y PDF. Diego Hurtado revisa su correspondencia con este conjunto de capturas mediante Pull Request; Marco podrá integrarlo después de su aprobación.
 4. El integrante designado por el equipo confirma el envío en Canvas y conserva el comprobante. Estas capturas no acreditan ese envío.
 
 No se ejecutaron nuevos entrenamientos ni se modificaron modelos para obtener estas vistas.

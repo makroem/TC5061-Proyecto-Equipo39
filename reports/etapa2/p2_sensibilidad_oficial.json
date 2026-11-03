@@ -1,0 +1,74 @@
+{
+  "source": "runs:/73804085f3944b54ac2f99542eec38be/evaluation/summary.json",
+  "source_sha256": "b7c38244d2ddf5b0d378e1700c13a9001c12264e4fa96462e2e5e2dcf2eebfc2",
+  "initial_occupancy_sensitivity": {
+    "validation": {
+      "0.25": {
+        "bikes": {
+          "prevalence": 0.05057848928658814,
+          "changed_vs_main": 0.0473554359350787,
+          "support_positive": 34728,
+          "recall": 0.5545093296475466,
+          "precision": 0.18489500820923466
+        },
+        "docks": {
+          "prevalence": 0.0004310997704685006,
+          "changed_vs_main": 0.0038303797173383667,
+          "support_positive": 296,
+          "recall": 0.956081081081081,
+          "precision": 0.003157460197034442
+        }
+      },
+      "0.75": {
+        "bikes": {
+          "prevalence": 0.00037138662658603937,
+          "changed_vs_main": 0.0028516667249233922,
+          "support_positive": 255,
+          "recall": 0.9333333333333333,
+          "precision": 0.002285143685610316
+        },
+        "docks": {
+          "prevalence": 0.0586339380381465,
+          "changed_vs_main": 0.054372458550339633,
+          "support_positive": 40259,
+          "recall": 0.4880896197123625,
+          "precision": 0.21923707728525366
+        }
+      }
+    },
+    "test": {
+      "0.25": {
+        "bikes": {
+          "prevalence": 0.06179873466391695,
+          "changed_vs_main": 0.057425110979062534,
+          "support_positive": 42432,
+          "recall": 0.5741892911010558,
+          "precision": 0.2087728468479276
+        },
+        "docks": {
+          "prevalence": 0.0006175212928332576,
+          "changed_vs_main": 0.005058140212287509,
+          "support_positive": 424,
+          "recall": 0.9386792452830188,
+          "precision": 0.004153968187700914
+        }
+      },
+      "0.75": {
+        "bikes": {
+          "prevalence": 0.0004514896244771459,
+          "changed_vs_main": 0.003922134060377271,
+          "support_positive": 310,
+          "recall": 0.9516129032258065,
+          "precision": 0.0025278275250426303
+        },
+        "docks": {
+          "prevalence": 0.07038140678341315,
+          "changed_vs_main": 0.06470574527829238,
+          "support_positive": 48325,
+          "recall": 0.47149508535954476,
+          "precision": 0.23780946019287771
+        }
+      }
+    }
+  }
+}

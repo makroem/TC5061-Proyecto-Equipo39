@@ -52,57 +52,15 @@ El alias `champion` identifica la versión elegida para producción académica. 
 
 La verificación independiente se ejecutó mediante `mlflow run . -e verify_registry`, corrida `77d302adcd404ab7aa8be53c4eeb2896`, con estado `FINISHED`. Cada versión conserva descripción, corrida de origen, commit, versión de datos y partición. El registro reside en el servidor local del equipo; las bases y los modelos no se publican en GitHub.
 
-## Comandos de reproducción
+## Reproducción y actualización del reporte
 
-Desde un clon limpio, seguir primero la instalación y el inicio del servidor descritos en el [README](../../README.md) y el [contrato de infraestructura](../../references/etapa2/contrato_infraestructura.md). Para reproducir exactamente este corte, usar el commit `288a592aba240983c8d21c8128c16be4cbf0f2df`. En PowerShell, con el entorno de dependencias fijas activo y el servidor en ejecución:
+Este documento conserva el cierre técnico histórico del 27 de octubre de 2026. Para ejecutar el código actual usar la [guía sin entrada manual](reproduccion.md). El punto de entrada `reproduce` utiliza las selecciones aprobadas ya versionadas y obtiene automáticamente los identificadores nuevos.
 
-```powershell
-$env:MLFLOW_TRACKING_URI = "http://127.0.0.1:5000"
-$env:MLFLOW_REGISTRY_URI = $env:MLFLOW_TRACKING_URI
-mlflow run . -e ingest --env-manager local --experiment-name mibici-equipo39
-foreach ($pregunta in @("p1", "p2", "p3")) {
-    mlflow run . -e train --env-manager local --experiment-name mibici-equipo39 -P question=$pregunta -P model=selected -P mode=reproduce -P member=Marco
-    if ($LASTEXITCODE -ne 0) { throw "Revisar la ejecución de $pregunta antes de continuar." }
-}
-```
+El [reporte editable](ReporteParte2_MLflow_Equipo39.docx) y el [PDF corregido](TC5061_Reporte_MLFlow_Equipo39.pdf) incorporan las comparaciones y las capturas oficiales. La ampliación de [P1](p1.md) y [P2](p2.md) documenta costo y estabilidad con resultados comprobables. Las figuras del 28 de octubre se mantienen identificadas como evidencia histórica; una validación posterior en un almacén aislado no las sustituye.
 
-Para registrar una reproducción nueva, tomar el identificador de su corrida hija del resumen generado y utilizar el punto de entrada `registry`. Los identificadores de esta evidencia pertenecen al servidor donde se ejecutó el cierre; un servidor nuevo genera otros.
+La corrección corresponde a Marco y la revisión independiente a Diego Hurtado. La integración requiere su aprobación y el cumplimiento de las protecciones de main. No se atribuye esta revisión a los demás integrantes. El envío o la aceptación del reporte corregido por el docente se confirma por separado.
 
-```powershell
-$pregunta = "p1"
-$corrida = Read-Host "Identificador de la corrida hija reproducida para p1"
-mlflow run . -e registry --env-manager local --experiment-name mibici-equipo39 -P question=$pregunta -P source_run_id=$corrida
-```
-
-Repetir el registro para P2 y P3 con sus identificadores. Una vez registrados los tres:
-
-```powershell
-mlflow run . -e verify_registry --env-manager local --experiment-name mibici-equipo39
-```
-
-## Límites y pendientes de entrega
-
-P1 conserva el baseline porque los tres candidatos tuvieron mayor MAE de validación. P2 mejora F1 frente al baseline, pero su precisión de prueba es baja y las etiquetas representan un riesgo aproximado sin inventario observado. P3 cumple la elegibilidad de entrenamiento y gana en silhouette de validación, aunque tiene menor estabilidad ARI y menor silhouette de prueba que el baseline. Estas limitaciones permanecen en la interpretación; el registro no las corrige.
-
-| Pendiente | Responsable | Qué necesita |
-|---|---|---|
-| Revisar las 19 capturas y su índice | Diego Hurtado o Diego Martinez | Conjunto publicado en el PR de evidencias de Marco |
-| Integrar el PR de capturas | Marco | Aprobación válida de otro integrante y protecciones de main |
-| Consolidar Word y PDF de la entrega | Diego Hurtado, con las aportaciones del equipo | Incorporar los resultados y la interpretación de P3 ya integrados, las capturas revisadas y las referencias APA 7 |
-| Confirmar el envío en Canvas | Integrante designado por el equipo | PDF final y comprobante de entrega |
-
-El Word previo contiene un corte anterior y debe actualizarse antes de presentarlo como reporte final. La evidencia técnica disponible no acredita el envío en Canvas.
-
-### Consulta y comprobación de las capturas
-
-Con el servidor del equipo en ejecución, abrir `http://127.0.0.1:5000` y seleccionar el experimento `mibici-equipo39`. No es necesario repetir las búsquedas ni registrar nuevas versiones para obtener estas capturas.
-
-1. Mostrar las búsquedas oficiales de P1, P2 y P3 con la corrida padre expandida y sus cuatro variantes. Abrir la comparación del baseline y las tres candidatas de cada pregunta; verificar que sean legibles los nombres, las métricas de validación y prueba y los hiperparámetros relevantes. Si la tabla no cabe, tomar capturas complementarias que permitan identificar las mismas corridas.
-2. Abrir una corrida candidata oficial y su pestaña de artefactos. Mostrar el modelo con firma y ejemplo de entrada, los manifiestos en `data/`, la configuración en `config/` y al menos una gráfica en `plots/`. Las gráficas guardadas por el modelo complementan esta evidencia; no sustituyen la captura de la interfaz.
-3. En Models, mostrar los tres modelos de la tabla anterior. Abrir la versión 1 de cada uno y capturar el alias `champion`, la corrida de origen y su linaje: commit, versión de datos y partición. Cuando esos campos estén en la corrida vinculada, incluir también esa pantalla.
-4. Comprobar las imágenes antes de incorporarlas al reporte: texto legible, columnas relevantes visibles, identidad de la corrida y ausencia de credenciales o información personal ajena al proyecto. Una imagen recortada que omite los resultados no cierra este pendiente.
-
-El [índice de 19 capturas](capturas_mlflow_marco.md) permite consultar las vistas generadas y sus corridas. Las imágenes de artefactos incluyen recortes identificados; el índice describe su alcance. Los hiperparámetros completos se conservan en los CSV de comparación. La revisión del PR y la incorporación al reporte siguen pendientes; disponer de estas imágenes no acredita el envío de la entrega.
+Las limitaciones de los modelos permanecen: P1 conserva el baseline, P2 tiene baja precisión y usa un proxy, y P3 presenta menor separación de prueba y menor estabilidad que su baseline. La guía documenta además el 404 observado en la descarga del catálogo el 2 de noviembre; no se declara resuelta la descarga desde cero.
 
 ## Archivos de evidencia
 

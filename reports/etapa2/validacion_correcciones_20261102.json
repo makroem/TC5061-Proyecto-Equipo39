@@ -1,0 +1,462 @@
+{
+  "date": "2026-11-02",
+  "executor": "Marco",
+  "reviewer_requested": "Diego Hurtado",
+  "code_commit": "d3ddd1076fd336716d5badd660cdd4d31d81cff3",
+  "environment": {
+    "python": "3.11.9",
+    "mlflow": "3.17.2",
+    "pyarrow": "23.0.1"
+  },
+  "validation_scope": "Clon limpio de código; fuentes históricas disponibles en cache verificadas por los 13 hashes; almacén independiente, sin escribir en el oficial.",
+  "fresh_download_status": "BLOCKED_HTTP_404_STATION_CATALOG",
+  "workflow": {
+    "workflow_run_id": "1506890ec2ca4b2f9f8c9f853d7565f7",
+    "git_commit": "d3ddd1076fd336716d5badd660cdd4d31d81cff3",
+    "status": "FINISHED",
+    "ingest": "837e0ba904e44a06ae93301cabf175b5",
+    "questions": {
+      "p1": {
+        "parent_run_id": "a3a2e6472ed54900a13ed063a9faeeca",
+        "source_run_id": "f10abba5dded4907bcf243d08d2ab11c",
+        "registry_run_id": "e5b30782260f4bd58e1e082e710e8afc"
+      },
+      "p2": {
+        "parent_run_id": "6088a70c446a4d76a65570fd137c009c",
+        "source_run_id": "b465238ea80a4cf3bc7eec2c08cc29f2",
+        "registry_run_id": "c3dd77fd95664a0ca73ec36072388cb5"
+      },
+      "p3": {
+        "parent_run_id": "72d582d5740443d8bf91863ae0e83502",
+        "source_run_id": "0c2130398492435290816858d0f2c029",
+        "registry_run_id": "540f55405e3a423b8e272e60cc8e6371"
+      }
+    },
+    "verification_run_id": "397bd04519c3497299c06be2813c2ee1"
+  },
+  "registry": {
+    "p1": {
+      "name": "mibici-equipo39-p1-demanda",
+      "version": "1",
+      "alias": "champion",
+      "source_run_id": "f10abba5dded4907bcf243d08d2ab11c",
+      "source_kind": "reproduction",
+      "variant_id": "baseline",
+      "git_commit": "d3ddd1076fd336716d5badd660cdd4d31d81cff3",
+      "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+      "split_version": "3",
+      "delivery": "A6",
+      "load_check": "ok"
+    },
+    "p2": {
+      "name": "mibici-equipo39-p2-riesgo",
+      "version": "1",
+      "alias": "champion",
+      "source_run_id": "b465238ea80a4cf3bc7eec2c08cc29f2",
+      "source_kind": "reproduction",
+      "variant_id": "p2_lr_0.1",
+      "git_commit": "d3ddd1076fd336716d5badd660cdd4d31d81cff3",
+      "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+      "split_version": "3",
+      "delivery": "A6",
+      "load_check": "ok"
+    },
+    "p3": {
+      "name": "mibici-equipo39-p3-grupos",
+      "version": "1",
+      "alias": "champion",
+      "source_run_id": "0c2130398492435290816858d0f2c029",
+      "source_kind": "reproduction",
+      "variant_id": "p3_gmm_3",
+      "git_commit": "d3ddd1076fd336716d5badd660cdd4d31d81cff3",
+      "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+      "split_version": "3",
+      "delivery": "A6",
+      "load_check": "ok"
+    }
+  },
+  "comparisons": {
+    "p1": {
+      "run_id": "f10abba5dded4907bcf243d08d2ab11c",
+      "metrics_compared": 6,
+      "all_match": true,
+      "metrics": {
+        "train_mae": {
+          "official": 0.7957515488602567,
+          "reproduced": 0.7957515488602567,
+          "matches": true
+        },
+        "train_rmse": {
+          "official": 1.4562388690213468,
+          "reproduced": 1.4562388690213468,
+          "matches": true
+        },
+        "val_mae": {
+          "official": 0.8887753519818337,
+          "reproduced": 0.8887753519818337,
+          "matches": true
+        },
+        "val_rmse": {
+          "official": 1.6964149888983533,
+          "reproduced": 1.6964149888983533,
+          "matches": true
+        },
+        "test_mae": {
+          "official": 0.916381318621011,
+          "reproduced": 0.916381318621011,
+          "matches": true
+        },
+        "test_rmse": {
+          "official": 1.7182335253495016,
+          "reproduced": 1.7182335253495016,
+          "matches": true
+        }
+      }
+    },
+    "p2": {
+      "run_id": "b465238ea80a4cf3bc7eec2c08cc29f2",
+      "metrics_compared": 45,
+      "all_match": true,
+      "metrics": {
+        "train_recall_bikes": {
+          "official": 0.8380599710982659,
+          "reproduced": 0.8380599710982659,
+          "matches": true
+        },
+        "train_precision_bikes": {
+          "official": 0.024308457268304696,
+          "reproduced": 0.024308457268304696,
+          "matches": true
+        },
+        "train_f1_bikes": {
+          "official": 0.04724650004709884,
+          "reproduced": 0.04724650004709884,
+          "matches": true
+        },
+        "train_support_positive_bikes": {
+          "official": 11072.0,
+          "reproduced": 11072.0,
+          "matches": true
+        },
+        "train_ap_bikes": {
+          "official": 0.04547883650319656,
+          "reproduced": 0.04547883650319656,
+          "matches": true
+        },
+        "train_prevalence_bikes": {
+          "official": 0.004047955402294816,
+          "reproduced": 0.004047955402294816,
+          "matches": true
+        },
+        "train_alerts_per_1000_bikes": {
+          "official": 139.55757660843344,
+          "reproduced": 139.55757660843344,
+          "matches": true
+        },
+        "train_recall_docks": {
+          "official": 0.7808558877710076,
+          "reproduced": 0.7808558877710076,
+          "matches": true
+        },
+        "train_precision_docks": {
+          "official": 0.03588850174216028,
+          "reproduced": 0.03588850174216028,
+          "matches": true
+        },
+        "train_f1_docks": {
+          "official": 0.06862305575273035,
+          "reproduced": 0.06862305575273035,
+          "matches": true
+        },
+        "train_support_positive_docks": {
+          "official": 14114.0,
+          "reproduced": 14114.0,
+          "matches": true
+        },
+        "train_ap_docks": {
+          "official": 0.11427336752307139,
+          "reproduced": 0.11427336752307139,
+          "matches": true
+        },
+        "train_prevalence_docks": {
+          "official": 0.0051601194497822465,
+          "reproduced": 0.0051601194497822465,
+          "matches": true
+        },
+        "train_alerts_per_1000_docks": {
+          "official": 112.27299715414696,
+          "reproduced": 112.27299715414696,
+          "matches": true
+        },
+        "train_macro_f1": {
+          "official": 0.057934777899914594,
+          "reproduced": 0.057934777899914594,
+          "matches": true
+        },
+        "val_recall_bikes": {
+          "official": 0.8088567555354722,
+          "reproduced": 0.8088567555354722,
+          "matches": true
+        },
+        "val_precision_bikes": {
+          "official": 0.0171865848623633,
+          "reproduced": 0.0171865848623633,
+          "matches": true
+        },
+        "val_f1_bikes": {
+          "official": 0.0336580045880185,
+          "reproduced": 0.0336580045880185,
+          "matches": true
+        },
+        "val_support_positive_bikes": {
+          "official": 2213.0,
+          "reproduced": 2213.0,
+          "matches": true
+        },
+        "val_ap_bikes": {
+          "official": 0.030978830953398803,
+          "reproduced": 0.030978830953398803,
+          "matches": true
+        },
+        "val_prevalence_bikes": {
+          "official": 0.003223053351509432,
+          "reproduced": 0.003223053351509432,
+          "matches": true
+        },
+        "val_alerts_per_1000_bikes": {
+          "official": 151.68740606102975,
+          "reproduced": 151.68740606102975,
+          "matches": true
+        },
+        "val_recall_docks": {
+          "official": 0.8075871496924129,
+          "reproduced": 0.8075871496924129,
+          "matches": true
+        },
+        "val_precision_docks": {
+          "official": 0.026364234790079103,
+          "reproduced": 0.026364234790079103,
+          "matches": true
+        },
+        "val_f1_docks": {
+          "official": 0.051061530981578514,
+          "reproduced": 0.051061530981578514,
+          "matches": true
+        },
+        "val_support_positive_docks": {
+          "official": 2926.0,
+          "reproduced": 2926.0,
+          "matches": true
+        },
+        "val_ap_docks": {
+          "official": 0.05156742735425882,
+          "reproduced": 0.05156742735425882,
+          "matches": true
+        },
+        "val_prevalence_docks": {
+          "official": 0.004261479487806867,
+          "reproduced": 0.004261479487806867,
+          "matches": true
+        },
+        "val_alerts_per_1000_docks": {
+          "official": 130.53730178149067,
+          "reproduced": 130.53730178149067,
+          "matches": true
+        },
+        "val_macro_f1": {
+          "official": 0.04235976778479851,
+          "reproduced": 0.04235976778479851,
+          "matches": true
+        },
+        "test_recall_bikes": {
+          "official": 0.8494838494838495,
+          "reproduced": 0.8494838494838495,
+          "matches": true
+        },
+        "test_precision_bikes": {
+          "official": 0.021859281411470338,
+          "reproduced": 0.021859281411470338,
+          "matches": true
+        },
+        "test_f1_bikes": {
+          "official": 0.04262180044108802,
+          "reproduced": 0.04262180044108802,
+          "matches": true
+        },
+        "test_support_positive_bikes": {
+          "official": 3003.0,
+          "reproduced": 3003.0,
+          "matches": true
+        },
+        "test_ap_bikes": {
+          "official": 0.042226145820596174,
+          "reproduced": 0.042226145820596174,
+          "matches": true
+        },
+        "test_prevalence_bikes": {
+          "official": 0.004373623684854416,
+          "reproduced": 0.004373623684854416,
+          "matches": true
+        },
+        "test_alerts_per_1000_bikes": {
+          "official": 169.96545376163678,
+          "reproduced": 169.96545376163678,
+          "matches": true
+        },
+        "test_recall_docks": {
+          "official": 0.789838337182448,
+          "reproduced": 0.789838337182448,
+          "matches": true
+        },
+        "test_precision_docks": {
+          "official": 0.03212541226568697,
+          "reproduced": 0.03212541226568697,
+          "matches": true
+        },
+        "test_f1_docks": {
+          "official": 0.061739662417635316,
+          "reproduced": 0.061739662417635316,
+          "matches": true
+        },
+        "test_support_positive_docks": {
+          "official": 3897.0,
+          "reproduced": 3897.0,
+          "matches": true
+        },
+        "test_ap_docks": {
+          "official": 0.09864514665750257,
+          "reproduced": 0.09864514665750257,
+          "matches": true
+        },
+        "test_prevalence_docks": {
+          "official": 0.005675661505120766,
+          "reproduced": 0.005675661505120766,
+          "matches": true
+        },
+        "test_alerts_per_1000_docks": {
+          "official": 139.5423351625945,
+          "reproduced": 139.5423351625945,
+          "matches": true
+        },
+        "test_macro_f1": {
+          "official": 0.052180731429361665,
+          "reproduced": 0.052180731429361665,
+          "matches": true
+        }
+      }
+    },
+    "p3": {
+      "run_id": "0c2130398492435290816858d0f2c029",
+      "metrics_compared": 17,
+      "all_match": true,
+      "metrics": {
+        "train_n_clusters": {
+          "official": 3.0,
+          "reproduced": 3.0,
+          "matches": true
+        },
+        "train_min_cluster_size": {
+          "official": 25.0,
+          "reproduced": 25.0,
+          "matches": true
+        },
+        "train_min_cluster_share": {
+          "official": 0.06775067750677506,
+          "reproduced": 0.06775067750677506,
+          "matches": true
+        },
+        "train_silhouette": {
+          "official": 0.08153772549733092,
+          "reproduced": 0.08153772549733092,
+          "matches": true
+        },
+        "train_davies_bouldin": {
+          "official": 3.0699033329920837,
+          "reproduced": 3.0699033329920837,
+          "matches": true
+        },
+        "train_stability_ari_mean": {
+          "official": 0.49161608005495216,
+          "reproduced": 0.49161608005495216,
+          "matches": true
+        },
+        "train_stability_ari_min": {
+          "official": 0.2732687685390185,
+          "reproduced": 0.2732687685390185,
+          "matches": true
+        },
+        "val_n_clusters": {
+          "official": 3.0,
+          "reproduced": 3.0,
+          "matches": true
+        },
+        "val_min_cluster_size": {
+          "official": 46.0,
+          "reproduced": 46.0,
+          "matches": true
+        },
+        "val_min_cluster_share": {
+          "official": 0.12466124661246612,
+          "reproduced": 0.12466124661246612,
+          "matches": true
+        },
+        "val_silhouette": {
+          "official": 0.026593711347692978,
+          "reproduced": 0.026593711347692978,
+          "matches": true
+        },
+        "val_davies_bouldin": {
+          "official": 3.0005039599290324,
+          "reproduced": 3.0005039599290324,
+          "matches": true
+        },
+        "test_n_clusters": {
+          "official": 3.0,
+          "reproduced": 3.0,
+          "matches": true
+        },
+        "test_min_cluster_size": {
+          "official": 17.0,
+          "reproduced": 17.0,
+          "matches": true
+        },
+        "test_min_cluster_share": {
+          "official": 0.04607046070460705,
+          "reproduced": 0.04607046070460705,
+          "matches": true
+        },
+        "test_silhouette": {
+          "official": 0.051373275011096224,
+          "reproduced": 0.051373275011096224,
+          "matches": true
+        },
+        "test_davies_bouldin": {
+          "official": 2.9422603614858196,
+          "reproduced": 2.9422603614858196,
+          "matches": true
+        }
+      }
+    }
+  },
+  "tests": {
+    "status": "passed",
+    "count": 101,
+    "failures": 0,
+    "warnings": 21,
+    "duration_seconds": 579.56,
+    "command": "python -m pytest tests/test_reproduce_workflow.py tests/test_stage2_project.py tests/test_stage2_registry.py tests/test_stage2_p1.py tests/test_stage2_p2.py tests/test_stage2_p3.py tests/test_stage2_contract.py -q --disable-warnings",
+    "scope": "Pruebas del flujo nuevo, adaptadores P1 P2 P3, contrato de artefactos y Model Registry; no es una repetición de toda la suite de seguridad."
+  },
+  "limitations": [
+    "No acredita descarga nueva completa desde una máquina sin las fuentes históricas.",
+    "No sustituye la revisión independiente del PR.",
+    "No cambia las selecciones ni los alias del servidor oficial."
+  ],
+  "security": {
+    "tool": "bandit",
+    "scope": "mibici_equipo39/reproduce.py",
+    "issues": 0,
+    "note": "Análisis del módulo agregado; no sustituye la auditoría histórica del repositorio."
+  },
+  "pip_check": "No broken requirements found."
+}
