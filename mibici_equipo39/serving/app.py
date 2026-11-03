@@ -9,7 +9,7 @@ from fastapi.responses import JSONResponse
 
 from .model_loader import load_model
 from .predictor import predict_request
-from .schemas import PredictionRequest, PredictionResponse
+from .schemas import PredictionRequest, PredictionResponse, ServiceError, ValidationResponse
 from .settings import Settings
 
 logger = logging.getLogger(__name__)
@@ -45,7 +45,7 @@ def create_app(settings=None, model_loader=load_model):
     def health():
         return {'status': 'ok'}
 
-    @service.get('/ready')
+    @service.get('/ready', responses={503: {'model': ServiceError}})
     def ready():
         loaded = service.state.model
         if loaded is None:
@@ -54,7 +54,8 @@ def create_app(settings=None, model_loader=load_model):
                 'model_version': str(loaded.manifest['model_version']),
                 'model_bundle_sha256': loaded.manifest['bundle_sha256']}
 
-    @service.post('/predict', response_model=PredictionResponse)
+    @service.post('/predict', response_model=PredictionResponse, responses={
+        422: {'model': ValidationResponse}, 503: {'model': ServiceError}, 500: {'model': ServiceError}})
     def predict(body: PredictionRequest):
         loaded = service.state.model
         if loaded is None:

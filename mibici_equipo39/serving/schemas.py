@@ -42,6 +42,7 @@ class PredictionInput(StrictModel):
 
 
 class PredictionRequest(StrictModel):
+    model_config = ConfigDict(json_schema_extra={"examples": [{'instances': [{'station_id': '10', 'hour_of_day': 6, 'day_of_week': 0, 'month': 1, 'is_weekend': 0, 'hour_sin': 1.0, 'hour_cos': 0.0, 'month_sin': 0.5, 'month_cos': 0.8660254037844386}]}]})
     instances: Annotated[list[PredictionInput], Field(min_length=1, max_length=MAX_BATCH_SIZE)]
 
 
@@ -55,3 +56,17 @@ class PredictionResponse(StrictModel):
     model_version: str
     model_bundle_sha256: str
     predictions: list[Prediction]
+
+
+class ValidationIssue(StrictModel):
+    loc: list[str | int]
+    msg: str
+    type: str
+
+
+class ValidationResponse(StrictModel):
+    detail: list[ValidationIssue]
+
+
+class ServiceError(StrictModel):
+    detail: str

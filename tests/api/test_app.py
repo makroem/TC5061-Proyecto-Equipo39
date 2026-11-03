@@ -144,3 +144,14 @@ def test_http_invalid_json_and_nonfinite_are_422(payload, loaded):
             assert response.status_code == 422
             assert 'private-body' not in response.text
         assert loaded.predict.call_count == 0
+
+
+def test_openapi_example_is_executable_and_errors_match_contract(loaded):
+    with TestClient(create_app(model_loader=lambda *_: loaded)) as client:
+        schema = client.get('/openapi.json').json()
+        example = schema['components']['schemas']['PredictionRequest']['examples'][0]
+        assert client.post('/predict', json=example).status_code == 200
+        responses = schema['paths']['/predict']['post']['responses']
+        assert {'200', '422', '503', '500'}.issubset(responses)
+        error_schema = responses['422']['content']['application/json']['schema']['$ref']
+        assert error_schema.endswith('/ValidationResponse')
