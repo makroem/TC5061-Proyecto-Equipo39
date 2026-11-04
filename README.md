@@ -413,3 +413,27 @@ Para preparar una selección nueva se utiliza `--name mibici-equipo39-p1-demanda
 Resultados y límites: [arranque de Marco](reports/etapa4/arranque_marco.md), [paridad real](reports/etapa4/paridad_modelo_marco.json) y [revisión de seguridad](reports/etapa4/seguridad_api.md). La comparación local no sustituye la predicción desde el contenedor que debe documentarse al integrar FastAPI.
 
 La [captura E02 del Registry de P1](reports/etapa4/captura_registry_p1.md) muestra la versión 1, el alias `champion` y su linaje. Se conserva la imagen original proporcionada por Marco el 2 de noviembre de 2026, junto con su huella SHA-256.
+
+### Recuperación del catálogo histórico
+
+El 3 de noviembre de 2026 el portal enlaza el catálogo de octubre y la URL de septiembre responde 404. Se conserva septiembre para reproducir el modelo aprobado. Marco publicó una copia exacta en el [respaldo de Google Drive](https://drive.google.com/file/d/1O48-8Mnav45t60JtcKTka7G2QPiUCttS/view), con permiso de lectura mediante enlace. No se cambian datos, partición ni modelos.
+
+La URL HTTPS de descarga está configurada en `config.py`. Una instalación nueva no necesita iniciar sesión en Google ni definir una URL manualmente. Desde el entorno completo del proyecto:
+
+```powershell
+python -B -m mibici_equipo39.prepare_catalog
+mlflow run . -e ingest --env-manager local
+```
+
+El primer comando comprueba únicamente el catálogo y es opcional. La ingesta y el flujo `reproduce` aplican la misma recuperación automáticamente. El orden es: archivo local verificado, carpeta de respaldo opcional, fuente oficial y respaldo HTTPS si falla la fuente oficial.
+
+Si ya tienes una copia histórica, puedes evitar su descarga configurando `MIBICI_SOURCE_CACHE` con la ruta real de una carpeta externa al repositorio:
+
+```powershell
+$env:MIBICI_SOURCE_CACHE = 'D:\RespaldoEquipo39'
+python -B -m mibici_equipo39.prepare_catalog
+```
+
+`MIBICI_STATIONS_BACKUP_URL` permite sustituir la ubicación HTTPS sin editar el código. Debe entregar exactamente el mismo CSV; no puede ser una página de vista previa, una carpeta ni una descarga que pida autenticación interactiva. No incluyas credenciales en código o capturas. Un valor vacío desactiva el respaldo remoto.
+
+La copia local y la descarga alternativa requieren el SHA256 congelado; cualquier contenido distinto se rechaza, incluyendo páginas de acceso o avisos de Drive. El modo `freeze` conserva la descarga oficial y no adopta respaldos. Los CSV permanecen fuera de Git. El respaldo depende de la disponibilidad de Drive y de conservar su permiso de lectura. Se verificó la descarga real sin sesión de Google y la recuperación desde un directorio sin copia local. Ver [recuperación comprobada](reports/etapa4/recuperacion_catalogo_20261103.md).
