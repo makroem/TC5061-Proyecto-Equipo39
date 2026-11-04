@@ -2,6 +2,8 @@
 
 Actualización del 2 de noviembre de 2026. Responsable: Marco. Revisión independiente: Diego Hurtado.
 
+Nota del 3 de noviembre de 2026: este documento conserva las comprobaciones y pendientes de su fecha original. Los PR #45 y #46 ya fueron integrados y la recuperación del catálogo se comprobó en `main`. Para las responsabilidades actuales y el PR de API pendiente, consultar la [distribución vigente](../../references/etapa4/distribucion_actual.md) y la [comprobación de integración](cierre_api_marco_20261103.md#comprobación-tras-integrar-catálogo-y-paridad).
+
 Los PR [#43](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/43) y [#44](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/44) fueron aprobados por Diego Hurtado e integrados en `main`. La base conjunta es `c9db414b7461cbb941ed9f79bc5dec8d3716c1a9`. Se conservan el reporte corregido de MLflow, la protección del Registry y el paquete verificable de P1 para la API. La captura original del Registry ya está incluida en la evidencia.
 
 ## Comprobaciones realizadas

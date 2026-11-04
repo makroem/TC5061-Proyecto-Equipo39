@@ -15,7 +15,14 @@ Toda integración conserva una revisión real por otra persona y las proteccione
 
 ## Cierre
 
-1. Diego Hurtado revisa los PR de catálogo, API y paridad ampliada.
-2. Marco integra los cambios aprobados y resuelve conflictos si aparecen.
-3. Marco y Diego Hurtado comprueban los comandos desde el contenido integrado y conservan capturas auténticas del contenedor.
-4. El PR #46 incorpora la descarga remota verificada del catálogo histórico desde Google Drive. Después de integrarlo, comprobar su recuperación desde main. Esto no bloquea el servicio: la imagen incluye el modelo verificado y no consume CSV para predecir.
+1. Completado: Diego Hurtado aprobó los PR [#45](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/45) y [#46](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/46); Marco los integró en `main` respetando las protecciones. La base resultante es `3c38b435269204729297342fc2f0013f6be455bb`.
+2. Completado: Marco comprobó en una copia limpia de ese commit la descarga del catálogo, sin copia local, caché ni sesión de Google. Coincidieron las 484 filas, los 40,841 bytes y la huella del manifiesto; 51 pruebas de ingesta aprobadas. Se reutilizó el entorno de Python, por lo que esta comprobación no sustituye una instalación completa desde cero.
+3. Completado: Marco incorporó `main` a la rama de la API, resolvió el conflicto de documentación conservando ambos procedimientos y ejecutó las 76 pruebas del servicio, todas aprobadas.
+4. Pendiente de Diego Hurtado: revisar el [PR #49](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/49), comprobar el contrato y el contenedor y registrar su revisión. Los PR #45 y #46 ya no requieren otra aprobación.
+5. Después de esa aprobación, Marco podrá integrar el PR #49 y comprobar los comandos de construcción y consumo sobre el contenido final de `main`. La imagen ya comprobada corresponde al código de servicio `73204ca`; no se presenta como una construcción del commit integrado.
+
+## Participación individual
+
+Las tareas #47 (Stefania) y #48 (Diego Martinez) continúan abiertas y sin nuevas aportaciones en esta revisión. Sus cambios son acotados y no detienen el cierre técnico de la API. Cada integrante conserva la responsabilidad de aportar y revisar con su propia cuenta; cubrir una tarea técnica no acredita participación de otra persona.
+
+Diego Hurtado puede aportar su comprobación independiente del contenedor mediante un PR de evidencia. Marco podrá revisar ese PR para completar su revisión a otro integrante en esta etapa. Se trata del siguiente trabajo propuesto, no de una contribución ya realizada.
