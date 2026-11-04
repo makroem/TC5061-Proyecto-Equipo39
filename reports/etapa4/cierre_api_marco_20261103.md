@@ -58,3 +58,13 @@ Actualización del 3 de noviembre de 2026, hora de Ciudad de México. Marco inte
 | Recuperación real del catálogo sin copia previa ni caché configurada | `verified_backup`, 484 filas, 40,841 bytes; SHA256 coincidente | Misma copia limpia de `main`, sin sesión de Google |
 
 La huella descargada fue `206e45fe633922b634d858142fa21e6fd9f4c421b6435c02980ef290cc2df90d`. Se reutilizaron los entornos de Python existentes; no se afirma haber instalado todas las dependencias desde cero, descargado de nuevo doce meses de viajes ni repetido entrenamientos. El contenedor y las capturas anteriores siguen acreditando la construcción de servicio `73204ca`, no una nueva imagen de `9832745`. La siguiente comprobación sobre el servicio integrado depende únicamente de la revisión y aprobación del PR #49.
+
+## Preparación del paquete para la revisión independiente
+
+Actualización del 4 de noviembre de 2026. Diego Hurtado informó en el PR #49 que ejecutó 76 pruebas de API con resultado aprobado, pero su almacén local no contiene el modelo original. Esto impedía construir la imagen y comprobar HTTP desde su computadora.
+
+Marco preparó `Paquete_P1_Equipo39_v1_22archivos.zip` con los 22 archivos del manifiesto, sin modificarlos. El archivo ocupa 174,928 bytes y su SHA256 es `5dbd9112b837fb6b4594d91c2db3f9660962f04c4e0f279219b8bba3f76d9925`. Se extrajo en un directorio temporal y se verificaron el inventario completo, la firma, la corrida y la carga local. La fuente se verificó de nuevo al terminar y conservó su integridad. Las advertencias sobre diferencias con el entorno histórico del modelo permanecen visibles.
+
+La extracción en Windows mediante `Expand-Archive` y la comprobación con `verify_bundle` terminaron correctamente: 22 archivos y versión 1. El modelo, el ZIP y los detalles de transferencia se mantienen fuera de Git. El manifiesto revisado permanece como referencia para comprobar cualquier copia recibida.
+
+El README incluye ahora la recepción de esta copia sin acceso al Registry. Diego Hurtado debe confirmar recepción, construir y ejecutar el contenedor, comprobar 72 casos con `verify_http` y emitir su revisión. Las pruebas de preparación de Marco no acreditan una ejecución desde la computadora del revisor. Marco integrará el PR #49 después de la aprobación vigente y completará la comprobación sobre `main`.

@@ -400,6 +400,27 @@ Este perfil comprueba 12,096 entradas artificiales y guarda `reports/etapa4/pari
 
 Para preparar una selección nueva se utiliza `--name mibici-equipo39-p1-demanda --alias champion --output <destino-nuevo> --manifest-out <manifiesto-nuevo>`, después de una revisión del cambio. No sobrescribas el manifiesto de esta entrega para seguir un alias que haya cambiado.
 
+#### Recibir el paquete original para revisar Docker sin acceso al Registry
+
+Si tu almacén local no contiene la versión aprobada, solicita a Marco la copia `Paquete_P1_Equipo39_v1_22archivos.zip` por el canal acordado por el equipo. El archivo contiene únicamente los 22 archivos originales bajo `models/serving/p1/`; el manifiesto de confianza se obtiene del repositorio, no del ZIP. No publiques el modelo ni los detalles de acceso en Git.
+
+Descarga el ZIP recibido a Descargas, abre PowerShell en la raíz de tu clon y activa el entorno de servicio descrito arriba. Comprueba la huella antes de extraer; si ya tienes `models/serving/p1`, verifica esa copia o utiliza otro clon, sin sobrescribirla.
+
+```powershell
+$pythonApi = '.venv-api\Scripts\python.exe'
+$paqueteP1 = Join-Path ([Environment]::GetFolderPath('UserProfile')) 'Downloads\Paquete_P1_Equipo39_v1_22archivos.zip'
+$huellaP1 = (Get-FileHash -LiteralPath $paqueteP1 -Algorithm SHA256).Hash.ToLowerInvariant()
+if ($huellaP1 -ne '5dbd9112b837fb6b4594d91c2db3f9660962f04c4e0f279219b8bba3f76d9925') { throw 'El ZIP no coincide con la copia original.' }
+if (Test-Path -LiteralPath 'models/serving/p1') { throw 'El destino ya existe; verificarlo o usar otro clon.' }
+Expand-Archive -LiteralPath $paqueteP1 -DestinationPath .
+& $pythonApi -B -c "from mibici_equipo39.serving.model_loader import read_manifest, verify_bundle; m=read_manifest('references/etapa4/model_manifest.json'); verify_bundle('models/serving/p1', m); print('Paquete verificado:', len(m['files']), 'archivos; version', m['model_version'])"
+if ($LASTEXITCODE -ne 0) { throw 'No construir el contenedor: falló la verificación del paquete.' }
+```
+
+El resultado esperado es `Paquete verificado: 22 archivos; version 1`. Después sigue **Construir y ejecutar la API** y ejecuta `verify_http` contra tu contenedor. Estos pasos usan el paquete local y no requieren MLflow en el puerto 5000. `verify_model`, en cambio, compara contra el Registry y sí requiere acceso al servidor que contiene la versión original: no lo sustituyas por un almacén vacío ni regeneres el modelo.
+
+La extracción y verificación con los comandos de Windows anteriores terminó correctamente: 22 archivos coincidentes. El modelo extraído también se cargó localmente, conservando las advertencias de dependencias históricas. Esta comprobación de integridad no sustituye la validación independiente del contenedor ni su revisión.
+
 ### Pruebas y seguridad del arranque
 
 ```powershell

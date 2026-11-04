@@ -1,6 +1,6 @@
 # Distribución vigente y continuidad — Etapa 4
 
-Fecha: 3 de noviembre de 2026. Reasignación solicitada por Marco.
+Actualización: 4 de noviembre de 2026. Reasignación solicitada por Marco.
 
 | Persona | Trabajo principal | Respaldo / dependencia |
 |---|---|---|
@@ -18,7 +18,7 @@ Toda integración conserva una revisión real por otra persona y las proteccione
 1. Completado: Diego Hurtado aprobó los PR [#45](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/45) y [#46](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/46); Marco los integró en `main` respetando las protecciones. La base resultante es `3c38b435269204729297342fc2f0013f6be455bb`.
 2. Completado: Marco comprobó en una copia limpia de ese commit la descarga del catálogo, sin copia local, caché ni sesión de Google. Coincidieron las 484 filas, los 40,841 bytes y la huella del manifiesto; 51 pruebas de ingesta aprobadas. Se reutilizó el entorno de Python, por lo que esta comprobación no sustituye una instalación completa desde cero.
 3. Completado: Marco incorporó `main` a la rama de la API, resolvió el conflicto de documentación conservando ambos procedimientos y ejecutó las 76 pruebas del servicio, todas aprobadas.
-4. Pendiente de Diego Hurtado: revisar el [PR #49](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/49), comprobar el contrato y el contenedor y registrar su revisión. Los PR #45 y #46 ya no requieren otra aprobación.
+4. Diego Hurtado informó [76 pruebas de API aprobadas en su computadora](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/49#issuecomment-6621059165). Le faltaba el paquete original para construir el contenedor. Marco preparó la copia verificable de 22 archivos y añadió al README su procedimiento de recepción. Pendiente de Diego Hurtado: confirmar recepción, ejecutar Docker y `verify_http` y registrar su revisión del [PR #49](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/49). Los PR #45 y #46 ya no requieren otra aprobación.
 5. Después de esa aprobación, Marco podrá integrar el PR #49 y comprobar los comandos de construcción y consumo sobre el contenido final de `main`. La imagen ya comprobada corresponde al código de servicio `73204ca`; no se presenta como una construcción del commit integrado.
 
 ## Participación individual
