@@ -389,6 +389,15 @@ $env:MLFLOW_REGISTRY_URI = $env:MLFLOW_TRACKING_URI
 
 El primer comando descarga la versión numérica fijada y verifica las 22 huellas. Si ya está presente, comprueba el paquete sin sobrescribirlo. El segundo compara 72 entradas de calendario con una carga independiente por nombre y versión desde el Registry, verifica repetición y prueba la carga local con solicitudes de red bloqueadas. No solicita un run_id ni ejecuta entrenamiento.
 
+Para ampliar la comprobación a cinco estaciones conocidas, una desconocida, los doce meses, los siete días y las 24 horas:
+
+```powershell
+& $pythonApi -B -m mibici_equipo39.serving.verify_model --profile extended
+if ($LASTEXITCODE -ne 0) { throw 'La comparación ampliada no terminó correctamente.' }
+```
+
+Este perfil comprueba 12,096 entradas artificiales y guarda `reports/etapa4/paridad_modelo_ampliada_marco.json`, separado del resultado básico. Las estaciones conocidas se contrastan con las tablas del baseline antes de predecir. Se obtuvo diferencia máxima 0.0 en Windows; esto no mide exactitud frente a viajes reales ni demuestra compatibilidad Linux. El mes no interviene en las medias del baseline elegido. Resultados, versión del código y pendientes: [seguimiento de la comprobación ampliada](reports/etapa4/seguimiento_marco_20261102.md).
+
 Para preparar una selección nueva se utiliza `--name mibici-equipo39-p1-demanda --alias champion --output <destino-nuevo> --manifest-out <manifiesto-nuevo>`, después de una revisión del cambio. No sobrescribas el manifiesto de esta entrega para seguir un alias que haya cambiado.
 
 ### Pruebas y seguridad del arranque
@@ -451,3 +460,27 @@ Si necesitas detener tu instancia, usa `docker stop mibici-equipo39-p1`. Para cr
 El [registro de implementación y validación](reports/etapa4/cierre_api_marco_20261103.md) distingue pruebas locales, Linux y la revisión independiente pendiente. La prueba de esta máquina publica el contenedor en el puerto 18040 para evitar ocupar el 8000 de otro servicio; los comandos anteriores permiten reproducirlo en el puerto habitual.
 
 Documentación técnica: [ciclo de vida de FastAPI](https://fastapi.tiangolo.com/advanced/events/), [FastAPI en contenedores](https://fastapi.tiangolo.com/deployment/docker/) y [validación estricta de Pydantic](https://docs.pydantic.dev/latest/concepts/strict_mode/).
+
+### Recuperación del catálogo histórico
+
+El 3 de noviembre de 2026 el portal enlaza el catálogo de octubre y la URL de septiembre responde 404. Se conserva septiembre para reproducir el modelo aprobado. Marco publicó una copia exacta en el [respaldo de Google Drive](https://drive.google.com/file/d/1O48-8Mnav45t60JtcKTka7G2QPiUCttS/view), con permiso de lectura mediante enlace. No se cambian datos, partición ni modelos.
+
+La URL HTTPS de descarga está configurada en `config.py`. Una instalación nueva no necesita iniciar sesión en Google ni definir una URL manualmente. Desde el entorno completo del proyecto:
+
+```powershell
+python -B -m mibici_equipo39.prepare_catalog
+mlflow run . -e ingest --env-manager local
+```
+
+El primer comando comprueba únicamente el catálogo y es opcional. La ingesta y el flujo `reproduce` aplican la misma recuperación automáticamente. El orden es: archivo local verificado, carpeta de respaldo opcional, fuente oficial y respaldo HTTPS si falla la fuente oficial.
+
+Si ya tienes una copia histórica, puedes evitar su descarga configurando `MIBICI_SOURCE_CACHE` con la ruta real de una carpeta externa al repositorio:
+
+```powershell
+$env:MIBICI_SOURCE_CACHE = 'D:\RespaldoEquipo39'
+python -B -m mibici_equipo39.prepare_catalog
+```
+
+`MIBICI_STATIONS_BACKUP_URL` permite sustituir la ubicación HTTPS sin editar el código. Debe entregar exactamente el mismo CSV; no puede ser una página de vista previa, una carpeta ni una descarga que pida autenticación interactiva. No incluyas credenciales en código o capturas. Un valor vacío desactiva el respaldo remoto.
+
+La copia local y la descarga alternativa requieren el SHA256 congelado; cualquier contenido distinto se rechaza, incluyendo páginas de acceso o avisos de Drive. El modo `freeze` conserva la descarga oficial y no adopta respaldos. Los CSV permanecen fuera de Git. El respaldo depende de la disponibilidad de Drive y de conservar su permiso de lectura. Se verificó la descarga real sin sesión de Google y la recuperación desde un directorio sin copia local. Ver [recuperación comprobada](reports/etapa4/recuperacion_catalogo_20261103.md).

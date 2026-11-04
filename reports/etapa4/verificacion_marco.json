@@ -42,10 +42,18 @@
   "reproduction_manifest_match": true,
   "git_models_tracked": [],
   "remaining": [
-    "independent_review",
     "pydantic_adapter",
     "fastapi_http",
     "linux_container",
     "clean_clone_end_to_end"
-  ]
+  ],
+  "integration_review": {
+    "status": "approved_and_merged",
+    "reviewer": "diegoHurtado01",
+    "pr": 44,
+    "approved_commit": "770e44a5baedb730821151054faa2e30382179c4",
+    "merge_commit": "c9db414b7461cbb941ed9f79bc5dec8d3716c1a9",
+    "merged_at_utc": "2026-11-03T04:10:51Z",
+    "follow_up": "La ampliación de paridad tiene evidencia y revisión propias; ver seguimiento_marco_20261102.md."
+  }
 }

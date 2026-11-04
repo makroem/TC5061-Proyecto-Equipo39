@@ -47,9 +47,11 @@ El 2 de noviembre de 2026 se incorporó la captura E02 proporcionada por Marco. 
 
 ## Pendientes y responsables
 
+Actualización del 2 de noviembre: Diego Hurtado aprobó el PR #44 y Marco lo integró en `main`. También se integró el PR #43 de correcciones de MLflow. La ampliación posterior de paridad y el estado de sus comprobaciones están en [seguimiento_marco_20261102.md](seguimiento_marco_20261102.md).
+
 | Pendiente | Responsable | Insumo disponible / dependencia |
 |---|---|---|
-| Revisar este PR | Diego Hurtado | Exportador, cargador, manifiesto, pruebas y contrato. |
+| Revisar la ampliación de paridad | Diego Hurtado | El PR #44 ya está integrado; la ampliación cuenta con pruebas y resultados propios. |
 | Implementar contrato Pydantic y adaptador tabular | Stefania | Firma y tipos del manifiesto; cargador listo. |
 | Implementar FastAPI y pruebas HTTP | Diego Martinez | Puede avanzar con fixtures; integra esquemas de Stefania y cargador de Marco. |
 | Containerfile, exclusiones y prueba Linux | Diego Hurtado, con Marco para dependencias | Requisitos preparados; construcción completa necesita API y esquemas. |

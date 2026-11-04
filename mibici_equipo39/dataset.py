@@ -9,6 +9,7 @@ import shutil
 import sqlite3
 import time
 import unicodedata
+from urllib.parse import urlsplit
 
 import pandas as pd
 import requests
@@ -44,14 +45,34 @@ def save_json(path, value):
     )
 
 
-def download_file(url, path, expected=None):
+def download_file(url, path, expected=None, *, cache_dir=None, backup_url=None):
     """Reutiliza un archivo coincidente y nunca acepta un cambio silencioso."""
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
     if path.exists():
         if expected and sha_file(path) != expected:
             raise ValueError(f"Hash distinto en {path.name}; revisar antes de reemplazar.")
-        return
+        return "existing"
+    if cache_dir is not None or backup_url is not None:
+        if not expected:
+            raise ValueError("El respaldo requiere una huella congelada en el manifiesto.")
+    if backup_url:
+        parsed = urlsplit(backup_url)
+        if parsed.scheme != "https" or not parsed.hostname or parsed.username or parsed.password:
+            raise ValueError("La fuente de respaldo debe ser HTTPS sin credenciales en la autoridad.")
+    cached = Path(cache_dir) / path.name if cache_dir is not None else None
+    if cached is not None and cached.exists():
+        if not cached.is_file() or sha_file(cached) != expected:
+            raise ValueError(f"El respaldo no coincide con la huella: {path.name}")
+        part = path.with_suffix(path.suffix + ".part")
+        try:
+            shutil.copyfile(cached, part)
+            if sha_file(part) != expected:
+                raise ValueError("El respaldo cambió durante la copia.")
+            part.replace(path)
+        finally:
+            part.unlink(missing_ok=True)
+        return "verified_cache"
     last_error = None
     part = path.with_suffix(path.suffix + ".part")
     for attempt in range(3):
@@ -70,12 +91,19 @@ def download_file(url, path, expected=None):
             if expected and sha_file(part) != expected:
                 raise ValueError(f"La fuente cambió: {path.name}")
             part.replace(path)
-            return
+            return "origin"
         except (requests.RequestException, OSError, ValueError) as exc:
             last_error = exc
             part.unlink(missing_ok=True)
             if attempt < 2:
                 time.sleep(2 ** (attempt + 1))
+    if backup_url:
+        try:
+            download_file(backup_url, path, expected)
+            return "verified_backup"
+        except (RuntimeError, ValueError) as exc:
+            # No publicar una URL privada o firmada en mensajes de error.
+            raise RuntimeError(f"El respaldo no pudo recuperar {path.name}; revise acceso y huella.") from None
     raise RuntimeError(f"No se pudo descargar {url}: {last_error}")
 
 
@@ -264,7 +292,9 @@ def ingest(mode):
     if sorted(C.SOURCE_URLS) != months:
         raise ValueError("Las URLs no corresponden exactamente a los doce meses configurados.")
     station_path = C.EXTERNAL / Path(C.STATIONS_URL).name
-    download_file(C.STATIONS_URL, station_path, expected.get(C.STATIONS_URL))
+    download_file(C.STATIONS_URL, station_path, expected.get(C.STATIONS_URL),
+                  cache_dir=C.SOURCE_CACHE_DIR if mode == "verify" else None,
+                  backup_url=C.STATIONS_BACKUP_URL if mode == "verify" else None)
     stations, encoding, separator = clean_stations(station_path)
     build = C.DATA / "_build"
     if build.exists():
