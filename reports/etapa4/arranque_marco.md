@@ -1,5 +1,7 @@
 # Arranque de Marco — Etapa 4
 
+> Seguimiento histórico. Para las responsabilidades vigentes desde el 3 de noviembre, consultar [distribución actual](../../references/etapa4/distribucion_actual.md).
+
 Fecha: 2 de noviembre de 2026. Repositorio: TC5061-Proyecto-Equipo39.
 Base: `5344be3498bd3d46459c7e905e341fd6f5aec0c2` (main).
 

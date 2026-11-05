@@ -361,7 +361,7 @@ La introducción pública de Wilson, capítulo 6, respalda la comparación objet
 
 ## Etapa 4: preparación del modelo para la API
 
-Marco preparó la recuperación y carga verificadas de P1. El [contrato inicial](references/etapa4/contrato_api.md) distribuye esquemas, API y contenedor entre los cuatro integrantes. La API HTTP y la imagen OCI todavía requieren esos módulos; esta sección documenta lo que ya se puede ejecutar.
+Marco preparó la recuperación de P1 y completó los esquemas, el adaptador, la API y el Containerfile. El [contrato vigente](references/etapa4/contrato_api.md) describe el servicio. La [distribución actual](references/etapa4/distribucion_actual.md) deja a Marco y Diego Hurtado el trabajo crítico y revisiones acotadas a Stefania y Diego Martinez.
 
 ### Entorno de servicio
 
@@ -374,7 +374,7 @@ $pythonApi = '.venv-api\Scripts\python.exe'
 & $pythonApi -m pip check
 ```
 
-`requirements-api.txt` usa MLflow Skinny 3.17.2 para cliente y carga local, más las dependencias de P1 y FastAPI. No instala un servidor de tracking. El servidor oficial conserva su entorno completo anterior. El modelo mantiene intacto su archivo histórico de dependencias; MLflow puede advertir diferencias con ese entorno. Se comprobó paridad en el entorno de servicio de Windows; la imagen Linux debe verificarse durante su construcción.
+`requirements-api.txt` usa MLflow Skinny 3.17.2 para cliente y carga local, más las dependencias de P1 y FastAPI. No instala un servidor de tracking. El servidor oficial conserva su entorno completo anterior. El modelo mantiene intacto su archivo histórico de dependencias; MLflow puede advertir diferencias con ese entorno. Se comprobó paridad en Windows y desde la imagen Linux: 72 casos por HTTP con diferencia máxima 0.0. La construcción verifica además la integridad y la carga del paquete; el registro de implementación enlazado al final conserva los resultados.
 
 ### Recuperar exactamente el modelo aprobado
 
@@ -400,6 +400,27 @@ Este perfil comprueba 12,096 entradas artificiales y guarda `reports/etapa4/pari
 
 Para preparar una selección nueva se utiliza `--name mibici-equipo39-p1-demanda --alias champion --output <destino-nuevo> --manifest-out <manifiesto-nuevo>`, después de una revisión del cambio. No sobrescribas el manifiesto de esta entrega para seguir un alias que haya cambiado.
 
+#### Recibir el paquete original para revisar Docker sin acceso al Registry
+
+Si tu almacén local no contiene la versión aprobada, solicita a Marco la copia `Paquete_P1_Equipo39_v1_22archivos.zip` por el canal acordado por el equipo. El archivo contiene únicamente los 22 archivos originales bajo `models/serving/p1/`; el manifiesto de confianza se obtiene del repositorio, no del ZIP. No publiques el modelo ni los detalles de acceso en Git.
+
+Descarga el ZIP recibido a Descargas, abre PowerShell en la raíz de tu clon y activa el entorno de servicio descrito arriba. Comprueba la huella antes de extraer; si ya tienes `models/serving/p1`, verifica esa copia o utiliza otro clon, sin sobrescribirla.
+
+```powershell
+$pythonApi = '.venv-api\Scripts\python.exe'
+$paqueteP1 = Join-Path ([Environment]::GetFolderPath('UserProfile')) 'Downloads\Paquete_P1_Equipo39_v1_22archivos.zip'
+$huellaP1 = (Get-FileHash -LiteralPath $paqueteP1 -Algorithm SHA256).Hash.ToLowerInvariant()
+if ($huellaP1 -ne '5dbd9112b837fb6b4594d91c2db3f9660962f04c4e0f279219b8bba3f76d9925') { throw 'El ZIP no coincide con la copia original.' }
+if (Test-Path -LiteralPath 'models/serving/p1') { throw 'El destino ya existe; verificarlo o usar otro clon.' }
+Expand-Archive -LiteralPath $paqueteP1 -DestinationPath .
+& $pythonApi -B -c "from mibici_equipo39.serving.model_loader import read_manifest, verify_bundle; m=read_manifest('references/etapa4/model_manifest.json'); verify_bundle('models/serving/p1', m); print('Paquete verificado:', len(m['files']), 'archivos; version', m['model_version'])"
+if ($LASTEXITCODE -ne 0) { throw 'No construir el contenedor: falló la verificación del paquete.' }
+```
+
+El resultado esperado es `Paquete verificado: 22 archivos; version 1`. Después sigue **Construir y ejecutar la API** y ejecuta `verify_http` contra tu contenedor. Estos pasos usan el paquete local y no requieren MLflow en el puerto 5000. `verify_model`, en cambio, compara contra el Registry y sí requiere acceso al servidor que contiene la versión original: no lo sustituyas por un almacén vacío ni regeneres el modelo.
+
+La extracción y verificación con los comandos de Windows anteriores terminó correctamente: 22 archivos coincidentes. El modelo extraído también se cargó localmente, conservando las advertencias de dependencias históricas. Esta comprobación de integridad no sustituye la validación independiente del contenedor ni su revisión.
+
 ### Pruebas y seguridad del arranque
 
 ```powershell
@@ -410,9 +431,56 @@ Para preparar una selección nueva se utiliza `--name mibici-equipo39-p1-demanda
 
 `--confcutdir` mantiene las pruebas unitarias de servicio independientes de las fixtures de entrenamiento de la etapa anterior. Si Windows impide crear temporales, agrega `--basetemp=private_results/etapa4/pruebas-nueva-carpeta` y utiliza un nombre que todavía no exista. La suite anterior se ejecuta con el entorno completo de calidad, no con el entorno reducido de servicio.
 
-Resultados y límites: [arranque de Marco](reports/etapa4/arranque_marco.md), [paridad real](reports/etapa4/paridad_modelo_marco.json) y [revisión de seguridad](reports/etapa4/seguridad_api.md). La comparación local no sustituye la predicción desde el contenedor que debe documentarse al integrar FastAPI.
+Resultados y límites: [arranque de Marco](reports/etapa4/arranque_marco.md), [paridad real](reports/etapa4/paridad_modelo_marco.json) y [revisión de seguridad](reports/etapa4/seguridad_api.md). La comparación local se complementa con la ejecución real del contenedor, documentada en el [registro de implementación](reports/etapa4/cierre_api_marco_20261103.md).
 
 La [captura E02 del Registry de P1](reports/etapa4/captura_registry_p1.md) muestra la versión 1, el alias `champion` y su linaje. Se conserva la imagen original proporcionada por Marco el 2 de noviembre de 2026, junto con su huella SHA-256.
+
+### Construir y ejecutar la API
+
+La estrategia es inferencia síncrona por HTTP para peticiones pequeñas (1 a 100 filas). Facilita consultar demanda por estación/hora y responder inmediatamente. No se mide todavía capacidad bajo carga ni un beneficio operativo; las predicciones conservan las limitaciones del baseline. La imagen incluye exactamente el modelo descargado: se evitan descargas o cambios de alias durante una petición.
+
+Verifica primero `docker --version` y `docker info`; no reinstales si ya funciona. Docker Desktop debe tener disponible su motor Linux. Si `docker` no está en el PATH, usa la ruta del ejecutable de tu instalación. Podman puede utilizar el mismo Containerfile sustituyendo el comando; la ejecución comprobada en esta entrega es Docker.
+
+Después de instalar el entorno y exportar el paquete según las secciones anteriores, desde la raíz del clon:
+
+```powershell
+docker build -f Containerfile -t mibici-equipo39:p1-etapa4 .
+docker run -d --name mibici-equipo39-p1 --read-only --cap-drop ALL --security-opt no-new-privileges:true --pids-limit 128 --memory 1g --tmpfs /tmp:rw,noexec,nosuid,size=128m -p 127.0.0.1:8000:8000 mibici-equipo39:p1-etapa4
+docker inspect mibici-equipo39-p1 --format '{{.State.Health.Status}}'
+Invoke-RestMethod http://127.0.0.1:8000/ready
+```
+
+El proceso usa UID/GID `10001:10001`, raíz de solo lectura y un temporal limitado. `.dockerignore` y `.containerignore` permiten únicamente el código, los requisitos, el manifiesto y el paquete del modelo. El modelo se incluye en la imagen aunque esté excluido de Git. No se copian CSV, entornos, credenciales, reportes ni bases de MLflow. El puerto se publica solo en localhost; no se ofrece como servicio público autenticado.
+
+Abre http://127.0.0.1:8000/docs. En `POST /predict`, selecciona **Try it out** y **Execute**: el ejemplo mostrado es válido. También puede usarse el archivo versionado:
+
+```powershell
+$body = Get-Content references/etapa4/examples/predict_request.json -Raw
+Invoke-RestMethod -Method Post -Uri http://127.0.0.1:8000/predict -ContentType 'application/json' -Body $body
+& $pythonApi -B -m mibici_equipo39.serving.verify_http --url http://127.0.0.1:8000 --output private_results/http_check.json
+```
+
+Consulta el [ejemplo de solicitud](references/etapa4/examples/predict_request.json) y la [respuesta real](references/etapa4/examples/predict_response.json). El verificador compara 72 entradas con una carga local independiente del mismo paquete, confirma repetición, orden, linaje y rechazo 422. No entrena ni modifica el Registry. Una estación desconocida usa la media global del baseline; es respaldo y no una predicción específicamente aprendida para esa estación.
+
+| Ruta | Resultado esperado |
+|---|---|
+| `/health` | 200: proceso disponible. |
+| `/ready` | 200 y linaje cuando el modelo está preparado; 503 si falló la carga. |
+| `/predict` | 200 con predicciones; 422 por entrada inválida; 503 sin modelo preparado; 500 ante fallo de inferencia. |
+| `/docs` | 200: documentación interactiva. |
+
+Para comprobar código y dependencias sin reconstruir el modelo:
+
+```powershell
+& $pythonApi -B -m pytest tests/api --confcutdir=tests/api -q
+& $pythonApi -m pip check
+```
+
+Si necesitas detener tu instancia, usa `docker stop mibici-equipo39-p1`. Para crearla nuevamente con otra imagen, elimina solo ese contenedor detenido con `docker rm mibici-equipo39-p1`. No borres el modelo local ni el Registry.
+
+El [registro de implementación y validación](reports/etapa4/cierre_api_marco_20261103.md) distingue pruebas locales, Linux y la revisión independiente pendiente. La prueba de esta máquina publica el contenedor en el puerto 18040 para evitar ocupar el 8000 de otro servicio; los comandos anteriores permiten reproducirlo en el puerto habitual.
+
+Documentación técnica: [ciclo de vida de FastAPI](https://fastapi.tiangolo.com/advanced/events/), [FastAPI en contenedores](https://fastapi.tiangolo.com/deployment/docker/) y [validación estricta de Pydantic](https://docs.pydantic.dev/latest/concepts/strict_mode/).
 
 ### Recuperación del catálogo histórico
 

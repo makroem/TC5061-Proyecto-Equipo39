@@ -1,0 +1,11 @@
+{
+  "model_name": "mibici-equipo39-p1-demanda",
+  "model_version": "1",
+  "model_bundle_sha256": "dedce1eb08bda971a42fba311224c88e56f75cd2789dbb391e9445951931bd80",
+  "predictions": [
+    {
+      "station_id": "10",
+      "predicted_trips": 1.6764705882352942
+    }
+  ]
+}

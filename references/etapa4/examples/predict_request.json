@@ -1,0 +1,6 @@
+{
+  "instances": [
+    {"station_id": "10", "hour_of_day": 6, "day_of_week": 0, "month": 1, "is_weekend": 0,
+     "hour_sin": 1.0, "hour_cos": 0.0, "month_sin": 0.5, "month_cos": 0.8660254037844386}
+  ]
+}
