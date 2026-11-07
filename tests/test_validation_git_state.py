@@ -5,6 +5,8 @@ from types import SimpleNamespace
 from mibici_equipo39.validation import data_checks as Q
 from types import SimpleNamespace
 
+import subprocess
+
 def completed(stdout="", returncode=0):
     return SimpleNamespace(
         stdout=stdout,
@@ -173,7 +175,7 @@ def test_git_state_uses_expected_git_commands(monkeypatch):
 
     assert commands == [
         [git_path, "rev-parse", "HEAD"],
-        [git_path, "status", "--porcelain"],
+        [git_path, "status", "--porcelain", "--untracked-files=normal"],
     ]
     
 def test_git_state_returns_none_when_status_fails(monkeypatch):
@@ -197,6 +199,26 @@ def test_git_state_returns_none_when_status_fails(monkeypatch):
         raise AssertionError(f"Comando inesperado: {command}")
 
     monkeypatch.setattr(Q.subprocess, "run", fake_run)
+
+    assert Q.git_state() == (None, None)
+    
+def test_git_state_returns_none_when_process_creation_fails(monkeypatch):
+    monkeypatch.setattr(Q.shutil, "which", lambda _: "/fake/git")
+
+    def fail(*args, **kwargs):
+        raise OSError("fallo simulado")
+
+    monkeypatch.setattr(Q.subprocess, "run", fail)
+
+    assert Q.git_state() == (None, None)
+    
+def test_git_state_returns_none_when_git_times_out(monkeypatch):
+    monkeypatch.setattr(Q.shutil, "which", lambda _: "/fake/git")
+
+    def fail(*args, **kwargs):
+        raise subprocess.TimeoutExpired("git", 10)
+
+    monkeypatch.setattr(Q.subprocess, "run", fail)
 
     assert Q.git_state() == (None, None)
     
