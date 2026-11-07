@@ -1,0 +1,97 @@
+{
+  "tarea": "#51",
+  "implemento_y_ejecuto": "Diego Martinez",
+  "revisor": "Marco",
+  "herramienta": {
+    "bandit": "1.9.4",
+    "python": "3.11.9",
+    "sistema": "macOS",
+    "entorno": "nuevo, instalado desde requirements-quality.txt; pip check sin problemas"
+  },
+  "comando": "python -m bandit -r mibici_equipo39/validation -f json -o private_quality/bandit_validacion.json",
+  "alcance": "mibici_equipo39/validation",
+  "nota": "Bandit sale con 1 cuando hay hallazgos; los errores de analisis aparecen en errores_de_analisis.",
+  "corridas": {
+    "antes": {
+      "commit": "b1ddc47a0234def92b23c5ae7d6804f05e34697f",
+      "fecha_utc": "2026-11-07T04:17:01Z",
+      "salida": 1,
+      "errores_de_analisis": [],
+      "lineas_analizadas": 303,
+      "archivos": [
+        "mibici_equipo39/validation/__init__.py",
+        "mibici_equipo39/validation/data_checks.py"
+      ],
+      "hallazgos": [
+        {
+          "regla": "B404",
+          "nombre": "blacklist",
+          "severidad": "LOW",
+          "confianza": "HIGH",
+          "archivo": "mibici_equipo39/validation/data_checks.py",
+          "linea": 20,
+          "texto": "Consider possible security implications associated with the subprocess module."
+        },
+        {
+          "regla": "B603",
+          "nombre": "subprocess_without_shell_equals_true",
+          "severidad": "LOW",
+          "confianza": "HIGH",
+          "archivo": "mibici_equipo39/validation/data_checks.py",
+          "linea": 46,
+          "texto": "subprocess call - check for execution of untrusted input."
+        },
+        {
+          "regla": "B603",
+          "nombre": "subprocess_without_shell_equals_true",
+          "severidad": "LOW",
+          "confianza": "HIGH",
+          "archivo": "mibici_equipo39/validation/data_checks.py",
+          "linea": 49,
+          "texto": "subprocess call - check for execution of untrusted input."
+        }
+      ]
+    },
+    "despues": {
+      "commit": "8812e5a1d0b0015c98c934704cd3c4f26ca33956",
+      "fecha_utc": "2026-11-07T04:22:28Z",
+      "salida": 1,
+      "errores_de_analisis": [],
+      "lineas_analizadas": 311,
+      "archivos": [
+        "mibici_equipo39/validation/__init__.py",
+        "mibici_equipo39/validation/data_checks.py"
+      ],
+      "hallazgos": [
+        {
+          "regla": "B404",
+          "nombre": "blacklist",
+          "severidad": "LOW",
+          "confianza": "HIGH",
+          "archivo": "mibici_equipo39/validation/data_checks.py",
+          "linea": 20,
+          "texto": "Consider possible security implications associated with the subprocess module."
+        },
+        {
+          "regla": "B603",
+          "nombre": "subprocess_without_shell_equals_true",
+          "severidad": "LOW",
+          "confianza": "HIGH",
+          "archivo": "mibici_equipo39/validation/data_checks.py",
+          "linea": 49,
+          "texto": "subprocess call - check for execution of untrusted input."
+        },
+        {
+          "regla": "B603",
+          "nombre": "subprocess_without_shell_equals_true",
+          "severidad": "LOW",
+          "confianza": "HIGH",
+          "archivo": "mibici_equipo39/validation/data_checks.py",
+          "linea": 53,
+          "texto": "subprocess call - check for execution of untrusted input."
+        }
+      ]
+    }
+  },
+  "interpretacion": "reports/etapa3/seguridad_validacion.md"
+}
