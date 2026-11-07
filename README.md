@@ -450,9 +450,11 @@ docker inspect mibici-equipo39-p1 --format '{{.State.Health.Status}}'
 Invoke-RestMethod http://127.0.0.1:8000/ready
 ```
 
+Al inicio `docker inspect` muestra `starting`; pasa a `healthy` cuando `/ready` responde 200, unos 30 segundos después. `unhealthy` significa que `/ready` dejó de responder 200, normalmente porque el modelo no cargó; la causa aparece en `docker logs mibici-equipo39-p1`.
+
 El proceso usa UID/GID `10001:10001`, raíz de solo lectura y un temporal limitado. `.dockerignore` y `.containerignore` permiten únicamente el código, los requisitos, el manifiesto y el paquete del modelo. El modelo se incluye en la imagen aunque esté excluido de Git. No se copian CSV, entornos, credenciales, reportes ni bases de MLflow. El puerto se publica solo en localhost; no se ofrece como servicio público autenticado.
 
-Abre http://127.0.0.1:8000/docs. En `POST /predict`, selecciona **Try it out** y **Execute**: el ejemplo mostrado es válido. También puede usarse el archivo versionado:
+Abre http://127.0.0.1:8000/docs. En `POST /predict`, selecciona **Try it out** y **Execute**: el ejemplo mostrado es válido. La página descarga Swagger UI de `cdn.jsdelivr.net`; sin internet se ve en blanco, aunque el servicio y `/openapi.json` sigan respondiendo. También puede usarse el archivo versionado:
 
 ```powershell
 $body = Get-Content references/etapa4/examples/predict_request.json -Raw
@@ -460,14 +462,22 @@ Invoke-RestMethod -Method Post -Uri http://127.0.0.1:8000/predict -ContentType '
 & $pythonApi -B -m mibici_equipo39.serving.verify_http --url http://127.0.0.1:8000 --output private_results/http_check.json
 ```
 
+En macOS o Linux el intérprete es `.venv-api/bin/python` y la solicitud se envía con `curl`. Sin el encabezado `Content-Type`, `curl` manda el cuerpo como formulario y la API responde 422:
+
+```bash
+curl -X POST http://127.0.0.1:8000/predict -H 'Content-Type: application/json' --data @references/etapa4/examples/predict_request.json
+```
+
 Consulta el [ejemplo de solicitud](references/etapa4/examples/predict_request.json) y la [respuesta real](references/etapa4/examples/predict_response.json). El verificador compara 72 entradas con una carga local independiente del mismo paquete, confirma repetición, orden, linaje y rechazo 422. No entrena ni modifica el Registry. Una estación desconocida usa la media global del baseline; es respaldo y no una predicción específicamente aprendida para esa estación.
 
 | Ruta | Resultado esperado |
 |---|---|
-| `/health` | 200: proceso disponible. |
-| `/ready` | 200 y linaje cuando el modelo está preparado; 503 si falló la carga. |
-| `/predict` | 200 con predicciones; 422 por entrada inválida; 503 sin modelo preparado; 500 ante fallo de inferencia. |
-| `/docs` | 200: documentación interactiva. |
+| `/health` | 200: proceso disponible, aunque el modelo no haya cargado. |
+| `/ready` | 200 con `model_name`, `model_version` y `model_bundle_sha256` cuando el modelo está preparado; 503 si falló la carga. |
+| `/predict` | 200 con predicciones; 422 por entrada inválida, JSON mal formado o falta de `Content-Type: application/json`; 503 sin modelo preparado; 500 ante fallo de inferencia. |
+| `/docs` | 200: documentación interactiva, aunque el modelo no haya cargado. |
+
+La solicitud se valida antes de revisar el modelo: una entrada inválida recibe 422 aunque el servicio no esté preparado. Detalle de cada código en la [revisión de uso](references/etapa4/revision_uso_diego_martinez.md).
 
 Para comprobar código y dependencias sin reconstruir el modelo:
 

@@ -28,10 +28,10 @@ La respuesta contiene `model_name`, `model_version`, `model_bundle_sha256` y `pr
 
 ## Servicio y errores
 
-- `GET /health`: 200 cuando el proceso responde.
-- `GET /ready`: 200 con el linaje cuando el modelo se cargó; 503 si falló su preparación.
-- `POST /predict`: 200 con las predicciones, 422 para solicitudes inválidas, 503 si no está preparado y 500 para un fallo de inferencia.
-- `GET /docs`: contrato interactivo; `/openapi.json` publica su definición.
+- `GET /health`: 200 cuando el proceso responde, aunque el modelo no haya cargado.
+- `GET /ready`: 200 con `model_name`, `model_version` y `model_bundle_sha256` cuando el modelo se cargó; 503 si falló su preparación.
+- `POST /predict`: 200 con las predicciones, 422 para solicitudes inválidas (incluye JSON mal formado y falta de `Content-Type: application/json`), 503 si no está preparado y 500 para un fallo de inferencia. La solicitud se valida primero, así que una inválida recibe 422 aunque el modelo no esté preparado.
+- `GET /docs`: contrato interactivo; `/openapi.json` publica su definición. Ninguna de las dos depende del modelo.
 
 La carga verifica inventario, firma y corrida antes de deserializar, y ocurre una vez por proceso durante el inicio de FastAPI. El cliente no puede elegir rutas, modelos, URI ni versiones. Las respuestas de error no incluyen trazas, rutas internas ni el cuerpo original. Un fallo al cargar deja `/health` disponible y `/ready` en 503 para que el operador pueda diagnosticarlo y reiniciar después de corregirlo.
 
