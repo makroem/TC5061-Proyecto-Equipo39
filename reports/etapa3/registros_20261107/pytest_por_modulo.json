@@ -1,0 +1,32 @@
+{
+  "tested_commit": "e4ac4c6037d7150ac9b5ea1ba4812030b9e05d99",
+  "total": 284,
+  "modules": {
+    "tests.test_data": 2,
+    "tests.test_data_checks": 23,
+    "tests.test_deepchecks_preparation": 7,
+    "tests.test_download": 12,
+    "tests.test_features": 4,
+    "tests.test_ingesta_calidad": 31,
+    "tests.test_p2_model": 6,
+    "tests.test_p2_targets": 4,
+    "tests.test_p3": 7,
+    "tests.test_reproduce_workflow": 22,
+    "tests.test_runtime_regressions": 5,
+    "tests.test_split_isolation": 11,
+    "tests.test_stage2_contract": 7,
+    "tests.test_stage2_p1": 10,
+    "tests.test_stage2_p2": 14,
+    "tests.test_stage2_p3": 33,
+    "tests.test_stage2_project": 17,
+    "tests.test_stage2_registry": 5,
+    "tests.test_stage3_p2": 8,
+    "tests.test_stage3_p3": 12,
+    "tests.test_stage3_registro": 14,
+    "tests.test_station_hash": 5,
+    "tests.test_station_manifest": 6,
+    "tests.test_tracking_migration": 6,
+    "tests.test_train": 3,
+    "tests.test_validation_git_state": 10
+  }
+}

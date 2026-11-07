@@ -1,0 +1,37 @@
+Copia del registro de la ejecución del 7 de noviembre de 2026.
+Commit: e4ac4c6037d7150ac9b5ea1ba4812030b9e05d99
+Se sustituyeron las rutas privadas por marcadores y se normalizaron saltos de línea y espacios finales.
+Se conservan los resultados y todas las advertencias. No es una nueva ejecución.
+
+
+Compatibilidad del entorno - datos sinteticos:
+|     | 0/1 [Time: 00:00]
+
+
+Compatibilidad del entorno - datos sinteticos:
+|     | 0/1 [Time: 00:00]
+
+{
+  "scope": "compatibilidad con datos sinteticos; no valida CSV reales",
+  "status": "PASS",
+  "cases": {
+    "variable": {
+      "condition_passed": true,
+      "html": "variable.html",
+      "sha256": "9bd64c9b03b5cf7f060103b7d029caee6a9236c221be114609e3b38d66026922"
+    },
+    "constant": {
+      "condition_passed": false,
+      "html": "constant.html",
+      "sha256": "dad5631d52e06071ed991495f654ff18eb734cd6126ca4a3b8f33ec86e7ef585"
+    }
+  },
+  "versions": {
+    "deepchecks": "0.19.1",
+    "numpy": "1.26.4",
+    "pandas": "2.2.3",
+    "scikit-learn": "1.6.1",
+    "plotly": "5.24.1",
+    "ipython": "8.37.0"
+  }
+}
