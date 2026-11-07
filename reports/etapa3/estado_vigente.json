@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "date_local": "2026-11-07",
+  "timezone": "America/Mexico_City",
+  "responsible": "Marco",
+  "repository": "https://github.com/makroem/TC5061-Proyecto-Equipo39",
+  "tested_commit": "e4ac4c6037d7150ac9b5ea1ba4812030b9e05d99",
+  "tracked_worktree_clean_at_test_start": true,
+  "started_at_utc": "2026-11-07T17:48:24.5403677Z",
+  "finished_at_utc": "2026-11-07T17:53:53.5188786Z",
+  "scope": "Suite compartida de tests con tests/api excluido; incluye regresiones de ingesta, funciones, modelos, trazabilidad y calidad. Datos sintéticos y almacenes temporales aislados.",
+  "environments": {
+    "quality": {
+      "python": "3.11.9",
+      "platform": "Windows",
+      "packages": {
+        "pytest": "9.0.3",
+        "bandit": "1.9.4",
+        "mlflow": "3.17.2",
+        "pyarrow": "23.0.1",
+        "numpy": "2.1.3",
+        "pandas": "2.2.3",
+        "scikit-learn": "1.6.1"
+      },
+      "environment": ".venv-a7",
+      "reused": true,
+      "created_local_date": "2026-11-05",
+      "requirements_file": "requirements-quality.txt",
+      "requirements_checked": 154,
+      "mismatches": [],
+      "pip_check": "PASS"
+    },
+    "deepchecks": {
+      "python": "3.11.9",
+      "platform": "Windows",
+      "packages": {
+        "deepchecks": "0.19.1",
+        "setuptools": "84.1.0",
+        "pyarrow": "23.0.1",
+        "numpy": "1.26.4",
+        "pandas": "2.2.3",
+        "scikit-learn": "1.6.1",
+        "plotly": "5.24.1",
+        "ipython": "8.37.0"
+      },
+      "environment": ".venv-deepchecks",
+      "reused": true,
+      "created_local_date": "2026-11-05",
+      "requirements_file": "requirements-deepchecks.txt",
+      "requirements_checked": 122,
+      "mismatches": [],
+      "pip_check": "PASS"
+    }
+  },
+  "pytest": {
+    "command": "python -m pytest tests --ignore=tests/api -q --basetemp=\"$tempA7\" --junitxml=private_quality/cierre_20261107/pytest.xml",
+    "environment": ".venv-a7",
+    "collected": 284,
+    "passed": 284,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "warnings": 23,
+    "duration_seconds": 315.42,
+    "exit_code": 0,
+    "deepchecks_integration_cases_passed": 2,
+    "raw_junit_sha256": "0fc469dc4f32bada8eb6e0db58e335d433c189361334adea3340e8ef98571681",
+    "raw_log_sha256": "7cab90183d426612492e2295880a261ca4dfe1dbde7f42dd5b13ec5350895ac4",
+    "public_log": "reports/etapa3/registros_20261107/pytest.txt",
+    "module_counts": "reports/etapa3/registros_20261107/pytest_por_modulo.json"
+  },
+  "deepchecks_smoke": {
+    "command": "python scripts/check_deepchecks_env.py --output private_quality/cierre_20261107/deepchecks_smoke",
+    "environment": ".venv-deepchecks",
+    "exit_code": 0,
+    "status": "PASS",
+    "cases": {
+      "variable": {
+        "condition_passed": true,
+        "html": "variable.html",
+        "sha256": "9bd64c9b03b5cf7f060103b7d029caee6a9236c221be114609e3b38d66026922"
+      },
+      "constant": {
+        "condition_passed": false,
+        "html": "constant.html",
+        "sha256": "dad5631d52e06071ed991495f654ff18eb734cd6126ca4a3b8f33ec86e7ef585"
+      }
+    },
+    "interpretation": "El caso variable aprueba; el constante se rechaza como se esperaba. Ambos controles funcionan.",
+    "summary": "reports/etapa3/registros_20261107/deepchecks_summary.json",
+    "public_log": "reports/etapa3/registros_20261107/deepchecks_smoke.txt",
+    "raw_log_sha256": "1d62ce2e95709fce157511434c8f337197cdc3c0a1625b67871f12c284d39e02"
+  },
+  "bandit": {
+    "command": "python -m bandit -r mibici_equipo39 -f json -o private_quality/cierre_20261107/bandit.json",
+    "version": "1.9.4",
+    "scope": "Módulo completo, incluido serving; no incluye tests.",
+    "low": 9,
+    "medium": 0,
+    "high": 0,
+    "analysis_errors": 0,
+    "low_by_scope": {
+      "modeling": 5,
+      "serving": 1,
+      "validation": 3
+    },
+    "exit_code": 1,
+    "interpretation": "Salida 1 por avisos bajos conservados; no equivale a error de análisis ni a cero riesgos.",
+    "blanket_nosec_locations_reported": 0,
+    "rule_suppressions_reported": 1,
+    "suppression_context": "Una exclusión específica B603 preexistente en serving/verify_model.py; justificada en reports/etapa4/seguridad_api.md. Esta revisión no añade exclusiones.",
+    "source_report_sha256": "47a063de08ada68be352aa84927890e3e3a264eaac7f193f1a097ef4732b4ada",
+    "published_report_sha256": "f6d52cd36576b8109b89aa8c307a9686cfb31f4cf4d2b3aea027b962a1c8cc25",
+    "publication_note": "Contenido JSON conservado; saltos de línea normalizados a LF para Git. La huella del original local se registra por separado.",
+    "report": "reports/etapa3/registros_20261107/bandit.json",
+    "analysis": "reports/etapa3/verificacion_vigente_20261107.md"
+  },
+  "historical_real_data": {
+    "rerun": false,
+    "source": "reports/etapa3/validacion_final_datos_20261101.json",
+    "created_utc": "2026-11-02T01:04:21+00:00",
+    "tested_commit": "03e114317db5e445f7905489b9a76f61b00e5b5e",
+    "totals": {
+      "PASS": 100,
+      "WARN": 3,
+      "FAIL": 0,
+      "NOT_EVALUATED": 0
+    },
+    "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+    "split_id": "ab6301f96f083217512343b4f800bc5ddea51b666492ef05b34da85591cc9bdd",
+    "source_sha256_git_blob": "9bb9ec1a98e8b9effb9202354afe1af3d0de2136ba35fe3146d103dd3355c981"
+  },
+  "original_screenshots": [
+    {
+      "file": "reports/figures/etapa3/cierre_20261107/deepchecks_variable.jpg",
+      "sha256": "d7cafd1ff11abbdf2f41795661a54ac2d5639555279713f1e4be2bc4d98081c0",
+      "source_html_sha256": "9bd64c9b03b5cf7f060103b7d029caee6a9236c221be114609e3b38d66026922",
+      "saved_at_utc": "2026-11-07T17:51:49.549703+00:00",
+      "scope": "Control sintético de compatibilidad; no es validación de datos reales.",
+      "method": "Captura directa del HTML original en navegador; sin retoque ni recomprimir."
+    },
+    {
+      "file": "reports/figures/etapa3/cierre_20261107/deepchecks_constante.jpg",
+      "sha256": "eee359cbd16d9e753e7843832891bcb0e17b9258f3a367ad0c2489a19acf860f",
+      "source_html_sha256": "dad5631d52e06071ed991495f654ff18eb734cd6126ca4a3b8f33ec86e7ef585",
+      "saved_at_utc": "2026-11-07T17:51:57.413862+00:00",
+      "scope": "Control sintético de compatibilidad; no es validación de datos reales.",
+      "method": "Captura directa del HTML original en navegador; sin retoque ni recomprimir."
+    }
+  ],
+  "limitations": [
+    "No se volvió a evaluar el conjunto real de prueba, entrenar modelos oficiales ni modificar el Registry.",
+    "Las 76 pruebas históricas de API no se suman a esta suite ni se repitieron aquí.",
+    "No se recalculó cobertura, ni se repitieron pip-audit o Gitleaks; pip check valida compatibilidad, no vulnerabilidades.",
+    "Los originales locales de JUnit y consola se conservan por sus huellas. Las copias de texto publicadas normalizan rutas privadas.",
+    "Las capturas nuevas muestran únicamente los controles sintéticos de DeepChecks. La consolidación del README y las capturas de PyTest y seguridad corresponden a #54."
+  ],
+  "coordination": {
+    "source_fix_pr": 57,
+    "tests_pr": 56,
+    "evidence_issue": 53,
+    "readme_issue": 54,
+    "independent_reviewer": "diegoHurtado01"
+  }
+}
