@@ -5,7 +5,7 @@ Verificar que el ejemplo de solicitud incluido en el repositorio sea consistente
 
 ## Resumen de validaciones 
 - station_id debe ser un texto de 1 a 6 dígitos sin ceros iniciales.
-- hour_of_the_day debe estar en el rango de 0 a 23.
+- hour_of_day debe estar en el rango de 0 a 23.
 - day_of_week debe estar en el rango de 0 a 6.
 - month debe estar en el rango de 1 a 12.
 - is_weekend debe ser coherente con day_of_week
@@ -40,10 +40,10 @@ Revisión:
 - Se incluyen todos los campos requeridos por el contrato.
 - No existen campos adicionales.
 
-Resultado:
+Resultado esperado:
 La solicitud es aceptada y se produce la respuesta HTTP 200 ok
 
-## Caso de validación 2: Hora válida
+## Caso de validación 2: Hora inválida
 validación:
 {
   "instances": [
@@ -89,7 +89,7 @@ El contrato indica que is_weekend debe ser 1 únicamente cuando day_of_week corr
 Se espera obtener un HTTP 422 Unprocessable Entity
 
 ## Limitaciones
-- La revisión se realizó a partir del ejemplo contenido en predict_request.json y las reglas documentadas en contrato_api.md.
+- La revisión de los tres caso se realizó a partir del ejemplo contenido en predict_request.json y las reglas documentadas en contrato_api.md.
 - No se evaluaron escenarios adicionales fuera de los casos solicitados, como identificadores de estación inválidos, meses fuera de rango, valores cíclicos inconsistentes o tipos de datos incorrectos.
 - La revisión confirma la coherencia entre la documentación y los ejemplos analizados, pero no sustituye las pruebas completas de integración, rendimiento o despliegue del servicio.
 
