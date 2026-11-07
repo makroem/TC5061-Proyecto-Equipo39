@@ -29,7 +29,6 @@ from mibici_equipo39 import features as F
 
 STAGES = {"development": ["train", "validation"], "final": ["train", "validation", "test"]}
 QUESTIONS = ["p1", "p2", "p3"]
-GIT_TIMEOUT = 10
 
 
 def policy_path():
@@ -41,19 +40,14 @@ def status_of(passed, severity):
 
 
 def git_state():
-    """Commit y cambios locales; (None, None) si Git no se pudo comprobar, nunca un estado limpio."""
     git = shutil.which("git")
     if git is None:
         return None, None
-    try:
-        head = subprocess.run([git, "rev-parse", "HEAD"], cwd=C.ROOT, capture_output=True,
-                              text=True, timeout=GIT_TIMEOUT)
-        if head.returncode:
-            return None, None
-        dirty = subprocess.run([git, "status", "--porcelain", "--untracked-files=normal"],
-                               cwd=C.ROOT, capture_output=True, text=True, timeout=GIT_TIMEOUT)
-    except (OSError, subprocess.SubprocessError):
+    head = subprocess.run([git, "rev-parse", "HEAD"], cwd=C.ROOT, capture_output=True, text=True)
+    if head.returncode:
         return None, None
+    dirty = subprocess.run([git, "status", "--porcelain"], cwd=C.ROOT,
+                           capture_output=True, text=True)
     if dirty.returncode:
         return None, None
     return head.stdout.strip(), bool(dirty.stdout.strip())
