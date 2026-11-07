@@ -1,0 +1,30 @@
+{
+  "checked_at_utc": "2026-11-05T03:51:29.287905+00:00",
+  "code_commit": "b1ddc47a0234def92b23c5ae7d6804f05e34697f",
+  "merged_pr": 49,
+  "independent_review": "https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/49#pullrequestreview-5779409126",
+  "fresh_remote_clone": true,
+  "fresh_virtual_environment": true,
+  "python_version": "3.11.9",
+  "environment": "Windows",
+  "dependency_file": "requirements-api-dev.txt",
+  "installation_exit_code": 0,
+  "pip_check": "No broken requirements found.",
+  "tests": {
+    "tests": 76,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0
+  },
+  "test_time_console_seconds": 2.67,
+  "test_time_junit_seconds": 2.637,
+  "warnings": [
+    "StarletteDeprecationWarning: httpx in TestClient.",
+    "MLflow reports differences between historical model dependencies and the reduced serving environment."
+  ],
+  "model_files": 22,
+  "bundle_sha256": "dedce1eb08bda971a42fba311224c88e56f75cd2789dbb391e9445951931bd80",
+  "http_evidence": "verificacion_http_main_20261104.json",
+  "container_evidence": "estado_contenedor_main_20261104.json",
+  "scope": "Fresh installation, API unit tests, Docker build and local HTTP inference. No retraining, full data ingestion, base image audit, load test or public deployment."
+}

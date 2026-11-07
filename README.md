@@ -363,6 +363,8 @@ La introducción pública de Wilson, capítulo 6, respalda la comparación objet
 
 Marco preparó la recuperación de P1 y completó los esquemas, el adaptador, la API y el Containerfile. El [contrato vigente](references/etapa4/contrato_api.md) describe el servicio. La [distribución actual](references/etapa4/distribucion_actual.md) deja a Marco y Diego Hurtado el trabajo crítico y revisiones acotadas a Stefania y Diego Martinez.
 
+El [PR #49](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/49) ya está integrado tras la revisión independiente de Diego Hurtado. Marco comprobó el commit `b1ddc47` desde un clon y un entorno de Python nuevos: instalación correcta, 76 pruebas aprobadas, contenedor Linux saludable y 72 casos HTTP sin diferencias. El [cierre sobre main](reports/etapa4/cierre_api_marco_20261103.md#cierre-sobre-main) incluye la inspección del contenedor y las capturas originales de esa ejecución.
+
 ### Entorno de servicio
 
 Comprueba primero `python --version` (3.11.9) y si ya existe `.venv-api`. Solo si falta, créalo. Después instala las versiones fijadas:
@@ -478,7 +480,7 @@ Para comprobar código y dependencias sin reconstruir el modelo:
 
 Si necesitas detener tu instancia, usa `docker stop mibici-equipo39-p1`. Para crearla nuevamente con otra imagen, elimina solo ese contenedor detenido con `docker rm mibici-equipo39-p1`. No borres el modelo local ni el Registry.
 
-El [registro de implementación y validación](reports/etapa4/cierre_api_marco_20261103.md) distingue pruebas locales, Linux y la revisión independiente pendiente. La prueba de esta máquina publica el contenedor en el puerto 18040 para evitar ocupar el 8000 de otro servicio; los comandos anteriores permiten reproducirlo en el puerto habitual.
+El [registro de implementación y validación](reports/etapa4/cierre_api_marco_20261103.md) distingue las pruebas históricas de la revisión independiente aprobada y la comprobación final de `main`. La ejecución final publica el contenedor en `127.0.0.1:18041` para conservar los servicios anteriores; la prueba histórica usó 18040. Los comandos anteriores permiten reproducirlo en el puerto habitual 8000.
 
 Documentación técnica: [ciclo de vida de FastAPI](https://fastapi.tiangolo.com/advanced/events/), [FastAPI en contenedores](https://fastapi.tiangolo.com/deployment/docker/) y [validación estricta de Pydantic](https://docs.pydantic.dev/latest/concepts/strict_mode/).
 
