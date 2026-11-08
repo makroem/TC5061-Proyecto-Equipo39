@@ -103,9 +103,9 @@ La corrección posterior del cierre de Etapa 3 se organizó en cuatro actividade
 | Diego Martínez | Tarea #51: corregir el manejo de errores de Git e interpretar los avisos Bandit del módulo de validación. | [PR #57](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/57) | Aprobado por Marco e integrado. |
 | Stefania | Tarea #52: añadir pruebas de controles y fallos de trazabilidad en `git_state()`. | [PR #56](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/56) | Aprobado por Marco después de solicitar correcciones; integrado. |
 | Marco | Tarea #53: ejecutar la verificación integrada y publicar los resultados vigentes de calidad y seguridad. | [PR #59](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/59) | Aprobado por Diego Hurtado e integrado. |
-| Diego Hurtado | Tarea #54: simplificar el README, consolidar los resultados, incorporar las evidencias visuales y documentar la colaboración. | [Tarea #54](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/54) | En elaboración; revisión documental pendiente por una persona distinta del autor. |
+| Diego Hurtado | Tarea #54: simplificar el README, consolidar los resultados, incorporar las evidencias visuales y documentar la colaboración. | [PR #60](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/60) | Autoría y revisión independiente consultables en el PR #60. |
 
-La integración de los PR #56, #57 y #59 se verificó en GitHub. La aportación documental de la tarea #54 requiere todavía su propio PR y aprobación independiente. La tarea #53 conserva abierta la comprobación de correspondencia con el README final.
+La integración de los PR #56, #57 y #59 se verificó en GitHub. La consolidación documental de la tarea #54 se registra en el [PR #60](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/60), donde puede consultarse su revisión y estado de integración. Las tareas [#53](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/53) y [#54](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/54) documentan la comprobación técnica y el estado del cierre, respectivamente.
 
 
 ### Historial de verificaciones anteriores
@@ -178,7 +178,7 @@ Las correcciones de seguridad y trazabilidad de las tareas #51 y #52 también es
 
 Las evidencias visuales originales y su consolidación se incorporaron anteriormente mediante los PR #40 y #41. El [PR #50](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/50) de cierre de API también está integrado en `main`.
 
-La tarea #54 actualiza este README y organiza los resultados vigentes, las evidencias y la colaboración. Su cierre permanece sujeto a revisión independiente e integración del PR correspondiente.
+La tarea #54 consolida los resultados vigentes, las evidencias y la colaboración en este README. La revisión independiente y el estado de integración de esta aportación pueden consultarse en el [PR #60](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/60).
 
 Los hallazgos LOW documentados conservan sus controles, limitaciones y seguimiento. La aprobación documental no equivale a una certificación de seguridad.
 
