@@ -1,6 +1,6 @@
 # Implementación y validación del servicio P1
 
-Registro inicial: 3 de noviembre de 2026. Última actualización: 4 de noviembre de 2026, hora de Ciudad de México. Implementación y ejecución: Marco. Revisión independiente: Diego Hurtado, aprobada. El servicio ya está integrado en `main`; el cierre final se documenta al final de este registro.
+Registro inicial: 3 de noviembre de 2026. Ejecución final: 4 de noviembre de 2026, hora de Ciudad de México. Seguimiento documental: 8 de noviembre de 2026. Implementación y ejecución: Marco. Revisión independiente: Diego Hurtado, aprobada. El servicio ya está integrado en `main`; el cierre final y el seguimiento se documentan al final de este registro.
 
 ## Cambio y continuidad
 
@@ -103,4 +103,14 @@ Las marcas de tiempo de los JSON están en UTC; `2026-11-05 03:xx UTC` correspon
 
 Permanece una advertencia de Starlette sobre el uso de httpx en TestClient y las diferencias entre el entorno histórico del modelo y el entorno reducido. No se ocultaron ni se reescribieron las dependencias del paquete. Esta prueba acredita instalación nueva, construcción e inferencia en los casos indicados; no acredita una descarga nueva de doce meses, reentrenamiento, prueba de carga, auditoría de la imagen base ni despliegue público. La comprobación funcional no mide exactitud predictiva frente a viajes reales.
 
-El trabajo técnico de la API quedó integrado. Las tareas individuales #47 y #48 siguen abiertas y no bloquean el servicio. Diego Hurtado puede publicar la evidencia propia en un PR y Marco revisarlo; esta revisión entre integrantes sigue pendiente hasta que exista ese PR. Los registros de esta ejecución no sustituyen aportaciones de otra persona.
+Al cierre del 4 de noviembre, el trabajo técnico de la API ya estaba integrado y las tareas individuales #47 y #48 permanecían abiertas. En ese momento se propuso que Diego Hurtado publicara evidencia propia para una revisión de Marco. Ese estado histórico quedó superado por las contribuciones y revisiones que se describen a continuación; los resultados de la ejecución no se modifican.
+
+## Seguimiento del 8 de noviembre de 2026
+
+Marco revisó e integró el [PR #55 de Stefania](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/55) y el [PR #58 de Diego Martinez](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/58) el 7 de noviembre. Las tareas #47 y #48 quedaron cerradas y la revisión de Marco a otro integrante ya está acreditada por esos PR.
+
+El [PR #50 de evidencia final](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/50) fue aprobado por Diego Hurtado e integrado por Marco el 8 de noviembre, en `b6bd0afd13a775431152df0b3f16e324b83a14c7`. Las capturas originales y los registros finales están publicados en `main`.
+
+Se contrastó el servicio probado en `b1ddc47` con `main` en `3bfe6c0d3623ae965f7242901732c62b4b6f8675`: no hay diferencias en `mibici_equipo39/serving`, `tests/api`, `Containerfile`, los archivos de exclusión de construcción, las dependencias de API, `config.py` ni el manifiesto del modelo. Esta revisión documental no constituye una nueva ejecución de Docker ni de la suite. Los resultados funcionales citados siguen correspondiendo al 4 de noviembre.
+
+El [índice de entrega de Marco](indice_entrega_marco.md) relaciona los requisitos con los archivos publicados y distingue las evidencias finales de los registros históricos. La [distribución vigente](../../references/etapa4/distribucion_actual.md) conserva los responsables y las revisiones ya completadas.
