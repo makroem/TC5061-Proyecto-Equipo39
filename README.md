@@ -2,12 +2,87 @@
 
 ## Etapa 3: pruebas, validación y seguridad
 
-La Etapa 3 del proyecto MiBici Equipo 39 está orientada a fortalecer la calidad del software, ampliar las pruebas automatizadas, comprobar la integridad de los datos y documentar los hallazgos de seguridad.
+La Etapa 3 del proyecto MiBici Equipo 39 cuenta con las correcciones técnicas de los cuatro integrantes integradas en `main`. La política de calidad permanece congelada.
 
-Las contribuciones técnicas de los cuatro integrantes ya fueron revisadas e integradas en `main`. La política de calidad está congelada. La [verificación integrada del 1 de noviembre](reports/etapa3/cierre_integrado_marco_20261101.md) documenta 238 pruebas aprobadas y la corrida final de datos: 100 PASS, 3 WARN, 0 FAIL y 0 NOT_EVALUATED. La comprobación inicial corresponde al commit `03e1143`. La [suite completa posterior al ajuste de dependencias](reports/etapa3/revision_pr38_20261101.json) volvió a aprobar las 238 pruebas, sin omisiones, sobre `0dd8c6e`. La evaluación final de datos no se repitió.
+**Resultado vigente:** verificación integrada del 7 de noviembre de 2026, ejecutada por Marco sobre el commit `e4ac4c6037d7150ac9b5ea1ba4812030b9e05d99`.
 
-La [actualización de compatibilidad de DeepChecks](reports/etapa3/cierre_adicional_marco.md) añade siete pruebas: la suite completa aprueba **245 pruebas**, sin fallos ni omisiones. El entorno independiente usa setuptools 84.1.0 y su auditoría de 122 requisitos no encontró vulnerabilidades conocidas. Esta actualización conserva la validación final de datos y requiere la revisión independiente de su PR para integrarse en `main`.
+| Comprobación | Resultado vigente |
+|---|---|
+| PyTest, excluyendo `tests/api` | **284 aprobadas**, 0 fallos, 0 errores, 0 omisiones |
+| Advertencias de PyTest | 23, conservadas |
+| Integración de DeepChecks | 2 pruebas incluidas en las 284 |
+| Controles independientes de DeepChecks | Variable aceptada y constante rechazada como se esperaba |
+| Bandit 1.9.4 | **9 LOW**, 0 MEDIUM, 0 HIGH, 0 errores de análisis |
+| Validación histórica de datos reales | 100 PASS, 3 WARN, 0 FAIL, 0 NOT_EVALUATED; no repetida |
+| API de Etapa 4 | 76 pruebas de alcance independiente; no se suman a las 284 |
 
+La fuente canónica es [estado_vigente.json](reports/etapa3/estado_vigente.json). Los comandos, las capturas y el historial se describen a continuación. Los nueve hallazgos bajos de Bandit y las advertencias de datos permanecen documentados; estos resultados no certifican ausencia de vulnerabilidades.
+
+
+### Reproducir la verificacion vigente
+
+La comprobacion integrada fue ejecutada por Marco el 7 de noviembre de 2026, sobre el commit `e4ac4c6037d7150ac9b5ea1ba4812030b9e05d99`, con Python 3.11.9 en Windows.
+
+**Preparacion:** se requieren dos entornos separados: `.venv-a7` (calidad, pruebas y seguridad) y `.venv-deepchecks` (compatibilidad). Los pasos de instalacion desde un clon limpio estan en la [guia unica de preparacion](references/etapa3/ejecucion_marco.md), que enlaza la adaptacion necesaria de DeepChecks. No mezclar las dependencias de ambos entornos.
+
+Desde la raiz del repositorio, con los dos entornos preparados, ejecutar en PowerShell:
+
+```powershell
+$pythonCalidad = ".\.venv-a7\Scripts\python.exe"
+$pythonDatos = ".\.venv-deepchecks\Scripts\python.exe"
+
+& $pythonCalidad --version
+& $pythonDatos --version
+& $pythonCalidad -m pip check
+& $pythonDatos -m pip check
+
+$env:OMP_NUM_THREADS = "4"
+$env:OPENBLAS_NUM_THREADS = "4"
+$env:MKL_NUM_THREADS = "4"
+
+$tempA7 = Join-Path ([IO.Path]::GetTempPath()) ("eq39_" + [guid]::NewGuid().ToString("N").Substring(0,8))
+New-Item -ItemType Directory -Force -Path "private_quality/reproduccion_etapa3" | Out-Null
+
+& $pythonCalidad -m pytest tests --ignore=tests/api -q --basetemp="$tempA7" --junitxml=private_quality/reproduccion_etapa3/pytest.xml
+
+& $pythonDatos scripts/check_deepchecks_env.py --output private_quality/reproduccion_etapa3/deepchecks
+
+& $pythonCalidad -m bandit -r mibici_equipo39 -f json -o private_quality/reproduccion_etapa3/bandit.json
+```
+
+Comprobar el codigo de salida de cada comando. PyTest y el control de DeepChecks deben terminar con codigo 0 cuando sus comprobaciones pasan. Bandit puede terminar con codigo 1 por hallazgos: revisar `results`, `errors` y severidades del JSON antes de interpretarlo como fallo del analisis.
+
+Los resultados publicados son historicos y corresponden al commit probado. Una nueva ejecucion sobre otra version del codigo puede producir resultados distintos; debe registrarse su propio commit y fecha.
+
+**Alcance:** los 284 casos vigentes excluyen `tests/api` e incluyen dos pruebas de integracion de DeepChecks. Los controles independientes de DeepChecks no se suman a PyTest. El escaneo Bandit incluye `mibici_equipo39`, pero no `tests`.
+
+Las 23 advertencias de PyTest son avisos de bibliotecas; los 9 LOW de Bandit son hallazgos de seguridad sujetos a interpretacion. No son fallos de validacion de datos. La validacion historica de CSV reales (100 PASS, 3 WARN) no se repitio.
+
+La [verificacion original](reports/etapa3/verificacion_vigente_20261107.md) y el [resultado canonico](reports/etapa3/estado_vigente.json) conservan versiones, registros, advertencias y limitaciones.
+
+### Evidencias visuales de la Etapa 3
+
+Las siguientes capturas conservan su procedencia original. El resultado vigente corresponde al 7 de noviembre de 2026, commit `e4ac4c6037d7150ac9b5ea1ba4812030b9e05d99`. Las capturas historicas se identifican expresamente y no sustituyen los registros actuales.
+
+**1. PyTest — captura historica (1 de noviembre de 2026)**
+
+![Registro historico de PyTest](reports/figures/etapa3/cierre_20261101/F04_PyTest_registro_original.jpg)
+
+Captura del registro original de la ejecucion sobre `0dd8c6e`: 238 pruebas aprobadas y 23 advertencias. No representa la ejecucion vigente ni una consola en vivo. El [registro vigente del 7 de noviembre](reports/etapa3/registros_20261107/pytest.txt) confirma 284 aprobadas y 23 advertencias.
+
+**2. DeepChecks — captura original (7 de noviembre de 2026)**
+
+![Control sintetico positivo de DeepChecks](reports/figures/etapa3/cierre_20261107/deepchecks_variable.jpg)
+
+Captura original del HTML generado durante la comprobacion del commit `e4ac4c6`. El caso con columna variable cumple la condicion. El [caso constante rechazado como se esperaba](reports/figures/etapa3/cierre_20261107/deepchecks_constante.jpg) se conserva como evidencia complementaria. Son controles sinteticos de compatibilidad, no una nueva validacion de CSV reales.
+
+**3. Bandit — captura historica (1 de noviembre de 2026)**
+
+![Registro historico de Bandit](reports/figures/etapa3/cierre_20261101/F07_Bandit_original.jpg)
+
+Captura del reporte original del cierre del 1 de noviembre: 8 hallazgos LOW, 0 MEDIUM, 0 HIGH y sin errores de analisis. El [reporte vigente del 7 de noviembre](reports/etapa3/registros_20261107/bandit.json), correspondiente a `e4ac4c6`, registra 9 LOW, 0 MEDIUM, 0 HIGH y cero errores. El aviso adicional pertenece al alcance de serving. La [interpretacion de seguridad](reports/etapa3/verificacion_vigente_20261107.md) documenta los riesgos residuales.
+
+Las capturas historicas tienen sus huellas, fecha y procedencia en el [manifiesto original](reports/etapa3/capturas_finales_20261101.json). Las actuales de DeepChecks estan registradas en [estado_vigente.json](reports/etapa3/estado_vigente.json). Ninguna imagen debe interpretarse como una ejecucion realizada por Diego Hurtado.
 ### Contribuciones del equipo
 
 | Responsable | Contribución | Evidencia |
@@ -19,21 +94,32 @@ La [actualización de compatibilidad de DeepChecks](reports/etapa3/cierre_adicio
 
 Las contribuciones se integraron mediante los PR #31 (P3), #33 (P1), #35 (DeepChecks/P2) y #36 (verificación del catálogo y dependencias), además de las aportaciones iniciales de infraestructura y calidad.
 
-### Pruebas automatizadas
+### Aportaciones verificables de la corrección de Etapa 3
 
-Las pruebas utilizan PyTest, datos sintéticos y recursos temporales para comprobar condiciones normales, casos límite y comportamientos ante errores.
+La corrección posterior del cierre de Etapa 3 se organizó en cuatro actividades. La autoría, las revisiones y la integración de cada PR se conservan en GitHub.
 
-La configuración central de PyTest se encuentra en `pyproject.toml`.
+| Responsable | Actividad | PR y evidencia | Revisión |
+|---|---|---|---|
+| Diego Martínez | Tarea #51: corregir el manejo de errores de Git e interpretar los avisos Bandit del módulo de validación. | [PR #57](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/57) | Aprobado por Marco e integrado. |
+| Stefania | Tarea #52: añadir pruebas de controles y fallos de trazabilidad en `git_state()`. | [PR #56](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/56) | Aprobado por Marco después de solicitar correcciones; integrado. |
+| Marco | Tarea #53: ejecutar la verificación integrada y publicar los resultados vigentes de calidad y seguridad. | [PR #59](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/59) | Aprobado por Diego Hurtado e integrado. |
+| Diego Hurtado | Tarea #54: simplificar el README, consolidar los resultados, incorporar las evidencias visuales y documentar la colaboración. | [Tarea #54](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/54) | En elaboración; revisión documental pendiente por una persona distinta del autor. |
 
-Para ejecutar la suite desde la raíz del repositorio, con el entorno del proyecto configurado:
+La integración de los PR #56, #57 y #59 se verificó en GitHub. La aportación documental de la tarea #54 requiere todavía su propio PR y aprobación independiente. La tarea #53 conserva abierta la comprobación de correspondencia con el README final.
 
-Preparar también el [entorno independiente de DeepChecks](references/etapa3/deepchecks_entorno.md), incluida la adaptación de compatibilidad indicada en esa guía, para que se ejecuten las pruebas que utilizan la biblioteca.
 
-```bash
-python -m pytest tests -q
-```
+### Historial de verificaciones anteriores
 
-La ejecución combinada documentada por Diego Martínez reportó 229 pruebas aprobadas. Este resultado corresponde a las verificaciones realizadas durante el desarrollo y no sustituye la validación final independiente sobre el código integrado.
+Las cifras siguientes corresponden a ejecuciones distintas. Se conservan como antecedentes y no sustituyen el resultado vigente de 284 pruebas.
+
+| Pruebas aprobadas | Procedencia | Interpretación |
+|---|---|---|
+| 229 | [Verificación de desarrollo de Diego Martínez](reports/etapa3/calidad_datos_diego_martinez.md) | Suite combinada durante el desarrollo |
+| 238 | [Cierre integrado del 1 de noviembre](reports/etapa3/cierre_integrado_marco_20261101.md) | Verificación integrada y revisión posterior de dependencias |
+| 245 | [Cierre adicional de compatibilidad](reports/etapa3/cierre_adicional_marco.md) | Suite posterior al ajuste de DeepChecks |
+
+La cobertura histórica de 82.14 % corresponde al cierre de 238 pruebas y no fue recalculada durante la verificación vigente. La validación real de 100 PASS y 3 WARN se conserva en su registro original.
+
 
 ### Validación de calidad con DeepChecks
 
@@ -62,9 +148,12 @@ La etapa `final` se ejecutó una sola vez sobre el código integrado y los datos
 
 ### Seguridad y dependencias
 
-Se realizaron revisiones mediante Bandit, auditorías de dependencias, comprobaciones de exclusiones y análisis de seguridad de los componentes P1, P2 y P3.
+La revisión vigente de Bandit 1.9.4 identifica nueve hallazgos LOW: tres del módulo de validación, cinco de entrenamiento y uno de serving, sin hallazgos MEDIUM/HIGH y sin errores de análisis.
 
-Los hallazgos identificados se encuentran documentados con sus limitaciones y acciones de seguimiento. La corrección de DeepChecks atiende los dos avisos de setuptools del cierre anterior; las observaciones bajas de Bandit permanecen documentadas. Una auditoría sin vulnerabilidades conocidas no demuestra ausencia de todos los riesgos.
+Los casos de validación tienen una [interpretación individual de sus riesgos y controles](reports/etapa3/seguridad_validacion.md). El [reporte de verificación vigente](reports/etapa3/verificacion_vigente_20261107.md) documenta el alcance completo, las exclusiones y las limitaciones.
+
+Las advertencias de PyTest son diferentes de los avisos de seguridad y de los tres WARN históricos de calidad de datos. Ninguna de estas categorías debe mezclarse o presentarse como ausencia absoluta de riesgos.
+
 
 ### Documentación y evidencias
 
@@ -81,15 +170,18 @@ Los hallazgos identificados se encuentran documentados con sus limitaciones y ac
 
 Las capturas preliminares documentan pruebas y verificaciones anteriores a la integración completa. Sus fechas, alcance y procedencia deben conservarse y distinguirse de las capturas de la validación final.
 
-### Pendientes del cierre integrado
+### Estado documental del cierre
 
-Marco completó la suite integrada y la validación final desde un clon nuevo, con entornos instalados desde cero y tablas procesadas verificadas contra los manifiestos. La descarga anual no se repitió.
+El cierre técnico de Etapa 3 está documentado mediante el [PR #59](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/59), aprobado e integrado. Los resultados y capturas anteriores conservan sus fechas y procedencia.
 
-Los [resultados del cierre](reports/etapa3/cierre_integrado_marco_20261101.json) y la [revisión de seguridad](reports/etapa3/seguridad_cierre_20261101.json) documentan el alcance y las limitaciones de esa ejecución. Las [nueve capturas originales del cierre](reports/etapa3/capturas_finales_20261101.md) muestran los registros de pruebas, validación y seguridad, además de la integración de los PR #38 y #39. Su procedencia y alcance se conservan en el inventario. El [cierre adicional](reports/etapa3/cierre_adicional_marco.md) documenta la solución posterior para los dos avisos de DeepChecks, la suite de 245 pruebas y la captura histórica renovada.
+Las correcciones de seguridad y trazabilidad de las tareas #51 y #52 también están integradas. La documentación histórica no se reescribe ni se presenta como una nueva ejecución.
 
-Diego Hurtado completó la consolidación del README y las evidencias mediante los PR #40 y #41. La actualización adicional de Marco queda sujeta a revisión independiente e integración por PR.
+Las evidencias visuales originales y su consolidación se incorporaron anteriormente mediante los PR #40 y #41. El [PR #50](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/50) de cierre de API también está integrado en `main`.
 
-La integración de los PR técnicos no constituye por sí misma la verificación final de calidad ni demuestra la ausencia de vulnerabilidades.
+La tarea #54 actualiza este README y organiza los resultados vigentes, las evidencias y la colaboración. Su cierre permanece sujeto a revisión independiente e integración del PR correspondiente.
+
+Los hallazgos LOW documentados conservan sus controles, limitaciones y seguimiento. La aprobación documental no equivale a una certificación de seguridad.
+
 
 ## Estado de integración de la Etapa 2
 
