@@ -1,0 +1,18 @@
+{
+  "protocol_sha256": "ac5868511f87e736b4f3462a23d7f248af347a17ec99b01426e0f912b4e7f596",
+  "model_name": "mibici-equipo39-p1-demanda",
+  "a": {
+    "version": "1",
+    "run_id": "66414a8b45164d3a8f5b9f42e7cb387b",
+    "uri": "models:/mibici-equipo39-p1-demanda/1",
+    "alias_at_freeze": "champion",
+    "data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+    "signature": {
+      "inputs": "[{\"type\": \"string\", \"name\": \"station_id\", \"required\": true}, {\"type\": \"integer\", \"name\": \"hour_of_day\", \"required\": true}, {\"type\": \"integer\", \"name\": \"day_of_week\", \"required\": true}, {\"type\": \"integer\", \"name\": \"month\", \"required\": true}, {\"type\": \"long\", \"name\": \"is_weekend\", \"required\": true}, {\"type\": \"double\", \"name\": \"hour_sin\", \"required\": true}, {\"type\": \"double\", \"name\": \"hour_cos\", \"required\": true}, {\"type\": \"double\", \"name\": \"month_sin\", \"required\": true}, {\"type\": \"double\", \"name\": \"month_cos\", \"required\": true}]",
+      "outputs": "[{\"type\": \"tensor\", \"tensor-spec\": {\"dtype\": \"float64\", \"shape\": [-1]}}]",
+      "params": null
+    },
+    "git_commit": "288a592aba240983c8d21c8128c16be4cbf0f2df"
+  },
+  "automatic_promotion": false
+}

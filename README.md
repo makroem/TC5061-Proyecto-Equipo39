@@ -1,5 +1,11 @@
 # Proyecto MiBici Equipo 39
 
+## Etapa 5: monitoreo y comparación de versiones
+
+El monitoreo de P1 conserva las entregas anteriores y utiliza octubre de 2026 como periodo nuevo. El protocolo, las fuentes y las versiones se registran en [references/etapa5](references/etapa5/). Las instrucciones están concentradas en [reproduccion.md](references/etapa5/reproduccion.md) y los resultados en [reports/etapa5](reports/etapa5/). La comparación es pareada y fuera de línea; no modifica automáticamente el modelo publicado.
+
+Marco prepara datos, drift, entrenamiento y comparación. Diego Hurtado realiza la revisión independiente. Las aportaciones documentales de Stefania y Diego Martinez son acotadas y cuentan con respaldo, según la [distribución actual](references/etapa5/distribucion_actual.md).
+
 ## Etapa 3: pruebas, validación y seguridad
 
 La Etapa 3 del proyecto MiBici Equipo 39 cuenta con las correcciones técnicas de los cuatro integrantes integradas en `main`. La política de calidad permanece congelada.

@@ -1,0 +1,42 @@
+{
+  "full_data_checks": {
+    "reference": {
+      "rows": 2152008,
+      "stations": 369,
+      "days": 243,
+      "departures": 2870337,
+      "zero_share": 0.5391476239865279,
+      "missing_values": 0,
+      "duplicate_keys": 0,
+      "start": "2025-10-01 00:00:00",
+      "last_hour": "2026-05-31 23:00:00"
+    },
+    "current": {
+      "rows": 274536,
+      "stations": 369,
+      "days": 31,
+      "departures": 579697,
+      "zero_share": 0.44591601829996796,
+      "missing_values": 0,
+      "duplicate_keys": 0,
+      "start": "2026-10-01 00:00:00",
+      "last_hour": "2026-10-31 23:00:00"
+    }
+  },
+  "sampling": {
+    "reference": {
+      "rows": 100000,
+      "population_rows": 2152008,
+      "method": "uniform_without_replacement",
+      "seed": 39
+    },
+    "current": {
+      "rows": 100000,
+      "population_rows": 274536,
+      "method": "uniform_without_replacement",
+      "seed": 39
+    }
+  },
+  "historical_data_version": "e9de13df5e9bdc1fde98c042f700e1a7c568ad85df5a303a96a78b3d4d45dbb7",
+  "raw_source_observations": "Consultar datos_resumen.json: exclusiones, catálogo y estación sin actividad."
+}

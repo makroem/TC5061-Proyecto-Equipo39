@@ -1,0 +1,7 @@
+{
+  "evidently": "0.7.23",
+  "pandas": "2.2.3",
+  "numpy": "2.1.3",
+  "pyarrow": "23.0.1",
+  "isolated_from_training": true
+}
