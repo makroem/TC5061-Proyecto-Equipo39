@@ -20,6 +20,7 @@ El drift observado se concentra en mes y sus transformaciones. Es esperado al co
 - Diego Hurtado: revisar el código, el resultado pareado, la documentación del costo y las limitaciones; aportar revisión al PR.
 - Stefania: revisión breve de la interpretación del drift (#62), con respaldo de Marco y validación de Diego Hurtado.
 - Diego Martinez: ficha breve de linaje A/B (#63), con el mismo respaldo. No debe ejecutar infraestructura ni entrenamientos.
-- Marco y Diego Hurtado: completar las capturas del Registry y de la comparación en MLflow e integrar el reporte final de 3–5 páginas. Las cuatro capturas originales de Evidently y su revisión visual por Marco se completaron el 12 de noviembre; la revisión independiente permanece pendiente. El control de Chrome se detuvo al no poder identificar con certeza la página activa.
+- Marco: integrar el reporte final de 3–5 páginas con las nueve capturas originales ya disponibles. Las cuatro de Evidently y las cinco del Registry y de la evaluación en MLflow se completaron el 12 de noviembre, con revisión visual y manifiesto de procedencia.
+- Diego Hurtado: validar de forma independiente las evidencias y el reporte antes de la integración. Las capturas de Marco no sustituyen esta revisión.
 
 Ninguna tarea documental de Stefania o Diego Martinez bloquea la preparación, la comparación ni la integración técnica revisada. La revisión independiente del PR sí se conserva.

@@ -45,9 +45,16 @@
   "visual_review_details": {
     "date": "2026-11-12",
     "manifest": "capturas/manifest.json",
-    "screenshots": 4,
+    "screenshots": 9,
     "matches_published_results": true,
     "independent_review": "PENDING_DIEGO_HURTADO",
-    "mlflow_ui_screenshots": "PENDING_BROWSER_CONTROL"
-  }
+    "mlflow_ui_screenshots": "COMPLETED_BY_MARCO",
+    "evidently_screenshots": 4,
+    "mlflow_screenshots": 5,
+    "evaluation_run_id": "93f298b2c1404a8bb8a4eb1bed83b4bb",
+    "registry_model": "mibici-equipo39-p1-demanda",
+    "registry_champion_version": "1",
+    "registry_candidate_version": "2"
+  },
+  "visual_review_mlflow": "COMPLETED_BY_MARCO"
 }
