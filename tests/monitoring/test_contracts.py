@@ -7,7 +7,7 @@ import pandas as pd
 import pytest
 
 from mibici_equipo39.dataset import clean_trips
-from mibici_equipo39.monitoring.common import load_config, model_input, validate_frame
+from mibici_equipo39.monitoring.common import ROOT, load_config, model_input, validate_frame
 from mibici_equipo39.monitoring.metrics import block_bootstrap, improvement, metrics
 from mibici_equipo39.monitoring.prepare import calendar_frame
 
@@ -26,6 +26,13 @@ def test_complete_grid_and_signature(current):
     assert list(x.columns) == c["features"]
     assert str(x.hour_of_day.dtype) == "int32"
     assert str(x.is_weekend.dtype) == "int64"
+
+
+def test_protocol_hash_is_portable_across_newlines(tmp_path):
+    text = (ROOT / "references/etapa5/protocolo.json").read_text(encoding="utf-8")
+    path = tmp_path / "windows.json"
+    path.write_bytes(text.replace("\n", "\r\n").encode("utf-8"))
+    assert load_config(path)["protocol_sha256"] == load_config()["protocol_sha256"]
 
 
 @pytest.mark.parametrize("fault", ["duplicate", "outside", "missing_hour", "calendar", "negative", "fraction", "infinity", "cyclic"])

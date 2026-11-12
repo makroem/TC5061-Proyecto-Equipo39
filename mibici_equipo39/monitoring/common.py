@@ -38,7 +38,8 @@ def load_config(path=DEFAULT_CONFIG):
         raise ValueError("B debe ampliar la misma ventana histórica de A.")
     if config["automatic_promotion"]:
         raise ValueError("Este protocolo no permite promover modelos automáticamente.")
-    config["protocol_sha256"] = sha256(path)
+    # Git puede convertir LF a CRLF en Windows; la identidad no depende de ello.
+    config["protocol_sha256"] = hashlib.sha256(path.read_text(encoding="utf-8-sig").encode("utf-8")).hexdigest()
     return config
 
 
