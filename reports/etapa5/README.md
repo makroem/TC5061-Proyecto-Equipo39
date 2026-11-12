@@ -15,6 +15,8 @@ Resultados de Marco del 11 de noviembre de 2026. La integración está pendiente
 | Recomendación y acciones siguientes | [recomendacion_ct.md](recomendacion_ct.md) |
 | Pruebas y auditorías del cambio | [verificacion_tecnica.json](verificacion_tecnica.json), [bandit_monitoreo.json](bandit_monitoreo.json), [auditoria_dependencias.json](auditoria_dependencias.json) |
 
-La gráfica no sustituye las capturas de interfaz. La revisión visual del HTML y las capturas auténticas quedaron pendientes porque no estuvo disponible el control del navegador. No se incorporaron imágenes simuladas. Marco o Diego Hurtado pueden obtenerlas al abrir el HTML y el Registry, antes de integrar el reporte final de 3–5 páginas.
+La revisión visual de Evidently se completó por Marco el 12 de noviembre de 2026. Las [cuatro capturas originales](capturas/README.md) muestran el resumen, la calidad, el detalle de mes y el reporte completo. Se verificó que sus cifras coinciden con los archivos publicados: tres de nueve variables con drift, proporción 0.333, sin alerta global y muestras de 100,000 filas por conjunto. Esta revisión no sustituye la validación independiente de Diego Hurtado.
+
+Las capturas del Registry y de la comparación en la interfaz de MLflow siguen pendientes: el navegador integrado presentó errores al cargar archivos de la interfaz y el control de Chrome no pudo identificar con certeza la página activa. La consulta del servidor respondió correctamente; no se modificaron modelos, métricas ni alias. La gráfica de error diario continúa identificada como gráfica calculada, no como captura de interfaz. El reporte final de 3–5 páginas aún debe integrarse.
 
 Los CSV de viajes, Parquet, modelos y bases de MLflow permanecen fuera de Git. Para reproducir el trabajo, consultar [las instrucciones concentradas](../../references/etapa5/reproduccion.md).

@@ -29,7 +29,7 @@
     "champion": "1",
     "same_signature": true
   },
-  "visual_review_html": "PENDING_BROWSER_CONTROL_UNAVAILABLE",
+  "visual_review_html": "COMPLETED_BY_MARCO",
   "independent_review": "PENDING_DIEGO_HURTADO",
   "tested_source_sha256": {
     "mibici_equipo39/monitoring/ab_test.py": "c19b8544b0d23c4e7bcf148fd08bef1a5d30c5216c9a811d9a93d6833bbe0154",
@@ -41,5 +41,13 @@
     "mibici_equipo39/monitoring/train_b.py": "c1e8591c0bff4ba84adca2c00266079281ba0571fc9ae894da3f1afd4db0b537",
     "mibici_equipo39/monitoring/__init__.py": "7c9edafa029b17f9482c0a7b4c47b8e4345aca7c30f3dc779a20a8dd4f1fe4ef",
     "tests/monitoring/test_contracts.py": "4c1692ab076bdaa25e4e19b2884291b27b14ea3176808ec771dbc1e81fbc8d3d"
+  },
+  "visual_review_details": {
+    "date": "2026-11-12",
+    "manifest": "capturas/manifest.json",
+    "screenshots": 4,
+    "matches_published_results": true,
+    "independent_review": "PENDING_DIEGO_HURTADO",
+    "mlflow_ui_screenshots": "PENDING_BROWSER_CONTROL"
   }
 }
