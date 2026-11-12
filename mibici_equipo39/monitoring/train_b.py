@@ -25,6 +25,8 @@ def train(config):
         b = client.get_model_version(config["model_name"], models["b"]["version"])
         if b.run_id != models["b"]["run_id"] or models["b"]["training_sha256"] != manifest["files"]["train_b"]["sha256"]:
             raise ValueError("La versión B existente no corresponde a este entrenamiento.")
+        if b.status != "READY" or client.get_run(b.run_id).info.status != "FINISHED":
+            raise ValueError("La corrida B debe estar terminada y su versión lista antes de reutilizarla.")
         print(f"B ya registrada y verificada: versión {b.version}.")
         return
     X = model_input(frame, config).reset_index(drop=True)

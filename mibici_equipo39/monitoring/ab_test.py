@@ -1,6 +1,7 @@
 """Evaluación retrospectiva pareada; no asigna tráfico ni modifica modelos en producción."""
 
 import json
+from pathlib import Path
 from time import perf_counter
 
 import numpy as np
@@ -39,6 +40,9 @@ def evaluate(config):
     X = model_input(frame, config)
     y = frame.target_departures.to_numpy()
     models = {name: mlflow.pyfunc.load_model(versions[name]["uri"]) for name in ("a", "b")}
+    signatures = {name: model.metadata.signature.to_dict() for name, model in models.items()}
+    if signatures["a"] != signatures["b"]:
+        raise ValueError("Las firmas de A y B no coinciden.")
     predictions = {name: np.asarray(model.predict(X), dtype=float).reshape(-1) for name, model in models.items()}
     result = {name: metrics(y, prediction) for name, prediction in predictions.items()}
     if any((prediction < 0).any() for prediction in predictions.values()):
@@ -48,6 +52,14 @@ def evaluate(config):
     result["bootstrap"] = block_bootstrap(frame.prediction_time, y, predictions["a"], predictions["b"],
                                           config["bootstrap_block_days"], config["bootstrap_repeats"], config["seed"])
     result["latency"] = latency(models, X, config)
+    sizes = {}
+    for name in ("a", "b"):
+        target = ROOT / config["private_dir"] / "models" / name
+        target.mkdir(parents=True, exist_ok=True)
+        downloaded = Path(mlflow.artifacts.download_artifacts(artifact_uri=versions[name]["uri"], dst_path=str(target)))
+        sizes[name] = {"bundle_bytes": sum(p.stat().st_size for p in downloaded.rglob("*") if p.is_file()),
+                       "serialized_model_bytes": sum(p.stat().st_size for p in downloaded.rglob("*.pkl"))}
+    result["model_size"] = sizes
     result["evaluation"] = {"design": "offline_paired_retrospective", "current_sha256": manifest["files"]["current"]["sha256"],
                             "rows_both_models": len(X), "same_keys_and_targets": True, "protocol_sha256": config["protocol_sha256"],
                             "a_version": versions["a"]["version"], "b_version": versions["b"]["version"]}
@@ -77,6 +89,10 @@ def evaluate(config):
     report.mkdir(parents=True, exist_ok=True)
     scores.to_csv(report / "ab_metricas.csv", index=False)
     save_json(report / "ab_resultados.json", result)
+    save_json(report / "compatibilidad_modelos.json", {"a_version": versions["a"]["version"], "b_version": versions["b"]["version"],
+                                                       "signature_equal": True, "signature": signatures["a"],
+                                                       "input_rows": len(X), "finite_predictions": True,
+                                                       "nonnegative_predictions": True})
     private = ROOT / config["private_dir"]
     private.mkdir(parents=True, exist_ok=True)
     frame[["station_id", "prediction_time", "target_departures"]].assign(a=predictions["a"], b=predictions["b"]).to_parquet(private / "predicciones.parquet", index=False)

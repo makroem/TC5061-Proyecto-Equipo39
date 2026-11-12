@@ -14,5 +14,15 @@
     },
     "git_commit": "288a592aba240983c8d21c8128c16be4cbf0f2df"
   },
-  "automatic_promotion": false
+  "automatic_promotion": false,
+  "b": {
+    "version": "2",
+    "run_id": "741ed805a55a49b3bb0bb95a4682b1f2",
+    "uri": "models:/mibici-equipo39-p1-demanda/2",
+    "model_uri": "models:/m-a2de698069cb479da31918d4e3ff6653",
+    "training_sha256": "fb6af29658d87919afa995db89fe6ada4c1f4f903c5e7ba20fc362eb8cf05b31",
+    "git_commit": "23d76181d8bbb321ab8cb215934060cb9d75c6fb",
+    "family": "seasonal_mean",
+    "status": "candidate_not_promoted"
+  }
 }

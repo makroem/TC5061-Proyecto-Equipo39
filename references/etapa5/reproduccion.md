@@ -9,6 +9,7 @@ Seguir la instalación e ingesta histórica del README desde un clon limpio. La 
 Iniciar el almacén oficial existente con el procedimiento de `scripts/start_tracking.ps1`. No usar una base vacía para sustituir el Registry. En PowerShell:
 
 ```powershell
+$env:PYTHONUTF8 = '1'
 $env:MLFLOW_TRACKING_URI = 'http://127.0.0.1:5000'
 python -m mibici_equipo39.monitoring.registry
 python -m mibici_equipo39.monitoring.prepare --historical-data data

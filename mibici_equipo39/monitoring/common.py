@@ -3,6 +3,7 @@
 import argparse
 import hashlib
 import json
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -44,6 +45,10 @@ def load_config(path=DEFAULT_CONFIG):
 
 
 def parser(description):
+    # Algunas bibliotecas imprimen símbolos Unicode al finalizar una corrida.
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8")
     result = argparse.ArgumentParser(description=description)
     result.add_argument("--config", default=DEFAULT_CONFIG)
     return result
