@@ -1,0 +1,18 @@
+{
+  "status": "pending_independent_review",
+  "recommendation": "retain_a_and_investigate",
+  "champion_unchanged": true,
+  "champion_version": "1",
+  "candidate_version": "2",
+  "evaluation_run_id": "93f298b2c1404a8bb8a4eb1bed83b4bb",
+  "promotion_checks": {
+    "mae_improves_5pct": false,
+    "rmse_within_tolerance": true,
+    "priority_segments_within_tolerance": false,
+    "ci_supports_lower_mae": true,
+    "latency_within_tolerance": true
+  },
+  "decision_owner": "Marco",
+  "reviewer": "Diego Hurtado",
+  "automatic_promotion": false
+}

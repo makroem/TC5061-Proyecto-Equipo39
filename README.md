@@ -6,6 +6,10 @@ El monitoreo de P1 conserva las entregas anteriores y utiliza octubre de 2026 co
 
 Marco prepara datos, drift, entrenamiento y comparación. Diego Hurtado realiza la revisión independiente. Las aportaciones documentales de Stefania y Diego Martinez son acotadas y cuentan con respaldo, según la [distribución actual](references/etapa5/distribucion_actual.md).
 
+**Resultado del 11 de noviembre de 2026:** 369 estaciones y 274,536 filas actuales; drift en 3 de 9 variables, asociado al calendario. B reduce el MAE de 1.239267 a 1.208781 (2.46%), pero no alcanza el umbral de promoción. Se conserva A como `champion`, versión 1, y B como candidata, versión 2. El [análisis de costo y estabilidad](reports/etapa5/analisis_ab.md) y la [recomendación de continuidad](reports/etapa5/recomendacion_ct.md) quedan sujetos a revisión de Diego Hurtado.
+
+**Verificación de este cambio:** 52 pruebas aprobadas (21 de monitoreo y 31 regresiones de ingesta), 16 advertencias; Bandit sin hallazgos en el módulo nuevo y auditoría de 82 dependencias de monitoreo sin vulnerabilidades conocidas. El [registro técnico](reports/etapa5/verificacion_tecnica.json) delimita el alcance; estas cifras no se suman a las pruebas históricas de las otras etapas. Las capturas finales de interfaz y el reporte de entrega permanecen pendientes.
+
 ## Etapa 3: pruebas, validación y seguridad
 
 La Etapa 3 del proyecto MiBici Equipo 39 cuenta con las correcciones técnicas de los cuatro integrantes integradas en `main`. La política de calidad permanece congelada.

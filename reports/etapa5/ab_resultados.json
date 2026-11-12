@@ -23,14 +23,14 @@
     "a": {
       "batch_rows": 1000,
       "repeats": 30,
-      "median_ms": 23.604449999766075,
-      "p95_ms": 32.04719499985912
+      "median_ms": 30.27105000001029,
+      "p95_ms": 38.22315500024159
     },
     "b": {
       "batch_rows": 1000,
       "repeats": 30,
-      "median_ms": 19.913849999738886,
-      "p95_ms": 30.89894000004277
+      "median_ms": 26.688150000154565,
+      "p95_ms": 33.88962000017272
     }
   },
   "model_size": {
@@ -46,6 +46,8 @@
   "evaluation": {
     "design": "offline_paired_retrospective",
     "current_sha256": "eecb9aa82a8541df446bad93cf867c0d8a5dacd32860b0b72ac442e6f9b7c082",
+    "git_commit": "f3c8af0b5931e1551b6c1b5a87858382998e7f44",
+    "git_dirty_at_start": false,
     "rows_both_models": 274536,
     "same_keys_and_targets": true,
     "protocol_sha256": "ac5868511f87e736b4f3462a23d7f248af347a17ec99b01426e0f912b4e7f596",
@@ -60,6 +62,6 @@
     "latency_within_tolerance": true
   },
   "recommendation": "retain_a_and_investigate",
-  "evaluation_run_id": "3ce5df72c57b4bb196b11122a0495f6f",
+  "evaluation_run_id": "93f298b2c1404a8bb8a4eb1bed83b4bb",
   "champion_unchanged": true
 }
