@@ -6,6 +6,17 @@ import os
 from .common import ROOT, load_config, parser, save_json
 
 
+def verify_versions(client, models):
+    """Rechaza versiones o corridas distintas de las que fijó el manifiesto."""
+    for name in ("a", "b"):
+        expected = models[name]
+        version = client.get_model_version(models["model_name"], expected["version"])
+        if version.run_id != expected["run_id"] or version.status != "READY":
+            raise ValueError(f"Versión {name.upper()} no lista o con linaje distinto.")
+        if client.get_run(version.run_id).info.status != "FINISHED":
+            raise ValueError(f"La corrida de {name.upper()} no está terminada.")
+
+
 def tracking(config):
     import mlflow
     uri = os.environ.get("MLFLOW_TRACKING_URI", "")

@@ -1,6 +1,7 @@
 """Contratos de fecha, pares, remuestreo y limpieza del periodo nuevo."""
 
 import sqlite3
+from types import SimpleNamespace
 
 import numpy as np
 import pandas as pd
@@ -10,6 +11,7 @@ from mibici_equipo39.dataset import clean_trips
 from mibici_equipo39.monitoring.common import ROOT, load_config, model_input, validate_frame
 from mibici_equipo39.monitoring.metrics import block_bootstrap, improvement, metrics
 from mibici_equipo39.monitoring.prepare import calendar_frame
+from mibici_equipo39.monitoring.registry import verify_versions
 
 
 @pytest.fixture
@@ -84,3 +86,18 @@ def test_paired_blocks_reproducible_and_direction():
 def test_missing_days_cannot_be_resampled_as_consecutive():
     days = pd.date_range("2026-10-01", periods=31).delete(10)
     with pytest.raises(ValueError): block_bootstrap(days, np.zeros(30), np.ones(30), np.zeros(30))
+
+
+@pytest.mark.parametrize("fault", [None, "other_run", "not_ready", "running"])
+def test_registry_lineage_and_finished_runs(fault):
+    class Client:
+        def get_model_version(self, name, version):
+            return SimpleNamespace(run_id="other" if fault == "other_run" else "run" + version,
+                                   status="PENDING_REGISTRATION" if fault == "not_ready" else "READY")
+        def get_run(self, run_id):
+            return SimpleNamespace(info=SimpleNamespace(status="RUNNING" if fault == "running" else "FINISHED"))
+    models = {"model_name": "p1", "a": {"version": "1", "run_id": "run1"}, "b": {"version": "2", "run_id": "run2"}}
+    if fault:
+        with pytest.raises(ValueError): verify_versions(Client(), models)
+    else:
+        verify_versions(Client(), models)

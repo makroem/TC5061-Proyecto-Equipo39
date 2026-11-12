@@ -1,0 +1,65 @@
+{
+  "a": {
+    "mae": 1.2392674466412144,
+    "rmse": 2.440745307535415
+  },
+  "b": {
+    "mae": 1.2087805544696755,
+    "rmse": 2.379532659078981
+  },
+  "mae_improvement_pct": 2.460073671277938,
+  "rmse_improvement_pct": 2.5079490378389657,
+  "bootstrap": {
+    "delta_mae_b_minus_a": -0.030486892171539052,
+    "ci95_low": -0.03258950846742075,
+    "ci95_high": -0.027244407733567212,
+    "block_days": 7,
+    "days": 31,
+    "repeats": 1000,
+    "seed": 39,
+    "interpretation": "Intervalo exploratorio: un mes contiene pocos ciclos semanales; no demuestra un efecto causal."
+  },
+  "latency": {
+    "a": {
+      "batch_rows": 1000,
+      "repeats": 30,
+      "median_ms": 23.604449999766075,
+      "p95_ms": 32.04719499985912
+    },
+    "b": {
+      "batch_rows": 1000,
+      "repeats": 30,
+      "median_ms": 19.913849999738886,
+      "p95_ms": 30.89894000004277
+    }
+  },
+  "model_size": {
+    "a": {
+      "bundle_bytes": 1274894,
+      "serialized_model_bytes": 1121792
+    },
+    "b": {
+      "bundle_bytes": 1371385,
+      "serialized_model_bytes": 1121511
+    }
+  },
+  "evaluation": {
+    "design": "offline_paired_retrospective",
+    "current_sha256": "eecb9aa82a8541df446bad93cf867c0d8a5dacd32860b0b72ac442e6f9b7c082",
+    "rows_both_models": 274536,
+    "same_keys_and_targets": true,
+    "protocol_sha256": "ac5868511f87e736b4f3462a23d7f248af347a17ec99b01426e0f912b4e7f596",
+    "a_version": "1",
+    "b_version": "2"
+  },
+  "promotion_checks": {
+    "mae_improves_5pct": false,
+    "rmse_within_tolerance": true,
+    "priority_segments_within_tolerance": false,
+    "ci_supports_lower_mae": true,
+    "latency_within_tolerance": true
+  },
+  "recommendation": "retain_a_and_investigate",
+  "evaluation_run_id": "3ce5df72c57b4bb196b11122a0495f6f",
+  "champion_unchanged": true
+}

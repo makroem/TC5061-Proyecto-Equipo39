@@ -1,0 +1,10 @@
+{
+  "run_id": "741ed805a55a49b3bb0bb95a4682b1f2",
+  "version": "2",
+  "before_status": "RUNNING",
+  "after_status": "FINISHED",
+  "reason": "La salida Unicode de la consola interrumpio el cierre despues de guardar el modelo y sus artefactos.",
+  "recovery": "Se verificaron modelo READY, linaje, huella de entrenamiento y 100 predicciones finitas; se reanudo la misma corrida para cerrarla en UTF-8.",
+  "retrained": false,
+  "champion_unchanged": true
+}

@@ -15,3 +15,5 @@ Actualización: 11 de noviembre de 2026. Esta distribución sustituye la asignac
 Las tareas de Stefania y Diego Martinez son acotadas y pueden realizarse en paralelo una vez publicados sus insumos. No autorizan cambios de protocolo, reentrenamiento ni promoción. Si no están disponibles, Marco y Diego Hurtado cubren el contenido, conservando la autoría real de cada aporte. Esto permite avanzar técnicamente, pero no acredita la participación individual de una persona que no haya contribuido.
 
 No se solicita reescribir el historial ni distribuir commits artificialmente. Cada aportación debe quedar en su rama y PR, con revisión y resultado verificables.
+
+Asignaciones publicadas: [revisión de Stefania, #62](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/62) y [ficha de Diego Martinez, #63](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/63).
