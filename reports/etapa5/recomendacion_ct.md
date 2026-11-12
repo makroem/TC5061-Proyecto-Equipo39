@@ -2,7 +2,7 @@
 
 ## Decisión para octubre de 2026
 
-Conservar A en producción y mantener B como candidata. B mejora el MAE 2.46%, con un costo de ajuste bajo, pero no supera el umbral de utilidad de 5% y presenta un incumplimiento relativo en una hora de demanda casi nula. La mejora estadística dentro de este mes no basta para justificar cambiar el servicio.
+Conservar A en producción y mantener B como candidata. B mejora el MAE 2.46%, con un costo de ajuste bajo, pero no supera el umbral de utilidad de 5% y no satisface la condición de deterioro máximo en cuatro horas: 01:00, 02:00, 03:00 y 04:00. A la 01:00 el deterioro relativo es 44.00%; en las otras tres, A tiene MAE cero y B un error positivo muy pequeño, por lo que el porcentaje no está definido y la condición directa tampoco se cumple. La [tabla de segmentos](analisis_ab.md#estabilidad-y-segmentos) detalla los aumentos absolutos. La mejora estadística dentro de este mes no basta para justificar cambiar el servicio. Se conservan los umbrales y resultados originales.
 
 El drift observado se concentra en mes y sus transformaciones. Es esperado al comparar ocho meses con un solo octubre, y estas variables no intervienen directamente en la media por estación-día-hora. La ausencia de alerta global tampoco garantiza precisión: el objetivo cambia y el MAE debe seguir observándose cuando estén disponibles los conteos reales.
 

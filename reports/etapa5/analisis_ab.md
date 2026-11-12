@@ -1,6 +1,6 @@
 # Comparación de P1: A frente a B
 
-Estado: resultados ejecutados por Marco el 11 de noviembre de 2026; revisión independiente de Diego Hurtado pendiente.
+Estado: resultados ejecutados por Marco el 11 de noviembre de 2026. El 12 de noviembre se precisó el análisis horario a partir de la revisión documental de Diego Hurtado en el PR #64; su reproducción independiente y aprobación final siguen pendientes.
 
 ## Versiones y diseño
 
@@ -27,7 +27,20 @@ Los paquetes completos incluyen código y metadatos: A ocupa 1,274,894 bytes y B
 
 La diferencia MAE(B)−MAE(A) es -0.030487, con intervalo exploratorio del 95% [-0.032590, -0.027244]. Se usaron 1,000 remuestreos de bloques móviles de siete días, manteniendo las estaciones y los pares A/B juntos. El intervalo favorece a B dentro de este mes, pero 31 días no prueban estabilidad anual.
 
-La mejora de MAE se mantiene entre 2.11% y 2.71% en las cinco fracciones semanales; la última tiene tres días y no se interpreta como una semana completa. Hay 21 estaciones cuyo MAE empeora. A la 01:00, el MAE aumenta de 0.000932 a 0.001341: 44.00% relativo, pero solo 0.000410 viajes por estación-hora en términos absolutos. Por ello se muestran ambas escalas. El protocolo trata todas las horas como segmentos prioritarios y ese caso incumple el límite relativo de 10%. No se cambió el criterio después de ver los resultados. Cuando A tiene MAE cero, no se informa mejora porcentual; la comprobación absoluta permite igualdad en cero.
+La mejora de MAE se mantiene entre 2.11% y 2.71% en las cinco fracciones semanales; la última tiene tres días y no se interpreta como una semana completa. Hay 21 estaciones cuyo MAE empeora.
+
+El protocolo trata todas las horas y los dos grupos de fin de semana como segmentos prioritarios. De sus 26 segmentos, cuatro no satisfacen la condición `MAE(B) <= MAE(A) × 1.10`: 01:00, 02:00, 03:00 y 04:00. Cada hora contiene 11,439 observaciones. Los valores siguientes proceden de [ab_metricas.csv](ab_metricas.csv); los cálculos y la decisión utilizan su precisión completa.
+
+| Hora | MAE de A | MAE de B | Aumento absoluto B−A | Deterioro relativo | Resultado |
+|---|---:|---:|---:|---|---|
+| 01:00 | 0.000931502945 | 0.001341342244 | 0.000409839300 | 44.00% | No cumple |
+| 02:00 | 0.000000000000 | 0.000065438292 | 0.000065438292 | No definido: A = 0 | No cumple |
+| 03:00 | 0.000000000000 | 0.000006724633 | 0.000006724633 | No definido: A = 0 | No cumple |
+| 04:00 | 0.000000000000 | 0.000065565172 | 0.000065565172 | No definido: A = 0 | No cumple |
+
+El MAE y su aumento absoluto se expresan en viajes por estación-hora. A la 01:00 existe una base positiva para calcular el porcentaje: el deterioro relativo es 44.00%, aunque el aumento absoluto es pequeño. A las 02:00, 03:00 y 04:00, A tiene error cero y B un error positivo muy pequeño. Dividir entre cero no permite expresar un deterioro porcentual; las celdas vacías del CSV significan porcentaje no definido, no ausencia de deterioro ni cumplimiento.
+
+La condición implementada compara directamente los errores: cuando A vale cero, el límite `1.10 × MAE(A)` también vale cero. Solo B = 0 cumpliría; cualquier B positivo falla. Los tres casos de base cero, por tanto, se contabilizan junto con la 01:00. Las otras 20 horas y ambos grupos de fin de semana cumplen. Esta distinción evita exagerar el impacto operacional de errores diminutos sin ocultar el incumplimiento del protocolo. No se añadieron tolerancias absolutas ni se modificaron umbrales después de observar los resultados.
 
 ![Error diario de A y B](error_diario.png)
 
@@ -35,7 +48,7 @@ La figura es una gráfica calculada con las observaciones evaluadas, no una capt
 
 ## Decisión
 
-Se recomienda conservar A. B mejora, pero no alcanza el mínimo de 5% de MAE fijado antes de la comparación y falla el criterio relativo de un segmento horario. RMSE, intervalo y latencia sí satisfacen sus condiciones. `champion` continúa en la versión 1 y B permanece registrada como candidata. La decisión final debe revisar también la importancia operacional de las horas de demanda casi nula; un eventual cambio de umbral requiere un protocolo nuevo y validación posterior, no una reinterpretación de esta entrega.
+Se recomienda conservar A. B mejora, pero no alcanza el mínimo de 5% de MAE fijado antes de la comparación y falla la condición de deterioro máximo en cuatro segmentos horarios: uno con base positiva y tres con MAE de A igual a cero. RMSE, intervalo y latencia sí satisfacen sus condiciones. `champion` continúa en la versión 1 y B permanece registrada como candidata. La decisión final debe revisar también la importancia operacional de las horas de demanda casi nula; un eventual cambio de umbral requiere un protocolo nuevo y validación posterior, no una reinterpretación de esta entrega.
 
 ## Límites y observaciones
 
