@@ -37,6 +37,6 @@ La captura de evaluación reúne `current_a_mae = 1.2392674466412144`, `current_
 
 ![Evaluación de A y B sobre octubre de 2026](07_mlflow_comparacion_ab_octubre.jpg)
 
-## Revisión pendiente
+## Revisión e integración
 
-La revisión visual por Marco no equivale a la revisión independiente de Diego Hurtado ni a una aprobación del PR #64. El reporte final de entrega aún debe integrarse. Las capturas no cambian modelos, métricas, umbrales ni alias.
+Diego Hurtado verificó las nueve capturas por tamaño y SHA-256, comprobó su correspondencia con los resultados y aprobó el commit `ebb45dc` en el [PR #64](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/64#pullrequestreview-5884278942). La integración técnica se registró en `3fcca8a`. Las capturas conservan su procedencia original y no cambian modelos, métricas, umbrales ni alias. El nuevo reporte editable y su PDF se revisan por separado.

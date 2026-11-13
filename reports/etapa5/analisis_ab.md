@@ -1,6 +1,6 @@
 # Comparación de P1: A frente a B
 
-Estado: resultados ejecutados por Marco el 11 de noviembre de 2026. El 12 de noviembre se precisó el análisis horario a partir de la revisión documental de Diego Hurtado en el PR #64; su reproducción independiente y aprobación final siguen pendientes.
+Estado: resultados ejecutados por Marco el 11 de noviembre de 2026. El 12 de noviembre se precisó el análisis horario a partir de la revisión documental de Diego Hurtado en el PR #64; Diego Hurtado completó la reproducción independiente de las 52 pruebas y aprobó `ebb45dc` en el [PR #64](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/64#pullrequestreview-5884278942), integrado mediante `3fcca8a`.
 
 ## Versiones y diseño
 

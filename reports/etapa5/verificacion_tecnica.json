@@ -30,7 +30,7 @@
     "same_signature": true
   },
   "visual_review_html": "COMPLETED_BY_MARCO",
-  "independent_review": "PENDING_DIEGO_HURTADO",
+  "independent_review": "APPROVED_BY_DIEGO_HURTADO",
   "tested_source_sha256": {
     "mibici_equipo39/monitoring/ab_test.py": "c19b8544b0d23c4e7bcf148fd08bef1a5d30c5216c9a811d9a93d6833bbe0154",
     "mibici_equipo39/monitoring/common.py": "15ce42284db8511308efd578ace1f5e643135cea5a968fb2f790de39b3f554b1",
@@ -47,7 +47,7 @@
     "manifest": "capturas/manifest.json",
     "screenshots": 9,
     "matches_published_results": true,
-    "independent_review": "PENDING_DIEGO_HURTADO",
+    "independent_review": "APPROVED_BY_DIEGO_HURTADO",
     "mlflow_ui_screenshots": "COMPLETED_BY_MARCO",
     "evidently_screenshots": 4,
     "mlflow_screenshots": 5,
@@ -56,5 +56,15 @@
     "registry_champion_version": "1",
     "registry_candidate_version": "2"
   },
-  "visual_review_mlflow": "COMPLETED_BY_MARCO"
+  "visual_review_mlflow": "COMPLETED_BY_MARCO",
+  "independent_review_record": {
+    "reviewer": "Diego Hurtado",
+    "github_login": "diegoHurtado01",
+    "status": "APPROVED",
+    "submitted_at": "2026-11-13T00:34:00Z",
+    "reviewed_commit": "ebb45dcf5c1733f0e2ffaf0cfbd03eb62e39feb2",
+    "review_url": "https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/64#pullrequestreview-5884278942",
+    "merge_commit": "3fcca8a3258c11a44821396e7ee139f3877fd9db",
+    "merged_at": "2026-11-13T00:50:09Z"
+  }
 }
