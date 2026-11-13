@@ -1,0 +1,13 @@
+{
+  "a_version": "1",
+  "b_version": "2",
+  "signature_equal": true,
+  "signature": {
+    "inputs": "[{\"type\": \"string\", \"name\": \"station_id\", \"required\": true}, {\"type\": \"integer\", \"name\": \"hour_of_day\", \"required\": true}, {\"type\": \"integer\", \"name\": \"day_of_week\", \"required\": true}, {\"type\": \"integer\", \"name\": \"month\", \"required\": true}, {\"type\": \"long\", \"name\": \"is_weekend\", \"required\": true}, {\"type\": \"double\", \"name\": \"hour_sin\", \"required\": true}, {\"type\": \"double\", \"name\": \"hour_cos\", \"required\": true}, {\"type\": \"double\", \"name\": \"month_sin\", \"required\": true}, {\"type\": \"double\", \"name\": \"month_cos\", \"required\": true}]",
+    "outputs": "[{\"type\": \"tensor\", \"tensor-spec\": {\"dtype\": \"float64\", \"shape\": [-1]}}]",
+    "params": null
+  },
+  "input_rows": 274536,
+  "finite_predictions": true,
+  "nonnegative_predictions": true
+}

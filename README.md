@@ -1,5 +1,15 @@
 # Proyecto MiBici Equipo 39
 
+## Etapa 5: monitoreo y comparación de versiones
+
+El monitoreo de P1 conserva las entregas anteriores y utiliza octubre de 2026 como periodo nuevo. El protocolo, las fuentes y las versiones se registran en [references/etapa5](references/etapa5/). Las instrucciones están concentradas en [reproduccion.md](references/etapa5/reproduccion.md) y los resultados en [reports/etapa5](reports/etapa5/). La comparación es pareada y fuera de línea; no modifica automáticamente el modelo publicado.
+
+Marco prepara datos, drift, entrenamiento y comparación. Diego Hurtado realiza la revisión independiente. Las aportaciones documentales de Stefania y Diego Martinez son acotadas y cuentan con respaldo, según la [distribución actual](references/etapa5/distribucion_actual.md).
+
+**Resultado del 11 de noviembre de 2026:** 369 estaciones y 274,536 filas actuales; drift en 3 de 9 variables, asociado al calendario. B reduce el MAE de 1.239267 a 1.208781 (2.46%), pero no alcanza el umbral de promoción. Se conserva A como `champion`, versión 1, y B como candidata, versión 2. El [análisis de costo y estabilidad](reports/etapa5/analisis_ab.md) y la [recomendación de continuidad](reports/etapa5/recomendacion_ct.md) quedan sujetos a revisión de Diego Hurtado.
+
+**Verificación de este cambio:** 52 pruebas aprobadas (21 de monitoreo y 31 regresiones de ingesta), 16 advertencias; Bandit sin hallazgos en el módulo nuevo y auditoría de 82 dependencias de monitoreo sin vulnerabilidades conocidas. El [registro técnico](reports/etapa5/verificacion_tecnica.json) delimita el alcance; estas cifras no se suman a las pruebas históricas de las otras etapas. Las [nueve capturas originales](reports/etapa5/capturas/README.md), cuatro de Evidently y cinco de MLflow, están disponibles desde el 12 de noviembre. Muestran el drift, las versiones de P1, su linaje y la evaluación A/B de octubre. Permanecen pendientes la revisión independiente y el reporte de entrega.
+
 ## Etapa 3: pruebas, validación y seguridad
 
 La Etapa 3 del proyecto MiBici Equipo 39 cuenta con las correcciones técnicas de los cuatro integrantes integradas en `main`. La política de calidad permanece congelada.
@@ -8,7 +18,7 @@ La Etapa 3 del proyecto MiBici Equipo 39 cuenta con las correcciones técnicas d
 
 | Comprobación | Resultado vigente |
 |---|---|
-| PyTest, excluyendo `tests/api` | **284 aprobadas**, 0 fallos, 0 errores, 0 omisiones |
+| PyTest de Etapa 3, excluyendo `tests/api` y `tests/monitoring` | **284 aprobadas**, 0 fallos, 0 errores, 0 omisiones |
 | Advertencias de PyTest | 23, conservadas |
 | Integración de DeepChecks | 2 pruebas incluidas en las 284 |
 | Controles independientes de DeepChecks | Variable aceptada y constante rechazada como se esperaba |
@@ -43,7 +53,7 @@ $env:MKL_NUM_THREADS = "4"
 $tempA7 = Join-Path ([IO.Path]::GetTempPath()) ("eq39_" + [guid]::NewGuid().ToString("N").Substring(0,8))
 New-Item -ItemType Directory -Force -Path "private_quality/reproduccion_etapa3" | Out-Null
 
-& $pythonCalidad -m pytest tests --ignore=tests/api -q --basetemp="$tempA7" --junitxml=private_quality/reproduccion_etapa3/pytest.xml
+& $pythonCalidad -m pytest tests --ignore=tests/api --ignore=tests/monitoring -q --basetemp="$tempA7" --junitxml=private_quality/reproduccion_etapa3/pytest.xml
 
 & $pythonDatos scripts/check_deepchecks_env.py --output private_quality/reproduccion_etapa3/deepchecks
 
@@ -54,7 +64,7 @@ Comprobar el codigo de salida de cada comando. PyTest y el control de DeepChecks
 
 Los resultados publicados son historicos y corresponden al commit probado. Una nueva ejecucion sobre otra version del codigo puede producir resultados distintos; debe registrarse su propio commit y fecha.
 
-**Alcance:** los 284 casos vigentes excluyen `tests/api` e incluyen dos pruebas de integracion de DeepChecks. Los controles independientes de DeepChecks no se suman a PyTest. El escaneo Bandit incluye `mibici_equipo39`, pero no `tests`.
+**Alcance:** los 284 casos históricos de Etapa 3 excluyen `tests/api` y la nueva carpeta `tests/monitoring`; incluyen dos pruebas de integracion de DeepChecks. Los controles independientes de DeepChecks no se suman a PyTest. El escaneo Bandit incluye `mibici_equipo39`, pero no `tests`; al añadir código de otra etapa, su resultado nuevo puede diferir del histórico.
 
 Las 23 advertencias de PyTest son avisos de bibliotecas; los 9 LOW de Bandit son hallazgos de seguridad sujetos a interpretacion. No son fallos de validacion de datos. La validacion historica de CSV reales (100 PASS, 3 WARN) no se repitio.
 

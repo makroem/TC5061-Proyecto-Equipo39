@@ -194,7 +194,7 @@ def unique_chunk(frame, db):
     return fresh, original - len(fresh)
 
 
-def clean_trips(frame, db):
+def clean_trips(frame, db, start=C.SOURCE_START, end=C.SOURCE_END_EXCLUSIVE):
     """Devuelve viajes completos, salidas disponibles, llegadas coherentes y exclusiones."""
     counts = {"raw_rows": len(frame)}
     frame = frame.copy()
@@ -209,13 +209,13 @@ def clean_trips(frame, db):
         frame.started_at.notna() & frame.origin_id.notna() & frame.origin_id.ne("")
     ].copy()
     departures = departures.loc[
-        departures.started_at.ge(C.SOURCE_START) & departures.started_at.lt(C.SOURCE_END_EXCLUSIVE)
+        departures.started_at.ge(start) & departures.started_at.lt(end)
     ]
     conditions = [
         ("invalid_start", frame.started_at.isna()),
         (
             "outside_range",
-            frame.started_at.lt(C.SOURCE_START) | frame.started_at.ge(C.SOURCE_END_EXCLUSIVE),
+            frame.started_at.lt(start) | frame.started_at.ge(end),
         ),
         (
             "missing_station",

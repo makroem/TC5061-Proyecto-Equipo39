@@ -1,0 +1,125 @@
+{
+  "date": "2026-11-12",
+  "timezone": "America/Mexico_City",
+  "responsible": "Marco",
+  "source_file": "reports/etapa5/drift.html",
+  "source_url": "http://127.0.0.1:8765/drift.html",
+  "source_sha256": "84b58f2a907f055b90a8ee616ad950add37f693cc4baa9369e14fb2e45e3f2d0",
+  "method": "Original JPEG browser captures: rendered Evidently HTML and native Chrome window screenshots; no pixel editing",
+  "registry_screenshots": "completed",
+  "independent_review": "pending",
+  "images": [
+    {
+      "file": "01_evidently_resumen.jpg",
+      "width": 1000,
+      "height": 1640,
+      "clip_xywh": [
+        0,
+        0,
+        1000,
+        1640
+      ],
+      "sha256": "ee0ac97695dd3eaae9920600c732da6e1ff36fd791f8f6ec269794cdf4e4b1c4",
+      "bytes": 146490,
+      "captured_at": "2026-11-12T07:46:53.401521-06:00"
+    },
+    {
+      "file": "02_evidently_calidad.jpg",
+      "width": 1000,
+      "height": 830,
+      "clip_xywh": [
+        0,
+        1640,
+        1000,
+        830
+      ],
+      "sha256": "9cf1626f34e7d2428599ada306879de0d3debfbfc9740798e83d98fdffdcd1c7",
+      "bytes": 53814,
+      "captured_at": "2026-11-12T07:47:03.449378-06:00"
+    },
+    {
+      "file": "03_evidently_mes.jpg",
+      "width": 1000,
+      "height": 650,
+      "clip_xywh": [
+        0,
+        3500,
+        1000,
+        650
+      ],
+      "sha256": "ebc0d266e8a79abe94bac791f81c0494d20db2da2a65779acccdda4655d3497e",
+      "bytes": 37561,
+      "captured_at": "2026-11-12T07:47:35.298419-06:00"
+    },
+    {
+      "file": "01_evidently_reporte_completo.jpg",
+      "width": 1000,
+      "height": 6522,
+      "clip_xywh": [
+        0,
+        0,
+        1000,
+        6522
+      ],
+      "sha256": "50c7f7bb47b13c895fbed9377fb03b349e8b847f6deb9ef1eded4ee3b8fb7ced",
+      "bytes": 445814,
+      "captured_at": "2026-11-12T07:47:04.428581-06:00"
+    },
+    {
+      "file": "04_registry_p1_versiones.jpg",
+      "width": 1280,
+      "height": 720,
+      "sha256": "58d44052e71da6968bb6834854c88f12057df0c9ecb93c46f3d6fa8ce42c3367",
+      "bytes": 73545,
+      "captured_at": "2026-11-12T12:35:14.998764-06:00",
+      "source_url": "http://127.0.0.1:5000/#/models/mibici-equipo39-p1-demanda",
+      "source_application": "MLflow 3.17.2 / Chrome",
+      "method": "Native window screenshot; full-screen Chrome; sidebar collapsed; original JPEG bytes; no pixel editing"
+    },
+    {
+      "file": "05_registry_a_champion_linaje.jpg",
+      "width": 1280,
+      "height": 720,
+      "sha256": "976fd105fcd3246c3044f0013298fe1afd37eb1f4ac31c6a19237e0465cb71ec",
+      "bytes": 61122,
+      "captured_at": "2026-11-12T12:35:42.280232-06:00",
+      "source_url": "http://127.0.0.1:5000/#/models/mibici-equipo39-p1-demanda/versions/1",
+      "source_application": "MLflow 3.17.2 / Chrome",
+      "method": "Native window screenshot; full-screen Chrome; sidebar collapsed; original JPEG bytes; no pixel editing"
+    },
+    {
+      "file": "06_registry_b_candidata_linaje.jpg",
+      "width": 1280,
+      "height": 720,
+      "sha256": "1975e560f62e27b1f6f832d560a807bbbe2186c0a9dca4df2e8be14e544efd10",
+      "bytes": 64173,
+      "captured_at": "2026-11-12T12:38:07.031169-06:00",
+      "source_url": "http://127.0.0.1:5000/#/models/mibici-equipo39-p1-demanda/versions/2",
+      "source_application": "MLflow 3.17.2 / Chrome",
+      "method": "Native window screenshot; full-screen Chrome; sidebar collapsed; original JPEG bytes; no pixel editing"
+    },
+    {
+      "file": "07_mlflow_comparacion_ab_octubre.jpg",
+      "width": 1280,
+      "height": 720,
+      "sha256": "d7b9a5faab27d28b9f7996d64ada562952fd5ff483026541527de3c02c8a24d5",
+      "bytes": 79722,
+      "captured_at": "2026-11-12T12:38:50.458725-06:00",
+      "source_url": "http://127.0.0.1:5000/#/experiments/1/runs/93f298b2c1404a8bb8a4eb1bed83b4bb",
+      "source_application": "MLflow 3.17.2 / Chrome",
+      "method": "Native window screenshot; full-screen Chrome; sidebar collapsed; original JPEG bytes; no pixel editing"
+    },
+    {
+      "file": "08_mlflow_trazabilidad_ab.jpg",
+      "width": 1280,
+      "height": 720,
+      "sha256": "dc24544087e692086a8a60b0ce3c39b94b735a97d2ba3c83e94a99e06002744a",
+      "bytes": 54132,
+      "captured_at": "2026-11-12T12:40:05.619195-06:00",
+      "source_url": "http://127.0.0.1:5000/#/experiments/1/runs/93f298b2c1404a8bb8a4eb1bed83b4bb",
+      "source_application": "MLflow 3.17.2 / Chrome",
+      "method": "Native window screenshot; full-screen Chrome; sidebar collapsed; original JPEG bytes; no pixel editing"
+    }
+  ],
+  "mlflow_evaluation_screenshots": "completed"
+}

@@ -1,0 +1,60 @@
+{
+  "datasets": {
+    "reference": {
+      "rows": 2152008,
+      "stations": 369,
+      "days": 243,
+      "departures": 2870337,
+      "zero_share": 0.5391476239865279,
+      "missing_values": 0,
+      "duplicate_keys": 0,
+      "start": "2025-10-01 00:00:00",
+      "last_hour": "2026-05-31 23:00:00"
+    },
+    "train_b": {
+      "rows": 3232440,
+      "stations": 369,
+      "days": 365,
+      "departures": 4397381,
+      "zero_share": 0.5359369392780686,
+      "missing_values": 0,
+      "duplicate_keys": 0,
+      "start": "2025-10-01 00:00:00",
+      "last_hour": "2026-09-30 23:00:00"
+    },
+    "current": {
+      "rows": 274536,
+      "stations": 369,
+      "days": 31,
+      "departures": 579697,
+      "zero_share": 0.44591601829996796,
+      "missing_values": 0,
+      "duplicate_keys": 0,
+      "start": "2026-10-01 00:00:00",
+      "last_hour": "2026-10-31 23:00:00"
+    }
+  },
+  "cleaning_current": {
+    "raw_rows": 635532,
+    "missing_trip_id": 0,
+    "duplicates": 0,
+    "invalid_start": 0,
+    "outside_range": 0,
+    "missing_station": 0,
+    "invalid_end": 0,
+    "end_before_start": 0,
+    "retained_rows": 635532
+  },
+  "historical_departure_partitions_verified": 50,
+  "cohort_from_a_train": 369,
+  "current_catalog_stations": 470,
+  "cohort_absent_from_current_catalog": [],
+  "current_catalog_outside_a_cohort": 101,
+  "current_departures_outside_cohort": 55835,
+  "current_departures_unknown_catalog": 1,
+  "cohort_without_observed_current_departures": [
+    "175"
+  ],
+  "zero_assumption": "Se asumen cero salidas en horas sin viaje de estaciones presentes en el catálogo. No hay inventario ni calendario de cierres; disponibilidad física no comprobada.",
+  "source_completeness": "Se observaron salidas en cada día del mes; esto no demuestra ausencia de pérdidas parciales del proveedor."
+}

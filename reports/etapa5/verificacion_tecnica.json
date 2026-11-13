@@ -1,0 +1,60 @@
+{
+  "date": "2026-11-11",
+  "responsible": "Marco",
+  "pytest": {
+    "scope": "tests/monitoring y tests/test_ingesta_calidad.py",
+    "tests": 52,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "warnings": 16,
+    "monitoring_tests": 21,
+    "ingestion_regression_tests": 31
+  },
+  "bandit": {
+    "scope": "mibici_equipo39/monitoring",
+    "findings": 0,
+    "analysis_errors": 0
+  },
+  "pip_audit": {
+    "scope": "requirements-monitoring.txt",
+    "audited_dependencies": 82,
+    "known_vulnerabilities": 0,
+    "skipped": []
+  },
+  "pip_check": "PASS",
+  "registry": {
+    "a": "1",
+    "b": "2",
+    "champion": "1",
+    "same_signature": true
+  },
+  "visual_review_html": "COMPLETED_BY_MARCO",
+  "independent_review": "PENDING_DIEGO_HURTADO",
+  "tested_source_sha256": {
+    "mibici_equipo39/monitoring/ab_test.py": "c19b8544b0d23c4e7bcf148fd08bef1a5d30c5216c9a811d9a93d6833bbe0154",
+    "mibici_equipo39/monitoring/common.py": "15ce42284db8511308efd578ace1f5e643135cea5a968fb2f790de39b3f554b1",
+    "mibici_equipo39/monitoring/drift.py": "c723055f1d0afbfdb6b034ad25b5ca168895eeb618f33e2af65d93a5aa0adc25",
+    "mibici_equipo39/monitoring/metrics.py": "65a076709b84ca3ca9fb90d8a3ed495dff084366a4c5f34d77e5750a9033551d",
+    "mibici_equipo39/monitoring/prepare.py": "c8d78f90f78c9c386e9aa3dd94368b176897f1dc8f1364d6abb9f2915d06b35c",
+    "mibici_equipo39/monitoring/registry.py": "a07c34650992666cd2b869ea82a260abe330297e28137a976878e55898dfe7a8",
+    "mibici_equipo39/monitoring/train_b.py": "c1e8591c0bff4ba84adca2c00266079281ba0571fc9ae894da3f1afd4db0b537",
+    "mibici_equipo39/monitoring/__init__.py": "7c9edafa029b17f9482c0a7b4c47b8e4345aca7c30f3dc779a20a8dd4f1fe4ef",
+    "tests/monitoring/test_contracts.py": "4c1692ab076bdaa25e4e19b2884291b27b14ea3176808ec771dbc1e81fbc8d3d"
+  },
+  "visual_review_details": {
+    "date": "2026-11-12",
+    "manifest": "capturas/manifest.json",
+    "screenshots": 9,
+    "matches_published_results": true,
+    "independent_review": "PENDING_DIEGO_HURTADO",
+    "mlflow_ui_screenshots": "COMPLETED_BY_MARCO",
+    "evidently_screenshots": 4,
+    "mlflow_screenshots": 5,
+    "evaluation_run_id": "93f298b2c1404a8bb8a4eb1bed83b4bb",
+    "registry_model": "mibici-equipo39-p1-demanda",
+    "registry_champion_version": "1",
+    "registry_candidate_version": "2"
+  },
+  "visual_review_mlflow": "COMPLETED_BY_MARCO"
+}
