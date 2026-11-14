@@ -44,6 +44,8 @@ Si B ya está registrada según `models.json`, se verifica la versión existente
 
 Los resultados se guardan en `reports/etapa5/`; las predicciones por fila en `private_results/etapa5/` permanecen excluidas de Git. Ninguno de estos comandos cambia el alias `champion`.
 
-## 4. Revisión y evidencia pendiente
+## 4. Revisión y evidencia
 
-Diego Hurtado revisa el PR técnico, las huellas, las fechas y la comparación. Después se toman capturas auténticas del HTML de Evidently, de la ficha A/B y de los resultados. Las capturas deben mostrar la versión y los datos vigentes. El reporte final debe distinguir observaciones, límites y recomendaciones; no declarar una mejora antes de consultar los resultados.
+El PR #64 fue aprobado por Diego Hurtado sobre `ebb45dc` e integrado en `main` mediante `3fcca8a`. Su revisión documenta 52 pruebas aprobadas, 16 advertencias conservadas, comprobación visual de Evidently y verificación de las nueve capturas mediante tamaño y SHA-256.
+
+Las capturas originales, las versiones A/B y las métricas vigentes están en [reports/etapa5/capturas](../../reports/etapa5/capturas/README.md). El [reporte editable](../../reports/etapa5/entrega/TC5061_Drift_ABTest_Equipo39.docx) y su [PDF](../../reports/etapa5/entrega/TC5061_Drift_ABTest_Equipo39.pdf) reúnen resultados, límites y recomendaciones. Estos documentos nuevos requieren revisión documental independiente; los modelos y el alias no se modifican.

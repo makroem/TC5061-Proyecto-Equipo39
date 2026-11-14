@@ -1,5 +1,5 @@
 {
-  "status": "pending_independent_review",
+  "status": "reviewed_retain_a",
   "recommendation": "retain_a_and_investigate",
   "champion_unchanged": true,
   "champion_version": "1",
@@ -14,5 +14,15 @@
   },
   "decision_owner": "Marco",
   "reviewer": "Diego Hurtado",
-  "automatic_promotion": false
+  "automatic_promotion": false,
+  "independent_review_record": {
+    "reviewer": "Diego Hurtado",
+    "github_login": "diegoHurtado01",
+    "status": "APPROVED",
+    "submitted_at": "2026-11-13T00:34:00Z",
+    "reviewed_commit": "ebb45dcf5c1733f0e2ffaf0cfbd03eb62e39feb2",
+    "review_url": "https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/64#pullrequestreview-5884278942",
+    "merge_commit": "3fcca8a3258c11a44821396e7ee139f3877fd9db",
+    "merged_at": "2026-11-13T00:50:09Z"
+  }
 }
