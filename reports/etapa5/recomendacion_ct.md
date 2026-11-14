@@ -17,9 +17,9 @@ El drift observado se concentra en mes y sus transformaciones. Es esperado al co
 
 ## Estado de revisión y entrega
 
-- Marco: código, resultados y nueve capturas integrados en `main` mediante el PR #64; reporte editable y PDF de cinco páginas preparados para revisión documental.
-- Diego Hurtado: revisión técnica aprobada sobre `ebb45dc`, incluidas 52 pruebas y las nueve capturas. Queda revisar el nuevo reporte y su correspondencia con la evidencia aprobada.
+- Marco: código, resultados y nueve capturas integrados mediante el PR #64; reporte editable y PDF de cinco páginas corregidos e integrados en `main` mediante el PR #65, commit `21723ad`.
+- Diego Hurtado: revisión técnica aprobada sobre `ebb45dc`, incluidas 52 pruebas y las nueve capturas; revisión documental completada sobre `aea5e5e`, según la [aprobación del PR #65](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/65#pullrequestreview-5905311387). La observación de interlineado quedó resuelta.
 - Stefania: aportación breve de interpretación (#62), abierta y no bloqueante; los contenidos necesarios ya están cubiertos por Marco y la revisión técnica de Diego Hurtado.
 - Diego Martinez: ficha breve de linaje (#63), abierta y no bloqueante. La ficha técnica existente conserva las versiones, corridas y huellas.
 
-Las aportaciones individuales pendientes no se atribuyen a quienes todavía no las han realizado. La aprobación técnica del PR #64 no se extiende automáticamente al nuevo documento. Se conserva A como `champion`, sin promoción automática.
+Las aportaciones individuales pendientes no se atribuyen a quienes todavía no las han realizado. El reporte cuenta con su propia aprobación independiente en el PR #65, además de la aprobación técnica del PR #64. Se conserva A como `champion`, sin promoción automática.
