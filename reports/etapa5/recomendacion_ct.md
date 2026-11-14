@@ -15,12 +15,11 @@ El drift observado se concentra en mes y sus transformaciones. Es esperado al co
 5. Comparar en un mes posterior no utilizado, con los mismos pares, métricas, segmentos y mediciones de costo. La revisión independiente corresponde a Diego Hurtado; Marco resuelve observaciones y prepara la integración.
 6. Promover solo con una decisión explícita respaldada por las métricas y la calidad. Conservar la versión anterior para reversión. La API de la etapa anterior empaqueta su modelo: cambiar el alias requiere además reconstruir y verificar el contenedor para que el servicio use la nueva versión.
 
-## Pendientes de revisión
+## Estado de revisión y entrega
 
-- Diego Hurtado: revisar el código, el resultado pareado, la documentación del costo y las limitaciones; aportar revisión al PR.
-- Stefania: revisión breve de la interpretación del drift (#62), con respaldo de Marco y validación de Diego Hurtado.
-- Diego Martinez: ficha breve de linaje A/B (#63), con el mismo respaldo. No debe ejecutar infraestructura ni entrenamientos.
-- Marco: integrar el reporte final de 3–5 páginas con las nueve capturas originales ya disponibles. Las cuatro de Evidently y las cinco del Registry y de la evaluación en MLflow se completaron el 12 de noviembre, con revisión visual y manifiesto de procedencia.
-- Diego Hurtado: validar de forma independiente las evidencias y el reporte antes de la integración. Las capturas de Marco no sustituyen esta revisión.
+- Marco: código, resultados y nueve capturas integrados en `main` mediante el PR #64; reporte editable y PDF de cinco páginas preparados para revisión documental.
+- Diego Hurtado: revisión técnica aprobada sobre `ebb45dc`, incluidas 52 pruebas y las nueve capturas. Queda revisar el nuevo reporte y su correspondencia con la evidencia aprobada.
+- Stefania: aportación breve de interpretación (#62), abierta y no bloqueante; los contenidos necesarios ya están cubiertos por Marco y la revisión técnica de Diego Hurtado.
+- Diego Martinez: ficha breve de linaje (#63), abierta y no bloqueante. La ficha técnica existente conserva las versiones, corridas y huellas.
 
-Ninguna tarea documental de Stefania o Diego Martinez bloquea la preparación, la comparación ni la integración técnica revisada. La revisión independiente del PR sí se conserva.
+Las aportaciones individuales pendientes no se atribuyen a quienes todavía no las han realizado. La aprobación técnica del PR #64 no se extiende automáticamente al nuevo documento. Se conserva A como `champion`, sin promoción automática.

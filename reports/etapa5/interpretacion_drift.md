@@ -12,4 +12,4 @@ Se conservaron 635,532 viajes en la limpieza del CSV actual. De ellos, 55,835 sa
 
 Evidently emitió advertencias de división al calcular correlaciones con variables constantes del mes actual. Esas correlaciones no están definidas; no se interpretan como cero. Los estadísticos de drift por variable se generaron y sus valores se conservan en el JSON. La revisión final debe comprobar estas limitaciones junto con el desempeño antes de recomendar reentrenamiento o promoción.
 
-Estado: análisis preliminar de Marco, pendiente de revisión documental de Stefania o del respaldo Marco/Diego Hurtado. Las conclusiones de desempeño dependen de la comparación pareada, no de esta alerta de drift por sí sola.
+Estado: análisis de Marco incorporado al PR #64 y revisado por Diego Hurtado. La aportación breve individual de Stefania (#62) permanece abierta y no bloquea la integración técnica. Las conclusiones de desempeño dependen de la comparación pareada, no de esta alerta de drift por sí sola.

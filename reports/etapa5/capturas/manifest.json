@@ -7,7 +7,7 @@
   "source_sha256": "84b58f2a907f055b90a8ee616ad950add37f693cc4baa9369e14fb2e45e3f2d0",
   "method": "Original JPEG browser captures: rendered Evidently HTML and native Chrome window screenshots; no pixel editing",
   "registry_screenshots": "completed",
-  "independent_review": "pending",
+  "independent_review": "APPROVED_BY_DIEGO_HURTADO",
   "images": [
     {
       "file": "01_evidently_resumen.jpg",
@@ -121,5 +121,15 @@
       "method": "Native window screenshot; full-screen Chrome; sidebar collapsed; original JPEG bytes; no pixel editing"
     }
   ],
-  "mlflow_evaluation_screenshots": "completed"
+  "mlflow_evaluation_screenshots": "completed",
+  "independent_review_record": {
+    "reviewer": "Diego Hurtado",
+    "github_login": "diegoHurtado01",
+    "status": "APPROVED",
+    "submitted_at": "2026-11-13T00:34:00Z",
+    "reviewed_commit": "ebb45dcf5c1733f0e2ffaf0cfbd03eb62e39feb2",
+    "review_url": "https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/64#pullrequestreview-5884278942",
+    "merge_commit": "3fcca8a3258c11a44821396e7ee139f3877fd9db",
+    "merged_at": "2026-11-13T00:50:09Z"
+  }
 }
