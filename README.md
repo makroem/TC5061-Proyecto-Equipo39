@@ -11,13 +11,24 @@ La API estima viajes que comienzan en una estación durante la hora indicada. Si
 Con acceso al Registry oficial, instala el entorno de servicio y descarga la versión fijada en el [manifiesto](references/etapa4/model_manifest.json). La dirección del ejemplo corresponde a un servidor ya iniciado en esta misma computadora; ajusta ambas variables si el servidor autorizado está en otro equipo.
 
 ```powershell
-if (!(Test-Path .venv-api)) { python -m venv .venv-api }
-$pythonApi = '.venv-api\Scripts\python.exe'
+$ErrorActionPreference = 'Stop'
+if (!(Test-Path -LiteralPath '.venv-api')) {
+    python -m venv .venv-api
+    if ($LASTEXITCODE -ne 0) { throw 'No se pudo crear el entorno de servicio.' }
+}
+$pythonApi = '.\.venv-api\Scripts\python.exe'
+if (!(Test-Path -LiteralPath $pythonApi -PathType Leaf)) { throw 'No se encontró el ejecutable de Python del servicio.' }
+$versionApi = & $pythonApi --version
+if ($LASTEXITCODE -ne 0 -or [string]$versionApi -ne 'Python 3.11.9') { throw 'El entorno de servicio debe usar Python 3.11.9.' }
+$versionApi
 & $pythonApi -m pip install -r requirements-api.txt
+if ($LASTEXITCODE -ne 0) { throw 'Falló la instalación de dependencias del servicio.' }
 & $pythonApi -m pip check
+if ($LASTEXITCODE -ne 0) { throw 'El entorno tiene dependencias incompatibles.' }
 $env:MLFLOW_TRACKING_URI = 'http://127.0.0.1:5000'
 $env:MLFLOW_REGISTRY_URI = $env:MLFLOW_TRACKING_URI
 & $pythonApi -B -m mibici_equipo39.serving.export_model --manifest references/etapa4/model_manifest.json --output models/serving/p1
+if ($LASTEXITCODE -ne 0) { throw 'No se completó la exportación y verificación del modelo.' }
 ```
 
 Sin acceso al Registry, utiliza la [recepción y verificación del ZIP original](#recibir-el-paquete-original-para-revisar-docker-sin-acceso-al-registry) y continúa en el paso 2. Ambas opciones dejan los mismos 22 archivos en `models/serving/p1/`; no requieren reentrenamiento.
@@ -25,23 +36,29 @@ Sin acceso al Registry, utiliza la [recepción y verificación del ZIP original]
 ### 2. Construir y levantar el contenedor
 
 ```powershell
+$ErrorActionPreference = 'Stop'
 docker info
+if ($LASTEXITCODE -ne 0) { throw 'El motor de Docker no está disponible.' }
 docker build -f Containerfile -t mibici-equipo39:p1-etapa4 .
 if ($LASTEXITCODE -ne 0) { throw 'La imagen no se construyó correctamente.' }
 docker run -d --name mibici-equipo39-p1 --read-only --cap-drop ALL --security-opt no-new-privileges:true --pids-limit 128 --memory 1g --tmpfs /tmp:rw,noexec,nosuid,size=128m -p 127.0.0.1:8000:8000 mibici-equipo39:p1-etapa4
+if ($LASTEXITCODE -ne 0) { throw 'El contenedor no pudo iniciarse.' }
 docker inspect mibici-equipo39-p1 --format '{{.State.Health.Status}}'
+if ($LASTEXITCODE -ne 0) { throw 'No se pudo consultar el estado del contenedor.' }
 ```
 
-Si la inspección muestra `starting`, espera y repite el último comando hasta que indique `healthy`. Si indica `unhealthy`, consulta `docker logs mibici-equipo39-p1`. El nombre y el puerto deben estar libres; para una instancia existente consulta los [detalles de operación](#construir-y-ejecutar-la-api).
+Si la inspección muestra `starting`, espera y repite la consulta de salud con `docker inspect` hasta que indique `healthy`. Si indica `unhealthy`, consulta `docker logs mibici-equipo39-p1`. El nombre y el puerto deben estar libres; para una instancia existente consulta los [detalles de operación](#construir-y-ejecutar-la-api).
 
 ### 3. Consumir la API
 
 Confirma que `/ready` devuelve `status: ready` y `model_version: 1`; después envía el [ejemplo de entrada completo](references/etapa4/examples/predict_request.json): estación 10, lunes, enero, 06:00, con las variables cíclicas correspondientes.
 
 ```powershell
-Invoke-RestMethod http://127.0.0.1:8000/ready
-$body = Get-Content references/etapa4/examples/predict_request.json -Raw
-Invoke-RestMethod -Method Post -Uri http://127.0.0.1:8000/predict -ContentType 'application/json' -Body $body | ConvertTo-Json -Depth 5
+$ready = Invoke-RestMethod http://127.0.0.1:8000/ready -ErrorAction Stop
+if ($ready.status -ne 'ready' -or [string]$ready.model_version -ne '1') { throw 'El servicio no tiene preparada la versión esperada.' }
+$ready
+$body = Get-Content references/etapa4/examples/predict_request.json -Raw -ErrorAction Stop
+Invoke-RestMethod -Method Post -Uri http://127.0.0.1:8000/predict -ContentType 'application/json' -Body $body -ErrorAction Stop | ConvertTo-Json -Depth 5
 ```
 
 Respuesta esperada para ese ejemplo y la versión fijada:
@@ -548,7 +565,7 @@ Comprueba primero `python --version` (3.11.9) y si ya existe `.venv-api`. Solo s
 
 ```powershell
 python -m venv .venv-api
-$pythonApi = '.venv-api\Scripts\python.exe'
+$pythonApi = '.\.venv-api\Scripts\python.exe'
 & $pythonApi -m pip install -r requirements-api-dev.txt
 & $pythonApi -m pip check
 ```
@@ -586,7 +603,7 @@ Si tu almacén local no contiene la versión aprobada, solicita a Marco la copia
 Descarga el ZIP recibido a Descargas, abre PowerShell en la raíz de tu clon y activa el entorno de servicio descrito arriba. Comprueba la huella antes de extraer; si ya tienes `models/serving/p1`, verifica esa copia o utiliza otro clon, sin sobrescribirla.
 
 ```powershell
-$pythonApi = '.venv-api\Scripts\python.exe'
+$pythonApi = '.\.venv-api\Scripts\python.exe'
 $paqueteP1 = Join-Path ([Environment]::GetFolderPath('UserProfile')) 'Downloads\Paquete_P1_Equipo39_v1_22archivos.zip'
 $huellaP1 = (Get-FileHash -LiteralPath $paqueteP1 -Algorithm SHA256).Hash.ToLowerInvariant()
 if ($huellaP1 -ne '5dbd9112b837fb6b4594d91c2db3f9660962f04c4e0f279219b8bba3f76d9925') { throw 'El ZIP no coincide con la copia original.' }
