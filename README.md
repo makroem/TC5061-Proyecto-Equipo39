@@ -1,5 +1,93 @@
 # Proyecto MiBici Equipo 39
 
+## Servicio API P1: inicio rápido
+
+La API estima viajes que comienzan en una estación durante la hora indicada. Sirve `mibici-equipo39-p1-demanda`, versión **1**, mediante FastAPI. Recibe de 1 a 100 filas por petición y devuelve predicciones en JSON.
+
+**Requisitos:** PowerShell, Python 3.11.9 y Docker Desktop con el motor Linux iniciado. Ejecuta los comandos desde la raíz del clon. El modelo se entrega por separado de Git: necesitas acceso al Registry que contiene la versión aprobada o el paquete original verificado. Detente si algún comando termina con error.
+
+### 1. Preparar el modelo
+
+Con acceso al Registry oficial, instala el entorno de servicio y descarga la versión fijada en el [manifiesto](references/etapa4/model_manifest.json). La dirección del ejemplo corresponde a un servidor ya iniciado en esta misma computadora; ajusta ambas variables si el servidor autorizado está en otro equipo.
+
+```powershell
+$ErrorActionPreference = 'Stop'
+if (!(Test-Path -LiteralPath '.venv-api')) {
+    python -m venv .venv-api
+    if ($LASTEXITCODE -ne 0) { throw 'No se pudo crear el entorno de servicio.' }
+}
+$pythonApi = '.\.venv-api\Scripts\python.exe'
+if (!(Test-Path -LiteralPath $pythonApi -PathType Leaf)) { throw 'No se encontró el ejecutable de Python del servicio.' }
+$versionApi = & $pythonApi --version
+if ($LASTEXITCODE -ne 0 -or [string]$versionApi -ne 'Python 3.11.9') { throw 'El entorno de servicio debe usar Python 3.11.9.' }
+$versionApi
+& $pythonApi -m pip install -r requirements-api.txt
+if ($LASTEXITCODE -ne 0) { throw 'Falló la instalación de dependencias del servicio.' }
+& $pythonApi -m pip check
+if ($LASTEXITCODE -ne 0) { throw 'El entorno tiene dependencias incompatibles.' }
+$env:MLFLOW_TRACKING_URI = 'http://127.0.0.1:5000'
+$env:MLFLOW_REGISTRY_URI = $env:MLFLOW_TRACKING_URI
+& $pythonApi -B -m mibici_equipo39.serving.export_model --manifest references/etapa4/model_manifest.json --output models/serving/p1
+if ($LASTEXITCODE -ne 0) { throw 'No se completó la exportación y verificación del modelo.' }
+```
+
+Sin acceso al Registry, utiliza la [recepción y verificación del ZIP original](#recibir-el-paquete-original-para-revisar-docker-sin-acceso-al-registry) y continúa en el paso 2. Ambas opciones dejan los mismos 22 archivos en `models/serving/p1/`; no requieren reentrenamiento.
+
+### 2. Construir y levantar el contenedor
+
+```powershell
+$ErrorActionPreference = 'Stop'
+docker info
+if ($LASTEXITCODE -ne 0) { throw 'El motor de Docker no está disponible.' }
+docker build -f Containerfile -t mibici-equipo39:p1-etapa4 .
+if ($LASTEXITCODE -ne 0) { throw 'La imagen no se construyó correctamente.' }
+docker run -d --name mibici-equipo39-p1 --read-only --cap-drop ALL --security-opt no-new-privileges:true --pids-limit 128 --memory 1g --tmpfs /tmp:rw,noexec,nosuid,size=128m -p 127.0.0.1:8000:8000 mibici-equipo39:p1-etapa4
+if ($LASTEXITCODE -ne 0) { throw 'El contenedor no pudo iniciarse.' }
+docker inspect mibici-equipo39-p1 --format '{{.State.Health.Status}}'
+if ($LASTEXITCODE -ne 0) { throw 'No se pudo consultar el estado del contenedor.' }
+```
+
+Si la inspección muestra `starting`, espera y repite la consulta de salud con `docker inspect` hasta que indique `healthy`. Si indica `unhealthy`, consulta `docker logs mibici-equipo39-p1`. El nombre y el puerto deben estar libres; para una instancia existente consulta los [detalles de operación](#construir-y-ejecutar-la-api).
+
+### 3. Consumir la API
+
+Confirma que `/ready` devuelve `status: ready` y `model_version: 1`; después envía el [ejemplo de entrada completo](references/etapa4/examples/predict_request.json): estación 10, lunes, enero, 06:00, con las variables cíclicas correspondientes.
+
+```powershell
+$ready = Invoke-RestMethod http://127.0.0.1:8000/ready -ErrorAction Stop
+if ($ready.status -ne 'ready' -or [string]$ready.model_version -ne '1') { throw 'El servicio no tiene preparada la versión esperada.' }
+$ready
+$body = Get-Content references/etapa4/examples/predict_request.json -Raw -ErrorAction Stop
+Invoke-RestMethod -Method Post -Uri http://127.0.0.1:8000/predict -ContentType 'application/json' -Body $body -ErrorAction Stop | ConvertTo-Json -Depth 5
+```
+
+Respuesta esperada para ese ejemplo y la versión fijada:
+
+```json
+{
+  "model_name": "mibici-equipo39-p1-demanda",
+  "model_version": "1",
+  "model_bundle_sha256": "dedce1eb08bda971a42fba311224c88e56f75cd2789dbb391e9445951931bd80",
+  "predictions": [{"station_id": "10", "predicted_trips": 1.6764705882352942}]
+}
+```
+
+También puedes usar [Swagger UI](http://127.0.0.1:8000/docs): **POST /predict → Try it out → Execute**. Su interfaz requiere acceso al CDN; la petición anterior funciona sin él. La API rechaza entradas inválidas con **422** y responde **503** si el modelo no está listo. Para detener esta instancia: `docker stop mibici-equipo39-p1`.
+
+### Estrategia de despliegue
+
+Se eligió **inferencia síncrona por HTTP** para consultas pequeñas de demanda por estación y hora: el cliente recibe el resultado en la misma petición. Las evaluaciones mensuales y el entrenamiento se ejecutan por separado; no forman parte del tiempo de respuesta de la API.
+
+La imagen incluye el modelo descargado del Registry por **nombre y versión numérica**, junto con las dependencias fijadas. La construcción comprueba las 22 huellas y la carga del paquete; al arrancar, el servicio vuelve a verificarlo y lo carga una vez por proceso. Así, las predicciones no dependen de que el Registry esté disponible ni cambian cuando se mueve un alias. La respuesta identifica la versión y la huella del paquete utilizado.
+
+Para desplegar otra versión se requiere revisar su manifiesto, preparar el paquete correspondiente, construir una imagen con una etiqueta nueva y comprobar `/ready` y las predicciones antes de sustituir la instancia. Se conserva la imagen anterior para volver a ella si es necesario. Este reemplazo es manual y puede interrumpir el servicio; cambiar `champion` por sí solo no actualiza el contenedor.
+
+El alcance comprobado es **un contenedor local**, ejecutado sin privilegios de administrador, con sistema de archivos de solo lectura, recursos limitados y puerto accesible solo desde la computadora anfitriona. Todavía no se han medido carga concurrente ni latencias operativas; un servicio público requeriría además autenticación, HTTPS y una política de disponibilidad. Docker es el motor validado en esta entrega.
+
+**Evidencia del servicio:** [captura original de respuesta 200](reports/etapa4/evidence/E05_api_main_respuesta_200.jpg) y [validación del contenedor](reports/etapa4/cierre_api_marco_20261103.md#cierre-sobre-main). El [contrato de entradas y salidas](references/etapa4/contrato_api.md) detalla los campos y las validaciones.
+
+**Otras etapas y antecedentes:** [monitoreo](#etapa-5-monitoreo-y-comparación-de-versiones) · [pruebas y seguridad](#etapa-3-pruebas-validación-y-seguridad) · [MLflow Projects](#experimentación-de-la-etapa-2-con-mlflow-projects) · [preparación y comprobaciones ampliadas de la API](#etapa-4-preparación-del-modelo-para-la-api).
+
 ## Etapa 5: monitoreo y comparación de versiones
 
 El monitoreo de P1 conserva las entregas anteriores y utiliza octubre de 2026 como periodo nuevo. El protocolo, las fuentes y las versiones se registran en [references/etapa5](references/etapa5/). Las instrucciones están concentradas en [reproduccion.md](references/etapa5/reproduccion.md) y los resultados en [reports/etapa5](reports/etapa5/). La comparación es pareada y fuera de línea; no modifica automáticamente el modelo publicado.
@@ -477,7 +565,7 @@ Comprueba primero `python --version` (3.11.9) y si ya existe `.venv-api`. Solo s
 
 ```powershell
 python -m venv .venv-api
-$pythonApi = '.venv-api\Scripts\python.exe'
+$pythonApi = '.\.venv-api\Scripts\python.exe'
 & $pythonApi -m pip install -r requirements-api-dev.txt
 & $pythonApi -m pip check
 ```
@@ -515,7 +603,7 @@ Si tu almacén local no contiene la versión aprobada, solicita a Marco la copia
 Descarga el ZIP recibido a Descargas, abre PowerShell en la raíz de tu clon y activa el entorno de servicio descrito arriba. Comprueba la huella antes de extraer; si ya tienes `models/serving/p1`, verifica esa copia o utiliza otro clon, sin sobrescribirla.
 
 ```powershell
-$pythonApi = '.venv-api\Scripts\python.exe'
+$pythonApi = '.\.venv-api\Scripts\python.exe'
 $paqueteP1 = Join-Path ([Environment]::GetFolderPath('UserProfile')) 'Downloads\Paquete_P1_Equipo39_v1_22archivos.zip'
 $huellaP1 = (Get-FileHash -LiteralPath $paqueteP1 -Algorithm SHA256).Hash.ToLowerInvariant()
 if ($huellaP1 -ne '5dbd9112b837fb6b4594d91c2db3f9660962f04c4e0f279219b8bba3f76d9925') { throw 'El ZIP no coincide con la copia original.' }
@@ -545,28 +633,17 @@ La [captura E02 del Registry de P1](reports/etapa4/captura_registry_p1.md) muest
 
 ### Construir y ejecutar la API
 
-La estrategia es inferencia síncrona por HTTP para peticiones pequeñas (1 a 100 filas). Facilita consultar demanda por estación/hora y responder inmediatamente. No se mide todavía capacidad bajo carga ni un beneficio operativo; las predicciones conservan las limitaciones del baseline. La imagen incluye exactamente el modelo descargado: se evitan descargas o cambios de alias durante una petición.
+Los comandos de construcción, arranque y consumo, el ejemplo de respuesta y la estrategia de despliegue están reunidos en [Servicio API P1: inicio rápido](#servicio-api-p1-inicio-rápido), al comienzo de este README. Esta sección conserva el diagnóstico y las comprobaciones ampliadas.
 
-Verifica primero `docker --version` y `docker info`; no reinstales si ya funciona. Docker Desktop debe tener disponible su motor Linux. Si `docker` no está en el PATH, usa la ruta del ejecutable de tu instalación. Podman puede utilizar el mismo Containerfile sustituyendo el comando; la ejecución comprobada en esta entrega es Docker.
-
-Después de instalar el entorno y exportar el paquete según las secciones anteriores, desde la raíz del clon:
-
-```powershell
-docker build -f Containerfile -t mibici-equipo39:p1-etapa4 .
-docker run -d --name mibici-equipo39-p1 --read-only --cap-drop ALL --security-opt no-new-privileges:true --pids-limit 128 --memory 1g --tmpfs /tmp:rw,noexec,nosuid,size=128m -p 127.0.0.1:8000:8000 mibici-equipo39:p1-etapa4
-docker inspect mibici-equipo39-p1 --format '{{.State.Health.Status}}'
-Invoke-RestMethod http://127.0.0.1:8000/ready
-```
+Docker Desktop debe tener disponible su motor Linux. Si `docker` no está en el PATH, usa la ruta del ejecutable de tu instalación. Podman puede utilizar el mismo Containerfile sustituyendo el comando; la ejecución comprobada en esta entrega es Docker.
 
 Al inicio `docker inspect` muestra `starting`; pasa a `healthy` cuando `/ready` responde 200, unos 30 segundos después. `unhealthy` significa que `/ready` dejó de responder 200, normalmente porque el modelo no cargó; la causa aparece en `docker logs mibici-equipo39-p1`.
 
 El proceso usa UID/GID `10001:10001`, raíz de solo lectura y un temporal limitado. `.dockerignore` y `.containerignore` permiten únicamente el código, los requisitos, el manifiesto y el paquete del modelo. El modelo se incluye en la imagen aunque esté excluido de Git. No se copian CSV, entornos, credenciales, reportes ni bases de MLflow. El puerto se publica solo en localhost; no se ofrece como servicio público autenticado.
 
-Abre http://127.0.0.1:8000/docs. En `POST /predict`, selecciona **Try it out** y **Execute**: el ejemplo mostrado es válido. La página descarga Swagger UI de `cdn.jsdelivr.net`; sin internet se ve en blanco, aunque el servicio y `/openapi.json` sigan respondiendo. También puede usarse el archivo versionado:
+El verificador HTTP comprueba el contenedor contra el paquete local. Requiere el entorno de servicio y el modelo preparado:
 
 ```powershell
-$body = Get-Content references/etapa4/examples/predict_request.json -Raw
-Invoke-RestMethod -Method Post -Uri http://127.0.0.1:8000/predict -ContentType 'application/json' -Body $body
 & $pythonApi -B -m mibici_equipo39.serving.verify_http --url http://127.0.0.1:8000 --output private_results/http_check.json
 ```
 
