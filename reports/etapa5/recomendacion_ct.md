@@ -17,9 +17,9 @@ El drift observado se concentra en mes y sus transformaciones. Es esperado al co
 
 ## Estado de revisión y entrega
 
-- Marco: código, resultados y nueve capturas integrados en `main` mediante el PR #64; reporte editable y PDF de cinco páginas preparados para revisión documental.
-- Diego Hurtado: revisión técnica aprobada sobre `ebb45dc`, incluidas 52 pruebas y las nueve capturas. Queda revisar el nuevo reporte y su correspondencia con la evidencia aprobada.
-- Stefania: aportación breve de interpretación (#62), abierta y no bloqueante; los contenidos necesarios ya están cubiertos por Marco y la revisión técnica de Diego Hurtado.
-- Diego Martinez: ficha breve de linaje (#63), abierta y no bloqueante. La ficha técnica existente conserva las versiones, corridas y huellas.
+- Marco: código, resultados y nueve capturas integrados mediante el PR #64; reporte editable y PDF de cinco páginas corregidos e integrados en `main` mediante el PR #65, commit `21723ad`.
+- Diego Hurtado: revisión técnica aprobada sobre `ebb45dc`, incluidas 52 pruebas y las nueve capturas; revisión documental completada sobre `aea5e5e`, según la [aprobación del PR #65](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/65#pullrequestreview-5905311387). La observación de interlineado quedó resuelta.
+- Stefania: interpretación presentada en el [PR #68](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/68). Marco solicitó precisar los límites de la cohorte fija y de la comparación de calendarios, y añadir referencias al reporte. La tarea #62 sigue abierta; esta corrección documental no bloquea la entrega técnica.
+- Diego Martinez: [ficha de linaje](revision_linaje_diego_martinez.md) revisada y aprobada por Marco sobre `a6b5984`, e integrada mediante el [PR #67](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/67), commit `9db8082`, el 15 de noviembre. La tarea #63 quedó cerrada. La revisión delimita la evidencia publicada y las comprobaciones que requerirían acceso al Registry y a los Parquet.
 
-Las aportaciones individuales pendientes no se atribuyen a quienes todavía no las han realizado. La aprobación técnica del PR #64 no se extiende automáticamente al nuevo documento. Se conserva A como `champion`, sin promoción automática.
+El estado anterior distingue aportaciones presentadas, correcciones solicitadas e integración, conservando la autoría de cada persona. El reporte cuenta con su propia aprobación independiente en el PR #65, además de la aprobación técnica del PR #64. Se conserva la decisión de mantener A como `champion`, sin promoción automática.
