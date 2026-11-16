@@ -4,9 +4,9 @@ La interpretación inicial identifica correctamente que las únicas variables qu
 
 La evidencia disponible es compatible con el cambio esperado en la composición del calendario entre el conjunto de referencia y el conjunto actual. Sin embargo, esta comparación por sí sola no demuestra un patrón estacional recurrente ni permite descartar posibles cambios operativos. El conjunto actual se concentra exclusivamente en observaciones correspondientes a octubre, mientras que la referencia incorpora varios meses. Bajo estas condiciones es esperable que las variables relacionadas con el mes presenten diferencias significativas en su distribución. Por otro lado, variables como station_id, hour_of_day, day_of_week e is_weekend permanecen por debajo de los umbrales definidos. No obstante, la ausencia de alerta en estas variables no demuestra estabilidad de toda la red o de la demanda observada, ya que la evaluación se realiza sobre una cohorte fija de estaciones y una malla temporal construida para mantener distribuciones cercanas a uniformes.
 
-Asimismo, es adecuado señalar que la presencia de drift no constituye evidencia suficiente de pérdida de precisión del modelo. El análisis realizado evalúa cambios en las distribuciones de entrada, pero no cuantifica su efecto sobre las predicciones. Cualquier afirmación relativa a degradación del desempeño, necesidad de reentrenamiento o promoción de modelos debe sustentarse mediante métricas de evaluación específicas, como MAE, RMSE o comparaciones de desempeño sobre datos recientes. En consecuencia, los resultados confirman la presencia de diferencias en variables asociadas al calendario entre ambos conjuntos de datos, pero no permiten atribuir dichas diferencias exclusivamente a estacionalidad ni concluir una afectación directa de la calidad predictiva del modelo.
+El drift de entrada no demuestra pérdida de precisión ni justifica por sí solo reentrenar o promover un modelo. Esas decisiones requieren evaluar MAE, RMSE y desempeño por segmento sobre datos recientes.
 
 ## Referencias revisadas
-- reports/etapa5/drift_variables.csv
-- reports/etapa5/interpretacion_drift.md
-- reports/etapa5/datos_resumen.json
+- [drift_variables.csv](drift_variables.csv)
+- [interpretacion_drift.md](interpretacion_drift.md)
+- [datos_resumen.json](datos_resumen.json)
