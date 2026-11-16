@@ -1,0 +1,33 @@
+{
+  "date": "2026-11-15",
+  "scope": "Revisión documental; resultados técnicos conservados. No se repitió entrenamiento ni evaluación.",
+  "total_pages": 10,
+  "main_pages_including_cover": 5,
+  "appendix_pages": 5,
+  "body_font": "Arial 11; títulos de 12 y 16 puntos",
+  "line_spacing": 1.15,
+  "paragraphs_checked": 180,
+  "original_media_files_preserved": 3,
+  "original_tables_preserved": 3,
+  "hyperlinks_present": 18,
+  "document_changes": [
+    "Corrección de concordancia en veintiuna estaciones",
+    "Precisión del uso de variables de calendario, consistente con el modelo",
+    "Condiciones de promoción y reconstrucción del contenedor, según la recomendación publicada",
+    "Anexo de aportaciones y revisiones verificables"
+  ],
+  "source_revision": "03c0502ac254ab8fa343a2f1fe4f3e49f435d5a1",
+  "source_document_sha256": "b034b0519ffbd3884ed24106f4c978f56d4478eda348d36c51cac39732ae3516",
+  "files": {
+    "TC5061_Drift_ABTest_Equipo39.docx": {
+      "sha256": "388108836b43f4309eb95b402b2d2bb5d4712db4f444e7ff8fcb4194db5126eb",
+      "bytes": 234161
+    },
+    "TC5061_Drift_ABTest_Equipo39.pdf": {
+      "sha256": "4206c11ce8c57cda2f1418bda2c9a59f07a233f9257c09b3a21913025b898e60",
+      "bytes": 606051
+    }
+  },
+  "independent_review_at_preparation": "pending",
+  "visual_review": "completed_all_10_pages"
+}
