@@ -1,0 +1,42 @@
+{
+  "date": "2026-11-15",
+  "scope": "Revisión documental; resultados técnicos conservados. No se repitió entrenamiento ni evaluación.",
+  "total_pages": 10,
+  "main_pages_including_cover": 5,
+  "appendix_pages": 5,
+  "body_font": "Arial 11; títulos de 12 y 16 puntos",
+  "line_spacing": 1.15,
+  "paragraphs_checked": 180,
+  "original_media_files_preserved": 3,
+  "original_tables_preserved": 3,
+  "hyperlinks_present": 18,
+  "document_changes": [
+    "Corrección de concordancia en veintiuna estaciones",
+    "Precisión del uso de variables de calendario, consistente con el modelo",
+    "Condiciones de promoción y reconstrucción del contenedor, según la recomendación publicada",
+    "Anexo de aportaciones y revisiones verificables; ajustes de Stefania atendidos y revisión independiente pendiente"
+  ],
+  "source_revision": "03c0502ac254ab8fa343a2f1fe4f3e49f435d5a1",
+  "source_document_sha256": "b034b0519ffbd3884ed24106f4c978f56d4478eda348d36c51cac39732ae3516",
+  "files": {
+    "TC5061_Drift_ABTest_Equipo39.docx": {
+      "sha256": "84455b1776cff740d28fc8901edbeb61742e61c9a5664864082942ca421cb673",
+      "bytes": 234136
+    },
+    "TC5061_Drift_ABTest_Equipo39.pdf": {
+      "sha256": "c6af2641cf88c5416cdecd5244db05f32b075fcb3994be5bc6c0569b21741c8a",
+      "bytes": 605946
+    }
+  },
+  "independent_review_at_preparation": "pending",
+  "visual_review": "completed_all_10_pages",
+  "collaboration_status_at_preparation": {
+    "pr": 68,
+    "commit": "f67b4e446b8f6436b1e2a35929df96277d667f20",
+    "words": 244,
+    "valid_relative_links": 3,
+    "state": "open",
+    "independent_reviewer": "diegoHurtado01",
+    "review": "pending"
+  }
+}
