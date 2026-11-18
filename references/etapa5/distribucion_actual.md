@@ -17,3 +17,7 @@ Las tareas de Stefania y Diego Martinez son acotadas y pueden realizarse en para
 No se solicita reescribir el historial ni distribuir commits artificialmente. Cada aportación debe quedar en su rama y PR, con revisión y resultado verificables.
 
 Asignaciones publicadas: [revisión de Stefania, #62](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/62) y [ficha de Diego Martinez, #63](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/63).
+
+## Cierre al 16 de noviembre de 2026
+
+Las actividades de esta distribución están integradas: implementación y revisión técnica en el PR #64; reporte inicial en el PR #65; aportaciones individuales en los PR #67 y #68; ampliación del reporte en el PR #70. Las tareas #62 y #63 están cerradas. Las aprobaciones independientes de Diego Hurtado se verificaron sobre las versiones integradas. El [registro de cierre](../../reports/etapa5/cierre_documental.md) conserva los enlaces y el alcance de cada revisión. Esta distribución describe responsabilidades; no acredita una participación equilibrada por sí sola.
