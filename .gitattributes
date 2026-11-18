@@ -1,0 +1,2 @@
+# Conservar los reportes originales de Locust sin convertir sus saltos de línea.
+references/etapa6/mediciones_marco/locust/*.html -text -diff

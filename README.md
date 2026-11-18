@@ -21,7 +21,7 @@ Invoke-RestMethod -Method Post -Uri http://127.0.0.1:8006/predict -ContentType '
 
 El [flujo de Etapa 6](.github/workflows/etapa6.yml) prueba API y operación en Linux y Windows, construye las imágenes y despliega Compose temporalmente para comprobar HTTP y persistencia. Utiliza una fixture sintética identificada; las mediciones de P1 se generan por separado. Consultar [ejecuciones de GitHub Actions](https://github.com/makroem/TC5061-Proyecto-Equipo39/actions/workflows/etapa6.yml) y el estado del PR antes de dar por concluida la revisión.
 
-La guía por persona y las evidencias se concentran en `references/etapa6/`; los resultados deben indicar el código medido y distinguir validación local de revisión independiente. Las instrucciones y entregas previas se conservan a continuación.
+Consulta el [manual editable por persona](references/etapa6/Manual_Etapa6_Microservicios_CICD_FinOps_Equipo39.docx) y el [estado con resultados y pendientes](docs/etapa6/estado.md). Las evidencias indican el código medido y distinguen validación local de revisión independiente. Las instrucciones y entregas previas se conservan a continuación.
 
 ## Servicio API P1: inicio rápido
 

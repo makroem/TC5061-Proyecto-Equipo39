@@ -9,6 +9,7 @@ import subprocess
 import threading
 import time
 from datetime import datetime, timezone
+from scripts.summarize_load import parse_report
 
 def main():
     parser=argparse.ArgumentParser()
@@ -20,11 +21,11 @@ def main():
     if args.seconds<30 or not 1<=args.repeats<=5:
         raise SystemExit('Duración mínima 30 segundos; entre una y cinco repeticiones.')
     destination=Path(args.output)
+    if destination.is_absolute() or '..' in destination.parts or destination.parts[:2]!=('private_results','etapa6'):
+        raise SystemExit('El destino debe quedar dentro de private_results/etapa6.')
     if destination.exists():
         raise SystemExit('El destino existe; elegir otro para conservar las mediciones.')
     destination.mkdir(parents=True)
-    if destination.parts[:2]!=('private_results','etapa6'):
-        raise SystemExit('El destino debe quedar dentro de private_results/etapa6.')
     def docker(*command,**kwargs):
         return subprocess.run([args.docker,*command],check=True,text=True,capture_output=True,**kwargs)
     manifest=json.loads(Path('references/etapa4/model_manifest.json').read_text(encoding='utf8'))
@@ -51,9 +52,15 @@ def main():
                  '-e','EXPECTED_BUNDLE_SHA256='+manifest['bundle_sha256'],
                  'locust','-f','tests/load/locustfile.py','--host','http://api:8000',
                  '--headless','--users',str(users),'--spawn-rate',str(spawn),'--run-time',str(seconds)+'s',
-                 '--stop-timeout','10','--csv',prefix,'--csv-full-history','--html',prefix+'.html']
+                 '--stop-timeout','10','--html',prefix+'.html']
         with (destination/(name+'.log')).open('w',encoding='utf8') as log:
-            return subprocess.run(command,stdout=log,stderr=subprocess.STDOUT).returncode
+            code=subprocess.run(command,stdout=log,stderr=subprocess.STDOUT).returncode
+        report_path=destination/(name+'.html')
+        if report_path.exists():
+            final=parse_report(report_path)['requests_statistics']
+            with (destination/(name+'_stats.csv')).open('w',encoding='utf8',newline='') as out:
+                writer=csv.DictWriter(out,fieldnames=list(final[0]));writer.writeheader();writer.writerows(final)
+        return code
     print('Calentamiento de 30 segundos.',flush=True)
     if load('warmup',1,1,30)!=0:
         raise SystemExit('Falló el calentamiento; revisar su registro.')

@@ -2,13 +2,8 @@
 import argparse
 import json
 from pathlib import Path
-from urllib.request import Request, urlopen
+from .http_client import json_request as request
 from uuid import uuid4
-
-def request(url, path, data=None):
-    body=None if data is None else json.dumps(data).encode()
-    with urlopen(Request(url+path, data=body, headers={'Content-Type':'application/json'}), timeout=20) as response:
-        return json.load(response)
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser()
