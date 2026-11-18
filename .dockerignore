@@ -15,3 +15,8 @@
 **/*.pyc
 **/.env
 **/.env.*
+
+# Construcciones aisladas de la Etapa 6.
+!deploy/
+!deploy/Containerfile.api
+!deploy/Containerfile.mlflow

@@ -1,5 +1,28 @@
 # Proyecto MiBici Equipo 39
 
+## Etapa 6 Microservicios CI/CD y FinOps
+
+Desde la raíz del repositorio, con Docker Linux y el [P1 original verificado](references/etapa4/model_manifest.json) en `models/serving/p1/`, inicia API y tracking con un comando:
+
+```powershell
+docker compose up --build -d --wait --wait-timeout 300
+```
+
+La API queda en `http://127.0.0.1:8006` y el tracking operativo en `http://127.0.0.1:5006`. El tracking usa un volumen persistente propio; conserva el Registry histórico. El modelo y manifiesto se montan como solo lectura. Para comprobar y consumir:
+
+```powershell
+docker compose ps
+Invoke-RestMethod http://127.0.0.1:8006/ready
+$body = Get-Content references/etapa4/examples/predict_request.json -Raw
+Invoke-RestMethod -Method Post -Uri http://127.0.0.1:8006/predict -ContentType 'application/json' -Body $body
+```
+
+`docker compose down` detiene esta etapa conservando el volumen. Para la carga, prepara el entorno de pruebas indicado en la guía, ejecuta `docker compose --profile load pull locust` y `python -m scripts.run_load`. Se guardan nueve mediciones, HTML/CSV de Locust y muestras de recursos en una carpeta nueva dentro de `private_results/etapa6/`.
+
+El [flujo de Etapa 6](.github/workflows/etapa6.yml) prueba API y operación en Linux y Windows, construye las imágenes y despliega Compose temporalmente para comprobar HTTP y persistencia. Utiliza una fixture sintética identificada; las mediciones de P1 se generan por separado. Consultar [ejecuciones de GitHub Actions](https://github.com/makroem/TC5061-Proyecto-Equipo39/actions/workflows/etapa6.yml) y el estado del PR antes de dar por concluida la revisión.
+
+La guía por persona y las evidencias se concentran en `references/etapa6/`; los resultados deben indicar el código medido y distinguir validación local de revisión independiente. Las instrucciones y entregas previas se conservan a continuación.
+
 ## Servicio API P1: inicio rápido
 
 La API estima viajes que comienzan en una estación durante la hora indicada. Sirve `mibici-equipo39-p1-demanda`, versión **1**, mediante FastAPI. Recibe de 1 a 100 filas por petición y devuelve predicciones en JSON.
