@@ -11,6 +11,10 @@
   "source_links_verified": 14,
   "data_commit": "a5749e5519cf7f7053d972c540fdecdeeca0fd96",
   "measurement_commit": "41a4d421df2bde3fd07679d3642aa3cc23aa8c14",
-  "independent_review": "pending",
-  "checked_on": "2026-11-18"
+  "independent_review": "approved",
+  "checked_on": "2026-11-18",
+  "independent_review_url": "https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/72#pullrequestreview-5969054034",
+  "reviewed_commit": "a9d8424ceb5090c7a4cc5b0aaeb9fc27e067db60",
+  "status_updated_on": "2026-11-19",
+  "historical_status_note": "Documento preservado exactamente como fue aprobado; las menciones pendientes en el cuerpo corresponden al corte del 18 de noviembre. Ver docs/etapa6/cierre_revision_20261119.md."
 }

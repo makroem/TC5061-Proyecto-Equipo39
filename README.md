@@ -2,6 +2,8 @@
 
 ## Etapa 6 Microservicios CI/CD y FinOps
 
+**Integrada el 19 de noviembre de 2026:** el [PR #72](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/72) se incorporó mediante `7c49a81`, después de la [aprobación independiente de Diego Hurtado](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/72#pullrequestreview-5969054034) sobre `a9d8424`. El [cierre documental](docs/etapa6/cierre_revision_20261119.md) distingue las mediciones originales, el contraste del revisor y las mejoras de rendimiento aún no demostradas.
+
 Desde la raíz del repositorio, con Docker Linux y el [P1 original verificado](references/etapa4/model_manifest.json) en `models/serving/p1/`, inicia API y tracking con un comando:
 
 ```powershell
@@ -19,7 +21,7 @@ Invoke-RestMethod -Method Post -Uri http://127.0.0.1:8006/predict -ContentType '
 
 `docker compose down` detiene esta etapa conservando el volumen. Para la carga, prepara el entorno de pruebas indicado en la guía, ejecuta `docker compose --profile load pull locust` y `python -m scripts.run_load`. Se guardan nueve mediciones, HTML/CSV de Locust y muestras de recursos en una carpeta nueva dentro de `private_results/etapa6/`.
 
-El [flujo de Etapa 6](.github/workflows/etapa6.yml) prueba API y operación en Linux y Windows, construye las imágenes y despliega Compose temporalmente para comprobar HTTP y persistencia. Utiliza una fixture sintética identificada; las mediciones de P1 se generan por separado. Consultar [ejecuciones de GitHub Actions](https://github.com/makroem/TC5061-Proyecto-Equipo39/actions/workflows/etapa6.yml) y el estado del PR antes de dar por concluida la revisión.
+El [flujo de Etapa 6](.github/workflows/etapa6.yml) prueba API y operación en Linux y Windows, construye las imágenes y despliega Compose temporalmente para comprobar HTTP y persistencia. Utiliza una fixture sintética identificada; las mediciones de P1 se generan por separado. Consultar [ejecuciones de GitHub Actions](https://github.com/makroem/TC5061-Proyecto-Equipo39/actions/workflows/etapa6.yml) y la [ejecución posterior a la integración](https://github.com/makroem/TC5061-Proyecto-Equipo39/actions/runs/44553281639).
 
 Consulta el [manual editable por persona](references/etapa6/Manual_Etapa6_Microservicios_CICD_FinOps_Equipo39.docx), el [informe editable de resultados](references/etapa6/TC5061_Microservicios_FinOps_Equipo39.docx) y el [estado con resultados y pendientes](docs/etapa6/estado.md). Las evidencias indican el código medido y distinguen validación local de revisión independiente. Las instrucciones y entregas previas se conservan a continuación.
 
@@ -105,7 +107,7 @@ La imagen incluye el modelo descargado del Registry por **nombre y versión num�
 
 Para desplegar otra versión se requiere revisar su manifiesto, preparar el paquete correspondiente, construir una imagen con una etiqueta nueva y comprobar `/ready` y las predicciones antes de sustituir la instancia. Se conserva la imagen anterior para volver a ella si es necesario. Este reemplazo es manual y puede interrumpir el servicio; cambiar `champion` por sí solo no actualiza el contenedor.
 
-El alcance comprobado es **un contenedor local**, ejecutado sin privilegios de administrador, con sistema de archivos de solo lectura, recursos limitados y puerto accesible solo desde la computadora anfitriona. Todavía no se han medido carga concurrente ni latencias operativas; un servicio público requeriría además autenticación, HTTPS y una política de disponibilidad. Docker es el motor validado en esta entrega.
+El alcance comprobado es **un contenedor local**, ejecutado sin privilegios de administrador, con sistema de archivos de solo lectura, recursos limitados y puerto accesible solo desde la computadora anfitriona. La Etapa 6 añadió [mediciones exploratorias de carga concurrente y latencia](docs/etapa6/estado.md#resultados-de-carga), revisadas de forma independiente. Las diferencias entre equipos requieren ensayos controlados antes de comprometer capacidad; un servicio público requeriría además autenticación, HTTPS y una política de disponibilidad. Docker es el motor validado en esta entrega.
 
 **Evidencia del servicio:** [captura original de respuesta 200](reports/etapa4/evidence/E05_api_main_respuesta_200.jpg) y [validación del contenedor](reports/etapa4/cierre_api_marco_20261103.md#cierre-sobre-main). El [contrato de entradas y salidas](references/etapa4/contrato_api.md) detalla los campos y las validaciones.
 
@@ -131,7 +133,7 @@ La Etapa 3 del proyecto MiBici Equipo 39 cuenta con las correcciones técnicas d
 
 | Comprobación | Resultado vigente |
 |---|---|
-| PyTest de Etapa 3, excluyendo `tests/api` y `tests/monitoring` | **284 aprobadas**, 0 fallos, 0 errores, 0 omisiones |
+| PyTest de Etapa 3, excluyendo `tests/api`, `tests/monitoring` y `tests/operations` | **284 aprobadas**, 0 fallos, 0 errores, 0 omisiones |
 | Advertencias de PyTest | 23, conservadas |
 | Integración de DeepChecks | 2 pruebas incluidas en las 284 |
 | Controles independientes de DeepChecks | Variable aceptada y constante rechazada como se esperaba |
@@ -166,7 +168,7 @@ $env:MKL_NUM_THREADS = "4"
 $tempA7 = Join-Path ([IO.Path]::GetTempPath()) ("eq39_" + [guid]::NewGuid().ToString("N").Substring(0,8))
 New-Item -ItemType Directory -Force -Path "private_quality/reproduccion_etapa3" | Out-Null
 
-& $pythonCalidad -m pytest tests --ignore=tests/api --ignore=tests/monitoring -q --basetemp="$tempA7" --junitxml=private_quality/reproduccion_etapa3/pytest.xml
+& $pythonCalidad -m pytest tests --ignore=tests/api --ignore=tests/monitoring --ignore=tests/operations -q --basetemp="$tempA7" --junitxml=private_quality/reproduccion_etapa3/pytest.xml
 
 & $pythonDatos scripts/check_deepchecks_env.py --output private_quality/reproduccion_etapa3/deepchecks
 

@@ -1,0 +1,21 @@
+{
+  "checked_on": "2026-11-19",
+  "timezone": "America/Mexico_City",
+  "pull_request": 72,
+  "reviewer": "diegoHurtado01",
+  "review_id": 5969054034,
+  "review_state": "APPROVED",
+  "review_url": "https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/72#pullrequestreview-5969054034",
+  "reviewed_commit": "a9d8424ceb5090c7a4cc5b0aaeb9fc27e067db60",
+  "submitted_at_utc": "2026-11-19T03:50:50Z",
+  "submitted_at_local": "2026-11-18T21:50:50-06:00",
+  "merge_commit": "7c49a8193746d3ac08e76619732a5905ca51d3f3",
+  "merged_at_utc": "2026-11-19T15:18:19Z",
+  "merged_at_local": "2026-11-19T09:18:19-06:00",
+  "post_merge_ci_url": "https://github.com/makroem/TC5061-Proyecto-Equipo39/actions/runs/44553281639",
+  "post_merge_ci_conclusion": "success",
+  "post_merge_ci_commit": "7c49a8193746d3ac08e76619732a5905ca51d3f3",
+  "reviewer_load_result": "reported_passed_for_1_10_30_users",
+  "reviewer_numeric_load_artifacts_versioned": false,
+  "scope_note": "La revisión pública declara ejecución independiente; no adjunta valores numéricos ni archivos originales. Se conservan sin alteración las mediciones de Marco. La aprobación corresponde al cambio indicado, no a modificaciones posteriores."
+}
