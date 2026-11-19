@@ -1,0 +1,3476 @@
+{
+  "u01_r1": [
+    {
+      "service": "locust",
+      "seconds": 2.0719258785247803,
+      "cpu_percent": 0.95,
+      "memory_mib": 42.3
+    },
+    {
+      "service": "api",
+      "seconds": 2.0719258785247803,
+      "cpu_percent": 6.4,
+      "memory_mib": 193.6
+    },
+    {
+      "service": "mlflow",
+      "seconds": 2.0719258785247803,
+      "cpu_percent": 0.3,
+      "memory_mib": 353.9
+    },
+    {
+      "service": "locust",
+      "seconds": 6.352305173873901,
+      "cpu_percent": 0.79,
+      "memory_mib": 42.29
+    },
+    {
+      "service": "api",
+      "seconds": 6.352305173873901,
+      "cpu_percent": 4.35,
+      "memory_mib": 193.5
+    },
+    {
+      "service": "mlflow",
+      "seconds": 6.352305173873901,
+      "cpu_percent": 0.25,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 10.750607013702393,
+      "cpu_percent": 0.74,
+      "memory_mib": 42.54
+    },
+    {
+      "service": "api",
+      "seconds": 10.750607013702393,
+      "cpu_percent": 4.18,
+      "memory_mib": 193.8
+    },
+    {
+      "service": "mlflow",
+      "seconds": 10.750607013702393,
+      "cpu_percent": 0.3,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 15.090479135513306,
+      "cpu_percent": 1.35,
+      "memory_mib": 42.54
+    },
+    {
+      "service": "api",
+      "seconds": 15.090479135513306,
+      "cpu_percent": 8.57,
+      "memory_mib": 193.6
+    },
+    {
+      "service": "mlflow",
+      "seconds": 15.090479135513306,
+      "cpu_percent": 0.2,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 19.49532151222229,
+      "cpu_percent": 0.86,
+      "memory_mib": 42.79
+    },
+    {
+      "service": "api",
+      "seconds": 19.49532151222229,
+      "cpu_percent": 6.09,
+      "memory_mib": 193.8
+    },
+    {
+      "service": "mlflow",
+      "seconds": 19.49532151222229,
+      "cpu_percent": 0.25,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 23.90710425376892,
+      "cpu_percent": 0.6,
+      "memory_mib": 43.04
+    },
+    {
+      "service": "api",
+      "seconds": 23.90710425376892,
+      "cpu_percent": 4.69,
+      "memory_mib": 193.7
+    },
+    {
+      "service": "mlflow",
+      "seconds": 23.90710425376892,
+      "cpu_percent": 0.24,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 28.27671456336975,
+      "cpu_percent": 1.36,
+      "memory_mib": 43.04
+    },
+    {
+      "service": "api",
+      "seconds": 28.27671456336975,
+      "cpu_percent": 6.34,
+      "memory_mib": 193.7
+    },
+    {
+      "service": "mlflow",
+      "seconds": 28.27671456336975,
+      "cpu_percent": 0.25,
+      "memory_mib": 353.9
+    },
+    {
+      "service": "locust",
+      "seconds": 32.66013288497925,
+      "cpu_percent": 1.09,
+      "memory_mib": 43.11
+    },
+    {
+      "service": "api",
+      "seconds": 32.66013288497925,
+      "cpu_percent": 7.36,
+      "memory_mib": 193.6
+    },
+    {
+      "service": "mlflow",
+      "seconds": 32.66013288497925,
+      "cpu_percent": 0.24,
+      "memory_mib": 353.9
+    },
+    {
+      "service": "locust",
+      "seconds": 36.92466473579407,
+      "cpu_percent": 1.12,
+      "memory_mib": 42.86
+    },
+    {
+      "service": "api",
+      "seconds": 36.92466473579407,
+      "cpu_percent": 7.05,
+      "memory_mib": 193.6
+    },
+    {
+      "service": "mlflow",
+      "seconds": 36.92466473579407,
+      "cpu_percent": 0.23,
+      "memory_mib": 354.0
+    },
+    {
+      "service": "locust",
+      "seconds": 41.285794258117676,
+      "cpu_percent": 1.63,
+      "memory_mib": 43.11
+    },
+    {
+      "service": "api",
+      "seconds": 41.285794258117676,
+      "cpu_percent": 8.34,
+      "memory_mib": 193.6
+    },
+    {
+      "service": "mlflow",
+      "seconds": 41.285794258117676,
+      "cpu_percent": 0.26,
+      "memory_mib": 354.0
+    },
+    {
+      "service": "locust",
+      "seconds": 44.8731369972229,
+      "cpu_percent": 1.81,
+      "memory_mib": 43.11
+    },
+    {
+      "service": "api",
+      "seconds": 44.8731369972229,
+      "cpu_percent": 12.46,
+      "memory_mib": 193.6
+    },
+    {
+      "service": "mlflow",
+      "seconds": 44.8731369972229,
+      "cpu_percent": 0.27,
+      "memory_mib": 354.0
+    },
+    {
+      "service": "locust",
+      "seconds": 49.25719094276428,
+      "cpu_percent": 1.08,
+      "memory_mib": 43.11
+    },
+    {
+      "service": "api",
+      "seconds": 49.25719094276428,
+      "cpu_percent": 45.07,
+      "memory_mib": 193.7
+    },
+    {
+      "service": "mlflow",
+      "seconds": 49.25719094276428,
+      "cpu_percent": 0.23,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 53.69736123085022,
+      "cpu_percent": 1.41,
+      "memory_mib": 43.11
+    },
+    {
+      "service": "api",
+      "seconds": 53.69736123085022,
+      "cpu_percent": 8.98,
+      "memory_mib": 193.6
+    },
+    {
+      "service": "mlflow",
+      "seconds": 53.69736123085022,
+      "cpu_percent": 0.34,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 58.04808807373047,
+      "cpu_percent": 1.17,
+      "memory_mib": 43.11
+    },
+    {
+      "service": "api",
+      "seconds": 58.04808807373047,
+      "cpu_percent": 8.06,
+      "memory_mib": 193.6
+    },
+    {
+      "service": "mlflow",
+      "seconds": 58.04808807373047,
+      "cpu_percent": 0.22,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 62.692827224731445,
+      "cpu_percent": 1.17,
+      "memory_mib": 43.2
+    },
+    {
+      "service": "api",
+      "seconds": 62.692827224731445,
+      "cpu_percent": 8.49,
+      "memory_mib": 193.7
+    },
+    {
+      "service": "mlflow",
+      "seconds": 62.692827224731445,
+      "cpu_percent": 0.2,
+      "memory_mib": 354.0
+    },
+    {
+      "service": "locust",
+      "seconds": 66.95697093009949,
+      "cpu_percent": 1.39,
+      "memory_mib": 43.2
+    },
+    {
+      "service": "api",
+      "seconds": 66.95697093009949,
+      "cpu_percent": 7.45,
+      "memory_mib": 194.0
+    },
+    {
+      "service": "mlflow",
+      "seconds": 66.95697093009949,
+      "cpu_percent": 0.28,
+      "memory_mib": 354.0
+    },
+    {
+      "service": "locust",
+      "seconds": 71.36048579216003,
+      "cpu_percent": 1.05,
+      "memory_mib": 43.2
+    },
+    {
+      "service": "api",
+      "seconds": 71.36048579216003,
+      "cpu_percent": 34.94,
+      "memory_mib": 193.8
+    },
+    {
+      "service": "mlflow",
+      "seconds": 71.36048579216003,
+      "cpu_percent": 0.23,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 74.91572594642639,
+      "cpu_percent": 1.26,
+      "memory_mib": 43.2
+    },
+    {
+      "service": "api",
+      "seconds": 74.91572594642639,
+      "cpu_percent": 7.8,
+      "memory_mib": 193.7
+    },
+    {
+      "service": "mlflow",
+      "seconds": 74.91572594642639,
+      "cpu_percent": 0.28,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 79.34927678108215,
+      "cpu_percent": 0.71,
+      "memory_mib": 43.2
+    },
+    {
+      "service": "api",
+      "seconds": 79.34927678108215,
+      "cpu_percent": 4.41,
+      "memory_mib": 193.8
+    },
+    {
+      "service": "mlflow",
+      "seconds": 79.34927678108215,
+      "cpu_percent": 10.75,
+      "memory_mib": 353.9
+    },
+    {
+      "service": "locust",
+      "seconds": 83.73719334602356,
+      "cpu_percent": 0.76,
+      "memory_mib": 43.19
+    },
+    {
+      "service": "api",
+      "seconds": 83.73719334602356,
+      "cpu_percent": 8.74,
+      "memory_mib": 193.9
+    },
+    {
+      "service": "mlflow",
+      "seconds": 83.73719334602356,
+      "cpu_percent": 0.21,
+      "memory_mib": 353.9
+    },
+    {
+      "service": "locust",
+      "seconds": 88.07827353477478,
+      "cpu_percent": 1.16,
+      "memory_mib": 43.19
+    },
+    {
+      "service": "api",
+      "seconds": 88.07827353477478,
+      "cpu_percent": 4.1,
+      "memory_mib": 193.8
+    },
+    {
+      "service": "mlflow",
+      "seconds": 88.07827353477478,
+      "cpu_percent": 0.27,
+      "memory_mib": 353.9
+    },
+    {
+      "service": "locust",
+      "seconds": 92.42769241333008,
+      "cpu_percent": 1.39,
+      "memory_mib": 43.43
+    },
+    {
+      "service": "api",
+      "seconds": 92.42769241333008,
+      "cpu_percent": 5.56,
+      "memory_mib": 193.8
+    },
+    {
+      "service": "mlflow",
+      "seconds": 92.42769241333008,
+      "cpu_percent": 0.21,
+      "memory_mib": 354.1
+    }
+  ],
+  "u10_r1": [
+    {
+      "service": "locust",
+      "seconds": 2.3571619987487793,
+      "cpu_percent": 4.75,
+      "memory_mib": 43.17
+    },
+    {
+      "service": "api",
+      "seconds": 2.3571619987487793,
+      "cpu_percent": 46.52,
+      "memory_mib": 205.3
+    },
+    {
+      "service": "mlflow",
+      "seconds": 2.3571619987487793,
+      "cpu_percent": 0.25,
+      "memory_mib": 353.9
+    },
+    {
+      "service": "locust",
+      "seconds": 6.856609344482422,
+      "cpu_percent": 6.78,
+      "memory_mib": 43.66
+    },
+    {
+      "service": "api",
+      "seconds": 6.856609344482422,
+      "cpu_percent": 90.47,
+      "memory_mib": 229.6
+    },
+    {
+      "service": "mlflow",
+      "seconds": 6.856609344482422,
+      "cpu_percent": 0.2,
+      "memory_mib": 354.2
+    },
+    {
+      "service": "locust",
+      "seconds": 11.290760517120361,
+      "cpu_percent": 7.02,
+      "memory_mib": 43.54
+    },
+    {
+      "service": "api",
+      "seconds": 11.290760517120361,
+      "cpu_percent": 68.4,
+      "memory_mib": 215.4
+    },
+    {
+      "service": "mlflow",
+      "seconds": 11.290760517120361,
+      "cpu_percent": 0.25,
+      "memory_mib": 353.9
+    },
+    {
+      "service": "locust",
+      "seconds": 15.708990097045898,
+      "cpu_percent": 6.57,
+      "memory_mib": 43.29
+    },
+    {
+      "service": "api",
+      "seconds": 15.708990097045898,
+      "cpu_percent": 73.2,
+      "memory_mib": 211.2
+    },
+    {
+      "service": "mlflow",
+      "seconds": 15.708990097045898,
+      "cpu_percent": 0.2,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 20.11788034439087,
+      "cpu_percent": 7.23,
+      "memory_mib": 43.75
+    },
+    {
+      "service": "api",
+      "seconds": 20.11788034439087,
+      "cpu_percent": 60.68,
+      "memory_mib": 211.0
+    },
+    {
+      "service": "mlflow",
+      "seconds": 20.11788034439087,
+      "cpu_percent": 0.21,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 24.752720832824707,
+      "cpu_percent": 7.85,
+      "memory_mib": 43.67
+    },
+    {
+      "service": "api",
+      "seconds": 24.752720832824707,
+      "cpu_percent": 80.47,
+      "memory_mib": 222.1
+    },
+    {
+      "service": "mlflow",
+      "seconds": 24.752720832824707,
+      "cpu_percent": 0.28,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 29.046700477600098,
+      "cpu_percent": 6.94,
+      "memory_mib": 43.84
+    },
+    {
+      "service": "api",
+      "seconds": 29.046700477600098,
+      "cpu_percent": 56.61,
+      "memory_mib": 216.0
+    },
+    {
+      "service": "mlflow",
+      "seconds": 29.046700477600098,
+      "cpu_percent": 0.21,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 33.53451180458069,
+      "cpu_percent": 8.17,
+      "memory_mib": 43.91
+    },
+    {
+      "service": "api",
+      "seconds": 33.53451180458069,
+      "cpu_percent": 91.39,
+      "memory_mib": 216.2
+    },
+    {
+      "service": "mlflow",
+      "seconds": 33.53451180458069,
+      "cpu_percent": 0.29,
+      "memory_mib": 353.9
+    },
+    {
+      "service": "locust",
+      "seconds": 37.438886880874634,
+      "cpu_percent": 8.32,
+      "memory_mib": 43.91
+    },
+    {
+      "service": "api",
+      "seconds": 37.438886880874634,
+      "cpu_percent": 75.97,
+      "memory_mib": 215.0
+    },
+    {
+      "service": "mlflow",
+      "seconds": 37.438886880874634,
+      "cpu_percent": 0.21,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 42.08479404449463,
+      "cpu_percent": 6.31,
+      "memory_mib": 44.13
+    },
+    {
+      "service": "api",
+      "seconds": 42.08479404449463,
+      "cpu_percent": 77.5,
+      "memory_mib": 217.0
+    },
+    {
+      "service": "mlflow",
+      "seconds": 42.08479404449463,
+      "cpu_percent": 0.27,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 46.804033517837524,
+      "cpu_percent": 8.24,
+      "memory_mib": 44.36
+    },
+    {
+      "service": "api",
+      "seconds": 46.804033517837524,
+      "cpu_percent": 80.62,
+      "memory_mib": 222.6
+    },
+    {
+      "service": "mlflow",
+      "seconds": 46.804033517837524,
+      "cpu_percent": 0.32,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 51.20679688453674,
+      "cpu_percent": 8.34,
+      "memory_mib": 44.36
+    },
+    {
+      "service": "api",
+      "seconds": 51.20679688453674,
+      "cpu_percent": 72.31,
+      "memory_mib": 214.9
+    },
+    {
+      "service": "mlflow",
+      "seconds": 51.20679688453674,
+      "cpu_percent": 0.24,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 55.674068450927734,
+      "cpu_percent": 7.66,
+      "memory_mib": 44.36
+    },
+    {
+      "service": "api",
+      "seconds": 55.674068450927734,
+      "cpu_percent": 101.49,
+      "memory_mib": 214.9
+    },
+    {
+      "service": "mlflow",
+      "seconds": 55.674068450927734,
+      "cpu_percent": 0.29,
+      "memory_mib": 353.9
+    },
+    {
+      "service": "locust",
+      "seconds": 60.064276456832886,
+      "cpu_percent": 8.48,
+      "memory_mib": 44.42
+    },
+    {
+      "service": "api",
+      "seconds": 60.064276456832886,
+      "cpu_percent": 63.24,
+      "memory_mib": 215.0
+    },
+    {
+      "service": "mlflow",
+      "seconds": 60.064276456832886,
+      "cpu_percent": 0.2,
+      "memory_mib": 354.0
+    },
+    {
+      "service": "locust",
+      "seconds": 64.43397307395935,
+      "cpu_percent": 8.0,
+      "memory_mib": 44.55
+    },
+    {
+      "service": "api",
+      "seconds": 64.43397307395935,
+      "cpu_percent": 63.43,
+      "memory_mib": 213.9
+    },
+    {
+      "service": "mlflow",
+      "seconds": 64.43397307395935,
+      "cpu_percent": 0.21,
+      "memory_mib": 354.0
+    },
+    {
+      "service": "locust",
+      "seconds": 68.83871459960938,
+      "cpu_percent": 10.51,
+      "memory_mib": 44.53
+    },
+    {
+      "service": "api",
+      "seconds": 68.83871459960938,
+      "cpu_percent": 95.44,
+      "memory_mib": 223.5
+    },
+    {
+      "service": "mlflow",
+      "seconds": 68.83871459960938,
+      "cpu_percent": 23.83,
+      "memory_mib": 354.0
+    },
+    {
+      "service": "locust",
+      "seconds": 73.4885778427124,
+      "cpu_percent": 7.04,
+      "memory_mib": 44.28
+    },
+    {
+      "service": "api",
+      "seconds": 73.4885778427124,
+      "cpu_percent": 66.15,
+      "memory_mib": 218.6
+    },
+    {
+      "service": "mlflow",
+      "seconds": 73.4885778427124,
+      "cpu_percent": 0.23,
+      "memory_mib": 354.0
+    },
+    {
+      "service": "locust",
+      "seconds": 77.77059125900269,
+      "cpu_percent": 7.81,
+      "memory_mib": 44.26
+    },
+    {
+      "service": "api",
+      "seconds": 77.77059125900269,
+      "cpu_percent": 94.32,
+      "memory_mib": 230.0
+    },
+    {
+      "service": "mlflow",
+      "seconds": 77.77059125900269,
+      "cpu_percent": 0.27,
+      "memory_mib": 354.0
+    },
+    {
+      "service": "locust",
+      "seconds": 82.66679406166077,
+      "cpu_percent": 9.65,
+      "memory_mib": 44.46
+    },
+    {
+      "service": "api",
+      "seconds": 82.66679406166077,
+      "cpu_percent": 80.43,
+      "memory_mib": 216.3
+    },
+    {
+      "service": "mlflow",
+      "seconds": 82.66679406166077,
+      "cpu_percent": 0.27,
+      "memory_mib": 354.2
+    },
+    {
+      "service": "locust",
+      "seconds": 87.08118987083435,
+      "cpu_percent": 8.09,
+      "memory_mib": 44.46
+    },
+    {
+      "service": "api",
+      "seconds": 87.08118987083435,
+      "cpu_percent": 67.18,
+      "memory_mib": 222.1
+    },
+    {
+      "service": "mlflow",
+      "seconds": 87.08118987083435,
+      "cpu_percent": 0.22,
+      "memory_mib": 354.2
+    },
+    {
+      "service": "locust",
+      "seconds": 91.46838021278381,
+      "cpu_percent": 7.67,
+      "memory_mib": 44.46
+    },
+    {
+      "service": "api",
+      "seconds": 91.46838021278381,
+      "cpu_percent": 80.8,
+      "memory_mib": 215.9
+    },
+    {
+      "service": "mlflow",
+      "seconds": 91.46838021278381,
+      "cpu_percent": 9.93,
+      "memory_mib": 354.2
+    }
+  ],
+  "u30_r1": [
+    {
+      "service": "locust",
+      "seconds": 2.751556396484375,
+      "cpu_percent": 10.1,
+      "memory_mib": 44.3
+    },
+    {
+      "service": "api",
+      "seconds": 2.751556396484375,
+      "cpu_percent": 98.22,
+      "memory_mib": 238.7
+    },
+    {
+      "service": "mlflow",
+      "seconds": 2.751556396484375,
+      "cpu_percent": 13.65,
+      "memory_mib": 354.2
+    },
+    {
+      "service": "locust",
+      "seconds": 7.337152481079102,
+      "cpu_percent": 11.23,
+      "memory_mib": 45.1
+    },
+    {
+      "service": "api",
+      "seconds": 7.337152481079102,
+      "cpu_percent": 101.89,
+      "memory_mib": 264.9
+    },
+    {
+      "service": "mlflow",
+      "seconds": 7.337152481079102,
+      "cpu_percent": 0.23,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 11.783190488815308,
+      "cpu_percent": 8.87,
+      "memory_mib": 45.04
+    },
+    {
+      "service": "api",
+      "seconds": 11.783190488815308,
+      "cpu_percent": 105.47,
+      "memory_mib": 248.0
+    },
+    {
+      "service": "mlflow",
+      "seconds": 11.783190488815308,
+      "cpu_percent": 0.25,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 16.213636875152588,
+      "cpu_percent": 10.73,
+      "memory_mib": 45.45
+    },
+    {
+      "service": "api",
+      "seconds": 16.213636875152588,
+      "cpu_percent": 96.73,
+      "memory_mib": 266.3
+    },
+    {
+      "service": "mlflow",
+      "seconds": 16.213636875152588,
+      "cpu_percent": 0.23,
+      "memory_mib": 353.9
+    },
+    {
+      "service": "locust",
+      "seconds": 20.72460699081421,
+      "cpu_percent": 3.92,
+      "memory_mib": 45.58
+    },
+    {
+      "service": "api",
+      "seconds": 20.72460699081421,
+      "cpu_percent": 108.79,
+      "memory_mib": 267.0
+    },
+    {
+      "service": "mlflow",
+      "seconds": 20.72460699081421,
+      "cpu_percent": 0.22,
+      "memory_mib": 353.9
+    },
+    {
+      "service": "locust",
+      "seconds": 25.231834888458252,
+      "cpu_percent": 10.35,
+      "memory_mib": 45.65
+    },
+    {
+      "service": "api",
+      "seconds": 25.231834888458252,
+      "cpu_percent": 104.36,
+      "memory_mib": 277.5
+    },
+    {
+      "service": "mlflow",
+      "seconds": 25.231834888458252,
+      "cpu_percent": 19.76,
+      "memory_mib": 353.8
+    },
+    {
+      "service": "locust",
+      "seconds": 29.54804229736328,
+      "cpu_percent": 13.46,
+      "memory_mib": 45.88
+    },
+    {
+      "service": "api",
+      "seconds": 29.54804229736328,
+      "cpu_percent": 103.01,
+      "memory_mib": 315.2
+    },
+    {
+      "service": "mlflow",
+      "seconds": 29.54804229736328,
+      "cpu_percent": 0.31,
+      "memory_mib": 353.8
+    },
+    {
+      "service": "locust",
+      "seconds": 34.29512667655945,
+      "cpu_percent": 10.35,
+      "memory_mib": 45.71
+    },
+    {
+      "service": "api",
+      "seconds": 34.29512667655945,
+      "cpu_percent": 102.57,
+      "memory_mib": 267.4
+    },
+    {
+      "service": "mlflow",
+      "seconds": 34.29512667655945,
+      "cpu_percent": 0.24,
+      "memory_mib": 353.8
+    },
+    {
+      "service": "locust",
+      "seconds": 38.07873249053955,
+      "cpu_percent": 2.37,
+      "memory_mib": 45.78
+    },
+    {
+      "service": "api",
+      "seconds": 38.07873249053955,
+      "cpu_percent": 102.64,
+      "memory_mib": 293.2
+    },
+    {
+      "service": "mlflow",
+      "seconds": 38.07873249053955,
+      "cpu_percent": 0.31,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 42.599255084991455,
+      "cpu_percent": 6.53,
+      "memory_mib": 46.04
+    },
+    {
+      "service": "api",
+      "seconds": 42.599255084991455,
+      "cpu_percent": 96.59,
+      "memory_mib": 327.0
+    },
+    {
+      "service": "mlflow",
+      "seconds": 42.599255084991455,
+      "cpu_percent": 0.19,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 47.05495047569275,
+      "cpu_percent": 9.67,
+      "memory_mib": 46.0
+    },
+    {
+      "service": "api",
+      "seconds": 47.05495047569275,
+      "cpu_percent": 97.0,
+      "memory_mib": 318.2
+    },
+    {
+      "service": "mlflow",
+      "seconds": 47.05495047569275,
+      "cpu_percent": 3.03,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 51.525691747665405,
+      "cpu_percent": 7.95,
+      "memory_mib": 46.18
+    },
+    {
+      "service": "api",
+      "seconds": 51.525691747665405,
+      "cpu_percent": 99.32,
+      "memory_mib": 272.9
+    },
+    {
+      "service": "mlflow",
+      "seconds": 51.525691747665405,
+      "cpu_percent": 0.18,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 55.915982484817505,
+      "cpu_percent": 6.44,
+      "memory_mib": 46.17
+    },
+    {
+      "service": "api",
+      "seconds": 55.915982484817505,
+      "cpu_percent": 94.19,
+      "memory_mib": 285.4
+    },
+    {
+      "service": "mlflow",
+      "seconds": 55.915982484817505,
+      "cpu_percent": 0.19,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 60.35201668739319,
+      "cpu_percent": 11.76,
+      "memory_mib": 46.22
+    },
+    {
+      "service": "api",
+      "seconds": 60.35201668739319,
+      "cpu_percent": 100.86,
+      "memory_mib": 284.5
+    },
+    {
+      "service": "mlflow",
+      "seconds": 60.35201668739319,
+      "cpu_percent": 0.18,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 64.84410858154297,
+      "cpu_percent": 5.52,
+      "memory_mib": 46.37
+    },
+    {
+      "service": "api",
+      "seconds": 64.84410858154297,
+      "cpu_percent": 95.87,
+      "memory_mib": 294.3
+    },
+    {
+      "service": "mlflow",
+      "seconds": 64.84410858154297,
+      "cpu_percent": 0.19,
+      "memory_mib": 354.0
+    },
+    {
+      "service": "locust",
+      "seconds": 69.17368364334106,
+      "cpu_percent": 9.1,
+      "memory_mib": 46.29
+    },
+    {
+      "service": "api",
+      "seconds": 69.17368364334106,
+      "cpu_percent": 96.89,
+      "memory_mib": 315.1
+    },
+    {
+      "service": "mlflow",
+      "seconds": 69.17368364334106,
+      "cpu_percent": 0.27,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 73.8744900226593,
+      "cpu_percent": 3.5,
+      "memory_mib": 46.22
+    },
+    {
+      "service": "api",
+      "seconds": 73.8744900226593,
+      "cpu_percent": 98.57,
+      "memory_mib": 312.0
+    },
+    {
+      "service": "mlflow",
+      "seconds": 73.8744900226593,
+      "cpu_percent": 0.51,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 77.8879005908966,
+      "cpu_percent": 12.74,
+      "memory_mib": 46.36
+    },
+    {
+      "service": "api",
+      "seconds": 77.8879005908966,
+      "cpu_percent": 99.42,
+      "memory_mib": 308.8
+    },
+    {
+      "service": "mlflow",
+      "seconds": 77.8879005908966,
+      "cpu_percent": 0.25,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 82.51177096366882,
+      "cpu_percent": 9.68,
+      "memory_mib": 46.38
+    },
+    {
+      "service": "api",
+      "seconds": 82.51177096366882,
+      "cpu_percent": 102.87,
+      "memory_mib": 326.1
+    },
+    {
+      "service": "mlflow",
+      "seconds": 82.51177096366882,
+      "cpu_percent": 0.2,
+      "memory_mib": 353.9
+    },
+    {
+      "service": "locust",
+      "seconds": 86.96897268295288,
+      "cpu_percent": 7.16,
+      "memory_mib": 46.25
+    },
+    {
+      "service": "api",
+      "seconds": 86.96897268295288,
+      "cpu_percent": 98.45,
+      "memory_mib": 312.8
+    },
+    {
+      "service": "mlflow",
+      "seconds": 86.96897268295288,
+      "cpu_percent": 0.31,
+      "memory_mib": 353.9
+    },
+    {
+      "service": "locust",
+      "seconds": 91.49045252799988,
+      "cpu_percent": 12.18,
+      "memory_mib": 46.42
+    },
+    {
+      "service": "api",
+      "seconds": 91.49045252799988,
+      "cpu_percent": 101.23,
+      "memory_mib": 316.8
+    },
+    {
+      "service": "mlflow",
+      "seconds": 91.49045252799988,
+      "cpu_percent": 14.19,
+      "memory_mib": 354.1
+    }
+  ],
+  "u01_r2": [
+    {
+      "service": "locust",
+      "seconds": 2.7356698513031006,
+      "cpu_percent": 0.9,
+      "memory_mib": 42.19
+    },
+    {
+      "service": "api",
+      "seconds": 2.7356698513031006,
+      "cpu_percent": 7.52,
+      "memory_mib": 272.2
+    },
+    {
+      "service": "mlflow",
+      "seconds": 2.7356698513031006,
+      "cpu_percent": 14.53,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 7.168412923812866,
+      "cpu_percent": 1.2,
+      "memory_mib": 42.43
+    },
+    {
+      "service": "api",
+      "seconds": 7.168412923812866,
+      "cpu_percent": 9.15,
+      "memory_mib": 242.2
+    },
+    {
+      "service": "mlflow",
+      "seconds": 7.168412923812866,
+      "cpu_percent": 0.23,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 11.529451608657837,
+      "cpu_percent": 1.45,
+      "memory_mib": 42.43
+    },
+    {
+      "service": "api",
+      "seconds": 11.529451608657837,
+      "cpu_percent": 3.72,
+      "memory_mib": 242.3
+    },
+    {
+      "service": "mlflow",
+      "seconds": 11.529451608657837,
+      "cpu_percent": 0.22,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 15.899040222167969,
+      "cpu_percent": 1.06,
+      "memory_mib": 42.43
+    },
+    {
+      "service": "api",
+      "seconds": 15.899040222167969,
+      "cpu_percent": 5.97,
+      "memory_mib": 242.3
+    },
+    {
+      "service": "mlflow",
+      "seconds": 15.899040222167969,
+      "cpu_percent": 0.23,
+      "memory_mib": 354.2
+    },
+    {
+      "service": "locust",
+      "seconds": 20.200743913650513,
+      "cpu_percent": 0.93,
+      "memory_mib": 42.68
+    },
+    {
+      "service": "api",
+      "seconds": 20.200743913650513,
+      "cpu_percent": 11.87,
+      "memory_mib": 242.4
+    },
+    {
+      "service": "mlflow",
+      "seconds": 20.200743913650513,
+      "cpu_percent": 0.22,
+      "memory_mib": 354.2
+    },
+    {
+      "service": "locust",
+      "seconds": 24.621912002563477,
+      "cpu_percent": 1.1,
+      "memory_mib": 42.78
+    },
+    {
+      "service": "api",
+      "seconds": 24.621912002563477,
+      "cpu_percent": 6.9,
+      "memory_mib": 242.4
+    },
+    {
+      "service": "mlflow",
+      "seconds": 24.621912002563477,
+      "cpu_percent": 12.53,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 29.030305862426758,
+      "cpu_percent": 1.14,
+      "memory_mib": 42.77
+    },
+    {
+      "service": "api",
+      "seconds": 29.030305862426758,
+      "cpu_percent": 5.01,
+      "memory_mib": 242.5
+    },
+    {
+      "service": "mlflow",
+      "seconds": 29.030305862426758,
+      "cpu_percent": 0.23,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 33.40052676200867,
+      "cpu_percent": 0.97,
+      "memory_mib": 43.01
+    },
+    {
+      "service": "api",
+      "seconds": 33.40052676200867,
+      "cpu_percent": 10.95,
+      "memory_mib": 242.2
+    },
+    {
+      "service": "mlflow",
+      "seconds": 33.40052676200867,
+      "cpu_percent": 0.2,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 37.80443549156189,
+      "cpu_percent": 1.26,
+      "memory_mib": 43.01
+    },
+    {
+      "service": "api",
+      "seconds": 37.80443549156189,
+      "cpu_percent": 7.52,
+      "memory_mib": 242.4
+    },
+    {
+      "service": "mlflow",
+      "seconds": 37.80443549156189,
+      "cpu_percent": 0.22,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 42.18950819969177,
+      "cpu_percent": 1.12,
+      "memory_mib": 43.01
+    },
+    {
+      "service": "api",
+      "seconds": 42.18950819969177,
+      "cpu_percent": 7.61,
+      "memory_mib": 242.3
+    },
+    {
+      "service": "mlflow",
+      "seconds": 42.18950819969177,
+      "cpu_percent": 0.23,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 46.552478313446045,
+      "cpu_percent": 1.0,
+      "memory_mib": 43.01
+    },
+    {
+      "service": "api",
+      "seconds": 46.552478313446045,
+      "cpu_percent": 5.45,
+      "memory_mib": 242.4
+    },
+    {
+      "service": "mlflow",
+      "seconds": 46.552478313446045,
+      "cpu_percent": 5.03,
+      "memory_mib": 353.9
+    },
+    {
+      "service": "locust",
+      "seconds": 50.83710026741028,
+      "cpu_percent": 0.91,
+      "memory_mib": 43.01
+    },
+    {
+      "service": "api",
+      "seconds": 50.83710026741028,
+      "cpu_percent": 4.14,
+      "memory_mib": 242.4
+    },
+    {
+      "service": "mlflow",
+      "seconds": 50.83710026741028,
+      "cpu_percent": 0.31,
+      "memory_mib": 353.9
+    },
+    {
+      "service": "locust",
+      "seconds": 55.25132989883423,
+      "cpu_percent": 0.87,
+      "memory_mib": 43.21
+    },
+    {
+      "service": "api",
+      "seconds": 55.25132989883423,
+      "cpu_percent": 24.65,
+      "memory_mib": 242.6
+    },
+    {
+      "service": "mlflow",
+      "seconds": 55.25132989883423,
+      "cpu_percent": 0.25,
+      "memory_mib": 353.9
+    },
+    {
+      "service": "locust",
+      "seconds": 59.06173300743103,
+      "cpu_percent": 1.13,
+      "memory_mib": 43.21
+    },
+    {
+      "service": "api",
+      "seconds": 59.06173300743103,
+      "cpu_percent": 9.08,
+      "memory_mib": 242.6
+    },
+    {
+      "service": "mlflow",
+      "seconds": 59.06173300743103,
+      "cpu_percent": 0.24,
+      "memory_mib": 354.2
+    },
+    {
+      "service": "locust",
+      "seconds": 63.4066641330719,
+      "cpu_percent": 1.37,
+      "memory_mib": 43.21
+    },
+    {
+      "service": "api",
+      "seconds": 63.4066641330719,
+      "cpu_percent": 4.2,
+      "memory_mib": 242.4
+    },
+    {
+      "service": "mlflow",
+      "seconds": 63.4066641330719,
+      "cpu_percent": 0.31,
+      "memory_mib": 354.2
+    },
+    {
+      "service": "locust",
+      "seconds": 67.7894082069397,
+      "cpu_percent": 1.36,
+      "memory_mib": 43.2
+    },
+    {
+      "service": "api",
+      "seconds": 67.7894082069397,
+      "cpu_percent": 8.46,
+      "memory_mib": 242.5
+    },
+    {
+      "service": "mlflow",
+      "seconds": 67.7894082069397,
+      "cpu_percent": 9.53,
+      "memory_mib": 354.3
+    },
+    {
+      "service": "locust",
+      "seconds": 72.1443133354187,
+      "cpu_percent": 1.07,
+      "memory_mib": 43.2
+    },
+    {
+      "service": "api",
+      "seconds": 72.1443133354187,
+      "cpu_percent": 6.41,
+      "memory_mib": 242.3
+    },
+    {
+      "service": "mlflow",
+      "seconds": 72.1443133354187,
+      "cpu_percent": 0.23,
+      "memory_mib": 354.2
+    },
+    {
+      "service": "locust",
+      "seconds": 76.57259559631348,
+      "cpu_percent": 1.55,
+      "memory_mib": 43.2
+    },
+    {
+      "service": "api",
+      "seconds": 76.57259559631348,
+      "cpu_percent": 9.33,
+      "memory_mib": 242.4
+    },
+    {
+      "service": "mlflow",
+      "seconds": 76.57259559631348,
+      "cpu_percent": 0.22,
+      "memory_mib": 354.2
+    },
+    {
+      "service": "locust",
+      "seconds": 80.87119030952454,
+      "cpu_percent": 1.38,
+      "memory_mib": 43.2
+    },
+    {
+      "service": "api",
+      "seconds": 80.87119030952454,
+      "cpu_percent": 8.25,
+      "memory_mib": 242.5
+    },
+    {
+      "service": "mlflow",
+      "seconds": 80.87119030952454,
+      "cpu_percent": 0.25,
+      "memory_mib": 354.2
+    },
+    {
+      "service": "locust",
+      "seconds": 85.24194931983948,
+      "cpu_percent": 1.2,
+      "memory_mib": 43.2
+    },
+    {
+      "service": "api",
+      "seconds": 85.24194931983948,
+      "cpu_percent": 7.91,
+      "memory_mib": 246.5
+    },
+    {
+      "service": "mlflow",
+      "seconds": 85.24194931983948,
+      "cpu_percent": 0.23,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 88.93566179275513,
+      "cpu_percent": 1.1,
+      "memory_mib": 43.2
+    },
+    {
+      "service": "api",
+      "seconds": 88.93566179275513,
+      "cpu_percent": 6.5,
+      "memory_mib": 242.3
+    },
+    {
+      "service": "mlflow",
+      "seconds": 88.93566179275513,
+      "cpu_percent": 0.25,
+      "memory_mib": 353.9
+    },
+    {
+      "service": "locust",
+      "seconds": 93.32008767127991,
+      "cpu_percent": 1.39,
+      "memory_mib": 43.2
+    },
+    {
+      "service": "api",
+      "seconds": 93.32008767127991,
+      "cpu_percent": 6.45,
+      "memory_mib": 242.3
+    },
+    {
+      "service": "mlflow",
+      "seconds": 93.32008767127991,
+      "cpu_percent": 0.24,
+      "memory_mib": 354.0
+    }
+  ],
+  "u10_r2": [
+    {
+      "service": "locust",
+      "seconds": 3.75238037109375,
+      "cpu_percent": 6.65,
+      "memory_mib": 42.95
+    },
+    {
+      "service": "api",
+      "seconds": 3.75238037109375,
+      "cpu_percent": 47.06,
+      "memory_mib": 243.6
+    },
+    {
+      "service": "mlflow",
+      "seconds": 3.75238037109375,
+      "cpu_percent": 15.04,
+      "memory_mib": 353.9
+    },
+    {
+      "service": "locust",
+      "seconds": 8.214308023452759,
+      "cpu_percent": 7.95,
+      "memory_mib": 43.64
+    },
+    {
+      "service": "api",
+      "seconds": 8.214308023452759,
+      "cpu_percent": 53.43,
+      "memory_mib": 251.1
+    },
+    {
+      "service": "mlflow",
+      "seconds": 8.214308023452759,
+      "cpu_percent": 0.17,
+      "memory_mib": 353.9
+    },
+    {
+      "service": "locust",
+      "seconds": 12.494410037994385,
+      "cpu_percent": 6.22,
+      "memory_mib": 43.4
+    },
+    {
+      "service": "api",
+      "seconds": 12.494410037994385,
+      "cpu_percent": 80.42,
+      "memory_mib": 247.7
+    },
+    {
+      "service": "mlflow",
+      "seconds": 12.494410037994385,
+      "cpu_percent": 0.2,
+      "memory_mib": 353.9
+    },
+    {
+      "service": "locust",
+      "seconds": 16.86346125602722,
+      "cpu_percent": 7.5,
+      "memory_mib": 43.38
+    },
+    {
+      "service": "api",
+      "seconds": 16.86346125602722,
+      "cpu_percent": 60.64,
+      "memory_mib": 247.5
+    },
+    {
+      "service": "mlflow",
+      "seconds": 16.86346125602722,
+      "cpu_percent": 0.27,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 21.078629732131958,
+      "cpu_percent": 7.43,
+      "memory_mib": 43.5
+    },
+    {
+      "service": "api",
+      "seconds": 21.078629732131958,
+      "cpu_percent": 61.72,
+      "memory_mib": 247.7
+    },
+    {
+      "service": "mlflow",
+      "seconds": 21.078629732131958,
+      "cpu_percent": 0.22,
+      "memory_mib": 354.0
+    },
+    {
+      "service": "locust",
+      "seconds": 25.479214668273926,
+      "cpu_percent": 7.93,
+      "memory_mib": 43.53
+    },
+    {
+      "service": "api",
+      "seconds": 25.479214668273926,
+      "cpu_percent": 70.89,
+      "memory_mib": 255.2
+    },
+    {
+      "service": "mlflow",
+      "seconds": 25.479214668273926,
+      "cpu_percent": 11.13,
+      "memory_mib": 354.0
+    },
+    {
+      "service": "locust",
+      "seconds": 29.91870927810669,
+      "cpu_percent": 8.06,
+      "memory_mib": 43.89
+    },
+    {
+      "service": "api",
+      "seconds": 29.91870927810669,
+      "cpu_percent": 63.48,
+      "memory_mib": 251.6
+    },
+    {
+      "service": "mlflow",
+      "seconds": 29.91870927810669,
+      "cpu_percent": 0.29,
+      "memory_mib": 354.0
+    },
+    {
+      "service": "locust",
+      "seconds": 34.325626373291016,
+      "cpu_percent": 7.69,
+      "memory_mib": 43.89
+    },
+    {
+      "service": "api",
+      "seconds": 34.325626373291016,
+      "cpu_percent": 79.55,
+      "memory_mib": 247.5
+    },
+    {
+      "service": "mlflow",
+      "seconds": 34.325626373291016,
+      "cpu_percent": 0.29,
+      "memory_mib": 354.0
+    },
+    {
+      "service": "locust",
+      "seconds": 38.69697022438049,
+      "cpu_percent": 7.3,
+      "memory_mib": 43.89
+    },
+    {
+      "service": "api",
+      "seconds": 38.69697022438049,
+      "cpu_percent": 67.07,
+      "memory_mib": 247.3
+    },
+    {
+      "service": "mlflow",
+      "seconds": 38.69697022438049,
+      "cpu_percent": 0.29,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 43.01833987236023,
+      "cpu_percent": 8.58,
+      "memory_mib": 43.7
+    },
+    {
+      "service": "api",
+      "seconds": 43.01833987236023,
+      "cpu_percent": 77.16,
+      "memory_mib": 247.4
+    },
+    {
+      "service": "mlflow",
+      "seconds": 43.01833987236023,
+      "cpu_percent": 0.2,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 47.636879682540894,
+      "cpu_percent": 6.5,
+      "memory_mib": 43.88
+    },
+    {
+      "service": "api",
+      "seconds": 47.636879682540894,
+      "cpu_percent": 98.33,
+      "memory_mib": 256.7
+    },
+    {
+      "service": "mlflow",
+      "seconds": 47.636879682540894,
+      "cpu_percent": 0.27,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 51.491692304611206,
+      "cpu_percent": 8.82,
+      "memory_mib": 43.96
+    },
+    {
+      "service": "api",
+      "seconds": 51.491692304611206,
+      "cpu_percent": 88.72,
+      "memory_mib": 251.6
+    },
+    {
+      "service": "mlflow",
+      "seconds": 51.491692304611206,
+      "cpu_percent": 0.22,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 56.15280532836914,
+      "cpu_percent": 7.97,
+      "memory_mib": 43.87
+    },
+    {
+      "service": "api",
+      "seconds": 56.15280532836914,
+      "cpu_percent": 78.12,
+      "memory_mib": 247.0
+    },
+    {
+      "service": "mlflow",
+      "seconds": 56.15280532836914,
+      "cpu_percent": 0.25,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 60.795929193496704,
+      "cpu_percent": 8.17,
+      "memory_mib": 43.84
+    },
+    {
+      "service": "api",
+      "seconds": 60.795929193496704,
+      "cpu_percent": 92.04,
+      "memory_mib": 246.4
+    },
+    {
+      "service": "mlflow",
+      "seconds": 60.795929193496704,
+      "cpu_percent": 0.29,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 65.39711594581604,
+      "cpu_percent": 9.64,
+      "memory_mib": 43.87
+    },
+    {
+      "service": "api",
+      "seconds": 65.39711594581604,
+      "cpu_percent": 70.94,
+      "memory_mib": 247.4
+    },
+    {
+      "service": "mlflow",
+      "seconds": 65.39711594581604,
+      "cpu_percent": 0.19,
+      "memory_mib": 353.9
+    },
+    {
+      "service": "locust",
+      "seconds": 69.79335427284241,
+      "cpu_percent": 6.97,
+      "memory_mib": 43.95
+    },
+    {
+      "service": "api",
+      "seconds": 69.79335427284241,
+      "cpu_percent": 73.33,
+      "memory_mib": 247.2
+    },
+    {
+      "service": "mlflow",
+      "seconds": 69.79335427284241,
+      "cpu_percent": 0.27,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 74.19270873069763,
+      "cpu_percent": 8.06,
+      "memory_mib": 43.84
+    },
+    {
+      "service": "api",
+      "seconds": 74.19270873069763,
+      "cpu_percent": 62.69,
+      "memory_mib": 247.3
+    },
+    {
+      "service": "mlflow",
+      "seconds": 74.19270873069763,
+      "cpu_percent": 0.17,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 78.57472538948059,
+      "cpu_percent": 8.32,
+      "memory_mib": 43.89
+    },
+    {
+      "service": "api",
+      "seconds": 78.57472538948059,
+      "cpu_percent": 79.13,
+      "memory_mib": 247.5
+    },
+    {
+      "service": "mlflow",
+      "seconds": 78.57472538948059,
+      "cpu_percent": 0.31,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 82.87515592575073,
+      "cpu_percent": 6.49,
+      "memory_mib": 43.96
+    },
+    {
+      "service": "api",
+      "seconds": 82.87515592575073,
+      "cpu_percent": 79.47,
+      "memory_mib": 260.5
+    },
+    {
+      "service": "mlflow",
+      "seconds": 82.87515592575073,
+      "cpu_percent": 0.18,
+      "memory_mib": 354.0
+    },
+    {
+      "service": "locust",
+      "seconds": 87.39276051521301,
+      "cpu_percent": 7.74,
+      "memory_mib": 43.95
+    },
+    {
+      "service": "api",
+      "seconds": 87.39276051521301,
+      "cpu_percent": 66.51,
+      "memory_mib": 247.3
+    },
+    {
+      "service": "mlflow",
+      "seconds": 87.39276051521301,
+      "cpu_percent": 0.19,
+      "memory_mib": 353.8
+    },
+    {
+      "service": "locust",
+      "seconds": 91.19333291053772,
+      "cpu_percent": 7.17,
+      "memory_mib": 44.14
+    },
+    {
+      "service": "api",
+      "seconds": 91.19333291053772,
+      "cpu_percent": 60.46,
+      "memory_mib": 247.4
+    },
+    {
+      "service": "mlflow",
+      "seconds": 91.19333291053772,
+      "cpu_percent": 8.98,
+      "memory_mib": 354.3
+    }
+  ],
+  "u30_r2": [
+    {
+      "service": "locust",
+      "seconds": 3.763437032699585,
+      "cpu_percent": 11.22,
+      "memory_mib": 43.92
+    },
+    {
+      "service": "api",
+      "seconds": 3.763437032699585,
+      "cpu_percent": 99.98,
+      "memory_mib": 255.1
+    },
+    {
+      "service": "mlflow",
+      "seconds": 3.763437032699585,
+      "cpu_percent": 18.25,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 8.136346578598022,
+      "cpu_percent": 9.68,
+      "memory_mib": 45.14
+    },
+    {
+      "service": "api",
+      "seconds": 8.136346578598022,
+      "cpu_percent": 96.19,
+      "memory_mib": 310.3
+    },
+    {
+      "service": "mlflow",
+      "seconds": 8.136346578598022,
+      "cpu_percent": 0.26,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 12.60921335220337,
+      "cpu_percent": 10.46,
+      "memory_mib": 45.03
+    },
+    {
+      "service": "api",
+      "seconds": 12.60921335220337,
+      "cpu_percent": 90.35,
+      "memory_mib": 280.2
+    },
+    {
+      "service": "mlflow",
+      "seconds": 12.60921335220337,
+      "cpu_percent": 0.18,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 17.08151364326477,
+      "cpu_percent": 8.1,
+      "memory_mib": 45.14
+    },
+    {
+      "service": "api",
+      "seconds": 17.08151364326477,
+      "cpu_percent": 99.92,
+      "memory_mib": 256.5
+    },
+    {
+      "service": "mlflow",
+      "seconds": 17.08151364326477,
+      "cpu_percent": 0.21,
+      "memory_mib": 353.8
+    },
+    {
+      "service": "locust",
+      "seconds": 21.52172875404358,
+      "cpu_percent": 7.16,
+      "memory_mib": 45.88
+    },
+    {
+      "service": "api",
+      "seconds": 21.52172875404358,
+      "cpu_percent": 94.67,
+      "memory_mib": 273.9
+    },
+    {
+      "service": "mlflow",
+      "seconds": 21.52172875404358,
+      "cpu_percent": 0.24,
+      "memory_mib": 353.8
+    },
+    {
+      "service": "locust",
+      "seconds": 25.92973256111145,
+      "cpu_percent": 9.03,
+      "memory_mib": 45.72
+    },
+    {
+      "service": "api",
+      "seconds": 25.92973256111145,
+      "cpu_percent": 100.57,
+      "memory_mib": 270.0
+    },
+    {
+      "service": "mlflow",
+      "seconds": 25.92973256111145,
+      "cpu_percent": 0.2,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 30.34933352470398,
+      "cpu_percent": 9.91,
+      "memory_mib": 45.84
+    },
+    {
+      "service": "api",
+      "seconds": 30.34933352470398,
+      "cpu_percent": 101.83,
+      "memory_mib": 268.8
+    },
+    {
+      "service": "mlflow",
+      "seconds": 30.34933352470398,
+      "cpu_percent": 0.2,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 34.71300959587097,
+      "cpu_percent": 11.29,
+      "memory_mib": 46.08
+    },
+    {
+      "service": "api",
+      "seconds": 34.71300959587097,
+      "cpu_percent": 95.38,
+      "memory_mib": 294.6
+    },
+    {
+      "service": "mlflow",
+      "seconds": 34.71300959587097,
+      "cpu_percent": 0.25,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 39.17916965484619,
+      "cpu_percent": 7.18,
+      "memory_mib": 46.06
+    },
+    {
+      "service": "api",
+      "seconds": 39.17916965484619,
+      "cpu_percent": 100.37,
+      "memory_mib": 272.7
+    },
+    {
+      "service": "mlflow",
+      "seconds": 39.17916965484619,
+      "cpu_percent": 0.19,
+      "memory_mib": 353.9
+    },
+    {
+      "service": "locust",
+      "seconds": 42.71111083030701,
+      "cpu_percent": 10.07,
+      "memory_mib": 46.09
+    },
+    {
+      "service": "api",
+      "seconds": 42.71111083030701,
+      "cpu_percent": 94.96,
+      "memory_mib": 304.0
+    },
+    {
+      "service": "mlflow",
+      "seconds": 42.71111083030701,
+      "cpu_percent": 0.23,
+      "memory_mib": 353.9
+    },
+    {
+      "service": "locust",
+      "seconds": 47.203389406204224,
+      "cpu_percent": 6.37,
+      "memory_mib": 46.14
+    },
+    {
+      "service": "api",
+      "seconds": 47.203389406204224,
+      "cpu_percent": 99.59,
+      "memory_mib": 273.1
+    },
+    {
+      "service": "mlflow",
+      "seconds": 47.203389406204224,
+      "cpu_percent": 26.44,
+      "memory_mib": 354.3
+    },
+    {
+      "service": "locust",
+      "seconds": 51.82337498664856,
+      "cpu_percent": 8.71,
+      "memory_mib": 45.98
+    },
+    {
+      "service": "api",
+      "seconds": 51.82337498664856,
+      "cpu_percent": 101.15,
+      "memory_mib": 297.7
+    },
+    {
+      "service": "mlflow",
+      "seconds": 51.82337498664856,
+      "cpu_percent": 0.23,
+      "memory_mib": 353.8
+    },
+    {
+      "service": "locust",
+      "seconds": 56.294257402420044,
+      "cpu_percent": 9.03,
+      "memory_mib": 46.27
+    },
+    {
+      "service": "api",
+      "seconds": 56.294257402420044,
+      "cpu_percent": 98.06,
+      "memory_mib": 307.5
+    },
+    {
+      "service": "mlflow",
+      "seconds": 56.294257402420044,
+      "cpu_percent": 0.21,
+      "memory_mib": 353.8
+    },
+    {
+      "service": "locust",
+      "seconds": 60.71691417694092,
+      "cpu_percent": 9.99,
+      "memory_mib": 46.15
+    },
+    {
+      "service": "api",
+      "seconds": 60.71691417694092,
+      "cpu_percent": 100.2,
+      "memory_mib": 308.1
+    },
+    {
+      "service": "mlflow",
+      "seconds": 60.71691417694092,
+      "cpu_percent": 0.2,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 65.12009119987488,
+      "cpu_percent": 10.32,
+      "memory_mib": 46.24
+    },
+    {
+      "service": "api",
+      "seconds": 65.12009119987488,
+      "cpu_percent": 100.48,
+      "memory_mib": 305.7
+    },
+    {
+      "service": "mlflow",
+      "seconds": 65.12009119987488,
+      "cpu_percent": 0.17,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 69.5698709487915,
+      "cpu_percent": 8.68,
+      "memory_mib": 46.2
+    },
+    {
+      "service": "api",
+      "seconds": 69.5698709487915,
+      "cpu_percent": 100.97,
+      "memory_mib": 282.4
+    },
+    {
+      "service": "mlflow",
+      "seconds": 69.5698709487915,
+      "cpu_percent": 16.8,
+      "memory_mib": 354.0
+    },
+    {
+      "service": "locust",
+      "seconds": 73.93333077430725,
+      "cpu_percent": 10.68,
+      "memory_mib": 46.04
+    },
+    {
+      "service": "api",
+      "seconds": 73.93333077430725,
+      "cpu_percent": 98.86,
+      "memory_mib": 326.5
+    },
+    {
+      "service": "mlflow",
+      "seconds": 73.93333077430725,
+      "cpu_percent": 0.23,
+      "memory_mib": 353.9
+    },
+    {
+      "service": "locust",
+      "seconds": 78.40135192871094,
+      "cpu_percent": 6.03,
+      "memory_mib": 46.2
+    },
+    {
+      "service": "api",
+      "seconds": 78.40135192871094,
+      "cpu_percent": 102.8,
+      "memory_mib": 317.0
+    },
+    {
+      "service": "mlflow",
+      "seconds": 78.40135192871094,
+      "cpu_percent": 0.2,
+      "memory_mib": 353.9
+    },
+    {
+      "service": "locust",
+      "seconds": 82.89010262489319,
+      "cpu_percent": 8.82,
+      "memory_mib": 46.29
+    },
+    {
+      "service": "api",
+      "seconds": 82.89010262489319,
+      "cpu_percent": 99.43,
+      "memory_mib": 278.9
+    },
+    {
+      "service": "mlflow",
+      "seconds": 82.89010262489319,
+      "cpu_percent": 0.22,
+      "memory_mib": 354.0
+    },
+    {
+      "service": "locust",
+      "seconds": 87.34514355659485,
+      "cpu_percent": 7.46,
+      "memory_mib": 46.18
+    },
+    {
+      "service": "api",
+      "seconds": 87.34514355659485,
+      "cpu_percent": 96.98,
+      "memory_mib": 306.7
+    },
+    {
+      "service": "mlflow",
+      "seconds": 87.34514355659485,
+      "cpu_percent": 0.21,
+      "memory_mib": 354.0
+    },
+    {
+      "service": "locust",
+      "seconds": 91.8870620727539,
+      "cpu_percent": 10.92,
+      "memory_mib": 46.25
+    },
+    {
+      "service": "api",
+      "seconds": 91.8870620727539,
+      "cpu_percent": 88.48,
+      "memory_mib": 296.3
+    },
+    {
+      "service": "mlflow",
+      "seconds": 91.8870620727539,
+      "cpu_percent": 9.12,
+      "memory_mib": 358.0
+    }
+  ],
+  "u01_r3": [
+    {
+      "service": "locust",
+      "seconds": 3.5622169971466064,
+      "cpu_percent": 0.78,
+      "memory_mib": 42.2
+    },
+    {
+      "service": "api",
+      "seconds": 3.5622169971466064,
+      "cpu_percent": 5.68,
+      "memory_mib": 283.2
+    },
+    {
+      "service": "mlflow",
+      "seconds": 3.5622169971466064,
+      "cpu_percent": 9.96,
+      "memory_mib": 354.2
+    },
+    {
+      "service": "locust",
+      "seconds": 7.915371656417847,
+      "cpu_percent": 1.19,
+      "memory_mib": 42.43
+    },
+    {
+      "service": "api",
+      "seconds": 7.915371656417847,
+      "cpu_percent": 9.71,
+      "memory_mib": 245.5
+    },
+    {
+      "service": "mlflow",
+      "seconds": 7.915371656417847,
+      "cpu_percent": 0.22,
+      "memory_mib": 354.2
+    },
+    {
+      "service": "locust",
+      "seconds": 12.41296100616455,
+      "cpu_percent": 1.26,
+      "memory_mib": 42.43
+    },
+    {
+      "service": "api",
+      "seconds": 12.41296100616455,
+      "cpu_percent": 5.36,
+      "memory_mib": 245.5
+    },
+    {
+      "service": "mlflow",
+      "seconds": 12.41296100616455,
+      "cpu_percent": 0.33,
+      "memory_mib": 354.2
+    },
+    {
+      "service": "locust",
+      "seconds": 16.809664726257324,
+      "cpu_percent": 1.56,
+      "memory_mib": 42.52
+    },
+    {
+      "service": "api",
+      "seconds": 16.809664726257324,
+      "cpu_percent": 3.77,
+      "memory_mib": 245.4
+    },
+    {
+      "service": "mlflow",
+      "seconds": 16.809664726257324,
+      "cpu_percent": 0.21,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 21.149200916290283,
+      "cpu_percent": 1.08,
+      "memory_mib": 42.77
+    },
+    {
+      "service": "api",
+      "seconds": 21.149200916290283,
+      "cpu_percent": 3.93,
+      "memory_mib": 245.4
+    },
+    {
+      "service": "mlflow",
+      "seconds": 21.149200916290283,
+      "cpu_percent": 0.22,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 25.45938539505005,
+      "cpu_percent": 1.04,
+      "memory_mib": 42.77
+    },
+    {
+      "service": "api",
+      "seconds": 25.45938539505005,
+      "cpu_percent": 5.76,
+      "memory_mib": 245.5
+    },
+    {
+      "service": "mlflow",
+      "seconds": 25.45938539505005,
+      "cpu_percent": 9.56,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 29.935750484466553,
+      "cpu_percent": 1.0,
+      "memory_mib": 42.77
+    },
+    {
+      "service": "api",
+      "seconds": 29.935750484466553,
+      "cpu_percent": 5.87,
+      "memory_mib": 245.5
+    },
+    {
+      "service": "mlflow",
+      "seconds": 29.935750484466553,
+      "cpu_percent": 0.25,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 33.54963207244873,
+      "cpu_percent": 1.14,
+      "memory_mib": 42.77
+    },
+    {
+      "service": "api",
+      "seconds": 33.54963207244873,
+      "cpu_percent": 5.46,
+      "memory_mib": 245.6
+    },
+    {
+      "service": "mlflow",
+      "seconds": 33.54963207244873,
+      "cpu_percent": 0.26,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 37.957133293151855,
+      "cpu_percent": 1.08,
+      "memory_mib": 42.77
+    },
+    {
+      "service": "api",
+      "seconds": 37.957133293151855,
+      "cpu_percent": 38.27,
+      "memory_mib": 245.4
+    },
+    {
+      "service": "mlflow",
+      "seconds": 37.957133293151855,
+      "cpu_percent": 0.2,
+      "memory_mib": 354.2
+    },
+    {
+      "service": "locust",
+      "seconds": 42.343616008758545,
+      "cpu_percent": 0.83,
+      "memory_mib": 42.77
+    },
+    {
+      "service": "api",
+      "seconds": 42.343616008758545,
+      "cpu_percent": 9.16,
+      "memory_mib": 245.4
+    },
+    {
+      "service": "mlflow",
+      "seconds": 42.343616008758545,
+      "cpu_percent": 0.23,
+      "memory_mib": 354.2
+    },
+    {
+      "service": "locust",
+      "seconds": 46.68825316429138,
+      "cpu_percent": 1.04,
+      "memory_mib": 42.77
+    },
+    {
+      "service": "api",
+      "seconds": 46.68825316429138,
+      "cpu_percent": 3.66,
+      "memory_mib": 245.4
+    },
+    {
+      "service": "mlflow",
+      "seconds": 46.68825316429138,
+      "cpu_percent": 9.89,
+      "memory_mib": 354.2
+    },
+    {
+      "service": "locust",
+      "seconds": 51.036617279052734,
+      "cpu_percent": 1.26,
+      "memory_mib": 42.96
+    },
+    {
+      "service": "api",
+      "seconds": 51.036617279052734,
+      "cpu_percent": 6.0,
+      "memory_mib": 245.5
+    },
+    {
+      "service": "mlflow",
+      "seconds": 51.036617279052734,
+      "cpu_percent": 0.26,
+      "memory_mib": 354.2
+    },
+    {
+      "service": "locust",
+      "seconds": 55.35326623916626,
+      "cpu_percent": 1.35,
+      "memory_mib": 42.92
+    },
+    {
+      "service": "api",
+      "seconds": 55.35326623916626,
+      "cpu_percent": 12.87,
+      "memory_mib": 245.2
+    },
+    {
+      "service": "mlflow",
+      "seconds": 55.35326623916626,
+      "cpu_percent": 0.27,
+      "memory_mib": 353.9
+    },
+    {
+      "service": "locust",
+      "seconds": 59.78516149520874,
+      "cpu_percent": 1.18,
+      "memory_mib": 43.16
+    },
+    {
+      "service": "api",
+      "seconds": 59.78516149520874,
+      "cpu_percent": 50.01,
+      "memory_mib": 245.2
+    },
+    {
+      "service": "mlflow",
+      "seconds": 59.78516149520874,
+      "cpu_percent": 0.24,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 63.60786151885986,
+      "cpu_percent": 0.74,
+      "memory_mib": 43.16
+    },
+    {
+      "service": "api",
+      "seconds": 63.60786151885986,
+      "cpu_percent": 4.2,
+      "memory_mib": 245.5
+    },
+    {
+      "service": "mlflow",
+      "seconds": 63.60786151885986,
+      "cpu_percent": 0.25,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 68.00974869728088,
+      "cpu_percent": 0.92,
+      "memory_mib": 43.16
+    },
+    {
+      "service": "api",
+      "seconds": 68.00974869728088,
+      "cpu_percent": 9.56,
+      "memory_mib": 245.4
+    },
+    {
+      "service": "mlflow",
+      "seconds": 68.00974869728088,
+      "cpu_percent": 9.57,
+      "memory_mib": 360.0
+    },
+    {
+      "service": "locust",
+      "seconds": 72.48622107505798,
+      "cpu_percent": 2.17,
+      "memory_mib": 43.16
+    },
+    {
+      "service": "api",
+      "seconds": 72.48622107505798,
+      "cpu_percent": 18.65,
+      "memory_mib": 245.5
+    },
+    {
+      "service": "mlflow",
+      "seconds": 72.48622107505798,
+      "cpu_percent": 0.23,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 77.05425477027893,
+      "cpu_percent": 1.43,
+      "memory_mib": 43.16
+    },
+    {
+      "service": "api",
+      "seconds": 77.05425477027893,
+      "cpu_percent": 10.7,
+      "memory_mib": 245.3
+    },
+    {
+      "service": "mlflow",
+      "seconds": 77.05425477027893,
+      "cpu_percent": 0.29,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 81.6851110458374,
+      "cpu_percent": 1.89,
+      "memory_mib": 43.23
+    },
+    {
+      "service": "api",
+      "seconds": 81.6851110458374,
+      "cpu_percent": 19.71,
+      "memory_mib": 248.5
+    },
+    {
+      "service": "mlflow",
+      "seconds": 81.6851110458374,
+      "cpu_percent": 0.3,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 85.94934511184692,
+      "cpu_percent": 1.34,
+      "memory_mib": 43.23
+    },
+    {
+      "service": "api",
+      "seconds": 85.94934511184692,
+      "cpu_percent": 9.7,
+      "memory_mib": 245.2
+    },
+    {
+      "service": "mlflow",
+      "seconds": 85.94934511184692,
+      "cpu_percent": 0.19,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 90.41125917434692,
+      "cpu_percent": 1.07,
+      "memory_mib": 43.23
+    },
+    {
+      "service": "api",
+      "seconds": 90.41125917434692,
+      "cpu_percent": 9.22,
+      "memory_mib": 245.3
+    },
+    {
+      "service": "mlflow",
+      "seconds": 90.41125917434692,
+      "cpu_percent": 0.23,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 94.73779082298279,
+      "cpu_percent": 2.57,
+      "memory_mib": 43.23
+    },
+    {
+      "service": "api",
+      "seconds": 94.73779082298279,
+      "cpu_percent": 13.29,
+      "memory_mib": 245.2
+    },
+    {
+      "service": "mlflow",
+      "seconds": 94.73779082298279,
+      "cpu_percent": 0.21,
+      "memory_mib": 353.9
+    }
+  ],
+  "u10_r3": [
+    {
+      "service": "locust",
+      "seconds": 1.212226390838623,
+      "cpu_percent": 6.56,
+      "memory_mib": 42.37
+    },
+    {
+      "service": "api",
+      "seconds": 1.212226390838623,
+      "cpu_percent": 38.74,
+      "memory_mib": 243.9
+    },
+    {
+      "service": "mlflow",
+      "seconds": 1.212226390838623,
+      "cpu_percent": 0.3,
+      "memory_mib": 353.9
+    },
+    {
+      "service": "locust",
+      "seconds": 5.536252021789551,
+      "cpu_percent": 7.23,
+      "memory_mib": 43.07
+    },
+    {
+      "service": "api",
+      "seconds": 5.536252021789551,
+      "cpu_percent": 97.73,
+      "memory_mib": 252.0
+    },
+    {
+      "service": "mlflow",
+      "seconds": 5.536252021789551,
+      "cpu_percent": 0.23,
+      "memory_mib": 353.9
+    },
+    {
+      "service": "locust",
+      "seconds": 10.145219326019287,
+      "cpu_percent": 9.79,
+      "memory_mib": 43.52
+    },
+    {
+      "service": "api",
+      "seconds": 10.145219326019287,
+      "cpu_percent": 94.82,
+      "memory_mib": 257.9
+    },
+    {
+      "service": "mlflow",
+      "seconds": 10.145219326019287,
+      "cpu_percent": 0.22,
+      "memory_mib": 353.9
+    },
+    {
+      "service": "locust",
+      "seconds": 14.550897121429443,
+      "cpu_percent": 9.59,
+      "memory_mib": 43.23
+    },
+    {
+      "service": "api",
+      "seconds": 14.550897121429443,
+      "cpu_percent": 90.22,
+      "memory_mib": 253.6
+    },
+    {
+      "service": "mlflow",
+      "seconds": 14.550897121429443,
+      "cpu_percent": 0.28,
+      "memory_mib": 354.2
+    },
+    {
+      "service": "locust",
+      "seconds": 19.109906435012817,
+      "cpu_percent": 8.47,
+      "memory_mib": 43.47
+    },
+    {
+      "service": "api",
+      "seconds": 19.109906435012817,
+      "cpu_percent": 87.37,
+      "memory_mib": 253.8
+    },
+    {
+      "service": "mlflow",
+      "seconds": 19.109906435012817,
+      "cpu_percent": 0.53,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 23.455555200576782,
+      "cpu_percent": 8.32,
+      "memory_mib": 43.62
+    },
+    {
+      "service": "api",
+      "seconds": 23.455555200576782,
+      "cpu_percent": 91.95,
+      "memory_mib": 262.5
+    },
+    {
+      "service": "mlflow",
+      "seconds": 23.455555200576782,
+      "cpu_percent": 0.26,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 28.002371788024902,
+      "cpu_percent": 8.5,
+      "memory_mib": 43.57
+    },
+    {
+      "service": "api",
+      "seconds": 28.002371788024902,
+      "cpu_percent": 84.43,
+      "memory_mib": 253.9
+    },
+    {
+      "service": "mlflow",
+      "seconds": 28.002371788024902,
+      "cpu_percent": 0.44,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 35.33856987953186,
+      "cpu_percent": 7.49,
+      "memory_mib": 43.45
+    },
+    {
+      "service": "api",
+      "seconds": 35.33856987953186,
+      "cpu_percent": 71.92,
+      "memory_mib": 254.6
+    },
+    {
+      "service": "mlflow",
+      "seconds": 35.33856987953186,
+      "cpu_percent": 2.8,
+      "memory_mib": 357.5
+    },
+    {
+      "service": "locust",
+      "seconds": 39.95632314682007,
+      "cpu_percent": 9.97,
+      "memory_mib": 43.77
+    },
+    {
+      "service": "api",
+      "seconds": 39.95632314682007,
+      "cpu_percent": 100.99,
+      "memory_mib": 268.1
+    },
+    {
+      "service": "mlflow",
+      "seconds": 39.95632314682007,
+      "cpu_percent": 0.38,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 44.43597960472107,
+      "cpu_percent": 7.4,
+      "memory_mib": 43.74
+    },
+    {
+      "service": "api",
+      "seconds": 44.43597960472107,
+      "cpu_percent": 62.96,
+      "memory_mib": 254.0
+    },
+    {
+      "service": "mlflow",
+      "seconds": 44.43597960472107,
+      "cpu_percent": 0.19,
+      "memory_mib": 353.9
+    },
+    {
+      "service": "locust",
+      "seconds": 48.736430168151855,
+      "cpu_percent": 8.53,
+      "memory_mib": 43.59
+    },
+    {
+      "service": "api",
+      "seconds": 48.736430168151855,
+      "cpu_percent": 82.62,
+      "memory_mib": 254.1
+    },
+    {
+      "service": "mlflow",
+      "seconds": 48.736430168151855,
+      "cpu_percent": 0.26,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 53.474647998809814,
+      "cpu_percent": 8.11,
+      "memory_mib": 43.89
+    },
+    {
+      "service": "api",
+      "seconds": 53.474647998809814,
+      "cpu_percent": 86.18,
+      "memory_mib": 273.0
+    },
+    {
+      "service": "mlflow",
+      "seconds": 53.474647998809814,
+      "cpu_percent": 0.34,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 57.867562770843506,
+      "cpu_percent": 10.23,
+      "memory_mib": 43.78
+    },
+    {
+      "service": "api",
+      "seconds": 57.867562770843506,
+      "cpu_percent": 85.4,
+      "memory_mib": 257.1
+    },
+    {
+      "service": "mlflow",
+      "seconds": 57.867562770843506,
+      "cpu_percent": 6.83,
+      "memory_mib": 358.0
+    },
+    {
+      "service": "locust",
+      "seconds": 62.62654137611389,
+      "cpu_percent": 9.25,
+      "memory_mib": 43.89
+    },
+    {
+      "service": "api",
+      "seconds": 62.62654137611389,
+      "cpu_percent": 93.33,
+      "memory_mib": 257.7
+    },
+    {
+      "service": "mlflow",
+      "seconds": 62.62654137611389,
+      "cpu_percent": 0.34,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 67.12606906890869,
+      "cpu_percent": 11.22,
+      "memory_mib": 44.14
+    },
+    {
+      "service": "api",
+      "seconds": 67.12606906890869,
+      "cpu_percent": 95.7,
+      "memory_mib": 252.9
+    },
+    {
+      "service": "mlflow",
+      "seconds": 67.12606906890869,
+      "cpu_percent": 0.5,
+      "memory_mib": 354.1
+    },
+    {
+      "service": "locust",
+      "seconds": 71.92946600914001,
+      "cpu_percent": 7.76,
+      "memory_mib": 44.14
+    },
+    {
+      "service": "api",
+      "seconds": 71.92946600914001,
+      "cpu_percent": 94.86,
+      "memory_mib": 258.9
+    },
+    {
+      "service": "mlflow",
+      "seconds": 71.92946600914001,
+      "cpu_percent": 19.54,
+      "memory_mib": 354.2
+    },
+    {
+      "service": "locust",
+      "seconds": 76.26085805892944,
+      "cpu_percent": 9.06,
+      "memory_mib": 44.14
+    },
+    {
+      "service": "api",
+      "seconds": 76.26085805892944,
+      "cpu_percent": 82.1,
+      "memory_mib": 253.4
+    },
+    {
+      "service": "mlflow",
+      "seconds": 76.26085805892944,
+      "cpu_percent": 0.23,
+      "memory_mib": 354.2
+    },
+    {
+      "service": "locust",
+      "seconds": 81.02493739128113,
+      "cpu_percent": 9.71,
+      "memory_mib": 44.38
+    },
+    {
+      "service": "api",
+      "seconds": 81.02493739128113,
+      "cpu_percent": 97.97,
+      "memory_mib": 259.0
+    },
+    {
+      "service": "mlflow",
+      "seconds": 81.02493739128113,
+      "cpu_percent": 0.27,
+      "memory_mib": 354.2
+    },
+    {
+      "service": "locust",
+      "seconds": 85.30201387405396,
+      "cpu_percent": 7.85,
+      "memory_mib": 44.38
+    },
+    {
+      "service": "api",
+      "seconds": 85.30201387405396,
+      "cpu_percent": 66.29,
+      "memory_mib": 251.1
+    },
+    {
+      "service": "mlflow",
+      "seconds": 85.30201387405396,
+      "cpu_percent": 0.24,
+      "memory_mib": 354.2
+    },
+    {
+      "service": "locust",
+      "seconds": 89.95314574241638,
+      "cpu_percent": 9.74,
+      "memory_mib": 44.38
+    },
+    {
+      "service": "api",
+      "seconds": 89.95314574241638,
+      "cpu_percent": 91.01,
+      "memory_mib": 250.3
+    },
+    {
+      "service": "mlflow",
+      "seconds": 89.95314574241638,
+      "cpu_percent": 0.24,
+      "memory_mib": 354.2
+    },
+    {
+      "service": "locust",
+      "seconds": 94.32452917098999,
+      "cpu_percent": 11.43,
+      "memory_mib": 44.87
+    },
+    {
+      "service": "api",
+      "seconds": 94.32452917098999,
+      "cpu_percent": 99.06,
+      "memory_mib": 266.4
+    },
+    {
+      "service": "mlflow",
+      "seconds": 94.32452917098999,
+      "cpu_percent": 0.27,
+      "memory_mib": 354.0
+    }
+  ],
+  "u30_r3": [
+    {
+      "service": "locust",
+      "seconds": 3.4905993938446045,
+      "cpu_percent": 7.71,
+      "memory_mib": 43.49
+    },
+    {
+      "service": "api",
+      "seconds": 3.4905993938446045,
+      "cpu_percent": 85.72,
+      "memory_mib": 251.6
+    },
+    {
+      "service": "mlflow",
+      "seconds": 3.4905993938446045,
+      "cpu_percent": 0.37,
+      "memory_mib": 353.9
+    },
+    {
+      "service": "locust",
+      "seconds": 7.77298903465271,
+      "cpu_percent": 9.49,
+      "memory_mib": 45.01
+    },
+    {
+      "service": "api",
+      "seconds": 7.77298903465271,
+      "cpu_percent": 97.1,
+      "memory_mib": 278.1
+    },
+    {
+      "service": "mlflow",
+      "seconds": 7.77298903465271,
+      "cpu_percent": 0.22,
+      "memory_mib": 354.0
+    },
+    {
+      "service": "locust",
+      "seconds": 12.29522156715393,
+      "cpu_percent": 8.49,
+      "memory_mib": 45.08
+    },
+    {
+      "service": "api",
+      "seconds": 12.29522156715393,
+      "cpu_percent": 99.08,
+      "memory_mib": 274.7
+    },
+    {
+      "service": "mlflow",
+      "seconds": 12.29522156715393,
+      "cpu_percent": 0.23,
+      "memory_mib": 354.0
+    },
+    {
+      "service": "locust",
+      "seconds": 16.830139875411987,
+      "cpu_percent": 13.06,
+      "memory_mib": 45.51
+    },
+    {
+      "service": "api",
+      "seconds": 16.830139875411987,
+      "cpu_percent": 98.67,
+      "memory_mib": 268.2
+    },
+    {
+      "service": "mlflow",
+      "seconds": 16.830139875411987,
+      "cpu_percent": 22.93,
+      "memory_mib": 354.0
+    },
+    {
+      "service": "locust",
+      "seconds": 21.38268256187439,
+      "cpu_percent": 3.02,
+      "memory_mib": 45.51
+    },
+    {
+      "service": "api",
+      "seconds": 21.38268256187439,
+      "cpu_percent": 94.74,
+      "memory_mib": 285.9
+    },
+    {
+      "service": "mlflow",
+      "seconds": 21.38268256187439,
+      "cpu_percent": 0.4,
+      "memory_mib": 354.0
+    },
+    {
+      "service": "locust",
+      "seconds": 25.76497197151184,
+      "cpu_percent": 9.57,
+      "memory_mib": 45.59
+    },
+    {
+      "service": "api",
+      "seconds": 25.76497197151184,
+      "cpu_percent": 97.98,
+      "memory_mib": 279.5
+    },
+    {
+      "service": "mlflow",
+      "seconds": 25.76497197151184,
+      "cpu_percent": 0.39,
+      "memory_mib": 354.0
+    },
+    {
+      "service": "locust",
+      "seconds": 30.452420711517334,
+      "cpu_percent": 5.15,
+      "memory_mib": 45.45
+    },
+    {
+      "service": "api",
+      "seconds": 30.452420711517334,
+      "cpu_percent": 102.53,
+      "memory_mib": 267.2
+    },
+    {
+      "service": "mlflow",
+      "seconds": 30.452420711517334,
+      "cpu_percent": 0.45,
+      "memory_mib": 354.2
+    },
+    {
+      "service": "locust",
+      "seconds": 34.42078638076782,
+      "cpu_percent": 7.33,
+      "memory_mib": 45.68
+    },
+    {
+      "service": "api",
+      "seconds": 34.42078638076782,
+      "cpu_percent": 99.1,
+      "memory_mib": 272.4
+    },
+    {
+      "service": "mlflow",
+      "seconds": 34.42078638076782,
+      "cpu_percent": 0.22,
+      "memory_mib": 354.2
+    },
+    {
+      "service": "locust",
+      "seconds": 38.70324420928955,
+      "cpu_percent": 10.05,
+      "memory_mib": 45.8
+    },
+    {
+      "service": "api",
+      "seconds": 38.70324420928955,
+      "cpu_percent": 98.38,
+      "memory_mib": 314.6
+    },
+    {
+      "service": "mlflow",
+      "seconds": 38.70324420928955,
+      "cpu_percent": 10.64,
+      "memory_mib": 359.9
+    },
+    {
+      "service": "locust",
+      "seconds": 43.199103116989136,
+      "cpu_percent": 9.03,
+      "memory_mib": 45.8
+    },
+    {
+      "service": "api",
+      "seconds": 43.199103116989136,
+      "cpu_percent": 97.35,
+      "memory_mib": 284.2
+    },
+    {
+      "service": "mlflow",
+      "seconds": 43.199103116989136,
+      "cpu_percent": 0.26,
+      "memory_mib": 354.3
+    },
+    {
+      "service": "locust",
+      "seconds": 47.510231256484985,
+      "cpu_percent": 12.15,
+      "memory_mib": 45.96
+    },
+    {
+      "service": "api",
+      "seconds": 47.510231256484985,
+      "cpu_percent": 100.74,
+      "memory_mib": 289.4
+    },
+    {
+      "service": "mlflow",
+      "seconds": 47.510231256484985,
+      "cpu_percent": 0.23,
+      "memory_mib": 354.3
+    },
+    {
+      "service": "locust",
+      "seconds": 52.20305347442627,
+      "cpu_percent": 9.91,
+      "memory_mib": 45.74
+    },
+    {
+      "service": "api",
+      "seconds": 52.20305347442627,
+      "cpu_percent": 101.96,
+      "memory_mib": 296.9
+    },
+    {
+      "service": "mlflow",
+      "seconds": 52.20305347442627,
+      "cpu_percent": 0.29,
+      "memory_mib": 354.2
+    },
+    {
+      "service": "locust",
+      "seconds": 56.57174205780029,
+      "cpu_percent": 10.82,
+      "memory_mib": 45.88
+    },
+    {
+      "service": "api",
+      "seconds": 56.57174205780029,
+      "cpu_percent": 100.96,
+      "memory_mib": 329.0
+    },
+    {
+      "service": "mlflow",
+      "seconds": 56.57174205780029,
+      "cpu_percent": 0.34,
+      "memory_mib": 354.2
+    },
+    {
+      "service": "locust",
+      "seconds": 61.109198331832886,
+      "cpu_percent": 9.61,
+      "memory_mib": 45.98
+    },
+    {
+      "service": "api",
+      "seconds": 61.109198331832886,
+      "cpu_percent": 98.78,
+      "memory_mib": 286.9
+    },
+    {
+      "service": "mlflow",
+      "seconds": 61.109198331832886,
+      "cpu_percent": 13.38,
+      "memory_mib": 358.3
+    },
+    {
+      "service": "locust",
+      "seconds": 64.83709454536438,
+      "cpu_percent": 4.53,
+      "memory_mib": 45.97
+    },
+    {
+      "service": "api",
+      "seconds": 64.83709454536438,
+      "cpu_percent": 97.11,
+      "memory_mib": 282.2
+    },
+    {
+      "service": "mlflow",
+      "seconds": 64.83709454536438,
+      "cpu_percent": 0.65,
+      "memory_mib": 354.2
+    },
+    {
+      "service": "locust",
+      "seconds": 69.13371229171753,
+      "cpu_percent": 1.75,
+      "memory_mib": 45.88
+    },
+    {
+      "service": "api",
+      "seconds": 69.13371229171753,
+      "cpu_percent": 100.43,
+      "memory_mib": 296.9
+    },
+    {
+      "service": "mlflow",
+      "seconds": 69.13371229171753,
+      "cpu_percent": 0.5,
+      "memory_mib": 354.2
+    },
+    {
+      "service": "locust",
+      "seconds": 73.92933344841003,
+      "cpu_percent": 7.1,
+      "memory_mib": 45.92
+    },
+    {
+      "service": "api",
+      "seconds": 73.92933344841003,
+      "cpu_percent": 100.26,
+      "memory_mib": 291.6
+    },
+    {
+      "service": "mlflow",
+      "seconds": 73.92933344841003,
+      "cpu_percent": 21.28,
+      "memory_mib": 354.0
+    },
+    {
+      "service": "locust",
+      "seconds": 78.30012440681458,
+      "cpu_percent": 7.19,
+      "memory_mib": 46.16
+    },
+    {
+      "service": "api",
+      "seconds": 78.30012440681458,
+      "cpu_percent": 99.92,
+      "memory_mib": 323.8
+    },
+    {
+      "service": "mlflow",
+      "seconds": 78.30012440681458,
+      "cpu_percent": 0.35,
+      "memory_mib": 354.0
+    },
+    {
+      "service": "locust",
+      "seconds": 83.03245496749878,
+      "cpu_percent": 14.16,
+      "memory_mib": 46.16
+    },
+    {
+      "service": "api",
+      "seconds": 83.03245496749878,
+      "cpu_percent": 94.85,
+      "memory_mib": 314.2
+    },
+    {
+      "service": "mlflow",
+      "seconds": 83.03245496749878,
+      "cpu_percent": 0.38,
+      "memory_mib": 354.0
+    },
+    {
+      "service": "locust",
+      "seconds": 87.4349353313446,
+      "cpu_percent": 9.38,
+      "memory_mib": 46.16
+    },
+    {
+      "service": "api",
+      "seconds": 87.4349353313446,
+      "cpu_percent": 97.61,
+      "memory_mib": 289.9
+    },
+    {
+      "service": "mlflow",
+      "seconds": 87.4349353313446,
+      "cpu_percent": 0.24,
+      "memory_mib": 353.9
+    },
+    {
+      "service": "locust",
+      "seconds": 92.04131937026978,
+      "cpu_percent": 11.51,
+      "memory_mib": 45.97
+    },
+    {
+      "service": "api",
+      "seconds": 92.04131937026978,
+      "cpu_percent": 98.18,
+      "memory_mib": 316.8
+    },
+    {
+      "service": "mlflow",
+      "seconds": 92.04131937026978,
+      "cpu_percent": 0.23,
+      "memory_mib": 353.9
+    }
+  ]
+}

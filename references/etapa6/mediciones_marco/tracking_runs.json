@@ -1,0 +1,43 @@
+{
+  "experiment_id": "2",
+  "tracking_scope": "almacén operativo local; no sustituye el Registry histórico",
+  "performance_sha256": "f1bb1d09a7a9613d94b2bc693dec0e85da6e1d8a65a7c590756ec1593908074d",
+  "runs": [
+    {
+      "measurement": "u01_r1",
+      "run_id": "bd817ee891ed460da70f5b79e492e368"
+    },
+    {
+      "measurement": "u10_r1",
+      "run_id": "f2907f55c3124e6d9625975e9a66bf16"
+    },
+    {
+      "measurement": "u30_r1",
+      "run_id": "2f70d36f76444343b64a9f571cb33fda"
+    },
+    {
+      "measurement": "u01_r2",
+      "run_id": "da522b122ed642d589820db7d5420f9d"
+    },
+    {
+      "measurement": "u10_r2",
+      "run_id": "1788d9392fbb4dfd8f065a7f1ea9c419"
+    },
+    {
+      "measurement": "u30_r2",
+      "run_id": "22f554dea19e42a9a07d1ae4ed3adb07"
+    },
+    {
+      "measurement": "u01_r3",
+      "run_id": "2e3100c3693f4bd8ba43ed3a22e1328a"
+    },
+    {
+      "measurement": "u10_r3",
+      "run_id": "8ee739f3b88f4c60a8e534b06dfc4597"
+    },
+    {
+      "measurement": "u30_r3",
+      "run_id": "3ab7f2dfd540487a9943afb74dd9a8b6"
+    }
+  ]
+}

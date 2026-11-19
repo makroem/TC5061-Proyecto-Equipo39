@@ -1,0 +1,11 @@
+{
+  "check": "persistencia del experimento tras recrear el contenedor de tracking",
+  "experiment_id": "1",
+  "result": "passed",
+  "services": {
+    "api": "healthy",
+    "mlflow": "healthy"
+  },
+  "source_commit": "41a4d421df2bde3fd07679d3642aa3cc23aa8c14",
+  "note": "Tracking operativo local; no sustituye el Registry histórico del modelo."
+}

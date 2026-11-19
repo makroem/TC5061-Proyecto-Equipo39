@@ -1,0 +1,33 @@
+{
+  "purpose": "comprobación breve de exportación; no reemplaza el ensayo principal",
+  "results": [
+    {
+      "profile": "warmup",
+      "requests": 83,
+      "failures": 0,
+      "csv_matches_final": true,
+      "export_errors": 0
+    },
+    {
+      "profile": "u01_r1",
+      "requests": 85,
+      "failures": 0,
+      "csv_matches_final": true,
+      "export_errors": 0
+    },
+    {
+      "profile": "u10_r1",
+      "requests": 738,
+      "failures": 0,
+      "csv_matches_final": true,
+      "export_errors": 0
+    },
+    {
+      "profile": "u30_r1",
+      "requests": 756,
+      "failures": 0,
+      "csv_matches_final": true,
+      "export_errors": 0
+    }
+  ]
+}

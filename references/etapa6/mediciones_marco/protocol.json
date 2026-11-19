@@ -1,0 +1,46 @@
+{
+  "source_commit": "41a4d421df2bde3fd07679d3642aa3cc23aa8c14",
+  "source_sha256": {
+    "docker-compose.yml": "2bcd3c144b710212958b60ad0f0ab07600ce081a7e27c1b6fba38bf945a225d7",
+    "tests\\load\\locustfile.py": "b8d3e5ca797d1b7205edbf445944a8366fd38575444baaea78274c6f6a46cb74",
+    "scripts\\run_load.py": "c277fef89501146659e49088782f925c1c5e6192250c24af0444d62188c6ec49"
+  },
+  "api_image_id": "sha256:ddf413fd91080f1194b3500487ec0a5db71e0e811b043c5f6494b9d89fbd5872",
+  "created_utc": "2026-11-18T05:09:46.374828+00:00",
+  "duration_seconds": 90,
+  "repeats": 3,
+  "profiles": [
+    {
+      "users": 1,
+      "spawn_rate": 1
+    },
+    {
+      "users": 10,
+      "spawn_rate": 2
+    },
+    {
+      "users": 30,
+      "spawn_rate": 5
+    }
+  ],
+  "warmup_seconds": 30,
+  "think_time_seconds": [
+    0.1,
+    0.5
+  ],
+  "task_weights": {
+    "one": 4,
+    "ten": 1
+  },
+  "model_bundle_sha256": "dedce1eb08bda971a42fba311224c88e56f75cd2789dbb391e9445951931bd80",
+  "model_version": "1",
+  "docker_version": "29.9.2",
+  "engine_cpus": 2,
+  "engine_memory_bytes": 4107382784,
+  "metrics_interval_target_seconds": 2,
+  "slo_failure_ratio": 0.001,
+  "slo_nominal_p95_ms": 250,
+  "slo_peak_p95_ms": 1000,
+  "scope": "medici\u00f3n local exploratoria; no equivale a capacidad de nube",
+  "generator_shares_host": true
+}

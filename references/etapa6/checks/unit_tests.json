@@ -1,0 +1,12 @@
+{
+  "scope": [
+    "tests/api",
+    "tests/operations"
+  ],
+  "tests": "108",
+  "failures": "0",
+  "errors": "0",
+  "skipped": "0",
+  "time": "2.865",
+  "deprecation_warnings": 15
+}
