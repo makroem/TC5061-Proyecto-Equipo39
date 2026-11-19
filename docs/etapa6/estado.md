@@ -1,22 +1,22 @@
 # Estado de la Etapa 6
 
-La implementación se revisa en el [PR #72](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/72). El manual y el código están publicados en la rama; la integración en main requiere revisión independiente de Diego Hurtado.
+La implementación del [PR #72](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/72) está integrada en `main` desde el 19 de noviembre de 2026 mediante `7c49a81`. Diego Hurtado [aprobó el último cambio `a9d8424`](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/72#pullrequestreview-5969054034). El [cierre de revisión](cierre_revision_20261119.md) conserva las fechas, la procedencia de los resultados y el alcance de esa aprobación.
 
 ## Avance verificado
 
 - 108 pruebas de API y operación aprobadas localmente. Este conteo corresponde a `tests/api` y `tests/operations`, no al total histórico del proyecto.
 - API y tracking saludables con Compose; P1 responde en lotes de 1, 10 y 100 y rechaza el lote vacío con 422.
 - [Persistencia comprobada](../../references/etapa6/checks/persistence.json) al recrear los contenedores; el volumen conserva el experimento de verificación.
-- El flujo ejecuta pruebas en Linux y Windows, construcción y despliegue temporal. Consultar el [resultado del último cambio](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/72/checks).
+- El flujo ejecuta pruebas en Linux y Windows, construcción y despliegue temporal. Consultar los [controles del PR aprobado](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/72/checks) y la [ejecución sobre main integrado](https://github.com/makroem/TC5061-Proyecto-Equipo39/actions/runs/44553281639).
 - Nueve mediciones exploratorias de P1: 13,001 solicitudes, 36,176 predicciones útiles y cero fallos de solicitud. Los objetivos de latencia no se cumplen en los perfiles de 10 y 30 usuarios.
 - Nueve registros de métricas creados en el tracking operativo; [identificadores y huella de la tabla](../../references/etapa6/mediciones_marco/tracking_runs.json).
 - [Seguridad interpretada](seguridad_operacion.md): 9 avisos bajos documentados, 0 medios y 0 altos.
 
-## Informe editable preparado
+## Informe editable revisado
 
 El [informe de operación y FinOps](../../references/etapa6/TC5061_Microservicios_FinOps_Equipo39.docx) contiene cuatro cuartillas de análisis y cuatro páginas de anexos, con Arial 11, texto justificado e interlineado 1.15. Incluye las tres gráficas originales, resultados de las nueve ejecuciones, cálculo por inferencia útil, sensibilidad y recomendaciones. Se verificaron cifras, enlaces y paginación; el [registro de comprobación](../../references/etapa6/checks/reporte_revision.json) identifica su versión.
 
-Preparado por Marco con las mediciones existentes; no incorpora una prueba de carga nueva ni sustituye la revisión independiente. La revisión del 18 de noviembre no encontró nuevas aportaciones, comentarios ni aprobaciones del equipo desde el corte anterior. El PR #72 mantiene solicitada la revisión de Diego Hurtado. El cierre del informe queda pendiente del contraste y de las observaciones del revisor.
+El informe de Marco fue contrastado por Diego Hurtado, quien confirmó su huella, tres imágenes y contenido en la aprobación del PR #72. Se conserva exactamente el archivo revisado: las menciones a tareas pendientes dentro del documento describen su corte del 18 de noviembre. El [cierre del 19 de noviembre](cierre_revision_20261119.md) actualiza el estado sin sustituir sus mediciones ni atribuir una prueba nueva a Marco.
 
 ## Resultados de carga
 
@@ -62,15 +62,15 @@ La [sensibilidad completa](../../references/etapa6/mediciones_marco/finops_sensi
 
 Prioridades de mejora: repetir en un anfitrión dedicado y con generador separado; medir el efecto de la cuota de CPU y de los procesos de inferencia; mantener los lotes cuando su tiempo de respuesta sea admisible; comprobar margen de memoria antes de reducir el plan; apagar entornos de prueba fuera de uso. Cada cambio debe conservar modelo, entradas y protocolo para permitir comparación. No se atribuye ahorro medido a una optimización todavía no probada.
 
-## Pendientes por persona
+## Seguimiento por persona
 
-| Responsable | Pendiente | Dependencia y respaldo |
+| Responsable | Avance y siguiente actividad | Dependencia y respaldo |
 |---|---|---|
-| [Marco #73](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/73) | Atender hallazgos de revisión, contrastar mejoras de rendimiento y cerrar el informe editable ya preparado con cuatro cuartillas más anexos. | La base técnica y el análisis ya están disponibles. El cierre requiere revisión de Diego Hurtado. |
-| [Diego Hurtado #74](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/74) | Reproducir, contrastar carga y costos y revisar el último cambio del PR. | Paquete P1 autorizado, rama y evidencias de Marco. |
-| [Stefania #75](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/75) | Interpretar dos gráficas en 150 a 250 palabras y verificar tres fuentes. | Gráficas publicadas. Respaldo de Marco o Diego Hurtado; no bloquea. |
-| [Diego Martínez #76](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/76) | Completar seis verificaciones documentales. | README y evidencias publicadas. Respaldo de Marco o Diego Hurtado; no bloquea. |
+| [Marco #73](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/73) | PR #72 integrado; informe revisado. Preparó actualización de estado, interpretación y seis comprobaciones documentales como respaldo. Contrastar rendimiento antes de prometer capacidad. | Los cambios documentales posteriores siguen su propia revisión; la aprobación técnica de #72 ya está atendida. |
+| [Diego Hurtado #74](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/74) | Reproducción y aprobación independientes realizadas. Conservar en el repositorio, si están disponibles, los resultados originales y datos de entorno de su ensayo. | La revisión pública no adjunta cifras de carga ni archivos originales. Su publicación completaría la comparación numérica, sin invalidar la integración aprobada. |
+| [Stefania #75](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/75) | Puede revisar y ampliar la [interpretación preparada por Marco](interpretacion_carga.md) con su aportación propia. | El contenido técnico ya tiene respaldo; no bloquea la implementación. |
+| [Diego Martínez #76](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/76) | Puede contrastar las [seis verificaciones documentales de Marco](verificacion_documental.md) y registrar sus observaciones. | El contenido técnico ya tiene respaldo; no bloquea la implementación. |
 
-Las tareas asignadas no se contabilizan como contribuciones terminadas. La participación equilibrada depende de las aportaciones reales de los cuatro. El manual editable es la guía de trabajo; no sustituye el reporte final solicitado por el curso.
+El contenido de respaldo se atribuye a Marco. No se registra como participación de Stefania o Diego Martínez ni sustituye sus aportaciones individuales. El manual conserva la distribución inicial; este seguimiento registra el estado posterior a la revisión.
 
 Las nueve mediciones corresponden al cambio `41a4d421df2bde3fd07679d3642aa3cc23aa8c14`; su protocolo registra las huellas de código e imagen. Las correcciones posteriores afectan comprobaciones HTTP, exportación y documentación, sin modificar el modelo ni la implementación de la API.
