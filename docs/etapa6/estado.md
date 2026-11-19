@@ -12,6 +12,12 @@ La implementación se revisa en el [PR #72](https://github.com/makroem/TC5061-Pr
 - Nueve registros de métricas creados en el tracking operativo; [identificadores y huella de la tabla](../../references/etapa6/mediciones_marco/tracking_runs.json).
 - [Seguridad interpretada](seguridad_operacion.md): 9 avisos bajos documentados, 0 medios y 0 altos.
 
+## Informe editable preparado
+
+El [informe de operación y FinOps](../../references/etapa6/TC5061_Microservicios_FinOps_Equipo39.docx) contiene cuatro cuartillas de análisis y cuatro páginas de anexos, con Arial 11, texto justificado e interlineado 1.15. Incluye las tres gráficas originales, resultados de las nueve ejecuciones, cálculo por inferencia útil, sensibilidad y recomendaciones. Se verificaron cifras, enlaces y paginación; el [registro de comprobación](../../references/etapa6/checks/reporte_revision.json) identifica su versión.
+
+Preparado por Marco con las mediciones existentes; no incorpora una prueba de carga nueva ni sustituye la revisión independiente. La revisión del 18 de noviembre no encontró nuevas aportaciones, comentarios ni aprobaciones del equipo desde el corte anterior. El PR #72 mantiene solicitada la revisión de Diego Hurtado. El cierre del informe queda pendiente del contraste y de las observaciones del revisor.
+
 ## Resultados de carga
 
 Cada perfil tiene tres repeticiones. Las tasas usan la duración real desde el inicio hasta el cierre, incluido el drenaje final; el tiempo configurado es de 90 segundos. La mediana del p95 se calcula entre ejecuciones y no equivale al p95 de todas las solicitudes combinadas.
@@ -60,7 +66,7 @@ Prioridades de mejora: repetir en un anfitrión dedicado y con generador separad
 
 | Responsable | Pendiente | Dependencia y respaldo |
 |---|---|---|
-| [Marco #73](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/73) | Atender hallazgos de revisión, contrastar mejoras de rendimiento y preparar el reporte editable final de 3 a 5 cuartillas más anexos. | La base técnica y el análisis ya están disponibles. El cierre requiere revisión de Diego Hurtado. |
+| [Marco #73](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/73) | Atender hallazgos de revisión, contrastar mejoras de rendimiento y cerrar el informe editable ya preparado con cuatro cuartillas más anexos. | La base técnica y el análisis ya están disponibles. El cierre requiere revisión de Diego Hurtado. |
 | [Diego Hurtado #74](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/74) | Reproducir, contrastar carga y costos y revisar el último cambio del PR. | Paquete P1 autorizado, rama y evidencias de Marco. |
 | [Stefania #75](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/75) | Interpretar dos gráficas en 150 a 250 palabras y verificar tres fuentes. | Gráficas publicadas. Respaldo de Marco o Diego Hurtado; no bloquea. |
 | [Diego Martínez #76](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/76) | Completar seis verificaciones documentales. | README y evidencias publicadas. Respaldo de Marco o Diego Hurtado; no bloquea. |
