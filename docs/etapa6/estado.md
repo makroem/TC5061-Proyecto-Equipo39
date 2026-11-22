@@ -12,11 +12,15 @@ La implementación del [PR #72](https://github.com/makroem/TC5061-Proyecto-Equip
 - Nueve registros de métricas creados en el tracking operativo; [identificadores y huella de la tabla](../../references/etapa6/mediciones_marco/tracking_runs.json).
 - [Seguridad interpretada](seguridad_operacion.md): 9 avisos bajos documentados, 0 medios y 0 altos.
 
-## Informe editable actualizado
+## Informe final para entrega
 
-El [informe actualizado de Operación y FinOps](../../references/etapa6/TC5061_Operacion_FinOps_Equipo39_Actualizado.docx), con corte al 21 de noviembre de 2026, contiene cuatro cuartillas de análisis y cinco páginas de anexos. Incluye las gráficas de Locust y recursos (anexos A–C), los resultados de las nueve mediciones (anexo D), el análisis FinOps y el cálculo del costo por inferencia (p. 3), y una captura original del pipeline exitoso de `main` (anexo E). Su SHA-256 es `296afaa611d9f806ba37b5906b36b137452ffb12fba06ca90a08d382b0644bd5`.
+El [informe final de Operación y FinOps](../../references/etapa6/TC5061_Operacion_FinOps_Equipo39_Final.docx), con corte al 21 de noviembre de 2026, conserva cuatro páginas de análisis y cinco de anexos, con Arial 11 e interlineado 1.15. Incluye las gráficas de Locust y recursos (anexos A–C), las nueve mediciones originales (anexo D), el análisis FinOps y el costo por inferencia (p. 3), y la captura del [pipeline exitoso de main sobre `1359830`](https://github.com/makroem/TC5061-Proyecto-Equipo39/actions/runs/44981895636) (anexo E). Su SHA-256 es `7c7f3f99f3512bdf382d7c341fef83dca5ea29fd5e242eff4a2b0ac0a6dfba9e`.
 
-Esta versión ya está publicada y enlazada desde el README en el [PR #77](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/77). Su revisión está solicitada a Diego Hurtado y sigue pendiente; no hereda la aprobación de #72. Las métricas y los incumplimientos de latencia originales se conservan. Para el estado actual de las comprobaciones automáticas, consultar los [controles de #77](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/77/checks).
+El [PR #77](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/77) fue aprobado por Diego Hurtado e integrado por Marco el 21 de noviembre a las 21:43, hora de Ciudad de México, mediante `1359830`. GitHub vincula la [aprobación](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/77#pullrequestreview-6010082736) a `d4eff36`, aunque el texto del revisor menciona `4dfd34d`; se conserva esa distinción. La ejecución posterior completó los tres trabajos de pruebas en Linux y Windows, construcción y despliegue temporal. Los tres avisos de migración de Node.js no impidieron el resultado exitoso. La [tarea #73](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/73) está cerrada.
+
+Esta versión final registra ese cierre y sustituye la captura por la ejecución posterior a #77; la aprobación anterior corresponde al contenido revisado en aquel PR. No se presentan nuevas mediciones ni una aprobación independiente de este archivo final. Las gráficas, los cálculos y los incumplimientos de latencia originales permanecen intactos.
+
+Se conserva la [versión actualizada incorporada mediante #77](../../references/etapa6/TC5061_Operacion_FinOps_Equipo39_Actualizado.docx), con SHA-256 `296afaa611d9f806ba37b5906b36b137452ffb12fba06ca90a08d382b0644bd5`. Sus referencias a revisión pendiente reflejan el corte previo a la integración.
 
 ### Informe anterior aprobado y conservado
 
@@ -72,8 +76,8 @@ Prioridades de mejora: repetir en un anfitrión dedicado y con generador separad
 
 | Responsable | Avance y siguiente actividad | Dependencia y respaldo |
 |---|---|---|
-| [Marco #73](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/73) | PR #72 integrado. Informe actualizado de nueve páginas y enlace en README publicados en #77; interpretación y seis comprobaciones preparadas como respaldo. Integrar el cierre documental cuando el último cambio esté aprobado. | Depende de la revisión de #77 por Diego Hurtado. Las mejoras de rendimiento requieren ensayos comparables y se siguen por separado. |
-| [Diego Hurtado #74](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/74) | Reproducción y aprobación de #72 realizadas. Revisar el último cambio de #77 y conservar, si están disponibles, los archivos originales y datos de entorno de su ensayo. | La revisión de #77 está pendiente. Los archivos de carga faltantes impiden cuantificar diferencias entre equipos; no invalidan la integración de #72. |
+| [Marco #73](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/73) | PR #72 y #77 integrados; tarea #73 cerrada. Informe final con cierre y captura posterior de main preparado para entrega. | La publicación de esta versión final requiere su propia revisión; las mejoras de rendimiento se siguen por separado. |
+| [Diego Hurtado #74](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/74) | Aprobaciones de #72 y #77 realizadas. Revisar la publicación del archivo final y conservar, si están disponibles, los originales de su ensayo. | Los archivos de carga faltantes impiden cuantificar diferencias entre equipos; no bloquean el cierre documental de #77. |
 | [Stefania #75](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/75) | Puede revisar y ampliar la [interpretación preparada por Marco](interpretacion_carga.md) con su aportación propia. | El contenido técnico ya tiene respaldo; no bloquea la implementación. |
 | [Diego Martínez #76](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/76) | Puede contrastar las [seis verificaciones documentales de Marco](verificacion_documental.md) y registrar sus observaciones. | El contenido técnico ya tiene respaldo; no bloquea la implementación. |
 
