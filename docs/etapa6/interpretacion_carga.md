@@ -4,7 +4,9 @@ Preparada por Marco el 19 de noviembre de 2026 como respaldo de la tarea #75. No
 
 ## Lectura de las gráficas
 
-La gráfica de rendimiento y latencia reúne tres repeticiones para cada perfil de 1, 10 y 30 usuarios. La mediana de solicitudes por segundo aumenta de 2.91 a 21.16 y 23.12, mientras la mediana del p95 pasa de 51 a 460 y 1700 milisegundos. Aumentar la concurrencia de 10 a 30 usuarios aporta poco rendimiento y eleva la espera. Los rangos del p95, 39–59, 370–840 y 1300–2400 ms, muestran variación entre ejecuciones; no son intervalos de confianza. Cero fallos de solicitud no implica cumplir el objetivo de latencia.
+La gráfica de rendimiento y latencia reúne tres repeticiones para cada perfil de 1, 10 y 30 usuarios. La mediana de solicitudes por segundo aumenta de 2.91 a 21.16 y 23.12, mientras la mediana del p95 pasa de 51 a 460 y 1700 milisegundos. Aumentar la concurrencia de 10 a 30 usuarios aporta poco rendimiento y eleva la espera. Los rangos del p95, 39–59, 370–840 y 1300–2400 ms, muestran variación entre ejecuciones; no son intervalos de confianza.
+
+Cero fallos de solicitud no implica cumplir el objetivo de latencia.Bajo las condiciones evaluadas, el perfil de 10 usuarios concurrentes parece ofrecer una mejor relación entre capacidad de procesamiento y tiempo de respuesta. Aunque el escenario de 30 usuarios incrementa la carga atendida, el aumento obtenido es reducido en comparación con el deterioro observado en la latencia, por lo que podría no representar una configuración conveniente para aplicaciones sensibles al tiempo de respuesta.
 
 La segunda gráfica, de recursos, muestra que la CPU media de la API se aproxima a su cuota al crecer la carga. La memoria máxima se expresa en MiB; las bandas resumen mínimos y máximos de tres repeticiones. Este patrón es compatible con saturación, pero no demuestra una causa aislada: servicios, generador y tareas auxiliares compartieron anfitrión.
 
