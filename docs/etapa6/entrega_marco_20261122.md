@@ -14,7 +14,7 @@ La implementación, el análisis y el Word final de Marco están integrados medi
 | Recursos | CPU y memoria muestreadas durante los ensayos; tablas y gráficas conservadas. |
 | FinOps | 81 escenarios recalculados, costo por inferencia útil y recomendaciones con limitaciones explícitas. |
 | Informe | Word final aprobado mediante #78. PDF de nueve páginas: cuatro principales y cinco de anexos; capturas y gráficas conservadas. |
-| Colaboración | Marco implementó y documentó; Diego Hurtado aprobó #72, #77 y #78. Las aportaciones de Stefania (#79) y Diego Martínez (#80) siguen su revisión propia. |
+| Colaboración | Marco implementó y documentó; Diego Hurtado aprobó #72, #77 y #78. Marco aprobó e integró la aportación de Diego Martínez mediante #80 y cerró #76. La aportación de Stefania (#79) sigue pendiente de revisión. |
 
 ## Archivos comprobados en main
 
@@ -96,7 +96,7 @@ Estos archivos se preparan en la rama `docs/marco-cierre-entrega-etapa6-20261122
 
 - Diego Hurtado debe aportar los archivos originales de su ensayo, si los conserva, en #74. Marco no puede reconstruirlos ni atribuirse esa ejecución. Su ausencia no bloquea el cierre documental ya aprobado.
 - PR #79: aportación de Stefania pendiente de revisión; una mejor relación que el perfil de 30 usuarios no convierte el perfil de 10 en cumplimiento del objetivo.
-- PR #80: revisión asignada a Marco y seis controles correctos; la integración está pendiente de aprobación.
+- PR #80: [aprobado por Marco](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/80#pullrequestreview-6014433070) sobre `c355593` e integrado mediante `4c37247` el 22 de noviembre a las 14:42, hora de Ciudad de México; #76 quedó cerrada. La [revisión individual de Diego Martínez](revision_verificaciones_diego_martinez.md) ya está en main y se conserva como aportación de su autor.
 - La distribución histórica de aportaciones no es equilibrada. Las revisiones y nuevas contribuciones cuentan como tales; no se modifican autorías ni se promete una calificación.
 - El despliegue de Actions es temporal y usa una fixture; no es producción ni prueba de capacidad con P1.
 - La entrega en Canvas no se ha ejecutado en esta revisión.
