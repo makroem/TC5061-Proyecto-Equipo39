@@ -19,6 +19,15 @@ $body = Get-Content references/etapa4/examples/predict_request.json -Raw
 Invoke-RestMethod -Method Post -Uri http://127.0.0.1:8006/predict -ContentType 'application/json' -Body $body
 ```
 
+En macOS o Linux:
+
+```bash
+curl http://127.0.0.1:8006/ready
+curl -X POST http://127.0.0.1:8006/predict -H 'Content-Type: application/json' --data @references/etapa4/examples/predict_request.json
+```
+
+Sin el paquete de P1 se puede probar el despliegue con la fixture sintética del flujo de CI: con el entorno de `requirements-api.txt`, ejecuta `python -B -m scripts.create_ci_model` y define `MODEL_PATH=./private_results/etapa6/ci/model` y `MODEL_MANIFEST_PATH=./private_results/etapa6/ci/model_manifest.json` antes de `docker compose up`. El servicio responde como `ci-fixture-only`, no como P1.
+
 `docker compose down` detiene esta etapa conservando el volumen. Para la carga, prepara el entorno de pruebas indicado en la guía, ejecuta `docker compose --profile load pull locust` y `python -m scripts.run_load`. Se guardan nueve mediciones, HTML/CSV de Locust y muestras de recursos en una carpeta nueva dentro de `private_results/etapa6/`.
 
 El [flujo de Etapa 6](.github/workflows/etapa6.yml) prueba API y operación en Linux y Windows, construye las imágenes y despliega Compose temporalmente para comprobar HTTP y persistencia. Utiliza una fixture sintética identificada; las mediciones de P1 se generan por separado. Consultar [ejecuciones de GitHub Actions](https://github.com/makroem/TC5061-Proyecto-Equipo39/actions/workflows/etapa6.yml) y la [ejecución posterior a la integración](https://github.com/makroem/TC5061-Proyecto-Equipo39/actions/runs/44553281639).
