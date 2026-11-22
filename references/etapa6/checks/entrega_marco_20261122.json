@@ -1,0 +1,30 @@
+{
+  "checked_on": "2026-11-22",
+  "main_commit": "19a0e0ad2956de391c13aac77d8b07b135998787",
+  "main_run": 45046142850,
+  "main_conclusion": "success",
+  "tests_per_os": 108,
+  "systems": [
+    "ubuntu-24.04",
+    "windows-2025"
+  ],
+  "measurement_runs": 9,
+  "requests": 13001,
+  "successful_predictions": 36176,
+  "request_failures": 0,
+  "finops_scenarios_recalculated": 81,
+  "source_files_with_matching_sha256": 72,
+  "source_files_in_manifest": 72,
+  "main_files_enumerated": 61,
+  "docx_sha256": "7c7f3f99f3512bdf382d7c341fef83dca5ea29fd5e242eff4a2b0ac0a6dfba9e",
+  "pdf_sha256": "23575bcf74629c062b8b436d284911e63bc292f84d6766d31e4be40632313aaa",
+  "pdf_pages": 9,
+  "body_pages": 4,
+  "annex_pages": 5,
+  "new_measurements": false,
+  "latency_objectives_passed_all_profiles": false,
+  "reviewed_pr": 78,
+  "review_commit": "734c7f59b08752387fe5252b1ad5ae3f419bad49",
+  "reviewer": "diegoHurtado01",
+  "publication_status": "nuevo complemento documental pendiente de revisión e integración"
+}
