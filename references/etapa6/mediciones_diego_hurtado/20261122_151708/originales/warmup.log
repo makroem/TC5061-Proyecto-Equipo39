@@ -1,0 +1,365 @@
+ Image locustio/locust:2.47.0 Pulling 
+ 77be27415a1b Pulling fs layer 0B
+ 4f4fb700ef54 Pulling fs layer 0B
+ ac7730f4ce1f Pulling fs layer 0B
+ 82a60621211f Pulling fs layer 0B
+ 7a4d52760b56 Pulling fs layer 0B
+ ba64820f915b Pulling fs layer 0B
+ 5f1c5a286804 Pulling fs layer 0B
+ 460903fff61b Pulling fs layer 0B
+ f2be67225471 Pulling fs layer 0B
+ 44136fa355b3 Already exists 0B
+ 4f4fb700ef54 Already exists 0B
+ 357908d2e2a8 Download complete 0B
+ 82a60621211f Downloading 250B
+ 77be27415a1b Download complete 0B
+ 7a4d52760b56 Downloading 1.049MB
+ ac7730f4ce1f Downloading 1.049MB
+ 82a60621211f Download complete 0B
+ 7a4d52760b56 Downloading 2.097MB
+ ac7730f4ce1f Downloading 1.049MB
+ 7a4d52760b56 Downloading 3.146MB
+ ac7730f4ce1f Downloading 1.049MB
+ ba64820f915b Download complete 0B
+ 7a4d52760b56 Downloading 4.194MB
+ ac7730f4ce1f Downloading 2.097MB
+ ac7730f4ce1f Downloading 2.097MB
+ 7a4d52760b56 Downloading 4.194MB
+ ac7730f4ce1f Downloading 2.097MB
+ 7a4d52760b56 Downloading 4.194MB
+ ac7730f4ce1f Downloading 2.097MB
+ 7a4d52760b56 Downloading 5.243MB
+ 460903fff61b Downloading 1.049MB
+ 7a4d52760b56 Downloading 6.291MB
+ 460903fff61b Downloading 1.049MB
+ ac7730f4ce1f Downloading 2.097MB
+ 7a4d52760b56 Downloading 6.291MB
+ 460903fff61b Download complete 0B
+ ac7730f4ce1f Downloading 2.097MB
+ ac7730f4ce1f Downloading 3.146MB
+ 7a4d52760b56 Downloading 7.34MB
+ ac7730f4ce1f Downloading 3.146MB
+ 7a4d52760b56 Downloading 8.389MB
+ 7a4d52760b56 Downloading 8.389MB
+ ac7730f4ce1f Downloading 3.146MB
+ 7a4d52760b56 Downloading 9.437MB
+ ac7730f4ce1f Downloading 3.146MB
+ 7a4d52760b56 Downloading 9.437MB
+ ac7730f4ce1f Downloading 4.194MB
+ 5f1c5a286804 Downloading 1.049MB
+ 7a4d52760b56 Downloading 10.49MB
+ ac7730f4ce1f Downloading 4.194MB
+ 5f1c5a286804 Downloading 1.049MB
+ 5f1c5a286804 Downloading 1.049MB
+ 7a4d52760b56 Downloading 10.49MB
+ ac7730f4ce1f Downloading 4.194MB
+ 7a4d52760b56 Downloading 11.53MB
+ ac7730f4ce1f Downloading 4.194MB
+ 5f1c5a286804 Downloading 2.097MB
+ 5f1c5a286804 Downloading 2.097MB
+ 7a4d52760b56 Downloading 11.53MB
+ ac7730f4ce1f Downloading 5.243MB
+ 7a4d52760b56 Downloading 12.58MB
+ ac7730f4ce1f Downloading 5.243MB
+ 5f1c5a286804 Downloading 2.097MB
+ 7a4d52760b56 Downloading 12.58MB
+ ac7730f4ce1f Downloading 5.243MB
+ 5f1c5a286804 Downloading 3.146MB
+ 7a4d52760b56 Downloading 13.63MB
+ ac7730f4ce1f Downloading 5.243MB
+ 5f1c5a286804 Downloading 3.146MB
+ 7a4d52760b56 Downloading 13.63MB
+ ac7730f4ce1f Downloading 5.243MB
+ 5f1c5a286804 Downloading 3.146MB
+ 5f1c5a286804 Downloading 4.194MB
+ 7a4d52760b56 Downloading 14.68MB
+ ac7730f4ce1f Downloading 6.291MB
+ 7a4d52760b56 Downloading 15.73MB
+ ac7730f4ce1f Downloading 6.291MB
+ 5f1c5a286804 Downloading 4.194MB
+ 5f1c5a286804 Downloading 5.243MB
+ 7a4d52760b56 Downloading 15.73MB
+ ac7730f4ce1f Downloading 6.291MB
+ ac7730f4ce1f Downloading 6.291MB
+ 5f1c5a286804 Downloading 5.243MB
+ 7a4d52760b56 Downloading 16.78MB
+ 7a4d52760b56 Downloading 16.78MB
+ ac7730f4ce1f Downloading 6.291MB
+ 5f1c5a286804 Downloading 5.243MB
+ 7a4d52760b56 Downloading 17.83MB
+ ac7730f4ce1f Downloading 7.34MB
+ 5f1c5a286804 Downloading 6.291MB
+ 7a4d52760b56 Downloading 17.83MB
+ ac7730f4ce1f Downloading 7.34MB
+ 5f1c5a286804 Downloading 6.291MB
+ 7a4d52760b56 Downloading 18.87MB
+ ac7730f4ce1f Downloading 7.34MB
+ 5f1c5a286804 Downloading 7.34MB
+ 5f1c5a286804 Downloading 7.34MB
+ 7a4d52760b56 Downloading 18.87MB
+ ac7730f4ce1f Downloading 7.34MB
+ ac7730f4ce1f Downloading 7.34MB
+ 5f1c5a286804 Downloading 7.34MB
+ 7a4d52760b56 Downloading 19.92MB
+ 7a4d52760b56 Downloading 19.92MB
+ ac7730f4ce1f Downloading 8.389MB
+ 5f1c5a286804 Downloading 8.389MB
+ ac7730f4ce1f Downloading 8.389MB
+ 5f1c5a286804 Downloading 8.389MB
+ 7a4d52760b56 Downloading 20.97MB
+ 5f1c5a286804 Downloading 9.437MB
+ 7a4d52760b56 Downloading 20.97MB
+ ac7730f4ce1f Downloading 8.389MB
+ 5f1c5a286804 Downloading 9.437MB
+ 7a4d52760b56 Download complete 0B
+ ac7730f4ce1f Downloading 8.389MB
+ ac7730f4ce1f Downloading 8.389MB
+ 5f1c5a286804 Downloading 9.437MB
+ ac7730f4ce1f Downloading 9.437MB
+ 5f1c5a286804 Downloading 10.49MB
+ 5f1c5a286804 Downloading 10.49MB
+ f2be67225471 Downloading 1.049MB
+ ac7730f4ce1f Downloading 9.437MB
+ 5f1c5a286804 Downloading 11.53MB
+ f2be67225471 Downloading 1.049MB
+ ac7730f4ce1f Downloading 9.437MB
+ ac7730f4ce1f Downloading 9.437MB
+ 5f1c5a286804 Downloading 11.53MB
+ f2be67225471 Downloading 2.097MB
+ ac7730f4ce1f Downloading 10.49MB
+ 5f1c5a286804 Downloading 12.58MB
+ f2be67225471 Downloading 2.097MB
+ ac7730f4ce1f Downloading 10.49MB
+ 5f1c5a286804 Downloading 12.58MB
+ f2be67225471 Downloading 3.146MB
+ ac7730f4ce1f Downloading 10.49MB
+ 5f1c5a286804 Downloading 12.58MB
+ f2be67225471 Downloading 3.146MB
+ ac7730f4ce1f Downloading 10.49MB
+ 5f1c5a286804 Downloading 13.63MB
+ f2be67225471 Downloading 4.194MB
+ ac7730f4ce1f Downloading 10.49MB
+ 5f1c5a286804 Downloading 13.63MB
+ f2be67225471 Downloading 4.194MB
+ ac7730f4ce1f Downloading 11.53MB
+ 5f1c5a286804 Downloading 14.68MB
+ f2be67225471 Downloading 5.243MB
+ ac7730f4ce1f Downloading 11.53MB
+ 5f1c5a286804 Downloading 14.68MB
+ f2be67225471 Downloading 5.243MB
+ ac7730f4ce1f Downloading 11.53MB
+ 5f1c5a286804 Downloading 14.68MB
+ f2be67225471 Downloading 5.243MB
+ 5f1c5a286804 Downloading 15.73MB
+ f2be67225471 Downloading 6.291MB
+ ac7730f4ce1f Downloading 11.53MB
+ 5f1c5a286804 Downloading 15.73MB
+ f2be67225471 Downloading 7.34MB
+ ac7730f4ce1f Download complete 0B
+ 5f1c5a286804 Downloading 16.78MB
+ f2be67225471 Downloading 7.34MB
+ 5f1c5a286804 Downloading 16.78MB
+ f2be67225471 Downloading 8.389MB
+ 5f1c5a286804 Downloading 17.83MB
+ f2be67225471 Downloading 8.389MB
+ 5f1c5a286804 Downloading 17.83MB
+ f2be67225471 Downloading 9.437MB
+ 5f1c5a286804 Downloading 18.87MB
+ f2be67225471 Downloading 10.49MB
+ f2be67225471 Downloading 10.49MB
+ 5f1c5a286804 Downloading 18.87MB
+ 5f1c5a286804 Downloading 19.92MB
+ f2be67225471 Downloading 11.53MB
+ 5f1c5a286804 Downloading 19.92MB
+ f2be67225471 Downloading 11.53MB
+ 5f1c5a286804 Downloading 20.97MB
+ f2be67225471 Downloading 12.58MB
+ 5f1c5a286804 Downloading 20.97MB
+ f2be67225471 Downloading 13.63MB
+ 5f1c5a286804 Download complete 0B
+ f2be67225471 Downloading 14.68MB
+ f2be67225471 Downloading 14.68MB
+ f2be67225471 Downloading 15.73MB
+ f2be67225471 Downloading 16.78MB
+ f2be67225471 Downloading 17.83MB
+ f2be67225471 Downloading 18.87MB
+ f2be67225471 Downloading 19.92MB
+ f2be67225471 Downloading 20.97MB
+ f2be67225471 Downloading 22.02MB
+ f2be67225471 Downloading 24.12MB
+ f2be67225471 Downloading 25.17MB
+ f2be67225471 Downloading 26.21MB
+ f2be67225471 Downloading 27.26MB
+ f2be67225471 Downloading 27.26MB
+ f2be67225471 Downloading 29.36MB
+ f2be67225471 Download complete 0B
+ f2be67225471 Extracting 1B
+ f2be67225471 Extracting 1B
+ f2be67225471 Extracting 1B
+ f2be67225471 Extracting 1B
+ f2be67225471 Extracting 1B
+ f2be67225471 Extracting 1B
+ f2be67225471 Extracting 1B
+ f2be67225471 Extracting 1B
+ f2be67225471 Pull complete 0B
+ 77be27415a1b Extracting 1B
+ 77be27415a1b Pull complete 0B
+ ac7730f4ce1f Extracting 1B
+ ac7730f4ce1f Extracting 1B
+ ac7730f4ce1f Extracting 1B
+ ac7730f4ce1f Extracting 1B
+ ac7730f4ce1f Extracting 1B
+ 82a60621211f Pull complete 0B
+ 7a4d52760b56 Extracting 1B
+ ac7730f4ce1f Pull complete 0B
+ 7a4d52760b56 Extracting 1B
+ 7a4d52760b56 Extracting 1B
+ 7a4d52760b56 Extracting 1B
+ 7a4d52760b56 Extracting 1B
+ 7a4d52760b56 Extracting 1B
+ 7a4d52760b56 Extracting 1B
+ 7a4d52760b56 Extracting 1B
+ 7a4d52760b56 Extracting 1B
+ ba64820f915b Extracting 1B
+ 7a4d52760b56 Pull complete 0B
+ ba64820f915b Pull complete 0B
+ 5f1c5a286804 Extracting 1B
+ 5f1c5a286804 Extracting 1B
+ 5f1c5a286804 Extracting 1B
+ 5f1c5a286804 Extracting 1B
+ 5f1c5a286804 Extracting 1B
+ 5f1c5a286804 Extracting 1B
+ 5f1c5a286804 Extracting 1B
+ 5f1c5a286804 Extracting 1B
+ 5f1c5a286804 Extracting 1B
+ 460903fff61b Extracting 1B
+ 5f1c5a286804 Pull complete 0B
+ 4f4fb700ef54 Pull complete 0B
+ 460903fff61b Pull complete 0B
+ Image locustio/locust:2.47.0 Pulled 
+ Container e39-etapa6-locust-run-986bc50e649f Creating 
+ Container e39-etapa6-locust-run-986bc50e649f Created 
+[2026-11-19 03:16:43,327] b369448fa4f7/INFO/locust.main: Starting Locust 2.47.0
+[2026-11-19 03:16:43,328] b369448fa4f7/INFO/locust.main: Run time limit set to 30 seconds
+Type     Name                                                                          # reqs      # fails |    Avg     Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+         Aggregated                                                                         0     0(0.00%) |      0       0       0      0 |    0.00        0.00
+
+[2026-11-19 03:16:43,329] b369448fa4f7/INFO/locust.runners: Ramping to 1 users at a rate of 1.00 per second
+[2026-11-19 03:16:43,329] b369448fa4f7/INFO/locust.runners: All users spawned: {"MiBiciUser": 1} (1 total users)
+Type     Name                                                                          # reqs      # fails |    Avg     Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+POST     /predict lote=1                                                                    5     0(0.00%) |      9       8      11      9 |    0.00        0.00
+POST     /predict lote=10                                                                   3     0(0.00%) |      8       8       9      9 |    0.00        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+         Aggregated                                                                         8     0(0.00%) |      9       8      11      9 |    0.00        0.00
+
+Type     Name                                                                          # reqs      # fails |    Avg     Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+POST     /predict lote=1                                                                    9     0(0.00%) |      9       8      11      9 |    2.00        0.00
+POST     /predict lote=10                                                                   5     0(0.00%) |      9       8       9      9 |    1.50        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+         Aggregated                                                                        14     0(0.00%) |      9       8      11      9 |    3.50        0.00
+
+Type     Name                                                                          # reqs      # fails |    Avg     Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+POST     /predict lote=1                                                                   13     0(0.00%) |      9       8      11      9 |    2.00        0.00
+POST     /predict lote=10                                                                   7     0(0.00%) |      9       8       9      9 |    1.25        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+         Aggregated                                                                        20     0(0.00%) |      9       8      11      9 |    3.25        0.00
+
+Type     Name                                                                          # reqs      # fails |    Avg     Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+POST     /predict lote=1                                                                   15     0(0.00%) |      9       8      11      9 |    2.00        0.00
+POST     /predict lote=10                                                                  11     0(0.00%) |      9       8       9      9 |    1.00        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+         Aggregated                                                                        26     0(0.00%) |      9       8      11      9 |    3.00        0.00
+
+Type     Name                                                                          # reqs      # fails |    Avg     Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+POST     /predict lote=1                                                                   20     0(0.00%) |      9       8      11      9 |    1.88        0.00
+POST     /predict lote=10                                                                  13     0(0.00%) |      9       8       9      9 |    1.38        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+         Aggregated                                                                        33     0(0.00%) |      9       8      11      9 |    3.25        0.00
+
+Type     Name                                                                          # reqs      # fails |    Avg     Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+POST     /predict lote=1                                                                   25     0(0.00%) |      8       7      11      9 |    1.90        0.00
+POST     /predict lote=10                                                                  15     0(0.00%) |      9       8       9      9 |    1.30        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+         Aggregated                                                                        40     0(0.00%) |      8       7      11      9 |    3.20        0.00
+
+Type     Name                                                                          # reqs      # fails |    Avg     Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+POST     /predict lote=1                                                                   32     0(0.00%) |      8       7      11      9 |    2.10        0.00
+POST     /predict lote=10                                                                  15     0(0.00%) |      9       8       9      9 |    1.10        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+         Aggregated                                                                        47     0(0.00%) |      8       7      11      9 |    3.20        0.00
+
+Type     Name                                                                          # reqs      # fails |    Avg     Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+POST     /predict lote=1                                                                   36     0(0.00%) |      8       7      11      9 |    2.30        0.00
+POST     /predict lote=10                                                                  17     0(0.00%) |      8       8       9      9 |    1.00        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+         Aggregated                                                                        53     0(0.00%) |      8       7      11      9 |    3.30        0.00
+
+Type     Name                                                                          # reqs      # fails |    Avg     Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+POST     /predict lote=1                                                                   42     0(0.00%) |      8       7      11      9 |    2.20        0.00
+POST     /predict lote=10                                                                  17     0(0.00%) |      8       8       9      9 |    0.90        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+         Aggregated                                                                        59     0(0.00%) |      8       7      11      9 |    3.10        0.00
+
+Type     Name                                                                          # reqs      # fails |    Avg     Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+POST     /predict lote=1                                                                   46     0(0.00%) |      8       7      11      9 |    2.50        0.00
+POST     /predict lote=10                                                                  18     0(0.00%) |      8       8       9      9 |    0.60        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+         Aggregated                                                                        64     0(0.00%) |      8       7      11      9 |    3.10        0.00
+
+Type     Name                                                                          # reqs      # fails |    Avg     Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+POST     /predict lote=1                                                                   51     0(0.00%) |      8       7      11      9 |    2.50        0.00
+POST     /predict lote=10                                                                  18     0(0.00%) |      8       8       9      9 |    0.50        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+         Aggregated                                                                        69     0(0.00%) |      8       7      11      9 |    3.00        0.00
+
+Type     Name                                                                          # reqs      # fails |    Avg     Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+POST     /predict lote=1                                                                   56     0(0.00%) |      8       7      11      9 |    2.40        0.00
+POST     /predict lote=10                                                                  18     0(0.00%) |      8       8       9      9 |    0.40        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+         Aggregated                                                                        74     0(0.00%) |      8       7      11      9 |    2.80        0.00
+
+Type     Name                                                                          # reqs      # fails |    Avg     Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+POST     /predict lote=1                                                                   62     0(0.00%) |      8       7      11      9 |    2.40        0.00
+POST     /predict lote=10                                                                  19     0(0.00%) |      9       8       9      9 |    0.30        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+         Aggregated                                                                        81     0(0.00%) |      8       7      11      9 |    2.70        0.00
+
+Type     Name                                                                          # reqs      # fails |    Avg     Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+POST     /predict lote=1                                                                   65     0(0.00%) |      8       7      11      9 |    2.60        0.00
+POST     /predict lote=10                                                                  23     0(0.00%) |      8       8       9      9 |    0.30        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+         Aggregated                                                                        88     0(0.00%) |      8       7      11      9 |    2.90        0.00
+
+[2026-11-19 03:17:13,264] b369448fa4f7/INFO/locust.main: --run-time limit reached, shutting down
+[2026-11-19 03:17:13,345] b369448fa4f7/INFO/locust.main: Shutting down (exit code 0)
+Type     Name                                                                          # reqs      # fails |    Avg     Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+POST     /predict lote=1                                                                   70     0(0.00%) |      8       7      11      9 |    2.34        0.00
+POST     /predict lote=10                                                                  25     0(0.00%) |      8       8       9      9 |    0.84        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+         Aggregated                                                                        95     0(0.00%) |      8       7      11      9 |    3.18        0.00
+
+Response time percentiles (approximated)
+Type     Name                                                                                  50%    66%    75%    80%    90%    95%    98%    99%  99.9% 99.99%   100% # reqs
+--------|--------------------------------------------------------------------------------|--------|------|------|------|------|------|------|------|------|------|------|------
+POST     /predict lote=1                                                                         9      9      9      9     10     10     10     12     12     12     12     70
+POST     /predict lote=10                                                                        9      9      9      9      9     10     10     10     10     10     10     25
+--------|--------------------------------------------------------------------------------|--------|------|------|------|------|------|------|------|------|------|------|------
+         Aggregated                                                                              9      9      9      9     10     10     10     12     12     12     12     95
+
