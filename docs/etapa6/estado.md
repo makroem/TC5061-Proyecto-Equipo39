@@ -12,7 +12,13 @@ La implementación del [PR #72](https://github.com/makroem/TC5061-Proyecto-Equip
 - Nueve registros de métricas creados en el tracking operativo; [identificadores y huella de la tabla](../../references/etapa6/mediciones_marco/tracking_runs.json).
 - [Seguridad interpretada](seguridad_operacion.md): 9 avisos bajos documentados, 0 medios y 0 altos.
 
-## Informe editable revisado
+## Informe editable actualizado
+
+El [informe actualizado de Operación y FinOps](../../references/etapa6/TC5061_Operacion_FinOps_Equipo39_Actualizado.docx), con corte al 21 de noviembre de 2026, contiene cuatro cuartillas de análisis y cinco páginas de anexos. Incluye las gráficas de Locust y recursos (anexos A–C), los resultados de las nueve mediciones (anexo D), el análisis FinOps y el cálculo del costo por inferencia (p. 3), y una captura original del pipeline exitoso de `main` (anexo E). Su SHA-256 es `296afaa611d9f806ba37b5906b36b137452ffb12fba06ca90a08d382b0644bd5`.
+
+Esta versión ya está publicada y enlazada desde el README en el [PR #77](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/77). Su revisión está solicitada a Diego Hurtado y sigue pendiente; no hereda la aprobación de #72. Las métricas y los incumplimientos de latencia originales se conservan. Para el estado actual de las comprobaciones automáticas, consultar los [controles de #77](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/77/checks).
+
+### Informe anterior aprobado y conservado
 
 El [informe de operación y FinOps](../../references/etapa6/TC5061_Microservicios_FinOps_Equipo39.docx) contiene cuatro cuartillas de análisis y cuatro páginas de anexos, con Arial 11, texto justificado e interlineado 1.15. Incluye las tres gráficas originales, resultados de las nueve ejecuciones, cálculo por inferencia útil, sensibilidad y recomendaciones. Se verificaron cifras, enlaces y paginación; el [registro de comprobación](../../references/etapa6/checks/reporte_revision.json) identifica su versión.
 
@@ -66,8 +72,8 @@ Prioridades de mejora: repetir en un anfitrión dedicado y con generador separad
 
 | Responsable | Avance y siguiente actividad | Dependencia y respaldo |
 |---|---|---|
-| [Marco #73](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/73) | PR #72 integrado; informe revisado. Preparó actualización de estado, interpretación y seis comprobaciones documentales como respaldo. Contrastar rendimiento antes de prometer capacidad. | Los cambios documentales posteriores siguen su propia revisión; la aprobación técnica de #72 ya está atendida. |
-| [Diego Hurtado #74](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/74) | Reproducción y aprobación independientes realizadas. Conservar en el repositorio, si están disponibles, los resultados originales y datos de entorno de su ensayo. | La revisión pública no adjunta cifras de carga ni archivos originales. Su publicación completaría la comparación numérica, sin invalidar la integración aprobada. |
+| [Marco #73](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/73) | PR #72 integrado. Informe actualizado de nueve páginas y enlace en README publicados en #77; interpretación y seis comprobaciones preparadas como respaldo. Integrar el cierre documental cuando el último cambio esté aprobado. | Depende de la revisión de #77 por Diego Hurtado. Las mejoras de rendimiento requieren ensayos comparables y se siguen por separado. |
+| [Diego Hurtado #74](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/74) | Reproducción y aprobación de #72 realizadas. Revisar el último cambio de #77 y conservar, si están disponibles, los archivos originales y datos de entorno de su ensayo. | La revisión de #77 está pendiente. Los archivos de carga faltantes impiden cuantificar diferencias entre equipos; no invalidan la integración de #72. |
 | [Stefania #75](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/75) | Puede revisar y ampliar la [interpretación preparada por Marco](interpretacion_carga.md) con su aportación propia. | El contenido técnico ya tiene respaldo; no bloquea la implementación. |
 | [Diego Martínez #76](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/76) | Puede contrastar las [seis verificaciones documentales de Marco](verificacion_documental.md) y registrar sus observaciones. | El contenido técnico ya tiene respaldo; no bloquea la implementación. |
 
