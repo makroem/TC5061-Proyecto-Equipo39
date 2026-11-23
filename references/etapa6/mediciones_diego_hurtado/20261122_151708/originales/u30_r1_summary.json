@@ -1,0 +1,15 @@
+{
+  "successful_requests": 7466,
+  "successful_predictions": 21524,
+  "start_epoch": 1795058417.665671,
+  "end_epoch": 1795058508.2059991,
+  "duration_seconds": 90.54032802581787,
+  "requests": 7466,
+  "failures": 0,
+  "failure_ratio": 0.0,
+  "latency_p50_ms": 26,
+  "latency_p95_ms": 190,
+  "latency_p99_ms": 320,
+  "model_name": "mibici-equipo39-p1-demanda",
+  "request_mix": "80% una fila; 20% diez filas; pesos de tareas, proporci\u00f3n observada variable"
+}

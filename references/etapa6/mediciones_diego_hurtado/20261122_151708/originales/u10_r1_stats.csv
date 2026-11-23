@@ -1,0 +1,4 @@
+avg_content_length,avg_response_time,current_fail_per_sec,current_rps,max_response_time,median_response_time,method,min_response_time,name,num_failures,num_requests,response_time_percentile_0.95,response_time_percentile_0.99,total_fail_per_sec,total_rps
+221.0540780141844,11.30661918084941,0.0,27.1,306.0,8,POST,6.0,/predict lote=1,0,2256,22,36,0.0,24.956705722695755
+697.2086330935252,11.2668101474833,0.0,5.8,240.0,8,POST,6.0,/predict lote=10,0,556,21,32,0.0,6.150677474210478
+315.20128022759604,11.298747977950564,0.0,32.9,306.0,8,,6.0,Aggregated,0,2812,22,36,0.0,31.10738319690623
