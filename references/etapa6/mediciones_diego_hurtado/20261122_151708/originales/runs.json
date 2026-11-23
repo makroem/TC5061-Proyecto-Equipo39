@@ -1,0 +1,23 @@
+[
+  {
+    "run": "u01_r1",
+    "users": 1,
+    "repeat": 1,
+    "exit_code": 0,
+    "summary_exists": true
+  },
+  {
+    "run": "u10_r1",
+    "users": 10,
+    "repeat": 1,
+    "exit_code": 0,
+    "summary_exists": true
+  },
+  {
+    "run": "u30_r1",
+    "users": 30,
+    "repeat": 1,
+    "exit_code": 0,
+    "summary_exists": true
+  }
+]
