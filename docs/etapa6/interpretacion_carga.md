@@ -10,7 +10,7 @@ Cero fallos de solicitud no implica cumplir el objetivo de latencia. Bajo las co
 
 La segunda gráfica, de recursos, muestra que la CPU media de la API se aproxima a su cuota al crecer la carga. La memoria máxima se expresa en MiB; las bandas resumen mínimos y máximos de tres repeticiones. Este patrón es compatible con saturación, pero no demuestra una causa aislada: servicios, generador y tareas auxiliares compartieron anfitrión.
 
-Conviene repetir con el equipo dedicado y contrastar una modificación por vez, conservando P1, entradas y protocolo. Los lotes pueden amortizar costo, siempre que su latencia sea admisible. La ejecución independiente declarada por Diego Hurtado cumplió sus objetivos; sin sus archivos originales no procede cuantificar esa diferencia ni atribuirla a una optimización.
+Conviene repetir con el equipo dedicado y contrastar una modificación por vez, conservando P1, entradas y protocolo. Los lotes pueden amortizar costo, siempre que su latencia sea admisible. Los [archivos originales del ensayo de Diego Hurtado](../../references/etapa6/mediciones_diego_hurtado/20261122_151708/README.md) ya están integrados mediante #82 y permiten contrastar sus resultados. Esa ejecución cumplió sus objetivos, pero una sola repetición por perfil y las condiciones históricas parcialmente documentadas impiden atribuir la diferencia frente a Marco a una optimización o extrapolar capacidad de producción. La interrupción puntual del muestreo de recursos del perfil de 30 usuarios se conserva y se describe en el [seguimiento](estado.md).
 
 ## Evidencia y referencias
 
