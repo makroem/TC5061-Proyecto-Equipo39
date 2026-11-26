@@ -1,0 +1,852 @@
+{
+  "schema_version": 1,
+  "baseline_commit": "39fcd9a6f6a396b31b63d04bd016f97694f47c97",
+  "scope": "Archivos publicados en reports y references antes de Etapa 7; conservar originales y añadir versiones nuevas en otras rutas.",
+  "files": {
+    "references/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "references/arquitectura.svg": [
+      "f65fe72284eba95199e45a138f44bd96c2dab55e13d90af2b66effcd4ea3ed70",
+      "7bd2b6577f2bc8cf3fd65dc2e968e5db6c7914fa82ff40e95b64ef451d0ef6ef"
+    ],
+    "references/cierre_marco.md": [
+      "768471bbd05832473f7474b86c16455f30b6ab1a4a86ad01a2334771f1bcc14a",
+      "5632f6f4e203d9d8941df316b6e59e351d9aa0e7b20cf0940b0efd613384f7d4"
+    ],
+    "references/data_manifest.json": [
+      "1432deda619d2a54ae4f60462b29a4d899b91eab9827de40dcaa291b233f83e6",
+      "5e4f5178e45cf38d1cb5844a204959181f0b55733f6009e9e6dd78330b68d42b"
+    ],
+    "references/etapa2/arquitectura.md": [
+      "85065ce2f4abf82886afe15c894af1e9d124c5fb19dfa313e007df267d9e4d58",
+      "a0918a06dacd326efbeab1511f03a66c4d14556b4ae6371dcb8ace8dd606ffd9"
+    ],
+    "references/etapa2/contrato_infraestructura.md": [
+      "14dca938fbf73ba9edd201d8525b5a46687eef2816eb2334cdc7f736fab9582e",
+      "9bc9b3e27958b41d9eca10618096972a5bbf7a3ca695d7a18d00895cec202c91"
+    ],
+    "references/etapa2/evidence/E13_estructura_modulo.jpg": "81863ca9c07a3138bbcf370722fea22741c1878f4ac8d6d7e501c1636873638c",
+    "references/etapa2/evidence/E14_colaboracion_p3.jpg": "13cb544a18475d510acd433ca458c30df535f934208269498975e5d3d5d053e5",
+    "references/etapa2/evidence_index.csv": [
+      "ae76436830cabe9473aa370d2f09c00cd567598f847f80a4bd0a89020bdc301f",
+      "fe5021f64a6e546ec0c0d8259924d15749adb94745cc510a9a5523d750772447"
+    ],
+    "references/etapa2/selection.json": [
+      "fdff7860312acc1af35e118e24ee56d3006b42402c8599082e538c3d51680227",
+      "24d7acceca3aab4dfce707800c66d6dfe937de713c9fe77e6f01e98443542a5e"
+    ],
+    "references/etapa2/starting_point.json": [
+      "a03f14a0833c3959355c5f4e363b294ca17a6cd54bda140e8a2b31ec3970d196",
+      "9f16080a0cb2cca3d54a0fc0d00b6e3ef0d2dd64943bdf54e4d1024bc39cfb89"
+    ],
+    "references/etapa2/validacion_marco.md": [
+      "61656553ffba0a097a96019178aa35d8fd673bbfb81d0a4071a51efcc2d0a285",
+      "5e807f3613c7ca6db3cedf5ea01f4fc9947f3ea3f6dbbbfe0bfdd2442e3ea128"
+    ],
+    "references/etapa3/actualizacion_dependencias.md": [
+      "5edf87bbad628ad929514893cac57bc63d0f7a40204cb3c55d48a3ce5cb7195b",
+      "37b2103414d4eb0f233d90fba21abd6f056496f38e99fe97933f6461c0a74221"
+    ],
+    "references/etapa3/contrato_calidad.md": [
+      "947530192fc901d875c591b3b23c3d935bd60051b22dfab439de0bccfddce993",
+      "a7512bb4a3ad288138d566987f8354874a4391a8d6549340eb126326b45819e9"
+    ],
+    "references/etapa3/deepchecks_entorno.md": [
+      "cd053e0d8cd7cce9574f80cb0f934022b03ad331755870ec77d345811b6f0b9e",
+      "eb96d8f68bb0f16f8aa740bbe82504e68afb634681358948f602e21b480bc6d6"
+    ],
+    "references/etapa3/ejecucion_marco.md": [
+      "648ee09d57135ac32f9731cf58c4d586e9bce4d2aca6bf4c4db9ef9e9f44877a",
+      "b1372d9a173c5b7b5bd6921f706aa0e9d4cfa4bb75e2dc83abc5aa6538a2fe1a"
+    ],
+    "references/etapa3/migracion_mlflow_pyarrow.md": [
+      "13f2165e80f729e5a24969f4c80730af76e2073c3a9f48d3c99dce0bc6496380",
+      "7a1579a25cd891ecc0943ebb633f5db0b3f8a2755a290375089285c0b3fc8b35"
+    ],
+    "references/etapa3/quality_policy.json": [
+      "7ebb213f37dbbe6e4ee6844e01d5a2da2ad40798fd8052075d714841a81d7c1d",
+      "68de388b6cb765a7e3f5cfe519f2b55dcb541977627b2ca598a6d506433f77c2"
+    ],
+    "references/etapa3/verificacion_estaciones.md": [
+      "6c95ffdb732943209c74058dd8fc4efccdf73820534b823d0bb01d00325c9866",
+      "a2b93b1069409356046187f64f9c78fa74ec61edba7c238a3a55621debbdaeb7"
+    ],
+    "references/etapa4/contrato_api.md": [
+      "8587eaf2e153c2d0643981ed46b45b5448b1676a70e49e58d6d31fc7585a7090",
+      "5387e2fd4b2f063021d81af860a16f2eb4019e37437c4e9e123ba6abf0f612d2"
+    ],
+    "references/etapa4/distribucion_actual.md": [
+      "52f521e3dff6f77dd497b08d1c85724422d64b7e932c7251500f2229353cacea",
+      "7441d2dcef0484caea196434716eeaeb15e38d0ac65c460ebf5c1648ba301b7a"
+    ],
+    "references/etapa4/examples/predict_request.json": [
+      "1f5555d89701eb18e856d83d1370553a2202b74353b76beeeaf8956c155250ce",
+      "d0fd1f2990c1240d0703c52b8fbf81ae3c4bbce256cebc71f049020041b8b0fe"
+    ],
+    "references/etapa4/examples/predict_response.json": [
+      "477e60f2124fc9a031da09a0665b80bbe19c5b630a02446c344a309550d399bc",
+      "8f7ed5b1f39c26c84eafeeb200ab2baf848612ed1714ed209692e277f2c5586d"
+    ],
+    "references/etapa4/model_manifest.json": [
+      "e2547b250f1a820940dc138b2633236f87eca0663870006e3e0e85dd6d22ec70",
+      "8d7f1d99153d48b03aa617213f97683febd8dea223ac82dc8c4074ba0a7073fd"
+    ],
+    "references/etapa4/revision_ejemplos_stefania.md": [
+      "55ffc1c8c5e410d79f67d9a79f735eb75a6a5a65570375b8c5185c2ce88d2e80",
+      "4f17061c1b712de6012b2755caafacb863356d2b43f1aba832ee5fd2d9737a7c"
+    ],
+    "references/etapa4/revision_uso_diego_martinez.md": [
+      "f1d9b8b6b6ea4d49298f22ea267222a72aa77a0ad2ffd8e810d622beaa603aef",
+      "520d6fe86b0bb44d8d72524c59103d92b5be2139269f4a08451eddbbaee551ee"
+    ],
+    "references/etapa5/data_manifest.json": [
+      "bc2411ddf8cc8cdb5fb7884a958630ad50d1c845b055c2d566405b2a8a7e5914",
+      "b6c9e38bccbd1a880ed63d0179418ef7871831e51d24ab01b54e07568ec84bcf"
+    ],
+    "references/etapa5/decision.json": [
+      "bdf9e3657fee9782618cc029971afea12565c0edd9de520c38c537f10bd9db7b",
+      "f6c6b20bde1eb67b6bc62aedc9e2424646c0f2493ecd48b07fadeb7b8f3e7080"
+    ],
+    "references/etapa5/distribucion_actual.md": [
+      "89e11ef663fe41e78620f2ab632e9772840b1e14d21963504b3654b0a6d3e6a3",
+      "5944ce847c81f1ebc0e16b28c50db388224145617f75b69bb5e20904067c359b"
+    ],
+    "references/etapa5/models.json": [
+      "318db05160ebd9b2ee3a19134ee152c76e9cce8325e2d5934e38c09eb28c0ad6",
+      "3ce1f934d04aeeda32886079a5514458eff6a713d2a24ce2b636e729a629f737"
+    ],
+    "references/etapa5/protocolo.json": [
+      "ac5868511f87e736b4f3462a23d7f248af347a17ec99b01426e0f912b4e7f596",
+      "f68f6dafd28ff65eed59f2dcdc221700fe3f8f7a62fca17fe75129aa749ff3b1"
+    ],
+    "references/etapa5/protocolo.md": [
+      "d2e77daa01a85e01f9d7bcc9cefc46d5c58b0b27062b94dd389eed8ef07c0fef",
+      "6d1d29030027d6426c8026265a54012452f94829881776e9a02a8def9aa066fb"
+    ],
+    "references/etapa5/reproduccion.md": [
+      "6cf2f5bd075b69e505346de572f26142c8acc5bf89a38284fcf4ac5d078c756b",
+      "14f715f4a125d72bbc1b54b19447259eaaeb5ae117bd0677236baf804940a31f"
+    ],
+    "references/etapa6/Manual_Etapa6_Microservicios_CICD_FinOps_Equipo39.docx": "d911cb3897cdf27be48f4e4d6cabcd2b5129937b259f4bd2a1bee16971d3b800",
+    "references/etapa6/TC5061_Microservicios_FinOps_Equipo39.docx": "a536f74c53b256994e1580058f2ba3dcd2f242b4a5ea9c6be1196f44b6409394",
+    "references/etapa6/TC5061_Operacion_FinOps_Equipo39.pdf": "23575bcf74629c062b8b436d284911e63bc292f84d6766d31e4be40632313aaa",
+    "references/etapa6/TC5061_Operacion_FinOps_Equipo39_Actualizado.docx": "296afaa611d9f806ba37b5906b36b137452ffb12fba06ca90a08d382b0644bd5",
+    "references/etapa6/TC5061_Operacion_FinOps_Equipo39_Final.docx": "7c7f3f99f3512bdf382d7c341fef83dca5ea29fd5e242eff4a2b0ac0a6dfba9e",
+    "references/etapa6/checks/bandit.json": [
+      "90fa29b0b965e94da0d0220698df4b37db2c1939c840d843c8ce06252f706a89",
+      "afa85e6a3301d3597633a4bb9629e30f4f48a00fb52f2150492ee5ce482a5a17"
+    ],
+    "references/etapa6/checks/entrega_marco_20261122.json": [
+      "a8dc08274dcc75680868aa2f0f3ace689ccbfd85d5fb8918cbc3aa948d048702",
+      "536320f05581339e31ca67112b818a411a88540abdd506d3fd902537baf64e79"
+    ],
+    "references/etapa6/checks/export_check.json": [
+      "e69608309d800c9e5e6bce07e87569742c3c287013d26c5b9d158d956dc01125",
+      "4acfd1d52bf6bfd17678f3c07a318c64a6926a6247fd67485436229ef586be30"
+    ],
+    "references/etapa6/checks/persistence.json": [
+      "4db0e5e5b87622e211b30da529cd28c93aeb80f6490a293b9d61e954c49ab3a0",
+      "bd85fa092e6b8b2c56b860e7d305ef8a6045940c986a67ef6016958422ece7e1"
+    ],
+    "references/etapa6/checks/reporte_revision.json": [
+      "0f6ea1c6758b736c76cdca3f3d75c586da6c887f1842a40f44225d75f14fc73b",
+      "de0631c106ddec33cafd21cf9706ccb0ee75076654c3fec942c74641185d2b57"
+    ],
+    "references/etapa6/checks/revision_independiente.json": [
+      "ab496fbaa68449378da14aafc64f8df3006535b56d8419e7c6b658b39a72795c",
+      "733c0601f8071f7c02e3f0df93da218aa1585d623de3b1963757e81480186a69"
+    ],
+    "references/etapa6/checks/smoke_p1.json": [
+      "7680420835b01571f7e6a0ad9c0f807dc1b8430da2aaf1cd211d700df1e93884",
+      "040ee9f38230c491613fba502c1210422c7941de467b03e08f96a9226a745a94"
+    ],
+    "references/etapa6/checks/unit_tests.json": [
+      "28e0d910fbe01f585d4d7a6b00301540ec781f5925d8c4b86b6b5c50f9bd2676",
+      "0ba70b857d0159eedc4e16f198140dcd3c1d48f3244c6de575f5ecee0b6301f7"
+    ],
+    "references/etapa6/mediciones_diego_hurtado/20261122_151708/.gitattributes": "8b9c3028d6467ff3be7c793141927841d70f47f52d0590677438f488ca154992",
+    "references/etapa6/mediciones_diego_hurtado/20261122_151708/README.md": "9534a20aa3679dea7d4d255d7981ea463a75fc15eae0d60de0df533119867f45",
+    "references/etapa6/mediciones_diego_hurtado/20261122_151708/inventario_sha256.csv": "45948f3fa223f7845a635b9433322387d58aeb14e99ed6a6ab31c2bd548bf8c9",
+    "references/etapa6/mediciones_diego_hurtado/20261122_151708/originales/protocol.json": "2a27775f807a03b792f19cacefbb47927c6a6b0403b6ecce71c6fcf077c28cbd",
+    "references/etapa6/mediciones_diego_hurtado/20261122_151708/originales/runs.json": "614d44bcc2244c8d3b52fa5412c58e1d4cecdd8f976e9a3fa645149faa39ddea",
+    "references/etapa6/mediciones_diego_hurtado/20261122_151708/originales/u01_r1.html": "dd49b5e4a9de93551715e0d34b8e56ace1c9137c63d0e7a98d5bfacf1ac9c0a4",
+    "references/etapa6/mediciones_diego_hurtado/20261122_151708/originales/u01_r1.log": "c186ed0e92b8aeca70dde17abba75f7851e998d3da246f2576bd84ebe69cebc2",
+    "references/etapa6/mediciones_diego_hurtado/20261122_151708/originales/u01_r1_resources.jsonl": "cd1da9f95a664bad10ee9607ae61abc394d81831807183e519ec90febf2a4c61",
+    "references/etapa6/mediciones_diego_hurtado/20261122_151708/originales/u01_r1_stats.csv": "8a6f2229a03dadeaf48b27b4137b77c45375baea58a30523b37683b3be882cde",
+    "references/etapa6/mediciones_diego_hurtado/20261122_151708/originales/u01_r1_summary.json": "f7a3bb50db3d8dde2711efddee63acd52f355695263f1a56558d11189b78c6b2",
+    "references/etapa6/mediciones_diego_hurtado/20261122_151708/originales/u10_r1.html": "a306216ff75e5914a866b6b72f576678fa2bc1332478f3f599d4a3b1facc5bd5",
+    "references/etapa6/mediciones_diego_hurtado/20261122_151708/originales/u10_r1.log": "f9d15ac245b24166b3a9b8e7e86a8e35c0d471dcb9f67ccdd9d8bedb826de482",
+    "references/etapa6/mediciones_diego_hurtado/20261122_151708/originales/u10_r1_resources.jsonl": "67eaad533f23fb82ff7dc47b34b9897c20a3b5824f5d67f1a48e2552f9fd3ce3",
+    "references/etapa6/mediciones_diego_hurtado/20261122_151708/originales/u10_r1_stats.csv": "1f92c04e18d32f4fa643b09097ab32c1cdc4b242145a2366c514843ba5295bf1",
+    "references/etapa6/mediciones_diego_hurtado/20261122_151708/originales/u10_r1_summary.json": "a2e27cdfc53138d7bb8abcd40ea5ea95c61d80b81a4e3249041947ceff1e2c73",
+    "references/etapa6/mediciones_diego_hurtado/20261122_151708/originales/u30_r1.html": "288498135c9d9d33bb6d46bcfd8c9262254176f53ccd230ba7830f2219c42708",
+    "references/etapa6/mediciones_diego_hurtado/20261122_151708/originales/u30_r1.log": "7c34895d59a383e88c4fa6309271cb04f78b986a4774b169f426c82c8488da69",
+    "references/etapa6/mediciones_diego_hurtado/20261122_151708/originales/u30_r1_resources.jsonl": "43e30521373166477972c9188a2f1660ab639245483439fe8ee96339e00ac3a9",
+    "references/etapa6/mediciones_diego_hurtado/20261122_151708/originales/u30_r1_stats.csv": "d8a6f53a018e1b4e0898706e9ebad1733ff05766cfd7c67f8229df83598ccd69",
+    "references/etapa6/mediciones_diego_hurtado/20261122_151708/originales/u30_r1_summary.json": "3314359cab2fc890b254d477a06782cadcc5ab057fbaa6865b66ccd6c303356f",
+    "references/etapa6/mediciones_diego_hurtado/20261122_151708/originales/warmup.html": "640060a4848c52237b79f3b39092f135ec1b9c6e2db3f7583c3477a30a9dadf4",
+    "references/etapa6/mediciones_diego_hurtado/20261122_151708/originales/warmup.log": "7dcc6a3d7aab954b9396a3706ab3684aba01334f4559844e21c96e96a0e78cad",
+    "references/etapa6/mediciones_diego_hurtado/20261122_151708/originales/warmup_stats.csv": "4cebc32907b7c75701218f73267d8e9bc3b84fd0b5c626eaaa92743717902d4f",
+    "references/etapa6/mediciones_diego_hurtado/20261122_151708/originales/warmup_summary.json": "82e55164343865222f153deb17baec300fd4d7a534c792b6300ce6932c5636ca",
+    "references/etapa6/mediciones_marco/finops_sensitivity.csv": [
+      "bd105583f9d9d8f13588cfb25b74eb30663d74f096d8018c1f3447fc7ce7af7f",
+      "c84b381309fa793ab423754986b612ebff8426146df60dcec4c3f6020ec74245"
+    ],
+    "references/etapa6/mediciones_marco/locust/u01_r1.html": "69fda7e612fa826e418afe637b8da3a04a63d9b2a4048345cba189cf1f0854d1",
+    "references/etapa6/mediciones_marco/locust/u01_r1.json": [
+      "3ad6aa38ddcae78dca434f7ae14de11df5f75407ca5f1758edcd748f8cbf7f60",
+      "f00eaf614e9fc6f657216eddb8009cb768f90aa221fd93e480d2998aa3a2497a"
+    ],
+    "references/etapa6/mediciones_marco/locust/u01_r2.json": [
+      "0913cf9a24cb016a46bba596faf3d6c4c42e8411f0b09b5c7773aa1b8ce3ea72",
+      "e4c4b31405d04419556c295c94dce92b61ffac6649c92e84d5c29b04027cb0c8"
+    ],
+    "references/etapa6/mediciones_marco/locust/u01_r3.json": [
+      "b7c22576e1f1132692e209a2d91d576b571971b3833ede4655abf7192020a645",
+      "53f08ecbabd9ae76411cac2e1b576515963accbf01149ed6be8ef426d4105a4d"
+    ],
+    "references/etapa6/mediciones_marco/locust/u10_r1.html": "f51c7a4b88db604907d6dd0b90bc343f33f7b097bd80c809ee35baae3b8490ab",
+    "references/etapa6/mediciones_marco/locust/u10_r1.json": [
+      "2aa5943614086c462641e1259a8913e8d1f6d41570064e36bb37e4dd54863bfb",
+      "33b44954dd746d247ad3365e4faf15e49a9859299b029b0d3944a60e30039301"
+    ],
+    "references/etapa6/mediciones_marco/locust/u10_r2.json": [
+      "121a8e6c7d90acc1e180c5a70078db7d6045abc3b478cc56ee5aa063ebc89ba1",
+      "0d1c8e025f35dac4e82d8ed73f02997ecb79ce3a5b8d299060b02bd58462d145"
+    ],
+    "references/etapa6/mediciones_marco/locust/u10_r3.json": [
+      "6554d3a35d89e223abbb656be46bece3ebcb10b7325ed8cad4a4497fb4930ebf",
+      "20840ad1a33f8b78a9cb40149e0c7863c2c344db73a417b336e49b68db0ece6b"
+    ],
+    "references/etapa6/mediciones_marco/locust/u30_r1.html": "ee6a5bd10ac83c6ca681b3535b1a64ec8e79779959bb466f0bde48af97b83c44",
+    "references/etapa6/mediciones_marco/locust/u30_r1.json": [
+      "f8c3a1e00f1578768e01e181ec5bf4fce2bdfea7b80bb276ab1b2940603343f6",
+      "0bda50d28fc0c0591f51cf7b471ac480418a348576faf0f4032adb31d88e94ab"
+    ],
+    "references/etapa6/mediciones_marco/locust/u30_r2.json": [
+      "27ed893653aa5853906fd68c82fb084b1b35d9ee97e01841b048aa3bc19b5098",
+      "125e67e0ec6ca6fb77e489fe41eaf769b7212f4103246c41520fbee11e49937a"
+    ],
+    "references/etapa6/mediciones_marco/locust/u30_r3.json": [
+      "85c1ced1b673c950f3a74e47b39674410dc1b2d1b617790ff5b453ff4cdde78e",
+      "349a4b1548ba88a1cc527503a4a125aab292f273ea063bb1b0dbe5fa7c4e9d5d"
+    ],
+    "references/etapa6/mediciones_marco/locust_serie_30_usuarios.png": "3160f653a43f3174802f9f22639b0056f93c38bad232ff70716f658e969f892f",
+    "references/etapa6/mediciones_marco/performance.csv": [
+      "28362bb17faa4bf99d1f0fcdc919bcae39424622780bcd043b3f272a264a7277",
+      "f1bb1d09a7a9613d94b2bc693dec0e85da6e1d8a65a7c590756ec1593908074d"
+    ],
+    "references/etapa6/mediciones_marco/protocol.json": [
+      "522201c86202460344be3a50b27800f3023d81594d078efbf9f55af523ba084a",
+      "0d0671a280b33b080e2f493ac14f847682e181660cbe799624700c7d4ef0fd78"
+    ],
+    "references/etapa6/mediciones_marco/recursos.png": "bca7f97a1ab850bfe4921904444bc20284dd4f67084a59ce33721b5de136b515",
+    "references/etapa6/mediciones_marco/rendimiento_latencia.png": "2dcec741815dead5c32bbd4c3d9d48d330329ee749a3ff36be76772c3acd30f5",
+    "references/etapa6/mediciones_marco/resource_series.json": [
+      "dc741109f33cf27ead0e45ddd8c61ec2c2bfca6caabf465d2a10bcdd36bf5d82",
+      "6b9b5980d07dd6e1bd66d0a5a10767b6784977d791fdccee50a748e89ad85d45"
+    ],
+    "references/etapa6/mediciones_marco/resources.csv": [
+      "d0fc0a4a9ea910e4c11be5e18d98bfa80d6e01a5184899dd3af73ba2c84f9a06",
+      "9ac50bcf74309a8badbc9fdd1506be3d089ac32428a7bf963f2008ab96e8f4da"
+    ],
+    "references/etapa6/mediciones_marco/source_sha256.json": [
+      "1123edc7a8306011fbe2cef9115664fffff5add461f04f39f96754c5a88845a7",
+      "ed4788c30ce1baecac21dc23df147f2bf42649bc4c118ca38b0666e079591bd7"
+    ],
+    "references/etapa6/mediciones_marco/summary.json": [
+      "0c7f9449df5bb020413bf6f98dd9e9a1cefca4f7c3380385274d87dbd83ddd5a",
+      "a1c88783060effd5bd3b4e85b606e2ee7af2f16957c33dc7b3e34947dba05705"
+    ],
+    "references/etapa6/mediciones_marco/tracking_runs.json": [
+      "1e7cd3ae80fffaf08717ac89265d72da75ae67fbf032def40466058ec0108ca7",
+      "cb03baff8037d119cd23e8c6562a78ebb67ed60c5804ad8c0fbc463cd5b0a43b"
+    ],
+    "references/evidence/01_lista_runs.jpg": "d0a1f53db4c42faa11581fa6fc81de57b85628729be42b913ade42998c145b49",
+    "references/evidence/02_detalle_run.jpg": "c170c5c3604a0ef10c9f6a00202d428121ae0d1c81ab4bbcdf3783bc43783da5",
+    "references/evidence/02b_parametros_metricas.jpg": "2d5ede8de542995e8ff52257c4e59c71cb91a0d320a415bd1b623611b3c99700",
+    "references/evidence/03_artefacto_mlflow.jpg": "9cb7c93392190b85b561a586c0e9b34ea26dffd72775cd10957883efc8072796",
+    "references/evidence/04_comparacion_runs.jpg": "dac49bffb1b72069cd7740f68e0ba7fe3a865461e293cda8814587e898f0273b",
+    "references/evidence/05_estructura_repositorio.jpg": "5638148e33bbfe2e20eb50c8adbe610e5192dd2dfb30f40213019df13a2ac738",
+    "references/ml_canvas.md": [
+      "a20efe0cf4b46aa531badeb6824075f8a5c7968ded16a0b54d3af641b34916ac",
+      "b30f4b81aa115bdd55c6eddc0a48b90316ae5ca77de56b9be93a0ce5af78f53e"
+    ],
+    "references/split_manifest.json": [
+      "b2e3a60cf7b9085347bb233c7f8a70aa4b6b1537f596d45890c2f7c16e192209",
+      "ba50456ad76740336336eadb10694dfb04bce6771371784ce60a8bc132050c63"
+    ],
+    "references/split_manifest_random_days_v2.json": [
+      "b3f0863a3e238f4502ca1a37543f4448086b33ad54715d55aab909a198d744f6",
+      "d63ec15e2b9b8c61e190df05a81cb1866f31058128006906fac3653fd8ef982b"
+    ],
+    "references/stations_backup.json": [
+      "f4537e81909cc988198e0fdaaa4541d2f73a68dc37211cea902871a3b7db8c77",
+      "dcddbfe99c1674b5450535eaffd82aab6eadb1869f94f9178ac273fd2b3417df"
+    ],
+    "reports/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "reports/Cierre_Actividades_y_Pendientes.txt": [
+      "e92f90dd80d772865942429e492e53f14c3c59915876fd2062920563e8f8e6a5",
+      "2f5f7e6b5e3974e86d4238ed31a26fa56732e1f65bbe0d852daf737908b09804"
+    ],
+    "reports/Estado_Integracion_Marco.json": [
+      "ad33b7d2f65b6823b8e76d94dde09e96af459eefaf0168dbdf1ee000b747f8b6",
+      "ee985e44cffb2e505bf772fc26dc5e2c8c9c1619d183539f0038577876e218ae"
+    ],
+    "reports/Pruebas_Cierre_Temporal_P3.xml": "ca84c1826cc034dadc4f0c0dea03b6afe0da92bb8bc186c9e068ac7c56fad24b",
+    "reports/TC5061_Propuesta_Proyecto_Equipo39.docx": "dac1d2e50b563a4100002d8b11ac5ad29aa0476e9919b0a7951ca3db1669f49f",
+    "reports/TC5061_Propuesta_Proyecto_Equipo39.pdf": "fe1812a6a69cfca0cc55330e4a2521fad04ae76e947efede39848b48e32fbefa",
+    "reports/Validacion_Entregable_Cierre.json": [
+      "79a5ddbc141b4a302300802fcc7c7992189c0661b4142fbca4682ba25be5823b",
+      "bd2bb223fd5a0b602bd3c11b18713852e9aef0d4fbcce7535c0f17770761cd66"
+    ],
+    "reports/calidad_datos.json": [
+      "41babe613f99efdde49653aeae8df9ffdc97612bd4655d97800cf2ea9e89d26c",
+      "9340a843915bb01e57b125ae272a8d3181746a144cee9158460c979cb79da104"
+    ],
+    "reports/calidad_datos_por_mes.csv": [
+      "c18bac2b362c29bf8a841131534fa21299c118a96b02604da616ebecd824d96b",
+      "964cdedef72e46b8da10ff4f56704427c7eefe7192e0446102edec711745b475"
+    ],
+    "reports/cierre_experimentos.json": [
+      "9deea49b259c0777638761587a1adf87dbbee0fb73ce06842b2bb51494e42381",
+      "cc2ca5239d7972e732e3e7beb05c06b2beac575cf177a23afcc962daeb49b7d0"
+    ],
+    "reports/etapa2/ReporteParte2_MLflow_Equipo39.docx": "37213952bd5b52cc8df2ac6019e7a85ae04be6c30b107f24d872f74097974e1a",
+    "reports/etapa2/TC5061_Reporte_MLFlow_Equipo39.pdf": "eb003641818d19bf7068a15e9e826cb37390d03e802551860210a757008077af",
+    "reports/etapa2/busquedas_oficiales_marco.md": [
+      "f299b04cb7a17081a4fd156f0bdc6835fd4f6bc9dad41acfb4c80765a60a53c5",
+      "444ca10486f6d25e9fd1b6b668b81d8c6094e02f18c9456da9a3645275575f49"
+    ],
+    "reports/etapa2/capturas_mlflow_marco.md": [
+      "79e86b258671043badcb729a08d3af375817c63a97148a3c39fe135669468a5a",
+      "b28ac9a11962e4fb004a77995b5b2d940aeedd58f09bd5dc3ac21568fb4f3afb"
+    ],
+    "reports/etapa2/cierre_tecnico_marco.md": [
+      "2af937f769cc2103615d3781086030f156d593948c0d4d54d154ea67b9c5a367",
+      "0e366aa68c036714164a1fbd5743a0eeadf4e087f5e31bae52f6979d0e2805c9"
+    ],
+    "reports/etapa2/origen_analisis_complementario.json": [
+      "1463425f4f81d713395449ecd79b7547ae71853ca8d34602a89332e943e69ca4",
+      "52db8f0b31e853e8ee8deb255167c8f8c91305dacb5e708a069093af5ce02381"
+    ],
+    "reports/etapa2/p1.md": [
+      "293524cb26f483754374af6cd299c5e1dbe50c23bb3cd9ee4dc29e3d1bb1c006",
+      "d734a4a97aa0a7963cf7d04e42329fcc1d926d54090db30c6c56d5ff2edbf1e9"
+    ],
+    "reports/etapa2/p1_comparacion_oficial.csv": [
+      "750985794cad09593f822d23a55207653a3ada2d0d2f67599adef8eec11fc6d8",
+      "178213662a605c1c5dd553fa285f4f781537e3e0c29d1a1912afebf607d9482d"
+    ],
+    "reports/etapa2/p1_hourly_mae_oficial.csv": [
+      "9e1d8f998867d31db4ac08cd1bb7e336190bbf4a3b15ae0120eda776394f67a7",
+      "3ff34aefb9fc74735f1f8e53397caebd3d1dd925624fc6ab7b5f51c0ae32f113"
+    ],
+    "reports/etapa2/p1_monthly_mae_oficial.csv": [
+      "25382ca97d8ab4d523fec78d0825d5ce853daa159d763fbeb5f534b7bdeb6a6b",
+      "aa6e0d473c9dc210255bb4306755ed9aeff7265d3a0a8db867dc3b54bf75bf77"
+    ],
+    "reports/etapa2/p2.md": [
+      "ce449e7b0551eb5da896ad09fe8e0d04b7cfa26577eca7ed5ed9aedda6e86c13",
+      "7daf4492f1e6bf8b9668d9de32ce25f4369fe18aac79e884edea483a19311c31"
+    ],
+    "reports/etapa2/p2_comparacion_oficial.csv": [
+      "33e2e0f1e068f12229b207cee090b5983b5c062446cf0f251a9251d5f89bf5de",
+      "cfdebbb4d11d5ec21c4af766cb54025faf9382febf02160901bb4e09bbd6e5b8"
+    ],
+    "reports/etapa2/p2_sensibilidad_oficial.json": [
+      "65ff42359f79942b63571decb2ad8318dd2af00fd03c87994706e1ec71d95e2f",
+      "b55d1546a3d54b3989326d605636411d9b5765088aa5c0691aff99cd50a49645"
+    ],
+    "reports/etapa2/p3.md": [
+      "c173cb7815fa830cf09bdbf5c85b37fcbf0106c3833779bf4c1c5cef21cf9248",
+      "8b9a9aec25799582b26aff8e3fae4f0ee6fd7060253d4e3f48517de66f3c991d"
+    ],
+    "reports/etapa2/p3_comparacion_oficial.csv": [
+      "a7a72685f3b980006f60c0c61a08b41a83c0c1159e8dcde4e05f696e0ab5897d",
+      "0ae005a1d9eb450359a2ac4b8dfa296a076fcd8d726edec03a11bbaa915f07f9"
+    ],
+    "reports/etapa2/reporte_corregido.md": [
+      "1b043d1bacabb6e1b273fb162702f6817133fde028fe53dad8a2b3113226284e",
+      "483cf2cd5accbca3df3669e909e61f0d7615032a95831a9bf62b25d134db4b14"
+    ],
+    "reports/etapa2/reproduccion.md": [
+      "e5725d354d75e116c0e1462442c047fb3b43bf469981eea681ff2fb06bbc8610",
+      "15401400eba282581eb5d69acffce079c4c366edf779c8589d8fabaf4b978154"
+    ],
+    "reports/etapa2/reproducibilidad_stefania.md": [
+      "9236a2b9194d76946aeae018822a9a4f7a54a5896c6852c0c9a27c1051e8e33a",
+      "8d2351b38c625e1cc19ddbb9fd043660dd5abd6bfe31c6b9b716a9b22f308227"
+    ],
+    "reports/etapa2/validacion_correcciones_20261102.json": [
+      "7e95601641a54aa76a663d246e411f25292485477cfcd79f7953f219d78a5072",
+      "12aa900b607d74708d8eaf52582853f67630bb7e36d15cbe6516b7857c510757"
+    ],
+    "reports/etapa2/validacion_proteccion_registry_20261102.json": [
+      "04caa8862c5a8b2eacd9df068a1eaa1bafd0ffa9dd4560f126fb8dc200669414",
+      "a67d7a11b68460730271cc3c8e094f5906b27129f674486390d5e984e838d8fa"
+    ],
+    "reports/etapa2/verificacion_ingesta_oficial_marco.json": [
+      "0337b3e2cac5bb9eee939b168d1aae5a406e9531bab3ca17a9ed7a75223e5f1a",
+      "1eb02a49bc27d99745828b30a28c4c196ac680562f91d143653e8b3a08bfd312"
+    ],
+    "reports/etapa2/verificacion_modelos_oficiales_marco.json": [
+      "7ad237fc322634eb4957cb6c0aab4d3f176801d33b6f9738f2c88780b219911d",
+      "4fd99aafe6209fe67786497b11355d584d0c427fd0639ad80c1e6975c100d0c9"
+    ],
+    "reports/etapa2/verificacion_previa_marco.json": [
+      "073ba2dd9054c1fef46d0b8199fca0f4baa71f65d8c7289b703c30605e667053",
+      "b95dcdc2a03011cf9c3ed5068bef0166d9d53e959f7b9b300dcbbc741f1c1b1c"
+    ],
+    "reports/etapa2/verificacion_registry_final_marco.json": [
+      "998de4fcf20912ae399982696a2fae90511442856c27e2e9d3c70827a94e61ec",
+      "d7f0c29309377578d62c76742cb30de48b3d482f9b916fcb894caabfae6d0d8b"
+    ],
+    "reports/etapa2/verificacion_reproduccion_final_marco.json": [
+      "25db9bcbcd1fb31ba47ce3d6b8f20a7f1fa30236bf12e1ea18dd7cc4ec8de9d4",
+      "0b82a48edc5c5d8c061c1f9f7d7d04d87ca67bcdcd054a73d5223ab1d04c8ea6"
+    ],
+    "reports/etapa3/activacion_servidor_20261030.json": [
+      "eed984e1d6598b4333e74b6147667aef2aff70315c6ea68066ec8089aabd2e23",
+      "8be69fa469cb766d0c583b69689748557e3c2476f60ee0c53eaf4f5858051f53"
+    ],
+    "reports/etapa3/actualizacion_dependencias.json": [
+      "d58daa787f939c88689ae80b6c8994873611015b5e52a2913d6d0fb3aeead930",
+      "9a69271d4c87f7163d398e36b15b7af0b7d81e9a37ca696ce7ed5a4366d64f74"
+    ],
+    "reports/etapa3/auditoria_deepchecks_20261101.json": [
+      "7339d66f4ab70938f361d1281ce2dfa7825e844e054f5ac02efa9457775b3611",
+      "21e17b4a4a1d804607a8af8fe8e32a2c116845c48f552ef7098acbd027e34fea"
+    ],
+    "reports/etapa3/avance_marco.md": [
+      "a213ae54ca9ed5d6c2a5540f719c6b0ac094c08ea067d68114cb8237f2f6cad0",
+      "7c35922bc8f4a4001ea778b6b08becbb42255a5254554c861104db12de21d7d2"
+    ],
+    "reports/etapa3/bandit_validacion_vigente.json": [
+      "981236b3ecec0cf684b6256671df40f9160f0c9de753ce0698980d5091e82bce",
+      "a0d61ccae48cac74e83ecd7e4a3c2d582bf175239a772593b09b5a58bb4ee272"
+    ],
+    "reports/etapa3/calidad_datos_diego_martinez.md": [
+      "921bb7f155d58cad716242c2fe03e886c7edda03b74b9340622a5486fde15329",
+      "9598fd84bfcf079b68510ede7a50e5098553d38605d30a32cd268b499fd8fc4d"
+    ],
+    "reports/etapa3/capturas_finales_20261101.json": [
+      "b0b43fa9efda270a21eeeed6201cd5ca236a151da79c9376c63c0ff36ce46230",
+      "468bb9e0409388379a72e043bb11422888e4f85efe94e3f91ec4448922335fbd"
+    ],
+    "reports/etapa3/capturas_finales_20261101.md": [
+      "80b1df513499ef8df7d1c52b2ce83c4ab46cd02263469623d8cfadaec24a9351",
+      "9ad1b9d66633a6d498c6866f4fcaf748a7985cf14a87dd0f3d63d17c836f872f"
+    ],
+    "reports/etapa3/cierre_adicional_marco.json": [
+      "c6835a6a15b8913ca9766f6cef213825654b2e47090b3c4fff6a7bfcdc69ab2d",
+      "5092632955b953fc906d77c342d80cb1af1a0a508e0dd5e81d9c440258bf2660"
+    ],
+    "reports/etapa3/cierre_adicional_marco.md": [
+      "96837bbd0689d698eac3ecc26225f5b7c9b256af0bb17ddeeea2bd8294bf4433",
+      "06b034416e8d40550e9fe77d0cf5d9ea9bf4da528257498bf8cc861953144d4b"
+    ],
+    "reports/etapa3/cierre_integrado_marco_20261101.json": [
+      "922a7f3ead09a9dd1411325a8221b8c6a3e0bd7e96c60074389d024d61802791",
+      "512554f1c6aa1493060ae05d5b5c3b09cd4c96a2e88d606ba39489c85900175a"
+    ],
+    "reports/etapa3/cierre_integrado_marco_20261101.md": [
+      "2a7ce6ac13ad7c8c991bb229afcb4a7260c1c1029dd8e45bd5c214e6c567998c",
+      "73a8f6762fc7dd2429671c2dbc4dc96e1e1c9e6db1a1795f2a9c3199c026e9e9"
+    ],
+    "reports/etapa3/contraste_estaciones_20261031.json": [
+      "ee8110a24ccc573d9593778f7ca9a6dfca62a49f9ed69802fb01c7dceccb21ea",
+      "3d7e797837c1c872a305d9e43188869a35ab4a011ae4a669613b7364ad70d04a"
+    ],
+    "reports/etapa3/deepchecks_compatibilidad.json": [
+      "446f1aeb6df8730e4aaebc0a1ec5f4a913a7b191aebcdf807d5780995be3c916",
+      "7a3aabd2a9975b0dc9498e7cf2538ce1357be19577aaade0fb0b7ebe970d37b8"
+    ],
+    "reports/etapa3/estado_vigente.json": [
+      "3d6196dfee96f8b62b1d3d00997081a2aae631f806f3a7163897fc89d277b491",
+      "a3d8572e348d517c8456322123b12cb190e961ddf046d6750c08d77679347d79"
+    ],
+    "reports/etapa3/evidence/migracion/README.md": [
+      "dc6900c84cee58629fa41cb11d3ad012a9a7f8f2e8b0dd022d3f81c1e0dabcd6",
+      "9de9aee753f5061306bcca6c1fbcf240483b351bda177698b1607e88ec8aaf13"
+    ],
+    "reports/etapa3/evidence/migracion/corridas_conservadas.png": "33b1c9b5a9a9b8b96b3f01b38c52bd7e5ae221b2f8d6a4264a22ef769906a765",
+    "reports/etapa3/evidence/migracion/registry_migrado.png": "374ad0688f80a55c1f9c3c587a0131178a7cf4965e35ae63be492f1e702eb151",
+    "reports/etapa3/evidencias_consolidadas_diego_hurtado.md": [
+      "c8d729be3f628247e21e0f82435af26a974b239ddb08d7dadb07ecc7d1678d71",
+      "67e4e8aa90254586b389efd0cec30726cbc4191428ee86db96153a434c127bcb"
+    ],
+    "reports/etapa3/evidencias_manifest.json": [
+      "846a1b12fb349414151c7a0e951f958cce5a267bf702ba363ee7da04a21c1a24",
+      "1254bf48822facfa87a5b1b8890f562eb407295728a92688085290968e2adbe9"
+    ],
+    "reports/etapa3/evidencias_marco.md": [
+      "9843f39110b7e028859f30190afcc1626b4c783775dcaba4e1cb51e48b1c953a",
+      "0353bce5e053efabf55ec959c7f7b537a741efb2e6221d20fd194ef36868fa25"
+    ],
+    "reports/etapa3/hallazgos.md": [
+      "fa8d92ab7c73939f6fde7f7fe156f0ae57494e31b82486dc9737e0ade378f014",
+      "4defc3721a0b6d5151867eed4d7a325b312ffceb94a9aa934d4d376cf2234fb9"
+    ],
+    "reports/etapa3/integracion_migracion_20261029.json": [
+      "649f2532e6699ee37be9675036a6d81fa04a48158d83c440573a7b3c121f5dc2",
+      "e52bfc3e5701ea88625281aa8e38fc9d19ec9d278ec1de4d7cfae9fb6f5c4cf6"
+    ],
+    "reports/etapa3/matriz_pruebas.md": [
+      "fa4af08141f524471ad9c6a4dbe2a1d02cacaf8746689447bdccc17250515a76",
+      "ca2c4cde28251ed7731480155ccd52068ea5ffc42540c730cd1583edce7e989f"
+    ],
+    "reports/etapa3/migracion_mlflow_pyarrow.json": [
+      "06f4381bcab5d56548b855a233568467bc98f00e3138a2d004eee489ec127ee5",
+      "8d78078c6177d9b00503f87b673598376b2c92bef50259ce9d1e933d6a02dc9f"
+    ],
+    "reports/etapa3/parquet_interoperabilidad.json": [
+      "bb208233a9210c15abdaf67ae2d5810626f6484ce37e3143a0c622efcb338678",
+      "0177d9e770c08253b05ea30cf1cfb169cc1e15aa16d024292b8814127155e5e7"
+    ],
+    "reports/etapa3/registros_20261107/bandit.json": [
+      "f6d52cd36576b8109b89aa8c307a9686cfb31f4cf4d2b3aea027b962a1c8cc25",
+      "47a063de08ada68be352aa84927890e3e3a264eaac7f193f1a097ef4732b4ada"
+    ],
+    "reports/etapa3/registros_20261107/deepchecks_smoke.txt": [
+      "3ef8f2cb7847483856745bf440570e9a58c1b872f1d85ac91aed8a9355ba9eec",
+      "8d7eb187bc93a114651bdf4eb0b3b2224f986a7d6ffa958d033361332245e77e"
+    ],
+    "reports/etapa3/registros_20261107/deepchecks_summary.json": [
+      "16a7fea99febbf2a81e60b876cf5ae05657a086716aebc166b9090cef0cecf08",
+      "a1025b7ffb050abba8f6d3e383d78c1a681fce93ee510707ef265d8c4a31839e"
+    ],
+    "reports/etapa3/registros_20261107/pytest.txt": [
+      "ea5c6eb3c15ca6f63cc1e16e9bfe047a95c0a51b7b925e225a227ef78f4f3375",
+      "e9f4b76474373d74bd1de53fa27f8619e5234d6ff7fc6f692bb4a5929cab8cd7"
+    ],
+    "reports/etapa3/registros_20261107/pytest_por_modulo.json": [
+      "89b92d75fcdf18adf488239851c1b0a469134ba1957946365e635c2578ff8af5",
+      "dcca7929068bfbeaa2df938918c0f6ecf9f797740c9a843d819a428db3ee8053"
+    ],
+    "reports/etapa3/resultados_marco.json": [
+      "caf5c525ef974d5698d264a3e2bb1d79830edc3c6babe3c41d89aa7cf3430fdf",
+      "33eefe6ff2d29b26d325c6c06edcf84420918346fac7dd76aa077aeac854cac3"
+    ],
+    "reports/etapa3/revision_p1_stefania.md": [
+      "7c651a49bda9f8011896e6a32f3f24d6a9abf8c021d3f59073bbe383fcaaf625",
+      "92f0f571a387f5dda8ab8281fe55590fa3923f27fb010e5d1bafd704011fa20a"
+    ],
+    "reports/etapa3/revision_p3_diego_hurtado.md": [
+      "a993155356f20527167f271c9f7f653b05146c88223d0ea1567c4bf3f2929921",
+      "10ab74db9fbc7f5833a5b9ab4e8a18819928649a9e0c7daf5a1134f76ee52c8f"
+    ],
+    "reports/etapa3/revision_pr38_20261101.json": [
+      "07d1bde92ec891ce4c583e9106478db5796517b2394bed413a51a59100701b27",
+      "0ee274897029d49dd4f016b897372e35a8641892f768cd1a407e4ff40a3e3863"
+    ],
+    "reports/etapa3/seguridad_cierre_20261101.json": [
+      "39349fc66306b35fecbaafdf967e5301453374732b1b575391a4f02da1d65bae",
+      "102278f3085743cb0c93d14830d7ba1b7290ec3572eff770f8861c6e84530f11"
+    ],
+    "reports/etapa3/seguridad_deepchecks_20261031.json": [
+      "444c542aa0eeebf3897f56083a1fe68e8eebcdae0c132e691eaddbeabdb79555",
+      "1efb7c3bf1eac893b91af3bc06c3a5bee54a780cb69324f520af08fd417af28a"
+    ],
+    "reports/etapa3/seguridad_resumen.json": [
+      "f394cdb343bab7aca5f0dea49adf39e0977f0092e2d9ed9261ea54262f8e9ed0",
+      "322ca89390101f6e3cb252caa3ad7deadf7431382fa52364b60d89297be15ffb"
+    ],
+    "reports/etapa3/seguridad_validacion.md": [
+      "9e491eab02d8deaea9c22dadecd803a23824b115025b44cfef1fa5ef04cfb9a0",
+      "94fcb709fd427a9b3cd8ab4b3be9c35d2fb7542e9cbda52aecbffa2604d607e5"
+    ],
+    "reports/etapa3/validacion_final_datos_20261101.json": [
+      "9bb9ec1a98e8b9effb9202354afe1af3d0de2136ba35fe3146d103dd3355c981",
+      "021000930c3f9dcfbc1dfaa1f19029951ee3806f999dd54895c98084dff21e23"
+    ],
+    "reports/etapa3/verificacion_estaciones_macos_20261031.json": [
+      "bdc4b605c869ff9e3a5176942cfdbb1b516debe216ffe663e6b9c576346ff1d9",
+      "d5d7957cdf37a1d64f5cac0189e27e19d419d40dbaa3898b85748fdf7c633244"
+    ],
+    "reports/etapa3/verificacion_estaciones_windows_20261031.json": [
+      "b0491e5e4c88d2a83fca0ea14af831750048c167d19cef987827fe949453aff5",
+      "3d612ca3f5e1e42240097ba224a998292b06c49138b52803ee48a05ea89d1889"
+    ],
+    "reports/etapa3/verificacion_vigente_20261107.md": [
+      "b770ac6bb97952e8d2f53b232190a9b7929d6fb2a89a484e22eabd5f9ea962bc",
+      "430fde824b5757d46ad89400e951bacbbdaf8fb1122440433e8253d4b4300396"
+    ],
+    "reports/etapa4/arranque_marco.md": [
+      "8718aa4727622660f24b2e73dbfa274438cdb358a1adf768f02d1dd15f0c5069",
+      "3d2c62f5aee13b4629c6633a2db4cf75259d8d50dd4a43a55764d991d22be12f"
+    ],
+    "reports/etapa4/bandit_api.json": [
+      "418beb190f2b0272be1d60756742792429a4a0821dd3d09f4f76a3a082b781a5",
+      "bae092f7fe68a310748c05e4b29cbc545d2a053148a98fea5db6894371675c31"
+    ],
+    "reports/etapa4/bandit_servicio_20261103.json": [
+      "b62e4f645f98a70c72e0fb1607884c903815a86fcb5c55f985b8685070835729",
+      "7b32e12c2cfb966900a1731c06879314b779549c98208e89a20d24faae13566b"
+    ],
+    "reports/etapa4/captura_registry_p1.md": [
+      "d68960b826a9e2c4af55632ccb5f933d42856410c23afca3bff3002caeca51d2",
+      "74904b1a9219fe5011f4a353cb7612781c60e05c0bd75d350395e40715e15f47"
+    ],
+    "reports/etapa4/capturas_api_20261103.json": [
+      "8b9f9a4135d09b5c8f0a75e7395fa47c490bd5ea89f877081e82bef0345a7ce8",
+      "e4159227aed44421e8b5de1626b24e5ad3bb0fc9de302ddc72b079f4693cd5f1"
+    ],
+    "reports/etapa4/capturas_api_main_20261104.json": [
+      "cbb75bd871e6febc41fa62be8c20df21a6d436e7b9275e648f70c9af07297c45",
+      "e46cd002c05de5d30a4cdc5a2430e578803f2f83e3840a30f440458fe664411a"
+    ],
+    "reports/etapa4/cierre_api_marco_20261103.md": [
+      "6628d7623afaa670fdbb06cf388b59a70ec409d0983d57de65cd93cb6ec08c85",
+      "3edb622e2e7022711d93948a479b472eba5ab86e18b42e5a185c7dd9cc8e4f3a"
+    ],
+    "reports/etapa4/estado_contenedor_20261103.json": [
+      "66df786e636568f18bdaf4c300d062db2b1879b3c804b6339fd738125a01876b",
+      "cd68f1a1338aec1c96a51fd3eaa33aaf49e2654a63f5edb73fecfb1d322eca4b"
+    ],
+    "reports/etapa4/estado_contenedor_main_20261104.json": [
+      "5cdf4f04c3810cfdf4929268f154ba3c2086449ff1aea1d3b98077a297462868",
+      "51bad5b3c292dba2361c2c1e5cb5b09d61c64bbfeca5372fdf03eb2f376bc67d"
+    ],
+    "reports/etapa4/evidence/E02_registry_p1.png": "78131e231ddb219b4bd6621d3cdca9bcc5adc3bc432817d734dbf5b89d683bce",
+    "reports/etapa4/evidence/E03_api_contenedor_respuesta_200.jpg": "b0e34ec1e603706ffae065b5f06f577dbd475fd571a9d73c45be400902b2d2a5",
+    "reports/etapa4/evidence/E04_api_contenedor_pagina_completa.jpg": "496de42a009174e8d84d186d211c6684f8b5236ce78c5d8eb71dd4f1ed592040",
+    "reports/etapa4/evidence/E05_api_main_respuesta_200.jpg": "57c2308e7513796198ad3d3992e17fdc407fe68d3a1363ac7a7036fe2e5cabc1",
+    "reports/etapa4/evidence/E05_catalogo_drive_detalle.jpg": "11438463eae2adbbfad17131cdee844e2e453f82a50ea4a85160899a32e74079",
+    "reports/etapa4/evidence/E06_api_main_pagina_completa.jpg": "0c835e415dc45c2325d52d8aba7652f8e1b578f23e3d1c578dff101df637e012",
+    "reports/etapa4/indice_entrega_marco.md": [
+      "2a3d6b1814b48c0a060c334fe2ca6838285433f76feaf3c1310510f15dac44e8",
+      "c76390f1c3ac0b57cbae56c0a06427c4e9f7f2d1c90b43f77fe6f4b65cb8dfdb"
+    ],
+    "reports/etapa4/paridad_modelo_ampliada_marco.json": [
+      "d51363bbcdac38fc4541d7deec5d499572879d15643b691a3bd8a147bd35fc50",
+      "dc7055e4f33d2c832268df1f049489e25044feee413924eafe6ebd42bbe23cff"
+    ],
+    "reports/etapa4/paridad_modelo_marco.json": [
+      "9f567fe76c5fc46719aec5f5e9275a01c78272a810f03cb9f1deb5242308f4c6",
+      "dae3d2a69c5c9f185f7684a8941f6728bf3c7ba19a59a8fd8941fd7f6e9bf626"
+    ],
+    "reports/etapa4/pip_audit_api.json": [
+      "f04b410826bd7a54a2508c7e4a75b7178fa95dde6b80d42c7d522fc56b532cf0",
+      "ef8573640adb8f3ec05ac7e2407aa397b2b470df6f1620113300401f9d91555c"
+    ],
+    "reports/etapa4/pip_audit_api_dev.json": [
+      "ab65f70e01d8f6252bbf5c9a818a73f272260348d0cd2bc7d23e63d18e7fd698",
+      "a617ad7190cd5d61eb691fe40ba6f109cc24fb4e1756f89cf025e46900f631a8"
+    ],
+    "reports/etapa4/recuperacion_catalogo_20261103.md": [
+      "78c09b0ab4489a7f623fb93c2d24228447eb533b1de43008388aa2380d9a22a1",
+      "b34c7e02482615e00da569c54fd854ea9fcd942e1ff306da1850062cac27807c"
+    ],
+    "reports/etapa4/seguimiento_marco_20261102.md": [
+      "36339ecdfdf14f7cce617186d57bc7b57832671d1032149782418306371cc8ef",
+      "fd72902610c1b08d86caf2ce0276e15a2447d45bbcc347ef125ca85071b31c87"
+    ],
+    "reports/etapa4/seguridad_api.md": [
+      "46d532d3a339a2b077d928f47588aed5bd53acb8388275abc78ebf81002cf57b",
+      "1a6d0b941a510eb100f504310a2a9ebdf5737b36233fec7ab9020b42ef061b5e"
+    ],
+    "reports/etapa4/validacion_ampliada_marco.json": [
+      "eb60a58fbfd7c4f061ec9f7650cc738c83490f4b8b3f8dc8a18a9328afb12f8a",
+      "b8104df67a7ad38e3f45c366839df11df71cca103bea39b681a32090c1f2c96f"
+    ],
+    "reports/etapa4/verificacion_contenedor_marco_20261103.json": [
+      "c7e888000acddf718d2d36ea56fb54da9e17e0a9960987a5fca90e14a2ef4a4f",
+      "d7119cab853e433868c508b1bb90a47ef21c6caa30ec14e00180d9a60d0e78c2"
+    ],
+    "reports/etapa4/verificacion_http_main_20261104.json": [
+      "8cd3589fb7702c83e73ff5490222135bb4f4a9d82b715de5530fc6ec4d7effce",
+      "a334d694100ec5b4c61784bddb3e27392b22d999d1e4ad9cc651a6bac8a8e65b"
+    ],
+    "reports/etapa4/verificacion_http_marco_20261103.json": [
+      "619c723f140e476f6ea7cb0ecf654a55f31f9514c0a48c1f624b99dc4bf5752d",
+      "af69c65190bf89efcfa31649dc8238653a248e10a41beeea0de9d6b5dd814ce8"
+    ],
+    "reports/etapa4/verificacion_main_20261104.json": [
+      "58c8eaa1ff663c601ba91e1d40056beff3085014db446fc9ed4155e1d617fed2",
+      "f4782c510a5b7764b0066b632eca9e4c8c30a4b033ff2819437cf61a0be27fd4"
+    ],
+    "reports/etapa4/verificacion_marco.json": [
+      "cf603126824659a443010d679b8d1ee52a3c92a62477529487da20172f9710ff",
+      "6e4019acebe03a19fe5d91ba5068afab3ce488a4578199b9defb366e5e48834f"
+    ],
+    "reports/etapa4/verificacion_respaldo_drive_20261103.json": [
+      "000a24d04e4b136bcb992f6d7b1c88de3e40a5f72f8a1ff4cfb4dbf10cf4ecf0",
+      "df84f6f1df5798c88d2fb2d51fced3e8869330fa97b3f2be8f0efc02f6e81f3e"
+    ],
+    "reports/etapa5/README.md": [
+      "e30a6f97b9a00677966119eb4f07376f2efc49285003585dc0df1b6c2edba8c4",
+      "15bbe4a1de2d370af5d5ce15a2501a6e6375d01e2f17c141cf9a299dc8f25f0f"
+    ],
+    "reports/etapa5/ab_metricas.csv": [
+      "c027e02401e4f87b31b1ac5b6c6dde8fdd7a31558e3663d26ef3f46d6cbf00cf",
+      "84664ecad790d80150c37b95dc78c2a1397a506d498a5135ce9939c7ba5babb0"
+    ],
+    "reports/etapa5/ab_resultados.json": [
+      "2a61c3448a2575946bc298804c7d6b05c0c3cb02ee14f19cca2a867e05f4330f",
+      "a99b53e9a1e0a94340672f43de78e531f2958b61ec4bb781b04d80530169635e"
+    ],
+    "reports/etapa5/analisis_ab.md": [
+      "665d340b17d0d3d45cd3d962290dcdb681f4f8463b7f23dcc8823dac5e28762e",
+      "ebf2a1882e69a049ed4eb5e089f1325b80919ecc8bf106c0e673ed4050b22c11"
+    ],
+    "reports/etapa5/auditoria_dependencias.json": [
+      "31e6e5b2eb22953fb3fd05edaed5549f841fba20ba4806ffae34231795d682f7",
+      "dcbf49f33c2f8ca4279df278a304b5d200444a78e29e0ea401a04398cd26d8b8"
+    ],
+    "reports/etapa5/bandit_monitoreo.json": [
+      "48d51a12c4ecab7c8aef2d05aaad945bfb1185c4ed5e95ca09d06a8f53a0e5e1",
+      "17c758fb596bfac102bbbf635f7777af8c4fa9f5c78490716a498aa628c0ae20"
+    ],
+    "reports/etapa5/calidad.json": [
+      "83cd074567a76446cd437014f813090f3f8c16ff46a51f9ee7db518fbf2ef151",
+      "eab906fb88101564a0e3df2574b77d8db77647472ca14f87dac66e3d011308e2"
+    ],
+    "reports/etapa5/capturas/01_evidently_reporte_completo.jpg": "50c7f7bb47b13c895fbed9377fb03b349e8b847f6deb9ef1eded4ee3b8fb7ced",
+    "reports/etapa5/capturas/01_evidently_resumen.jpg": "ee0ac97695dd3eaae9920600c732da6e1ff36fd791f8f6ec269794cdf4e4b1c4",
+    "reports/etapa5/capturas/02_evidently_calidad.jpg": "9cf1626f34e7d2428599ada306879de0d3debfbfc9740798e83d98fdffdcd1c7",
+    "reports/etapa5/capturas/03_evidently_mes.jpg": "ebc0d266e8a79abe94bac791f81c0494d20db2da2a65779acccdda4655d3497e",
+    "reports/etapa5/capturas/04_registry_p1_versiones.jpg": "58d44052e71da6968bb6834854c88f12057df0c9ecb93c46f3d6fa8ce42c3367",
+    "reports/etapa5/capturas/05_registry_a_champion_linaje.jpg": "976fd105fcd3246c3044f0013298fe1afd37eb1f4ac31c6a19237e0465cb71ec",
+    "reports/etapa5/capturas/06_registry_b_candidata_linaje.jpg": "1975e560f62e27b1f6f832d560a807bbbe2186c0a9dca4df2e8be14e544efd10",
+    "reports/etapa5/capturas/07_mlflow_comparacion_ab_octubre.jpg": "d7b9a5faab27d28b9f7996d64ada562952fd5ff483026541527de3c02c8a24d5",
+    "reports/etapa5/capturas/08_mlflow_trazabilidad_ab.jpg": "dc24544087e692086a8a60b0ce3c39b94b735a97d2ba3c83e94a99e06002744a",
+    "reports/etapa5/capturas/README.md": [
+      "2f8fc43f4815e5dc6b42b30a9063d5f05f10de1d4a32c8dee7e98a8249187d6a",
+      "153bca400994e2d0132d2b0625adddac0877eed005e254efc6f3802c1a238a14"
+    ],
+    "reports/etapa5/capturas/manifest.json": [
+      "ef6bb7eee666212e592db31c3a463e00a4187422d874a327c2b1e453ae26de56",
+      "f47a873824e7f7fbe32e02f04cf4989e9ba2e0bc9915e738b171c24cb5769304"
+    ],
+    "reports/etapa5/cierre_corrida_b.json": [
+      "60408c4b8bd958db42e8cc3dc1e910576c93d6d20fd96766793d0876d53d600b",
+      "3650590a18de31fd4de7ff215f0a341bb7b7a25c7ea507de846d46f757732d76"
+    ],
+    "reports/etapa5/cierre_documental.md": [
+      "1c95822d6d1cc29eb73adb3d01ea91e7f5bcb67ddaa60591337747f27666a652",
+      "4a644edf50332138a49bc31f575df5b6f8ced7ab6933ed1a08675156dda18f03"
+    ],
+    "reports/etapa5/compatibilidad_modelos.json": [
+      "8234e6baa9287ccb92e417bcbebaf8a40962b1d308e12f2cc1add4ee14082e57",
+      "c1b70d3f21bc8baf22e136b1ab449a3241943d40ff1d6dac71c9fa10f41898a3"
+    ],
+    "reports/etapa5/datos_resumen.json": [
+      "beb5314e42337a43c7ef7315d7783a514ce93b4a6f47afebedee9449fa41a27f",
+      "8d3ce65e1e06216c14793ac1aad62e82fb933d1247d0e41050ad28909bd6af04"
+    ],
+    "reports/etapa5/drift.html": [
+      "d54caefaa8d8d1369a1caa55a988fb0f7eb6c951799fd18010e125a1ffa8ab9b",
+      "84b58f2a907f055b90a8ee616ad950add37f693cc4baa9369e14fb2e45e3f2d0"
+    ],
+    "reports/etapa5/drift.json": "cf101836fa72cffcabc99d310813265a98a50b28f9e22bc3fd76e7eb6d775e41",
+    "reports/etapa5/drift_variables.csv": [
+      "4c9b26c9693878ac86b1752231373ede94ad7678d1241dacd6c2273980cac950",
+      "6d14df1ec0733558b172da4138fc6a38fc6b954882ddd28d0c7ff767f79b1c02"
+    ],
+    "reports/etapa5/entorno.json": [
+      "ca57f23b567f109d7c947f12f3ab6d92b9dda831a504ae6580384ec11a8c7353",
+      "b7529a61b38b0ab3384108e8c03facd230748de4d1aae6f4fd175428b5e62a90"
+    ],
+    "reports/etapa5/entorno_evaluacion.json": [
+      "bd71406309066a3d999f376341ce0ad23df6cdb2c2199739897e15f02d2eb4b8",
+      "889bd6ef267aab80b7f9234e94687950b736bb13f2afc10a5fcb9437e47da4b5"
+    ],
+    "reports/etapa5/entrega/TC5061_Drift_ABTest_Equipo39.docx": "84455b1776cff740d28fc8901edbeb61742e61c9a5664864082942ca421cb673",
+    "reports/etapa5/entrega/TC5061_Drift_ABTest_Equipo39.pdf": "c6af2641cf88c5416cdecd5244db05f32b075fcb3994be5bc6c0569b21741c8a",
+    "reports/etapa5/entrega/verificacion_reporte.json": [
+      "f8a5b169f98265cc033e5c3bbc1fb7431bb8f50d37ae3dacef455eaa4389fa4c",
+      "6743a46d093b10ece9663f8d9803346bad77a896da068b7c1aa324202b4855a2"
+    ],
+    "reports/etapa5/entrenamiento_b.json": [
+      "e487e826ad4974ced18a86349bd12435dfe1b1f00b7a6e20fb367284062759a1",
+      "8f20a46139856ef8782e42cfa304cd2ef6e0eee7c95dc8eff2584873082ad65c"
+    ],
+    "reports/etapa5/error_diario.png": "7936308fb5a794b40558c1dabc788dee72784c4c267a93fa8af8f2d0ab7b444a",
+    "reports/etapa5/interpretacion_drift.md": [
+      "3b5ee4174c71fb77a3e606133d31366810c03b675047f1ed2e0b89027793321a",
+      "8c806dd7a8fc6a616b419daddd3cb7a8366ae71c935a27369632e5ffb6ff7dc3"
+    ],
+    "reports/etapa5/recomendacion_ct.md": [
+      "15e1f272c9364e0c71fbfbe34d1fe512e4e061f182e1dc75d6db717ccbe17b46",
+      "b20134e25be0582aedc02742d6dcd4797aba3c8b3f0753d73373a700c578425e"
+    ],
+    "reports/etapa5/revision_interpretacion_stefania.md": [
+      "80d665e2a29b520802b50ebd90f6bae92aca38fdc38fa4732641937f5f033fbd",
+      "252f0bae0b4fb1802eb2ca785a40c965700579aa2917677ec41aa0aa4a6448cb"
+    ],
+    "reports/etapa5/revision_linaje_diego_martinez.md": [
+      "a0aaa65e9661e84b2802199f65e230a4932a66550d638d265e3260ed622441e8",
+      "33427ffab6fc4473ab6e9eff7508ede2b1e102934f6e9dd81e824b0396f27afa"
+    ],
+    "reports/etapa5/verificacion_tecnica.json": [
+      "4ca1e6581622555e2f2bdc141ade4c104a0bdbcdd41dcf0706057f30fe08ef9c",
+      "922bac252cf5fde2943ab030142d3fb0fe2365964455eb3b22387349038b0916"
+    ],
+    "reports/experiment_summary.json": [
+      "97351134a9b6b2e3a39954d1ce828b927ca21782b546a3fe6ac70a94d16938d6",
+      "ed06ff86f214c733f864283f9a17d89c89089421d4816446ac9e6de1a36deac7"
+    ],
+    "reports/figures/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "reports/figures/etapa2/capturas_20261028/01_registry_tres_modelos.jpg": "d6c19b423b29f5563449736049c18446acc00413921d11b5b256acb16bbd4de5",
+    "reports/figures/etapa2/capturas_20261028/02_p1_champion_linaje.jpg": "c95c4770d4bb847123ed354ceaa5ef880dc5e55311aefde374c9258420bee6d1",
+    "reports/figures/etapa2/capturas_20261028/03_p2_champion_linaje.jpg": "acc5395c3d7e7edd7107010dd13d124b0f7e8bfda0c19ef2c8491332c43c6f35",
+    "reports/figures/etapa2/capturas_20261028/04_p3_champion_linaje.jpg": "8e831c8399444208f77e1d7f4d54f00894a3a61dd827953fd92478593770c4b7",
+    "reports/figures/etapa2/capturas_20261028/05_p3_arbol_artefactos.jpg": "11f0722a9eac3277822abf9abd84eff7f9e58e1899d86bfaeee4741d0fbfa3f2",
+    "reports/figures/etapa2/capturas_20261028/06_p3_firma_modelo.jpg": "f8c602bc34b5e3db5f02c69a157febac2b98c3673253d6b6ecf9db913e56e51b",
+    "reports/figures/etapa2/capturas_20261028/07_p3_corridas_anidadas.jpg": "5b309381dca5fce7e986fa4e927f453259dc74d13f61712a4b80ae59e80b0d8c",
+    "reports/figures/etapa2/capturas_20261028/08_p3_comparacion_prueba.jpg": "b2dac7a602d93f8438d82cd6841850ce6ef0a7cd04c7196fc1ad30a938c61063",
+    "reports/figures/etapa2/capturas_20261028/09_p3_comparacion_validacion.jpg": "1422b34b396504e1de67f5b08d8c2989a6bd35b4898efa5977409528ca369dfa",
+    "reports/figures/etapa2/capturas_20261028/10_p1_corridas_anidadas.jpg": "48feea36a9e59f19eebd75f73f9e85f27624b51410d4bc53e9cbab14005d0e78",
+    "reports/figures/etapa2/capturas_20261028/11_p1_comparacion_prueba.jpg": "134efab410d564a159039095a99f459c4715ff62d96a14c5c3ef4cff69ae9c42",
+    "reports/figures/etapa2/capturas_20261028/12_p1_comparacion_validacion.jpg": "b8ae1bbe25a7f88f4918d8d66fad8431a9513f43b4da8012d4c34957ac4642dc",
+    "reports/figures/etapa2/capturas_20261028/13_p2_corridas_anidadas.jpg": "a767ea7e6623677ed33cf569ab17c908bf02abb28504d14679ef5a98d0e5f752",
+    "reports/figures/etapa2/capturas_20261028/14_p2_comparacion_prueba.jpg": "6661ca63940fc4973ba33a9b622b3a3ee70a71ad2b7825bb27a2cf2fe31da61a",
+    "reports/figures/etapa2/capturas_20261028/15_p2_comparacion_validacion.jpg": "516fc3e138bf0f85bcf3349ff47f856470bed0f166d54a351106c571bdc2c86b",
+    "reports/figures/etapa2/capturas_20261028/16_p2_hiperparametros.jpg": "474c41b86b61ae3b448a98b106e62e821f0975bb743dde915eb321f77d867360",
+    "reports/figures/etapa2/capturas_20261028/17_p2_comparacion_f1_prueba.jpg": "4d22fdeafe7a3749c1519e5c2ff6b891e7dd9fc7126dae1bdd81fc80de0b9e14",
+    "reports/figures/etapa2/capturas_20261028/18_p2_matriz_bicicletas_validacion.jpg": "68dcaf3672b4b6c00684080b7d7615020ed5a02e2d8e645d8980e7af1c049d98",
+    "reports/figures/etapa2/capturas_20261028/19_p2_artefacto_matriz_contexto.jpg": "b79b1479d2be17f26f9c41d64e46073583112c771a40345fad55473cbb26b1c5",
+    "reports/figures/etapa2/capturas_20261028/origen.json": [
+      "c67150add9c55fd5d3a4fa8c8e93e7f0366ad6a2b8471c94474902f8f9071e4c",
+      "24d592ade7390c4bda8c28bb89fc9f165a3567e0c5ac3ac821027131cf7d2a5b"
+    ],
+    "reports/figures/etapa2/p3_gmm_3_46ce752d/origen.json": [
+      "03651969069f94608d41844bcb4792bafe646c44938dc5bb5d48b8e59e50baa0",
+      "51f3bd9bfd673d3b3c076c74096847b589c14f0e33b9667cfcccf722ad3c8a09"
+    ],
+    "reports/figures/etapa2/p3_gmm_3_46ce752d/perfiles_grupos.png": "f00e5495be21dbda7bf41783e665ef55fbdd6e2d63681fe5a23e042488c2bb49",
+    "reports/figures/etapa2/p3_gmm_3_46ce752d/ubicacion_grupos.png": "9fc7ab83a4dba5a270a1a0e1b17e85c88b2b51d2aa4188b7417ebfb3d94633c0",
+    "reports/figures/etapa3/E01_entornos.jpg": "106de83be170080b874ca75ab628a7d3223203c6cdbdc3bd7f5e18a38c79b36d",
+    "reports/figures/etapa3/E02_estructura.jpg": "5aff255350875ff2a618aafddb6a2157a629bdbab2f3f8513517aeee0ef6ef78",
+    "reports/figures/etapa3/E03_ingesta.jpg": "8272d801c5aaaa26576a0874e9c8dcb7f84ea923895504d55479498f518f43d5",
+    "reports/figures/etapa3/E04_deepchecks_variable.jpg": "38e5b52e0908c8c2816b6e30da110b4d9e764eedb794ff3fa00721cbaa543c7f",
+    "reports/figures/etapa3/E05_deepchecks_constante.jpg": "e76edbe4bbe27811a3226a07abbf610078150d0adf8acf2588002fd8fe143936",
+    "reports/figures/etapa3/E06_suite_sintetica.jpg": "f19b690f8440bc0940dd40f1032976a971baa3f992d43f05ff08baeaab52a301",
+    "reports/figures/etapa3/E09_seguridad.jpg": "dc8aec290343db8bf067d58bc394b15f787c4ff57acdb4d22914135d648ee42e",
+    "reports/figures/etapa3/E10_exclusiones.jpg": "b55d0f4addba1d057324efeace740feb9a75e6e80fd6e87c2f5d5535922652be",
+    "reports/figures/etapa3/E12_actualizacion_dependencias.jpg": "dafeaa3dbc8851759fc4705840e38ca469a8cb665466cd04934e18940c71865c",
+    "reports/figures/etapa3/cierre_20261101/F01_PR38_integrado.jpg": "fd763ceedef53ba03e4c1e602d2b7e185a36887e2adfd7af197c359450402c90",
+    "reports/figures/etapa3/cierre_20261101/F02_PR39_integrado.jpg": "27984a757ee0fd061e6b2a74875f9f57273a5d55d8604d701ccde9f331988eca",
+    "reports/figures/etapa3/cierre_20261101/F03_DeepChecks_original.jpg": "e5445ccb6945fe977a7bd47a0800ca173b89a67f53623e12726a8a97b6f5a768",
+    "reports/figures/etapa3/cierre_20261101/F04_PyTest_registro_original.jpg": "cf184d0be37afc05a6c90d4ae7bac9d92faf69903a3b28dc453d9d5f76b2f9d4",
+    "reports/figures/etapa3/cierre_20261101/F05_Validacion_linaje_original.jpg": "289836d5a3a5b12ebde721f05e81c44dcd05829cbc09f097a380c9e254ea777d",
+    "reports/figures/etapa3/cierre_20261101/F06_Validacion_totales_original.jpg": "0dd6bb9a86be0cfd8daffbb57b3fc3d68aac6fa52d540690aa5f094f09495a74",
+    "reports/figures/etapa3/cierre_20261101/F07_Bandit_original.jpg": "a55e15407d20b68873fe3ab2bb4324ac156f3a8e35cc7f98129b1029b3f9f944",
+    "reports/figures/etapa3/cierre_20261101/F08_Dependencias_resultado_publicado.jpg": "347f04d626a838e5619417fd89a125a2a9b7de0cfeef0b1cc3aff2cda4ef4656",
+    "reports/figures/etapa3/cierre_20261101/F09_Gitleaks_registro_original.jpg": "4e8e18d7a3538801fde5610d1159182fb6e20d1a9336c2e0535bd85b4589dcf0",
+    "reports/figures/etapa3/cierre_20261107/deepchecks_constante.jpg": "eee359cbd16d9e753e7843832891bcb0e17b9258f3a367ad0c2489a19acf860f",
+    "reports/figures/etapa3/cierre_20261107/deepchecks_variable.jpg": "d7cafd1ff11abbdf2f41795661a54ac2d5639555279713f1e4be2bc4d98081c0",
+    "reports/figures/p1_exploracion_modelos.png": "e468214c6cd1c839724b8232c16a064dd9d9784990080de03c2d784de1290693",
+    "reports/figures/p1_exploracion_modelos_final.png": "db153a72619b1e44cc5c6afc6002dbb5fd73d3cba66684b2d55ae5c3491107c4",
+    "reports/figures/p1_mae_por_hora.png": "5942e998bcf4ae74b98acb097b1593861bd474cc725265afbbfd93ce85f94bc3",
+    "reports/figures/p1_semana_estacion.png": "be2165d10b9e3d7a05dd450b597f81d081d49d2edff7a517e9ac8852f83bdc75",
+    "reports/figures/p2_comparacion_modelos.png": "06b5d96d41f218f1f47a279bb93fde94a7eb166dc6e7812bab06626826d863ff",
+    "reports/figures/p2_precision_recall.png": "7e02d43f7347ddae136e8070ffa4115893011ab2c73c3b647ffc7b32f00850ab",
+    "reports/figures/p2_tasa_por_hora.png": "1b5b9ae61a846f146b66c7c950ccc002d4ada6119a1c3ef36c16663b743904de",
+    "reports/reproduccion_previa_cierre.json": [
+      "76be99952f170f1455d8dc719c7cd83aeff6d0ff189d6ced3f53291d59e4a907",
+      "c8c6089de5fb17dc4421c01bf0803873595c622d1a2d3173b71850d0dd536f79"
+    ]
+  },
+  "hash_policy": "SHA-256 del blob Git; se admite también la huella comprobada de su copia Windows cuando solo difieren los saltos LF/CRLF. No se transforman archivos."
+}

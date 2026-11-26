@@ -1,5 +1,14 @@
 # Proyecto MiBici Equipo 39
 
+## Etapa 7 entrega final en preparación
+
+[Manual editable por persona](references/etapa7/Manual_Etapa7_Entrega_Final_Equipo39.docx) · [Estado y evidencias](docs/etapa7/README.md) · [Model Card de P1](MODEL_CARD.md) · [Protocolo de Continuous Training](docs/etapa7/continuous_training.md).
+
+Marco inicia la consolidación; Diego Hurtado revisa el modelo y la demostración. Stefania y Diego Martínez realizan revisiones breves con respaldo, sin bloquear la implementación. La entrega requiere presentación editable y video de **2 a 5 minutos**, con API real y un ciclo verificable de reentrenamiento y promoción aceptada. Estos resultados finales siguen pendientes; la corrección estacional del [PR #86](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/86) requiere revisión antes de integrarse.
+
+Las entregas anteriores se conservan. `python -B -m scripts.check_final_evidence` comprueba las huellas de **301 archivos históricos**; este control no sustituye la demostración ni la revisión del candidato.
+
+
 ## Etapa 6 Microservicios CI/CD y FinOps
 
 **Integrada el 19 de noviembre de 2026:** el [PR #72](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/72) se incorporó mediante `7c49a81`, después de la [aprobación independiente de Diego Hurtado](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/72#pullrequestreview-5969054034) sobre `a9d8424`. El [cierre documental](docs/etapa6/cierre_revision_20261119.md) distingue las mediciones originales, el contraste del revisor y las mejoras de rendimiento aún no demostradas.
