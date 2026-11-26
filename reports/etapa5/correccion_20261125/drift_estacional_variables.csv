@@ -1,0 +1,12 @@
+variable,method,threshold,score,drift,role
+target_departures,wasserstein,0.1,0.21870766941005296,True,target
+prediction_a,wasserstein,0.1,0.007398176836224155,False,prediction
+station_id,jensenshannon,0.1,0.0,False,feature
+hour_of_day,jensenshannon,0.1,0.0,False,feature
+day_of_week,jensenshannon,0.1,0.04328016952551219,False,feature
+month,jensenshannon,0.1,0.0,False,feature
+is_weekend,jensenshannon,0.1,0.0263046203592539,False,feature
+hour_sin,wasserstein,0.1,0.0,False,feature
+hour_cos,wasserstein,0.1,0.0,False,feature
+month_sin,wasserstein,0.1,0.0,False,feature
+month_cos,wasserstein,0.1,0.0,False,feature

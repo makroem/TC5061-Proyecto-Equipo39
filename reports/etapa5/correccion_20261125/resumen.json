@@ -1,0 +1,318 @@
+{
+  "protocol_sha256": "ac5868511f87e736b4f3462a23d7f248af347a17ec99b01426e0f912b4e7f596",
+  "model": {
+    "model_name": "mibici-equipo39-p1-demanda",
+    "model_version": "1",
+    "source_run_id": "66414a8b45164d3a8f5b9f42e7cb387b",
+    "bundle_sha256": "dedce1eb08bda971a42fba311224c88e56f75cd2789dbb391e9445951931bd80"
+  },
+  "prediction_files": {
+    "reference": {
+      "file": "reference_predictions.parquet",
+      "sha256": "81c05e379d81531289049634387b941d8f9cfa8f75bcc0cf929b43fc46ebbd8d",
+      "data_sha256": "cff9fbe8104680cf462c97115e3ca55f0e89c7447dc4fe691c408f53d87fa515",
+      "rows": 2152008
+    },
+    "current": {
+      "file": "current_predictions.parquet",
+      "sha256": "20ecab526415170f585e90e2c114d160c57b196aa700baf1855e2806c4b81bae",
+      "data_sha256": "eecb9aa82a8541df446bad93cf867c0d8a5dacd32860b0b72ac442e6f9b7c082",
+      "rows": 274536
+    }
+  },
+  "populations": {
+    "reference": {
+      "rows": 2152008,
+      "observed_mean": 1.3337947628447477,
+      "predicted_mean": 1.3337947628447464,
+      "departures": 2870337,
+      "bias_prediction_minus_observed": -3.9530396280533345e-18,
+      "aggregate_underestimate_pct": 9.73393620277492e-14,
+      "mae": 0.7957515488602567,
+      "rmse": 1.4562388690213468
+    },
+    "current": {
+      "rows": 274536,
+      "observed_mean": 2.1115518547658594,
+      "predicted_mean": 1.3338443682394716,
+      "departures": 579697,
+      "bias_prediction_minus_observed": -0.777707486526388,
+      "aggregate_underestimate_pct": 36.83108632975648,
+      "mae": 1.2392674466412144,
+      "rmse": 2.440745307535415
+    },
+    "october_2025": {
+      "rows": 274536,
+      "observed_mean": 1.5300871288282776,
+      "predicted_mean": 1.3490069906798283,
+      "departures": 420064,
+      "bias_prediction_minus_observed": -0.1810801381484494,
+      "aggregate_underestimate_pct": 11.83462920096049,
+      "mae": 0.8096868041735445,
+      "rmse": 1.431803190278863
+    },
+    "october_2026": {
+      "rows": 274536,
+      "observed_mean": 2.1115518547658594,
+      "predicted_mean": 1.3338443682394716,
+      "departures": 579697,
+      "bias_prediction_minus_observed": -0.777707486526388,
+      "aggregate_underestimate_pct": 36.83108632975648,
+      "mae": 1.2392674466412144,
+      "rmse": 2.440745307535415
+    }
+  },
+  "seasonal_periods": {
+    "reference_start": "2025-10-01",
+    "reference_end_exclusive": "2025-11-01",
+    "current_start": "2026-10-01",
+    "current_end_exclusive": "2026-11-01",
+    "stations": 369,
+    "reference_rows": 274536,
+    "current_rows": 274536
+  },
+  "historical_target_change_pct": 58.31160187361162,
+  "seasonal_target_change_pct": 38.00206635179399,
+  "standardized": {
+    "method": "equal_station_weekday_hour_weights",
+    "strata": 61992,
+    "target_departures": {
+      "reference_mean": 1.5126040456833139,
+      "current_mean": 2.1135541682797783,
+      "change_pct": 39.7295064965258
+    },
+    "prediction_a": {
+      "reference_mean": 1.3347770002309864,
+      "current_mean": 1.3347770002309864,
+      "change_pct": 0.0
+    }
+  },
+  "comparisons": {
+    "historico": {
+      "sampling": {
+        "reference": {
+          "population_rows": 2152008,
+          "sample_rows": 100000,
+          "seed": 39
+        },
+        "current": {
+          "population_rows": 274536,
+          "sample_rows": 100000,
+          "seed": 39
+        }
+      },
+      "features_drifted": 3,
+      "features_total": 9,
+      "variables": [
+        {
+          "variable": "target_departures",
+          "method": "wasserstein",
+          "threshold": 0.1,
+          "score": 0.32297503772668756,
+          "drift": true,
+          "role": "target"
+        },
+        {
+          "variable": "prediction_a",
+          "method": "wasserstein",
+          "threshold": 0.1,
+          "score": 0.005603133463036975,
+          "drift": false,
+          "role": "prediction"
+        },
+        {
+          "variable": "station_id",
+          "method": "jensenshannon",
+          "threshold": 0.1,
+          "score": 0.02701275306961017,
+          "drift": false,
+          "role": "feature"
+        },
+        {
+          "variable": "hour_of_day",
+          "method": "jensenshannon",
+          "threshold": 0.1,
+          "score": 0.005277698030720621,
+          "drift": false,
+          "role": "feature"
+        },
+        {
+          "variable": "day_of_week",
+          "method": "jensenshannon",
+          "threshold": 0.1,
+          "score": 0.03617943336774403,
+          "drift": false,
+          "role": "feature"
+        },
+        {
+          "variable": "month",
+          "method": "jensenshannon",
+          "threshold": 0.1,
+          "score": 0.7042080307683959,
+          "drift": true,
+          "role": "feature"
+        },
+        {
+          "variable": "is_weekend",
+          "method": "jensenshannon",
+          "threshold": 0.1,
+          "score": 0.004485178861408379,
+          "drift": false,
+          "role": "feature"
+        },
+        {
+          "variable": "hour_sin",
+          "method": "wasserstein",
+          "threshold": 0.1,
+          "score": 0.004622297177612871,
+          "drift": false,
+          "role": "feature"
+        },
+        {
+          "variable": "hour_cos",
+          "method": "wasserstein",
+          "threshold": 0.1,
+          "score": 0.0017711742068642082,
+          "drift": false,
+          "role": "feature"
+        },
+        {
+          "variable": "month_sin",
+          "method": "wasserstein",
+          "threshold": 0.1,
+          "score": 1.8096205891883237,
+          "drift": true,
+          "role": "feature"
+        },
+        {
+          "variable": "month_cos",
+          "method": "wasserstein",
+          "threshold": 0.1,
+          "score": 0.8015062910914692,
+          "drift": true,
+          "role": "feature"
+        }
+      ]
+    },
+    "estacional": {
+      "sampling": {
+        "reference": {
+          "population_rows": 274536,
+          "sample_rows": 100000,
+          "seed": 39
+        },
+        "current": {
+          "population_rows": 274536,
+          "sample_rows": 100000,
+          "seed": 39
+        }
+      },
+      "features_drifted": 0,
+      "features_total": 9,
+      "variables": [
+        {
+          "variable": "target_departures",
+          "method": "wasserstein",
+          "threshold": 0.1,
+          "score": 0.21870766941005296,
+          "drift": true,
+          "role": "target"
+        },
+        {
+          "variable": "prediction_a",
+          "method": "wasserstein",
+          "threshold": 0.1,
+          "score": 0.007398176836224155,
+          "drift": false,
+          "role": "prediction"
+        },
+        {
+          "variable": "station_id",
+          "method": "jensenshannon",
+          "threshold": 0.1,
+          "score": 0.0,
+          "drift": false,
+          "role": "feature"
+        },
+        {
+          "variable": "hour_of_day",
+          "method": "jensenshannon",
+          "threshold": 0.1,
+          "score": 0.0,
+          "drift": false,
+          "role": "feature"
+        },
+        {
+          "variable": "day_of_week",
+          "method": "jensenshannon",
+          "threshold": 0.1,
+          "score": 0.04328016952551219,
+          "drift": false,
+          "role": "feature"
+        },
+        {
+          "variable": "month",
+          "method": "jensenshannon",
+          "threshold": 0.1,
+          "score": 0.0,
+          "drift": false,
+          "role": "feature"
+        },
+        {
+          "variable": "is_weekend",
+          "method": "jensenshannon",
+          "threshold": 0.1,
+          "score": 0.0263046203592539,
+          "drift": false,
+          "role": "feature"
+        },
+        {
+          "variable": "hour_sin",
+          "method": "wasserstein",
+          "threshold": 0.1,
+          "score": 0.0,
+          "drift": false,
+          "role": "feature"
+        },
+        {
+          "variable": "hour_cos",
+          "method": "wasserstein",
+          "threshold": 0.1,
+          "score": 0.0,
+          "drift": false,
+          "role": "feature"
+        },
+        {
+          "variable": "month_sin",
+          "method": "wasserstein",
+          "threshold": 0.1,
+          "score": 0.0,
+          "drift": false,
+          "role": "feature"
+        },
+        {
+          "variable": "month_cos",
+          "method": "wasserstein",
+          "threshold": 0.1,
+          "score": 0.0,
+          "drift": false,
+          "role": "feature"
+        }
+      ]
+    }
+  },
+  "reference_performance_in_sample": true,
+  "no_new_training": true,
+  "no_alias_changed": true,
+  "limitations": [
+    "Octubre 2025 pertenece al entrenamiento de A: su error es descriptivo, no un test independiente.",
+    "Una comparación interanual no prueba causalidad ni concept drift.",
+    "Se conservan ceros por ausencia de viajes; no hay inventario de bicicletas ni cierres comprobados."
+  ],
+  "environment": {
+    "evidently": "0.7.23",
+    "pandas": "2.2.3",
+    "numpy": "2.1.3",
+    "pyarrow": "23.0.1"
+  }
+}

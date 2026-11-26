@@ -1,0 +1,22 @@
+{
+  "pages": 8,
+  "body_pages": 4,
+  "annex_pages": 4,
+  "body_font": "Arial",
+  "body_size_pt": 11,
+  "line_spacing": 1.15,
+  "embedded_images_original_bytes": true,
+  "local_links_valid": true,
+  "previous_files_verified_unchanged": 51,
+  "files": {
+    "TC5061_Drift_ABTest_Equipo39.docx": {
+      "bytes": 377974,
+      "sha256": "f274342039006637890f2a72e549f0d5730f23f60d94aab607320513be13eebd"
+    },
+    "TC5061_Drift_ABTest_Equipo39.pdf": {
+      "bytes": 594595,
+      "sha256": "1f84bf54a6edd7b8ae842425eca690edb70ff323aab6dc9190cf823f9cb10490"
+    }
+  },
+  "independent_review": "pending_issue_83"
+}
