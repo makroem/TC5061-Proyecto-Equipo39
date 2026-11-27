@@ -1,6 +1,6 @@
 # Protocolo del ciclo de Continuous Training
 
-Estado al 25 de noviembre de 2026: **diseño pendiente de implementación y ejecución**, asignado a Marco en #87, con revisión de Diego Hurtado en #88. La rúbrica final evalúa monitoreo, gobernanza y FinOps sin exigir por separado un ciclo de reentrenamiento y promoción. Para esa evaluación, el ciclo es una ampliación. «Prompt parte7 Final.docx» sí pide mostrarlo. Confirmar con el docente cuál instrucción rige la entrega antes de exigir su ejecución como condición de cierre. La ejecución histórica de B y la existencia de un reporte de drift no constituyen todavía un ciclo automático completo ni una promoción nueva.
+La consigna oficial de la Actividad 11 clasifica Continuous Training como valor agregado opcional y establece que no modifica la rúbrica. Este protocolo queda disponible si el equipo decide ejecutar el ciclo. El entrenamiento histórico de B y el reporte de drift no acreditan un ciclo automático ni una promoción nueva.
 
 ## Secuencia y evidencia de aceptación
 

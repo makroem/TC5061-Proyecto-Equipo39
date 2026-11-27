@@ -8,7 +8,7 @@ Marco coordina la preparación técnica. Diego Hurtado revisa el modelo y la ope
 |---|---|---|
 | Índice, Model Card e integridad de originales | Marco, [#87](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/87) | Preparados en `feat/marco-etapa7-cierre`; pendientes de revisión e integración |
 | Corrección estacional de drift | Diego Hurtado revisa; Marco integra | [#86](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/86) abierto al corte; depende de [#83](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/83) |
-| Continuous Training (ampliación) | Marco ejecuta; Diego Hurtado valida | [Protocolo preparado](continuous_training.md); ejecución pendiente de confirmar según la consigna aplicable |
+| Continuous Training (opcional) | Marco coordina si el equipo decide ejecutarlo | [Protocolo disponible](continuous_training.md). La Actividad 11 lo considera valor agregado y no modifica la rúbrica. |
 | Reproducción y revisión independiente final | Diego Hurtado, [#88](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/88) | Depende del cambio y de los resultados concretos de Marco |
 | Revisión de uso y límites de la Model Card | Stefania, [#89](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/89) | Breve y no bloqueante; respaldo de Marco y validación de Diego Hurtado |
 | Cotejo de seis enlaces y evidencia | Diego Martínez, [#90](https://github.com/makroem/TC5061-Proyecto-Equipo39/issues/90) | Breve y no bloqueante; respaldo de Marco o Diego Hurtado |
