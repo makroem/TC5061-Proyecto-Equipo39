@@ -2,7 +2,7 @@
 
 ## Etapa 7 entrega final en preparación
 
-[Manual editable por persona](references/etapa7/Manual_Etapa7_Entrega_Final_Equipo39.docx) · [Estado y evidencias](docs/etapa7/README.md) · [Model Card de P1](MODEL_CARD.md) · [Protocolo de Continuous Training](docs/etapa7/continuous_training.md).
+[Presentación final en PDF](references/etapa7/TC5061_Proyecto_Final_Equipo39.pdf) · [Índice técnico](references/etapa7/Indice_Entrega_Final_Equipo39.md) · [Estado y evidencias](docs/etapa7/README.md) · [Model Card de P1](MODEL_CARD.md) · [Protocolo de Continuous Training](docs/etapa7/continuous_training.md).
 
 Marco coordina la consolidación y Diego Hurtado revisa el modelo. Stefania y Diego Martínez realizan revisiones de apoyo. La corrección estacional del [PR #86](https://github.com/makroem/TC5061-Proyecto-Equipo39/pull/86) requiere revisión antes de integrarse.
 

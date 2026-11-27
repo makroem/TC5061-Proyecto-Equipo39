@@ -23,6 +23,7 @@ Las tareas pequeñas no impiden avanzar con la implementación. Su respaldo no a
 | Modelo y Registry, 15% | [Manifiesto P1](../../references/etapa4/model_manifest.json), [versiones A/B](../../references/etapa5/models.json), [Model Card](../../MODEL_CARD.md) | Consultar versión, run, firma y alias en Registry; justificar aceptación |
 | Despliegue y operación, 25% | [Compose](../../docker-compose.yml), [API](../../mibici_equipo39/serving), [workflow](../../.github/workflows/etapa6.yml), [Locust](../../tests/load/locustfile.py), [carga y costos](../etapa6/estado.md) | Petición HTTP real y CI exitoso sobre el cambio final; conservar limitaciones de latencia |
 | Monitoreo, gobernanza y FinOps, 20% | [A/B original](../../reports/etapa5/analisis_ab.md), [monitoreo](../../mibici_equipo39/monitoring), [FinOps](../../mibici_equipo39/operations/finops.py), [Model Card](../../MODEL_CARD.md) | Verificar Evidently, A/B testing, FinOps y Model Card. El ciclo nuevo se documenta por separado |
+| Presentación y demostración, 20% | [Presentación final en PDF](../../references/etapa7/TC5061_Proyecto_Final_Equipo39.pdf) | La entrega académica incluye una demostración funcional de 2 a 5 minutos. Su entrega se gestiona por separado. |
 
 La versión 1 se conserva temporalmente. B mejora el MAE 2.46%, pero no alcanza los criterios de promoción de Etapa 5. No se presenta B como candidata aprobada ni el diseño del ciclo como una ejecución terminada.
 

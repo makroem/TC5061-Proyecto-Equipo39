@@ -8,18 +8,18 @@
     "passed": 4,
     "failed": 0
   },
-  "manual": {
-    "path": "references/etapa7/Manual_Etapa7_Entrega_Final_Equipo39.docx",
-    "sha256": "39ccb1c56a7e919cce13b3b1c7dc0949915a955d9393b5f81f5a102f9ae8d4e0",
-    "pages_reviewed": 11,
-    "font": "Arial 11",
-    "line_spacing": 1.5,
-    "source_manual_preserved": true
-  },
   "local_links_valid": true,
   "new_training_executed": false,
   "new_promotion_executed": false,
-  "video_recorded": false,
   "independent_review": "pending #88",
-  "previous_dependency": "PR #86 and review #83"
+  "previous_dependency": "PR #86 and review #83",
+  "delivery_documents": {
+    "references/etapa7/TC5061_Proyecto_Final_Equipo39.pdf": {
+      "sha256": "35c4591e733e3ff8e9bc3a63db2e8f783e1dddd77303356f287ce8ada2e021ce"
+    },
+    "references/etapa7/Indice_Entrega_Final_Equipo39.md": {
+      "sha256": "578e301f7ad50b234ca8e03478fc7fdd746eb564005ee49354e649599edb6840"
+    }
+  },
+  "delivery_documents_checked_on": "2026-11-27"
 }
