@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-25",
+  "stage": "Etapa 7 preparación",
+  "baseline_commit": "39fcd9a6f6a396b31b63d04bd016f97694f47c97",
+  "historical_files_checked": 301,
+  "historical_files_unchanged": true,
+  "verifier_tests": {
+    "passed": 4,
+    "failed": 0
+  },
+  "manual": {
+    "path": "references/etapa7/Manual_Etapa7_Entrega_Final_Equipo39.docx",
+    "sha256": "39ccb1c56a7e919cce13b3b1c7dc0949915a955d9393b5f81f5a102f9ae8d4e0",
+    "pages_reviewed": 11,
+    "font": "Arial 11",
+    "line_spacing": 1.5,
+    "source_manual_preserved": true
+  },
+  "local_links_valid": true,
+  "new_training_executed": false,
+  "new_promotion_executed": false,
+  "video_recorded": false,
+  "independent_review": "pending #88",
+  "previous_dependency": "PR #86 and review #83"
+}
