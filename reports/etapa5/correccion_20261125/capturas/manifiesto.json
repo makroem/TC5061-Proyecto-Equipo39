@@ -1,0 +1,34 @@
+{
+  "source_html": [
+    "../drift_estacional.html",
+    "../drift_historico.html"
+  ],
+  "captures": [
+    {
+      "file": "E01_estacional_completo.jpg",
+      "bytes": 626225,
+      "sha256": "afcc276337b4c5bf971305ea3868175d2dc56ae4a9b94333329fa43c1f8e19da"
+    },
+    {
+      "file": "E01_objetivo_estacional.jpg",
+      "bytes": 50945,
+      "sha256": "74fa5ac1f284c8ec7c81cad5ac1384553f53f47dde13a25c301c680329c20c84"
+    },
+    {
+      "file": "E02_prediccion_estacional.jpg",
+      "bytes": 57064,
+      "sha256": "f6f717c9a565506a7f443e2d0533732e5d4e98b753ca1527e4c039ec588bd053"
+    },
+    {
+      "file": "E03_entradas_estacionales.jpg",
+      "bytes": 140758,
+      "sha256": "f5616346d04c5fbd64719ac502e805a7269cbcdd3184b3829ad6875fc2d9cff9"
+    },
+    {
+      "file": "E04_objetivo_historico.jpg",
+      "bytes": 51212,
+      "sha256": "e31fdb57c99d459feaae165d76ab09a0363bd80f5cec446460d26add20cd9819"
+    }
+  ],
+  "method": "Captura directa del reporte en navegador; sin alteración de valores. Vistas de regiones del reporte y vista completa."
+}

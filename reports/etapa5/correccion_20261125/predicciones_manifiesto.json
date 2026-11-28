@@ -1,0 +1,29 @@
+{
+  "protocol_sha256": "ac5868511f87e736b4f3462a23d7f248af347a17ec99b01426e0f912b4e7f596",
+  "model_name": "mibici-equipo39-p1-demanda",
+  "model_version": "1",
+  "source_run_id": "66414a8b45164d3a8f5b9f42e7cb387b",
+  "bundle_sha256": "dedce1eb08bda971a42fba311224c88e56f75cd2789dbb391e9445951931bd80",
+  "files": {
+    "reference": {
+      "file": "reference_predictions.parquet",
+      "sha256": "81c05e379d81531289049634387b941d8f9cfa8f75bcc0cf929b43fc46ebbd8d",
+      "data_sha256": "cff9fbe8104680cf462c97115e3ca55f0e89c7447dc4fe691c408f53d87fa515",
+      "rows": 2152008
+    },
+    "current": {
+      "file": "current_predictions.parquet",
+      "sha256": "20ecab526415170f585e90e2c114d160c57b196aa700baf1855e2806c4b81bae",
+      "data_sha256": "eecb9aa82a8541df446bad93cf867c0d8a5dacd32860b0b72ac442e6f9b7c082",
+      "rows": 274536
+    }
+  },
+  "environment": {
+    "mlflow": "2.22.0",
+    "scikit-learn": "1.6.1",
+    "pandas": "2.2.3",
+    "numpy": "2.1.3",
+    "pyarrow": "19.0.1"
+  },
+  "code_sha256": "15b35655e93d1b7091a3fb00630a748da766fa363c9294dacb760052cdf47d58"
+}

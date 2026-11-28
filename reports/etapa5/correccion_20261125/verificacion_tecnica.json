@@ -1,0 +1,31 @@
+{
+  "date_local": "2026-11-25",
+  "base_commit": "39fcd9a6f6a396b31b63d04bd016f97694f47c97",
+  "tests": {
+    "command": "python -m pytest tests/monitoring --confcutdir=tests/monitoring -q",
+    "passed": 34,
+    "warnings": 18,
+    "previous_tests": 21,
+    "new_tests": 13
+  },
+  "bandit": {
+    "files": 2,
+    "findings": 0
+  },
+  "pip_check": "No broken requirements found",
+  "prediction_equivalence": {
+    "rows": 274536,
+    "same_keys_and_targets": true,
+    "exactly_equal_to_original_a": true
+  },
+  "original_sha256": {
+    "reports/etapa5/ab_resultados.json": "a99b53e9a1e0a94340672f43de78e531f2958b61ec4bb781b04d80530169635e",
+    "reports/etapa5/ab_metricas.csv": "84664ecad790d80150c37b95dc78c2a1397a506d498a5135ce9939c7ba5babb0",
+    "reports/etapa5/drift_variables.csv": "6d14df1ec0733558b172da4138fc6a38fc6b954882ddd28d0c7ff767f79b1c02",
+    "references/etapa5/protocolo.json": "f68f6dafd28ff65eed59f2dcdc221700fe3f8f7a62fca17fe75129aa749ff3b1",
+    "references/etapa4/model_manifest.json": "8d7f1d99153d48b03aa617213f97683febd8dea223ac82dc8c4074ba0a7073fd"
+  },
+  "independent_review": "pending_issue_83",
+  "model_retrained": false,
+  "alias_changed": false
+}
